@@ -1,10 +1,7 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
-
- * sadadasdsads
  * saddasdsd
  */
+echo "aROOO";
 ?>
