@@ -18,7 +18,7 @@ class Estudiante extends Modelo{
     private $idEstudiante;
     private $pNombre;
     private $sNombre;
-    private $pPellido;
+    private $pApellido;
     private $sApellido;
     private $sexo;
     private $telefono;
@@ -55,12 +55,12 @@ class Estudiante extends Modelo{
         $this->sNombre = $sNombre;
     }
 
-    public function getPPellido() {
-        return $this->pPellido;
+    public function getPApellido() {
+        return $this->pApellido;
     }
 
-    public function setPPellido($pPellido) {
-        $this->pPellido = $pPellido;
+    public function setPApellido($pPellido) {
+        $this->pApellido = $pPellido;
     }
 
     public function getSApellido() {
@@ -113,34 +113,34 @@ class Estudiante extends Modelo{
 
      private function mapearEstudiante(Estudiante $estudiante, array $props) {
         if (array_key_exists('idEstudiante', $props)) {
-            $estudiante->setDocumento($props['idEstudiante']);
+            $estudiante->setIdEstudiante($props['idEstudiante']);
         }
         if (array_key_exists('pNombre', $props)) {
-            $estudiante->setNombre($props['pNombre']);
+            $estudiante->setPNombre($props['pNombre']);
         }
          if (array_key_exists('sNombre', $props)) {
-            $estudiante->setNombre($props['sNombre']);
+            $estudiante->setSNombre($props['sNombre']);
         }
         if (array_key_exists('pApellido', $props)) {
-            $estudiante->setApellido($props['pApellido']);
+            $estudiante->setPApellido($props['pApellido']);
         }
         if (array_key_exists('sApellido', $props)) {
-            $estudiante->setApellido($props['sApellido']);
+            $estudiante->setSApellido($props['sApellido']);
         }
         if (array_key_exists('sexo', $props)) {
-            $estudiante->setApellido($props['sexo']);
+            $estudiante->setSexo($props['sexo']);
         }
         if (array_key_exists('telefono', $props)) {
-            $estudiante->setApellido($props['telefono']);
+            $estudiante->setTelefono($props['telefono']);
         }
         if (array_key_exists('direccion', $props)) {
-            $estudiante->setApellido($props['direccion']);
+            $estudiante->setDireccion($props['direccion']);
         }
         if (array_key_exists('correo', $props)) {
-            $estudiante->setApellido($props['correo']);
+            $estudiante->setCorreo($props['correo']);
         }
         if (array_key_exists('fNacimiento', $props)) {
-            $estudiante->setFechaNacimiento(self::crearFecha($props['fNacimiento']));
+            $estudiante->setFNacimiento(self::crearFecha($props['fNacimiento']));
         }
     }
   
@@ -150,7 +150,7 @@ class Estudiante extends Modelo{
             ':idEstudiante' => $est->getIdEstudiante(),
             ':pNombre' => $est->getPNombre(),
             ':sNombre' => $est->getSNombre(),
-            ':pApellido' => $est->getPPellido(),
+            ':pApellido' => $est->getPApellido(),
             ':sApellido' => $est->getSApellido(),
             ':sexo' => $this->getSexo(),
             ':telefono' => $est->getTelefono(),
@@ -168,7 +168,7 @@ class Estudiante extends Modelo{
     }
 
     public function leerEstudiantes() {
-        $sql = "SELECT documento, nombre, apellido, fechanacimiento FROM test.usuario";
+        $sql = "SELECT idEstudiante, pNombre, sNombre, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento FROM estudiantes";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $ests = array();
@@ -181,14 +181,14 @@ class Estudiante extends Modelo{
     }
 
     public function actualizarEstudiante(Estudiante $estudiante) {
-        $sql = "UPDATE test.usuario SET nombre=?, apellido=?, fechanacimiento=? WHERE documento=?";
+        $sql = "UPDATE estudiantes SET pNombre=?, sNombre=?, pApellido=?, sApellido=?, sexo=?, telefono=?, direccion=?, correo=?, fNacimiento=? WHERE idEstudiante=?";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($estudiante));        
         }
     
     
     public function eliminarEstudiante(Estudiante $estudiante) {
-        $sql = "DELETE test.usuario where documento=?";
+        $sql = "DELETE estudiantes where idEstudiante=?";
         $this->__setSql($sql);
         $param = array(':idEstudiante' => $estudiante->getIdEstudiante());
         $this->ejecutar($param);        
