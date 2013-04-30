@@ -1,46 +1,31 @@
 <?php
 
+define('DS', DIRECTORY_SEPARATOR);
+define('HOME', dirname(__FILE__));
+
+
+ini_set('display_erros', 1);
+
 function cargadorClases(){
-    include './config/Configuracion.php';
-    include './config/Db.php';
-    include './modelo/Modelo.php';
-    include './modelo/Estudiante.php';
+    require_once './config/Configuracion.php';
+    require_once './config/Db.php';
+    require_once './modelo/Modelo.php';
+    require_once './modelo/Estudiante.php';
+    require_once './modelo/Grado.php';
+    require_once './modelo/Materia.php';
+    require_once './modelo/Salon.php';
+    require_once './controlador/Controlador.php';
+    require_once './controlador/EstudianteControl.php';
+    require_once './vista/Vista.php';
 }
 
-spl_autoload_register(cargadorClases);
-
-$users = new Estudiante();
-$lista = $users->leerEstudiantes();
+spl_autoload_register('cargadorClases');
+if ($_GET['usuario']==1){
+require_once './utiles/inicioAdmin.php';
+}elseif ($_GET['usuario']==2){
+require_once './utiles/inicioDocente.php';
+}else{
+require_once './utiles/inicioEstudiante.php';
+}
 
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        ?>
-        <table border="0" width="500" cellspacing="2" cellpadding="1">
-            <thead>
-                <tr>
-                    <th>Documento</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Fecha Nacimiento</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($lista as $user) { ?>
-                <tr>
-                    <td><?php echo $user->getIdEstudiante();?></td>
-                    <td><?php echo $user->getPNombre().$user->getSNombre();?></td>
-                    <td><?php echo $user->getPApellido();?></td>
-                    <td><?php echo $user->getFNacimiento()->format('Y-m-d');?></td>
-                </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-    </body>
-</html>

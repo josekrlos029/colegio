@@ -16,8 +16,7 @@ class Estudiante extends Modelo{
     
     
     private $idEstudiante;
-    private $pNombre;
-    private $sNombre;
+    private $nombres;
     private $pApellido;
     private $sApellido;
     private $sexo;
@@ -39,22 +38,14 @@ class Estudiante extends Modelo{
         $this->idEstudiante = $idEstudiante;
     }
 
-    public function getPNombre() {
-        return $this->pNombre;
+    public function getNombres() {
+        return $this->nombres;
     }
 
-    public function setPNombre($pNombre) {
-        $this->pNombre = $pNombre;
+    public function setNombres($nombres) {
+        $this->nombres = $nombres;
     }
-
-    public function getSNombre() {
-        return $this->sNombre;
-    }
-
-    public function setSNombre($sNombre) {
-        $this->sNombre = $sNombre;
-    }
-
+    
     public function getPApellido() {
         return $this->pApellido;
     }
@@ -115,11 +106,8 @@ class Estudiante extends Modelo{
         if (array_key_exists('idEstudiante', $props)) {
             $estudiante->setIdEstudiante($props['idEstudiante']);
         }
-        if (array_key_exists('pNombre', $props)) {
-            $estudiante->setPNombre($props['pNombre']);
-        }
-         if (array_key_exists('sNombre', $props)) {
-            $estudiante->setSNombre($props['sNombre']);
+         if (array_key_exists('nombres', $props)) {
+            $estudiante->setNombres($props['nombres']);
         }
         if (array_key_exists('pApellido', $props)) {
             $estudiante->setPApellido($props['pApellido']);
@@ -148,8 +136,7 @@ class Estudiante extends Modelo{
               
         $parametros = array(
             ':idEstudiante' => $est->getIdEstudiante(),
-            ':pNombre' => $est->getPNombre(),
-            ':sNombre' => $est->getSNombre(),
+            ':nombres' => $est->getNombres(),
             ':pApellido' => $est->getPApellido(),
             ':sApellido' => $est->getSApellido(),
             ':sexo' => $this->getSexo(),
@@ -162,13 +149,19 @@ class Estudiante extends Modelo{
     }
     
     public function crearEstudiante(Estudiante $estudiante) {
-        $sql = "INSERT INTO estudiantes (idEstudiante, pNombre, sNombre, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO estudiante (idEstudiante, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento) VALUES (?,?,?,?,?,?,?,?,?)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($estudiante));
     }
 
+        public function leerEstudiante($id) {
+            
+            
+            
+        }
+    
     public function leerEstudiantes() {
-        $sql = "SELECT idEstudiante, pNombre, sNombre, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento FROM estudiantes";
+        $sql = "SELECT idEstudiante, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento FROM estudiante";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $ests = array();
@@ -181,14 +174,14 @@ class Estudiante extends Modelo{
     }
 
     public function actualizarEstudiante(Estudiante $estudiante) {
-        $sql = "UPDATE estudiantes SET pNombre=?, sNombre=?, pApellido=?, sApellido=?, sexo=?, telefono=?, direccion=?, correo=?, fNacimiento=? WHERE idEstudiante=?";
+        $sql = "UPDATE estudiante SET nombres=?, pApellido=?, sApellido=?, sexo=?, telefono=?, direccion=?, correo=?, fNacimiento=? WHERE idEstudiante=?";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($estudiante));        
         }
     
     
     public function eliminarEstudiante(Estudiante $estudiante) {
-        $sql = "DELETE estudiantes where idEstudiante=?";
+        $sql = "DELETE estudiante where idEstudiante=?";
         $this->__setSql($sql);
         $param = array(':idEstudiante' => $estudiante->getIdEstudiante());
         $this->ejecutar($param);        

@@ -12,9 +12,8 @@
  */
 class Docente {
 private $idDocente;
-    private $pNombre;
-    private $sNombre;
-    private $pPellido;
+    private $Nombres;
+    private $pApellido;
     private $sApellido;
     private $sexo;
     private $telefono;
@@ -35,28 +34,20 @@ private $idDocente;
         $this->idDocente = $idDocente;
     }
 
-    public function getPNombre() {
-        return $this->pNombre;
+    public function getNombres() {
+        return $this->Nombres;
     }
 
-    public function setPNombre($pNombre) {
-        $this->pNombre = $pNombre;
+    public function setNombres($Nombres) {
+        $this->Nombres = $Nombres;
     }
 
-    public function getSNombre() {
-        return $this->sNombre;
+    public function getPApellido() {
+        return $this->pApellido;
     }
 
-    public function setSNombre($sNombre) {
-        $this->sNombre = $sNombre;
-    }
-
-    public function getPPellido() {
-        return $this->pPellido;
-    }
-
-    public function setPPellido($pPellido) {
-        $this->pPellido = $pPellido;
+    public function setPApellido($pApellido) {
+        $this->pApellido = $pApellido;
     }
 
     public function getSApellido() {
@@ -111,11 +102,8 @@ private $idDocente;
         if (array_key_exists('idDocente', $props)) {
             $docente->setIdDocente($props['idDocente']);
         }
-        if (array_key_exists('pNombre', $props)) {
-            $docente->setPNombre($props['pNombre']);
-        }
-         if (array_key_exists('sNombre', $props)) {
-            $docente->setSNombre($props['sNombre']);
+         if (array_key_exists('nombres', $props)) {
+            $docente->setSNombre($props['nombres']);
         }
         if (array_key_exists('pApellido', $props)) {
             $docente->setPPellido($props['pApellido']);
@@ -144,9 +132,8 @@ private $idDocente;
               
         $parametros = array(
             ':idDocente' => $doc->getIdDocente(),
-            ':pNombre' => $doc->getPNombre(),
-            ':sNombre' => $doc->getSNombre(),
-            ':pApellido' => $doc->getPPellido(),
+            ':Nombres' => $doc->getPNombres(),
+            ':pApellido' => $doc->getPApellido(),
             ':sApellido' => $doc->getSApellido(),
             ':sexo' => $this->getSexo(),
             ':telefono' => $doc->getTelefono(),
@@ -158,13 +145,13 @@ private $idDocente;
     }
     
     public function crearDocente(Docente $docente) {
-        $sql = "INSERT INTO docentes (idDocente, pNombre, sNombre, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO docente (idDocente, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento) VALUES (?,?,?,?,?,?,?,?,?)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($docente));
     }
 
     public function leerDocentes() {
-        $sql = "SELECT idDocente, pNombre, sNombre, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento FROM docentes";
+        $sql = "SELECT idDocente, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento FROM docente";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $docs = array();
@@ -177,7 +164,7 @@ private $idDocente;
     }
 
     public function actualizarDocente(Docente $docente) {
-        $sql = "UPDATE docentes SET pNombre=?, sNombre=?, pApellido=?, sApellido=?, sexo=?, telefono=?, direccion=?, correo=?, fNacimiento=? WHERE idDocente=?";
+        $sql = "UPDATE docente SET nombres=?, pApellido=?, sApellido=?, sexo=?, telefono=?, direccion=?, correo=?, fNacimiento=? WHERE idDocente=?";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($docente));        
         }
