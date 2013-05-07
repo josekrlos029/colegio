@@ -82,6 +82,7 @@ abstract class Modelo {
         if(!$sentencia->execute($parametros)){
             self::enviarError($this->db->errorInfo());
         }
+        return $sentencia;
     }
     
     protected static function formatearFecha(DateTime $fecha){

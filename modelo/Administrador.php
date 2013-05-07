@@ -69,11 +69,14 @@ class Administrador extends Modelo{
     }
     
     public function verificarAdministrador($usuario, $contraseña) {
-        $sql = "SELECT COUNT(*) usuario_admin WHERE usuario=? AND contraseña=?";
+        $sql = "SELECT COUNT(*) from usuario_admin WHERE usuario=? AND contraseña=?";
         $this->__setSql($sql);
-        $valor= $this->ejecutar(array($usuario,$contraseña));
-        return $valor;
-        
+        $valor = $this->ejecutar(array($usuario,$contraseña));
+        foreach ($valor as $fila) {
+            $vr = $fila['COUNT(*)'];
+        }
+        return $vr;
+  
     }
 
     

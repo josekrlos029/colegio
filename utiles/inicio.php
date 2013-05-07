@@ -8,7 +8,7 @@
  */
 
 
-$controlador = "Administrador";
+$controlador = "Inicio";
 $accion = "index";
 $consulta = null;
 

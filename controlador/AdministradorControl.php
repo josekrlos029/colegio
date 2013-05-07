@@ -19,7 +19,6 @@ class AdministradorControl extends Controlador{
 
     public function index() {
         try {
-            $datos = $this->modelo->leerEstudiantes();
             $this->vista->set('estudiantes', $datos);
             $this->vista->set('titulo', 'Lista de Estudiantes');
             return $this->vista->imprimir();
@@ -27,7 +26,35 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
     }
-    //put your code here
+    public function logueo() {
+        try {
+       
+            $this->vista->set('titulo', 'Iniciar Sesión | Administrador');
+            return $this->vista->imprimir();
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+    }
+        public function verificarUsuario(){
+         try {
+             
+             $valor=$this->modelo->verificarAdministrador($_POST['usuario'],$_POST['contraseña']);
+             if ( $valor> 0){
+                 $this->vista->set('titulo', 'Exito');
+                 $this->vista->set('msg', 'lOGUEADO CON EXITO');
+             }else{
+                  $this->vista->set('titulo', 'nada');
+                 $this->vista->set('msg', 'USUARIO O CONTRASEÑA INCORRECTAS');
+             }
+                 
+            return $this->vista->imprimir();
+            
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }   
+        }
+        
+    
 }
 
 ?>
