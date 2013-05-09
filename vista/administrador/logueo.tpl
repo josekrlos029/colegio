@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="../../utiles/css/login.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="../utiles/css/login.css" rel="stylesheet" type="text/css" media="screen"/>
 <script type="text/javascript">
 
 setTimeout("maximizar()",1250);
@@ -66,7 +66,7 @@ document.onmousedown=IE;document.onmouseup=NS;document.oncontextmenu=new Functio
 <div id="escudo" align="right"></div>
 <div class="separador" align="center"> </div>
 <div align="right" class="login">
-<form action="/colegio/index.php?leer=administrador/verificarUsuario" method="post"  AUTOCOMPLETE="OFF">
+<form action="/colegio/administrador/verificarUsuario" method="post"  AUTOCOMPLETE="OFF">
 <div align="left"><h2>Iniciar sesiòn</h2></div>
 <div class="espace"> 
 <input name="usuario" id="username" type="text" size="20"  class="caja_texto" placeholder="Usuario" required autofocus />

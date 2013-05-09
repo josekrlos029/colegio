@@ -41,10 +41,10 @@ class AdministradorControl extends Controlador{
              $valor=$this->modelo->verificarAdministrador($_POST['usuario'],$_POST['contraseña']);
              if ( $valor> 0){
                  $this->vista->set('titulo', 'Exito');
-                 $this->vista->set('msg', 'lOGUEADO CON EXITO');
+                 $this->vista->set('url', '/colegio/administrador/usuarioAdministrador');
              }else{
-                  $this->vista->set('titulo', 'nada');
-                 $this->vista->set('msg', 'USUARIO O CONTRASEÑA INCORRECTAS');
+                  $this->vista->set('titulo', 'Fallo');
+                 $this->vista->set('url', '/colegio/administrador/logueo');
              }
                  
             return $this->vista->imprimir();
@@ -52,6 +52,17 @@ class AdministradorControl extends Controlador{
         } catch (Exception $exc) {
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }   
+        }
+        
+        public function usuarioAdministrador(){
+        try {
+       
+            $this->vista->set('titulo', 'Usuario Administrador');
+            return $this->vista->imprimir();
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
         }
         
     

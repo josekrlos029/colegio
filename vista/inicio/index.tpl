@@ -4,53 +4,35 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link href="css/login.css" rel="stylesheet" type="text/css" media="screen"/>
 <link type="text/css" href="css/base.css" rel="stylesheet" />
-<link href="css/login.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="css/style3.css" rel="stylesheet" type="text/css" media="screen"/>
 <script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
 
 	<div class="barra"></br></br><h1>Control Academico<h1></div>
-	<tr><td align="center"><img src="aro.png"></td></tr>
+                    <tr><td align="center"><img src="vista/inicio/aro.png"></td></tr>
 </table>	
 
 
 <table  border="1" align="center">
 
-    <ul class="ch-grid">
+    <ul>
 					<li>
-						<div class="ch-item">	
-							<div class="ch-info">
+						
 								<h3>Administrador</h3>
 								<p><a href="javascript:ventana(500,500)">Entrar</a></p>
-							</div>
-							<div class="ch-thumb ch-img-1"></div>
-						</div>
+						
 					</li>
 					<li>
-						<div class="ch-item">
-							<div class="ch-info">
 								<h3>Coordinador</h3>
 								<p> <a href="javascript:ventana4(500,500)">Entrar</a></p>
-							</div>
-							<div class="ch-thumb ch-img-2"></div>
-						</div>
 					</li>
 					<li>
-						<div class="ch-item">
-							<div class="ch-info">
-								<h3>Docente</h3>
+						<h3>Docente</h3>
 								<p><a href="javascript:ventana3(500,500)">Entrar</a></p>
-							</div>
-							<div class="ch-thumb ch-img-3"></div>
-						</div>
+					
 					</li>
                     	<li>
-						<div class="ch-item">
-							<div class="ch-info">
 								<h3>Estudiante</h3>
 								<p><a href="javascript:ventana2(500,500)">Entrar</a></p>
-							</div>
-							<div class="ch-thumb ch-img-4"></div>
-						</div>
 					</li>
 				</ul>
 			
