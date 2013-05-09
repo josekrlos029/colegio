@@ -1,0 +1,238 @@
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('slider/fonts/BebasNeue-webfont.eot');
+    src: url('slider/fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('slider/fonts/BebasNeue-webfont.woff') format('woff'),
+         url('slider/fonts/BebasNeue-webfont.ttf') format('truetype'),
+         url('slider/fonts/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+body {
+	line-height: 1;
+	color: black;
+	font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    color :#ffff;	
+    height: 100%;
+
+}
+
+
+html {
+ overflow-x:hidden;
+}
+
+
+ol, ul {
+	list-style: none;
+}
+tables still need 'cellspacing="0"'
+
+
+caption, th, td {
+	text-align: left;
+	font-weight: normal;
+}
+
+blockquote:before, blockquote:after,
+
+q:before, q:after {
+	content: "";
+}
+
+blockquote, q {
+	quotes: "" "";
+}
+
+/*FIN RESET   */
+.index_admin{
+top:200px; 
+left:100px;
+position:relative;
+width: 400px;
+height: 200px; 
+
+}
+
+
+
+
+
+
+.img_admin{
+top:20px; 
+right:10px;
+position:absolute;
+background:url(../imagenes/cabecera/cab_admin.jpg)no-repeat center;
+width: 300px;
+height: 100px; 
+}
+.img_est{
+top:20px; 
+right:10px;
+position:absolute;
+background:url(../imagenes/cabecera/cab_est.jpg)no-repeat center;
+width: 300px;
+height: 100px; 
+}
+.img_doc{
+top:20px; 
+right:10px;
+position:absolute;
+background:url(../imagenes/cabecera/cab_doc.jpg)no-repeat center;
+width: 300px;
+height: 100px; 
+}
+
+#cabecera{
+left: 0px;
+position: absolute;
+background: #0089e1;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+color :#ffff;
+width:100%;
+height:100px;
+}
+
+#pie {
+color:#666;
+font-family:Arial, Helvetica, sans-serif;
+ position:relative; 
+ top:100%;
+ width:100%;
+height:80px;
+}
+
+
+
+.titulo1{
+font-family:Arial, Helvetica, sans-serif;
+font-size:30px;
+color: #FFFFFF;
+font-weight: bold;
+}
+
+.titulo2{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+color: #191c73;
+font-weight: bold;
+}
+
+#texto{
+color: #00000;	
+font: 12px Arial, Helvetica, sans-serif;
+position: absolute; 
+top: 220px; 
+width: 600px;
+left: 350px;
+
+}
+
+.caja_texto{
+    
+        padding: 10px 60px 5px 10px; 
+		background-color: #FFFFFF; 
+		color: #000000; 
+		font-family: Arial, Helvetica, sans-serif;   
+		font-size: 14px; 
+		border: 1px solid #666;
+}
+
+
+.espace{
+margin-top:20px;
+
+}
+
+#escudo{
+    position: absolute;
+	padding: 300px 0px 0px 300px;
+	font: 12px Arial, Helvetica, sans-serif;
+	background:url(../imagenes/escudo.png)no-repeat center;
+
+
+}
+
+
+.caja {  
+    position: relative;
+	width: 800px;
+    height: 300px; 
+	display: block;
+    padding: 30px 40px 30px 40px;
+  
+}
+
+.separador { 
+margin-top: 5px; 
+margin-left: 350px;
+position: absolute; 
+width: 2px;
+height: 300px; 
+background:url(../imagenes/separador.png)no-repeat center ;
+}
+
+
+.login{
+ margin-top: 40px; 
+position: absolute;
+margin-left: 500px; 
+}
+
+
+#logo{
+margin-top: 5px; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+margin: 5px 0px 5px 0px;
+}
+h1, h2, h3, h4, h5, h6 {
+font-weight: normal;
+}
+
+
+ 
+ a{
+ text-decoration:none;
+ }
+ 
+ .link{
+ font-size: 12px;
+line-height: 50px;
+color: #666;
+margin-bottom: 0px
+ }
+ 
+ .link:hover{
+ font-size: 12px;
+line-height: 50px;
+color: #533;
+margin-bottom: 0px
+ }
+ 
+h2{
+font-size: 250%;
+line-height: 50px;
+color: #666;
+margin-bottom: 0px;
+
+}
+
+	h1{
+	color: #666;
+	font-size: 40px;
+	position:relative;
+	white-space: nowrap;
+	z-index: 10;
+	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+	font-weight: 700;
+    text-shadow: 0px 1px 1px #4d4d4d;
+	}
+

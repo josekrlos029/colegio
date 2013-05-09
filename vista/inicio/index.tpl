@@ -8,10 +8,8 @@
 <link href="css/style3.css" rel="stylesheet" type="text/css" media="screen"/>
 <script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
 
-    
-    </td></tr>
 	<div class="barra"></br></br><h1>Control Academico<h1></div>
-	<tr><td align="center"><img src="imagenes/index/text.gif"></td></tr>
+	<tr><td align="center"><img src="aro.png"></td></tr>
 </table>	
 
 
@@ -81,7 +79,7 @@
 	var w;
 function ventana(x,y){
 
-w=window.open('/colegio/index.php?leer=administrador/logueo','/colegio/index.php?leer=administrador/logueo', 'width=100,height=100,scrollbars=yes');
+w=window.open('/colegio/administrador/logueo','/colegio/administrador/logueo', 'width=100,height=100,scrollbars=yes');
 setTimeout("maximizar(w)",1000);
 
 }
