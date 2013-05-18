@@ -37,18 +37,12 @@ class AdministradorControl extends Controlador{
     }
         public function verificarUsuario(){
          try {
-             
              $valor=$this->modelo->verificarAdministrador($_POST['usuario'],$_POST['contraseña']);
-             if ( $valor> 0){
-                 $this->vista->set('titulo', 'Exito');
-                 $this->vista->set('url', '/colegio/administrador/usuarioAdministrador');
-             }else{
-                  $this->vista->set('titulo', 'Fallo');
-                 $this->vista->set('url', '/colegio/administrador/logueo');
-             }
-                 
-            return $this->vista->imprimir();
-            
+             
+          
+           echo json_encode($valor);
+           //  echo $valor;
+             
         } catch (Exception $exc) {
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }   

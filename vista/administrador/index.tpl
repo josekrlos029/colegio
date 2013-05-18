@@ -22,7 +22,7 @@
             <tbody>
                 <?php foreach ($estudiantes as $est) { ?>
                 <tr>
-                    <td><a href="/Pruebas/usuario/detalle/<?php echo $user->getDocumento();?>">
+                    <td hidden><a href="/Pruebas/usuario/detalle/<?php echo $user->getDocumento();?>">
                             <?php echo $est->getIdEstudiante();?></a></td>
                     <td><?php echo $est->getNombres();?></td>
                     <td><?php echo $est->getPApellido();?></td>

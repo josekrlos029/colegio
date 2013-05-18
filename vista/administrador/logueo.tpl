@@ -3,7 +3,52 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="../utiles/css/login.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
+<script src="../utiles/js/envios.js" type="text/javascript" ></script>
 <script type="text/javascript">
+/* 
+*/
+function envio(){ 
+ 
+ var x = $("#msg");
+ x.html ( "<p>Cargando...</p>");
+ x.show("slow");
+  
+ var usuario = document.getElementById("username");
+ var contraseña = document.getElementById("password");
+ 
+var url="/colegio/administrador/verificarUsuario/";
+var data="usuario="+usuario.value+"&contraseña="+contraseña.value;
+
+envioJson(url,data,function respuesta(res){   
+if (res == 0){
+var div = document.getElementById("msg");
+x.html ( "<p>Usuario o Contraseña Incorrectos</p>");
+usuario.value="";
+usuario.setAttribute("autofocus","true");
+contraseña.value="";
+setTimeout("$('#msg').hide();", 4000);
+}else{
+document.location.href="/colegio/administrador/usuarioAdministrador";
+}
+});
+
+}
+window.onload = function() {
+$('#password').bind('keypress', function (e) {
+  var key = e.keyCode || e.which;
+  if (key === 13) {
+    envio();
+  };
+});          
+}
+/*function respuesta(res){
+var x = $("#msg");   
+x.html ("<p>"+res+"</p>");
+setTimeout("x.toggle('slow');", 4000);
+}
+*/
 
 setTimeout("maximizar()",1250);
 function maximizar(){
@@ -23,71 +68,49 @@ window.resizeTo(screen.availWidth + (2 * offset),
 screen.availHeight + (2 * offset));
 }
 
-function IE(e){
-if (navigator.appName == "Microsoft Internet Explorer" && (event.button == "2" || event.button == "3")) {
-return false;
-}
-}
-function NS(e) {
-if (document.layers || (document.getElementById && !document.all)) {
-if (e.which == "2" || e.which == "3") {
-return false;
-}
-}
-}
-document.onmousedown=IE;document.onmouseup=NS;document.oncontextmenu=new Function("return false");
 </script>
-
-
 <title><?php echo $titulo; ?></title>
 </head>
-
-
-
-
 <body> 
-<p>&nbsp;</p>
-<p>&nbsp;</p><p>&nbsp;</p>
-<p>&nbsp;</p><p>&nbsp;</p>
 <p>&nbsp;</p><p>&nbsp;</p>
 <p>&nbsp;</p><p>&nbsp;</p>
 
+<div id="msg" hidden>
+    
+</div>
+<div id="contenedor" align="center" >
 <table align="center" border="0" width="700px">
 <tr>
-<td align="left">
+    <td align="center">
 <h1>ADMINISTRADOR</h1>
 </td>
-<tr>
-</table>
-<table align="center" border="0" width="800px">
-<tr>
-<td>
-<div class="caja"><!--------------caja--------------->
-<div id="escudo" align="right"></div>
-<div class="separador" align="center"> </div>
-<div align="right" class="login">
-<form action="/colegio/administrador/verificarUsuario" method="post"  AUTOCOMPLETE="OFF">
-<div align="left"><h2>Iniciar sesiòn</h2></div>
-<div class="espace"> 
-<input name="usuario" id="username" type="text" size="20"  class="caja_texto" placeholder="Usuario" required autofocus />
-</div>
- <div class="espace">   
-<input name="contraseña" id="password" type="password" size="20"  class="caja_texto" placeholder="Contraseña" required />
- </div>
- <div class="espace">
-<div align="left" ><input name="submit" type="submit" value="Iniciar Sesion" class="button large blue" ></div>
-</div>
-</form>
-<div align="left"><a href="#"><div class="link">¿olvidaste tus datos?</div></a></div>
-</div><!-- end login -->
+</tr>
+    <tr align="center">
+    <td align="center">
+        <div class="caja"  align="center"><!--------------caja--------------->
+            <div align="center" class="login">
+                <div align="center"><h2>Iniciar sesiòn</h2></div>
+                <div class="espace" align="center"> 
+                    <input name="usuario" id="username" type="text" size="20"  class="caja_texto" placeholder="Usuario" required autofocus />
+                </div>
+                <div class="espace">   
+                    <input name="contraseña"  id="password" type="password" size="20"  class="caja_texto" placeholder="Contraseña" required />
+                </div>
+                <div class="espace">
+                    <div align="center" ><button onclick="envio();" class="button large red">Iniciar Sesión </button></div>
+                </div>
+
+                <div align="center"><a href="#"><div class="link">¿olvidaste tus datos?</div></a></div>
+            </div><!-- end login -->
 <!--------------------------end caja------------------>
 </br></br></br></br>
-<div id="pie" align="center">copyright 2012 - 2013  Todos los derechos reservados | appSchool</div>
-</div>
+           <div id="pie" align="center">copyright 2012 - 2013  Todos los derechos reservados | appSchool</div>
+        </div>
 <!--------------------------end contenedor-------------------------------------->
-</td>
-</tr>
+    </td>
+    </tr>
 </table>
+    </div>
 </body>
 </html>
 
