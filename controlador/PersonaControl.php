@@ -6,11 +6,11 @@
  */
 
 /**
- * Description of Administrador
+ * Description of PersonaControl
  *
  * @author JoseCarlos
  */
-class Administrador {
+class PersonaControl {
     //put your code here
 }
 

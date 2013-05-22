@@ -7,8 +7,7 @@
 <script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
 <script src="../utiles/js/envios.js" type="text/javascript" ></script>
 <script type="text/javascript">
-/* 
-*/
+
 function envio(){ 
  
  var x = $("#msg");
@@ -17,31 +16,36 @@ function envio(){
   
  var usuario = document.getElementById("username");
  var contraseña = document.getElementById("password");
- 
-var url="/colegio/administrador/verificarUsuario/";
-var data="usuario="+usuario.value+"&contraseña="+contraseña.value;
 
-envioJson(url,data,function respuesta(res){   
-if (res == 0){
-var div = document.getElementById("msg");
-x.html ( "<p>Usuario o Contraseña Incorrectos</p>");
-usuario.value="";
-usuario.setAttribute("autofocus","true");
-contraseña.value="";
-setTimeout("$('#msg').hide();", 4000);
-}else{
-document.location.href="/colegio/administrador/usuarioAdministrador";
-}
-});
+    if (usuario.value=="" || contraseña.value==""){
+      x.html ( "<p>Error: Tiene Campos Vacios</p>");
+      setTimeout("$('#msg').hide();", 4000);
+    }else{
 
+        var url="/colegio/administrador/verificarUsuario/";
+        var data="usuario="+usuario.value+"&contraseña="+contraseña.value;
+
+        envioJson(url,data,function respuesta(res){   
+            if (res == 0){
+                var div = document.getElementById("msg");
+                x.html ( "<p>Usuario o Contraseña Incorrectos</p>");
+                usuario.value="";
+                usuario.setAttribute("autofocus","true");
+                contraseña.value="";
+                setTimeout("$('#msg').hide();", 4000);
+            }else{
+                document.location.href="/colegio/administrador/usuarioAdministrador";
+            }
+         });
+    }   
 }
 window.onload = function() {
-$('#password').bind('keypress', function (e) {
-  var key = e.keyCode || e.which;
-  if (key === 13) {
-    envio();
-  };
-});          
+    $('#password').bind('keypress', function (e) {
+        var key = e.keyCode || e.which;
+        if (key === 13) {
+            envio();
+        };
+    });          
 }
 /*function respuesta(res){
 var x = $("#msg");   
@@ -91,7 +95,7 @@ screen.availHeight + (2 * offset));
             <div align="center" class="login">
                 <div align="center"><h2>Iniciar sesiòn</h2></div>
                 <div class="espace" align="center"> 
-                    <input name="usuario" id="username" type="text" size="20"  class="caja_texto" placeholder="Usuario" required autofocus />
+                    <input name="usuario" id="username" type="text" x-webkit-speech size="20"  class="caja_texto" placeholder="Usuario" required autofocus />
                 </div>
                 <div class="espace">   
                     <input name="contraseña"  id="password" type="password" size="20"  class="caja_texto" placeholder="Contraseña" required />
@@ -100,7 +104,7 @@ screen.availHeight + (2 * offset));
                     <div align="center" ><button onclick="envio();" class="button large red">Iniciar Sesión </button></div>
                 </div>
 
-                <div align="center"><a href="#"><div class="link">¿olvidaste tus datos?</div></a></div>
+                <div align="center"><a href="#"><div class="link">¿Olvidaste tu Contraseña?</div></a></div>
             </div><!-- end login -->
 <!--------------------------end caja------------------>
 </br></br></br></br>

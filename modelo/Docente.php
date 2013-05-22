@@ -10,7 +10,7 @@
  *
  * @author JoseCarlos
  */
-class Docente {
+abstract class Docente {
 private $idDocente;
     private $Nombres;
     private $pApellido;

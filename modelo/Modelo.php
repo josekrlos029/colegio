@@ -60,14 +60,15 @@ abstract class Modelo {
      * @param string $sql
      * @return PDOStatement
      */
-    protected function consultar($sql = null) {
-        if($sql == null)
+    protected function consultar($sql = null, $param = null) {
+        if ($sql == null)
             $sql = $this->sql;
-        $sentencia = $this->db->query($sql,PDO::FETCH_ASSOC);
-        if($sentencia === false){
-            self::enviarError($this->db->errorInfo());
-        }
-        return $sentencia;
+        $stmt = $this->db->prepare($sql);
+        if($param!=null)
+            $stmt->execute($param);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll();
+        return $resultado;
     }
     
     /**

@@ -11,96 +11,88 @@
  * @author JoseCarlos
  */
 
-class Estudiante extends Modelo{
+class Estudiante extends Persona {
     //put your code here
     
-    
-    private $idEstudiante;
-    private $nombres;
-    private $pApellido;
-    private $sApellido;
-    private $sexo;
-    private $telefono;
-    private $direccion;
-    private $correo;
-    private $fNacimiento;
-    
+   
     public function __construct() {
         parent::__construct();
     }
-
-
-    public function getIdEstudiante() {
-        return $this->idEstudiante;
-    }
-
-    public function setIdEstudiante($idEstudiante) {
-        $this->idEstudiante = $idEstudiante;
-    }
-
-    public function getNombres() {
-        return $this->nombres;
-    }
-
-    public function setNombres($nombres) {
-        $this->nombres = $nombres;
-    }
     
-    public function getPApellido() {
-        return $this->pApellido;
-    }
-
-    public function setPApellido($pPellido) {
-        $this->pApellido = $pPellido;
-    }
-
-    public function getSApellido() {
-        return $this->sApellido;
-    }
-
-    public function setSApellido($sApellido) {
-        $this->sApellido = $sApellido;
-    }
-
-    public function getSexo() {
-        return $this->sexo;
-    }
-
-    public function setSexo($sexo) {
-        $this->sexo = $sexo;
-    }
-
-    public function getTelefono() {
-        return $this->telefono;
-    }
-
-    public function setTelefono($telefono) {
-        $this->telefono = $telefono;
+    
+    public function getCorreo() {
+        return parent::getCorreo();
     }
 
     public function getDireccion() {
-        return $this->direccion;
-    }
-
-    public function setDireccion($direccion) {
-        $this->direccion = $direccion;
-    }
-
-    public function getCorreo() {
-        return $this->correo;
-    }
-
-    public function setCorreo($correo) {
-        $this->correo = $correo;
+        return parent::getDireccion();
     }
 
     public function getFNacimiento() {
-        return $this->fNacimiento;
+        return parent::getFNacimiento();
+    }
+
+    public function getIdPersona() {
+        return parent::getIdPersona();
+    }
+
+    public function getNombres() {
+        return parent::getNombres();
+    }
+
+    public function getPApellido() {
+        return parent::getPApellido();
+    }
+
+    public function getSApellido() {
+        return parent::getSApellido();
+    }
+
+    public function getSexo() {
+        return parent::getSexo();
+    }
+
+    public function getTelefono() {
+        return parent::getTelefono();
+    }
+
+    public function setCorreo($correo) {
+        parent::setCorreo($correo);
+    }
+
+    public function setDireccion($direccion) {
+        parent::setDireccion($direccion);
     }
 
     public function setFNacimiento($fNacimiento) {
-        $this->fNacimiento = $fNacimiento;
+        parent::setFNacimiento($fNacimiento);
     }
+
+    public function setIdPersona($idPersona) {
+        parent::setIdPersona($idPersona);
+    }
+
+    public function setNombres($nombres) {
+        parent::setNombres($nombres);
+    }
+
+    public function setPApellido($pApellido) {
+        parent::setPApellido($pApellido);
+    }
+
+    public function setSApellido($sApellido) {
+        parent::setSApellido($sApellido);
+    }
+
+    public function setSexo($sexo) {
+        parent::setSexo($sexo);
+    }
+
+    public function setTelefono($telefono) {
+        parent::setTelefono($telefono);
+    }
+
+    
 
      private function mapearEstudiante(Estudiante $estudiante, array $props) {
         if (array_key_exists('idEstudiante', $props)) {

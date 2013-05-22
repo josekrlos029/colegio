@@ -1,135 +1,94 @@
-<html>
-<head>
-<title><?php echo $titulo; ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link href="css/login.css" rel="stylesheet" type="text/css" media="screen"/>
-<link type="text/css" href="css/base.css" rel="stylesheet" />
-<link href="css/style3.css" rel="stylesheet" type="text/css" media="screen"/>
-<script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
+<!DOCTYPE html>
+<html lang="es">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="utiles/css/login.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
+<script src="utiles/js/envios.js" type="text/javascript" ></script>
 
-	<div class="barra"></br></br><h1>Control Academico<h1></div>
-                    <tr><td align="center"><img src="vista/inicio/aro.png"></td></tr>
-</table>	
+<script type="text/javascript">
 
+function envio(){ 
+ 
+ var x = $("#msg");
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+  
+ var usuario = document.getElementById("username");
+ var contraseña = document.getElementById("password");
 
-<table  border="1" align="center">
+    if (usuario.value=="" || contraseña.value==""){
+      x.html ( "<p>Error: Tiene Campos Vacios</p>");
+      setTimeout("$('#msg').hide();", 4000);
+    }else{
 
-    <ul>
-					<li>
-						
-								<h3>Administrador</h3>
-								<p><a href="javascript:ventana(500,500)">Entrar</a></p>
-						
-					</li>
-					<li>
-								<h3>Coordinador</h3>
-								<p> <a href="javascript:ventana4(500,500)">Entrar</a></p>
-					</li>
-					<li>
-						<h3>Docente</h3>
-								<p><a href="javascript:ventana3(500,500)">Entrar</a></p>
-					
-					</li>
-                    	<li>
-								<h3>Estudiante</h3>
-								<p><a href="javascript:ventana2(500,500)">Entrar</a></p>
-					</li>
-				</ul>
-			
+        var url="/colegio/inicio/verificarUsuario/";
+        var data="usuario="+usuario.value+"&clave="+contraseña.value;
 
-<!--
-	<tr align="center">
-	
-	<td><a href="javascript:ventana(500,500)"><img src="imagenes/index/administrador.gif"  alt=""></a></td>
-	
-	<td align="center"><a href="javascript:ventana4(500,500)"><img src="imagenes/index/coordinacion.gif"   alt=""></a></td>
-		
-	<td align="center"><a href="javascript:ventana3(500,500)"><img src="imagenes/index/estudiante.gif" alt=""></a></td>
-	
-   <td  align="center"><a href="javascript:ventana2(500,500)"><img src="imagenes/index/docentes.gif"   alt=""></a></td>
-	
-    </tr>
--->	</table>
-	
-	</br>
-	
-
-	
-</div>
-</body>
-<script language="Javascript">
-	var w;
-function ventana(x,y){
-
-w=window.open('/colegio/administrador/logueo','/colegio/administrador/logueo', 'width=100,height=100,scrollbars=yes');
-setTimeout("maximizar(w)",1000);
-
+        envioJson(url,data,function respuesta(res){   
+            if (res == 0){
+                var div = document.getElementById("msg");
+                x.html ( "<p>Usuario o Contraseña Incorrectos</p>");
+                usuario.value="";
+                usuario.setAttribute("autofocus","true");
+                contraseña.value="";
+                setTimeout("$('#msg').hide();", 4000);
+            }else{
+                document.location.href=res;
+            }
+         });
+    }   
 }
-
-function ventana2(x,y){
-
-w=window.open('login_Docente.html','login_Docente.html', 'width=100,height=100,scrollbars=yes');
-setTimeout("maximizar(w)",1000);
-
-}
-function ventana3(x,y){
-
-w=window.open('login_estudiante.html','login_estudiante.html', 'width=100,height=100,scrollbars=yes');
-setTimeout("maximizar(w)",1000);
-
-}
-function ventana4(x,y){
-
-w=window.open('login_coordinacion.html','login_coordinacion.html', 'width=100,height=100,scrollbars=yes');
-setTimeout("maximizar(w)",1000);
-
-}
-
-function maximizar(win ) {
-var offset = (navigator.userAgent.indexOf("Mac") != -1 ||
-navigator.userAgent.indexOf("Gecko") != -1 ||
-navigator.appName.indexOf("Netscape") != -1) ? 0 : 4;
-win.moveTo(-offset, -offset);
-win.resizeTo(screen.availWidth + (2 * offset),screen.availHeight + (2 * offset));
+window.onload = function() {
+    $('#password').bind('keypress', function (e) {
+        var key = e.keyCode || e.which;
+        if (key === 13) {
+            envio();
+        };
+    });          
 }
 </script>
-<?php
-function queBrowser() {
+<title><?php echo $titulo; ?></title>
+</head>
+<body> 
+<p>&nbsp;</p><p>&nbsp;</p>
+<p>&nbsp;</p><p>&nbsp;</p>
 
-	$user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';  
-	
-	if (strpos($user_agent, 'Opera') !== false) {  
-	   $browser = 'Opera Lo sentimos deberas navegar en google Chrome, si A un no los tienes instalado Progras Hacerlo Aqui:www.google.com/intl/es/chrome/browser/?hl=es';  
-	} elseif (strpos($user_agent, 'Chrome') !== false) { ?>
+<div id="msg" hidden>
+    
+</div>
+<div id="contenedor" align="center" >
+<table align="center" border="0" width="700px">
+<tr>
+    <td align="center">
+<h1>BIENVENIDO !</h1>
+</td>
+</tr>
+    <tr align="center">
+    <td align="center">
+        <div class="caja"  align="center"><!--------------caja--------------->
+            <div align="center" class="login">
+                <div align="center"><h2>Iniciar sesión</h2></div>
+                <div class="espace" align="center"> <!--------------x-webkit-speech--------------->
+                    <input name="usuario" id="username" type="text"  size="20"  class="caja_texto" placeholder="Usuario" required autofocus />
+                </div>
+                <div class="espace">   
+                    <input name="contraseña"  id="password" type="password" size="20"  class="caja_texto" placeholder="Contraseña" required />
+                </div>
+                <div class="espace">
+                    <div align="center" ><button onclick="envio();" class="button large red">Iniciar Sesión </button></div>
+                </div>
 
-<?php
- $browser = 'Google Chorme';  
-	   
-	   
-	} elseif (strpos($user_agent, 'Firefox/2') !== false) {  
-	   $browser = 'Firefox 2 Lo sentimos deberas navegar en google Chrome, si aun no los tienes instalado Progras Hacerlo Aqui:www.google.com/intl/es/chrome/browser/?hl=es';  
-	} elseif (strpos($user_agent, 'Firefox/3') !== false) {  
-	   $browser = 'Firefox 3 Lo sentimos deberas navegar en google Chrome, si aun no los tienes instalado Progras Hacerlo Aqui:www.google.com/intl/es/chrome/browser/?hl=es';  
-	} elseif (strpos($user_agent, 'Firefox') !== false) {  
-	   $browser = 'Firefox (Version desconocida) Lo sentimos deberas navegar en google Chrome, si aun no los tienes instalado Progras Hacerlo Aqui:www.google.com/intl/es/chrome/browser/?hl=es';  
-	} elseif (strpos($user_agent, 'Safari') !== false) {  
-	   $browser = 'Safari';  
-	} elseif (strpos($user_agent, 'MSIE 6') !== false) {  
-	   $browser = 'Internet Explorer 6 Lo sentimos deberas navegar en google Chrome, si aun no los tienes instalado Prodras Hacerlo Aqui:www.google.com/intl/es/chrome/browser/?hl=es';  
-	} elseif (strpos($user_agent, 'MSIE 7') !== false) {  
-	   $browser = 'Internet Explorer 7 Lo sentimos deberas navegar en google Chrome, si aun no los tienes instalado Prodras Hacerlo Aqui:www.google.com/intl/es/chrome/browser/?hl=es'; 
-	} elseif (strpos($user_agent, 'MSIE 8') !== false) {  
-	   $browser = 'Internet Explorer 8 Lo sentimos deberas navegar en google Chrome, si aun no los tienes instalado Prodras Hacerlo Aqui:www.google.com/intl/es/chrome/browser/?hl=es'; 
-	} elseif (strpos($user_agent, 'MSIE9') !== false) {  
-	   $browser = 'Internet Explorer (Version desconocida) Lo sentimos deberas navegar en google Chrome, si aun no los tienes instalado Progras Hacerlo Aqui:www.google.com/intl/es/chrome/browser/?hl=es'; 
-	} else {  
-	   $browser = 'Otro';  
-	}
-	
-	return $browser;
-
-}
-
-echo 'Browser detectado: '.queBrowser().'';
-?>
+                <div align="center"><a href="/colegio/inicio/olvidoclave"><div class="link">¿Olvidaste tu Contraseña?</div></a></div>
+            </div><!-- end login -->
+<!--------------------------end caja------------------>
+</br></br></br></br>
+           <div id="pie" align="center">copyright 2013  Todos los derechos reservados | Programación Web 2013-I UPC</div>
+        </div>
+<!--------------------------end contenedor-------------------------------------->
+    </td>
+    </tr>
+</table>
+    </div>
+</body>
 </html>
