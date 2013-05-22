@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2013 a las 20:28:48
+-- Tiempo de generación: 22-05-2013 a las 16:22:19
 -- Versión del servidor: 5.5.27
 -- Versión de PHP: 5.4.7
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `colegio`
+-- Base de datos: `colegio1`
 --
 
 -- --------------------------------------------------------
@@ -49,52 +49,6 @@ CREATE TABLE IF NOT EXISTS `carga_docente` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `docente`
---
-
-CREATE TABLE IF NOT EXISTS `docente` (
-  `idDocente` varchar(15) NOT NULL,
-  `nombres` varchar(45) NOT NULL,
-  `pApellido` varchar(30) NOT NULL,
-  `sApellido` varchar(30) DEFAULT NULL,
-  `sexo` char(1) NOT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
-  `correo` varchar(45) DEFAULT NULL,
-  `fNacimiento` date DEFAULT NULL,
-  PRIMARY KEY (`idDocente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `estudiante`
---
-
-CREATE TABLE IF NOT EXISTS `estudiante` (
-  `idEstudiante` varchar(15) NOT NULL DEFAULT '',
-  `nombres` varchar(45) NOT NULL,
-  `pApellido` varchar(30) NOT NULL,
-  `sApellido` varchar(30) DEFAULT NULL,
-  `sexo` char(1) NOT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
-  `correo` varchar(45) DEFAULT NULL,
-  `estado` char(1) NOT NULL,
-  `fNacimiento` date DEFAULT NULL,
-  PRIMARY KEY (`idEstudiante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `estudiante`
---
-
-INSERT INTO `estudiante` (`idEstudiante`, `nombres`, `pApellido`, `sApellido`, `sexo`, `telefono`, `direccion`, `correo`, `estado`, `fNacimiento`) VALUES
-('111', 'Jose', 'Jimenez', 'Montenegro', 'M', '3017693991', 'dads', 'adasd', '1', '2013-04-01');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `grado`
 --
 
@@ -120,6 +74,73 @@ CREATE TABLE IF NOT EXISTS `materia` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `persona`
+--
+
+CREATE TABLE IF NOT EXISTS `persona` (
+  `idPersona` varchar(15) NOT NULL DEFAULT '',
+  `nombres` varchar(45) NOT NULL,
+  `pApellido` varchar(30) NOT NULL,
+  `sApellido` varchar(30) DEFAULT NULL,
+  `sexo` char(1) NOT NULL,
+  `telefono` varchar(45) DEFAULT NULL,
+  `direccion` varchar(45) DEFAULT NULL,
+  `correo` varchar(45) DEFAULT NULL,
+  `estado` char(1) NOT NULL,
+  `fNacimiento` date DEFAULT NULL,
+  PRIMARY KEY (`idPersona`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`idPersona`, `nombres`, `pApellido`, `sApellido`, `sexo`, `telefono`, `direccion`, `correo`, `estado`, `fNacimiento`) VALUES
+('111', 'Jose', 'Jimenez', 'Montenegro', 'M', '3017693991', 'dads', 'josekrlos029@hotmail.com', '1', '2013-04-01');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol`
+--
+
+CREATE TABLE IF NOT EXISTS `rol` (
+  `idRol` varchar(2) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  PRIMARY KEY (`idRol`),
+  UNIQUE KEY `nombre_UNIQUE` (`nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`idRol`, `nombre`) VALUES
+('A', 'ADMINISTRADOR'),
+('D', 'DOCENTE'),
+('E', 'ESTUDIANTE');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rolespersona`
+--
+
+CREATE TABLE IF NOT EXISTS `rolespersona` (
+  `idPersona` varchar(15) DEFAULT NULL,
+  `idRol` varchar(2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `rolespersona`
+--
+
+INSERT INTO `rolespersona` (`idPersona`, `idRol`) VALUES
+('111', 'A');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `salon`
 --
 
@@ -134,48 +155,23 @@ CREATE TABLE IF NOT EXISTS `salon` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario_admin`
+-- Estructura de tabla para la tabla `usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `usuario_admin` (
-  `idAdministrador` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `idPersona` varchar(15) NOT NULL,
   `usuario` varchar(45) NOT NULL,
   `contraseña` varchar(45) NOT NULL,
-  PRIMARY KEY (`idAdministrador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  UNIQUE KEY `usuario_UNIQUE` (`usuario`),
+  UNIQUE KEY `contraseña_UNIQUE` (`contraseña`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `usuario_admin`
+-- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario_admin` (`idAdministrador`, `usuario`, `contraseña`) VALUES
-(1, 'jose', 'jose');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario_docente`
---
-
-CREATE TABLE IF NOT EXISTS `usuario_docente` (
-  `idDocente` varchar(15) NOT NULL,
-  `usuario` varchar(45) NOT NULL,
-  `contraseña` varchar(45) NOT NULL,
-  KEY `idDocente_idx` (`idDocente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario_estudiante`
---
-
-CREATE TABLE IF NOT EXISTS `usuario_estudiante` (
-  `idEstudiante` varchar(15) NOT NULL,
-  `usuario` varchar(45) NOT NULL,
-  `contraseña` varchar(45) NOT NULL,
-  KEY `idEstudiante_idx` (`idEstudiante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `usuario` (`idPersona`, `usuario`, `contraseña`) VALUES
+('111', 'admin', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220');
 
 --
 -- Restricciones para tablas volcadas
@@ -193,18 +189,6 @@ ALTER TABLE `carga`
 --
 ALTER TABLE `salon`
   ADD CONSTRAINT `idGrado` FOREIGN KEY (`idGrado`) REFERENCES `grado` (`idGrado`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuario_docente`
---
-ALTER TABLE `usuario_docente`
-  ADD CONSTRAINT `idDocente` FOREIGN KEY (`idDocente`) REFERENCES `docente` (`idDocente`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuario_estudiante`
---
-ALTER TABLE `usuario_estudiante`
-  ADD CONSTRAINT `idEstudiante` FOREIGN KEY (`idEstudiante`) REFERENCES `estudiante` (`idEstudiante`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
