@@ -32,6 +32,17 @@ class AdministradorControl extends Controlador{
         }
             
         }
+        public function agregarMateria(){
+        try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Agregar Materia');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
         
     
 }

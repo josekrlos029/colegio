@@ -75,6 +75,7 @@
 	   <td>
 	    <ul class="menu" >
 	   <li><a href="#">Aulas de clases</a></li>
+           <li><a href="colegio/administrador/agregarMateria">Agregar Materias</a></li>
 	   <li><a href="#">Historial Anual</a></li>
        <li><a href="#">Consolidados</a></li>
        <li><a href="#">Cierre de ano</a></li>
