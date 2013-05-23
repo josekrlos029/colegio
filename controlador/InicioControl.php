@@ -96,8 +96,10 @@ class InicioControl extends Controlador{
             //md5 o sha combinando usuario+mail+salt, etc.
             $msg1 .= "http://localhost/colegio/inicio/cambiarclave/111";
             $msg1 .= "<br>El administrador";
+            
+            $asunto = "Cambio de Contraseña Aplicación";
 
-            $this->enviarCorreo($msg1, 'Olvidó su contraseña',$persona->getCorreo()) ;
+            $this->enviarCorreo($msg1,$per->getCorreo(),$asunto, $per->getNombres()." ".$per->getPApellido()) ;
               
         }
     }

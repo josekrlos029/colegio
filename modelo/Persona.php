@@ -196,7 +196,7 @@ class Persona extends Modelo{
             $this->mapearPersona($persona, $fila);
             $pers[$persona->getIdPersona()] = $persona;
         }
-        return $pers;
+        return $persona;
     }
     
     
