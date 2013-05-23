@@ -77,7 +77,7 @@
            <li><a href="/colegio/administrador/agregarSalon">Gestionar Salones</a></li>
            <li><a href="#">Aulas de clases</a></li>
            <li><a href="/colegio/administrador/agregarMateria">Gestionar Materias</a></li>
-           <li><a href="/colegio/administrador/agregarPensum">Gestionar Pensum</a></li>
+           <li><a href="/colegio/administrador/gestionarPensum">Gestionar Pensum</a></li>
 	   <li><a href="#">Historial Anual</a></li>
        <li><a href="#">Consolidados</a></li>
        <li><a href="#">Cierre de ano</a></li>
