@@ -95,7 +95,18 @@ public function getIdMateria() {
         $param = array(':idMateria' => $materia->getIdMateria());
         $this->ejecutar($param);        
     }
-  
+  public function leerMateriasPorSalon($idSalon){
+        $sql = "SELECT m.idMateria as idMateria, m.nombre as nombre, m.horas as horas FROM materia m, pensum p WHERE p.idMateria=m.idMateria AND p.idSalon=".$idSalon;
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $mats = array();
+        foreach ($resultado as $fila) {
+            $materia = new Materia();
+            $this->mapearMateria($materia, $fila);
+            $mats[$materia->getIdMateria()] = $materia;
+        }
+        return $mats;
+  }
 }
 
 ?>

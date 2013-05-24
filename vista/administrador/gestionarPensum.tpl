@@ -9,8 +9,13 @@
         <form action="/colegio/administrador/guardarPensum" method="post" name="form1">
             <table width="416" border="1" cellspacing="0" cellpadding="2">
                 <tr>
-                    <th width="197" scope="row">idMateria</th>
-                    <td width="211"><input name="idMateria" id="idMateria" type="text"  /></td>
+                    
+                    <th width="197" scope="row">Grados</th>
+                    <td width="211"><select id="grados" name="grados" onchange="consultarMaterias()">
+                    <?php foreach ($grados as $grado) { ?>
+                    <option value="<?php echo $grado->getIdGrado(); ?>"><?php echo $grado->getNombre(); ?></option>
+                         <?php } ?>
+                        </select></td>
                 </tr>
                 <tr>
                     <th scope="row">nombreMateria</th>
