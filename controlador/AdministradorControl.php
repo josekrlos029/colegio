@@ -56,6 +56,23 @@ class AdministradorControl extends Controlador{
         }
             
         }
+        public function agregarGrado(){
+            try {
+             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
+             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : NULL;
+             $grado = new Grado();
+             $grado->setIdGrado($idGrado);
+             $grado->setNombre($nombre);
+             $grado->crearGrado($grado);
+             echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }
+            
+           
+            
+        }
+
         public function gestionarPensum(){
          try {
             if($this->verificarSession()){
