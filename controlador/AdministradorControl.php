@@ -41,6 +41,19 @@ class AdministradorControl extends Controlador{
         } catch (Exception $exc) {
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
+        }
+        public function gestionarGrados(){
+        try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Gestión De Grados');
+            $grado = new Grado();
+            $grados = $grado->leerGrados();
+            $this->vista->set('grados', $grados);
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
             
         }
         public function gestionarPensum(){

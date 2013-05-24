@@ -10,13 +10,7 @@
 	
 	<div id="marco">
 <hr>
-	<table border="0" align="center" width="900px" >
-	<tr>
-    <td> <td align="right" width="10%"><a href="#"><img src="../utiles/imagenes/iconos/inicio.png"/></a></td>
-    <td align="right"><a href="#"><img src="../utiles/imagenes/iconos/Power.png"/></td>
-    <td align="right" width="10%"><a href="#"><img  src="../utiles/imagenes/iconos/salir.png"/></a></td>
-    </tr>
-    </table>
+	<?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
 </br>
 <hr>
 </br>
@@ -74,8 +68,8 @@
 	   <tr>
 	   <td>
 	    <ul class="menu" >
-           <li><a href="/colegio/administrador/agregarSalon">Gestionar Salones</a></li>
-           <li><a href="#">Aulas de clases</a></li>
+           <li><a href="/colegio/administrador/gestionarGrados">Gestión de Grados</a></li>
+           <li><a href="/colegio/administrador/agregarSalon">Aulas de Clase</a></li>
            <li><a href="/colegio/administrador/agregarMateria">Gestionar Materias</a></li>
            <li><a href="/colegio/administrador/gestionarPensum">Gestionar Pensum</a></li>
 	   <li><a href="#">Historial Anual</a></li>
