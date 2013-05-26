@@ -83,11 +83,9 @@ abstract class Modelo {
         if(!$sentencia->execute($parametros)){
             self::enviarError($this->db->errorInfo());
         }
-        return $sentencia;
     }
-    
-    protected static function formatearFecha(DateTime $fecha){
-        return $fecha->format(DateTime::ISO8601);
+    protected static function formatearFecha(DateTime $fecha, $formato = 'Y-m-d') {
+        return empty($formato) ? $fecha->format(DateTime::ISO8601) : $fecha->format($formato);
     }
 }
 ?>

@@ -42,14 +42,7 @@ function envio(){
          });
     }   
 }
-window.onload = function() {
-    $('#password').bind('keypress', function (e) {
-        var key = e.keyCode || e.which;
-        if (key === 13) {
-            envio();
-        };
-    });          
-}
+
 </script>
     </head>
     <body>

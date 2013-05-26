@@ -49,8 +49,10 @@ border-spacing:0;
     box-shadow: 0 0px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0 1px 0px rgba(0,0,0,0.5);
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+    
 	}
-	
+       
+       
 	#barra{
 	width:95%;
 	height:4px;

@@ -21,8 +21,11 @@ class Persona extends Modelo{
     private $direccion;
     private $correo;
     private $fNacimiento;
-    
-    
+    private $estado;
+
+
+
+
     public function __construct() {
         parent::__construct();
     }
@@ -48,8 +51,8 @@ class Persona extends Modelo{
         return $this->pApellido;
     }
 
-    public function setPApellido($pPellido) {
-        $this->pApellido = $pPellido;
+    public function setPApellido($pApellido) {
+        $this->pApellido = $pApellido;
     }
 
     public function getSApellido() {
@@ -99,7 +102,15 @@ class Persona extends Modelo{
     public function setFNacimiento($fNacimiento) {
         $this->fNacimiento = $fNacimiento;
     }
+    public function getEstado() {
+        return $this->estado;
+    }
 
+    public function setEstado($estado) {
+        $this->estado = $estado;
+    }
+
+    
      private function mapearPersona(Persona $persona, array $props) {
         if (array_key_exists('idPersona', $props)) {
             $persona->setIdPersona($props['idPersona']);
@@ -128,7 +139,12 @@ class Persona extends Modelo{
         if (array_key_exists('fNacimiento', $props)) {
             $persona->setFNacimiento(self::crearFecha($props['fNacimiento']));
         }
+        if (array_key_exists('estado', $props)) {
+            $persona->setEstado($props['estado']);
+        }
     }
+    
+    
   
     private function getParametros(Persona $per){
               
@@ -141,13 +157,14 @@ class Persona extends Modelo{
             ':telefono' => $per->getTelefono(),
             ':direccion' => $per->getDireccion(),
             ':correo' => $per->getCorreo(),
-            ':fNacimiento' => $this->formatearFecha($per->getFNacimiento())
+            ':fNacimiento' => $per->getFNacimiento(),
+            ':estado' => $per->getEstado(),
         );
         return $parametros;
     }
     
     public function crearPersona(Persona $persona) {
-        $sql = "INSERT INTO persona (idPersona, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento) VALUES (?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO persona (idPersona, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento, estado) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($persona));
     }
@@ -160,6 +177,19 @@ class Persona extends Modelo{
     
     public function leerPersonas() {
         $sql = "SELECT idPersona, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento FROM persona";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pers = array();
+        foreach ($resultado as $fila) {
+            $persona = new Persona();
+            $this->mapearPersona($persona, $fila);
+            $pers[$persona->getIdPersona()] = $persona;
+        }
+        return $pers;
+    }
+    
+    public function leerDocentes() {
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo, p.fNacimiento, p.estado FROM persona p, rolespersona r WHERE p.idPersona=r.idPersona AND r.idRol='D'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();

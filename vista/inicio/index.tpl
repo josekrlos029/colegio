@@ -70,7 +70,7 @@ window.onload = function() {
             <div align="center" class="login">
                 <div align="center"><h2>Iniciar sesión</h2></div>
                 <div class="espace" align="center"> <!--------------x-webkit-speech--------------->
-                    <input name="usuario" id="username" type="text"  size="20"  class="caja_texto" placeholder="Usuario" required autofocus />
+                    <input name="usuario" id="username" type="text" size="20"  class="caja_texto" placeholder="Usuario" required autofocus />
                 </div>
                 <div class="espace">   
                     <input name="contraseña"  id="password" type="password" size="20"  class="caja_texto" placeholder="Contraseña" required />
