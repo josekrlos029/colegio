@@ -25,7 +25,7 @@
                     <th scope="row">horas</th>
                     <td><input name="horas" id="horas" type="text" /></td>
                 </tr>
-                
+                <tr>
                     <td colspan="2"><input name="agregarlicuadora" id="agregarlicuadora" type="submit" value="Guardar" /></td>
                 
                 </tr>

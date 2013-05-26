@@ -86,6 +86,40 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
         }
+        
+        public function gestionarSalones(){
+        try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Gestión De Salones');
+            $salon = new Salon();
+            $salones = $salon->leerSalones();
+            $this->vista->set('salones', $salones);
+            $grado = new Grado();
+            $grados = $grado->leerGrados();
+            $this->vista->set('grados', $grados);
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+        public function agregarSalon(){
+            try {
+             
+             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
+             $grupo = isset($_POST['grupo']) ? $_POST['grupo'] : NULL;
+             $idSalon = $idGrado."-".$grupo;
+             $salon = new Salon();
+             $salon->setIdSalon($idSalon);
+             $salon->setIdGrado($idGrado);
+             $salon->setGrupo($grupo);
+            $salon->crearSalon($salon);
+             echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+        }
 
         public function gestionarPensum(){
          try {
