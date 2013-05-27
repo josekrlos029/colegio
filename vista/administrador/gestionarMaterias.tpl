@@ -35,9 +35,6 @@ function envio(){
                 document.location.href="/colegio/administrador/gestionarMaterias";
             }else{
                 x.html ( "<p>"+res+"</p>");
-                idMateria.value="";
-                idGrado.setAttribute("autofocus","true");
-                nombre.value="";
                 setTimeout("$('#msg').hide();", 4000);
             }
          });
@@ -57,15 +54,15 @@ function envio(){
             <table width="416" border="1" cellspacing="0" cellpadding="2">
                 <tr>
                     <th width="197" scope="row">ID de Materia</th>
-                    <td width="211"><input name="idMateria" id="idMateria" type="text"  /></td>
+                    <td width="211"><input name="idMateria" id="idMateria" type="text"  required /></td>
                 </tr>
                 <tr>
                     <th scope="row">Nombre</th>
-                    <td><input name="nombreMateria" id="nombre" type="text" /></td>
+                    <td><input name="nombreMateria" id="nombre" type="text" required/></td>
                 </tr>
                 <tr>
                     <th scope="row">Horas</th>
-                    <td><input name="horas" id="horas" type="number"  max="10"/></td>
+                    <td><input name="horas" id="horas" type="number"  max="10" required/></td>
                 </tr>
                 
                 <td colspan="2"><input name="agregarlicuadora" id="agregarlicuadora" type="submit" value="Guardar"  onclick="envio()"/></td>

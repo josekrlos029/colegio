@@ -1,9 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  * Description of AdministradorControl
@@ -147,8 +143,23 @@ class AdministradorControl extends Controlador{
         }
         }
         public function imprimirMateriasPorSalon(){
+            $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
             $materia = new Materia();
-            $materias = $materia->leerMateriasPorSalon($idSalon);
+            $materias = $materia->leerMateriasPorSalon($idGrado);
+        }
+        
+        public function listaMateriasNoPertenecientes(){
+            $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
+            $materia = new Materia();
+            $materias = $materia->MateriasNoPertenecientesGrado($idGrado);
+            $respuesta = "";
+            foreach ($materias as $materia) {
+                
+                $respuesta.= '<option value="'.$materia->getIdMateria().'">'.$materia->getNombreMateria().'</option>';
+                
+            }
+            echo json_encode($respuesta);
+            
         }
         
         
