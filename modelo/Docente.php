@@ -11,7 +11,7 @@
  * @author JoseCarlos
  */
 abstract class Docente {
-private $idDocente;
+    private $idDocente;
     private $Nombres;
     private $pApellido;
     private $sApellido;
@@ -145,7 +145,7 @@ private $idDocente;
     }
     
     public function crearDocente(Docente $docente) {
-        $sql = "INSERT INTO docente (idDocente, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento) VALUES (?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO docente (idDocente, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento) VALUES (:idDocente,?,?,?,?,?,?,?,?)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($docente));
     }

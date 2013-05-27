@@ -84,7 +84,7 @@ class InicioControl extends Controlador{
             if ($id!=NULL){
              $per=$persona->leerPorId($id);   
             }else{
-                
+                $per=$persona->leerPorCorreo($email);
             }
             
             if ($per == NULL) {

@@ -103,7 +103,37 @@ function envio(){
                 </tr>
 
             </table>
-        
         <p>&nbsp;</p>
+        <h2>DOCENTES DE LA APLICACION</h2>
+        <table border="1" width="500" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>Documento</th>
+                    <th>Nombres</th>
+                    <th>P.Apellido</th>
+                    <th>S.Apellido</th>
+                    <th>Sexo</th>
+                    <th>Telefono</th>
+                    <th>Dirección</th>
+                    <th>Correo</th>
+                    <th>Fecha de Nacimiento</th>
+                </tr>
+          </thead>
+            <tbody>
+                <?php foreach ($docentes as $docente) { ?>
+                <tr>
+                    <td><a href="#"><?php echo $docente->getIdPersona();?></a></td>
+                    <td><?php echo $docente->getNombres();?></td>
+                    <td><?php echo $docente->getPApellido();?></td>
+                    <td><?php echo $docente->getSApellido();?></td>
+                    <td><?php echo $docente->getSexo();?></td>
+                    <td><?php echo $docente->getTelefono();?></td>
+                    <td><?php echo $docente->getDireccion();?></td>
+                    <td><?php echo $docente->getCorreo();?></td>
+                    <td><?php echo $docente->getFNacimiento()->format('Y-m-d');?></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+    </table>
     </body>
 </html>

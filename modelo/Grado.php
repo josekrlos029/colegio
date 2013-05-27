@@ -54,7 +54,7 @@ class Grado extends Modelo{
     }
     
     public function crearGrado(Grado $grado) {
-        $sql = "INSERT INTO grado (idGrado, nombre) VALUES (?,?)";
+        $sql = "INSERT INTO grado (idGrado, nombre) VALUES (:idGrado,:nombre)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($grado));
     }
@@ -73,17 +73,16 @@ class Grado extends Modelo{
     }
 
     public function actualizarGrado(Grado $grado) {
-        $sql = "UPDATE grado SET nombre=?, horas=? WHERE idGrado=?";
+        $sql = "UPDATE grado SET nombre=:nombre, horas=:horas WHERE idGrado=:idGrado";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($grado));        
         }
     
     
-    public function eliminarGrado(Grado $grado) {
-        $sql = "DELETE grado where idGrado=?";
+    public function eliminarGrado($grado) {
+        $sql = "DELETE grado where idGrado=".$grado;
         $this->__setSql($sql);
-        $param = array(':idGrado' => $grado->getIdGrado());
-        $this->ejecutar($param);        
+        $this->ejecutar();        
     }
   
     

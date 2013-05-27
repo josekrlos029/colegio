@@ -31,6 +31,10 @@ class AdministradorControl extends Controlador{
         }
             
         }
+        /**
+         * Imprime La Vista de Gestión de Materias
+         * @return type
+         */
         public function gestionarMaterias(){
         try {
             if($this->verificarSession()){
@@ -44,6 +48,9 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+        /**
+         * Función Llamada Por Json Desde El formulario para Agregar Materia
+         */
         public function agregarMateria(){
             try {
              $idMateria = isset($_POST['idMateria']) ? $_POST['idMateria'] : NULL;
@@ -73,6 +80,9 @@ class AdministradorControl extends Controlador{
         }
             
         }
+        /**
+         * Función Llamada Por Json Desde El formulario para Agregar Grado
+         */
         public function agregarGrado(){
             try {
              $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
@@ -102,8 +112,10 @@ class AdministradorControl extends Controlador{
         } catch (Exception $exc) {
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
-            
         }
+        /**
+         * Función Llamada Por Json Desde El formulario para Agregar Salón (Aula de Clases)
+         */
         public function agregarSalon(){
             try {
              
@@ -144,8 +156,9 @@ class AdministradorControl extends Controlador{
          try {
             if($this->verificarSession()){
             $this->vista->set('titulo', 'Gestión de Docentes');
+            $idRol='D';
             $persona = new Persona();
-            $docentes = $persona->leerDocentes();
+            $docentes = $persona->leerPorRol($idRol);
             $this->vista->set('docentes', $docentes);
             return $this->vista->imprimir();
             }
@@ -153,7 +166,9 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
-        
+        /**
+         * Función Llamada Por Json Desde El formulario para Agregar Docente
+         */
         public function agregarDocente(){
             try {
              $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
@@ -166,6 +181,7 @@ class AdministradorControl extends Controlador{
              $correo = isset($_POST['correo']) ? $_POST['correo'] : NULL;
              $fNacimiento = isset($_POST['fNacimiento']) ? $_POST['fNacimiento'] : NULL;
              $estado='1';
+             $idRol= 'D';
              $persona = new Persona();
              $persona->setIdPersona($idPersona);
              $persona->setNombres($nombres);
@@ -177,6 +193,7 @@ class AdministradorControl extends Controlador{
              $persona->setCorreo($correo);
              $persona->setFNacimiento($fNacimiento);
              $persona->setEstado($estado);
+             $persona->setIdRol($idRol);
              $persona->crearPersona($persona);
              echo json_encode(1);
         } catch (Exception $exc) {

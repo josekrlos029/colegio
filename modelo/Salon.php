@@ -33,7 +33,7 @@ class Salon extends Modelo{
     }
 
     public function getGrupo() {
-        return $this->iGrupo;
+        return $this->Grupo;
     }
 
     public function setGrupo($Grupo) {
@@ -62,7 +62,7 @@ class Salon extends Modelo{
         return $parametros;
     }
 public function crearSalon(Salon $salon) {
-        $sql = "INSERT INTO salon (idSalon, idGrado, grupo) VALUES (?,?,?)";
+        $sql = "INSERT INTO salon (idSalon, idGrado, grupo) VALUES (:idSalon,:idGrado,:grupo)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($salon));
     }
@@ -80,18 +80,17 @@ public function crearSalon(Salon $salon) {
         return $salones;
     }
 
-    public function actualizarSalon(Salon $grado) {
-        $sql = "UPDATE grado SET nombre=?, horas=? WHERE idSalon=?";
+    public function actualizarSalon(Salon $salon) {
+        $sql = "UPDATE grado SET nombre=:nombre, horas=:horas WHERE idSalon=:idSalon";
         $this->__setSql($sql);
-        $this->ejecutar($this->getParametros($grado));        
+        $this->ejecutar($this->getParametros($salon));        
         }
     
     
-    public function eliminarSalon(Salon $grado) {
-        $sql = "DELETE salon where idSalon=?";
+    public function eliminarSalon($idSalon) {
+        $sql = "DELETE salon where idSalon=".$idSalon;
         $this->__setSql($sql);
-        $param = array(':idSalon' => $grado->getIdSalon());
-        $this->ejecutar($param);        
+        $this->ejecutar();        
     }
 }
 

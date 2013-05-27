@@ -42,7 +42,7 @@ class Controlador {
             $mailer->IsSMTP();
             $mailer->Host = "smtp.gmail.com";
             $mailer->Port = 587;
-            $mailer->SMTPAuth = true;
+            $mailer->SMTPAuth = FALSE;
             $mailer->SMTPSecure = "tls";
             $mailer->Username = "josekrlos029@gmail.com";
             $mailer->Password = "1009jose";

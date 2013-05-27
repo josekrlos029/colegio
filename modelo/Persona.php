@@ -22,7 +22,7 @@ class Persona extends Modelo{
     private $correo;
     private $fNacimiento;
     private $estado;
-
+    private $idRol;
 
 
 
@@ -109,7 +109,15 @@ class Persona extends Modelo{
     public function setEstado($estado) {
         $this->estado = $estado;
     }
+    public function getIdRol() {
+        return $this->idRol;
+    }
 
+    public function setIdRol($idRol) {
+        $this->idRol = $idRol;
+    }
+
+    
     
      private function mapearPersona(Persona $persona, array $props) {
         if (array_key_exists('idPersona', $props)) {
@@ -142,6 +150,9 @@ class Persona extends Modelo{
         if (array_key_exists('estado', $props)) {
             $persona->setEstado($props['estado']);
         }
+        if (array_key_exists('idRol', $props)) {
+            $persona->setIdRol($props['idRol']);
+        }
     }
     
     
@@ -158,18 +169,28 @@ class Persona extends Modelo{
             ':direccion' => $per->getDireccion(),
             ':correo' => $per->getCorreo(),
             ':fNacimiento' => $per->getFNacimiento(),
-            ':estado' => $per->getEstado(),
+            ':estado' => $per->getEstado()
         );
         return $parametros;
     }
     
     public function crearPersona(Persona $persona) {
-        $sql = "INSERT INTO persona (idPersona, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento, estado) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO persona (idPersona, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento, estado) VALUES ( :idPersona, :nombres, :pApellido, :sApellido, :sexo, :telefono, :direccion, :correo, :fNacimiento, :estado)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($persona));
+        $this->asignarRol($persona);
+        
+    }
+    
+    public function asignarRol(Persona $persona){
+        $sql = "INSERT INTO rolespersona (idPersona, idRol) VALUES ( :idPersona, :idRol)";
+        $this->__setSql($sql);
+        $this->ejecutar(array(
+            ':idPersona' => $persona->getIdPersona(),
+            ':idRol' => $persona->getIdRol()));
     }
 
-        public function leerPersona($id) {
+    public function leerPersona($id) {
             
             
             
@@ -188,9 +209,8 @@ class Persona extends Modelo{
         return $pers;
     }
     
-    public function leerDocentes() {
-        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo, p.fNacimiento, p.estado FROM persona p, rolespersona r WHERE p.idPersona=r.idPersona AND r.idRol='D'";
-        $this->__setSql($sql);
+    public function leerPorRol($idRol) {
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo, p.fNacimiento, p.estado FROM persona p, rolespersona r WHERE p.idPersona=r.idPersona AND r.idRol='".$idRol."'";
         $resultado = $this->consultar($sql);
         $pers = array();
         foreach ($resultado as $fila) {
@@ -218,6 +238,19 @@ class Persona extends Modelo{
     public function leerPorId($id){
         $sql = "SELECT idPersona, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento FROM persona ";
         $sql .= "WHERE idPersona=".$id;
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pers = array();
+        foreach ($resultado as $fila) {
+            $persona = new Persona();
+            $this->mapearPersona($persona, $fila);
+            $pers[$persona->getIdPersona()] = $persona;
+        }
+        return $persona;
+    }
+    public function leerPorCorreo($correo){
+        $sql = "SELECT idPersona, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento FROM persona ";
+        $sql .= "WHERE correo='".$correo."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();
