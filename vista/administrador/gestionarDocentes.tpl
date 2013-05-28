@@ -96,7 +96,7 @@ function envio(){
                 </tr>
                 <tr>
                     <th scope="row">Fecha de Nacimiento</th>
-                    <td><input name="fNacimiento" id="fNacimiento" type="date" /></td>
+                    <td><input name="fNacimiento" id="fNacimiento" type="date" required/></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input name="agregarDocente" id="agregarDocente" type="submit" value="Guardar" onclick="envio()" /></td>

@@ -231,6 +231,7 @@ class AdministradorControl extends Controlador{
              $estado='1';
              $idRol= 'D';
              $persona = new Persona();
+             $usuario = new Usuario();
              $persona->setIdPersona($idPersona);
              $persona->setNombres($nombres);
              $persona->setPApellido($pApellido);
@@ -242,7 +243,11 @@ class AdministradorControl extends Controlador{
              $persona->setFNacimiento($fNacimiento);
              $persona->setEstado($estado);
              $persona->setIdRol($idRol);
+             $usuario->setIdPersona($idPersona);
+             $usuario->setUsuario($idPersona);
+             $usuario->setContraseña($idPersona);
              $persona->crearPersona($persona);
+            $usuario->crearUsuario($usuario);
              echo json_encode(1);
         } catch (Exception $exc) {
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
