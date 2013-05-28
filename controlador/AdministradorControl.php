@@ -142,24 +142,61 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
-        public function imprimirMateriasPorSalon(){
+        public function imprimirMateriasPorGrado(){
             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
             $materia = new Materia();
-            $materias = $materia->leerMateriasPorSalon($idGrado);
+            $materias = $materia->leerMateriasPorGrado($idGrado);
+            $respuesta = "";
+            foreach ($materias as $materia) {
+            $respuesta .= "<tr>";
+             $respuesta.= '<td>'. strtoupper($materia->getIdMateria()).'</td>';
+             $respuesta.= '<td>'. strtoupper($materia->getNombreMateria()).'</td>';
+             $respuesta.= '<td>'. strtoupper($materia->getHoras()).'</td>';
+            $respuesta .= "</tr>";
+            }
+            
+            echo json_encode($respuesta);
         }
         
         public function listaMateriasNoPertenecientes(){
             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
             $materia = new Materia();
-            $materias = $materia->MateriasNoPertenecientesGrado($idGrado);
+            $materias1 = $materia->leerMaterias();
+            $materias2 = $materia->leerMateriasPorGrado($idGrado);
             $respuesta = "";
-            foreach ($materias as $materia) {
-                
-                $respuesta.= '<option value="'.$materia->getIdMateria().'">'.$materia->getNombreMateria().'</option>';
+            foreach ($materias1 as $materia1) {
+                $band= 0;
+                  foreach ($materias2 as $materia2) {
+                      if ($materia1->getIdMateria() == $materia2->getIdMateria()){
+                        $band=1;  
+                      }
+                  }
+                if ($band == 0 ){
+                    $respuesta.= '<option value="'.$materia1->getIdMateria().'">'. strtoupper($materia1->getNombreMateria()).'</option>';
+                }
                 
             }
-            echo json_encode($respuesta);
-            
+            echo json_encode($respuesta);   
+        }
+        
+        public function agregarPensum(){
+            try {
+             
+             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
+             $materias = isset($_POST['materias']) ? $_POST['materias'] : NULL;
+             
+             $arreglo = array();
+             $arreglo = explode(',', $materias);
+             $pensum = new Materia();
+             
+             for ($i=0; $i<count($arreglo); $i++){
+                 $pensum->crearPensum($idGrado, $arreglo[$i]);
+             }
+             
+             echo json_encode("Pensum Agregado Correctamente");
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
         }
         
         

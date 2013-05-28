@@ -96,7 +96,7 @@ public function getIdMateria() {
         $this->ejecutar($param);        
     }
   public function leerMateriasPorGrado($idGrado){
-        $sql = "SELECT m.idMateria as idMateria, m.nombre as nombre, m.horas as horas FROM materia m, pensum p WHERE p.idMateria=m.idMateria AND p.idSalon=".$idGrado;
+        $sql = "SELECT m.idMateria as idMateria, m.nombre as nombre, m.horas as horas FROM materia m, pensum p WHERE p.idMateria=m.idMateria AND p.idGrado='".$idGrado."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $mats = array();
@@ -107,19 +107,13 @@ public function getIdMateria() {
         }
         return $mats;
   }
-  
-  public function MateriasNoPertenecientesGrado($idGrado){
-      $sql = "SELECT m.idMateria as idMateria, m.nombre as nombre, m.horas as horas FROM materia m, pensum p WHERE p.idMateria=m.idMateria AND p.idSalon<>".$idGrado;
+  public function crearPensum($idGrado, $idMateria) {
+        $sql = "INSERT INTO pensum(idGrado, idMateria) VALUES (:idGrado, :idMateria)";
         $this->__setSql($sql);
-        $resultado = $this->consultar($sql);
-        $mats = array();
-        foreach ($resultado as $fila) {
-            $materia = new Materia();
-            $this->mapearMateria($materia, $fila);
-            $mats[$materia->getIdMateria()] = $materia;
-        }
-        return $mats;
-  }
+        $param = array(':idGrado' => $idGrado,
+           ':idMateria' => $idMateria);
+        $this->ejecutar($param);
+    }
 }
 
 ?>
