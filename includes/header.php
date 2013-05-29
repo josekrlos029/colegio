@@ -5,3 +5,5 @@
     <td align="right" width="10%"><a href="#"><img  src="../utiles/imagenes/iconos/salir.png"/></a></td>
     </tr>
     </table>
+</br>
+<hr>

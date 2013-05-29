@@ -7,30 +7,17 @@
                 <script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
                 <script src="../utiles/js/easing.js" type="text/javascript" ></script>
                 <script>
-                    window.onload = function() {
-                        
-                    $('#box.green').hover(function(){
-                    
-                       $('#box.green').animate({left:'10px'});
-                       $(this).css('cursor','pointer');                       
-                     }, function(){
-                       $('#box.green').animate({left:'-10px'});
-                     });
-    }          
          </script>
         <title>Usuario Administrador</title>
     </head>
     <body>
 	
 	<div id="marco">
-<hr>
 	<?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
 </br>
-<hr>
 </br>
 <table border="0" align="center" width="900px" >
 	<tr>
-  
   <td width="40%" >
   <img src="../utiles/imagenes/tag_administrador.png"/>
   </td>
@@ -81,8 +68,7 @@
 	   
 	   <tr>
 	   <td>
-              
-               <ul class="menu"  >
+           <ul class="menu"  >
            <li><a href="/colegio/administrador/gestionarGrados">Gestinar de Grados</a></li>
            <li><a href="/colegio/administrador/gestionarSalones">Aulas de Clase</a></li>
            <li><a href="/colegio/administrador/gestionarMaterias">Gestionar Materias</a></li>
@@ -90,27 +76,27 @@
 	   <li><a href="#">Consolidados</a></li>
            <li><a href="#">Historial Anual</a></li>
            <li><a href="#">Cierre de ano</a></li>
-               </ul>
-		 <td></td>
-	   <td>
-	    <ul class="menu">
+           </ul>
+           </td>
+	   <td></td>
+	   <td valign="top">
+	   <ul class="menu">
 	   <li><a href="#">Matricular</a></li>
 	   <li><a href="#">Registrar</a></li>
            <li><a href="#">Actualizar</a></li>
            <li><a href="#">Historial</a></li>
 	   </ul>
 	   </td>
-	    <td></td>
-	     <td>
-		  <ul class="menu">
+	   <td></td>
+	   <td valign="top">
+           <ul class="menu">
            <li><a href="/colegio/administrador/gestionarDocentes">Gestinar de Docentes</a></li>
 	   <li><a href="#">Gestionar Cargas</a></li>
-      
 	   </ul>
 	   </td>
 	   </td>
 	   </tr>
 	   </table>
 </div>
-    </body>
+ </body>
 </html>

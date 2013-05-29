@@ -57,38 +57,48 @@ window.onload = function() {
 <div id="msg" hidden>
     
 </div>
-<div id="contenedor" align="center" >
+
 <table align="center" border="0" width="700px">
 <tr>
     <td align="center">
-<h1>BIENVENIDO !</h1>
+<h1>BIENVENIDO A SU APLICACION <br> DE CONTROL ACADEMICO</h1>
 </td>
 </tr>
-    <tr align="center">
-    <td align="center">
-        <div class="caja"  align="center"><!--------------caja--------------->
-            <div align="center" class="login">
-                <div align="center"><h2>Iniciar sesión</h2></div>
-                <div class="espace" align="center"> <!--------------x-webkit-speech--------------->
-                    <input name="usuario" id="username" type="text" size="20"  class="caja_texto" placeholder="Usuario" required autofocus />
+</table>
+    
+ <table align="right" width="40%" height="500px" border="0">
+ <tr>
+ <td>
+     
+            
+                <div align="left"><h2>Iniciar sesión</h2></div>
+                
+                <div class="espace" align="left">
+                <input name="usuario" id="username" type="text" size="20"  class="caja_texto" placeholder="Usuario" required autofocus />
                 </div>
-                <div class="espace">   
-                    <input name="contraseña"  id="password" type="password" size="20"  class="caja_texto" placeholder="Contraseña" required />
+                
+                <div class="espace" align="left">   
+                <input name="contraseña"  id="password" type="password" size="20"  class="caja_texto" placeholder="Contraseña" required />
                 </div>
+                
                 <div class="espace">
-                    <div align="center" ><button onclick="envio();" class="button large red">Iniciar Sesión </button></div>
+                <div align="left" ><button onclick="envio();" class="button large red">Iniciar Sesión </button></div>
                 </div>
 
-                <div align="center"><a href="/colegio/inicio/olvidoclave"><div class="link">¿Olvidaste tu Contraseña?</div></a></div>
-            </div><!-- end login -->
-<!--------------------------end caja------------------>
-</br></br></br></br>
-           <div id="pie" align="center">copyright 2013  Todos los derechos reservados | Programación Web 2013-I UPC</div>
-        </div>
-<!--------------------------end contenedor-------------------------------------->
-    </td>
-    </tr>
+                
+                <div align="left"><a href="/colegio/inicio/olvidoclave"><div class="link">¿Olvidaste tu Contraseña?</div></a></div>
+            
+ </td>
+ </tr>
 </table>
-    </div>
+           
+<table align="center" width="100%">
+<tr>
+ <td>
+<div id="pie" align="center">copyright 2013  Todos los derechos reservados | Programación Web 2013-I UPC</div>
+</td>
+</tr> 
+</table>     
+
 </body>
 </html>
