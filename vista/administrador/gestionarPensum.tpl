@@ -49,7 +49,7 @@ var x = $("#tablaMaterias");
       
     }else{
 
-        var url="/colegio/administrador/imprimirMateriasPorGrado/";
+        var url="/colegio/administrador/imprimirMateriasPorGrado/table";
         var data="idGrado="+idGrado.value;
 
         envioJson(url,data,function respuesta(res){   

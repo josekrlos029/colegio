@@ -142,11 +142,12 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
-        public function imprimirMateriasPorGrado(){
+        public function imprimirMateriasPorGrado($html){
             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
             $materia = new Materia();
             $materias = $materia->leerMateriasPorGrado($idGrado);
             $respuesta = "";
+            if ($html == 'table'){
             foreach ($materias as $materia) {
             $respuesta .= "<tr>";
              $respuesta.= '<td>'. strtoupper($materia->getIdMateria()).'</td>';
@@ -154,6 +155,15 @@ class AdministradorControl extends Controlador{
              $respuesta.= '<td>'. strtoupper($materia->getHoras()).'</td>';
             $respuesta .= "</tr>";
             }
+        }elseif ($html=='select') {
+            
+        }{
+            foreach ($materias as $materia) {
+            
+             $respuesta.= '<option value="'.$materia->getIdMateria().'">'. strtoupper($materia->getNombreMateria()).'</option>';
+          
+            }
+        }
             
             echo json_encode($respuesta);
         }
@@ -253,7 +263,23 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
         }
-        
+        public function gestionarCargas(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Gestión de Cargas Acedemicas');
+            $idRol='D';
+            $persona = new Persona();
+            $docentes = $persona->leerPorRol($idRol);
+            $this->vista->set('docentes', $docentes);
+            $salon = new Salon();
+            $salones = $salon->leerSalones();
+            $this->vista->set('salones', $salones);  
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
     
 }
 

@@ -91,7 +91,7 @@
 	   <td valign="top">
            <ul class="menu">
            <li><a href="/colegio/administrador/gestionarDocentes">Gestinar de Docentes</a></li>
-	   <li><a href="#">Gestionar Cargas</a></li>
+	   <li><a href="/colegio/administrador/gestionarCargas">Gestionar Cargas</a></li>
 	   </ul>
 	   </td>
 	   </td>

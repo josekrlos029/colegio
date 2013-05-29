@@ -59,6 +59,7 @@ function envio(){
                     <th scope="row">Grupos</th>
                     <td><select name="grupo" id="grupo">
                             <option>01</option>
+                            <option>02</option>
                             <option>03</option>
                             <option>04</option>
                             <option>05</option>
