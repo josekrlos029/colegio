@@ -19,9 +19,10 @@ function consultarMaterias(){
   
  var idGrado = document.getElementById("idGrado");
  
-    if (idGrado.value==""){
-      y.html ( "Error...");
-      
+    if (idGrado.value=="" || idGrado.value=="---"){
+      y.html ( "Error... Escoja un Grado");
+       setTimeout("$('#msg').hide();", 4000);
+       
     }else{
 
         var url="/colegio/administrador/listaMateriasNoPertenecientes/";
@@ -44,9 +45,9 @@ var x = $("#tablaMaterias");
   
  var idGrado = document.getElementById("idGrado");
  
-    if (idGrado.value==""){
-      y.html ( "Error...");
-      
+    if (idGrado.value==""|| idGrado.value=="---"){
+      y.html ( "Error... ");
+       setTimeout("$('#msg').hide();", 4000);
     }else{
 
         var url="/colegio/administrador/imprimirMateriasPorGrado/table";
@@ -74,8 +75,9 @@ function enviar(){
     arreglo[i]=materias[i].value;
   }   
 
-    if (idGrado.value==""){
+    if (idGrado.value=="" || idGrado.value=="---"){
       y.html ( "Error...");
+      
       
     }else{
 
@@ -106,7 +108,8 @@ function enviar(){
                     
                     <th width="197" scope="row">Grados</th>
                     <td width="211"><select id="idGrado" name="idGrado" onchange="consultarMaterias()">
-                    <?php foreach ($grados as $grado) { ?>
+                    <option value="---">---</option>
+                     <?php foreach ($grados as $grado) { ?>
                     <option value="<?php echo $grado->getIdGrado(); ?>"><?php echo $grado->getNombre(); ?></option>
                          <?php } ?>
                         </select></td>

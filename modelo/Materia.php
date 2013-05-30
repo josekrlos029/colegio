@@ -81,6 +81,18 @@ public function getIdMateria() {
         }
         return $mats;
     }
+    public function leerMateriaPorId($idMateria) {
+        $sql = "SELECT idMateria, nombre, horas FROM materia WHERE idMateria='".$idMateria."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $mats = array();
+        foreach ($resultado as $fila) {
+            $materia = new Materia();
+            $this->mapearMateria($materia, $fila);
+            $mats[$materia->getIdMateria()] = $materia;
+        }
+        return $mats;
+    }
 
     public function actualizarMateria(Materia $materia) {
         $sql = "UPDATE materia SET nombre=?, horas=? WHERE idMateria=?";

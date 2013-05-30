@@ -157,7 +157,6 @@ class AdministradorControl extends Controlador{
             }
         }elseif ($html=='select') {
             
-        }{
             foreach ($materias as $materia) {
             
              $respuesta.= '<option value="'.$materia->getIdMateria().'">'. strtoupper($materia->getNombreMateria()).'</option>';
@@ -280,6 +279,56 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+        
+        public function imprimirCarga(){
+            $idPersona = isset($_POST['idDocente']) ? $_POST['idDocente'] : NULL;
+            $carga = new Carga();
+            $cargas = $carga->leerCargasPorDocente($idPersona);
+            $respuesta = "";
+            $idCarga = "";
+                  foreach ($cargas as $carg) {
+                      $respuesta .= "<tr>";
+                      $idCarga =$carg->getIdCarga();
+                      $respuesta.= '<td>'. strtoupper($carg->getIdSalon()).'</td>';
+                      $materia=new Materia();
+                      $materias = $materia->leerMateriaPorId($carg->getIdGrado());
+                         foreach ($materias as $mat) {
+                              $respuesta.= '<td>'. strtoupper($mat->getNombreMateria()).'</td>';
+                         }
+                      $respuesta .= "</tr>";
+                      $respuesta .= "<input id='idCarga' type='hidden' value='".$idCarga."'/>";
+                  }
+               
+            
+            echo json_encode($respuesta);  
+            
+        }
+        
+        public function agregarCarga(){
+            try {
+             
+             
+             $idSalon =  isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+             $idCarga =  isset($_POST['idCarga']) ? $_POST['idCarga'] : NULL;
+             $materias = isset($_POST['materias']) ? $_POST['materias'] : NULL;
+             
+             $arreglo = array();
+             $arreglo = explode(',', $materias);
+             
+             for ($i=0; $i<count($arreglo); $i++){
+                 $carga = new Carga();
+                 $carga->setIdCarga($idCarga);
+                 $carga->setIdMateria($arreglo[$i]);
+                 $carga->setIdSalon($idSalon);
+                 $carga->crearCarga($carga);
+             }
+             
+             echo json_encode("Pensum Agregado Correctamente");
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+        }
+                
     
 }
 
