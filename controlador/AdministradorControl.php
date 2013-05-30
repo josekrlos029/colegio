@@ -62,6 +62,10 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
         }
+        /**
+         * Imprime La Vista de Gestión de Grados
+         * @return type
+         */
         public function gestionarGrados(){
         try {
             if($this->verificarSession()){
@@ -92,7 +96,10 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
         }
-        
+        /**
+         * Imprime La Vista de Gestión de Salones
+         * @return type
+         */
         public function gestionarSalones(){
         try {
             if($this->verificarSession()){
@@ -128,7 +135,10 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
         }
-
+        /**
+         * Imprime La Vista de Gestión de Pensum
+         * @return type
+         */
         public function gestionarPensum(){
          try {
             if($this->verificarSession()){
@@ -142,6 +152,11 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+        /**
+         * Función Llamada Por Json Desde El formulario para Agregar Materias de acuerdo a un grado.. 
+         * si recibe table, llena una tabla; y si recibe select llena, un select
+         * @param type $html
+         */
         public function imprimirMateriasPorGrado($html){
             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
             $materia = new Materia();
@@ -166,7 +181,9 @@ class AdministradorControl extends Controlador{
             
             echo json_encode($respuesta);
         }
-        
+        /**
+         * Función Llamada Por Json Desde El formulario para Listar Las materias Que no estan Asignadas a un Grado
+         */
         public function listaMateriasNoPertenecientes(){
             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
             $materia = new Materia();
@@ -187,7 +204,9 @@ class AdministradorControl extends Controlador{
             }
             echo json_encode($respuesta);   
         }
-        
+        /**
+         * Función Llamada Por Json Desde El formulario para Agregar Pensum
+         */
         public function agregarPensum(){
             try {
              
@@ -208,7 +227,10 @@ class AdministradorControl extends Controlador{
         }    
         }
         
-        
+        /**
+         * Imprime La Vista de Gestión de Docentes
+         * @return type
+         */
         public function gestionarDocentes(){
          try {
             if($this->verificarSession()){
@@ -262,6 +284,10 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
         }
+        /**
+         * Imprime La Vista de Gestión de Cargas de Docentes
+         * @return type
+         */
         public function gestionarCargas(){
          try {
             if($this->verificarSession()){
@@ -279,7 +305,9 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
-        
+        /**
+         * Función Llamada Por Json Desde El formulario para Imprimir las CArgas de Un Docente (en una Tabla)
+         */
         public function imprimirCarga(){
             $idPersona = isset($_POST['idDocente']) ? $_POST['idDocente'] : NULL;
             $carga = new Carga();
@@ -303,7 +331,9 @@ class AdministradorControl extends Controlador{
             echo json_encode($respuesta);  
             
         }
-        
+        /**
+         * Función Llamada Por Json Desde El formulario para Agregar Carga
+         */
         public function agregarCarga(){
             try {
              

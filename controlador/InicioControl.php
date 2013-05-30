@@ -16,7 +16,10 @@ class InicioControl extends Controlador{
         parent::__construct($modelo, $accion);
         $this->setModelo($modelo);
     }
-
+    /**
+     * Función que Imprime El Index (página principal de la Aplicación
+     * @return type
+     */
     public function index() {
         try {
              $this->vista->set('titulo', 'Iniciar Sesión ');
@@ -58,7 +61,10 @@ class InicioControl extends Controlador{
         }   
         }
         
-        
+        /**
+         * Imprime el la Vista de acuerdo al Rol
+         * @param type $idRol
+         */
         public function imprimeRol($idRol){
                       
                     if ($idRol == 'A'){
@@ -70,12 +76,19 @@ class InicioControl extends Controlador{
                          echo json_encode("/colegio/administrador/usuarioEstudiante");
                     }       
         }
-        
+        /**
+         * Imprime la Vista DE olvido de contraseña
+         * @return type
+         */
         public function olvidoclave() {
         $this->vista->set('titulo', 'Recuperar contrase&ntilde;a');
         return $this->vista->imprimir();
     }
     
+    /**
+     * Envia el Correo
+     * @return type
+     */
      public function enviardatosolvido() {
         if (isset($_POST['botonenviar'])) {
             $id = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
