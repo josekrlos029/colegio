@@ -81,7 +81,7 @@
 	   <td></td>
 	   <td valign="top">
 	   <ul class="menu">
-	   <li><a href="#">Matricular</a></li>
+	   <li><a href="/colegio/administrador/matricularEstudiante">Matricular</a></li>
 	   <li><a href="#">Registrar</a></li>
            <li><a href="#">Actualizar</a></li>
            <li><a href="#">Historial</a></li>

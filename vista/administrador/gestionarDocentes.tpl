@@ -36,7 +36,7 @@ function envio(){
 
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
-                x.html ( "<p>Docente Agregado Correctamente, Se Actualizará la Página</p>");
+                x.html ("<p>Docente Agregado Correctamente, Se Actualizará la Página</p>");
                 setTimeout("$('#msg').hide();", 4000);
                 document.location.href="/colegio/administrador/gestionarDocentes";
             }else{

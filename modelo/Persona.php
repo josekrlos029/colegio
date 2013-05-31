@@ -237,7 +237,7 @@ class Persona extends Modelo{
     
     public function leerPorId($id){
         $sql = "SELECT idPersona, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, fNacimiento FROM persona ";
-        $sql .= "WHERE idPersona=".$id;
+        $sql .= "WHERE idPersona='".$id."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();
