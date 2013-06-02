@@ -22,7 +22,7 @@ class Persona extends Modelo{
     private $correo;
     private $fNacimiento;
     private $estado;
-
+    private $idRol;
 
 
 
@@ -109,7 +109,15 @@ class Persona extends Modelo{
     public function setEstado($estado) {
         $this->estado = $estado;
     }
-    
+    public function getIdRol() {
+        return $this->idRol;
+    }
+
+    public function setIdRol($idRol) {
+        $this->idRol = $idRol;
+    }
+
+        
      private function mapearPersona(Persona $persona, array $props) {
         if (array_key_exists('idPersona', $props)) {
             $persona->setIdPersona($props['idPersona']);

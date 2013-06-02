@@ -158,6 +158,7 @@ class AdministradorControl extends Controlador{
          * @param type $html
          */
         public function imprimirMateriasPorGrado($html){
+            try {
             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
             $materia = new Materia();
             $materias = $materia->leerMateriasPorGrado($idGrado);
@@ -180,11 +181,15 @@ class AdministradorControl extends Controlador{
         }
             
             echo json_encode($respuesta);
+            } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
         }
         /**
          * Función Llamada Por Json Desde El formulario para Listar Las materias Que no estan Asignadas a un Grado
          */
         public function listaMateriasNoPertenecientes(){
+            try {
             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
             $materia = new Materia();
             $materias1 = $materia->leerMaterias();
@@ -203,6 +208,10 @@ class AdministradorControl extends Controlador{
                 
             }
             echo json_encode($respuesta);   
+            
+ } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
         }
         /**
          * Función Llamada Por Json Desde El formulario para Agregar Pensum
@@ -309,6 +318,7 @@ class AdministradorControl extends Controlador{
          * Función Llamada Por Json Desde El formulario para Imprimir las CArgas de Un Docente (en una Tabla)
          */
         public function imprimirCarga(){
+            try {
             $idPersona = isset($_POST['idDocente']) ? $_POST['idDocente'] : NULL;
             $carga = new Carga();
             $cargas = $carga->leerCargasPorDocente($idPersona);
@@ -329,6 +339,9 @@ class AdministradorControl extends Controlador{
                
             
             echo json_encode($respuesta);  
+             } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
             
         }
         /**
@@ -371,7 +384,11 @@ class AdministradorControl extends Controlador{
         }
         }
         
-             //imprime formulario de registro de estudiantes
+             
+/**
+ * imprime formulario de registro de estudiantes
+ * @return type
+ */
          public function RegistrarEstudiantes(){
          try {
             if($this->verificarSession()){
@@ -389,7 +406,10 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
-        //guarda los datos que vienen del formulario Registrar Estudiantes
+        /**
+         * guarda los datos que vienen del formulario Registrar Estudiantes
+         */
+       
         public function guardarEstudiantes(){
            try {
              $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
@@ -427,9 +447,12 @@ class AdministradorControl extends Controlador{
         }     
         }
         
+        /**
+         * proceso de consultar persona/estudiante por numero de identificacion
+         */
         
-        //proceso de consultar persona/estudiante por numero de identificacion
-    public function consultarEstudiante(){ 
+    public function consultarEstudiante(){
+        try {
             $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
             
             $persona = new Persona();
@@ -503,7 +526,11 @@ class AdministradorControl extends Controlador{
               
               }
             echo json_encode($respuesta);
-    }
+    } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+            
+         }
     
 }
 
