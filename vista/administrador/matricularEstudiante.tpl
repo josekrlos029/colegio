@@ -39,6 +39,7 @@
                 setTimeout("$('#msg').hide();", 4000);
             }else{
             y.html(res);
+            setTimeout("$('#msg').hide();", 4000);
             }
             
          });
@@ -63,4 +64,5 @@
         </table>
         <div id="tabla">
         </div>
-        
+    </body>
+</html>

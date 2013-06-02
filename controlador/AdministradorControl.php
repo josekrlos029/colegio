@@ -433,83 +433,76 @@ class AdministradorControl extends Controlador{
             $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
             
             $persona = new Persona();
-            $estudiantes = $persona->leerPorId($idPersona);
-            
- 
-            if ($estudiantes == NULL){
+            $estudiante = $persona->leerPorId($idPersona);
+            if ($estudiante == NULL){
                  $respuesta= 1;
-            echo json_encode($respuesta);}
-            else{
-                echo json_encode("aro");}
-//                $rol = new Rol();
-//                $roles = $rol->leerRoles($idPersona);
-//                $band = 0;
-//                foreach ($roles  as $ro) {
-//                  if ($ro->getIdRol() == 'E'){
-//                      $band=1;
-//                  } 
-//                }
-//                
-//                foreach ($estudiantes  as $est) {
-//                    if ($est->getEstado()== 1 ){
-//                      $respuesta= 2;
-//                      echo json_encode($respuesta);  
-//                    }elseif ($band!=1){
-//                      $respuesta= 3;
-//                    }else{
-//                  
-//                        $respuesta .= "<table> 
-//                                       <tr>
-//                                        <td>Nombre:</td>
-//                                        <td>".$est->getNombres()."</td>
-//                                       </tr>
-//                      
-//                                        <tr>
-//                                            <td>Primer Apellido:</td>
-//                                            <td>".$est->getPApellido()."</td>
-//                                        </tr>
-//
-//                                        <tr>
-//                                            <td>Segundo Apellido:</td>
-//                                            <td>".$est->getSApellido()."</td>
-//                                        </tr>
-//
-//                                        <tr>
-//                                            <td>Sexo:</td>
-//                                            <td>".$est->getSexo()."</td>
-//                                        </tr>
-//
-//                                        <tr>
-//                                            <td>Telefono:</td>
-//                                            <td>".$est->getTelefono()."</td>
-//                                        </tr>
-//
-//                                        <tr>
-//                                            <td>Direccion:</td>
-//                                            <td>".$est->getDireccion()."</td>
-//                                        </tr>
-//
-//                                        <tr>
-//                                            <td>Correo:</td>
-//                                            <td>".$est->getCorreo()."</td>
-//                                        </tr>
-//
-//                                        <tr>
-//                                            <td>Fecha De Nacimiento:</td>
-//                                            <td>".$est->getFNacimiento()."</td>
-//                                        </tr>
-//
-//                                        <tr>
-//                                            <td>Estado:</td>
-//                                            <td>".$est->getEstado()."</td>
-//                                        </tr>
-//                                    </table>
-//
-//                                     "; 
-//                  }
-//              }
-//              }
-//            
+            }else{
+                $rol = new Rol();
+                $roles = $rol->leerRoles($idPersona);
+                $band = 0;
+                foreach ($roles  as $ro) {
+                  if ($ro->getIdRol() == 'E'){
+                      $band=1;
+                  } 
+                }
+                    if ($band!=1){
+                      $respuesta= 3;
+                    }elseif ($estudiante->getEstado()== 1 ){
+                      $respuesta= 2;
+                    }else{
+                  
+                        $respuesta = "<table> 
+                                       <tr>
+                                        <td>Nombres:</td>
+                                        <td>".$estudiante->getNombres()."</td>
+                                       </tr>
+                      
+                                        <tr>
+                                            <td>Primer Apellido:</td>
+                                            <td>".$estudiante->getPApellido()."</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Segundo Apellido:</td>
+                                            <td>".$estudiante->getSApellido()."</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Sexo:</td>
+                                            <td>".$estudiante->getSexo()."</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Telefono:</td>
+                                            <td>".$estudiante->getTelefono()."</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Direccion:</td>
+                                            <td>".$estudiante->getDireccion()."</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Correo:</td>
+                                            <td>".$estudiante->getCorreo()."</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Fecha De Nacimiento:</td>
+                                            <td>".$estudiante->getFNacimiento()->format('Y-m-d')."</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Estado:</td>
+                                            <td>".$estudiante->getEstado()."</td>
+                                        </tr>
+                                    </table>
+
+                                     "; 
+                  }
+              
+              }
+            echo json_encode($respuesta);
     }
     
 }
