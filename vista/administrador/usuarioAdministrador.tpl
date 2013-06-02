@@ -15,6 +15,7 @@
 	<div id="marco">
 	<?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
 </br>
+<hr>
 </br>
 <table border="0" align="center" width="900px" >
 	<tr>
