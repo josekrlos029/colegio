@@ -371,6 +371,63 @@ class AdministradorControl extends Controlador{
         }
         }
         
+             //imprime formulario de registro de estudiantes
+         public function RegistrarEstudiantes(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Registro de Estudiantes');
+            $idRol='D';
+            $persona = new Persona();
+            $docentes = $persona->leerPorRol($idRol);
+            $this->vista->set('docentes', $docentes);
+            $salon = new Salon();
+            $salones = $salon->leerSalones();
+            $this->vista->set('salones', $salones);  
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        //guarda los datos que vienen del formulario Registrar Estudiantes
+        public function guardarEstudiantes(){
+           try {
+             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $nombres = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
+             $pApellido = isset($_POST['pApellido']) ? $_POST['pApellido'] : NULL;
+             $sApellido = isset($_POST['sApellido']) ? $_POST['sApellido'] : NULL;
+             $sexo = isset($_POST['sexo']) ? $_POST['sexo'] : NULL;
+             $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : NULL;
+             $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : NULL;
+             $correo = isset($_POST['correo']) ? $_POST['correo'] : NULL;
+             $fNacimiento = isset($_POST['fNacimiento']) ? $_POST['fNacimiento'] : NULL;
+             $estado='0';
+             $idRol= 'E';
+             $persona = new Persona();
+             $usuario = new Usuario();
+             $persona->setIdPersona($idPersona);
+             $persona->setNombres($nombres);
+             $persona->setPApellido($pApellido);
+             $persona->setSApellido($sApellido);
+             $persona->setSexo($sexo);
+             $persona->setTelefono($telefono);
+             $persona->setDireccion($direccion);
+             $persona->setCorreo($correo);
+             $persona->setFNacimiento($fNacimiento);
+             $persona->setEstado($estado);
+             $persona->setIdRol($idRol);
+             $usuario->setIdPersona($idPersona);
+             $usuario->setUsuario($idPersona);
+             $usuario->setContraseña($idPersona);
+             $persona->crearPersona($persona);
+             $usuario->crearUsuario($usuario);
+             echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }     
+        }
+        
+        
         //proceso de consultar persona/estudiante por numero de identificacion
     public function consultarEstudiante(){ 
             $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
