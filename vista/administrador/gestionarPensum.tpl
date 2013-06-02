@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title><?php echo $titulo; ?></title>
+        <link href="../utiles/css/administrador.css" rel="stylesheet" type="text/css" media="screen"/>
         <link href="../utiles/css/login.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
 <script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
