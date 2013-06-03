@@ -72,8 +72,13 @@ function enviar(){
  var idGrado = document.getElementById("idGrado");
   var materias = document.getElementById("materias").options;
   var arreglo = new Array();
+  var j=0;
   for (var i=0; i<materias.length; i++){   
-    arreglo[i]=materias[i].value;
+    if (materias[i].selected == true){
+    arreglo[j]=materias[i].value;
+    j++;
+    }
+    
   }   
 
     if (idGrado.value=="" || idGrado.value=="---"){

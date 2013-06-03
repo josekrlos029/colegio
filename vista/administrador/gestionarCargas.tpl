@@ -19,11 +19,13 @@ if(!$("input[name=idDocente]:checked").val()) {
 return true;
 }
 }
+
 function leerCarga(){
-var y= $("#tablaCargas");
 var x = $("#msg");
- x.html ("<p>Cargando Carga del Docente...</p>");
+x.html ("<p>Cargando Carga del Docente...</p>");
+x.show("slow");
  
+var y= $("#tablaCargas"); 
  var idDocente = document.getElementById("idDocente").value;
   var url="/colegio/administrador/imprimirCarga";
         var data="idDocente="+idDocente;
@@ -31,7 +33,7 @@ var x = $("#msg");
     x.hide();            
     y.html (res);
          });
- 
+
 }
 
 function cargarMaterias(){ 
@@ -67,20 +69,23 @@ var grado = salon[0];
          });
     }
     }
-    
-    function agregar(){
+    }
+function agregar(){
 
  var y = $("#msg");
  y.html ("Cargando...");
  y.show("slow");
  
  var idDocente = document.getElementById("idDocente");
- var idSalon = document.getElementById("idSalon");
- var idCarga = document.getElementById("idCarga");
+ var idSalon = document.getElementById("salones");
   var materias = document.getElementById("materias").options;
   var arreglo = new Array();
-  for (var i=0; i<materias.length; i++){   
-    arreglo[i]=materias[i].value;
+  var j=0;
+  for (var i=0; i<materias.length; i++){ 
+   if (materias[i].selected == true){
+    arreglo[j]=materias[i].value;
+    j++;
+    }
   }   
 
     if (idDocente.value=="" || idSalon.value=="---" || materias.length == 0){
@@ -88,8 +93,8 @@ var grado = salon[0];
       setTimeout("$('#msg').hide();", 4000);
     }else{
 
-        var url="/colegio/administrador/agregarPensum/";
-        var data="idDocente="+idDocente.value+"&idSalon="+idSalon.value + "&materias="+ arreglo+"&idCarga="+idSalon.value;
+        var url="/colegio/administrador/agregarCarga/";
+        var data="idDocente="+idDocente.value+"&idSalon="+idSalon.value + "&materias="+ arreglo;
 
         envioJson(url,data,function respuesta(res){   
            
@@ -100,9 +105,7 @@ var grado = salon[0];
     }   
 
 }
-    
-    
-}
+   
 </script>
     </head>
     <body>
@@ -124,7 +127,7 @@ var grado = salon[0];
             <tbody>
                 <?php foreach ($docentes as $docente) { ?>
                 <tr>
-                    <td><input id="idDocente" name="idDocente" type="radio" onchange="leerCarga()" value="<?php echo $docente->getIdPersona();?>"/>
+                    <td><input onclick="leerCarga()" id="idDocente" name="idDocente" type="radio" value="<?php echo $docente->getIdPersona();?>" />
                     <td><?php echo $docente->getIdPersona();?></td>
                     <td><?php echo $docente->getNombres();?></td>
                     <td><?php echo $docente->getPApellido()." ".$docente->getSApellido();?></td> 

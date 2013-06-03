@@ -65,6 +65,12 @@ public function crearCarga(Carga $carga) {
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($carga));
     }
+    
+    public function crearCargaDocente($idPersona) {
+        $sql = "INSERT INTO carga_docente (idPersona) VALUES (:idPersona)";
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=> $idPersona));
+    }
 
     public function leerCargas() {
         $sql = "SELECT idCarga, idSalon, idMateria FROM carga";
@@ -80,7 +86,10 @@ public function crearCarga(Carga $carga) {
     }
 
     public function leerCargasPorDocente($idDocente) {
-        $sql = "SELECT c.idCarga as idCarga, c.idSalon as idSalon, c.idMateria as idMateria FROM carga c, carga_docente cd WHERE c.idCarga=cd.idCarga AND cd.idPersona='".$idDocente."'";
+        $sql = "SELECT        c.idCarga, c.idSalon, c.idMateria
+FROM            carga c INNER JOIN
+                         carga_docente cd ON c.idCarga = cd.idCarga
+WHERE        (cd.idPersona = '".$idDocente."')";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $cargas = array();
@@ -118,7 +127,12 @@ public function crearCarga(Carga $carga) {
         $this->ejecutar();        
     }
     
-    
+    public function consultarIdCarga($idPersona){
+        $sql = "SELECT idCarga, idPersona FROM carga_docente WHERE idPersona='".$idPersona."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        return $resultado;
+    }
 }
 
 ?>

@@ -328,8 +328,8 @@ class AdministradorControl extends Controlador{
                       $respuesta .= "<tr>";
                       $idCarga =$carg->getIdCarga();
                       $respuesta.= '<td>'. strtoupper($carg->getIdSalon()).'</td>';
-                      $materia=new Materia();
-                      $materias = $materia->leerMateriaPorId($carg->getIdGrado());
+                      $materia = new Materia();
+                      $materias = $materia->leerMateriaPorId($carg->getIdMateria());
                          foreach ($materias as $mat) {
                               $respuesta.= '<td>'. strtoupper($mat->getNombreMateria()).'</td>';
                          }
@@ -352,12 +352,25 @@ class AdministradorControl extends Controlador{
              
              
              $idSalon =  isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
-             $idCarga =  isset($_POST['idCarga']) ? $_POST['idCarga'] : NULL;
+             $idPersona =  isset($_POST['idDocente']) ? $_POST['idDocente'] : NULL;
              $materias = isset($_POST['materias']) ? $_POST['materias'] : NULL;
              
              $arreglo = array();
              $arreglo = explode(',', $materias);
              
+             $c = new Carga();
+             $resultado = $c->consultarIdCarga($idPersona);
+              if (count($resultado)==0){
+                  $c->crearCargaDocente($idPersona);
+                  $resultado = $c->consultarIdCarga($idPersona);
+                   foreach ($resultado as $fila){
+                      $idCarga=$fila['idCarga'];
+                  }
+              }else{
+                  foreach ($resultado as $fila){
+                      $idCarga=$fila['idCarga'];
+                  }
+              }
              for ($i=0; $i<count($arreglo); $i++){
                  $carga = new Carga();
                  $carga->setIdCarga($idCarga);
