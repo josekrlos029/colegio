@@ -23,16 +23,20 @@
 	
 	*{margin-top:0;}
  body{
- 	font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+ 	font-family: 'Arial Narrow', Arial, sans-serif;
 	background: #e0e3ec url(../imagenes/bg.jpg) repeat top left;
 	font-weight: 400;
 	font-size: 15px;
-	color: #393b40;
+	color: #5b6163;
 	overflow-y: scroll;
 	margin-top: 0;
-	margin-left:0;
-	
+	margin-left:0;	
 }
+
+html {
+ overflow-x:hidden;
+}
+
 table {
 border-collapse:0;
 border-spacing:0;
@@ -66,12 +70,11 @@ border-spacing:0;
  box-shadow: 0px 3px 5px #000000;
 }
 
-.title-cab{
+#title-cab{
     position:absolute;
         text-shadow: 0px 1px 1px ;
         top: 25px;
-        right: 30px; 
-	color:#fff;
+        right: 30px;
 	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
 	font-size: 38px;
 	}
@@ -122,24 +125,34 @@ transition-delay:2s;
 	
 	}
 	.blue{
-	background:#39b4e0;
+	background:#0089e1;
 	}
 	.green{
 	background:#aacc5b;
 	}
 	
-	.title{
-	color:#5b6163;
-	font-family: Monte,Arial, Helvetica, sans-serif;
-	font-size: 32px;
-	}
+	/*-----------------titulos----------------------------------*/
 	
 	h1{
         text-shadow: 0px 1px 1px ;
-	color:#5b6163;
 	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
 	font-size: 38px;
 	}
+        
+        .color-text-blanco{  
+            color:#fff;
+        }
+        
+         .color-text-blue{  
+            color:#0089e1;
+        }
+        
+        .color-text-gris{
+           color: #5b6163;
+        }
+        /*-------------------------------------------------------------*/
+        
+       
 	
 	img{
 	padding-top:20px;
@@ -156,7 +169,11 @@ transition-delay:2s;
 	color:#000;
 	text-decoration:none;
 	}
-
+        
+            
+            
+   
+      
  
  
  
