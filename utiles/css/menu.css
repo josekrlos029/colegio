@@ -32,25 +32,9 @@
 
 background-color:  #272727;
     color:#fff;
-    -moz-transition: background 0.3s ease-in;
-    -webkit-transition: background 0.3s ease-in;
-    -o-transition: background 0.3s ease-in;
-     background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.1)), to(rgba(0,0,0,.07)));
-    background-image: -webkit-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
-    background-image: -moz-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
-    background-image: -ms-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
-    background-image: -o-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
-    background-image: linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
-    border: 1px solid #ccc;
-    -moz-box-shadow:
-        0 2px 3px 0 rgba(255,255,255,.2) inset,
-        0 2px 2px 0 rgba(0,0,0,.1);
-    -webkit-box-shadow:
-        0 2px 3px 0 rgba(255,255,255,.2) inset,
-        0 2px 2px 0 rgba(0,0,0,.1);
-    box-shadow:
-        0 2px 3px 0 rgba(255,255,255,.2) inset,
-        0 2px 2px 0 rgba(0,0,0,.1);
+    	
+	
+
 
 }
  
