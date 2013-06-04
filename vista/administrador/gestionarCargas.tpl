@@ -169,14 +169,16 @@ var y = $("#mensaje");
      <hr>
      <p>&nbsp;</p>
         
-        <table width="600" border="0" cellspacing="0" cellpadding="2">
+        <table width="800" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                   <td width="10%"></td>
                   <td align="left" class="color-text-gris"><h1>Escoger aula de clases</h1></td>
+                   <td align="right" class="color-text-gris" colspan="3"><h1>Escoger Materias</h1></td>
               </tr>
                 <tr>
                     <td></td>
                     <td>Salon:</td>
+                     <td align="right">Materias:</td>
                 </tr>
        
             <tbody>
@@ -190,42 +192,18 @@ var y = $("#mensaje");
             <?php } ?>
             </select>
             </td>
-                </tr>
-                
-            </tbody>
-    </table>
-         
-      <p>&nbsp;</p>
-     <hr>
-     <p>&nbsp;</p>
-     
-         <table width="600" border="0" cellspacing="0" cellpadding="2">
-                <tr>
-                  <td width="10%"></td>
-                  <td align="left" class="color-text-gris" colspan="3"><h1>Escoger Materias</h1></td>
-              </tr>
-                
-              <tr>
-                    <td></td>
-                    <td>Materias:</td>
-                </tr>
-          </thead
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td>
-                        <select id="materias" name="materias" multiple class="box-text">
+            <td align="right"><select id="materias" name="materias" multiple class="box-text">
                         </select>
-                    </td>
+                </td>
+            
                 </tr>
                 <tr>
-                    <td></td>
-                      <td><button onclick="agregar()" class="button large red"> Guardar Carga </button></td>
-                </tr>
+                    <td colspan="3" align="right"><button onclick="agregar()" class="button large red"> Guardar Carga </button></td>
+                    </tr>
                 
             </tbody>
     </table>
-         
+      
      <p>&nbsp;</p>
      <hr>
      <p>&nbsp;</p>

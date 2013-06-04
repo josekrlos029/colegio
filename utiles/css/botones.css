@@ -81,13 +81,6 @@ padding: 8px 14px 9px;
 .yellow.button:hover{ background-color: #FC9200; }
 
 
-:invalid{
-    border-color: #CF2525;
-    box-shadow: 0px 0px 5px #CF2525;
-}
-[required]{
-    border-color: #0089e1;
-    box-shadow: 0px 0px 5px #0089e1;
-}
+
 
 

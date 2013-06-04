@@ -139,20 +139,27 @@ left: 350px;
 
 }
 
-.caja_texto{
-    
-        padding: 10px 60px 5px 10px; 
-		background-color: #FFFFFF; 
+.caja-texto{
+                outline: none;
+                width: 250px;
+                padding: 10px 5px 5px 10px; 
 		color: #000000; 
 		font-family: Arial, Helvetica, sans-serif;   
 		font-size: 14px; 
-		border: 1px solid #666;
+		border: 1px solid #c9c9c9 ;
 }
 
+.caja-texto:focus{
+                outline: 0;
+		border: 1px solid #000000;
+}
 
 .espace{
-margin-top:20px;
+margin-top:5px;
+}
 
+.espace-btn{
+margin-top:30px;
 }
 
 #escudo{
@@ -203,14 +210,14 @@ font-weight: normal;
  .link{
  font-size: 12px;
 line-height: 50px;
-color: #666;
+color:#0089e1;
 margin-bottom: 0px
  }
  
  .link:hover{
  font-size: 12px;
 line-height: 50px;
-color: #533;
+color: #2575CF;
 margin-bottom: 0px
  }
  

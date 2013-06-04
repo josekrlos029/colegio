@@ -72,17 +72,19 @@ window.onload = function() {
  <td>
      
             
-                <div align="left"><h2>Iniciar sesión</h2></div>
+                <div class="espace-btn" align="left">
+                <h2>Iniciar sesión</h2>
+                </div>
                 
                 <div class="espace" align="left">
-                <input name="usuario" id="username" type="text" size="20"  class="caja_texto" placeholder="Usuario" required autofocus />
+                <input name="usuario" id="username" type="text" size="20"  class="caja-texto" placeholder="Usuario" required autofocus />
                 </div>
                 
                 <div class="espace" align="left">   
-                <input name="contraseña"  id="password" type="password" size="20"  class="caja_texto" placeholder="Contraseña" required />
+                <input name="contraseña"  id="password" type="password" size="20"  class="caja-texto" placeholder="Contraseña" required />
                 </div>
                 
-                <div class="espace">
+                <div class="espace-btn">
                 <div align="left" ><button onclick="envio();" class="button large blue">Iniciar Sesión </button></div>
                 </div>
 

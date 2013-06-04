@@ -70,7 +70,7 @@
 	   <tr>
 	   <td>
            <ul class="menu"  >
-           <li><a href="/colegio/administrador/gestionarGrados">Gestinar de Grados</a></li>
+           <li><a href="/colegio/administrador/gestionarGrados">Gestionar de Grados</a></li>
            <li><a href="/colegio/administrador/gestionarSalones">Aulas de Clase</a></li>
            <li><a href="/colegio/administrador/gestionarMaterias">Gestionar Materias</a></li>
            <li><a href="/colegio/administrador/gestionarPensum">Gestionar Pensum</a></li>
