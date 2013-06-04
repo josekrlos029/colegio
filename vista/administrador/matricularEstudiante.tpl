@@ -10,10 +10,16 @@
 <script src="../utiles/js/envios.js" type="text/javascript" ></script>
 
 <script type="text/javascript">
- function envio(){ 
- 
- var x = $("#msg");
- x.html ("<p>Cargando...</p>");
+    
+ function fondoColor(elColor) { 
+ $("#mensaje").css("background-color",elColor);
+ }
+
+function envio(){ 
+  
+ var x = $("#mensaje");
+ setTimeout("fondoColor('#aacc5b')",1);
+ x.html ("</br><p>Cargando...</p>");
  x.show("slow");
    var y = $("#tabla");
  var idPersona = document.getElementById("idPersona");
@@ -21,7 +27,8 @@
 
     if (idPersona.value==""){
       x.html ( "<p>Error: Ingresar Numero de Documento</p>");
-      setTimeout("$('#msg').hide();", 4000);
+       setTimeout("fondoColor('#e5582b')",1);
+      setTimeout("$('#mensaje').hide();", 5000);
     }else{
 
         var url="/colegio/administrador/consultarEstudiante/";
@@ -30,14 +37,17 @@
         envioJson(url,data,function respuesta(res){   
             if (res == "1"){
                 x.html ("<p>El Número de Documento no existe en el sistema</p>");
-                setTimeout("$('#msg').hide();", 4000);
+                 setTimeout("fondoColor('#e5582b')",1);
+      setTimeout("$('#mensaje').hide();", 5000);
                
             }else if(res==2){
                  x.html ("<p>El estudiante ya se encuentra matriculado</p>");
-                setTimeout("$('#msg').hide();", 4000);
+                 setTimeout("fondoColor('#e5582b')",1);
+      setTimeout("$('#mensaje').hide();", 5000);
             }else if(res==3){
             x.html ("<p>El Número de Documento ingresado no corresponde al de un estudiante</p>");
-                setTimeout("$('#msg').hide();", 4000);
+                 setTimeout("fondoColor('#e5582b')",1);
+      setTimeout("$('#mensaje').hide();", 5000);
             }else{
             y.html(res);
             setTimeout("$('#msg').hide();", 4000);
@@ -66,13 +76,16 @@
                          
      <!-------------------------------------------------------------------->     
      
-        <table border="1" width="500" cellspacing="0" cellpadding="0">
-       <tr>
-           <td>Diigite Numero de Documento:</td>
-           <td><input name="idPersona" id="idPersona" type="text" required/></td>
-           <td><input name="consultarEstudiante" id="consultarEstudiante" type="submit" value="Consultar" onclick="envio()" /></td>       
+       <table width="600" border="0" cellspacing="0" cellpadding="2">
+                
+           <td align="right">Digite Numero de Documento:</td>
+           <td><input name="idPersona" id="idPersona" type="text" class="box-text" required/></td>
+           <td><input name="consultarEstudiante" id="consultarEstudiante" type="submit" value="Consultar" class="button large blue" onclick="envio()" /></td>       
        </tr>
         </table>
+      <p>&nbsp;</p>
+      <hr>
+       <p>&nbsp;</p>
         <div id="tabla">
         </div>
     </body>
