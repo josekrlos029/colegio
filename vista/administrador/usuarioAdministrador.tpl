@@ -24,7 +24,7 @@
   </td>
   <td>
   <ul>
-      <div class="title" >Estudiantes</div>
+      <div><h2>Estudiantes</h2></div>
       <li><a href="#"onclick="preescolar()">Consulta Preescolar</a></li>
       <li><a href="#"onclick="primaria()">Consulta Primaria</a></li>
       <li><a href="#"onclick="secundaria()">Consulta Secundaria</a></li>
@@ -33,7 +33,7 @@
   
 <td>
   <ul>
-  <div class="title" >Docentes</div>
+  <div><h2>Docentes</h2></div>
        <li><a href="#"onclick="preescolar()">Consulta Preescolar</a></li>
        <li><a href="#"onclick="primaria()">Consulta Primaria</a></li>
        <li><a href="#"onclick="secundaria()">Consulta Secundaria</a></li>
@@ -53,11 +53,11 @@
 	   </tr>
 	 
 	<tr>
-	   <td class="title" >Administrador</td>
+	   <td><h2>Administrador</h2></td>
 	   <td></td>
-	   <td class="title" >Estudiantes</td>
+	   <td><h2>Estudiantes</h2></td>
 	   <td></td>
-	   <td class="title" >Docentes</td>
+	   <td><h2>Docentes</h2></td>
 	   </tr>
 	   <tr>
                <td align="center" width="30%"><div id="box" class="green"><img id="bb" src="../utiles/imagenes/admin.png"/></div></td>

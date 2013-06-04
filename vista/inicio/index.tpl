@@ -7,7 +7,8 @@
 <script src="utiles/js/envios.js" type="text/javascript" ></script>
 
 <script type="text/javascript">
-
+  
+ 
 function envio(){ 
  
  var x = $("#msg");
@@ -58,10 +59,10 @@ window.onload = function() {
     
 </div>
 
-<table align="center" border="0" width="700px">
+<table align="center" border="0">
 <tr>
     <td align="center">
-<h1>BIENVENIDO A SU APLICACION <br> DE CONTROL ACADEMICO</h1>
+<h1>APLICACION DE CONTROL ACADEMICO</h1>
 </td>
 </tr>
 </table>
@@ -82,7 +83,7 @@ window.onload = function() {
                 </div>
                 
                 <div class="espace">
-                <div align="left" ><button onclick="envio();" class="button large red">Iniciar Sesión </button></div>
+                <div align="left" ><button onclick="envio();" class="button large blue">Iniciar Sesión </button></div>
                 </div>
 
                 

@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <title><?php echo $titulo; ?></title>
         <link href="../utiles/css/administrador.css" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="../utiles/css/login.css" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
 <script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
 <script src="../utiles/js/envios.js" type="text/javascript" ></script>
@@ -51,11 +51,21 @@
  </head>
     <body>
         <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
-        <div id="msg" hidden>
-    
-        </div>
-        <p>&nbsp;</p>
-        <h2>MATRICULAR ESTUDIANTE</h2>
+      <!------------------------------cabecera--------------------------->  
+          <p>&nbsp;</p>
+            <p>&nbsp;</p>
+              <p>&nbsp;</p>
+        <div id="encapsulador">
+            <div id="mensaje" hidden> </div>
+                <div id="cabecera" class="blue">
+                    <div class="color-text-blanco" id="title-cab"><h1>Matricular estudiantes</h1> </div>
+                </div>
+        </div> 
+                <p>&nbsp;</p>
+                     
+                         
+     <!-------------------------------------------------------------------->     
+     
         <table border="1" width="500" cellspacing="0" cellpadding="0">
        <tr>
            <td>Diigite Numero de Documento:</td>

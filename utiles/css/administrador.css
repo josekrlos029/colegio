@@ -95,20 +95,7 @@ transition-delay:2s;
  }
  
  
- #error{
-position:absolute;
-width:400px;
-height:45px;
-right: 30px; 
-background:#e5582b;
-color:#FFFFFF;
-font-weight:bold;
-text-align:center;
-border-radius: 5px;
-transition-property:width;
-transition-duration:5s; 
-transition-delay:2s;
- }
+
        
 	#barra{
 	width:95%;
@@ -152,6 +139,12 @@ transition-delay:2s;
         }
         /*-------------------------------------------------------------*/
         
+        h2{
+        text-shadow: 0px 1px 1px ;
+	font-style: italic;
+	font-size: 20px;
+        color:#5b6163;
+	}
        
 	
 	img{
