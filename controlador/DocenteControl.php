@@ -6,11 +6,11 @@
  */
 
 /**
- * Description of EstudianteControl
+ * Description of DoncenteControl
  *
  * @author AndyHenry
  */
-class EstudianteControl extends Controlador{
+class DocenteControl extends Controlador{
     
     public function __construct($modelo, $accion) {
         parent::__construct($modelo, $accion);
@@ -20,10 +20,10 @@ class EstudianteControl extends Controlador{
          * Imprime la Vista principal del Usuario Estudiante
          * @return type
          */
-        public function usuarioEstudiante(){
+        public function usuarioDocente(){
         try {
             if($this->verificarSession()){
-            $this->vista->set('titulo', 'Usuario Estudiante');
+            $this->vista->set('titulo', 'Usuario Docente');
             return $this->vista->imprimir();
             }
         } catch (Exception $exc) {

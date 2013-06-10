@@ -24,6 +24,7 @@ function cargadorClases(){
     require_once './controlador/Controlador.php';
     require_once './controlador/AdministradorControl.php';
     require_once './controlador/EstudianteControl.php';
+    require_once './controlador/DocenteControl.php';
     require_once './controlador/InicioControl.php';
     require_once './controlador/UsuarioControl.php';
     require_once './vista/Vista.php';

@@ -68,12 +68,11 @@ class InicioControl extends Controlador{
         public function imprimeRol($idRol){
                       
                     if ($idRol == 'A'){
-                        echo json_encode("/colegio/administrador/usuarioAdministrador");
-                               
+                        echo json_encode("/colegio/administrador/usuarioAdministrador");   
                     }elseif ($idRol =='D') {
-                         echo json_encode("/colegio/administrador/usuarioDocente");
+                         echo json_encode("/colegio/administrador/docente/usuarioDocente");
                     }elseif ($idRol == 'E') {
-                         echo json_encode("/colegio/administrador/usuarioEstudiante");
+                         echo json_encode("/colegio/administrador/estudiante/usuarioEstudiante");
                     }       
         }
         /**
