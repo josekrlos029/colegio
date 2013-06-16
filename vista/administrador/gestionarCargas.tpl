@@ -132,43 +132,53 @@ var y = $("#mensaje");
                       
                          
      <!--------------------------------------------------------------------> 
-          <table width="600" border="0" cellspacing="0" cellpadding="2">
+    
+<div id="tabla-contenedora">
+    
+        <table width="500" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                   <td></td>
                   <td align="left" class="color-text-gris" colspan="3"><h1>Escoger docente</h1></td>
               </tr>
               
                 <tr>
-                    <td>...</td>
-                    <td>Documento</td>
-                    <td>Nombres</td>
-                    <td>Apellidos</td>
+                    <td width="10%"></td>
+                    <td width="30%">Documento</td>
+                    <td width="30%">Nombres</td>
+                    <td width="30%">Apellidos</td>
                 </tr>
-          <tr>
+               
+       
+     
+                <tr>
+                    <td> <hr> </td>
                     <td> <hr> </td>
                      <td> <hr> </td>
-                      <td> <hr> </td>
-                      <td> <hr> </td>
-                </tr>    
-        
+                     <td> <hr> </td>
+                </tr>  
                 
-            <tbody>
+        </table>
+    
+    <div style="float:left;">
+        <div id="tabla-consulta">
+            <table width="500" border="0" cellspacing="0" cellpadding="2">  
+        
                 <?php foreach ($docentes as $docente) { ?>
                 <tr>
-                    <td><input onclick="leerCarga()" id="idDocente" name="idDocente" type="radio"  value="<?php echo $docente->getIdPersona();?>" />
-                    <td><?php echo $docente->getIdPersona();?></td>
-                    <td><?php echo $docente->getNombres();?></td>
-                    <td><?php echo $docente->getPApellido()." ".$docente->getSApellido();?></td> 
+                    <td width="10%"><input onclick="leerCarga()" id="idDocente" name="idDocente" type="radio"  value="<?php echo $docente->getIdPersona();?>" />
+                    <td width="30%"><?php echo $docente->getIdPersona();?></td>
+                    <td width="30%"><?php echo $docente->getNombres();?></td>
+                    <td width="30%"><?php echo $docente->getPApellido()." ".$docente->getSApellido();?></td> 
                 </tr>
                 <?php } ?>
-            </tbody>
-    </table>
-        
-      <p>&nbsp;</p>
-     <hr>
-     <p>&nbsp;</p>
-        
-        <table width="800" border="0" cellspacing="0" cellpadding="2">
+          
+            </table>
+        </div>  
+    </div>    
+     
+    
+    <div style="float:right" >
+          <table width="650" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                   <td width="10%"></td>
                   <td align="left" class="color-text-gris"><h1>Escoger aula de clases</h1></td>
@@ -201,30 +211,39 @@ var y = $("#mensaje");
                     </tr>
                 
             </tbody>
-    </table>
-      
-     <p>&nbsp;</p>
+        </table>
+    </div>
+ </div>  
+     
+ 
+    </br>
      <hr>
-     <p>&nbsp;</p>
-      
-         <table width="600" border="0" cellspacing="0" cellpadding="2" align="center">
+     </br>
+     
+     
+         <table width="500" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                   <td align="center" class="color-text-gris" colspan="2"><h1>cargas asignadas a docentes</h1></td>
               </tr>
                 
                 <tr>
-                    <td>Salon</td>
-                    <td>Materia</td>
+                    <td width="30%">Salon</td>
+                    <td width="70%">Materia</td>
                 </tr>
                   <tr>
                     <td> <hr> </td>
                      <td> <hr> </td>
                      </tr>
-          
-            <tbody id="tablaCargas">
+          </table>
      
-            </tbody>
-    </table>
+          <div id="tabla-consulta">
+               <table width="500" border="0" cellspacing="0" cellpadding="2" >
+                <tbody id="tablaCargas">
+     
+                </tbody>
+               </table>
+            </div>
+</div>  
         
   
         

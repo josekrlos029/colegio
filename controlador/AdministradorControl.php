@@ -323,11 +323,11 @@ class AdministradorControl extends Controlador{
             $idCarga = "";
                   foreach ($cargas as $carg) {
                       $respuesta .= "<tr>";
-                      $respuesta.= '<td>'. strtoupper($carg->getIdSalon()).'</td>';
+                      $respuesta.= '<td width="30%">'. strtoupper($carg->getIdSalon()).'</td>';
                       $materia = new Materia();
                       $materias = $materia->leerMateriaPorId($carg->getIdMateria());
                          foreach ($materias as $mat) {
-                              $respuesta.= '<td>'. strtoupper($mat->getNombreMateria()).'</td>';
+                              $respuesta.= '<td width="70%">'. strtoupper($mat->getNombreMateria()).'</td>';
                          }
                       $respuesta .= "</tr>";
                   }

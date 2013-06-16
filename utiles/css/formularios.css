@@ -24,5 +24,18 @@ root {
                 outline: 0;
 		border: 1px solid #000000;
 }
-  
-        
+
+#tabla-contenedora{
+ width:95%; 
+ overflow-x:hidden;
+ height:30%;
+}
+
+#tabla-consulta{
+padding-left:5px;     
+overflow-x:hidden;
+width: 510px; 
+height:200px;
+}
+
+
