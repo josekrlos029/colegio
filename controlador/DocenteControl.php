@@ -17,7 +17,7 @@ class DocenteControl extends Controlador{
         $this->setModelo($modelo);
     }
     /**
-         * Imprime la Vista principal del Usuario Estudiante
+         * Imprime la Vista principal del Usuario Docente
          * @return type
          */
         public function usuarioDocente(){

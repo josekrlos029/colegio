@@ -31,7 +31,7 @@ function leerCarga(){
  x.show("slow");
  
 var y= $("#tablaCargas"); 
- var idDocente = document.getElementById("idDocente").value;
+ var idDocente =$("input[name=idDocente]:checked").val();
   var url="/colegio/administrador/imprimirCarga";
         var data="idDocente="+idDocente;
  envioJson(url,data,function respuesta(res){   
@@ -84,7 +84,7 @@ var y = $("#mensaje");
  y.html ("</br><p>Cargando...</p>");
  y.show("slow");
  
- var idDocente = document.getElementById("idDocente");
+ var idDocente =$("input[name=idDocente]:checked").val();
  var idSalon = document.getElementById("salones");
   var materias = document.getElementById("materias").options;
   var arreglo = new Array();
@@ -96,17 +96,16 @@ var y = $("#mensaje");
     }
   }   
 
-    if (idDocente.value=="" || idSalon.value=="---" || materias.length == 0){
+    if (idDocente=="" || idSalon.value=="---" || materias.length == 0){
           y.html ( "</br><p>Error: Seleccion invalida</p>");
       setTimeout("fondoColor('#e5582b')",1);
       setTimeout("$('#mensaje').hide();", 4000);
     }else{
 
         var url="/colegio/administrador/agregarCarga/";
-        var data="idDocente="+idDocente.value+"&idSalon="+idSalon.value + "&materias="+ arreglo;
+        var data="idDocente="+idDocente+"&idSalon="+idSalon.value + "&materias="+ arreglo;
 
         envioJson(url,data,function respuesta(res){   
-           
                 y.html ( res);
                 y.hide();
                 leerCarga()
@@ -156,7 +155,7 @@ var y = $("#mensaje");
             <tbody>
                 <?php foreach ($docentes as $docente) { ?>
                 <tr>
-                    <td><input onclick="leerCarga()" id="idDocente" name="idDocente" type="radio" value="<?php echo $docente->getIdPersona();?>" />
+                    <td><input onclick="leerCarga()" id="idDocente" name="idDocente" type="radio"  value="<?php echo $docente->getIdPersona();?>" />
                     <td><?php echo $docente->getIdPersona();?></td>
                     <td><?php echo $docente->getNombres();?></td>
                     <td><?php echo $docente->getPApellido()." ".$docente->getSApellido();?></td> 

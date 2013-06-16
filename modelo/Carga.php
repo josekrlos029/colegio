@@ -11,15 +11,15 @@
  * @author JoseCarlos
  */
 class Carga extends Modelo{
-    private $idCarga;
+    private $idPersona;
     private $idSalon;
     private $idMateria;
     
-    public function getIdCarga() {
-        return $this->idCarga;
+    public function getIdPersona() {
+        return $this->idPersona;
     }
-     public function setIdCarga($idCarga) {
-        $this->idCarga = $idCarga;
+     public function setIdPersona($idPersona) {
+        $this->idPersona = $idPersona;
     }
 
     public function getIdSalon() {
@@ -40,8 +40,8 @@ class Carga extends Modelo{
     }
 
  private function mapearCarga(Carga $carga, array $props) {
-         if (array_key_exists('idCarga', $props)) {
-            $carga->setIdCarga($props['idCarga']);
+         if (array_key_exists('idPersona', $props)) {
+            $carga->setIdPersona($props['idPersona']);
         }
          if (array_key_exists('idSalon', $props)) {
             $carga->setIdSalon($props['idSalon']);
@@ -54,14 +54,14 @@ class Carga extends Modelo{
     private function getParametros(Carga $carga){
               
         $parametros = array(
-            ':idCarga' => $carga->getIdCarga(),
+            ':idPersona' => $carga->getIdPersona(),
             ':idSalon' => $carga->getIdSalon(),
             ':idMateria' => $carga->getIdMateria()
         );
         return $parametros;
     }
 public function crearCarga(Carga $carga) {
-        $sql = "INSERT INTO carga (idCarga, idSalon, idMateria) VALUES (:idCarga,:idSalon,:idMateria)";
+        $sql = "INSERT INTO carga (idPersona, idSalon, idMateria) VALUES (:idPersona,:idSalon,:idMateria)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($carga));
     }
@@ -73,62 +73,61 @@ public function crearCarga(Carga $carga) {
     }
 
     public function leerCargas() {
-        $sql = "SELECT idCarga, idSalon, idMateria FROM carga";
+        $sql = "SELECT idPersona, idSalon, idMateria FROM carga";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $cargas = array();
         foreach ($resultado as $fila) {
             $carga = new Carga();
             $this->mapearCarga($carga, $fila);
-            $cargas[$carga->getIdCarga()] = $carga;
+            $cargas[$carga->getIdPersona()] = $carga;
         }
         return $cargas;
     }
 
     public function leerCargasPorDocente($idDocente) {
-        $sql = "SELECT        c.idCarga, c.idSalon, c.idMateria
-FROM            carga c INNER JOIN
-                         carga_docente cd ON c.idCarga = cd.idCarga
-WHERE        (cd.idPersona = '".$idDocente."')";
+        $sql = "SELECT * FROM carga WHERE idPersona='".$idDocente."'" ;
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+$cargas = array();
+$i=0;
+        foreach ($resultado as $fila) {
+            $carga = new Carga();
+            $this->mapearCarga($carga, $fila);
+            $cargas[$i] = $carga;
+            $i++;
+        }
+        return $cargas;
+    }
+    
+    public function verificarCarga($idSalon,$idMateria) {
+        $sql = "SELECT * FROM carga WHERE idSalon='".$idSalon."' AND idMateria='".$idMateria."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $cargas = array();
         foreach ($resultado as $fila) {
             $carga = new Carga();
             $this->mapearCarga($carga, $fila);
-            $cargas[$carga->getIdCarga()] = $carga;
+            $cargas[$carga->getIdPersona()] = $carga;
         }
         return $cargas;
     }
-    
-    public function verificarCarga($idDocente) {
-        $sql = "SELECT c.idCarga as idCarga, c.idSalon as idSalon, c.idMateria as idMateria FROM carga c, carga_docente cd WHERE c.idCarga=cd.idCarga AND cd.idPersona='".$idDocente."'";
-        $this->__setSql($sql);
-        $resultado = $this->consultar($sql);
-        $cargas = array();
-        foreach ($resultado as $fila) {
-            $carga = new Carga();
-            $this->mapearCarga($carga, $fila);
-            $cargas[$carga->getIdCarga()] = $carga;
-        }
-        return $cargas;
-    }
-    
+
     public function actualizarCarga(Carga $carga) {
-        $sql = "UPDATE grado SET nombre=:nombre, horas=:horas WHERE idCarga=:idCarga";
+        $sql = "UPDATE grado SET nombre=:nombre, horas=:horas WHERE idPersona=:idPersona";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($carga));        
         }
     
     
-    public function eliminarCarga($idCarga) {
-        $sql = "DELETE carga where idCarga=".$idCarga;
+    public function eliminarCarga($idPersona) {
+        $sql = "DELETE carga where idPersona=".$idPersona;
         $this->__setSql($sql);
         $this->ejecutar();        
     }
     
-    public function consultarIdCarga($idPersona){
-        $sql = "SELECT idCarga, idPersona FROM carga_docente WHERE idPersona='".$idPersona."'";
+    public function consultarIdPersona($idPersona){
+        $sql = "SELECT idPersona, idPersona FROM carga_docente WHERE idPersona='".$idPersona."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         return $resultado;

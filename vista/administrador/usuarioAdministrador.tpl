@@ -70,7 +70,7 @@
 	   <tr>
 	   <td>
            <ul class="menu"  >
-           <li><a href="/colegio/administrador/gestionarGrados">Gestionar de Grados</a></li>
+           <li><a href="/colegio/administrador/gestionarGrados">Gestionar Grados</a></li>
            <li><a href="/colegio/administrador/gestionarSalones">Aulas de Clase</a></li>
            <li><a href="/colegio/administrador/gestionarMaterias">Gestionar Materias</a></li>
            <li><a href="/colegio/administrador/gestionarPensum">Gestionar Pensum</a></li>
@@ -91,7 +91,7 @@
 	   <td></td>
 	   <td valign="top">
            <ul class="menu">
-           <li><a href="/colegio/administrador/gestionarDocentes">Gestionar de Docentes</a></li>
+           <li><a href="/colegio/administrador/gestionarDocentes">Gestionar Docentes</a></li>
 	   <li><a href="/colegio/administrador/gestionarCargas">Gestionar Cargas</a></li>
 	   </ul>
 	   </td>

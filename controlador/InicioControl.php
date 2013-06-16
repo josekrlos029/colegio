@@ -70,9 +70,9 @@ class InicioControl extends Controlador{
                     if ($idRol == 'A'){
                         echo json_encode("/colegio/administrador/usuarioAdministrador");   
                     }elseif ($idRol =='D') {
-                         echo json_encode("/colegio/administrador/docente/usuarioDocente");
+                         echo json_encode("/colegio/docente/usuarioDocente");
                     }elseif ($idRol == 'E') {
-                         echo json_encode("/colegio/administrador/estudiante/usuarioEstudiante");
+                         echo json_encode("/colegio/estudiante/usuarioEstudiante");
                     }       
         }
         /**

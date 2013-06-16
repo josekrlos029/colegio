@@ -323,7 +323,6 @@ class AdministradorControl extends Controlador{
             $idCarga = "";
                   foreach ($cargas as $carg) {
                       $respuesta .= "<tr>";
-                      $idCarga =$carg->getIdCarga();
                       $respuesta.= '<td>'. strtoupper($carg->getIdSalon()).'</td>';
                       $materia = new Materia();
                       $materias = $materia->leerMateriaPorId($carg->getIdMateria());
@@ -331,11 +330,14 @@ class AdministradorControl extends Controlador{
                               $respuesta.= '<td>'. strtoupper($mat->getNombreMateria()).'</td>';
                          }
                       $respuesta .= "</tr>";
-                      $respuesta .= "<input id='idCarga' type='hidden' value='".$idCarga."'/>";
                   }
                
+            if (strlen($respuesta)>0){
+                echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            }
             
-            echo json_encode($respuesta);  
              } catch (Exception $exc) {
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
@@ -356,27 +358,21 @@ class AdministradorControl extends Controlador{
              $arreglo = explode(',', $materias);
              
              $c = new Carga();
-             $resultado = $c->consultarIdCarga($idPersona);
-              if (count($resultado)==0){
-                  $c->crearCargaDocente($idPersona);
-                  $resultado = $c->consultarIdCarga($idPersona);
-                   foreach ($resultado as $fila){
-                      $idCarga=$fila['idCarga'];
-                  }
-              }else{
-                  foreach ($resultado as $fila){
-                      $idCarga=$fila['idCarga'];
-                  }
-              }
+            
+             
              for ($i=0; $i<count($arreglo); $i++){
                  $carga = new Carga();
-                 $carga->setIdCarga($idCarga);
+                 $resultado = $carga->verificarCarga($idSalon, $arreglo[$i]);
+                 if (count($resultado)==0){
+                 $carga->setIdPersona($idPersona);
                  $carga->setIdMateria($arreglo[$i]);
                  $carga->setIdSalon($idSalon);
                  $carga->crearCarga($carga);
+                 }
+                
              }
              
-             echo json_encode("Pensum Agregado Correctamente");
+             echo json_encode("Carga Agregada Correctamente");
         } catch (Exception $exc) {
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
