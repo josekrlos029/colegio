@@ -320,15 +320,16 @@ class AdministradorControl extends Controlador{
             $carga = new Carga();
             $cargas = $carga->leerCargasPorDocente($idPersona);
             $respuesta = "";
-            $idCarga = "";
+            
                   foreach ($cargas as $carg) {
                       $respuesta .= "<tr>";
-                      $respuesta.= '<td width="30%">'. strtoupper($carg->getIdSalon()).'</td>';
+                      $respuesta.= '<td>'. strtoupper($carg->getIdSalon()).'</td>';
                       $materia = new Materia();
                       $materias = $materia->leerMateriaPorId($carg->getIdMateria());
                          foreach ($materias as $mat) {
-                              $respuesta.= '<td width="70%">'. strtoupper($mat->getNombreMateria()).'</td>';
+                              $respuesta.= '<td>'. strtoupper($mat->getNombreMateria()).'</td>';
                          }
+                         $respuesta.= '<td><img src="../utiles/imagenes/iconos/fail.png"  onclick="eliminar('.$carg->getIdSalon().','.$carg->getIdMateria().')"/></td>';
                       $respuesta .= "</tr>";
                   }
                
@@ -343,6 +344,7 @@ class AdministradorControl extends Controlador{
         }    
             
         }
+
         /**
          * Función Llamada Por Json Desde El formulario para Agregar Carga
          */
@@ -378,11 +380,30 @@ class AdministradorControl extends Controlador{
         }    
         }
         
+ public function eliminarCarga(){
+            try {
+             
+             $idSalon =  isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+             $idMateria = isset($_POST['idMateria']) ? $_POST['idMateria'] : NULL;
+             
+             $c = new Carga();
+             $c->eliminarCarga($idSalon, $idMateria);
+
+             echo json_encode("Carga Eliminada Correctamente");
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+        }
+        
+        
         //imprimir formulario matricular estudiante
           public function matricularEstudiante(){
          try {
             if($this->verificarSession()){
             $this->vista->set('titulo', 'Matricular Estudiante');
+            $salon= new Salon();
+            $salones = $salon->leerSalones();
+            $this->vista->set('salones', $salones);
             return $this->vista->imprimir();
             }
         } catch (Exception $exc) {
@@ -516,11 +537,6 @@ class AdministradorControl extends Controlador{
                                             <td>Fecha De Nacimiento:</td>
                                             <td>".$estudiante->getFNacimiento()->format('Y-m-d')."</td>
                                         </tr>
-
-                                        <tr>
-                                            <td>Estado:</td>
-                                            <td>".$estudiante->getEstado()."</td>
-                                        </tr>
                                     </table>
 
                                      "; 
@@ -532,6 +548,37 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
             
+         }
+         
+         public function matricular(){
+             try {
+                 
+             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+             $jornada = isset($_POST['jornada']) ? $_POST['jornada'] : NULL;
+             $fecha = getdate();
+             $FechaTxt=$fecha["year"]."-".$fecha["mon"]."-".$fecha["mday"];
+
+                if ($fecha["month"]== 'December' or $fecha["month"]== 'November' or $fecha["month"]== 'October'){
+                    $año=$fecha["year"] ;
+                    $añoLectivo=$año + 1 ;
+                }else{
+                    $añoLectivo=$fecha["year"];
+                }
+
+             $mat = new Matricula();
+             $mat->setIdPersona($idPersona);
+             $mat->setIdSalon($idSalon);
+             $mat->setJornada($jornada);
+             $mat->setFecha($FechaTxt);
+             $mat->setAñoLectivo(strval($añoLectivo));
+             $mat->matricularEstudiante($mat);
+             echo json_encode("1");
+             
+             } catch (Exception $exc) {
+                 echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+             }
+
          }
     
 }

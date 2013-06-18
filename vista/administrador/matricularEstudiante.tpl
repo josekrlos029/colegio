@@ -50,12 +50,49 @@ function envio(){
       setTimeout("$('#mensaje').hide();", 5000);
             }else{
             y.html(res);
-            setTimeout("$('#msg').hide();", 4000);
+            $("#matricula").show();
+            x.hide();
+            }
+            
+         });
+    }   
+} 
+
+function matricular(){ 
+  
+ var x = $("#mensaje");
+ setTimeout("fondoColor('#aacc5b')",1);
+ x.html ("</br><p>Cargando...</p>");
+ x.show("slow");
+   
+ var idPersona = document.getElementById("idPersona");
+ var idSalon = document.getElementById("idSalon");
+ var jornada = document.getElementById("jornada");
+
+
+    if (idPersona.value==""){
+      x.html ( "<p>Error: Ingresar Numero de Documento</p>");
+       setTimeout("fondoColor('#e5582b')",1);
+      setTimeout("$('#mensaje').hide();", 5000);
+    }else{
+
+        var url="/colegio/administrador/matricular/";
+        var data="idPersona="+idPersona.value+"&idSalon="+idSalon.value+"&jornada="+jornada.value;
+
+        envioJson(url,data,function respuesta(res){   
+            if (res == "1"){
+                x.html ("<p>Estudiante Matriculado Correctamente</p>");
+      setTimeout("$('#mensaje').hide();", 5000);
+               
+            }else{
+                 x.html ("<p>"+res+"</p>");
+                 setTimeout("$('#mensaje').hide();", 4000);
             }
             
          });
     }   
 }   
+
  </script>
  
  </head>
@@ -86,7 +123,47 @@ function envio(){
       <p>&nbsp;</p>
       <hr>
        <p>&nbsp;</p>
-        <div id="tabla">
+       <div align="center">
+       <div  id="tabla">
         </div>
+           <p>&nbsp;</p>
+           <div id="matricula" hidden>
+               <table>
+                   <tr>
+                       <td>SALON</td>
+                       <td>JORNADA</td>
+                   </tr>
+                   <tr>
+                    <td> <hr> </td>
+                     <td> <hr> </td>
+                     </tr>
+                     <tr><td>
+                          <select id="idSalon">
+                   <?php foreach ($salones as $salon) { ?>
+                   <option><?php echo $salon->getIdSalon();?></option>
+                    <?php } ?>
+               </select>
+                         </td>
+                     
+                         <td>
+                             <select id="jornada">
+                                 <option>MAÑANA</option>
+                                 <option>TARDE</option>
+                                 <option>NOCHE</option>
+                             </select>
+                         </td>
+                     </tr>
+                     
+                      <tr>
+                  
+                    <td colspan="2" align="center"><input name="matricularEstudiante" id="matricularEstudiante" type="submit" value="Matricular" class="button large green" onclick="matricular()" /></td>
+                
+                </tr>
+               </table>
+               
+               
+           </div>
+       </div>
+        
     </body>
 </html>

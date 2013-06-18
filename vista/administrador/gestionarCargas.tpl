@@ -10,6 +10,24 @@
 <script src="../utiles/js/envios.js" type="text/javascript" ></script>
 
 <script type="text/javascript">
+    
+function eliminar(idSalon,idMateria){
+  var x = $("#mensaje");
+ setTimeout("fondoColor('#aacc5b')",1);
+ x.html ("</br><p>Cargando...</p>");
+ x.show("slow");
+ 
+  var url="/colegio/administrador/eliminarCarga";
+        var data="idSalon="+idSalon+"&idMateria="+idMateria;
+ envioJson(url,data,function respuesta(res){   
+                
+    x.html (res);
+    leerCarga();
+    setTimeout("$('#mensaje').hide();", 4000);
+         });
+
+}
+
 
 function validarRadio(){
 
@@ -113,6 +131,7 @@ var y = $("#mensaje");
     }   
 
 }
+
    
 </script>
     </head>

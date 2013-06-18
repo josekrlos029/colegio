@@ -120,12 +120,12 @@ $i=0;
         }
     
     
-    public function eliminarCarga($idPersona) {
-        $sql = "DELETE carga where idPersona=".$idPersona;
+   public function eliminarCarga($idSalon,$idMateria) {
+        $sql = "DELETE carga where idSalon='".$idSalon."' AND idMateria='".$idMateria."'";
         $this->__setSql($sql);
         $this->ejecutar();        
-    }
-    
+   }
+   
     public function consultarIdPersona($idPersona){
         $sql = "SELECT idPersona, idPersona FROM carga_docente WHERE idPersona='".$idPersona."'";
         $this->__setSql($sql);
