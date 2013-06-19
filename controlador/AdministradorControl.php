@@ -329,7 +329,9 @@ class AdministradorControl extends Controlador{
                          foreach ($materias as $mat) {
                               $respuesta.= '<td>'. strtoupper($mat->getNombreMateria()).'</td>';
                          }
-                         $respuesta.= '<td><img src="../utiles/imagenes/iconos/fail.png"  onclick="eliminar('.$carg->getIdSalon().','.$carg->getIdMateria().')"/></td>';
+                         
+                         $eliminar= "eliminar('".$carg->getIdSalon()."','".$carg->getIdMateria()."')";
+                         $respuesta.= '<td><img src="../utiles/imagenes/iconos/fail.png"  onclick="'.$eliminar.'"/></td>';
                       $respuesta .= "</tr>";
                   }
                

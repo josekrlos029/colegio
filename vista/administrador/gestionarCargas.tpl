@@ -21,7 +21,7 @@ function eliminar(idSalon,idMateria){
         var data="idSalon="+idSalon+"&idMateria="+idMateria;
  envioJson(url,data,function respuesta(res){   
                 
-    x.html (res);
+    x.html ("</br><p>"+res+"</p>");
     leerCarga();
     setTimeout("$('#mensaje').hide();", 4000);
          });

@@ -121,7 +121,7 @@ $i=0;
     
     
    public function eliminarCarga($idSalon,$idMateria) {
-        $sql = "DELETE carga where idSalon='".$idSalon."' AND idMateria='".$idMateria."'";
+        $sql = "DELETE FROM carga where idSalon='".$idSalon."' AND idMateria='".$idMateria."'";
         $this->__setSql($sql);
         $this->ejecutar();        
    }
