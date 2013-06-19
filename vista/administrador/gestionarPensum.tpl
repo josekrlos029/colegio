@@ -1,33 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
+   <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
         <title><?php echo $titulo; ?></title>
-        <link href="../utiles/css/administrador.css" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
-<link href="../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
-<script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
-<script src="../utiles/js/envios.js" type="text/javascript" ></script>
+   
 
 <script type="text/javascript">
 
- function fondoColor(elColor) { 
- $("#mensaje").css("background-color",elColor);
- }
- 
 function envio(){ 
  
  var x = $("#mensaje");
- setTimeout("fondoColor('#aacc5b')",1);
- x.html ("</br><p>Cargando...</p>");
+ cargando();
+ x.html ("<p>Cargando...</p>");
  x.show("slow");
   
  var idGrado = document.getElementById("idGrado");
  
     if (idGrado.value=="" || idGrado.value=="---"){
-      y.html ( "Error... Escoja un Grado");
-       setTimeout("fondoColor('#e5582b')",1);
-      setTimeout("$('#mensaje').hide();", 4000);
+      y.html ( "Error:Escoja un Grado");
+      error();
+      ocultar();
        
     }else{
 
@@ -46,6 +35,7 @@ function envio(){
 function listarMaterias(){
 var x = $("#tablaMaterias");
  var y = $("#mensaje");
+ cargando();
  y.html ("Cargando...");
  y.show("slow");
   
@@ -53,8 +43,8 @@ var x = $("#tablaMaterias");
  
     if (idGrado.value==""|| idGrado.value=="---"){
       y.html ( "Error... ");
-      setTimeout("fondoColor('#e5582b')",1);
-       setTimeout("$('#mensaje').hide();", 4000);
+      erro();
+      ocultar();
     }else{
 
         var url="/colegio/administrador/imprimirMateriasPorGrado/table";
@@ -72,7 +62,7 @@ var x = $("#tablaMaterias");
 function enviar(){
 
  var y = $("#mensaje");
-  setTimeout("fondoColor('#aacc5b')",1);
+  cargando();
  y.html ("Cargando...");
  y.show("slow");
  
@@ -89,9 +79,9 @@ function enviar(){
   }   
 
     if (idGrado.value=="" || idGrado.value=="---"){
-      y.html ( "</br><p>Error...debe seleccionar un grado</p>");
-       setTimeout("fondoColor('#e5582b')",1);
-       setTimeout("$('#mensaje').hide();", 4000);
+      y.html ( "<p>Error:debe seleccionar un grado</p>");
+       error();
+       ocultar();
       
     }else{
 

@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
+   <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
+   
         <title><?php echo $titulo; ?></title>
-        <link href="../utiles/css/administrador.css" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
-<link href="../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
-<script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
-<script src="../utiles/js/envios.js" type="text/javascript" ></script>
+    
 
 <script type="text/javascript">
     
- function fondoColor(elColor) { 
- $("#mensaje").css("background-color",elColor);
- }
-
 function envio(){ 
   
  var x = $("#mensaje");
- setTimeout("fondoColor('#aacc5b')",1);
- x.html ("</br><p>Cargando...</p>");
+ cargando();
+ x.html ("<p>Cargando...</p>");
  x.show("slow");
    var y = $("#tabla");
  var idPersona = document.getElementById("idPersona");
@@ -27,8 +17,8 @@ function envio(){
 
     if (idPersona.value==""){
       x.html ( "<p>Error: Ingresar Numero de Documento</p>");
-       setTimeout("fondoColor('#e5582b')",1);
-      setTimeout("$('#mensaje').hide();", 5000);
+      error(); 
+      ocultar();
     }else{
 
         var url="/colegio/administrador/consultarEstudiante/";
@@ -37,17 +27,18 @@ function envio(){
         envioJson(url,data,function respuesta(res){   
             if (res == "1"){
                 x.html ("<p>El Número de Documento no existe en el sistema</p>");
-                 setTimeout("fondoColor('#e5582b')",1);
-      setTimeout("$('#mensaje').hide();", 5000);
+                error(); 
+                ocultar();
                
             }else if(res==2){
                  x.html ("<p>El estudiante ya se encuentra matriculado</p>");
-                 setTimeout("fondoColor('#e5582b')",1);
-      setTimeout("$('#mensaje').hide();", 5000);
+                error();
+                ocultar()
+    
             }else if(res==3){
             x.html ("<p>El Número de Documento ingresado no corresponde al de un estudiante</p>");
-                 setTimeout("fondoColor('#e5582b')",1);
-      setTimeout("$('#mensaje').hide();", 5000);
+                error();
+                ocultar();
             }else{
             y.html(res);
             $("#matricula").show();
@@ -61,8 +52,8 @@ function envio(){
 function matricular(){ 
   
  var x = $("#mensaje");
- setTimeout("fondoColor('#aacc5b')",1);
- x.html ("</br><p>Cargando...</p>");
+ cargando();
+ x.html ("<p>Cargando...</p>");
  x.show("slow");
    
  var idPersona = document.getElementById("idPersona");
@@ -72,8 +63,8 @@ function matricular(){
 
     if (idPersona.value==""){
       x.html ( "<p>Error: Ingresar Numero de Documento</p>");
-       setTimeout("fondoColor('#e5582b')",1);
-      setTimeout("$('#mensaje').hide();", 5000);
+       error();
+       ocultar();
     }else{
 
         var url="/colegio/administrador/matricular/";
@@ -82,11 +73,13 @@ function matricular(){
         envioJson(url,data,function respuesta(res){   
             if (res == "1"){
                 x.html ("<p>Estudiante Matriculado Correctamente</p>");
-      setTimeout("$('#mensaje').hide();", 5000);
+                exito();
+                ocultar();
                
             }else{
                  x.html ("<p>"+res+"</p>");
-                 setTimeout("$('#mensaje').hide();", 4000);
+                 error();
+                ocultar();
             }
             
          });

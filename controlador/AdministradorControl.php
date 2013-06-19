@@ -12,13 +12,18 @@ class AdministradorControl extends Controlador{
         parent::__construct($modelo, $accion);
         $this->setModelo($modelo);
     }
-    /**
+    
+//**************************************************************************************************//        
+//**********************************FIN IMPRIMIR VISTAS*********************************************//
+//**************************************************************************************************//     
+         /**
          * Imprime la Vista principal del Usuario Administrador
          * @return type
          */
         public function usuarioAdministrador(){
         try {
             if($this->verificarSession()){
+            $this->vista->set('titulo', 'Usuario Administrador');
             $this->vista->set('titulo', 'Usuario Administrador');
             return $this->vista->imprimir();
             }
@@ -44,25 +49,7 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
-        /**
-         * Función Llamada Por Json Desde El formulario para Agregar Materia
-         */
-        public function agregarMateria(){
-            try {
-             $idMateria = isset($_POST['idMateria']) ? $_POST['idMateria'] : NULL;
-             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : NULL;
-             $horas = isset($_POST['horas']) ? $_POST['horas'] : NULL;
-             $materia = new Materia();
-             $materia->setIdMateria($idMateria);
-             $materia->setNombreMateria($nombre);
-             $materia->setHoras($horas);
-            $materia->crearMateria($materia);
-             echo json_encode(1);
-        } catch (Exception $exc) {
-            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
-        }    
-        }
-        /**
+           /**
          * Imprime La Vista de Gestión de Grados
          * @return type
          */
@@ -80,23 +67,7 @@ class AdministradorControl extends Controlador{
         }
             
         }
-        /**
-         * Función Llamada Por Json Desde El formulario para Agregar Grado
-         */
-        public function agregarGrado(){
-            try {
-             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
-             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : NULL;
-             $grado = new Grado();
-             $grado->setIdGrado($idGrado);
-             $grado->setNombre($nombre);
-             $grado->crearGrado($grado);
-             echo json_encode(1);
-        } catch (Exception $exc) {
-            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
-        }    
-        }
-        /**
+         /**
          * Imprime La Vista de Gestión de Salones
          * @return type
          */
@@ -116,6 +87,151 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+         /**
+         * Imprime La Vista de Gestión de Pensum
+         * @return type
+         */
+        public function gestionarPensum(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Gestión de Pensum');
+            $grado = new Grado();
+            $grados = $grado->leerGrados();
+            $this->vista->set('grados', $grados);
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+         /**
+         * Imprime La Vista de Gestión de Docentes
+         * @return type
+         */
+        public function gestionarDocentes(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Gestión de Docentes');
+            $idRol='D';
+            $persona = new Persona();
+            $docentes = $persona->leerPorRol($idRol);
+            $this->vista->set('docentes', $docentes);
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        /**
+         * Imprime La Vista de Gestión de Cargas de Docentes
+         * @return type
+         */
+        public function gestionarCargas(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Gestión de Cargas Acedemicas');
+            $idRol='D';
+            $persona = new Persona();
+            $docentes = $persona->leerPorRol($idRol);
+            $this->vista->set('docentes', $docentes);
+            $salon = new Salon();
+            $salones = $salon->leerSalones();
+            $this->vista->set('salones', $salones);  
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+            
+                    
+    /**
+    * imprime formulario de matricular estudiante
+    * @return type
+    */
+    
+          public function matricularEstudiante(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Matricular Estudiante');
+            $salon= new Salon();
+            $salones = $salon->leerSalones();
+            $this->vista->set('salones', $salones);
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+                   
+    /**
+    * imprime formulario de registro de estudiantes
+    * @return type
+    */
+         public function RegistrarEstudiantes(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Registro de Estudiantes');
+            $idRol='D';
+            $persona = new Persona();
+            $docentes = $persona->leerPorRol($idRol);
+            $this->vista->set('docentes', $docentes);
+            $salon = new Salon();
+            $salones = $salon->leerSalones();
+            $this->vista->set('salones', $salones);  
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+//**************************************************************************************************//        
+//**********************************FIN IMPRIMIR VISTAS*********************************************//
+//**************************************************************************************************//        
+        
+  
+ //**************************************************************************************************//        
+//**********************************INICIO DE METODOS*********************************************//
+//**************************************************************************************************//         
+        
+        
+        
+        /**
+         * Función Llamada Por Json Desde El formulario para Agregar Materia
+         */
+        public function agregarMateria(){
+            try {
+             $idMateria = isset($_POST['idMateria']) ? $_POST['idMateria'] : NULL;
+             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : NULL;
+             $horas = isset($_POST['horas']) ? $_POST['horas'] : NULL;
+             $materia = new Materia();
+             $materia->setIdMateria($idMateria);
+             $materia->setNombreMateria($nombre);
+             $materia->setHoras($horas);
+            $materia->crearMateria($materia);
+             echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+        }
+     
+        /**
+         * Función Llamada Por Json Desde El formulario para Agregar Grado
+         */
+        public function agregarGrado(){
+            try {
+             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
+             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : NULL;
+             $grado = new Grado();
+             $grado->setIdGrado($idGrado);
+             $grado->setNombre($nombre);
+             $grado->crearGrado($grado);
+             echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+        }
+       
         /**
          * Función Llamada Por Json Desde El formulario para Agregar Salón (Aula de Clases)
          */
@@ -135,23 +251,7 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
         }
-        /**
-         * Imprime La Vista de Gestión de Pensum
-         * @return type
-         */
-        public function gestionarPensum(){
-         try {
-            if($this->verificarSession()){
-            $this->vista->set('titulo', 'Gestión de Pensum');
-            $grado = new Grado();
-            $grados = $grado->leerGrados();
-            $this->vista->set('grados', $grados);
-            return $this->vista->imprimir();
-            }
-        } catch (Exception $exc) {
-            echo 'Error de aplicacion: ' . $exc->getMessage();
-        }
-        }
+       
         /**
          * Función Llamada Por Json Desde El formulario para Agregar Materias de acuerdo a un grado.. 
          * si recibe table, llena una tabla; y si recibe select llena, un select
@@ -236,24 +336,7 @@ class AdministradorControl extends Controlador{
         }    
         }
         
-        /**
-         * Imprime La Vista de Gestión de Docentes
-         * @return type
-         */
-        public function gestionarDocentes(){
-         try {
-            if($this->verificarSession()){
-            $this->vista->set('titulo', 'Gestión de Docentes');
-            $idRol='D';
-            $persona = new Persona();
-            $docentes = $persona->leerPorRol($idRol);
-            $this->vista->set('docentes', $docentes);
-            return $this->vista->imprimir();
-            }
-        } catch (Exception $exc) {
-            echo 'Error de aplicacion: ' . $exc->getMessage();
-        }
-        }
+       
         /**
          * Función Llamada Por Json Desde El formulario para Agregar Docente
          */
@@ -290,27 +373,7 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
         }
-        /**
-         * Imprime La Vista de Gestión de Cargas de Docentes
-         * @return type
-         */
-        public function gestionarCargas(){
-         try {
-            if($this->verificarSession()){
-            $this->vista->set('titulo', 'Gestión de Cargas Acedemicas');
-            $idRol='D';
-            $persona = new Persona();
-            $docentes = $persona->leerPorRol($idRol);
-            $this->vista->set('docentes', $docentes);
-            $salon = new Salon();
-            $salones = $salon->leerSalones();
-            $this->vista->set('salones', $salones);  
-            return $this->vista->imprimir();
-            }
-        } catch (Exception $exc) {
-            echo 'Error de aplicacion: ' . $exc->getMessage();
-        }
-        }
+        
         /**
          * Función Llamada Por Json Desde El formulario para Imprimir las CArgas de Un Docente (en una Tabla)
          */
@@ -397,48 +460,10 @@ class AdministradorControl extends Controlador{
         }    
         }
         
-        
-        //imprimir formulario matricular estudiante
-          public function matricularEstudiante(){
-         try {
-            if($this->verificarSession()){
-            $this->vista->set('titulo', 'Matricular Estudiante');
-            $salon= new Salon();
-            $salones = $salon->leerSalones();
-            $this->vista->set('salones', $salones);
-            return $this->vista->imprimir();
-            }
-        } catch (Exception $exc) {
-            echo 'Error de aplicacion: ' . $exc->getMessage();
-        }
-        }
-        
-             
-/**
- * imprime formulario de registro de estudiantes
- * @return type
- */
-         public function RegistrarEstudiantes(){
-         try {
-            if($this->verificarSession()){
-            $this->vista->set('titulo', 'Registro de Estudiantes');
-            $idRol='D';
-            $persona = new Persona();
-            $docentes = $persona->leerPorRol($idRol);
-            $this->vista->set('docentes', $docentes);
-            $salon = new Salon();
-            $salones = $salon->leerSalones();
-            $this->vista->set('salones', $salones);  
-            return $this->vista->imprimir();
-            }
-        } catch (Exception $exc) {
-            echo 'Error de aplicacion: ' . $exc->getMessage();
-        }
-        }
+    
         /**
          * guarda los datos que vienen del formulario Registrar Estudiantes
          */
-       
         public function guardarEstudiantes(){
            try {
              $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
@@ -475,7 +500,6 @@ class AdministradorControl extends Controlador{
         /**
          * proceso de consultar persona/estudiante por numero de identificacion
          */
-        
     public function consultarEstudiante(){
         try {
             $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
@@ -552,6 +576,7 @@ class AdministradorControl extends Controlador{
             
          }
          
+         
          public function matricular(){
              try {
                  
@@ -582,6 +607,9 @@ class AdministradorControl extends Controlador{
              }
 
          }
+//**************************************************************************************************//        
+//**********************************FIN DE LOS METODOS*********************************************//
+//**************************************************************************************************// 
     
 }
 

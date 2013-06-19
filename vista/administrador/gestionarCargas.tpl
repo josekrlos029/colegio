@@ -1,30 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title><?php echo $titulo; ?></title>
-        <link href="../utiles/css/administrador.css" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
-<link href="../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
-<script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
-<script src="../utiles/js/envios.js" type="text/javascript" ></script>
+   <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
+        
+   <title><?php echo $titulo; ?></title>
+    
 
 <script type="text/javascript">
     
 function eliminar(idSalon,idMateria){
-  var x = $("#mensaje");
- setTimeout("fondoColor('#aacc5b')",1);
- x.html ("</br><p>Cargando...</p>");
+ var x = $("#mensaje");
+cargando();
+ x.html ("<p>Cargando...</p>");
  x.show("slow");
  
   var url="/colegio/administrador/eliminarCarga";
         var data="idSalon="+idSalon+"&idMateria="+idMateria;
  envioJson(url,data,function respuesta(res){   
                 
-    x.html ("</br><p>"+res+"</p>");
+    x.html ("<p>"+res+"</p>");
     leerCarga();
-    setTimeout("$('#mensaje').hide();", 4000);
-         });
+    cargando();
+    ocultar();
+    });
 
 }
 
@@ -38,14 +33,10 @@ return true;s
 }
 }
 
- function fondoColor(elColor) { 
- $("#mensaje").css("background-color",elColor);
- }
- 
 function leerCarga(){
-  var x = $("#mensaje");
- setTimeout("fondoColor('#aacc5b')",1);
- x.html ("</br><p>Cargando...</p>");
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
  x.show("slow");
  
 var y= $("#tablaCargas"); 
@@ -66,8 +57,8 @@ function cargarMaterias(){
 
 }else{
   var x = $("#mensaje");
- setTimeout("fondoColor('#aacc5b')",1);
- x.html ("</br><p>Cargando...</p>");
+ cargando();
+ x.html ("<p>Cargando...</p>");
  x.show("slow");
  
  var y =$("#materias"); 
@@ -80,9 +71,9 @@ var grado = salon[0];
 
     if (idSalon=="" || idSalon == "---"){
     y.html(" ");  
-     x.html ( "</br><p>Error: por favor escoja un salon</p>");
-      setTimeout("fondoColor('#e5582b')",1);
-      setTimeout("$('#mensaje').hide();", 4000);
+     x.html ( "<p>Error: por favor escoja un salon</p>");
+     error();
+     ocultar();
     }else{
 
         var url="/colegio/administrador/imprimirMateriasPorGrado/select";
@@ -98,8 +89,8 @@ var grado = salon[0];
 function agregar(){
 
 var y = $("#mensaje");
- setTimeout("fondoColor('#aacc5b')",1);
- y.html ("</br><p>Cargando...</p>");
+ cargando();
+ y.html ("<p>Cargando...</p>");
  y.show("slow");
  
  var idDocente =$("input[name=idDocente]:checked").val();
@@ -115,9 +106,9 @@ var y = $("#mensaje");
   }   
 
     if (idDocente=="" || idSalon.value=="---" || materias.length == 0){
-          y.html ( "</br><p>Error: Seleccion invalida</p>");
-      setTimeout("fondoColor('#e5582b')",1);
-      setTimeout("$('#mensaje').hide();", 4000);
+          y.html ( "<p>Error: Seleccion invalida</p>");
+      error();
+      ocultar();
     }else{
 
         var url="/colegio/administrador/agregarCarga/";

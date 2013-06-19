@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
+   <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
+   
         <title><?php echo $titulo; ?></title>
-        <link href="../utiles/css/administrador.css" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
-<link href="../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
-<script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
-<script src="../utiles/js/envios.js" type="text/javascript" ></script>
+ 
 
 <script type="text/javascript">
- function fondoColor(elColor) { 
- $("#mensaje").css("background-color",elColor);
- }
- 
 function envio(){ 
- 
-  var x = $("#mensaje");
- setTimeout("fondoColor('#aacc5b')",1);
- x.html ("</br><p>Cargando...</p>");
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
  x.show("slow");
   
  var idMateria = document.getElementById("idMateria");
@@ -26,9 +15,9 @@ function envio(){
  var horas = document.getElementById("horas");
 
     if (idMateria.value=="" || nombre.value=="" || horas.value==""){
-         x.html ( "</br><p>Error: Tiene Campos Vacios</p>");
-      setTimeout("fondoColor('#e5582b')",1);
-      setTimeout("$('#mensaje').hide();", 4000);
+      x.html ( "<p>Error: Tiene Campos Vacios</p>");
+      error();
+      ocultar();
     }else{
 
         var url="/colegio/administrador/agregarMateria/";
@@ -37,12 +26,12 @@ function envio(){
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
                 x.html ( "<p>Materia Agregada Correctamente, Se Actualizará la Página</p>");
-                setTimeout("fondoColor('#aacc5b')",1);
-                setTimeout("$('#mensaje').hide();", 10000);
+                exito();
+                ocultar();
                 document.location.href="/colegio/administrador/gestionarMaterias";
             }else{
                 x.html ( "<p>"+res+"</p>");
-                setTimeout("$('#msg').hide();", 7000);
+                ocultar();
             }
          });
     }   

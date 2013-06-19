@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
+   <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
         <title><?php echo $titulo; ?></title>
-        <link href="../utiles/css/administrador.css" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
-<link href="../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
-<script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
-<script src="../utiles/js/envios.js" type="text/javascript" ></script>
+     
 
 <script type="text/javascript">
 
-function fondoColor(elColor) { 
- $("#mensaje").css("background-color",elColor);
- }
- 
-function envio(){ 
- 
-  var x = $("#mensaje");
- setTimeout("fondoColor('#aacc5b')",1);
- x.html ("</br><p>Cargando...</p>");
+
+function envio(){
+ var x = $("#mensaje");
+cargando();
+ x.html ("<p>Cargando...</p>");
  x.show("slow");
   
  var idPersona = document.getElementById("idPersona");
@@ -33,9 +22,9 @@ function envio(){
  var fNacimiento = document.getElementById("fNacimiento");
 
     if (idPersona.value=="" || nombres.value=="" || pApellido.value=="" || sApellido.value=="" || fNacimiento.value==""){
-        x.html ( "</br><p>Error: Tiene Campos requeridos Vacios</p>");
-      setTimeout("fondoColor('#e5582b')",1);
-      setTimeout("$('#mensaje').hide();", 4000);
+        x.html ( "<p>Error: Tiene Campos requeridos Vacios</p>");
+        error();
+        ocultar();
     }else{
 
         var url="/colegio/administrador/agregarDocente/";
@@ -43,17 +32,16 @@ function envio(){
 
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
-            
-                 x.html ( "<p></br>Docente Registrador Correctamente</p>");
-                 setTimeout("fondoColor('#aacc5b')",1);
-                setTimeout("$('#mensaje').hide();", 10000);
-                document.location.href="/colegio/administrador/gestionarDocentes";
+                 x.html ( "<p>Docente Registrador Correctamente</p>");
+                 exito();
+                 ocultar();
+                 document.location.href="/colegio/administrador/gestionarDocentes";
             }else{
                 x.html ( "<p>"+res+"</p>");
                 idMateria.value="";
                 idGrado.setAttribute("autofocus","true");
                 nombre.value="";
-                setTimeout("$('#msg').hide();", 7000);
+                ocultar();
             }
          });
     }   

@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8" />
-		<link href="../utiles/css/administrador.css" rel="stylesheet" type="text/css" media="screen"/>
-                <link href="../utiles/css/menu.css" rel="stylesheet" type="text/css" media="screen"/>
-                <script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
-                <script src="../utiles/js/easing.js" type="text/javascript" ></script>
-                <script>
-         </script>
-        <title>Usuario Administrador</title>
-    </head>
+   <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
+    <title>Usuario Administrador</title>
     <body>
 	
 	<div id="marco">
@@ -48,27 +38,27 @@
 </br>
 	   <table border="0" align="center" width="900px">
 	   <tr>
-	   <td colspan="5" align="right"><h1>Gestion Administrativa</h1></td>
-	   
+	   <td align="right"><h1>Gestion Administrativa</h1></td>
 	   </tr>
-	 
-	<tr>
-	   <td><h2>Administrador</h2></td>
+	   </table>
+          <table border="0" align="center" width="900px">
+	   <tr>
+	   <td class="tdMenu"><h2>Administrador</h2></td>
+           <td></td>
+	   <td class="tdMenu"><h2>Estudiantes</h2></td>
 	   <td></td>
-	   <td><h2>Estudiantes</h2></td>
-	   <td></td>
-	   <td><h2>Docentes</h2></td>
+	   <td class="tdMenu"><h2>Docentes</h2></td>
 	   </tr>
 	   <tr>
-               <td align="center" width="30%"><div id="box" class="green"><img id="bb" src="../utiles/imagenes/admin.png"/></div></td>
-	    <td></td>
-	   <td align="center" width="30%"> <div id="box" class="blue"><img src="../utiles/imagenes/student.png"/></div></td>
-	    <td></td>
-	   <td align="center" width="30%"><div id="box" class="red"><img src="../utiles/imagenes/teacher.png"/></div></td>
+           <td align="center" width="30%" class="tdMenu"> <div id="box" class="green"><img id="bb" src="../utiles/imagenes/admin.png"/></div></td>
+	   <td></td>
+	   <td align="center" width="30%" class="tdMenu"> <div id="box" class="blue"><img src="../utiles/imagenes/student.png"/></div></td>
+	   <td></td>
+	   <td align="center" width="30%" class="tdMenu"> <div id="box" class="red"><img src="../utiles/imagenes/teacher.png"/></div></td>
 	   </tr>
 	   
 	   <tr>
-	   <td>
+	   <td class="tdMenu">
            <ul class="menu"  >
            <li><a href="/colegio/administrador/gestionarGrados">Gestionar Grados</a></li>
            <li><a href="/colegio/administrador/gestionarSalones">Aulas de Clase</a></li>
@@ -80,7 +70,7 @@
            </ul>
            </td>
 	   <td></td>
-	   <td valign="top">
+	   <td valign="top" class="tdMenu">
 	   <ul class="menu">
 	   <li><a href="/colegio/administrador/matricularEstudiante">Matricular</a></li>
 	   <li><a href="/colegio/administrador/registrarEstudiantes">Registrar</a></li>
@@ -89,7 +79,7 @@
 	   </ul>
 	   </td>
 	   <td></td>
-	   <td valign="top">
+	   <td valign="top" class="tdMenu">
            <ul class="menu">
            <li><a href="/colegio/administrador/gestionarDocentes">Gestionar Docentes</a></li>
 	   <li><a href="/colegio/administrador/gestionarCargas">Gestionar Cargas</a></li>
@@ -99,5 +89,7 @@
 	   </tr>
 	   </table>
 </div>
- </body>
+        
+        
+</body>
 </html>

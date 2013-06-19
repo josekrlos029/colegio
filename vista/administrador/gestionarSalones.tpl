@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
+
         <title><?php echo $titulo; ?></title>
-        <link href="../utiles/css/administrador.css" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
-<link href="../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
-<script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
-<script src="../utiles/js/envios.js" type="text/javascript" ></script>
+  
 
 <script type="text/javascript">
 
- function fondoColor(elColor) { 
- $("#mensaje").css("background-color",elColor);
- }
 
 function envio(){ 
  
  var x = $("#mensaje");
- setTimeout("fondoColor('#aacc5b')",1);
- x.html ("</br><p>Cargando...</p>");
+ cargando();
+ x.html ("<p>Cargando...</p>");
  x.show("slow");
   
  var idGrado = document.getElementById("idGrado");
@@ -30,16 +20,17 @@ function envio(){
 
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
-                x.html ( "</br><p>Salon Agregado Correctamente, Se Actualizará la Página</p>");
-                 setTimeout("fondoColor('#aacc5b')",1);
-                setTimeout("$('#mensaje').hide();", 10000);
+                x.html ( "<p>Salon Agregado Correctamente, Se Actualizará la Página</p>");
+                exito();
+                ocultar();
                 document.location.href="/colegio/administrador/gestionarSalones";
             }else{
                 x.html ( "<p>"+res+"</p>");
+                error();
                 idMateria.value="";
                 idGrado.setAttribute("autofocus","true");
                 nombre.value="";
-                setTimeout("$('#mensaje').hide();", 7000);
+                ocultar();
             }
          });
      
