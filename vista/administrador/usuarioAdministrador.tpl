@@ -38,55 +38,96 @@
 </br>
 	   <table border="0" align="center" width="900px">
 	   <tr>
-	   <td align="right"><h1>Gestion Administrativa</h1></td>
+	   <td align="right" class="color-text-gris"><h1>Gestion Administrativa</h1></td>
 	   </tr>
 	   </table>
           <table border="0" align="center" width="900px">
 	   <tr>
-	   <td class="tdMenu"><h2>Administrador</h2></td>
+	   <td colspan="3"><h2>Administrador</h2></td>
            <td></td>
-	   <td class="tdMenu"><h2>Estudiantes</h2></td>
+	   <td colspan="3"><h2>Estudiantes</h2></td>
 	   <td></td>
-	   <td class="tdMenu"><h2>Docentes</h2></td>
+	   <td colspan="3"><h2>Docentes</h2></td>
+         
 	   </tr>
 	   <tr>
-           <td align="center" width="30%" class="tdMenu"> <div id="box" class="green"><img id="bb" src="../utiles/imagenes/admin.png"/></div></td>
+           <td align="center" width="30%" colspan="3"> <div id="box" class="green"><img src="../utiles/imagenes/admin.png"/></div></td>
 	   <td></td>
-	   <td align="center" width="30%" class="tdMenu"> <div id="box" class="blue"><img src="../utiles/imagenes/student.png"/></div></td>
+	   <td align="center" width="30%" colspan="3"> <div id="box" class="blue"><img src="../utiles/imagenes/student.png"/></div></td>
 	   <td></td>
-	   <td align="center" width="30%" class="tdMenu"> <div id="box" class="red"><img src="../utiles/imagenes/teacher.png"/></div></td>
+	   <td align="center" width="30%" colspan="3"> <div id="box" class="red"><img src="../utiles/imagenes/teacher.png"/></div></td>
 	   </tr>
 	   
 	   <tr>
-	   <td class="tdMenu">
-           <ul class="menu"  >
-           <li><a href="/colegio/administrador/gestionarGrados">Gestionar Grados</a></li>
-           <li><a href="/colegio/administrador/gestionarSalones">Aulas de Clase</a></li>
-           <li><a href="/colegio/administrador/gestionarMaterias">Gestionar Materias</a></li>
-           <li><a href="/colegio/administrador/gestionarPensum">Gestionar Pensum</a></li>
-	   <li><a href="#">Consolidados</a></li>
-           <li><a href="#">Historial Anual</a></li>
-           <li><a href="#">Cierre de ano</a></li>
-           </ul>
+               
+	   <td valign="top" align="left" width="10%">
+           <a href="/colegio/administrador/gestionarGrados"><img src="../utiles/imagenes/iconos/gestionarGrados.png"/></a>
+           </td> 
+           
+           <td valign="top" align="center" width="10%">
+           <a href="/colegio/administrador/gestionarSalones"><img src="../utiles/imagenes/iconos/gestionarSalones.png"/></a>
            </td>
+           
+           <td valign="top" align="right" width="10%">
+           <a href="/colegio/administrador/gestionarMaterias"><img src="../utiles/imagenes/iconos/gestionarMaterias.png"/></a>
+           </td>
+           
+           
 	   <td></td>
-	   <td valign="top" class="tdMenu">
-	   <ul class="menu">
-	   <li><a href="/colegio/administrador/matricularEstudiante">Matricular</a></li>
-	   <li><a href="/colegio/administrador/registrarEstudiantes">Registrar</a></li>
-           <li><a href="#">Actualizar</a></li>
-           <li><a href="#">Historial</a></li>
-	   </ul>
-	   </td>
+           
+	  
+           <td valign="top" align="left" width="10%">
+	   <a href="/colegio/administrador/registrarEstudiantes"><img src="../utiles/imagenes/iconos/registrarEstudiante.png"/></a>
+           </td>
+           
+            <td valign="top" align="center" width="10%">
+	   <a href="/colegio/administrador/matricularEstudiante"><img src="../utiles/imagenes/iconos/matricular.png"/></a>
+           </td>
+           
+           <td valign="top" align="right" width="10%">
+           <a href="#"><img src="../utiles/imagenes/iconos/actualizarEstudiante.png"/></a>
+           </td>
+          
 	   <td></td>
-	   <td valign="top" class="tdMenu">
-           <ul class="menu">
-           <li><a href="/colegio/administrador/gestionarDocentes">Gestionar Docentes</a></li>
-	   <li><a href="/colegio/administrador/gestionarCargas">Gestionar Cargas</a></li>
-	   </ul>
+           
+	   <td valign="top" align="left" width="10%" >
+           <a href="/colegio/administrador/gestionarDocentes"><img src="../utiles/imagenes/iconos/gestionarDocentes.png"/></a>
 	   </td>
+             
+           <td valign="top" align="center" width="10%">
+           <a href="/colegio/administrador/gestionarCargas"><img src="../utiles/imagenes/iconos/gestionarCargas.png"/></a>
 	   </td>
+           
+            <td valign="top" align="left" width="10%">
+           </td> 
+           
 	   </tr>
+           
+           <tr>
+            <td valign="top" align="left" width="10%">
+           <a href="/colegio/administrador/gestionarPensum"><img src="../utiles/imagenes/iconos/gestionarPensum.png"/></a>
+           </td>
+           
+           <td valign="top" align="center" width="10%">
+	   <a href="#"><img src="../utiles/imagenes/iconos/consolidados.png"/></a>
+           </td>
+           
+           <td valign="top" align="right" width="10%">
+           <a href="#"><img src="../utiles/imagenes/iconos/historialAnual.png"/></a>
+           </td>
+           
+           <td></td>
+           
+           <td valign="top">
+           <a href="#"><img src="../utiles/imagenes/iconos/HistorialEstudiante.png"/></a>
+           </td>
+           
+           </tr> 
+           <tr>
+            <td valign="top" align="left" width="10%">
+           <a href="#"><img src="../utiles/imagenes/iconos/cierreAno.png"/></a>
+           </td>
+           </tr>
 	   </table>
 </div>
         

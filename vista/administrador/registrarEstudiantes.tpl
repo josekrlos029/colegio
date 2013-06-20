@@ -8,7 +8,7 @@
 function envio(){ 
   
  var x = $("#mensaje");
- cargando;
+ cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
  
@@ -47,7 +47,7 @@ function envio(){
                 idGrado.setAttribute("autofocus","true");
                 nombre.value="";
                 error();
-               ocultar();
+                ocultar();
                 
                 
             }

@@ -1,14 +1,15 @@
 
-.menu{
-	width:100%;
+/* MENU VERDE */
+
+.menuVerde{
+    width:100%;
     padding:0;
     list-style:none;
     font-size:20px;
     border: 0px solid rgba(0,0,0,0.8);
 }
  
-.menu li a{
-
+.menuVerde li a{
     font-size:14px;
     display: block;
     border-bottom: 1px solid rgba(0,0,0, 0.2);
@@ -17,28 +18,13 @@
     color: #666;
     filter: dropshadow(color=#000, offx=1, offy=0);
     padding-top:10px;
-	 padding-bottom:10px;
-   
+    padding-bottom:10px;  
 }
- 
-.menu li ul li a{
-    font-size:14px;
-    color:#47689d;
-    text-shadow: 1px 0px 1px rgba(255,255,255,0.5);
-     
-}
- 
-.menu li a:hover{
-
-background-color:  #272727;
+.menuVerde li a:hover{
+background-color:  #aacc5b;
     color:#fff;
-    	
-	
-
-
 }
- 
-.menu ul{
+.menuVerde ul{
     margin:0;
     padding:0;
     list-style:none;
@@ -48,18 +34,110 @@ background-color:  #272727;
     -moz-transition:1s;
     -webkit-transition:1s;
 }
- 
-.menu li:hover ul{
+.menuVerde li:hover ul{
     height:120px;
     overflow-y:auto;
     overflow-x:hidden;
 }
- 
-.menu ul li a{
-    background:#fafafa;
+.menuVerde ul li a:hover {
+    background: none repeat scroll 0 0 #ccc;
+    color: #fff;
+    -moz-transition: color 0.4s ease;
+    -webkit-transition: color 0.4s ease;
+    -o-transition: color 0.4s ease;
+}
+
+
+/* MENU AZUL */
+
+.menuAzul{
+    width:100%;
+    padding:0;
+    list-style:none;
+    font-size:20px;
+    border: 0px solid rgba(0,0,0,0.8);
 }
  
-.menu ul li a:hover {
+.menuAzul li a{
+    font-size:14px;
+    display: block;
+    border-bottom: 1px solid rgba(0,0,0, 0.2);
+    border-top: 0px solid rgba(255,255,255, 0.2);
+    text-decoration:none;
+    color: #666;
+    filter: dropshadow(color=#000, offx=1, offy=0);
+    padding-top:10px;
+    padding-bottom:10px;  
+}
+.menuAzul li a:hover{
+background-color:  #0089e1;
+    color:#fff;
+}
+.menuAzul ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+    height:0;
+    overflow: hidden;
+    transition:1s;
+    -moz-transition:1s;
+    -webkit-transition:1s;
+}
+.menuAzul li:hover ul{
+    height:120px;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+.menuAzul ul li a:hover {
+    background: none repeat scroll 0 0 #ccc;
+    color: #fff;
+    -moz-transition: color 0.4s ease;
+    -webkit-transition: color 0.4s ease;
+    -o-transition: color 0.4s ease;
+}
+
+
+/* MENU ROJO */
+
+.menuRojo{
+    width:100%;
+    padding:0;
+    list-style:none;
+    font-size:20px;
+    border: 0px solid rgba(0,0,0,0.8);
+}
+ 
+.menuRojo li a{
+    font-size:14px;
+    display: block;
+    border-bottom: 1px solid rgba(0,0,0, 0.2);
+    border-top: 0px solid rgba(255,255,255, 0.2);
+    text-decoration:none;
+    color: #666;
+    filter: dropshadow(color=#000, offx=1, offy=0);
+    padding-top:10px;
+    padding-bottom:10px;  
+}
+.menuRojo li a:hover{
+background-color: #e5582b;
+    color:#fff;
+}
+.menuRojo ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+    height:0;
+    overflow: hidden;
+    transition:1s;
+    -moz-transition:1s;
+    -webkit-transition:1s;
+}
+.menuRojo li:hover ul{
+    height:120px;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+.menuRojo ul li a:hover {
     background: none repeat scroll 0 0 #ccc;
     color: #fff;
     -moz-transition: color 0.4s ease;

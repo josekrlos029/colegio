@@ -123,13 +123,13 @@ cargando();
      <p>&nbsp;</p>
       
       
-            <table width="1000" border="0" cellspacing="0" cellpadding="2" align="center">
+            <table width="1000" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
                <td align="center" class="color-text-gris" colspan="9"><h1>docentes registrados</h1></td>
            </tr>
          
          
-                <tr>
+                <tr class="modo5">
                     <td>Documento</td>
                     <td>Nombres</td>
                     <td>P.Apellido</td>
@@ -139,16 +139,13 @@ cargando();
                     <td>Dirección</td>
                     <td>Correo</td>
                     <td>Fecha de Nacimiento</td>
-                </tr>
-                
-                  <tr>
-                    <td colspan="9"> <hr> </td>
+                </tr> 
            
-                </tr>    
-         
+   
             <tbody>
+                  
                 <?php foreach ($docentes as $docente) { ?>
-                <tr>
+                <tr class="modo6" id="cebra3">
                     <td><a href="#"><?php echo $docente->getIdPersona();?></a></td>
                     <td><?php echo $docente->getNombres();?></td>
                     <td><?php echo $docente->getPApellido();?></td>
@@ -160,7 +157,9 @@ cargando();
                     <td><?php echo $docente->getFNacimiento()->format('Y-m-d');?></td>
                 </tr>
                 <?php } ?>
+              
             </tbody>
-    </table>
+        </table>
+     div>    
     </body>
 </html>

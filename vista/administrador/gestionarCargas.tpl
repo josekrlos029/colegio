@@ -145,28 +145,18 @@ var y = $("#mensaje");
     
 <div id="tabla-contenedora">
     
-        <table width="500" border="0" cellspacing="0" cellpadding="2">
+        <table width="500" border="0" cellspacing="0" cellpadding="2" class="tabla">
                 <tr>
                   <td></td>
                   <td align="left" class="color-text-gris" colspan="3"><h1>Escoger docente</h1></td>
               </tr>
               
-                <tr>
+                <tr class="modo5">
                     <td width="10%"></td>
                     <td width="30%">Documento</td>
                     <td width="30%">Nombres</td>
                     <td width="30%">Apellidos</td>
-                </tr>
-               
-       
-     
-                <tr>
-                    <td> <hr> </td>
-                    <td> <hr> </td>
-                     <td> <hr> </td>
-                     <td> <hr> </td>
-                </tr>  
-                
+                </tr>      
         </table>
     
     <div style="float:left;">
@@ -174,7 +164,7 @@ var y = $("#mensaje");
             <table width="500" border="0" cellspacing="0" cellpadding="2">  
         
                 <?php foreach ($docentes as $docente) { ?>
-                <tr>
+                <tr class="modo6" id="cebra3">
                     <td width="10%"><input onclick="leerCarga()" id="idDocente" name="idDocente" type="radio"  value="<?php echo $docente->getIdPersona();?>" />
                     <td width="30%"><?php echo $docente->getIdPersona();?></td>
                     <td width="30%"><?php echo $docente->getNombres();?></td>
@@ -231,19 +221,16 @@ var y = $("#mensaje");
      </br>
      
      
-         <table width="500" border="0" cellspacing="0" cellpadding="2">
+         <table width="500" border="0" cellspacing="0" cellpadding="2" class="tabla">
                 <tr>
                   <td align="center" class="color-text-gris" colspan="2"><h1>cargas asignadas a docentes</h1></td>
               </tr>
                 
-                <tr>
+                <tr class="modo5">
                     <td width="30%">Salon</td>
                     <td width="70%">Materia</td>
                 </tr>
-                  <tr>
-                    <td> <hr> </td>
-                     <td> <hr> </td>
-                     </tr>
+                
           </table>
      
           <div id="tabla-consulta">

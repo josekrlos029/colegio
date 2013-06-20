@@ -1,0 +1,101 @@
+/* 
+    Document   : tablas
+    Created on : 19/06/2013, 06:30:42 PM
+    Author     : andy henry
+    Description:
+        Purpose of the stylesheet follows.
+*/
+root { 
+    display: block;
+}
+
+/*TABLAS COLOR VERDE */
+
+.tabla .modo1 {
+font-size: 16px;
+background-color: #aacc5b;
+color: #fff;
+}
+.tabla .modo1 td {
+padding: 3px;
+border-right-width: 1px;
+border-right-style: solid;
+border-right-color: #fff;
+text-align:center;
+}
+
+.tabla .modo2 {
+text-align:right;
+color:#000;
+}
+.tabla .modo2 td {
+padding: 2px;
+border-right-width: 1px;
+border-right-style: solid;
+border-right-color: #fff;
+}
+
+
+#cebra:nth-child(even) { background: #f3ffd7}
+#cebra:nth-child(odd) { background: #fff}
+
+/*TABLAS COLOR AZUL */
+
+.tabla .modo3 {
+font-size: 16px;
+background-color: #0089e1;
+color: #fff;
+}
+.tabla .modo3 td {
+padding: 3px;
+border-right-width: 1px;
+border-right-style: solid;
+border-right-color: #fff;
+text-align:center;
+}
+
+.tabla .modo4 {
+font-size: 16px;
+color:#000;
+}
+.tabla .modo4 td {
+padding: 3px;
+border-right-width: 1px;
+border-right-style: solid;
+border-right-color: #fff;
+text-align:right;
+}
+
+#cebra2:nth-child(even) { background: #91d4ff}
+#cebra2:nth-child(odd) { background: #fff}
+
+/*TABLAS COLOR ROJO */
+
+.tabla .modo5 {
+font-size: 16px;
+background-color: #e5582b;
+color: #fff;
+}
+.tabla .modo5 td {
+padding: 3px;
+border-right-width: 1px;
+border-right-style: solid;
+border-right-color: #fff;
+text-align:center;
+}
+
+.tabla .modo6 {
+font-size: 16px;
+color:#000;
+}
+.tabla .modo6 td {
+padding: 3px;
+border-right-width: 1px;
+border-right-style: solid;
+border-right-color: #fff;
+text-align:right;
+}
+
+#cebra3:nth-child(even) { background: #feaf95}
+#cebra3:nth-child(odd) { background: #fff}
+                             

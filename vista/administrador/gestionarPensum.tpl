@@ -151,20 +151,15 @@ function enviar(){
          
         <div id="contenedorTabla">
          
-        <table width="600" border="0" cellspacing="0" cellpadding="2" align="center">
+        <table width="600" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
           <tr>
                <td align="center" class="color-text-gris" colspan="3"><h1>Pensum del grado Seleccionado</h1></td>
            </tr>
-                <tr>
+                <tr class="modo1">
                     <td>ID de Materia</td>
                     <td>Nombre</td>
                     <td>Horas</td>
-                </tr>
-                      <tr>
-                    <td> <hr> </td>
-                     <td> <hr> </td>
-                      <td> <hr> </td>
-                </tr>   
+                
          
             <tbody id="tablaMaterias">
                

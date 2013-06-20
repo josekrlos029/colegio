@@ -85,26 +85,22 @@ function envio(){
      <hr>
      <p>&nbsp;</p>
      
-        <table width="600" border="0" cellspacing="0" cellpadding="2" align="center">
+        <table width="600" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
                <td align="center" class="color-text-gris" colspan="2"><h1>Materias Registradas</h1></td>
            </tr>
          
          
-                <tr>
+                <tr class="modo1">
                     <td>ID de Materia</td>
                     <td>Nombre</td>
                     <td>Horas</td>
                 </tr>
-                 <tr>
-                    <td> <hr> </td>
-                     <td> <hr> </td>
-                      <td> <hr> </td>
-                </tr>    
+              
         
          
                 <?php foreach ($materias as $materia) { ?>
-                <tr>
+                <tr class="modo2" id="cebra">
                     <td ><?php echo $materia->getIdMateria();?></td>
                     <td><?php echo $materia->getNombreMateria();?></td>
                     <td><?php echo $materia->getHoras();?></td>

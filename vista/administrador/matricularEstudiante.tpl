@@ -118,20 +118,22 @@ function matricular(){
        <p>&nbsp;</p>
        <div align="center">
        <div  id="tabla">
+           
         </div>
            <p>&nbsp;</p>
            <div id="matricula" hidden>
-               <table>
+               <table class="tabla" width="600" >
                    <tr>
+                  
+                  <td colspan="2" align="center" class="color-text-gris"><h1>realizar matricula</h1></td>
+                   </tr>
+                   <tr class="modo3">
                        <td>SALON</td>
                        <td>JORNADA</td>
                    </tr>
-                   <tr>
-                    <td> <hr> </td>
-                     <td> <hr> </td>
-                     </tr>
+                   
                      <tr><td>
-                          <select id="idSalon">
+                          <select id="idSalon" class="box-text">
                    <?php foreach ($salones as $salon) { ?>
                    <option><?php echo $salon->getIdSalon();?></option>
                     <?php } ?>
@@ -139,18 +141,20 @@ function matricular(){
                          </td>
                      
                          <td>
-                             <select id="jornada">
+                             <select id="jornada" class="box-text">
                                  <option>MAÑANA</option>
                                  <option>TARDE</option>
                                  <option>NOCHE</option>
                              </select>
                          </td>
                      </tr>
-                     
-                      <tr>
-                  
-                    <td colspan="2" align="center"><input name="matricularEstudiante" id="matricularEstudiante" type="submit" value="Matricular" class="button large green" onclick="matricular()" /></td>
-                
+                     </table>
+                       <p>&nbsp;</p>
+                     <table align="center">
+                     <tr>
+                    <td colspan="2" align="center">
+                    <input name="matricularEstudiante" id="matricularEstudiante" type="submit" value="Matricular" class="button large blue" onclick="matricular()" />
+                    </td>
                 </tr>
                </table>
                

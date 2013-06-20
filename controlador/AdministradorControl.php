@@ -1,11 +1,12 @@
+
 <?php
-
-
 /**
  * Description of AdministradorControl
  *
  * @author JoseCarlos
  */
+ 
+  
 class AdministradorControl extends Controlador{
     
     public function __construct($modelo, $accion) {
@@ -14,7 +15,7 @@ class AdministradorControl extends Controlador{
     }
     
 //**************************************************************************************************//        
-//**********************************FIN IMPRIMIR VISTAS*********************************************//
+//**********************************INICIO IMPRIMIR VISTAS*********************************************//
 //**************************************************************************************************//     
          /**
          * Imprime la Vista principal del Usuario Administrador
@@ -385,7 +386,7 @@ class AdministradorControl extends Controlador{
             $respuesta = "";
             
                   foreach ($cargas as $carg) {
-                      $respuesta .= "<tr>";
+                      $respuesta .= "<tr class='modo6' id='cebra'>";
                       $respuesta.= '<td>'. strtoupper($carg->getIdSalon()).'</td>';
                       $materia = new Materia();
                       $materias = $materia->leerMateriaPorId($carg->getIdMateria());
@@ -523,45 +524,27 @@ class AdministradorControl extends Controlador{
                       $respuesta= 2;
                     }else{
                   
-                        $respuesta = "<table> 
-                                       <tr>
+                        $respuesta = "<table class='tabla'> 
+                                       <tr class='modo3'>
                                         <td>Nombres:</td>
+                                         <td>Primer Apellido:</td>
+                                         <td>Segundo Apellido:</td>
+                                         <td>Sexo:</td>
+                                         <td>Telefono:</td>
+                                         <td>Direccion:</td>
+                                         <td>Correo:</td>
+                                         <td>Fecha De Nacimiento:</td>
+                                        </tr>
+                                        
+                                        <tr class='modo4' id='cebra2'>
                                         <td>".$estudiante->getNombres()."</td>
-                                       </tr>
-                      
-                                        <tr>
-                                            <td>Primer Apellido:</td>
-                                            <td>".$estudiante->getPApellido()."</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Segundo Apellido:</td>
-                                            <td>".$estudiante->getSApellido()."</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Sexo:</td>
-                                            <td>".$estudiante->getSexo()."</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Telefono:</td>
-                                            <td>".$estudiante->getTelefono()."</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Direccion:</td>
-                                            <td>".$estudiante->getDireccion()."</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Correo:</td>
-                                            <td>".$estudiante->getCorreo()."</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Fecha De Nacimiento:</td>
-                                            <td>".$estudiante->getFNacimiento()->format('Y-m-d')."</td>
+                                        <td>".$estudiante->getPApellido()."</td>
+                                        <td>".$estudiante->getSApellido()."</td>
+                                        <td>".$estudiante->getSexo()."</td>
+                                        <td>".$estudiante->getTelefono()."</td>
+                                        <td>".$estudiante->getDireccion()."</td>
+                                        <td>".$estudiante->getCorreo()."</td>
+                                        <td>".$estudiante->getFNacimiento()->format('Y-m-d')."</td>
                                         </tr>
                                     </table>
 

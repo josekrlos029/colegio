@@ -1,4 +1,4 @@
-
+ <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
         <title><?php echo $titulo; ?></title>
   
 
@@ -94,26 +94,22 @@ function envio(){
      <p>&nbsp;</p>
      
       
-        <table border="0" width="600" cellspacing="0" cellpadding="0" align="center">
+        <table border="0" width="600" cellspacing="0" cellpadding="0" align="center" class="tabla">
                
               <tr>
                <td align="center" class="color-text-gris" colspan="3"><h1>Aulas De Clases Registradas</h1></td>
-           </tr>
+             </tr>
           
-                <tr>
+                <tr class="modo1">
                     <td>ID de Salón</td>
                     <td>Grado</td>
                     <td>Grupo</td>
                 </tr>
-                <tr>
-                    <td><hr></td>
-                    <td><hr></td>
-                    <td><hr></td>
-                </tr>
+               
      
-      
+
                 <?php foreach ($salones as $salon) { ?>
-                <tr>
+                 <tr class="modo2" id="cebra">
                     <td ><?php echo $salon->getIdSalon();?></td>
                     <td><?php echo $salon->getIdGrado();?></td>
                     <td><?php echo $salon->getGrupo();?></td>
