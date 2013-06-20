@@ -29,6 +29,7 @@ interface usuarioDocente {
 	<tr>
   <td width="40%" >
   <img src="../utiles/imagenes/tag_docente.png"/>
+   <?php include HOME . DS . 'includes' . DS . 'fecha.php'; ?>
   </td>
 </tr>
 </table >

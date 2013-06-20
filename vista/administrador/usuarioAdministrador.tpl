@@ -4,13 +4,16 @@
 	
 	<div id="marco">
 	<?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
+        
 </br>
 <hr>
 </br>
 <table border="0" align="center" width="900px" >
-	<tr>
+  <tr>
   <td width="40%" >
+  Hola Usuario <?php echo $_SESSION['idUsuario'] ?> Bienvenido(a) a tu Cuenta    
   <img src="../utiles/imagenes/tag_administrador.png"/>
+  <?php include HOME . DS . 'includes' . DS . 'fecha.php'; ?>
   </td>
   <td>
   <ul>

@@ -21,7 +21,7 @@ function envio(){
       x.html ( "<p>Error: Tiene Campos Vacios</p>");
       setTimeout("$('#msg').hide();", 4000);
     }else{
-
+//esta linea si se moidifica no altera nd? //
         var url="/colegio/inicio/verificarUsuario/";
         var data="usuario="+usuario.value+"&clave="+contraseña.value;
 
