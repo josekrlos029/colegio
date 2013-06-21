@@ -576,7 +576,9 @@ class AdministradorControl extends Controlador{
             
          }
          
-         
+         /**
+          * Matricula De estudiantes
+          */
          public function matricular(){
              try {
                  
