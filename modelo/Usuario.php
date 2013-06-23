@@ -89,6 +89,39 @@ class Usuario extends Modelo{
   
     }
    
+    public function verificarPorSocial($idSocial, $redSocial){
+        
+        if($redSocial == 'face'){
+             $sql = "SELECT idPersona, usuario, contraseña FROM usuario WHERE facebook='".$idSocial."'";
+        }else if($redSocial == 'twitter'){
+             $sql = "SELECT idPersona, usuario, contraseña FROM usuario WHERE twitter='".$idSocial."'";
+        }else if($redSocial == 'google'){
+             $sql = "SELECT idPersona, usuario, contraseña FROM usuario WHERE google='".$idSocial."'";
+        }
+        $this->__setSql($sql);
+        $res = $this->consultar($sql);
+        $usuario = NULL;
+        foreach ($res as $fila) {
+            $usuario = new Usuario();
+            $this->mapearUsuario($usuario, $fila);
+        }
+        return $usuario;
+    }
+    
+    
+    public function actualizarSocial($idSocial, $redSocial, $idPersona){
+        
+        if($redSocial == 'face'){
+             $sql = "UPDATE usuario SET facebook=:idSocial WHERE idPersona=:idPersona";
+        }else if($redSocial == 'twitter'){
+             $sql = "UPDATE usuario SET twitter=:idSocial WHERE idPersona=:idPersona";
+        }else if($redSocial == 'google'){
+             $sql = "UPDATE usuario SET google=:idSocial WHERE idPersona=:idPersona";
+        }
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=> $idPersona, ':idSocial'=>$idSocial));
+    }
+    
 }
 
 ?>

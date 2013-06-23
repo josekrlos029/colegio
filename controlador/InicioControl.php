@@ -41,7 +41,7 @@ class InicioControl extends Controlador{
             if ($usuario == NULL) {
                 echo json_encode(0);
             }else{
-                //MANEJO DE SESIONES
+                //MANEJO DE SESSIONES
                 session_start();
                 $_SESSION['idUsuario'] = $usuario->getIdPersona();
                 $rol = new Rol();
@@ -115,6 +115,102 @@ class InicioControl extends Controlador{
               
         }
     }
+    
+    
+    public function accesofb($social) {
+        session_start();
+        $cfg = Configuracion::getConfiguracion('social_login');
+        $app_id = '';
+        $app_secret = '';
+        $app_cb = '';
+        $url = '';
+        $oauthObj = null;
+        if (isset($social) && $social == 'face') {
+            $app_id = $cfg['FB_APP_ID'];
+            $app_secret = $cfg['FB_APP_SECRET'];
+            $app_cb = $cfg['FB_APP_CB'];
+            $url = $cfg['FB_APP_INFO'];
+            $oauthObj = new Facebook($app_id, $app_secret, $app_cb);
+        } else if (isset($social) && $social == 'twitter') {
+            $app_id = $cfg['TW_APP_ID'];
+            $app_secret = $cfg['TW_APP_SECRET'];
+            $app_cb = $cfg['TW_APP_CB'];
+            $url = $cfg['TW_APP_INFO'];
+            $oauthObj = new Twitter($app_id, $app_secret, $app_cb);
+        } else if (isset($social) && $social == 'google') {
+            $app_id = $cfg['GO_APP_ID'];
+            $app_secret = $cfg['GO_APP_SECRET'];
+            $app_cb = $cfg['GO_APP_CB'];
+            $url = $cfg['GO_APP_INFO'];
+            $oauthObj = new Google($app_id, $app_secret, $app_cb);
+        }
+        $scope = Array('email');
+        $oauthObj->setScope($scope);
+        if ($oauthObj->validateAccessToken()) {
+            try {
+                $response = $oauthObj->makeRequest($url);
+                $this->verificarAutenticacion($social, $response);
+                 
+            } catch (Exception $e) {
+                echo $e;
+            }
+        }
+       
+    }
+    
+    public function verificarAutenticacion($social, $response){
+        try {
+        $u = new Usuario();
+        $usuario = $u->verificarPorSocial($response['id'], $social);
+        if ( $usuario == NULL){
+            
+            $per = new Persona();
+            $correo= $response['email'];
+            $persona = $per->leerPorCorreo($correo);
+            if($persona == NULL){
+                header("Location: /colegio/inicio/index");
+            }else{
+               $u->actualizarSocial($response['id'], $social, $persona->getIdPersona());
+               $usuario = $u->verificarPorSocial($response['id'], $social);
+               $this->entrar($usuario);
+            }
+            
+        }else{
+           $this->entrar($usuario);
+        }
+    
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+
+    }
+    
+    
+    public function entrar(Usuario $usuario){
+           
+                
+                $_SESSION['idUsuario'] = $usuario->getIdPersona();
+                $rol = new Rol();
+                $roles = $rol->leerRoles($usuario->getIdPersona());
+                if (count($roles)>1){
+                    $this->setVista('escogeRol');
+                    $this->vista->set('roles',$roles);
+                    return $this->vista->imprimir();
+                }else{
+                   foreach($roles as $rol) {
+                        if ($rol->getIdRol() == 'A'){
+                        header("Location: /colegio/administrador/usuarioAdministrador");   
+                    }elseif ($rol->getIdRol() =='D') {
+                         header("Location: /colegio/docente/usuarioDocente");
+                    }elseif ($rol->getIdRol() == 'E') {
+                         header("Location: /colegio/estudiante/usuarioEstudiante");
+                    }       
+                       
+                    }
+                } 
+    }
+    
+  
      
 }
 

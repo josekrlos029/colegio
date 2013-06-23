@@ -93,6 +93,13 @@ window.onload = function() {
  </td>
  </tr>
 </table>
+<table width="200" border="0" cellspacing="0" cellpadding="2">
+          <tr>
+            <td align="center"><a href="/colegio/inicio/accesofb/face"><img src="utiles/imagenes/iconos/face.png" alt="facebook" width="48" height="48"></a></td>
+            <td align="center"><a href="/colegio/inicio/accesofb/twitter"><img src="utiles/imagenes/iconos/twitter.png" alt="twitter" width="48" height="48"></a></td>
+            <td align="center"><a href="/colegio/inicio/accesofb/google"><img src="utiles/imagenes/iconos/googlep.png" alt="google plus" width="48" height="48"></a></td>
+          </tr>
+        </table>
            
 <table align="center" width="100%">
 <tr>
