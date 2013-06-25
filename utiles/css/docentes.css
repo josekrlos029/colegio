@@ -1,0 +1,58 @@
+/* 
+    Document   : docentes
+    Created on : 24/06/2013, 09:07:18 AM
+    Author     : andy henry
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#titulo-menu{
+background-color: #d67661; 
+border-top-left-radius:5px; 
+border-top-right-radius:5px; 
+padding-right: 3px; 
+}
+  
+.contenedora-imagen{
+width: 215px; 
+height:199px;   
+ position: relative;   
+}
+
+.marco-foto{  
+width: 215px; 
+height:199px; 
+position: absolute;
+background: url(../imagenes/marcoPerfil.png) no-repeat;
+Z-index: 100;
+}
+
+.perfilDefecto{
+width: 215px; 
+height:199px; 
+position: absolute;
+background: url(../imagenes/perfilDefecto.png) no-repeat; 
+left:45px; 
+top: 35px;
+Z-index: 0;
+
+}
+
+.carga-pag{
+width:100%; 
+height:90%; 
+}
+
+.link-menu{
+  color:#e0e3ec;
+  font-size: 15px;
+  font-family: 'Arial Narrow', Arial, sans-serif;
+}
+
+.link-menu:hover{
+ color:#fff;  
+}

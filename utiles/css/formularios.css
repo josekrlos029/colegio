@@ -29,6 +29,7 @@ root {
  width:95%; 
  overflow-x:hidden;
  height:30%;
+ padding-left: 5px;
 }
 
 #tabla-consulta{
@@ -37,5 +38,6 @@ overflow-x:hidden;
 width: 510px; 
 height:200px;
 }
+
 
 

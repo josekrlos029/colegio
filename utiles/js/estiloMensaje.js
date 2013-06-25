@@ -21,9 +21,6 @@ setTimeout("asignarColor('#FFBABA','#e5582b','#D8000C','url(../utiles/imagenes/i
  setTimeout("asignarColor('#BDE5F8','#00529B','#00529B','url(../utiles/imagenes/iconos/cargando.gif)')",1);
  }
  
-
- 
- 
  function ocultar(){
  setTimeout("$('#mensaje').hide();", 10000);
  }

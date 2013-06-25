@@ -386,7 +386,7 @@ class AdministradorControl extends Controlador{
             $respuesta = "";
             
                   foreach ($cargas as $carg) {
-                      $respuesta .= "<tr class='modo6' id='cebra'>";
+                      $respuesta .= "<tr class='modo6' id='cebra3'>";
                       $respuesta.= '<td>'. strtoupper($carg->getIdSalon()).'</td>';
                       $materia = new Materia();
                       $materias = $materia->leerMateriaPorId($carg->getIdMateria());

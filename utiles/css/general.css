@@ -143,12 +143,20 @@ transition-delay:2s;
         .color-text-gris{
            color: #272727;
         }
+         .color-text-rojo{
+           color:#be0000;
+        }
+        
         /*-------------------------------------------------------------*/
         
         h2{
 	font-size: 20px;
-        color: #272727;
         font-family: 'LeagueGothicRegular', Arial, Helvetica, sans-serif;
+	}
+        
+        h3{
+	font-size: 28px;
+        font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
 	}
        
 	

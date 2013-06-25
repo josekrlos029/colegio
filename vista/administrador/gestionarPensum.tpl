@@ -43,7 +43,7 @@ var x = $("#tablaMaterias");
  
     if (idGrado.value==""|| idGrado.value=="---"){
       y.html ( "Error... ");
-      erro();
+      error();
       ocultar();
     }else{
 
@@ -137,7 +137,8 @@ function enviar(){
                     <td align="right" width="40%">Seleccione Materias Para Asignarselas al Grado</td>
                     <td><select name="materias" class="box-text" id="materias" multiple> 
                         
-                        </select></td>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>

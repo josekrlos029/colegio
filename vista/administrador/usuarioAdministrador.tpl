@@ -11,7 +11,7 @@
 <table border="0" align="center" width="900px" >
   <tr>
   <td width="40%" >
-  Hola Usuario <?php echo $_SESSION['idUsuario'] ?> Bienvenido(a) a tu Cuenta    
+  Hola Usuario <?php echo $_SESSION['idUsuario'] ?> Bienvenido(a) a tu Cuenta.</br>    
   <img src="../utiles/imagenes/tag_administrador.png"/>
   <?php include HOME . DS . 'includes' . DS . 'fecha.php'; ?>
   </td>

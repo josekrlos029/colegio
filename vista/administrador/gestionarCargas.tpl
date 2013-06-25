@@ -164,7 +164,7 @@ var y = $("#mensaje");
             <table width="500" border="0" cellspacing="0" cellpadding="2">  
         
                 <?php foreach ($docentes as $docente) { ?>
-                <tr class="modo6" id="cebra3">
+                <tr class="modo5" id="cebra3">
                     <td width="10%"><input onclick="leerCarga()" id="idDocente" name="idDocente" type="radio"  value="<?php echo $docente->getIdPersona();?>" />
                     <td width="30%"><?php echo $docente->getIdPersona();?></td>
                     <td width="30%"><?php echo $docente->getNombres();?></td>
@@ -233,13 +233,13 @@ var y = $("#mensaje");
                 
           </table>
      
-          <div id="tabla-consulta">
-               <table width="500" border="0" cellspacing="0" cellpadding="2" >
+     
+               <table width="500" border="0" cellspacing="0" cellpadding="2"  >
                 <tbody id="tablaCargas">
      
                 </tbody>
                </table>
-            </div>
+            
 </div>  
         
   
