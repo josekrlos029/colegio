@@ -38,8 +38,6 @@ function funcionesAcademicas(){
 	<?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
 </br>
 <hr>
-<input type="hidden" name="idPersona" id="idPersona" value="<?php echo $_SESSION['idUsuario'] ?>"/>
-</br>
 <table border="0" align="center" width="900px" >
  <tr>
   <td width="40%" >
@@ -73,7 +71,7 @@ function funcionesAcademicas(){
                     <td>
                         <div class="contenedora-imagen">
                             <div class="perfilDefecto"></div>
-                            <div class="marco-foto"></div>
+                            <div class="marco-foto-doc"></div>
                         </div>    
                     </td>
                 </tr>
@@ -103,7 +101,7 @@ function funcionesAcademicas(){
              </table>   
          </td> 
           <td>
-              <table id="titulo-menu" width="100%" height="8%" border="0">
+              <table id="titulo-menu-doc" width="100%" height="8%" border="0">
                    <tr> 
                        <td width="55"></td>
                         <td width="20%" align="right">

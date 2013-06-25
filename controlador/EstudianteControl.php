@@ -24,6 +24,33 @@ class EstudianteControl extends Controlador{
         try {
             if($this->verificarSession()){
             $this->vista->set('titulo', 'Usuario Estudiante');
+            $idPersona = $_SESSION['idUsuario'];
+            $persona = new Persona();
+            $estudiante = $persona->leerPorId($idPersona);
+            $this->vista->set('estudiante', $estudiante);
+            return $this->vista->imprimir();
+            
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+          public function datosAcademicos(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Datos Academicos');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+         public function funcionesAcademicas(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'funciones Academicas');
             return $this->vista->imprimir();
             }
         } catch (Exception $exc) {

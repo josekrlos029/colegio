@@ -10,8 +10,15 @@ root {
     display: block;
 }
 
-#titulo-menu{
+#titulo-menu-doc{
 background-color: #d67661; 
+border-top-left-radius:5px; 
+border-top-right-radius:5px; 
+padding-right: 3px; 
+}
+
+#titulo-menu-est{
+background-color: #0089e1; 
 border-top-left-radius:5px; 
 border-top-right-radius:5px; 
 padding-right: 3px; 
@@ -23,12 +30,19 @@ height:199px;
  position: relative;   
 }
 
-.marco-foto{  
+.marco-foto-doc{  
 width: 215px; 
 height:199px; 
 position: absolute;
-background: url(../imagenes/marcoPerfil.png) no-repeat;
-Z-index: 100;
+background: url(../imagenes/marcoPerfilDoc.png) no-repeat;
+
+}
+.marco-foto-est{  
+width: 215px; 
+height:199px; 
+position: absolute;
+background: url(../imagenes/marcoPerfilEst.png) no-repeat;
+
 }
 
 .perfilDefecto{
@@ -38,9 +52,10 @@ position: absolute;
 background: url(../imagenes/perfilDefecto.png) no-repeat; 
 left:45px; 
 top: 35px;
-Z-index: 0;
 
 }
+
+
 
 .carga-pag{
 width:100%; 

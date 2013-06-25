@@ -137,6 +137,9 @@ transition-delay:2s;
         
 	}
         
+        .color-text-azul{
+           color: #006cb2;
+        }
         .color-text-blanco{  
             color:#fff;
         } 
@@ -147,6 +150,7 @@ transition-delay:2s;
            color:#be0000;
         }
         
+      
         /*-------------------------------------------------------------*/
         
         h2{
