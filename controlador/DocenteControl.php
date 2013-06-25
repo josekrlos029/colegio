@@ -36,6 +36,42 @@ class DocenteControl extends Controlador{
             
         }
         
+         public function datosAcademicos(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Datos Academicos');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+        
+         public function ingresoNotas(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'ingreso de Notas');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+        
+         public function funcionesAcademicas(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'funciones Academicas');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+        
 }
 
 ?>

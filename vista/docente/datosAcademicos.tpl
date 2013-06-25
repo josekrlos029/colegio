@@ -1,21 +1,4 @@
-<?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author andy henry
- */
-interface datos Academicos {
-    //put your code here
-}
-
-?>
- 
- 
    <table aling="center" width="100%"  border="0">
        <tr>
            <td align="right" class="color-text-rojo" colspan="3"><h3>Datos Academicos</h3></td>    
