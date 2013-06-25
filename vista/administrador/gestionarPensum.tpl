@@ -4,8 +4,34 @@
 
 <script type="text/javascript">
 
-function envio(){ 
+function consultarMaterias(){ 
  
+ var x = $("#materias");
+ var y = $("#mensaje");
+ y.html ("Cargando...");
+ y.show("slow");
+  
+ var idGrado = document.getElementById("idGrado");
+ 
+    if (idGrado.value==""){
+      y.html ( "Error...");
+      
+    }else{
+
+        var url="/colegio/administrador/listaMateriasNoPertenecientes/";
+        var data="idGrado="+idGrado.value;
+
+        envioJson(url,data,function respuesta(res){   
+           
+                x.html ( res);
+                y.hide();
+                listarMaterias();
+         });
+    }   
+}
+
+function envio(){ 
+
  var x = $("#mensaje");
  cargando();
  x.html ("<p>Cargando...</p>");

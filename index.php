@@ -32,6 +32,11 @@ function cargadorClases(){
     require_once './utiles/php/class.phpmailer.php';
     require_once './utiles/php/class.pop3.php';
     require_once './utiles/php/class.smtp.php';
+    require_once './utiles/php/Oauth.php';
+    require_once './utiles/php/Facebook.php';
+    require_once './utiles/php/Google.php';
+    require_once './utiles/php/Twitter.php';
+    
 }
 
 spl_autoload_register('cargadorClases');
