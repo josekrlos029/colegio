@@ -20,15 +20,6 @@ interface usuarioDocente {
 
 <script type="text/javascript">
     
-function envio(){ 
-
-         var y = $("#tabla");
-         var url="/colegio/administrador/consultarDocente/";
-         var data="idPersona="+idPersona.value;
-         y.html(res);
-       
- }
- 
  function datosAcademicos(){    
   $('#cargar').load('../vista/docente/datosAcademicos.tpl');        
 }
@@ -41,7 +32,7 @@ function funcionesAcademicas(){
   </script>  
     
   
-    <body onload="envio()">
+    <body>
 	
 	<div id="marco">
 	<?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
@@ -89,7 +80,29 @@ function funcionesAcademicas(){
                 <tr>
                     <td>
                        <div  id="tabla">
-           
+                            <table> 
+                                       <tr>
+                                        <td>Nombres:</td>
+                                         <td>Primer Apellido:</td>
+                                         <td>Segundo Apellido:</td>
+                                         <td>Sexo:</td>
+                                         <td>Telefono:</td>
+                                         <td>Direccion:</td>
+                                         <td>Correo:</td>
+                                         <td>Fecha De Nacimiento:</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                        <td><?php echo $docente->getNombres(); ?></td>
+                                        <td><?php echo $docente->getPApellido(); ?></td>
+                                        <td><?php echo $docente->getSApellido(); ?></td>
+                                        <td><?php echo $docente->getSexo(); ?></td>
+                                        <td><?php echo $docente->getTelefono(); ?></td>
+                                        <td><?php echo $docente->getDireccion(); ?></td>
+                                        <td><?php echo $docente->getCorreo(); ?></td>
+                                        <td><?php echo $docente->getFNacimiento()->format('Y-m-d'); ?></td>
+                                        </tr>
+                                    </table>
                         </div> 
                     </td>
                     
