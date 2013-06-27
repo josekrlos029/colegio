@@ -11,7 +11,11 @@
         <tr>
            <td colspan="3"><hr></td>
        </tr> 
-          <?php foreach ($cargas as $carg) { ?>
+          <?php 
+          $resultado=0;
+          $cont=0;
+          
+          foreach ($cargas as $carg) { ?>
           <tr>
           <td><?php echo  $carg->getIdSalon();?> </td>
           <?php  
@@ -19,18 +23,28 @@
             $materias = $materia->leerMateriaPorId($carg->getIdMateria());
             foreach ($materias as $mat) { ?>
             <td> <?php echo strtoupper($mat->getNombreMateria()); ?> </td>
-            <td><?php echo strtoupper($mat->getHoras()); ?></td>
+            <td>
+                <?php echo strtoupper($mat->getHoras()); 
+                $cont=$mat->getHoras();
+                $resultado=$resultado+$cont;     
+                ?>
+            </td>
             <?php }?>
           </tr>
-          <?php } ?>
+          <?php } 
+          
+          ?>
         
         <tr>
            <td colspan="3"><hr></td>
        </tr>   
        <tr>
-          
-           <td colspan="3" aling="center" class="color-text-gris"><h2>Total Horas Semanales: </h2></td>
-        
+           <td colspan="3" class="color-text-gris" align="center">
+               <h2>Total Horas Semanales:<?php echo " ".$resultado;?> </h2>
+           </td>
        </tr>   
+        <tr>
+           <td colspan="3"><hr></td>
+       </tr> 
    </table>    
 

@@ -242,7 +242,6 @@ var y = $("#mensaje");
                 <tr>
                   <td align="center" class="color-text-gris" colspan="4"><h1>cargas asignadas a docentes</h1></td>
               </tr>
-                
                 <tr class="modo1">
                     <td width="20%">Salon</td>
                     <td width="40%">Materia</td>
@@ -250,7 +249,12 @@ var y = $("#mensaje");
                     <td width="20%">Eliminar</td>
                 </tr>
                 
+                
+              
+                
           </table>
+       
+     
      
      
                <table width="500" border="0" cellspacing="0" cellpadding="2"  >

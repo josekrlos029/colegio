@@ -49,14 +49,8 @@ class DocenteControl extends Controlador{
         } catch (Exception $exc) {
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }     
-        }
-        
-        
-        
-           
-      
-        
-        
+         }
+         
          public function ingresoNotas(){
          try {
             if($this->verificarSession()){

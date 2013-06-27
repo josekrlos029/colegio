@@ -380,6 +380,8 @@ class AdministradorControl extends Controlador{
          */
         public function imprimirCarga(){
             try {
+            $cont=0;
+            $total=0;
             $idPersona = isset($_POST['idDocente']) ? $_POST['idDocente'] : NULL;
             $carga = new Carga();
             $cargas = $carga->leerCargasPorDocente($idPersona);
@@ -393,16 +395,24 @@ class AdministradorControl extends Controlador{
                          foreach ($materias as $mat) {
                               $respuesta.= '<td width="40%">'. strtoupper($mat->getNombreMateria()).'</td>'.
                                            '<td width="10%" align="center">'. strtoupper($mat->getHoras()).'</td>';
+                                             $cont=($mat->getHoras());
+                                             $total=$total+$cont;   
                          }
                          
                          $eliminar= "eliminar('".$carg->getIdSalon()."','".$carg->getIdMateria()."')";
                          $respuesta.= '<td width="20%" align="center">
-                                       <img src="../utiles/imagenes/iconos/delete.png"  onclick="'.$eliminar.'"/>
+                                      <!--<img src="../utiles/imagenes/iconos/delete.png"  onclick="'.$eliminar.'"/>-->
                                        </td>';
-                      $respuesta .= "</tr>";
+                        $respuesta .= "</tr>";
+                       
                   }
+                   $respuesta .= '<tr><td colspan="4" align="center"><hr></td></tr>
+                                   <tr>
+                                     <td colspan="4" align="center"><h2>Total Horas Semanales:'. $total.'</h2></td>
+                                  </tr>';
                
             if (strlen($respuesta)>0){
+          
                 echo json_encode($respuesta);  
             }  else {
                 echo json_encode("<tr> </tr>"); 

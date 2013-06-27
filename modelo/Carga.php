@@ -132,6 +132,13 @@ $i=0;
         $resultado = $this->consultar($sql);
         return $resultado;
     }
+    
+    public function totalHoras($idMateria){
+       $sql = "SELECT SUM(horas) FROM materia WHERE idMateria='".$idMateria.",";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        return $resultado;
+    }
 }
 
 ?>
