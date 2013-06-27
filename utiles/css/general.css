@@ -1,3 +1,5 @@
+
+
 /* webkit, opera, IE9 */
 ::selection { background:#000; color:#fff; }
 /* mozilla firefox */
@@ -211,10 +213,34 @@ transition-delay:2s;
 top:0px;
 left:0px;
 position:relative;    
- width: 100%;   /*
-background: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#cccccc));*/
+width: 100%;  
 background: #e0e3ec url(../imagenes/bgCabecera.jpg) repeat top left;
 
 } 
- 
- 
+ /*BUSCADOR DE CABECERA */
+ .top-search{
+top:10px;
+position:relative;
+	
+}
+
+#searchform #s{
+	color: #7e7e7e;
+	font-size: 12px;
+	width: 180px;
+	height: 28px;
+	padding: 0px 35px 0px 10px;
+	border: 0;
+	background: url(../imagenes/search.png) no-repeat transparent;	
+}
+
+#searchform #searchsubmit{
+	position: absolute; 
+	top: 0px;
+	right: 10px;
+	width: 30px;
+	height: 25px;
+	border: 0px;
+	background: transparent;
+}
+/*END BUSCADOR DE CABECERA */

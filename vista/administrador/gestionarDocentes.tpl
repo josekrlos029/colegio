@@ -136,7 +136,7 @@ cargando();
      <p>&nbsp;</p>
       
       
-            <table width="1000" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+            <table width="1024" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
                <td align="center" class="color-text-gris" colspan="9"><h1>docentes registrados</h1></td>
            </tr>
