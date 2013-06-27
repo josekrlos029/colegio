@@ -49,15 +49,28 @@ cargando();
 </script>
     </head>
     <body>
+        <div class="cabecera">
         <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
+        </div>
         <!------------------------------cabecera--------------------------->  
-          <p>&nbsp;</p>
+         
             <p>&nbsp;</p>
-              <p>&nbsp;</p>
+            </br>
+            <p>&nbsp;</p>
         <div id="encapsulador">
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="red">
-                    <div class="color-text-blanco" id="title-cab"><h1>Gestion De docentes</h1> </div>
+                    
+                    <div class="color-text-blanco" id="title-cab">
+                        <table width="900" align="center" border="0" cellspacing="0" cellpadding="2">
+                         <tr>   
+                            <td align="right">   
+                                <h1>Gestion De docentes</h1>
+                            </td>
+                         </tr>
+                        </table>
+                    </div>
+                    
                 </div>
         </div> 
                 <p>&nbsp;</p>
@@ -129,7 +142,7 @@ cargando();
            </tr>
          
          
-                <tr class="modo5">
+                <tr class="modo1">
                     <td>Documento</td>
                     <td>Nombres</td>
                     <td>P.Apellido</td>
@@ -145,7 +158,7 @@ cargando();
             <tbody>
                   
                 <?php foreach ($docentes as $docente) { ?>
-                <tr class="modo6" id="cebra3">
+                <tr  id="cebra">
                     <td><a href="#"><?php echo $docente->getIdPersona();?></a></td>
                     <td><?php echo $docente->getNombres();?></td>
                     <td><?php echo $docente->getPApellido();?></td>
@@ -160,6 +173,6 @@ cargando();
               
             </tbody>
         </table>
-     div>    
+     </div>    
     </body>
 </html>

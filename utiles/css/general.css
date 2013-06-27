@@ -1,4 +1,8 @@
-	
+/* webkit, opera, IE9 */
+::selection { background:#000; color:#fff; }
+/* mozilla firefox */
+::-moz-selection { background:#000; color: #fff; }
+
 @font-face {
     font-family:'Bebas';
     src: url('../fonts/BebasNeue-webfont.ttf');
@@ -31,16 +35,14 @@
 	overflow-y: scroll;
 	margin-top: 0;
 	margin-left:0;	
+  
 }
 
 html {
  overflow-x:hidden;
 }
 
-table {
-border-collapse:0;
-border-spacing:0;
-}
+
 
 
 #box{
@@ -63,26 +65,25 @@ border-spacing:0;
 #encapsulador{
   position: relative;   
 }     
-#cabecera{
+#cabecera{ 
  width:100%;
  height:80px; 
  bottom: 0px;
  position:absolute;
  box-shadow: 0px 2px 4px #000000;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.1)), to(rgba(0,0,0,.07)));
-    background-image: -webkit-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
-    background-image: -moz-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
-    background-image: -ms-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
-    background-image: -o-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
-    background-image: linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
+ background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.1)), to(rgba(0,0,0,.07)));
+ background-image: -webkit-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
+ background-image: -moz-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
+ background-image: -ms-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
+ background-image: -o-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
+ background-image: linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
   
 }
 
 #title-cab{
-    position:absolute;
+        position:relative;
         text-shadow: 0px 1px 1px ;
-        top: 25px;
-        right: 30px;
+        top: 20px;
 	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
 	font-size: 38px;
 	}
@@ -206,6 +207,14 @@ transition-delay:2s;
 }   
    
       
- 
+.cabecera{
+top:0px;
+left:0px;
+position:relative;    
+ width: 100%;   /*
+background: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#cccccc));*/
+background: #e0e3ec url(../imagenes/bgCabecera.jpg) repeat top left;
+
+} 
  
  

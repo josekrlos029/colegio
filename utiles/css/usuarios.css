@@ -10,20 +10,14 @@ root {
     display: block;
 }
 
-#titulo-menu-doc{
-background-color: #d67661; 
-border-top-left-radius:5px; 
-border-top-right-radius:5px; 
+#titulo-menu{
+ background: -moz-linear-gradient(top, #eeeeee , #cccccc);
+ background: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee),  to(#cccccc));
 padding-right: 3px; 
+border: 1px solid #cccccc;
 }
 
-#titulo-menu-est{
-background-color: #0089e1; 
-border-top-left-radius:5px; 
-border-top-right-radius:5px; 
-padding-right: 3px; 
-}
-  
+
 .contenedora-imagen{
 width: 215px; 
 height:199px;   
@@ -54,20 +48,17 @@ left:45px;
 top: 35px;
 
 }
-
-
-
 .carga-pag{
 width:100%; 
 height:90%; 
 }
 
 .link-menu{
-  color:#e0e3ec;
+  color:#666;
   font-size: 15px;
   font-family: 'Arial Narrow', Arial, sans-serif;
 }
 
 .link-menu:hover{
- color:#fff;  
+ color:#000;  
 }

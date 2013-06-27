@@ -57,15 +57,26 @@ function envio(){
 </script>
     </head>
     <body>
+        <div class="cabecera">
         <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
+        </div>
       <!------------------------------cabecera--------------------------->  
           <p>&nbsp;</p>
+            </br>
             <p>&nbsp;</p>
-              <p>&nbsp;</p>
+           
         <div id="encapsulador">
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="blue">
-                    <div class="color-text-blanco" id="title-cab"><h1>Registro De Estudiantes</h1> </div>
+                    <div class="color-text-blanco" id="title-cab">
+                        <table width="900" align="center" border="0" cellspacing="0" cellpadding="2">
+                         <tr>   
+                            <td align="right">   
+                                <h1>Matricula De Estudiantes</h1>
+                            </td>
+                         </tr>
+                        </table>
+                    </div>
                 </div>
         </div> 
                 <p>&nbsp;</p>

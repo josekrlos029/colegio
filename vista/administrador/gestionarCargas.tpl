@@ -127,17 +127,34 @@ var y = $("#mensaje");
 </script>
     </head>
     <body>
+
+
+        <div class="cabecera">
         <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
-         <!------------------------------cabecera--------------------------->  
-          <p>&nbsp;</p>
+        </div>
+          <!------------------------------cabecera--------------------------->  
             <p>&nbsp;</p>
-              <p>&nbsp;</p>
+            </br>
+            <p>&nbsp;</p>
         <div id="encapsulador">
             <div id="mensaje" hidden> </div>
-                <div id="cabecera" class="red">
-                    <div class="color-text-blanco" id="title-cab"><h1>Gestion De Cargas</h1> </div>
+                 <div id="cabecera" class="red">
+                    
+                    <div class="color-text-blanco" id="title-cab">
+                        <table width="900" align="center" border="0" cellspacing="0" cellpadding="2">
+                         <tr>   
+                            <td align="right">   
+                                <h1>Gestion De Cargas Academicas</h1>
+                            </td>
+                         </tr>
+                        </table>
+                    </div>
+                    
                 </div>
+                    
+           
         </div> 
+     
                 <p>&nbsp;</p>
                       
                          
@@ -151,7 +168,7 @@ var y = $("#mensaje");
                   <td align="left" class="color-text-gris" colspan="3"><h1>Escoger docente</h1></td>
               </tr>
               
-                <tr class="modo5">
+                <tr class="modo1">
                     <td width="10%"></td>
                     <td width="30%">Documento</td>
                     <td width="30%">Nombres</td>
@@ -164,7 +181,7 @@ var y = $("#mensaje");
             <table width="500" border="0" cellspacing="0" cellpadding="2">  
         
                 <?php foreach ($docentes as $docente) { ?>
-                <tr class="modo5" id="cebra3">
+                <tr id="cebra">
                     <td width="10%"><input onclick="leerCarga()" id="idDocente" name="idDocente" type="radio"  value="<?php echo $docente->getIdPersona();?>" />
                     <td width="30%"><?php echo $docente->getIdPersona();?></td>
                     <td width="30%"><?php echo $docente->getNombres();?></td>
@@ -223,12 +240,14 @@ var y = $("#mensaje");
      
          <table width="500" border="0" cellspacing="0" cellpadding="2" class="tabla">
                 <tr>
-                  <td align="center" class="color-text-gris" colspan="2"><h1>cargas asignadas a docentes</h1></td>
+                  <td align="center" class="color-text-gris" colspan="4"><h1>cargas asignadas a docentes</h1></td>
               </tr>
                 
-                <tr class="modo5">
-                    <td width="30%">Salon</td>
-                    <td width="70%">Materia</td>
+                <tr class="modo1">
+                    <td width="20%">Salon</td>
+                    <td width="40%">Materia</td>
+                    <td width="10%">Horas</td>
+                    <td width="20%">Eliminar</td>
                 </tr>
                 
           </table>

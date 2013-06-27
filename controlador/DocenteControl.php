@@ -40,13 +40,22 @@ class DocenteControl extends Controlador{
          try {
             if($this->verificarSession()){
             $this->vista->set('titulo', 'Datos Academicos');
+            $idPersona = $_SESSION['idUsuario'];
+            $carga = new Carga();
+            $cargas = $carga->leerCargasPorDocente($idPersona);
+            $this->vista->set('cargas', $cargas);
             return $this->vista->imprimir();
-            }
+              }
         } catch (Exception $exc) {
             echo 'Error de aplicacion: ' . $exc->getMessage();
+        }     
         }
-            
-        }
+        
+        
+        
+           
+      
+        
         
          public function ingresoNotas(){
          try {
@@ -71,6 +80,8 @@ class DocenteControl extends Controlador{
         }
             
         }
+        
+         
         
 }
 

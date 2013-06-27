@@ -33,11 +33,12 @@ function funcionesAcademicas(){
     
   
     <body>
-	
-	<div id="marco">
+        
+     <div class="cabecera">
 	<?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
+    </div>
 </br>
-<hr>
+
 <table border="0" align="center" width="900px" >
  <tr>
   <td width="40%" >
@@ -49,6 +50,7 @@ function funcionesAcademicas(){
 </tr>
 </table >
 </br>
+
 <hr>
 </br>
 
@@ -101,10 +103,10 @@ function funcionesAcademicas(){
              </table>   
          </td> 
           <td>
-              <table id="titulo-menu-doc" width="100%" height="8%" border="0">
+              <table  width="100%" height="8%" border="0" id="titulo-menu">
                    <tr> 
                        <td width="55"></td>
-                        <td width="20%" align="right">
+                        <td width="20%" align="right" >
                             <a href="#"onclick="datosAcademicos()" class="link-menu">Datos Academicos</a>
                         </td>
                         <td width="20%" align="right">
@@ -125,7 +127,6 @@ function funcionesAcademicas(){
                         </td>
                     </tr>
                 </table> 
-             
          </td>  
          </tr>      
  </table> 

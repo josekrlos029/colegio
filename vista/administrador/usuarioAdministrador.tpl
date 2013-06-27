@@ -2,11 +2,10 @@
     <title>Usuario Administrador</title>
     <body>
 	
-	<div id="marco">
+	 <div class="cabecera">
 	<?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
-        
-</br>
-<hr>
+        </div>
+
 </br>
 <table border="0" align="center" width="900px" >
   <tr>

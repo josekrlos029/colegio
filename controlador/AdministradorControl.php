@@ -266,7 +266,7 @@ class AdministradorControl extends Controlador{
             $respuesta = "";
             if ($html == 'table'){
             foreach ($materias as $materia) {
-            $respuesta .= "<tr>";
+            $respuesta .= "<tr id='cebra'>";
              $respuesta.= '<td>'. strtoupper($materia->getIdMateria()).'</td>';
              $respuesta.= '<td>'. strtoupper($materia->getNombreMateria()).'</td>';
              $respuesta.= '<td>'. strtoupper($materia->getHoras()).'</td>';
@@ -386,16 +386,19 @@ class AdministradorControl extends Controlador{
             $respuesta = "";
             
                   foreach ($cargas as $carg) {
-                      $respuesta .= "<tr class='modo6' id='cebra3'>";
-                      $respuesta.= '<td>'. strtoupper($carg->getIdSalon()).'</td>';
+                      $respuesta .= "<tr  id='cebra'>";
+                      $respuesta.= '<td width="20%" align="center">'. strtoupper($carg->getIdSalon()).'</td>';
                       $materia = new Materia();
                       $materias = $materia->leerMateriaPorId($carg->getIdMateria());
                          foreach ($materias as $mat) {
-                              $respuesta.= '<td>'. strtoupper($mat->getNombreMateria()).'</td>';
+                              $respuesta.= '<td width="40%">'. strtoupper($mat->getNombreMateria()).'</td>'.
+                                           '<td width="10%" align="center">'. strtoupper($mat->getHoras()).'</td>';
                          }
                          
                          $eliminar= "eliminar('".$carg->getIdSalon()."','".$carg->getIdMateria()."')";
-                         $respuesta.= '<td><img src="../utiles/imagenes/iconos/fail.png"  onclick="'.$eliminar.'"/></td>';
+                         $respuesta.= '<td width="20%" align="center">
+                                       <img src="../utiles/imagenes/iconos/delete.png"  onclick="'.$eliminar.'"/>
+                                       </td>';
                       $respuesta .= "</tr>";
                   }
                
@@ -525,7 +528,7 @@ class AdministradorControl extends Controlador{
                     }else{
                   
                         $respuesta = "<table class='tabla'> 
-                                       <tr class='modo3'>
+                                       <tr class='modo1'>
                                         <td>Nombres:</td>
                                          <td>Primer Apellido:</td>
                                          <td>Segundo Apellido:</td>
@@ -536,7 +539,7 @@ class AdministradorControl extends Controlador{
                                          <td>Fecha De Nacimiento:</td>
                                         </tr>
                                         
-                                        <tr class='modo4' id='cebra2'>
+                                        <tr  id='cebra'>
                                         <td>".$estudiante->getNombres()."</td>
                                         <td>".$estudiante->getPApellido()."</td>
                                         <td>".$estudiante->getSApellido()."</td>

@@ -1,21 +1,29 @@
 
-   <table aling="center" width="100%"  border="0">
+   <table aling="right" width="100%"  border="0">
        <tr>
            <td align="right" class="color-text-rojo" colspan="3"><h3>Datos Academicos</h3></td>    
        </tr>
        <tr>
-           <td class="color-text-rojo" width="30%">Asignaturas</td>
-           <td class="color-text-rojo" width="10%" align="right">Horas Semanales</td>
-           <td class="color-text-rojo" width="10%" align="right">Salon</td>
+           <td class="color-text-rojo">salones</td>
+          <td class="color-text-rojo">Materias</td>
+          <td class="color-text-rojo">Horas</td>
        </tr>
         <tr>
            <td colspan="3"><hr></td>
        </tr> 
-       <tr>
-           <td></td>
-           <td></td>
-           <td></td>
-       </tr>
+          <?php foreach ($cargas as $carg) { ?>
+          <tr>
+          <td><?php echo  $carg->getIdSalon();?> </td>
+          <?php  
+            $materia = new Materia();
+            $materias = $materia->leerMateriaPorId($carg->getIdMateria());
+            foreach ($materias as $mat) { ?>
+            <td> <?php echo strtoupper($mat->getNombreMateria()); ?> </td>
+            <td><?php echo strtoupper($mat->getHoras()); ?></td>
+            <?php }?>
+          </tr>
+          <?php } ?>
+        
         <tr>
            <td colspan="3"><hr></td>
        </tr>   
@@ -25,3 +33,4 @@
         
        </tr>   
    </table>    
+

@@ -30,10 +30,10 @@ interface usuarioEstudiante {
     
     <body>
 	
-	<div id="marco">
+	 <div class="cabecera">
 	<?php include HOME . DS . 'includes' . DS . 'headerEstudiante.php'; ?>
+        </div>
 </br>
-<hr>
 <table border="0" align="center" width="900px" >
  <tr>
   <td width="40%" >
@@ -98,7 +98,7 @@ interface usuarioEstudiante {
              </table>   
          </td> 
           <td>
-              <table id="titulo-menu-est" width="100%" height="8%" border="0">
+              <table id="titulo-menu" width="100%" height="8%" border="0">
                    <tr> 
                        <td width="55"></td>
                         <td width="20%" align="right">
