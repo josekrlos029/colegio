@@ -89,8 +89,8 @@ public function crearCarga(Carga $carga) {
         $sql = "SELECT * FROM carga WHERE idPersona='".$idDocente."'" ;
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
-$cargas = array();
-$i=0;
+        $cargas = array();
+        $i=0;
         foreach ($resultado as $fila) {
             $carga = new Carga();
             $this->mapearCarga($carga, $fila);

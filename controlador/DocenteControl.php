@@ -55,6 +55,10 @@ class DocenteControl extends Controlador{
          try {
             if($this->verificarSession()){
             $this->vista->set('titulo', 'ingreso de Notas');
+            $carga = new Carga();
+            $idDocente = $_SESSION['idUsuario'];
+            $Cargas = $carga->leerCargasPorDocente($idDocente);
+            $this->vista->set('cargas', $Cargas);
             return $this->vista->imprimir();
             }
         } catch (Exception $exc) {
@@ -75,8 +79,47 @@ class DocenteControl extends Controlador{
             
         }
         
-         
+        public function imprimirMaterias(){
+            try {
+                session_start();
+                $idSalon =  isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+                $idDocente = $_SESSION['idUsuario'];
+                $materia = new Materia();
+                $materias = $materia->leerMateriasPorCarga($idSalon, $idDocente);
+                $respuesta = "";
+                foreach ($materias as $mat) {
+                   $respuesta.="<option value='".$mat->getIdMateria()."'>".$mat->getNombreMateria()."</option>";
+                }
+                echo json_encode($respuesta);
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }    
+        }
         
+        public function verNotas(){
+            try {
+             $this->vista->set('titulo', 'Vista de Notas');
+            $periodo =  isset($_POST['periodo']) ? $_POST['periodo'] : NULL;
+            $idSalon =  isset($_POST['salon']) ? $_POST['salon'] : NULL;
+            $idMateria =  isset($_POST['materia']) ? $_POST['materia'] : NULL; 
+            $materia = new Materia();
+            $materias= $materia->leerMateriaPorId($idMateria);
+            foreach ($materias as $mats) {
+                   $mat = $mats;
+                }
+            $docente = new Docente();
+            $resultado = $docente->crearConsulta($idSalon, $idMateria);
+            $this->vista->set('periodo', $periodo);
+            $this->vista->set('idSalon', $idSalon);
+            $this->vista->set('materia', $mat);
+            $this->vista->set('resultado', $resultado);
+            return $this->vista->imprimir();
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+
+        }
+               
 }
 
 ?>
