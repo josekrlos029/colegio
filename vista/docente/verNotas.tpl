@@ -1,13 +1,39 @@
 <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
  <title><?php echo $titulo; ?></title>
-
+ <script>
+ var searchOnTable = function() {
+    var table = $('#tabla');
+    var value = this.value;
+    table.find('tr').each(function(index, row) {
+        var allCells = $(row).find('td');
+        if(allCells.length > 0) {
+            var found = false;
+            allCells.each(function(index, td) {
+                var regExp = new RegExp(value, 'i');
+                if(regExp.test($(td).text())) {
+                    found = true;
+                    return false;
+                }
+            });
+            if (found == true) $(row).show();
+            else $(row).hide();
+        }
+    });
+};
+$(function(){
+    $('#filter').keyup(searchOnTable);
+});
+ </script>
  </head>
  
  <body>
+      <div class="cabecera">
+        <?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
+        </div>
 <p>&nbsp;</p>
-  
+  <input type="text" id="filter" placeholder="Filtrar">
 <h1>Calificaciones de Estudiantes</h1>
-<table   width="80%" border="0" align="center" cellpadding="1" cellspacing="0">
+<table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0">
     <tr class="modo1">
        <td>Salon</td>
        <td>Materia</td>
@@ -16,12 +42,12 @@
 
     <tr>
         <td><?php echo " ". $idSalon; ?></td>
-        <td><?php echo " ". $materia->getNombreMateria();?></td>
+        <td><?php echo " ". strtoupper ($materia->getNombreMateria());?></td>
         <td><?php echo " ".$materia->getHoras();?></td>
     </tr>
 
 </table>
-<table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla">
+<table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla" id="tabla">
     <tr>
         <td width="12%"><div align="center" >IDENTIFICACION</div></td>
         <td><div align="center">APELLIDOS</div></td>
@@ -35,15 +61,15 @@
     </tr>
     
     <?php foreach ($resultado as $fila) { ?>
-    <tr class="modo2" id="cebra">
-        <td align="right"><a class="texto" href="guardar_notas.php?idEstudiante=<?php echo $fila['idPersona'];?>"><?php echo $fila['idPersona'];?></a></td>
-        <td><div align="right" class="text_mensaje"> <?php echo $fila['pApellido']." ".$fila['sApellido'];?></div></td> 
-        <td><div align="right" class="text_mensaje"> <?php echo $fila['nombres'];?></div></td>
-        <td> <div align="center" class="titulo"> <?php echo $fila['primerP'];?></div></td>
-        <td> <div align="center" class="titulo"> <?php echo $fila['segundoP'];?></div></td>
-        <td> <div align="center" class="titulo"> <?php echo $fila['tercerP'];?></div></td>
-        <td> <div align="center" class="titulo"> <?php echo $fila['cuartoP'];?></div></td>
-        <td> <div align="center" class="titulo"> <?php echo $fila['def'];?></div></td>
+    <tr class="recorrer" id="cebra" >
+          <td align="right"><a class="texto" href="guardar_notas.php?idEstudiante=<?php echo $fila['idPersona'];?>"><?php echo $fila['idPersona'];?></a></td>
+        <td align="center"><?php echo strtoupper ($fila['pApellido']." ".$fila['sApellido']);?></td> 
+        <td><?php echo strtoupper ($fila['nombres']);?></td>
+        <td> <?php echo $fila['primerP'];?></td>
+        <td>  <?php echo $fila['segundoP'];?></td>
+        <td>  <?php echo $fila['tercerP'];?></td>
+        <td>  <?php echo $fila['cuartoP'];?></td>
+        <td>  <?php echo $fila['def'];?></td>
         <?php  if($fila['def']>='30'){   ?>
         <td align="center"><img src="../utiles/imagenes/iconos/exito.png" /></td>
         <?php }else{ ?>
@@ -56,8 +82,13 @@
 </br>
 <table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla">
     <tr>
-        <td>
-            <div align="center"><a href="act_notas.php">Guardar</a></div>
+        <td align="center">
+            <form action="/colegio/docente/actualizarNotas" method="post">
+                <input type="hidden" name="salon" value="<?php echo $idSalon; ?>"/>
+                <input type="hidden" name="periodo" value="<?php echo $periodo; ?>"/>
+                <input type="hidden" name="materia" value="<?php echo $materia->getIdMateria(); ?>"/>
+                <input type="submit" name="Actualizar"  class="button large red" value="Actualizar Notas"/>
+            </form>
         </td>
     </tr>
 </table>

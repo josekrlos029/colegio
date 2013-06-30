@@ -119,6 +119,44 @@ class DocenteControl extends Controlador{
             }
 
         }
+        
+        public function actualizarNotas(){
+            try {
+             $this->vista->set('titulo', 'Actualizar Notas');
+            $periodo =  isset($_POST['periodo']) ? $_POST['periodo'] : NULL;
+            $idSalon =  isset($_POST['salon']) ? $_POST['salon'] : NULL;
+            $idMateria =  isset($_POST['materia']) ? $_POST['materia'] : NULL; 
+            $materia = new Materia();
+            $materias= $materia->leerMateriaPorId($idMateria);
+            foreach ($materias as $mats) {
+                   $mat = $mats;
+                }
+            $docente = new Docente();
+            $resultado = $docente->crearConsulta($idSalon, $idMateria);
+            $this->vista->set('periodo', $periodo);
+            $this->vista->set('idSalon', $idSalon);
+            $this->vista->set('materia', $mat);
+            $this->vista->set('resultado', $resultado);
+            return $this->vista->imprimir();
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+
+        }
+        
+        public function guardarNotas(){
+            try {
+                $arreglo =  isset($_POST['notas']) ? $_POST['notas'] : NULL;
+                $idMateria =  isset($_POST['idMateria']) ? $_POST['idMateria'] : NULL;
+                $notas = json_decode($arreglo);
+                $docente = new Docente();
+                foreach($notas as $nota){
+                    $docente->actualizarNota($idPersona, $idMateria, $pirmerP, $segundoP, $tercerP, $cuartoP);
+                }
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+                }
                
 }
 

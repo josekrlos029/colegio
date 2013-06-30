@@ -55,5 +55,11 @@ class Docente extends Persona{
         $resultado = $this->consultar($sql);
         return $resultado;
     }
+    
+    public function actualizarNota($idPersona,$idMateria,$pirmerP,$segundoP,$tercerP,$cuartoP){
+        $param = array(':idPersona' => $idPersona, ':idMateria'=> $idMateria, ':primerP'=>$pirmerP, ':segundoP'=>segundoP, ':tercerP'=>tercerP, ':cuartoP'=>cuartoP);
+        $this->ejecutar($param);   
+    }
+    
 }
 ?>
