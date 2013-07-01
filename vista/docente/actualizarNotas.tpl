@@ -54,6 +54,7 @@
             if (res==1){
             x.html("Notas Actualizadas Correctamente");
             exito();
+            $("#formulario").submit();
             ocultar();
             }
             
@@ -210,11 +211,18 @@
 <table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla">
     <tr>
         <td align=center">
-             <input type="hidden" id="materia" name="materia" value="<?php echo $materia->getIdMateria(); ?>"/>
             <button id="btnRecorrer" class="button large red"> Guardar </button>
+             <input type="hidden" id="materia" name="materia" value="<?php echo $materia->getIdMateria(); ?>"/>
+            
         </td>
     </tr>
 </table>
+<form action="/colegio/docente/actualizarNotas" method="post" id="formulario">
+                <input type="hidden" name="salon" value="<?php echo $idSalon; ?>"/>
+                <input type="hidden" name="periodo" value="<?php echo $periodo; ?>"/>
+                <input type="hidden" name="materia" value="<?php echo $materia->getIdMateria(); ?>"/>
+                
+            </form>
 </body>
 <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>
