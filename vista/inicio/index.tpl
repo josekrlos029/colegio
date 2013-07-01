@@ -7,9 +7,7 @@
 <script src="utiles/js/envios.js" type="text/javascript" ></script>
 <script type="text/javascript">
   
- 
 function envio(){ 
- 
  var x = $("#msg");
  x.html ("<p>Cargando...</p>");
  x.show("slow");
@@ -50,22 +48,26 @@ window.onload = function() {
 </script>
 <title><?php echo $titulo; ?></title>
 </head>
-<body> 
-<p>&nbsp;</p><p>&nbsp;</p>
-<p>&nbsp;</p><p>&nbsp;</p>
+<body>
+
+<div id="contenedor">
+
+   <div id="header">
+          <span class="ejemplo"><h1>APLICACION DE CONTROL ACADEMICO</h1></span>
+       </div> 
+    
+       <div id="cuerpo">
+       <span class="ejemplo">Contenido</span>  
+    
 
 <div id="msg" hidden>
     
 </div>
 
-<table align="center" border="0">
-<tr>
-    <td align="center">
-<h1>APLICACION DE CONTROL ACADEMICO</h1>
-</td>
-</tr>
-</table>
-    
+
+
+
+
  <table align="right" width="40%" height="500px" border="0">
  <tr>
  <td>
@@ -100,14 +102,19 @@ window.onload = function() {
             <td align="center"><a href="/colegio/inicio/accesofb/google"><img src="utiles/imagenes/iconos/googlep.png" alt="google plus" width="48" height="48"></a></td>
           </tr>
         </table>
-           
-<table align="center" width="100%">
-<tr>
- <td>
-<div id="pie" align="center">copyright 2013  Todos los derechos reservados | Programación Web 2013-I UPC</div>
-</td>
-</tr> 
-</table>     
+         </div>   
+
+   <div id="footer">
+       <table width="100%" border="0">
+        <tr>
+        <td width="50%"> <a href="#">© 2013 Innovar.dev S.A.S</a></td> 
+        <td align="right"><a href="#">Terminos</a></td>
+        <td align="right"><a href="#">Centro de Ayuda</a></td>
+        <td align="right"><a href="#">Reportar un Error</a></td>
+        <td align="right"><a href="#">Ayudanos a Mejorar</a></td>
+        </tr>  
+       </table>    
+   </div>
 
 </body>
 </html>
