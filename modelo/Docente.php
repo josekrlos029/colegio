@@ -70,10 +70,48 @@ class Docente extends Persona{
         if ($cuartoP==""){
             $cuartoP=NULL;
         }
-        $sql = "UPDATE notas SET primerP=:primerP, segundoP=:segundoP, tercerP=:tercerP, cuartoP=:cuartoP WHERE idPersona=:idPersona and idMateria=:idMateria";
+        $def= $this->calcularDef($primerP,$segundoP,$tercerP,$cuartoP);
+        $sql = "UPDATE notas SET primerP=:primerP, segundoP=:segundoP, tercerP=:tercerP, cuartoP=:cuartoP, definitiva=:def WHERE idPersona=:idPersona and idMateria=:idMateria";
         $this->__setSql($sql);
-        $param = array(':idPersona' => $idPersona, ':idMateria'=> $idMateria, ':primerP'=>$primerP, ':segundoP'=>$segundoP, ':tercerP'=>$tercerP, ':cuartoP'=>$cuartoP);
+        $param = array(':idPersona' => $idPersona, ':idMateria'=> $idMateria, ':primerP'=>$primerP, ':segundoP'=>$segundoP, ':tercerP'=>$tercerP, ':cuartoP'=>$cuartoP, ':def'=>$def);
         $this->ejecutar($param);   
+    }
+    
+    public function calcularDef($n1,$n2,$n3,$n4){
+        if($n1 == NULL && $n2 == NULL && $n3 == NULL && $n4 == NULL ){
+        $def =NULL;
+        }elseif ($n2 == NULL && $n3 == NULL && $n4 == NULL  ){
+            $def = $n1;
+        }elseif($n1 == NULL && $n3 == NULL && $n4 == NULL ){
+            $def= $n2;
+        }elseif($n1 == NULL && $n2 == NULL && $n4 == NULL ){
+            $def= $n3;
+        }elseif($n1 == NULL && $n2 == NULL && $n3 == NULL ){
+            $def= $n4;
+        }elseif($n3 == NULL && $n4 == NULL ){
+            $def= ($n1+$n2)/2;
+        }elseif($n2 == NULL && $n4 == NULL ){
+            $def= ($n1+$n3)/2;
+        }elseif($n1 == NULL && $n4 == NULL ){
+            $def= ($n2+$n3)/2;
+        }elseif($n2 == NULL && $n3 == NULL ){
+            $def= ($n1+$n4)/2;
+        }elseif($n1 == NULL && $n3 == NULL ){
+            $def= ($n2+$n4)/2;
+        }elseif($n1 == NULL && $n2 == NULL ){
+            $def= ($n4+$n3)/2;
+        }elseif($n4 == NULL ){
+            $def= ($n1+$n2+$n3)/3;
+        }elseif($n3 == NULL ){
+            $def= ($n1+$n2+$n4)/3;
+        }elseif($n2 == NULL ){
+            $def= ($n1+$n3+$n4)/3;
+        }elseif($n1 == NULL ){
+            $def= ($n2+$n3+$n4)/3;
+        }else{
+            $def= ($n1 + $n2 + $n3 + $n4)/4;
+        }
+        return $def;
     }
     
 }

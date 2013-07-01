@@ -153,7 +153,7 @@ class DocenteControl extends Controlador{
                 foreach($notas as $nota){
                     $docente->actualizarNota($nota[0], $idMateria, $nota[1], $nota[2], $nota[3], $nota[4]);
                 }
-                
+                echo json_encode(1);
             } catch (Exception $exc) {
                 echo $exc->getTraceAsString();
             }

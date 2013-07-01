@@ -70,7 +70,7 @@ $(function(){
         <td>  <?php echo $fila['tercerP'];?></td>
         <td>  <?php echo $fila['cuartoP'];?></td>
         <td>  <?php echo $fila['def'];?></td>
-        <?php  if($fila['def']>='30'){   ?>
+        <?php  if($fila['def']>='3'){   ?>
         <td align="center"><img src="../utiles/imagenes/iconos/exito.png" /></td>
         <?php }else{ ?>
         <td align="center"><img src="../utiles/imagenes/iconos/error.png" /></td>
@@ -93,4 +93,5 @@ $(function(){
     </tr>
 </table>
 </body>
+<?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>
