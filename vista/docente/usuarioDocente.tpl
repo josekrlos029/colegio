@@ -16,7 +16,7 @@ interface usuarioDocente {
 ?>
    <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
         <title>Usuario Docente</title>
-    </head>
+   
 
 <script type="text/javascript">
     
@@ -29,9 +29,11 @@ function ingresoNotas(){
 function funcionesAcademicas(){    
   $('#cargar').load('/colegio/docente/funcionesAcademicas.');        
 }
+
+
   </script>  
     
-  
+   </head>
     <body>
         
      <div class="cabecera">

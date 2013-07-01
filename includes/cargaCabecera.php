@@ -11,7 +11,7 @@
                 <script src="../utiles/js/easing.js" type="text/javascript" ></script>
                 <script src="../utiles/js/envios.js" type="text/javascript" ></script>
                 <script src="../utiles/js/estiloMensaje.js" type="text/javascript"></script>
-              
+              <script src="../utiles/js/mootools-core-1.4.5.js" type="text/javascript"></script>
            
     </head>
 

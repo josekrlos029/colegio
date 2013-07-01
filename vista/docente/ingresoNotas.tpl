@@ -1,4 +1,24 @@
+<script>
+function cargarMaterias(){ 
+ 
+ var y =$("#materia"); 
+ var b= $("#ingresoNotas");
+  
+ var idSalon = document.getElementById("salon").value;
 
+    if (idSalon!=""){
+        var url="/colegio/docente/imprimirMaterias";
+        var data="idSalon="+idSalon;
+        envioJson(url,data,function respuesta(res){               
+        y.html (res);
+        b.removeAttr("disabled");
+         });  
+    }
+    }
+    
+
+</script>
+<form name="input" action="/colegio/docente/verNotas" method="post">
    <table aling="center" width="100%"  border="0">
        <tr>
            <td align="right" class="color-text-rojo" colspan="3"><h3>Ingreso De Notas</h3></td>    
@@ -15,17 +35,23 @@
            <td colspan="3"><hr></td>
        </tr> 
        <tr>
-           <td><select name="periodo" class="box-text" id="periodo" multiple> 
-                        
+           <td><select name="periodo" class="box-text" id="periodo" > 
+                   <option>PRIMERO</option>
+                   <option>SEGUNDO</option>
+                   <option>TERCERO</option>
+                   <option>CUARTO</option>
                </select>
            </td>
-           <td align="right"><select name="salon" class="box-text" id="salon" multiple> 
-                        
+           <td align="right"><select name="salon" class="box-text" id="salon" onchange="cargarMaterias()">
+                        <option>---</option>
+                        <?php foreach ($cargas as $carga) { ?>
+                        <option><?php echo $carga->getIdSalon(); ?></option>
+                        <?php } ?>
                </select>
            </td>
            <td align="right">
-               <select name="materia" class="box-text" id="materia" multiple> 
-                        
+               <select name="materia" class="box-text" id="materia" > 
+                      
                </select>
            </td>
        </tr>
@@ -35,8 +61,9 @@
        <tr>
           
            <td colspan="3" aling="center">
-           <input name="ingresoNotas" id="ingresoNotas" type="submit" value="Ingresar Notas" class="button large red" onclick="envio()" />  
+               <input name="ingresoNotas" id="ingresoNotas" type="submit" value="Ingresar Notas" class="button large red" onclick="ingresoNotas()"  disabled/>  
            </td>
         
        </tr>   
    </table>    
+</form>
