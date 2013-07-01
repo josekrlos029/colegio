@@ -151,8 +151,9 @@ class DocenteControl extends Controlador{
                 $notas = json_decode($arreglo);
                 $docente = new Docente();
                 foreach($notas as $nota){
-                    $docente->actualizarNota($idPersona, $idMateria, $pirmerP, $segundoP, $tercerP, $cuartoP);
+                    $docente->actualizarNota($nota[0], $idMateria, $nota[1], $nota[2], $nota[3], $nota[4]);
                 }
+                
             } catch (Exception $exc) {
                 echo $exc->getTraceAsString();
             }

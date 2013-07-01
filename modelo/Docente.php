@@ -50,14 +50,29 @@ class Docente extends Persona{
     }
   
     public function crearConsulta($idSalon,$idMateria){
+        
         $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP, n.definitiva as def FROM notas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND n.idMateria='".$idMateria."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         return $resultado;
     }
     
-    public function actualizarNota($idPersona,$idMateria,$pirmerP,$segundoP,$tercerP,$cuartoP){
-        $param = array(':idPersona' => $idPersona, ':idMateria'=> $idMateria, ':primerP'=>$pirmerP, ':segundoP'=>segundoP, ':tercerP'=>tercerP, ':cuartoP'=>cuartoP);
+    public function actualizarNota($idPersona,$idMateria,$primerP,$segundoP,$tercerP,$cuartoP){
+        if ($primerP==""){
+            $primerP=NULL;
+        }
+        if ($segundoP==""){
+            $segundoP=NULL;
+        }
+        if ($tercerP==""){
+            $tercerP=NULL;
+        }
+        if ($cuartoP==""){
+            $cuartoP=NULL;
+        }
+        $sql = "UPDATE notas SET primerP=:primerP, segundoP=:segundoP, tercerP=:tercerP, cuartoP=:cuartoP WHERE idPersona=:idPersona and idMateria=:idMateria";
+        $this->__setSql($sql);
+        $param = array(':idPersona' => $idPersona, ':idMateria'=> $idMateria, ':primerP'=>$primerP, ':segundoP'=>$segundoP, ':tercerP'=>$tercerP, ':cuartoP'=>$cuartoP);
         $this->ejecutar($param);   
     }
     

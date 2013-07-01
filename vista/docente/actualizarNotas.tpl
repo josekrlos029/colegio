@@ -112,7 +112,7 @@
 <table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla">
     <tr>
         <td align=center">
-             <input type="hidden" name="materia" value="<?php echo $materia->getIdMateria(); ?>"/>
+             <input type="hidden" id="materia" name="materia" value="<?php echo $materia->getIdMateria(); ?>"/>
             <button id="btnRecorrer" class="button large red"> Guardar </button>
         </td>
     </tr>
