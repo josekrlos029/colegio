@@ -265,7 +265,6 @@ var y = $("#mensaje");
             
 </div>  
         
-  
-        
     </body>
+    
 </html>

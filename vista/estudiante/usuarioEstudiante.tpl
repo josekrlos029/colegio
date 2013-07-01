@@ -46,21 +46,17 @@ interface usuarioEstudiante {
 </table >
 </br>
 <hr>
-</br>
 
-<table border="0" align="center" width="900px">
-	 <tr>
+<table border="0" align="center" width="900px" height="100%">
+     <tr>
 	   <td class="color-text-azul" width="26%">  
-                <h1>datos personales</h1>
+                <h3>datos personales</h3>
                 
            </td>
            <td>
            
            </td>
          </tr>
- </table>
-
-<table border="0" align="center" width="900px" height="100%">
          <tr>
          <td width="26%">
              <table class="fondo" width="99%">
@@ -125,4 +121,5 @@ interface usuarioEstudiante {
  </table> 
 
  </body>
+  <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>

@@ -35,9 +35,9 @@
  </td>
 </tr>
 </table >
-</br>
+
 <hr>
-</br>
+
 	   <table border="0" align="center" width="900px">
 	   <tr>
 	   <td align="right" class="color-text-gris"><h1>Gestion Administrativa</h1></td>
@@ -53,7 +53,7 @@
          
 	   </tr>
 	   <tr>
-           <td align="center" width="30%" colspan="3"> <div id="box" class="green"><img src="../utiles/imagenes/admin.png"/></div></td>
+           <td align="center" valign="top" width="30%" colspan="3"> <div id="box" class="green"><img src="../utiles/imagenes/admin.png"/></div></td>
 	   <td></td>
 	   <td align="center" width="30%" colspan="3"> <div id="box" class="blue"><img src="../utiles/imagenes/student.png"/></div></td>
 	   <td></td>
@@ -131,8 +131,7 @@
            </td>
            </tr>
 	   </table>
-</div>
-        
-        
+</div>       
 </body>
+ <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>
