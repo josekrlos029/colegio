@@ -34,7 +34,7 @@ interface usuarioEstudiante {
 	<?php include HOME . DS . 'includes' . DS . 'headerEstudiante.php'; ?>
         </div>
 </br>
-<table border="0" align="center" width="900px" >
+<table border="0" align="center" width="80%" >
  <tr>
   <td width="40%" >
   Hola <?php echo $estudiante->getNombres();?> Bienvenido(a) a tu Cuenta.</br> 
@@ -47,9 +47,9 @@ interface usuarioEstudiante {
 </br>
 <hr>
 
-<table border="0" align="center" width="900px" height="100%">
+<table border="0" align="center" width="80%" height="100%">
      <tr>
-	   <td class="color-text-azul" width="26%">  
+	   <td class="color-text-azul" width="20%">  
                 <h3>datos personales</h3>
                 
            </td>
@@ -58,8 +58,8 @@ interface usuarioEstudiante {
            </td>
          </tr>
          <tr>
-         <td width="26%">
-             <table class="fondo" width="99%">
+         <td width="10%">
+             <table class="fondo" width="100%">
                 <tr> 
                     <td>
                         <div class="contenedora-imagen">

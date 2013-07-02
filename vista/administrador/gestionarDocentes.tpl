@@ -62,7 +62,7 @@ cargando();
                 <div id="cabecera" class="red">
                     
                     <div class="color-text-blanco" id="title-cab">
-                        <table width="900" align="center" border="0" cellspacing="0" cellpadding="2">
+                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
                          <tr>   
                             <td align="right">   
                                 <h1>Gestion De docentes</h1>
@@ -79,7 +79,7 @@ cargando();
      <!--------------------------------------------------------------------> 
       
         
-            <table width="600" border="0" cellspacing="0" cellpadding="2">
+            <table width="40%" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                     <td></td>
                     <td align="left" class="color-text-gris"><h1>DATOS DEL docente</h1></td>
@@ -136,7 +136,7 @@ cargando();
      <p>&nbsp;</p>
       
       
-            <table width="1024" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+            <table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
                <td align="center" class="color-text-gris" colspan="9"><h1>docentes registrados</h1></td>
            </tr>

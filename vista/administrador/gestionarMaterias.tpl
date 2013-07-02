@@ -53,7 +53,7 @@ function envio(){
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="green">
                     <div class="color-text-blanco" id="title-cab">
-                        <table width="900" align="center" border="0" cellspacing="0" cellpadding="2">
+                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
                          <tr>   
                             <td align="right">   
                                 <h1>Gestion De Materias</h1>
@@ -69,7 +69,7 @@ function envio(){
      <!--------------------------------------------------------------------> 
        
         
-            <table width="600" border="0" cellspacing="0" cellpadding="2">
+            <table width="40%" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                   <td></td>
                   <td align="left" class="color-text-gris"><h1>Agregar Materias</h1></td>
@@ -96,7 +96,7 @@ function envio(){
      <hr>
      <p>&nbsp;</p>
      
-        <table width="600" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+        <table width="50%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
                <td align="center" class="color-text-gris" colspan="2"><h1>Materias Registradas</h1></td>
            </tr>

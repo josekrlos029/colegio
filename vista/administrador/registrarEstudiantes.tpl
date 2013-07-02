@@ -69,7 +69,7 @@ function envio(){
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="blue">
                     <div class="color-text-blanco" id="title-cab">
-                        <table width="900" align="center" border="0" cellspacing="0" cellpadding="2">
+                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
                          <tr>   
                             <td align="right">   
                                 <h1>Matricula De Estudiantes</h1>
@@ -85,7 +85,7 @@ function envio(){
      <!-------------------------------------------------------------------->         
          
     
-            <table width="600" border="0" cellspacing="0" cellpadding="2">
+            <table width="40%" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                     <td></td>
                     <td align="left" class="color-text-gris"><h1>DATOS DEL ESTUDIANTE</h1></td>

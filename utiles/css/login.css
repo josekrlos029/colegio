@@ -8,18 +8,18 @@ body{
 }
 #header{
     width:100%;
-    height:100px;
+    height:10%;
     background-color:#000;
 }
 #cuerpo{
-    width:960px;
+    width:100%;
     height:auto;
     background-color:#FFF;
     margin:auto;
 }
 #footer{
     width:100%;
-    height:150px;
+    height:10%;
     background-color:#e62746;
     position:fixed;
     bottom:0px;
@@ -46,7 +46,7 @@ border-radius: 5px;
 
 .caja-texto{
                 outline: none;
-                width: 250px;
+                width: 40%;
                 padding: 10px 5px 5px 10px; 
 		color: #000000; 
 		font-family: Arial, Helvetica, sans-serif;   
@@ -60,11 +60,12 @@ border-radius: 5px;
 }
 
 .espace{
-margin-top:5px;
+margin-top:2%;
 }
 
 .espace-btn{
-margin-top:30px;
+margin-top:3%;
+margin-bottom:3%;
 }
 
 #escudo{
@@ -77,28 +78,21 @@ margin-top:30px;
 }
 
 
-.caja {  
+.contenedorLogin {  
+    margin-top: 15%;
+    margin-left:60%;
     position: relative;
-    width: 800px;
-    height: 300px; 
+    width: 50%;
+    height: 40%; 
     display: block;
 }
 
 .separador { 
-margin-top: 5px; 
-margin-left: 350px;
+margin-left: 48%;
 position: absolute; 
 width: 2px;
-height: 300px; 
-background:url(../imagenes/separador.png)no-repeat center ;
-}
-
-.login{
- margin-top: 70px; 
-}
-
-#logo{
-margin-top: 5px; 
+height: 40%; 
+background-color: #666;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -141,3 +135,9 @@ margin-bottom: 0px;
         text-shadow: 0px 1px 1px #4d4d4d;
 	}
 
+        .link{  
+        color:#0089e1;
+        }
+        .link:hover{
+        color:#2575CF; 
+        }

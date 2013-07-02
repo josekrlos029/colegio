@@ -35,22 +35,22 @@ function cargarMaterias(){
            <td colspan="3"><hr></td>
        </tr> 
        <tr>
-           <td><select name="periodo" class="box-text" id="periodo" > 
+           <td><select name="periodo" class="box-text" id="periodo" required > 
                    <option>PRIMERO</option>
                    <option>SEGUNDO</option>
                    <option>TERCERO</option>
                    <option>CUARTO</option>
                </select>
            </td>
-           <td align="right"><select name="salon" class="box-text" id="salon" onchange="cargarMaterias()">
-                        <option>---</option>
+           <td align="right"><select name="salon" class="box-text" id="salon" onchange="cargarMaterias()" required focus>
+                        <option></option>
                         <?php foreach ($cargas as $carga) { ?>
                         <option><?php echo $carga->getIdSalon(); ?></option>
                         <?php } ?>
                </select>
            </td>
            <td align="right">
-               <select name="materia" class="box-text" id="materia" > 
+               <select name="materia" class="box-text" id="materia" required> 
                       
                </select>
            </td>

@@ -102,7 +102,7 @@ function matricular(){
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="blue">
                     <div class="color-text-blanco" id="title-cab">
-                        <table width="900" align="center" border="0" cellspacing="0" cellpadding="2">
+                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
                          <tr>   
                             <td align="right">   
                                 <h1>Matricula De Estudiantes</h1>
@@ -117,7 +117,7 @@ function matricular(){
                          
      <!-------------------------------------------------------------------->     
      
-       <table width="600" border="0" cellspacing="0" cellpadding="2">
+       <table width="50%" border="0" cellspacing="0" cellpadding="2">
                 
            <td align="right">Digite Numero de Documento:</td>
            <td><input name="idPersona" id="idPersona" type="text" class="box-text" required/></td>
@@ -133,7 +133,7 @@ function matricular(){
         </div>
            <p>&nbsp;</p>
            <div id="matricula" hidden>
-               <table class="tabla" width="600" >
+               <table class="tabla" width="50%" >
                    <tr>
                   
                   <td colspan="2" align="center" class="color-text-gris"><h1>realizar matricula</h1></td>

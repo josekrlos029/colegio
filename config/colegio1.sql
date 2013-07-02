@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2013 a las 02:14:34
+-- Tiempo de generación: 01-07-2013 a las 21:17:07
 -- Versión del servidor: 5.5.27
 -- Versión de PHP: 5.4.7
 
@@ -20,30 +20,6 @@ SET time_zone = "+00:00";
 -- Base de datos: `colegio1`
 --
 
-DELIMITER $$
---
--- Procedimientos
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `llenarNotas`(IN `idPersona` VARCHAR(15), IN `idSal` VARCHAR(5))
-BEGIN
-DECLARE done INT DEFAULT 0;
-declare idMat varchar(5);
-DECLARE cur1 CURSOR FOR SELECT `idMateria` FROM `pensum` WHERE `idGrado` = (SELECT `idGrado` FROM `salon` WHERE `idSalon`=idSal);
-DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
-
-OPEN cur1;
-c1_loop: LOOP
-FETCH cur1 INTO idMat;
- IF `done` THEN LEAVE c1_loop; END IF; 
-INSERT INTO `notas` (`idPersona`,`idMateria`) VALUES (idPersona,idMat);
-END LOOP c1_loop;
-  CLOSE cur1;
-
-END$$
-
-DELIMITER ;
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `carga`
@@ -63,12 +39,14 @@ CREATE TABLE IF NOT EXISTS `carga` (
 --
 
 INSERT INTO `carga` (`idPersona`, `idSalon`, `idMateria`) VALUES
-('222', '1-02', 'I1'),
+('222', '1-01', 'MAT'),
 ('222', '1-02', 'MAT'),
-('222', '1-03', 'I1'),
-('222', '2-01', 'MAT'),
-('444', '3-01', 'MAT'),
-('222', '3-01', 'I1');
+('222', '2-02', 'MAT'),
+('222', '3-01', 'MAT'),
+('444', '1-01', 'ING'),
+('444', '1-02', 'ING'),
+('444', '3-01', 'CN'),
+('444', '3-01', 'CS');
 
 -- --------------------------------------------------------
 
@@ -91,8 +69,7 @@ INSERT INTO `grado` (`idGrado`, `nombre`) VALUES
 ('2', 'SEGUNDO'),
 ('3', 'TERCERO'),
 ('4', 'CUARTO'),
-('5', 'QUINTO'),
-('6', 'SEXTO');
+('5', 'QUINTO');
 
 -- --------------------------------------------------------
 
@@ -114,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `materia` (
 INSERT INTO `materia` (`idMateria`, `nombre`, `horas`) VALUES
 ('CN', 'CIENCIAS NATURALES', 4),
 ('CS', 'CIENCIAS SOCIALES', 4),
-('I1', 'Ingles', 2),
+('ING', 'INGLES', 2),
 ('MAT', 'MATEMATICAS', 5);
 
 -- --------------------------------------------------------
@@ -132,15 +109,16 @@ CREATE TABLE IF NOT EXISTS `matricula` (
   `jornada` varchar(15) NOT NULL,
   PRIMARY KEY (`idMatricula`),
   KEY `idPersona_idx` (`idPersona`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `matricula`
 --
 
 INSERT INTO `matricula` (`idMatricula`, `idPersona`, `idSalon`, `fecha_matricula`, `año_lectivo`, `jornada`) VALUES
-(3, '333', '1-01', '2013-06-18', '2013', 'MAÑANA'),
-(4, '555', '1-01', '2013-06-19', '2013', 'MAÑANA');
+(5, '333', '1-01', '2013-06-29', '2013', 'MAÑANA'),
+(6, '555', '1-01', '2013-06-29', '2013', 'MAÑANA'),
+(7, '777', '1-01', '2013-06-29', '2013', 'MAÑANA');
 
 --
 -- Disparadores `matricula`
@@ -164,11 +142,11 @@ DELIMITER ;
 CREATE TABLE IF NOT EXISTS `notas` (
   `idPersona` varchar(15) NOT NULL,
   `idMateria` varchar(5) NOT NULL,
-  `primerP` int(11) DEFAULT NULL,
-  `segundoP` int(11) DEFAULT NULL,
-  `tercerP` int(11) DEFAULT NULL,
-  `cuartoP` int(11) DEFAULT NULL,
-  `definitiva` int(11) DEFAULT NULL
+  `primerP` decimal(11,1) DEFAULT NULL,
+  `segundoP` decimal(11,1) DEFAULT NULL,
+  `tercerP` decimal(11,1) DEFAULT NULL,
+  `cuartoP` decimal(11,1) DEFAULT NULL,
+  `definitiva` decimal(11,1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -176,10 +154,18 @@ CREATE TABLE IF NOT EXISTS `notas` (
 --
 
 INSERT INTO `notas` (`idPersona`, `idMateria`, `primerP`, `segundoP`, `tercerP`, `cuartoP`, `definitiva`) VALUES
-('333', 'MAT', NULL, NULL, NULL, NULL, NULL),
-('333', 'I1', NULL, NULL, NULL, NULL, NULL),
-('555', 'MAT', NULL, NULL, NULL, NULL, NULL),
-('555', 'I1', NULL, NULL, NULL, NULL, NULL);
+('333', 'CN', 40.0, 4.0, NULL, NULL, NULL),
+('333', 'CS', NULL, NULL, NULL, NULL, NULL),
+('333', 'ING', NULL, NULL, NULL, NULL, NULL),
+('333', 'MAT', 3.0, 3.0, 3.0, 3.0, 3.0),
+('555', 'CN', NULL, NULL, NULL, NULL, NULL),
+('555', 'CS', NULL, NULL, NULL, NULL, NULL),
+('555', 'ING', NULL, NULL, NULL, NULL, NULL),
+('555', 'MAT', 2.0, 4.0, 4.0, 4.0, 3.5),
+('777', 'CN', NULL, NULL, NULL, NULL, NULL),
+('777', 'CS', NULL, NULL, NULL, NULL, NULL),
+('777', 'ING', NULL, NULL, NULL, NULL, NULL),
+('777', 'MAT', 1.0, 2.0, 4.0, 3.0, 2.5);
 
 -- --------------------------------------------------------
 
@@ -189,8 +175,7 @@ INSERT INTO `notas` (`idPersona`, `idMateria`, `primerP`, `segundoP`, `tercerP`,
 
 CREATE TABLE IF NOT EXISTS `pensum` (
   `idGrado` varchar(3) NOT NULL,
-  `idMateria` varchar(5) NOT NULL,
-  KEY `idGrado_idx` (`idGrado`)
+  `idMateria` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -198,15 +183,21 @@ CREATE TABLE IF NOT EXISTS `pensum` (
 --
 
 INSERT INTO `pensum` (`idGrado`, `idMateria`) VALUES
+('1', 'CN'),
+('1', 'CS'),
+('1', 'ING'),
 ('1', 'MAT'),
-('2', 'I1'),
+('2', 'CN'),
+('2', 'CS'),
+('2', 'ING'),
 ('2', 'MAT'),
-('3', 'I1'),
+('3', 'CN'),
+('3', 'CS'),
+('3', 'ING'),
 ('3', 'MAT'),
-('1', 'I1'),
-('4', 'CN'),
-('4', 'MAT'),
-('5', 'I1'),
+('5', 'CN'),
+('5', 'CS'),
+('5', 'ING'),
 ('5', 'MAT');
 
 -- --------------------------------------------------------
@@ -234,12 +225,12 @@ CREATE TABLE IF NOT EXISTS `persona` (
 --
 
 INSERT INTO `persona` (`idPersona`, `nombres`, `pApellido`, `sApellido`, `sexo`, `telefono`, `direccion`, `correo`, `estado`, `fNacimiento`) VALUES
-('111', 'Jose', 'Jimenez', 'Montenegro', 'M', '3017693991', 'dads', 'josekrlos029@hotmail.com', '1', '2013-04-01'),
+('111', 'Jose', 'Jimenez', 'Montenegro', 'M', '3017693991', 'dads', 'josekrlos029@gmail.com', '1', '2013-04-01'),
 ('222', 'Humberto', 'Palmera', 'Loaiza', 'M', '', '', 'ver870826@hotmail.com', '0', '2013-05-10'),
 ('333', 'andy', 'bolaños', 'castilla', 'M', '132', 'dasdasd', '', '1', '2013-06-20'),
-('444', 'juan miguel', 'martinez', 'oñate', 'M', '13231', 'sdad', 'dasd', '0', '2013-06-03'),
+('444', 'juan miguel', 'martinez', 'oñate', 'M', '13231', 'sdad', 'jhosse_-henriquex@hotmail.com', '0', '2013-06-03'),
 ('555', 'Carlos', 'Jimenez', 'Montenegro', 'M', '123123', 'dsasd', 'asdsa@dasd', '1', '2013-06-05'),
-('777', 'WILMAN', 'VEGA', 'CASTILLA', 'M', '', '', '', '0', '2013-06-04');
+('777', 'WILMAN', 'VEGA', 'CASTILLA', 'M', '', '', '', '1', '2013-06-04');
 
 --
 -- Disparadores `persona`
@@ -282,8 +273,9 @@ INSERT INTO `rol` (`idRol`, `nombre`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `rolespersona` (
-  `idPersona` varchar(15) DEFAULT NULL,
-  `idRol` varchar(2) DEFAULT NULL
+  `idPersona` varchar(15) NOT NULL,
+  `idRol` varchar(2) NOT NULL,
+  KEY `idRolRP_idx` (`idRol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -308,7 +300,8 @@ CREATE TABLE IF NOT EXISTS `salon` (
   `idSalon` varchar(5) NOT NULL,
   `idGrado` varchar(3) NOT NULL,
   `grupo` varchar(3) NOT NULL,
-  PRIMARY KEY (`idSalon`)
+  PRIMARY KEY (`idSalon`),
+  KEY `idGrado1_idx` (`idGrado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -318,10 +311,8 @@ CREATE TABLE IF NOT EXISTS `salon` (
 INSERT INTO `salon` (`idSalon`, `idGrado`, `grupo`) VALUES
 ('1-01', '1', '01'),
 ('1-02', '1', '02'),
-('1-03', '1', '03'),
-('1-04', '1', '04'),
 ('2-01', '2', '01'),
-('2-04', '2', '04'),
+('2-02', '2', '02'),
 ('3-01', '3', '01'),
 ('4-01', '4', '01'),
 ('5-01', '5', '01');
@@ -336,6 +327,9 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `idPersona` varchar(15) NOT NULL,
   `usuario` varchar(45) NOT NULL,
   `contraseña` varchar(45) NOT NULL,
+  `facebook` varchar(30) DEFAULT NULL,
+  `twitter` varchar(30) DEFAULT NULL,
+  `google` varchar(30) DEFAULT NULL,
   UNIQUE KEY `usuario_UNIQUE` (`usuario`),
   UNIQUE KEY `contraseña_UNIQUE` (`contraseña`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -344,13 +338,13 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idPersona`, `usuario`, `contraseña`) VALUES
-('222', '222', '1c6637a8f2e1f75e06ff9984894d6bd16a3a36a9'),
-('333', '333', '43814346e21444aaf4f70841bf7ed5ae93f55a9d'),
-('444', '444', '9a3e61b6bcc8abec08f195526c3132d5a4a98cc0'),
-('555', '555', 'cfa1150f1787186742a9a884b73a43d8cf219f9b'),
-('777', '777', 'fc7a734dba518f032608dfeb04f4eeb79f025aa7'),
-('111', 'admin', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220');
+INSERT INTO `usuario` (`idPersona`, `usuario`, `contraseña`, `facebook`, `twitter`, `google`) VALUES
+('222', '222', '1c6637a8f2e1f75e06ff9984894d6bd16a3a36a9', NULL, NULL, NULL),
+('333', '333', '43814346e21444aaf4f70841bf7ed5ae93f55a9d', NULL, NULL, NULL),
+('444', '444', '9a3e61b6bcc8abec08f195526c3132d5a4a98cc0', NULL, NULL, NULL),
+('555', '555', 'cfa1150f1787186742a9a884b73a43d8cf219f9b', NULL, NULL, NULL),
+('777', '777', 'fc7a734dba518f032608dfeb04f4eeb79f025aa7', '100003000642691', NULL, NULL),
+('111', 'admin', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '640009763', NULL, '112729141050675684104');
 
 --
 -- Restricciones para tablas volcadas
@@ -360,9 +354,49 @@ INSERT INTO `usuario` (`idPersona`, `usuario`, `contraseña`) VALUES
 -- Filtros para la tabla `carga`
 --
 ALTER TABLE `carga`
-  ADD CONSTRAINT `idMateria` FOREIGN KEY (`idMateria`) REFERENCES `materia` (`idMateria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `idPersona` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `iSalon` FOREIGN KEY (`idSalon`) REFERENCES `salon` (`idSalon`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `idMateria` FOREIGN KEY (`idMateria`) REFERENCES `materia` (`idMateria`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `idPersona` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `iSalon` FOREIGN KEY (`idSalon`) REFERENCES `salon` (`idSalon`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `rolespersona`
+--
+ALTER TABLE `rolespersona`
+  ADD CONSTRAINT `idRolRP` FOREIGN KEY (`idRol`) REFERENCES `rol` (`idRol`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `salon`
+--
+ALTER TABLE `salon`
+  ADD CONSTRAINT `idGrado1` FOREIGN KEY (`idGrado`) REFERENCES `grado` (`idGrado`) ON UPDATE CASCADE;
+  
+  
+DELIMITER $$
+--
+-- Procedimientos
+--
+DROP PROCEDURE IF EXISTS `llenarNotas`;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `llenarNotas`(IN `idPersona` VARCHAR(15), IN `idSal` VARCHAR(5))
+BEGIN
+DECLARE done INT DEFAULT 0;
+declare idMat varchar(5);
+DECLARE cur1 CURSOR FOR SELECT `idMateria` FROM `pensum` WHERE `idGrado` = (SELECT `idGrado` FROM `salon` WHERE `idSalon`=idSal);
+DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
+
+OPEN cur1;
+c1_loop: LOOP
+FETCH cur1 INTO idMat;
+ IF `done` THEN LEAVE c1_loop; END IF; 
+INSERT INTO `notas` (`idPersona`,`idMateria`) VALUES (idPersona,idMat);
+END LOOP c1_loop;
+  CLOSE cur1;
+
+END$$
+
+DELIMITER ;
+
+
+-- --------------------------------------------------------
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -27,13 +27,47 @@ $(function(){
  </head>
  
  <body>
-      <div class="cabecera">
+    <div class="cabecera">
         <?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
         </div>
-<p>&nbsp;</p>
-  <input type="text" id="filter" placeholder="Filtrar">
-<h1>Calificaciones de Estudiantes</h1>
-<table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0">
+       
+          <!------------------------------cabecera--------------------------->  
+         
+            <p>&nbsp;</p>
+            </br>
+            <p>&nbsp;</p>
+        <div id="encapsulador">
+            <div id="mensaje" hidden> </div>
+                <div id="cabecera" class="red">
+                    
+                    <div class="color-text-blanco" id="title-cab">
+                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="0">
+                         <tr>   
+                            <td>
+           <!-- search -->
+                                <div class="top-search">
+                                     <div id="searchform" >
+                                        <input type="text" value="" name="id" id="filter" onkeypress="" placeholder="Filtrar" />
+                                     </div>	
+                                </div>
+        <!-- END search -->   
+                            
+                            
+                            </td> 
+                            <td align="right">   
+                                <h1>Calificaciones de Estudiantes</h1>
+                            </td>
+                         </tr>
+                        </table>
+                    </div>
+                    
+                </div>
+        </div> 
+                <p>&nbsp;</p>
+                      
+                         
+     <!--------------------------------------------------------------------> 
+    <table  width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla">
     <tr class="modo1">
        <td>Salon</td>
        <td>Materia</td>
@@ -43,46 +77,49 @@ $(function(){
     <tr>
         <td><?php echo " ". $idSalon; ?></td>
         <td><?php echo " ". strtoupper ($materia->getNombreMateria());?></td>
-        <td><?php echo " ".$materia->getHoras();?></td>
+        <td align="center"><?php echo " ".$materia->getHoras();?></td>
     </tr>
 
 </table>
-<table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla" id="tabla">
-    <tr>
-        <td width="12%"><div align="center" >IDENTIFICACION</div></td>
+      <p>&nbsp;</p>
+      <hr>
+      <p>&nbsp;</p>
+<table  width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
+    <tr class="modo1">
+        <td width="12%"><div align="right" >IDENTIFICACION</div></td>
         <td><div align="center">APELLIDOS</div></td>
         <td><div align="center" >NOMBRES</div></td>
-        <td width="6%"><div align="center" >PRIMER PERIODO</div></td>
-        <td width="6%"><div align="center" >SEGUNDO PERIODO</div></td>
-        <td width="6%"><div align="center" >TERCER PERIODO</div></td>
-        <td width="6%"><div align="center" >CUARTO PERIODO</div></td>
-        <td width="10%"><div align="center" >PROMEDIO</div></td>
+        <td width="8%"><div align="center" >PERIODO 1</div></td>
+        <td width="8%"><div align="center" >PERIODO 2</div></td>
+        <td width="8%"><div align="center" >PERIODO 3</div></td>
+        <td width="8%"><div align="center" >PERIODO 4</div></td>
+        <td width="8%"><div align="center" >PROMEDIO</div></td>
         <td width="6%"><div align="center" >ESTADO</div></td>
     </tr>
     
     <?php foreach ($resultado as $fila) { ?>
     <tr class="recorrer" id="cebra" >
-          <td align="right"><a class="texto" href="guardar_notas.php?idEstudiante=<?php echo $fila['idPersona'];?>"><?php echo $fila['idPersona'];?></a></td>
-        <td align="center"><?php echo strtoupper ($fila['pApellido']." ".$fila['sApellido']);?></td> 
-        <td><?php echo strtoupper ($fila['nombres']);?></td>
-        <td> <?php echo $fila['primerP'];?></td>
-        <td>  <?php echo $fila['segundoP'];?></td>
-        <td>  <?php echo $fila['tercerP'];?></td>
-        <td>  <?php echo $fila['cuartoP'];?></td>
-        <td>  <?php echo $fila['def'];?></td>
+          <td align="left"><a class="texto" href="guardar_notas.php?idEstudiante=<?php echo $fila['idPersona'];?>"><?php echo $fila['idPersona'];?></a></td>
+        <td align="left"><?php echo strtoupper ($fila['pApellido']." ".$fila['sApellido']);?></td> 
+        <td align="left"><?php echo strtoupper ($fila['nombres']);?></td>
+        <td align="center"> <?php echo $fila['primerP'];?></td>
+        <td align="center">  <?php echo $fila['segundoP'];?></td>
+        <td align="center">  <?php echo $fila['tercerP'];?></td>
+        <td align="center">  <?php echo $fila['cuartoP'];?></td>
+        <td align="center">  <?php echo $fila['def'];?></td>
         <?php  if($fila['def']>='3'){   ?>
-        <td align="center"><img src="../utiles/imagenes/iconos/exito.png" /></td>
+        <td align="center" ><img src="../utiles/imagenes/iconos/exitoCalificacion.png"/></td>
         <?php }else{ ?>
-        <td align="center"><img src="../utiles/imagenes/iconos/error.png" /></td>
+        <td align="center"><img src="../utiles/imagenes/iconos/errorCalificacion.png" /></td>
         <?php
         } 
     }//fin del For ?>
     </tr>
 </table>
 </br>
-<table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla">
+<table  width="90%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla">
     <tr>
-        <td align="center">
+        <td align="right"> 
             <form action="/colegio/docente/actualizarNotas" method="post">
                 <input type="hidden" name="salon" value="<?php echo $idSalon; ?>"/>
                 <input type="hidden" name="periodo" value="<?php echo $periodo; ?>"/>

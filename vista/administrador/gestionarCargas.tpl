@@ -141,7 +141,7 @@ var y = $("#mensaje");
                  <div id="cabecera" class="red">
                     
                     <div class="color-text-blanco" id="title-cab">
-                        <table width="900" align="center" border="0" cellspacing="0" cellpadding="2">
+                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
                          <tr>   
                             <td align="right">   
                                 <h1>Gestion De Cargas Academicas</h1>
@@ -162,7 +162,7 @@ var y = $("#mensaje");
     
 <div id="tabla-contenedora">
     
-        <table width="500" border="0" cellspacing="0" cellpadding="2" class="tabla">
+        <table width="43%" border="0" cellspacing="0" cellpadding="2" class="tabla">
                 <tr>
                   <td></td>
                   <td align="left" class="color-text-gris" colspan="3"><h1>Escoger docente</h1></td>
@@ -178,7 +178,7 @@ var y = $("#mensaje");
     
     <div style="float:left;">
         <div id="tabla-consulta">
-            <table width="500" border="0" cellspacing="0" cellpadding="2">  
+            <table width="100%" border="0" cellspacing="0" cellpadding="2">  
         
                 <?php foreach ($docentes as $docente) { ?>
                 <tr id="cebra">
@@ -238,7 +238,7 @@ var y = $("#mensaje");
      </br>
      
      
-         <table width="500" border="0" cellspacing="0" cellpadding="2" class="tabla">
+         <table width="50%" align="center" border="0" cellspacing="0" cellpadding="2" class="tabla">
                 <tr>
                   <td align="center" class="color-text-gris" colspan="4"><h1>cargas asignadas a docentes</h1></td>
               </tr>
@@ -257,7 +257,7 @@ var y = $("#mensaje");
      
      
      
-               <table width="500" border="0" cellspacing="0" cellpadding="2"  >
+               <table width="50%" align="center" border="0" cellspacing="0" cellpadding="2"  >
                 <tbody id="tablaCargas">
      
                 </tbody>

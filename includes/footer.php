@@ -1,6 +1,6 @@
 <footer>
     </br>
-<table border="0" align="center" width="900px">
+<table border="0" align="center" width="90%">
     <tr>
         <td colspan="5"><hr></td>
     </tr>

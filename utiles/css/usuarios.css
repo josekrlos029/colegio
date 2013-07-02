@@ -21,10 +21,10 @@ border: 1px solid #cccccc;
 .contenedora-imagen{
 width: 215px; 
 height:199px;   
- position: relative;   
+position: relative;   
 }
 
-.marco-foto-doc{  
+.marco-foto-doc{     
 width: 215px; 
 height:199px; 
 position: absolute;

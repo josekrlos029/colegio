@@ -40,6 +40,12 @@
   
 }
 
+
+
+.imgMenu{ 
+padding-top: 25px
+}
+
 html {
  overflow-x:hidden;
 }
@@ -149,7 +155,9 @@ transition-delay:2s;
 	font-size: 36px;
         text-shadow: 0 1px 0 #fff;
         overflow: hidden;
-        
+        margin:0; 
+        padding:0; 
+        border:0; 
 	}
         
         .color-text-azul{
@@ -180,7 +188,9 @@ transition-delay:2s;
        
 	
 	img{
-	padding-top:20px;
+	 margin:0; 
+         padding:0; 
+         border:0;
 	}
 	
 	a{
@@ -227,17 +237,27 @@ left:0px;
 position:relative;    
 width: 100%;  
 background: #e0e3ec url(../imagenes/bgCabecera.jpg) repeat top left;
-
 } 
  /*BUSCADOR DE CABECERA */
  .top-search{
-top:10px;
+top:0px;
 position:relative;
 	
 }
 
+
 #searchform #s{
 	color: #7e7e7e;
+	font-size: 12px;
+	width: 180px;
+	height: 28px;
+	padding: 0px 35px 0px 10px;
+	border: 0;
+	background: url(../imagenes/search.png) no-repeat transparent;	
+}
+
+#searchform #filter{
+	color: #FFF;
 	font-size: 12px;
 	width: 180px;
 	height: 28px;

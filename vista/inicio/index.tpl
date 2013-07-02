@@ -53,26 +53,22 @@ window.onload = function() {
 <div id="contenedor">
 
    <div id="header">
-          <span class="ejemplo"><h1>APLICACION DE CONTROL ACADEMICO</h1></span>
+         <h1>APLICACION DE CONTROL ACADEMICO</h1>
        </div> 
     
        <div id="cuerpo">
-       <span class="ejemplo">Contenido</span>  
-    
-
-<div id="msg" hidden>
-    
-</div>
-
-
-
-
-
- <table align="right" width="40%" height="500px" border="0">
- <tr>
- <td>
      
-            
+    
+
+        <div id="msg" hidden> </div>
+
+
+        <div class="separador"></div>
+
+
+ 
+     
+            <div class="contenedorLogin">
                 <div class="espace-btn" align="left">
                 <h2>Iniciar sesión</h2>
                 </div>
@@ -90,11 +86,9 @@ window.onload = function() {
                 </div>
 
                 
-                <div align="left"><a href="/colegio/inicio/olvidoclave"><div class="link">¿Olvidaste tu Contraseña?</div></a></div>
-            
- </td>
- </tr>
-</table>
+                <div align="left"><a href="/colegio/inicio/olvidoclave" class="link">¿Olvidaste tu Contraseña?</a></div>
+            </div>
+
 <table width="200" border="0" cellspacing="0" cellpadding="2">
           <tr>
             <td align="center"><a href="/colegio/inicio/accesofb/face"><img src="utiles/imagenes/iconos/face.png" alt="facebook" width="48" height="48"></a></td>

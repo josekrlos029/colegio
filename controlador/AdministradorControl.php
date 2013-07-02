@@ -401,14 +401,14 @@ class AdministradorControl extends Controlador{
                          
                          $eliminar= "eliminar('".$carg->getIdSalon()."','".$carg->getIdMateria()."')";
                          $respuesta.= '<td width="20%" align="center">
-                                      <!--<img src="../utiles/imagenes/iconos/delete.png"  onclick="'.$eliminar.'"/>-->
+                                     <img src="../utiles/imagenes/iconos/errorCalificacion.png"  onclick="'.$eliminar.'"/>
                                        </td>';
                         $respuesta .= "</tr>";
                        
                   }
                    $respuesta .= '<tr><td colspan="4" align="center"><hr></td></tr>
                                    <tr>
-                                     <td colspan="4" align="center"><h2>Total Horas Semanales:'. $total.'</h2></td>
+                                     <td colspan="4" align="center" class="color-text-gris"><h2>Total Horas Semanales:'. $total.'</h2></td>
                                   </tr>';
                
             if (strlen($respuesta)>0){

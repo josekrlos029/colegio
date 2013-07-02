@@ -158,10 +158,31 @@
       <div class="cabecera">
         <?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
         </div>
-<p>&nbsp;</p>
-   <div id="mensaje" hidden> </div>
-<h1>Calificaciones de Estudiantes</h1>
-<table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0">
+ <!------------------------------cabecera--------------------------->  
+         
+            <p>&nbsp;</p>
+            </br>
+            <p>&nbsp;</p>
+        <div id="encapsulador">
+            <div id="mensaje" hidden> </div>
+                <div id="cabecera" class="red">   
+                    <div class="color-text-blanco" id="title-cab">
+                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="0">
+                         <tr>   
+                            <td align="right">   
+                                <h1>Calificaciones de Estudiantes</h1>
+                            </td>
+                         </tr>
+                        </table>
+                    </div>
+                    
+                </div>
+        </div> 
+                <p>&nbsp;</p>
+                      
+                         
+     <!--------------------------------------------------------------------> 
+<table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla">
     <tr class="modo1">
        <td>Salon</td>
        <td>Materia</td>
@@ -173,44 +194,47 @@
         <td><?php echo " ". strtoupper ($materia->getNombreMateria());?></td>
         <td><?php echo " ".$materia->getHoras();?></td>
     </tr>
-
 </table>
-<table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla" id="tabla">
-    <tr>
+      <p>&nbsp;</p>
+      <hr>
+       <p>&nbsp;</p>
+       
+<table  width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
+    <tr class="modo1">
         <td width="12%"><div align="center" >IDENTIFICACION</div></td>
-        <td><div align="center">APELLIDOS</div></td>
-        <td><div align="center" >NOMBRES</div></td>
-        <td width="6%"><div align="center" >PRIMER PERIODO</div></td>
-        <td width="6%"><div align="center" >SEGUNDO PERIODO</div></td>
-        <td width="6%"><div align="center" >TERCER PERIODO</div></td>
-        <td width="6%"><div align="center" >CUARTO PERIODO</div></td>
-        <td width="10%"><div align="center" >PROMEDIO</div></td>
+        <td width="12%"><div align="center">APELLIDOS</div></td>
+        <td width="12%"><div align="center" >NOMBRES</div></td>
+        <td width="3%"><div align="center" >PERIODO 1</div></td>
+        <td width="3%"><div align="center" >PERIODO 2</div></td>
+        <td width="3%"><div align="center" >PERIODO 3</div></td>
+        <td width="3%"><div align="center" >PERIODO 4</div></td>
+        <td width="3%"><div align="center" >PROMEDIO</div></td>
         <td width="6%"><div align="center" >ESTADO</div></td>
     </tr>
     
     <?php foreach ($resultado as $fila) { ?>
     <tr class="recorrer" id="cebra" >
-        <td align="right"><a class="texto" href="guardar_notas.php?idEstudiante=<?php echo $fila['idPersona'];?>"><?php echo $fila['idPersona'];?></a></td>
-        <td align="center"><?php echo strtoupper ($fila['pApellido']." ".$fila['sApellido']);?></td> 
+        <td align="left"><a class="texto" href="guardar_notas.php?idEstudiante=<?php echo $fila['idPersona'];?>"><?php echo $fila['idPersona'];?></a></td>
+        <td align="left"><?php echo strtoupper ($fila['pApellido']." ".$fila['sApellido']);?></td> 
         <td><?php echo strtoupper ($fila['nombres']);?></td>
-        <td><input type="text" value="<?php echo $fila['primerP'];?>" /></td>
-        <td><input type="text" value="<?php echo $fila['segundoP'];?>" /></td>
-        <td><input type="text" value="<?php echo $fila['tercerP'];?>" /></td>
-        <td><input type="text" value="<?php echo $fila['cuartoP'];?>" /></td>
-        <td>  <?php echo $fila['def'];?></td>
+        <td><input type="text" value="<?php echo $fila['primerP'];?>" class="box-text" /></td>
+        <td><input type="text" value="<?php echo $fila['segundoP'];?>" class="box-text" /></td>
+        <td><input type="text" value="<?php echo $fila['tercerP'];?>" class="box-text"/></td>
+        <td align="center"><input type="text" value="<?php echo $fila['cuartoP'];?>" class="box-text"/></td>
+        <td align="center">  <?php echo $fila['def'];?></td>
         <?php  if($fila['def']>='3'){   ?>
-        <td align="center"><img src="../utiles/imagenes/iconos/exito.png" /></td>
+        <td align="center"><img src="../utiles/imagenes/iconos/exitoCalificacion.png"  /></td>
         <?php }else{ ?>
-        <td align="center"><img src="../utiles/imagenes/iconos/error.png" /></td>
+        <td align="center"><img src="../utiles/imagenes/iconos/errorCalificacion.png" /></td>
         <?php
         } 
     }//fin del For ?>
     </tr>
 </table>
 </br>
-<table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla">
+<table  width="90%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla">
     <tr>
-        <td align=center">
+        <td align="right">
             <button id="btnRecorrer" class="button large red"> Guardar </button>
              <input type="hidden" id="materia" name="materia" value="<?php echo $materia->getIdMateria(); ?>"/>
             

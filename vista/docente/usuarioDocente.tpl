@@ -41,7 +41,7 @@ function funcionesAcademicas(){
     </div>
 </br>
 
-<table border="0" align="center" width="900px" >
+<table border="0" align="center" width="80%" >
  <tr>
   <td width="40%" >
   Hola <?php echo $docente->getNombres();?> Bienvenido(a) a tu Cuenta.</br> 
@@ -54,9 +54,9 @@ function funcionesAcademicas(){
 </br>
 <hr>
 
- <table border="0" align="center" width="900px" height="100%">
+ <table border="0" align="center" width="80%" height="100%">
       <tr>
-	   <td class="color-text-rojo" width="26%">  
+	   <td class="color-text-rojo" width="10%">  
                 <h3>datos personales</h3>   
            </td>
            <td>
@@ -64,7 +64,7 @@ function funcionesAcademicas(){
            </td>
          </tr>
          <tr>
-         <td width="26%">
+         <td width="10%">
              <table class="fondo" width="99%">
                 <tr> 
                     <td>
