@@ -2,7 +2,6 @@
 <html lang="es">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="utiles/css/login.css" rel="stylesheet" type="text/css" media="screen"/>
-<link href="utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
 <script src="utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
 <script src="utiles/js/envios.js" type="text/javascript" ></script>
 <script type="text/javascript">
@@ -51,28 +50,24 @@ window.onload = function() {
 <body>
 
 <div id="contenedor">
-
-   <div id="header">
-         <h1>APLICACION DE CONTROL ACADEMICO</h1>
-       </div> 
-    
-       <div id="cuerpo">
-     
-    
-
+     <div id="cuerpo">
         <div id="msg" hidden> </div>
-
-
-        <div class="separador"></div>
-
-
- 
+        
+<div class="contenedorBox">
+    
+     <table border="0" width="100%" height="100%">
+    <!-- <tr height="10%"> 
+            <td colspan="5">   
+                <div class="iniciarSesion" align="left"><h2>Inicio de Sesion</h2></div>
+            </td> 
+          </tr>-->
      
-            <div class="contenedorLogin">
-                <div class="espace-btn" align="left">
-                <h2>Iniciar sesión</h2>
-                </div>
-                
+         <tr>
+             <td width="30%"><div class="escudo"></div></td>
+             
+             <td width="5%" class="separador"></td>
+              
+             <td width="30%">
                 <div class="espace" align="left">
                 <input name="usuario" id="username" type="text" size="20"  class="caja-texto" placeholder="Usuario" required autofocus />
                 </div>
@@ -81,22 +76,43 @@ window.onload = function() {
                 <input name="contraseña"  id="password" type="password" size="20"  class="caja-texto" placeholder="Contraseña" required />
                 </div>
                 
-                <div class="espace-btn">
+                <div class="espace">
                 <div align="left" ><button onclick="envio();" class="button large blue">Iniciar Sesión </button></div>
                 </div>
-
+                <div class="espace"><a href="/colegio/inicio/olvidoclave" class="link">¿Olvidaste tu Contraseña?</a></div>
+                </td>
                 
-                <div align="left"><a href="/colegio/inicio/olvidoclave" class="link">¿Olvidaste tu Contraseña?</a></div>
-            </div>
-
-<table width="200" border="0" cellspacing="0" cellpadding="2">
-          <tr>
-            <td align="center"><a href="/colegio/inicio/accesofb/face"><img src="utiles/imagenes/iconos/face.png" alt="facebook" width="48" height="48"></a></td>
-            <td align="center"><a href="/colegio/inicio/accesofb/twitter"><img src="utiles/imagenes/iconos/twitter.png" alt="twitter" width="48" height="48"></a></td>
-            <td align="center"><a href="/colegio/inicio/accesofb/google"><img src="utiles/imagenes/iconos/googlep.png" alt="google plus" width="48" height="48"></a></td>
-          </tr>
-        </table>
-         </div>   
+                <td width="5%" class="separador"></td>
+                
+                <td width="30%">
+                
+                <div class="espaceRed" align="left">
+                    <a href="/colegio/inicio/accesofb/face">
+                     <img src="utiles/imagenes/iconos/face.png" alt="facebook" 
+                         accesskey=""onmouseover="this.src='utiles/imagenes/iconos/faceOver.png'" 
+                        onmouseout="this.src='utiles/imagenes/iconos/face.png';"/>
+                </div>
+                    
+                 <div class="espaceRed" align="left">
+                   <a href="/colegio/inicio/accesofb/twitter">
+                      <img src="utiles/imagenes/iconos/twitter.png" alt="twitter"
+                        accesskey=""onmouseover="this.src='utiles/imagenes/iconos/twitterOver.png'" 
+                        onmouseout="this.src='utiles/imagenes/iconos/twitter.png';"/>
+                </div>    
+                
+                <div class="espaceRed" align="left">
+                   <a href="/colegio/inicio/accesofb/google">
+                       <img src="utiles/imagenes/iconos/googlep.png" alt="google plus" 
+                        accesskey=""onmouseover="this.src='utiles/imagenes/iconos/googlepOver.png'" 
+                        onmouseout="this.src='utiles/imagenes/iconos/googlep.png';"/>
+                   </a>
+                </div>  
+                
+                </td>
+         </tr>
+    </table>
+</div>
+ 
 
    <div id="footer">
        <table width="100%" border="0">

@@ -97,7 +97,7 @@ font-size: 12px;
  background-image: -ms-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
  background-image: -o-linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
  background-image: linear-gradient(top, rgba(255,255,255,.1), rgba(0,0,0,.07));
-  
+ 
 }
 
 #title-cab{
@@ -237,6 +237,7 @@ left:0px;
 position:relative;    
 width: 100%;  
 background: #e0e3ec url(../imagenes/bgCabecera.jpg) repeat top left;
+
 } 
  /*BUSCADOR DE CABECERA */
  .top-search{
