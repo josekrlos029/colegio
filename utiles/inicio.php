@@ -11,7 +11,9 @@
 $controlador = "Inicio";
 $accion = "index";
 $consulta = null;
+$peticion = isset($_GET['leer']) ? $_GET['leer']:NULL;
 
+if (!(preg_match("/\.css$/", $peticion) || preg_match("/\.js$/", $peticion) || preg_match("/\.jpg$/", $peticion) || preg_match("/\.png$/", $peticion) ) ) {
 if(isset($_GET['leer'])){
     $parametros  = array();
     $parametros  =  explode("/", $_GET['leer']); //explode: divide en varias cadenas la cadena de consulta. 
@@ -34,5 +36,6 @@ if(method_exists($carga, $accion)){
     $carga->$accion($consulta);
 }else{
     die('Metodo no valido. por favor verificar la URL');
+}
 }
 ?>

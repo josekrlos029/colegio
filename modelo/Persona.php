@@ -236,7 +236,6 @@ class Persona extends Modelo{
         foreach ($resultado as $fila) {
             $persona = new Persona();
             $this->mapearPersona($persona, $fila);
-           
         }
         return $persona;
     }

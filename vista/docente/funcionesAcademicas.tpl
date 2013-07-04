@@ -7,7 +7,7 @@
            <td colspan="2"><hr></td>
        </tr> 
        <tr>
-       <td align="right"><a href="#"><img src="../utiles/imagenes/iconos/actualizarLogros.png"/></a>
+       <td align="right"><a href="/colegio/docente/actualizarLogros"><img src="../utiles/imagenes/iconos/actualizarLogros.png"/></a>
 </td>
        <td><a href="#"><img src="../utiles/imagenes/iconos/descargarPlanillas.png"/></a></td>
        </tr>

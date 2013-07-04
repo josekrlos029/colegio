@@ -4,7 +4,7 @@
  var searchOnTable = function() {
     var table = $('#tabla');
     var value = this.value;
-    table.find('tr').each(function(index, row) {
+    table.find('.recorrer').each(function(index, row) {
         var allCells = $(row).find('td');
         if(allCells.length > 0) {
             var found = false;
@@ -99,14 +99,14 @@ $(function(){
     
     <?php foreach ($resultado as $fila) { ?>
     <tr class="recorrer" id="cebra" >
-          <td align="left"><a class="texto" href="guardar_notas.php?idEstudiante=<?php echo $fila['idPersona'];?>"><?php echo $fila['idPersona'];?></a></td>
+          <td align="left"><?php echo $fila['idPersona'];?></td>
         <td align="left"><?php echo strtoupper ($fila['pApellido']." ".$fila['sApellido']);?></td> 
         <td align="left"><?php echo strtoupper ($fila['nombres']);?></td>
-        <td align="center"> <?php echo $fila['primerP'];?></td>
-        <td align="center">  <?php echo $fila['segundoP'];?></td>
-        <td align="center">  <?php echo $fila['tercerP'];?></td>
-        <td align="center">  <?php echo $fila['cuartoP'];?></td>
-        <td align="center">  <?php echo $fila['def'];?></td>
+        <td align="center"><?php echo $fila['primerP'];?></td>
+        <td align="center"><?php echo $fila['segundoP'];?></td>
+        <td align="center"><?php echo $fila['tercerP'];?></td>
+        <td align="center"><?php echo $fila['cuartoP'];?></td>
+        <td align="center"><?php echo $fila['def'];?></td>
         <?php  if($fila['def']>='3'){   ?>
         <td align="center" ><img src="../utiles/imagenes/iconos/exitoCalificacion.png"/></td>
         <?php }else{ ?>

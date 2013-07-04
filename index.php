@@ -5,6 +5,26 @@ define('HOME', dirname(__FILE__));
 
 
 ini_set('display_erros', 1);
+/**
+ * Esta funcion se utiliza para cambiar de INFORMACION DE ERRORES
+ * a MANEJO DE EXCEPCIONES
+ * @param type $code
+ * @param type $mensaje
+ * @param type $archivo
+ * @param type $linea
+ * @param type $contexto
+ * @return boolean
+ * @throws ErrorException
+ */
+function manejadorErrores($code, $mensaje, $archivo, $linea, $contexto = NULL){
+    if(E_RECOVERABLE_ERROR === $code){
+        throw new ErrorException($mensaje, $code,1, $archivo, $linea, NULL );
+    }
+    return false;
+}
+set_error_handler('manejadorErrores'); //Indica la funcion (callback) que manejara los errores
+                                       //Esto es para cambiar de manejo de errores a manejo de 
+                                       //Excepciones
 
 function cargadorClases(){
     require_once './config/Configuracion.php';
@@ -22,6 +42,7 @@ function cargadorClases(){
     require_once './modelo/Inicio.php';
     require_once './modelo/Carga.php';
     require_once './modelo/Matricula.php';
+    require_once './modelo/Logro.php';
     require_once './controlador/Controlador.php';
     require_once './controlador/AdministradorControl.php';
     require_once './controlador/EstudianteControl.php';
