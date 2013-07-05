@@ -73,6 +73,25 @@ class Usuario extends Modelo{
         $this->ejecutar($this->getParametros($usuario));
     }
     
+       public function leerPorId($id){
+        $sql = "SELECT * FROM usuario WHERE idPersona='".$id."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $usuario=NULL;
+        foreach ($resultado as $fila) {
+            $usuario = new Usuario();
+            $this->mapearUsuario($usuario, $fila);
+           
+        }
+        return $usuario;
+    }
+   
+     public function actualizarUsuario(Usuario $usuario) {
+        $sql = "UPDATE usuario SET usuario=:usuario, contraseña=:clave WHERE idPersona=:idPersona";
+        $this->__setSql($sql);
+       $this->ejecutar($this->getParametros($usuario));    
+        }
+    
     public function verificarUsuario($usuario, $clave) {
         $sql = "SELECT * FROM usuario WHERE usuario=? AND contraseña=?";
         $clave1= sha1($clave);

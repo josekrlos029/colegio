@@ -186,6 +186,23 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+        
+         /**
+    * imprime formulario de configuracion de usuario
+    * @return type
+    */
+    
+          public function configuracionUsuario(){
+          try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'configuracion de Usuario');
+            $this->vista->set('titulo', 'configuracion de Usuario');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
 //**************************************************************************************************//        
 //**********************************FIN IMPRIMIR VISTAS*********************************************//
 //**************************************************************************************************//        
@@ -604,6 +621,10 @@ class AdministradorControl extends Controlador{
                  echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
              }
 
+         }
+      
+         protected function configurarUsuario() {
+             parent::configurarUsuario();
          }
 //**************************************************************************************************//        
 //**********************************FIN DE LOS METODOS*********************************************//

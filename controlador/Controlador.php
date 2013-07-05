@@ -70,6 +70,41 @@ class Controlador {
             }
                
     }
+    
+    protected function configurarUsuario(){
+         try{
+               
+             $idPersona=isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $username = isset($_POST['username']) ? $_POST['username'] : NULL;
+             $password = isset($_POST['password']) ? $_POST['password'] : NULL;
+             $newUsuario = isset($_POST['newUsername']) ? $_POST['newUsername'] : NULL;
+             $newContraseña = isset($_POST['newPassword']) ? $_POST['newPassword'] : NULL;
+             
+             $user = new Usuario();
+             $usuario = $user->leerPorId($idPersona);
+             $passD= sha1($password);
+             
+             if($username !=  $usuario->getUsuario() ){
+                echo json_encode(2); 
+             }elseif($passD != $usuario->getContraseña()){
+                echo json_encode(3); 
+             }else{
+                $user->setIdPersona($idPersona); 
+                $user->setUsuario($newUsuario);
+                $user->setContraseña($newContraseña);
+                
+                $user->actualizarUsuario($user); 
+                echo json_encode(1); 
+                }
+       
+     
+ 
+         } catch (Exception $exc) {
+                 echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+             }
+
+         }
+    
 }
 
 ?>

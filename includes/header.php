@@ -4,7 +4,7 @@
 <table border="0" align="center" width="80%" >
     <tr>
     <td align="left" width="10%"><a href="/colegio/administrador/usuarioAdministrador"><img src="../utiles/imagenes/iconos/inicio.png"/></a></td>
-    <td align="left" width="50%"><a href="#"><img src="../utiles/imagenes/iconos/Power.png"/></td>
+    <td align="left" width="50%"><a href="/colegio/administrador/configuracionUsuario"><img src="../utiles/imagenes/iconos/Power.png"/></td>
      <td align="right">
      <!-- search -->
         <div class="top-search">

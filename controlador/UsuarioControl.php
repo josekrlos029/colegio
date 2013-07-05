@@ -2,7 +2,7 @@
 
 /**
  * Clase para manejar los controladores en la aplicacion
- * @author Wilman Vega <wilmanvega@gmail.com>
+ * @author andyhenry
  *
  */
 class UsuarioControl extends Controlador {
