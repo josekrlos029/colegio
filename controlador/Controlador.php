@@ -77,34 +77,79 @@ class Controlador {
              $idPersona=isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
              $username = isset($_POST['username']) ? $_POST['username'] : NULL;
              $password = isset($_POST['password']) ? $_POST['password'] : NULL;
-             $newUsuario = isset($_POST['newUsername']) ? $_POST['newUsername'] : NULL;
-             $newContraseña = isset($_POST['newPassword']) ? $_POST['newPassword'] : NULL;
-             
              $user = new Usuario();
              $usuario = $user->leerPorId($idPersona);
-             $passD= sha1($password);
+             $passDesc= sha1($password);
              
-             if($username !=  $usuario->getUsuario() ){
+          if($passDesc != $usuario->getContraseña()){
                 echo json_encode(2); 
-             }elseif($passD != $usuario->getContraseña()){
-                echo json_encode(3); 
              }else{
-                $user->setIdPersona($idPersona); 
-                $user->setUsuario($newUsuario);
-                $user->setContraseña($newContraseña);
-                
-                $user->actualizarUsuario($user); 
+                $user->actualizarUsuario($idPersona,$username); 
                 echo json_encode(1); 
                 }
        
-     
- 
          } catch (Exception $exc) {
                  echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
              }
 
          }
+         
+         protected function configurarContraseña(){
+         try{
+             $idPersona=isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $passwordActual = isset($_POST['passwordActual']) ? $_POST['passwordActual'] : NULL;
+             $passwordNew = isset($_POST['passwordNew']) ? $_POST['passwordNew'] : NULL; 
+             
+             $user = new Usuario();
+             $usuario = $user->leerPorId($idPersona);
+             
+             $passDesc= sha1($passwordActual);
+             $clave= sha1($passwordNew);
+              
+            if($passDesc != $usuario->getContraseña()){
+                echo json_encode(2); 
+             }else{
+                $user->actualizarContraseña($idPersona,$clave); 
+                echo json_encode(1);  
+             }
+                
+         
+             
+            }catch (Exception $exc) {
+                 echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+             }
+
+         }
+         
+         protected function configurarCorreo(){
+           try{
+             
+             $idPersona=isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $correo = isset($_POST['correo']) ? $_POST['correo'] : NULL;
+             $password = isset($_POST['passwordC']) ? $_POST['passwordC'] : NULL;
+             
+             $user = new Usuario();
+             $usuario = $user->leerPorId($idPersona);
+             
+             $passDesc= sha1($password);
+             
+              if($passDesc != $usuario->getContraseña()){
+                echo json_encode(2); 
+             }else{
+                $persona = new Persona();
+                $persona->actualizarCorreo($idPersona,$correo); 
+                echo json_encode(1);  
+             }
+             
+             }catch (Exception $exc) {
+             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+             }
+         }
+         
+         
+         
+   }
     
-}
+
 
 ?>

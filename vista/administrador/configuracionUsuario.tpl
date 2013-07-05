@@ -5,7 +5,7 @@
 </head>
 <script type="text/javascript">
     
-function envio(){ 
+function envioUser(){ 
   
  var x = $("#mensaje");
  cargando();
@@ -16,17 +16,15 @@ function envio(){
  var idPersona = document.getElementById("idPersona");
  var username = document.getElementById("username");
  var password = document.getElementById("password");
- var newUsername = document.getElementById("newUsername");
- var newPassword = document.getElementById("newPassword");
- 
-    if (idPersona.value=="" || username.value=="" || password.value=="" || newUsername.value=="" || newPassword.value=="" ){
+
+    if (idPersona.value=="" || username.value=="" || password.value=="" ){
     x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
       error();
       ocultar();
     }else{
 
         var url="/colegio/administrador/configurarUsuario/";
-        var data="idPersona="+idPersona.value+"&username="+username.value+"&password="+password.value+"&newUsername="+newUsername.value+"&newPassword="+newPassword.value;
+        var data="idPersona="+idPersona.value+"&username="+username.value+"&password="+password.value;
 
         envioJson(url,data,function respuesta(res){
         
@@ -40,13 +38,7 @@ function envio(){
         break;
 
         case 2:
-         x.html ( "<p>Error: El nombre de <b> Usuario Actual </b> Ingresado es Incorrecto</p>");
-         error();
-         ocultar();
-        break;
-        
-        case 3:
-         x.html ( "<p>Error: La <b> contraseña Actual </b> Ingresada es Incorrecta</p>");
+         x.html ( "<p>Error: la <b> Contraseña Ingresada </b> es Incorrecta</p>");
          error();
          ocultar();
         break;
@@ -65,7 +57,125 @@ function envio(){
 
     }   
 }
+
+function envioPassword(){ 
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+
+var idPersona = document.getElementById("idPersona");
+var passwordActual = document.getElementById("passwordActual");
+var passwordNew = document.getElementById("passwordNew");
+var confPasswordNew = document.getElementById("confPasswordNew");
+
+  if (idPersona.value=="" || passwordActual.value=="" || passwordNew.value=="" || confPasswordNew.value=="" ){
+             
+             x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
+             error();
+             ocultar(); 
+             
+       }else if(passwordNew.value != confPasswordNew.value){
+       
+            x.html ( "<p>Error: la <b> Nueva Contraseña Ingresada </b>no coincide Con la contraseña confirmada</p>");
+            error();
+            ocultar();
+            
+       }else{
+       
+            var url="/colegio/administrador/configurarContraseña/";
+            var data="idPersona="+idPersona.value+"&passwordActual="+passwordActual.value+"&passwordNew="+passwordNew.value;
+
+            envioJson(url,data,function respuesta(res){
+             switch (res){
+
+            case 1:
+            x.html ( "<p>Datos Actualizados Correctamente</p>");
+            exito();
+            ocultar();
+            document.location.href="/colegio/administrador/configuracionUsuario";
+            break;
+
+            case 2:
+            x.html ( "<p>Error: la <b> Contraseña Ingresada </b> es Incorrecta</p>");
+            error();
+            ocultar();
+            break;
+           
+            default:
+            x.html ( "<p>"+res+"</p>");
+            idMateria.value="";
+            idGrado.setAttribute("autofocus","true");
+            nombre.value="";
+             error();
+            ocultar();               
+         
+            }
+  
+  
+    
+            });
+        }
+
+}
+
+function envioEmail(){ 
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+ 
+var idPersona = document.getElementById("idPersona");
+var correo = document.getElementById("correo");
+var passwordC = document.getElementById("passwordC");
+ 
+ 
+ 
+ if (idPersona.value=="" || correo.value=="" || passwordC.value==""){
+             
+             x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
+             error();
+             ocultar(); 
+             
+       }else{
+            var url="/colegio/administrador/configurarCorreo/";
+            var data="idPersona="+idPersona.value+"&correo="+correo.value+"&passwordC="+passwordC.value;
+
+            envioJson(url,data,function respuesta(res){
+             switch (res){
+
+            case 1:
+            x.html ( "<p>Datos Actualizados Correctamente</p>");
+            exito();
+            ocultar();
+            document.location.href="/colegio/administrador/configuracionUsuario";
+            break;
+
+            case 2:
+            x.html ( "<p>Error: la <b> Contraseña Ingresada </b> es Incorrecta</p>");
+            error();
+            ocultar();
+            break;
+           
+            default:
+            x.html ( "<p>"+res+"</p>");
+            idMateria.value="";
+            idGrado.setAttribute("autofocus","true");
+            nombre.value="";
+             error();
+            ocultar();               
+         
+            }
+  
+  
+    
+            }); 
+       }
+ 
+ }
 </script>
+
+
     <body>
     <div class="cabecera">
         <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
@@ -83,7 +193,7 @@ function envio(){
                         <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
                          <tr>   
                             <td align="right">   
-                                <h1>Configuracion de Usuario</h1>
+                                <h1>Configuracion General de la Cuenta</h1>
                             </td>
                          </tr>
                         </table>
@@ -93,29 +203,104 @@ function envio(){
       <p>&nbsp;</p>                
      <!--------------------------------------------------------------------> 
 
-          <table width="40%" border="0" cellspacing="0" cellpadding="2">
+<ul id="accordion">
+<li><div>Cambiar Nombre De Usuario</div>
+<ul>
+    
+<li>
+    
+                <table width="80%" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                     <td></td>
-                    <td align="left" class="color-text-gris"><h1>DATOS DE USUARIO</h1></td>
+                    <td align="left" class="color-text-gris"><h1>Nombre DE USUARIO</h1></td>
                 </tr>  
                 <tr>
-                    <td align="right" width="40%" >Nombre de Usuario Actual:</td>
-                    <td><input name="username" id="username" type="text" class="box-text" required/></td>
+                    <td align="right" width="40%" >Nombre de Usuario:</td>
+                    <td><input name="username" id="username" type="text" class="box-text" value="<?php echo $usuario->getUsuario(); ?>" required/></td>
                 </tr>
                 <tr>
-                    <td align="right">Contraseña Actual:</td>
+                    <td align="right">Contraseña:</td>
                     <td><input name="password" id="password" type="password" class="box-text"  required/></td>
-                </tr>
-                 <tr>
-                    <td align="right">Nuevo Nombre de Usuario:</td>
-                    <td><input name="newUsername" id="newUsername" type="text" class="box-text"  required/></td>
-                </tr>
-                <tr>
-                    <td align="right">Nueva Contraseña:</td>
-                    <td><input name="newPassword" id="newPassword" type="password" class="box-text"  required/></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td colspan="2"><input name="configurarUsuario" id="configurarUsuario" type="submit" class="button large green" value="Guardar" onclick="envio()" /></td>
+                    <td colspan="2"><input name="configurarUsuario" id="configurarUsuario" type="submit" class="button large green" value="Guardar" onclick="envioUser()" /></td>
                 </tr>
                </table>
+    
+    
+</li>
+
+</ul>
+</li>
+
+<li><div>Cambiar Contraseña</div>
+<ul>
+    
+<li>
+ <table width="80%" border="0" cellspacing="0" cellpadding="2">
+                <tr>
+                    <td></td>
+                    <td align="left" class="color-text-gris"><h1>contraseÑa</h1></td>
+                </tr>  
+                <tr>
+                    <td align="right" width="40%" >Actual:</td>
+                    <td><input name="passwordActual" id="passwordActual" type="password" class="box-text" required/></td>
+                </tr>
+                <tr>
+                    <td align="right">Nueva:</td>
+                    <td><input name="passwordNew" id="passwordNew" type="password" class="box-text"  required/></td>
+                </tr>
+                 <tr>
+                    <td align="right">Confirmar Contraseña Nueva:</td>
+                    <td><input name="confPasswordNew" id="confPasswordNew" type="password" class="box-text"  required/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2"><input name="configurarContraseña" id="configurarContraseña" type="submit" class="button large green" value="Guardar" onclick="envioPassword()" /></td>
+                </tr>
+</table>
+</li>
+
+</ul>
+</li>
+
+<li><div>Cambiar Correo electronico</div>
+<ul>
+<li>
+    <table width="80%" border="0" cellspacing="1" cellpadding="2">
+                <tr>
+                    <td></td>
+                    <td align="left" class="color-text-gris"><h1>correo electronico</h1></td>
+                </tr>  
+                <tr>
+                    <td align="right" width="40%" >Direccion de correo electronico:</td>
+                    <td><input name="correo" id="correo" type="text" class="box-text" value="<?php echo $persona->getCorreo(); ?>" required/></td>
+                </tr>
+                <tr>
+                    <td align="right">Contraseña:</td>
+                    <td><input name="passwordC" id="passwordC" type="password" class="box-text"  required/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2"><input name="configurarEmail" id="configurarEmail" type="submit" class="button large green" value="Guardar" onclick="envioEmail()" /></td>
+                </tr>
+               </table>  
+
+</li>
+</ul>
+</li>
+</ul>
+     
+ <script type="text/javascript">
+ $("#accordion > li > div").click(function(){
+ if(false == $(this).next().is(':visible')) {
+ $('#accordion ul').slideUp(300);
+ }
+ $(this).next().slideToggle(300);
+ });
+ $('#accordion ul:eq(0)').show();
+ </script>
+
+    </body>
+</html>

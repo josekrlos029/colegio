@@ -196,7 +196,13 @@ class AdministradorControl extends Controlador{
           try {
             if($this->verificarSession()){
             $this->vista->set('titulo', 'configuracion de Usuario');
-            $this->vista->set('titulo', 'configuracion de Usuario');
+            $idPersona = $_SESSION['idUsuario'];
+             $pers = new Persona();
+             $user = new Usuario();
+             $persona = $pers->leerPorId($idPersona);
+             $usuario = $user->leerPorId($idPersona);
+             $this->vista->set('usuario', $usuario);
+             $this->vista->set('persona', $persona);
             return $this->vista->imprimir();
             }
         } catch (Exception $exc) {
@@ -625,6 +631,14 @@ class AdministradorControl extends Controlador{
       
          public function configurarUsuario() {
              parent::configurarUsuario();
+         }
+         
+         public function configurarContraseña() {
+             parent::configurarContraseña();
+         }
+         
+         public function configurarCorreo() {
+             parent::configurarCorreo();
          }
 //**************************************************************************************************//        
 //**********************************FIN DE LOS METODOS*********************************************//

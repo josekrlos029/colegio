@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-07-2013 a las 21:17:07
+-- Tiempo de generación: 05-07-2013 a las 20:01:46
 -- Versión del servidor: 5.5.27
 -- Versión de PHP: 5.4.7
 
@@ -70,6 +70,32 @@ INSERT INTO `grado` (`idGrado`, `nombre`) VALUES
 ('3', 'TERCERO'),
 ('4', 'CUARTO'),
 ('5', 'QUINTO');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `logro`
+--
+
+CREATE TABLE IF NOT EXISTS `logro` (
+  `periodo` varchar(11) NOT NULL,
+  `idSalon` varchar(5) NOT NULL,
+  `idMateria` varchar(5) NOT NULL,
+  `superior` varchar(213) DEFAULT NULL,
+  `alto` varchar(213) DEFAULT NULL,
+  `basico` varchar(213) DEFAULT NULL,
+  `bajo` varchar(213) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `logro`
+--
+
+INSERT INTO `logro` (`periodo`, `idSalon`, `idMateria`, `superior`, `alto`, `basico`, `bajo`) VALUES
+('PRIMERO', '1-01', 'MAT', 'aro1', 'aro2', 'aro3', 'aro4'),
+('PRIMERO', '1-02', 'MAT', NULL, NULL, NULL, NULL),
+('PRIMERO', '2-02', 'MAT', NULL, NULL, NULL, NULL),
+('PRIMERO', '3-01', 'MAT', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -157,7 +183,7 @@ INSERT INTO `notas` (`idPersona`, `idMateria`, `primerP`, `segundoP`, `tercerP`,
 ('333', 'CN', 40.0, 4.0, NULL, NULL, NULL),
 ('333', 'CS', NULL, NULL, NULL, NULL, NULL),
 ('333', 'ING', NULL, NULL, NULL, NULL, NULL),
-('333', 'MAT', 3.0, 3.0, 3.0, 3.0, 3.0),
+('333', 'MAT', 4.0, 3.0, 3.0, 3.0, 3.3),
 ('555', 'CN', NULL, NULL, NULL, NULL, NULL),
 ('555', 'CS', NULL, NULL, NULL, NULL, NULL),
 ('555', 'ING', NULL, NULL, NULL, NULL, NULL),
@@ -165,7 +191,7 @@ INSERT INTO `notas` (`idPersona`, `idMateria`, `primerP`, `segundoP`, `tercerP`,
 ('777', 'CN', NULL, NULL, NULL, NULL, NULL),
 ('777', 'CS', NULL, NULL, NULL, NULL, NULL),
 ('777', 'ING', NULL, NULL, NULL, NULL, NULL),
-('777', 'MAT', 1.0, 2.0, 4.0, 3.0, 2.5);
+('777', 'MAT', 5.0, 2.0, 4.0, 3.0, 3.5);
 
 -- --------------------------------------------------------
 
@@ -229,7 +255,7 @@ INSERT INTO `persona` (`idPersona`, `nombres`, `pApellido`, `sApellido`, `sexo`,
 ('222', 'Humberto', 'Palmera', 'Loaiza', 'M', '', '', 'ver870826@hotmail.com', '0', '2013-05-10'),
 ('333', 'andy', 'bolaños', 'castilla', 'M', '132', 'dasdasd', '', '1', '2013-06-20'),
 ('444', 'juan miguel', 'martinez', 'oñate', 'M', '13231', 'sdad', 'jhosse_-henriquex@hotmail.com', '0', '2013-06-03'),
-('555', 'Carlos', 'Jimenez', 'Montenegro', 'M', '123123', 'dsasd', 'asdsa@dasd', '1', '2013-06-05'),
+('555', 'Carlos', 'Jimenez', 'Montenegro', 'M', '123123', 'dsasd', 'carlos_mjimenez@hotmail.com', '1', '2013-06-05'),
 ('777', 'WILMAN', 'VEGA', 'CASTILLA', 'M', '', '', '', '1', '2013-06-04');
 
 --
@@ -342,9 +368,9 @@ INSERT INTO `usuario` (`idPersona`, `usuario`, `contraseña`, `facebook`, `twitt
 ('222', '222', '1c6637a8f2e1f75e06ff9984894d6bd16a3a36a9', NULL, NULL, NULL),
 ('333', '333', '43814346e21444aaf4f70841bf7ed5ae93f55a9d', NULL, NULL, NULL),
 ('444', '444', '9a3e61b6bcc8abec08f195526c3132d5a4a98cc0', NULL, NULL, NULL),
-('555', '555', 'cfa1150f1787186742a9a884b73a43d8cf219f9b', NULL, NULL, NULL),
+('555', '555', 'cfa1150f1787186742a9a884b73a43d8cf219f9b', '100003165681229', NULL, NULL),
 ('777', '777', 'fc7a734dba518f032608dfeb04f4eeb79f025aa7', '100003000642691', NULL, NULL),
-('111', 'admin', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '640009763', NULL, '112729141050675684104');
+('111', 'admin', '8cb2237d0679ca88db6464eac60da96345513964', '640009763', NULL, '112729141050675684104');
 
 --
 -- Restricciones para tablas volcadas
@@ -369,13 +395,14 @@ ALTER TABLE `rolespersona`
 --
 ALTER TABLE `salon`
   ADD CONSTRAINT `idGrado1` FOREIGN KEY (`idGrado`) REFERENCES `grado` (`idGrado`) ON UPDATE CASCADE;
+
+ -- -------------------------------------------------------- 
   
-  
-DELIMITER $$
+  DELIMITER $$
 --
 -- Procedimientos
 --
-DROP PROCEDURE IF EXISTS `llenarNotas`;
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `llenarNotas`(IN `idPersona` VARCHAR(15), IN `idSal` VARCHAR(5))
 BEGIN
 DECLARE done INT DEFAULT 0;
@@ -394,10 +421,8 @@ END LOOP c1_loop;
 END$$
 
 DELIMITER ;
-
-
--- --------------------------------------------------------
-
+  
+  
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

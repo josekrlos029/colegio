@@ -62,3 +62,37 @@ height:90%;
 .link-menu:hover{
  color:#000;  
 }
+
+/***** MENU ACORDEON VERTICAL ******/
+#accordion {
+ list-style: none;
+ padding: 0 0 0 0;
+ width: 60%;
+ margin-left: 20%;
+ margin-top:  10%;
+ }
+ #accordion div {
+ display: block;
+ font-size:16px;
+ color:#000;
+ cursor: pointer;
+ padding: 5px;
+ margin:0;
+ background-color:transparent;
+ background-position: right center;
+ background-repeat:no-repeat;
+ border-bottom: 1px solid #5b6163;
+ }
+ #accordion ul {
+ background-color:transparent;
+ list-style-type: none;
+ display: none;
+ /*background: #eff2f5 url(/images/stripes.png) repeat;*/
+ }
+ #accordion ul li {
+ cursor: auto;
+ padding: 5px;
+ width: 80%;
+ height: 50%;
+ }
+ 
