@@ -15,6 +15,10 @@ class Carga extends Modelo{
     private $idSalon;
     private $idMateria;
     
+    public function __construct() {
+        parent::__construct();
+    }
+    
     public function getIdPersona() {
         return $this->idPersona;
     }
@@ -114,7 +118,7 @@ public function crearCarga(Carga $carga) {
     }
 
     public function actualizarCarga(Carga $carga) {
-        $sql = "UPDATE grado SET nombre=:nombre, horas=:horas WHERE idPersona=:idPersona";
+        $sql = "UPDATE carga SET nombre=:nombre, horas=:horas WHERE idPersona=:idPersona";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($carga));        
         }

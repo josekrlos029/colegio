@@ -126,7 +126,8 @@ function funcionesAcademicas(){
                 </table> 
          </td>  
          </tr>      
- </table> 
+ </table>
+
  </body>
   <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>

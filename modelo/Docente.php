@@ -57,6 +57,14 @@ class Docente extends Persona{
         return $resultado;
     }
     
+    public function crearConsultaPorIdPersona($idPersona, $idSalon, $idMateria){
+        
+        $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP, n.definitiva as def FROM notas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND n.idMateria='".$idMateria."' AND n.idPersona='".$idPersona."'" ;
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        return $resultado;
+    }
+    
     public function actualizarNota($idPersona,$idMateria,$primerP,$segundoP,$tercerP,$cuartoP){
         if ($primerP==""){
             $primerP=NULL;

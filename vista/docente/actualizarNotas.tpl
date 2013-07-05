@@ -59,8 +59,30 @@
             }
             
          });  
-        }); 
         });
+        
+        $('#filter').keyup(searchOnTable);
+        });
+        
+              var searchOnTable = function() {
+    var table = $('#tabla');
+    var value = this.value;
+    table.find('.recorrer').each(function(index, row) {
+        var allCells = $(row).find('td');
+        if(allCells.length > 0) {
+            var found = false;
+            allCells.each(function(index, td) {
+                var regExp = new RegExp(value, 'i');
+                if(regExp.test($(td).text())) {
+                    found = true;
+                    return false;
+                }
+            });
+            if (found == true) $(row).show();
+            else $(row).hide();
+        }
+    });
+};
         
         function inhabilitar(periodo){
                 
@@ -168,7 +190,18 @@
                 <div id="cabecera" class="red">   
                     <div class="color-text-blanco" id="title-cab">
                         <table width="80%" align="center" border="0" cellspacing="0" cellpadding="0">
-                         <tr>   
+                         <tr>  
+                              <td>
+           <!-- search -->
+                                <div class="top-search">
+                                     <div id="searchform" >
+                                        <input type="text" value="" name="id" id="filter" onkeypress="" placeholder="Filtrar" />
+                                     </div>	
+                                </div>
+        <!-- END search -->   
+                            
+                            
+                            </td> 
                             <td align="right">   
                                 <h1>Calificaciones de Estudiantes</h1>
                             </td>
@@ -214,7 +247,7 @@
     
     <?php foreach ($resultado as $fila) { ?>
     <tr class="recorrer" id="cebra" >
-        <td align="left"><a class="texto" href="guardar_notas.php?idEstudiante=<?php echo $fila['idPersona'];?>"><?php echo $fila['idPersona'];?></a></td>
+        <td align="left"><?php echo $fila['idPersona'];?></td>
         <td align="left"><?php echo strtoupper ($fila['pApellido']." ".$fila['sApellido']);?></td> 
         <td><?php echo strtoupper ($fila['nombres']);?></td>
         <td><input type="text" value="<?php echo $fila['primerP'];?>" class="box-text" /></td>
