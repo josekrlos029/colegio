@@ -33,9 +33,9 @@ $(function(){
        
           <!------------------------------cabecera--------------------------->  
          
-            <p>&nbsp;</p>
+         
             </br>
-            <p>&nbsp;</p>
+        
         <div id="encapsulador">
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="red">
