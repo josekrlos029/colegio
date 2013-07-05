@@ -623,7 +623,7 @@ class AdministradorControl extends Controlador{
 
          }
       
-         protected function configurarUsuario() {
+         public function configurarUsuario() {
              parent::configurarUsuario();
          }
 //**************************************************************************************************//        
