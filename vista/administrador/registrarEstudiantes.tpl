@@ -61,8 +61,9 @@ function envio(){
         <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
         </div>
       <!------------------------------cabecera--------------------------->  
-       </br>
-           
+        <p>&nbsp;</p>
+            </br>
+           <p>&nbsp;</p>
         <div id="encapsulador">
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="blue">

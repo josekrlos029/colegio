@@ -122,20 +122,16 @@ var y = $("#mensaje");
     }   
 
 }
-
-   
 </script>
     </head>
     <body>
-
-
         <div class="cabecera">
         <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
         </div>
           <!------------------------------cabecera--------------------------->  
-           
+           <p>&nbsp;</p>
             </br>
-          
+           <p>&nbsp;</p>
         <div id="encapsulador">
             <div id="mensaje" hidden> </div>
                  <div id="cabecera" class="red">
@@ -149,19 +145,11 @@ var y = $("#mensaje");
                          </tr>
                         </table>
                     </div>
-                    
                 </div>
-                    
-           
         </div> 
-     
-                <p>&nbsp;</p>
-                      
-                         
+                <p>&nbsp;</p>               
      <!--------------------------------------------------------------------> 
-    
 <div id="tabla-contenedora">
-    
         <table width="43%" border="0" cellspacing="0" cellpadding="2" class="tabla">
                 <tr>
                   <td></td>
@@ -175,7 +163,6 @@ var y = $("#mensaje");
                     <td width="30%">Apellidos</td>
                 </tr>      
         </table>
-    
     <div style="float:left;">
         <div id="tabla-consulta">
             <table width="100%" border="0" cellspacing="0" cellpadding="2">  
@@ -192,8 +179,6 @@ var y = $("#mensaje");
             </table>
         </div>  
     </div>    
-     
-    
     <div style="float:right" >
           <table width="650" border="0" cellspacing="0" cellpadding="2">
                 <tr>
@@ -206,7 +191,6 @@ var y = $("#mensaje");
                     <td>Salon:</td>
                      <td align="right">Materias:</td>
                 </tr>
-       
             <tbody>
                 <tr>
                     <td></td>
@@ -221,23 +205,17 @@ var y = $("#mensaje");
             <td align="right"><select id="materias" name="materias" multiple class="box-text">
                         </select>
                 </td>
-            
                 </tr>
                 <tr>
                     <td colspan="3" align="right"><button onclick="agregar()" class="button large red"> Guardar Carga </button></td>
                     </tr>
-                
             </tbody>
         </table>
     </div>
  </div>  
-     
- 
     </br>
      <hr>
      </br>
-     
-     
          <table width="50%" align="center" border="0" cellspacing="0" cellpadding="2" class="tabla">
                 <tr>
                   <td align="center" class="color-text-gris" colspan="4"><h1>cargas asignadas a docentes</h1></td>
@@ -247,24 +225,13 @@ var y = $("#mensaje");
                     <td width="40%">Materia</td>
                     <td width="10%">Horas</td>
                     <td width="20%">Eliminar</td>
-                </tr>
-                
-                
-              
-                
+                </tr>   
           </table>
-       
-     
-     
-     
                <table width="50%" align="center" border="0" cellspacing="0" cellpadding="2"  >
                 <tbody id="tablaCargas">
      
                 </tbody>
-               </table>
-            
-</div>  
-        
-    </body>
-    
+               </table>          
+</div>    
+    </body>  
 </html>

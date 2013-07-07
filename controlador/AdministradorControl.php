@@ -424,7 +424,7 @@ class AdministradorControl extends Controlador{
                          
                          $eliminar= "eliminar('".$carg->getIdSalon()."','".$carg->getIdMateria()."')";
                          $respuesta.= '<td width="20%" align="center">
-                                     <img src="../utiles/imagenes/iconos/errorCalificacion.png"  onclick="'.$eliminar.'"/>
+                                     <img src="../utiles/imagenes/iconos/eliminarPersona.png"  onclick="'.$eliminar.'"/>
                                        </td>';
                         $respuesta .= "</tr>";
                        

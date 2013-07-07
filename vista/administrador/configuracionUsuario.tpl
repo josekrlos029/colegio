@@ -182,10 +182,9 @@ var passwordC = document.getElementById("passwordC");
           <input type="hidden" name="idPersona" id="idPersona" value="<?php echo $_SESSION['idUsuario'] ?>">
         </div>
           <!------------------------------cabecera--------------------------->  
-     
+      <p>&nbsp;</p>
             </br>
-         
-            
+           <p>&nbsp;</p>
         <div id="encapsulador">
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="green">

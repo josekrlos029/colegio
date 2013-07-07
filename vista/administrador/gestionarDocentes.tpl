@@ -53,10 +53,9 @@ cargando();
         <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
         </div>
         <!------------------------------cabecera--------------------------->  
-         
-          
+          <p>&nbsp;</p>
             </br>
-           
+           <p>&nbsp;</p>
         <div id="encapsulador">
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="red">
@@ -152,6 +151,9 @@ cargando();
                     <td>Dirección</td>
                     <td>Correo</td>
                     <td>Fecha de Nacimiento</td>
+                    <td>editar</td>
+                    <td>Eliminar</td>
+                    
                 </tr> 
            
    
@@ -168,6 +170,8 @@ cargando();
                     <td><?php echo $docente->getDireccion();?></td>
                     <td><?php echo $docente->getCorreo();?></td>
                     <td><?php echo $docente->getFNacimiento()->format('Y-m-d');?></td>
+                    <td align="center"><img src="../utiles/imagenes/iconos/editarPersona.png"  onclick=""/></td>
+                    <td align="center"><img src="../utiles/imagenes/iconos/eliminarPersona.png"  onclick=""/></td>
                 </tr>
                 <?php } ?>
               

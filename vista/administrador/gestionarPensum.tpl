@@ -131,10 +131,9 @@ function enviar(){
         <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
         </div>
           <!------------------------------cabecera--------------------------->  
-        
+         <p>&nbsp;</p>
             </br>
-         
-            
+           <p>&nbsp;</p>
         <div id="encapsulador">
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="green">
