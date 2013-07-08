@@ -195,30 +195,33 @@ $respuesta .= '
         <tr>
            <td colspan="3"><hr></td>
        </tr> 
-          '.
-          $resultado=0;
-          $cont=0; .'
-         '. foreach ($cargas as $carg) { .'
-          <tr>
+          ';
+      $resultado=0;
+      $cont=0;
+      //Te falto llamar a Carga
+      $carga = new Carga();
+      $cargas = $carga->leerCargasPorDocente($idPersona);
+      foreach ($cargas as $carg) { 
+          //Cada vez que vas a escribir html.. tienes que concatenar la $respuesta 
+          //y cerrar cuando vayas a hacer una operacion como foreach y luego volver a concatenar $respuesta
+          $respuesta .='<tr>
           <td>'.  $carg->getIdSalon().' </td>
-         '.
-            $materia = new Materia();
-            $materias = $materia->leerMateriaPorId($carg->getIdMateria());
-            foreach ($materias as $mat) { .'
-            <td>'. strtoupper($mat->getNombreMateria()).' </td>
+         ';
+          $materia = new Materia();
+          $materias = $materia->leerMateriaPorId($carg->getIdMateria());
+            foreach ($materias as $mat) { 
+            $respuesta .='<td>'. strtoupper($mat->getNombreMateria()).' </td>
             <td>
-                '. strtoupper($mat->getHoras())
+                '. strtoupper($mat->getHoras());
                 $cont=$mat->getHoras();
-                $resultado=$resultado+$cont;   .' 
+                $resultado=$resultado+$cont;   
               
-            </td>
-            '. } .'
-            </tr>
-           '. } .' 
+            $respuesta .='</td>';
+             }
+            $respuesta .='</tr>';
+            }
           
-         
-        
-        <tr>
+        $respuesta .='<tr>
            <td colspan="3"><hr></td>
        </tr>   
        <tr>
@@ -233,10 +236,6 @@ $respuesta .= '
 </div>
 
                   ';
-     
-              
-                      
-                 
                       
             if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
