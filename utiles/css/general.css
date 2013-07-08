@@ -277,3 +277,35 @@ position:relative;
 	background: transparent;
 }
 /*END BUSCADOR DE CABECERA */
+
+/* VENTANA FLOTANTE*/
+
+ .overlay{
+     display: none;
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background: #000;
+     z-index:1001;
+     opacity:.90;
+     -moz-opacity: 0.90;
+     filter: alpha(opacity=90);
+}
+
+.modal {
+     display: none;
+     position: absolute;
+     top: 10%;
+     left: 10%;
+     width: 80%;
+     height: 80%;
+     background: #fff;
+     border: #b0b4b6 1px solid;
+     z-index:1002;
+     overflow: auto;
+     border-radius: 5px;
+}
+
+/* FIN DE VENTANA FLOTANTE */

@@ -146,6 +146,62 @@ class Controlador {
              }
          }
          
+          public function consultaGeneralPersona(){
+            try{
+           $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $pers = new Persona();
+            $persona = $pers->leerPorId($idPersona);
+            $respuesta = "";
+              
+            $respuesta .= '
+           <div class="contenedorDp" >     
+                            <div class="marcoAvatar">
+                                <div class="avatar">
+                                    <span class="rounded">
+                                        <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                                    </span> 
+                                </div>    
+                            </div>  
+                                   <table border="0" width="100%"> 
+                                      <tr><td class="color-text-gris">Nombres:</td></tr> 
+                                       <tr><td>'. strtoupper($persona->getNombres()).'</td></tr>
+                                       <tr><td class="color-text-gris">Apellidos:</td></tr>
+                                       <tr><td>'. strtoupper($persona->getPApellido()).' '. strtoupper($persona->getSApellido()).'</td></tr>  
+                                       <tr><td class="color-text-gris">Sexo:</td></tr>                                       
+                                       <tr><td>'. strtoupper($persona->getSexo()).'</td> </tr>                                        
+                                       <tr><td class="color-text-gris">Telefono:</td></tr>
+                                       <tr><td>'. strtoupper($persona->getTelefono()).'</td></tr> 
+                                       <tr><td class="color-text-gris">Direccion:</td></tr>
+                                       <tr><td>'. strtoupper($persona->getDireccion()).'</td</tr> 
+                                       <tr><td class="color-text-gris">Correo:</td></tr>    
+                                       <tr><td>'. strtoupper($persona->getCorreo()).'</td></tr>
+                                       <tr><td class="color-text-gris">Fecha De Nacimiento:</td></tr>
+                                    <tr><td>'. strtoupper($persona->getFNacimiento()->format('Y-m-d')).'</td></tr>
+                                </table>
+             </div>';
+       
+$respuesta .= ' 
+     
+<div class="contenedorCentro">
+                  
+</div>
+
+                  ';
+     
+              
+                      
+                 
+                      
+            if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            } 
+            } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+       }
+         
          
          
    }

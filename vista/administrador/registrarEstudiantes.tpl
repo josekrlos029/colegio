@@ -107,7 +107,7 @@ function envio(){
                 </tr>
                 <tr>
                     <td align="right">Sexo:</td>
-                    <td><select name="sexo" id="sexo">
+                    <td><select name="sexo" id="sexo" >
                             <option>M</option>
                             <option>F</option>
                         </select></td>

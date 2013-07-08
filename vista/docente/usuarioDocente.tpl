@@ -68,10 +68,15 @@ function funcionesAcademicas(){
              <table class="fondo" width="99%">
                 <tr> 
                     <td>
-                        <div class="contenedora-imagen">
-                            <div class="perfilDefecto"></div>
-                            <div class="marco-foto-doc"></div>
-                        </div>    
+                      
+                        <div class="marcoAvatardoc">
+                            <div class="avatar">
+                            <span class="rounded">
+                            <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                            </span> 
+                            </div>    
+                            </div>  
+                       
                     </td>
                 </tr>
                 <tr>
@@ -95,7 +100,6 @@ function funcionesAcademicas(){
                                      
                    </table>
                     </td>
-                    
                 </tr>
              </table>   
          </td> 

@@ -62,10 +62,13 @@ interface usuarioEstudiante {
              <table class="fondo" width="100%">
                 <tr> 
                     <td>
-                        <div class="contenedora-imagen">
-                            <div class="perfilDefecto"></div>
-                            <div class="marco-foto-est"></div>
-                        </div>    
+                        <div class="marcoAvatarest">
+                            <div class="avatar">
+                            <span class="rounded">
+                            <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                            </span> 
+                            </div>    
+                            </div>   
                     </td>
                 </tr>
                 <tr>

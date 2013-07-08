@@ -18,36 +18,34 @@ border: 1px solid #cccccc;
 }
 
 
-.contenedora-imagen{
-width: 215px; 
-height:199px;   
-position: relative;   
+.avatar{
+padding-left: 30px;  
+ padding-top: 25px;   
+ position: relative;  
 }
 
-.marco-foto-doc{     
-width: 215px; 
-height:199px; 
-position: absolute;
-background: url(../imagenes/marcoPerfilDoc.png) no-repeat;
 
-}
-.marco-foto-est{  
+.marcoAvatardoc{   
 width: 215px; 
 height:199px; 
-position: absolute;
-background: url(../imagenes/marcoPerfilEst.png) no-repeat;
-
+position: relative;
+background-color:#d67661;
 }
 
-.perfilDefecto{
+.marcoAvatarest{  
 width: 215px; 
 height:199px; 
-position: absolute;
-background: url(../imagenes/perfilDefecto.png) no-repeat; 
-left:45px; 
-top: 35px;
-
+position: relative;
+background-color:#0089e1;
 }
+
+.marcoAvatar{
+ width: 100%; 
+height:199px; 
+position: relative;
+background-color:#3a3a3a;  
+}
+
 .carga-pag{
 width:100%; 
 height:90%; 
@@ -96,3 +94,66 @@ height:90%;
  height: 50%;
  }
  
+ /****REDONDEAR IMAGENES/************/
+ .rounded{
+    display:inline-block;
+    position:relative;
+    overflow:hidden;
+}
+
+.rounded > img{
+    vertical-align:top;
+    -webkit-border-radius:100em;
+}
+
+.rounded, .rounded:before{
+    -moz-border-radius:100em;
+    border-radius:100em;
+}
+
+.rounded:before{
+    content:'';
+    display:block;
+    position:absolute;
+    left:0;
+    right:0;
+    width:100%;
+    height:100%;
+    margin:-10em;
+    border:10em solid white;
+}​
+
+/*******************contenido ventane emergente de consulta*********************************/
+
+.contenedorDa {
+float:center;
+background-color: red;
+}
+
+.contenedorDp{
+float:left;
+margin-top:10px;
+margin-left: 10px;
+position: relative;
+background-color: #ecf1f4; 
+border: 1px solid #b0b4b6;
+padding-left:4px;
+padding-top:4px; 
+padding-right: 4px;
+width:217px; 
+height:90%;
+}
+
+.contenedorCentro {
+float:left;
+margin-left:4px;
+margin-top: 10px;
+position: relative;
+padding-left:4px;
+padding-top:4px; 
+padding-right: 4px;
+width:70%; 
+height:90%;
+}
+
+/***********************************fin*********************************************/
