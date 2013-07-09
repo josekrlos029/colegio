@@ -75,7 +75,7 @@ function matricular(){
                 x.html ("<p>Estudiante Matriculado Correctamente</p>");
                 exito();
                 ocultar();
-               
+               document.location.href="/colegio/administrador/matricularEstudiante";
             }else{
                  x.html ("<p>"+res+"</p>");
                  error();

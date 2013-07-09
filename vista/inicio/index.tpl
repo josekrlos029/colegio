@@ -16,7 +16,7 @@ function envio(){
 
     if (usuario.value=="" || contraseña.value==""){
       x.html ( "<p>Error: Tiene Campos Vacios</p>");
-      setTimeout("$('#msg').hide();", 4000);
+      setTimeout("$('#msg').hide();", 1000);
     }else{
 //esta linea si se moidifica no altera nd? //
         var url="/colegio/inicio/verificarUsuario/";
@@ -29,7 +29,7 @@ function envio(){
                 usuario.value="";
                 usuario.setAttribute("autofocus","true");
                 contraseña.value="";
-                setTimeout("$('#msg').hide();", 4000);
+                setTimeout("$('#msg').hide();", 2000);
             }else{
                 document.location.href=res;
             }
@@ -48,83 +48,55 @@ window.onload = function() {
 <title><?php echo $titulo; ?></title>
 </head>
 <body>
-
-<div id="contenedor">
-     <div id="cuerpo">
-        <div id="msg" hidden> </div>
-        
-<div class="contenedorBox">
     
-     <table border="0" width="100%" height="100%">
-    <!-- <tr height="10%"> 
-            <td colspan="5">   
-                <div class="iniciarSesion" align="left"><h2>Inicio de Sesion</h2></div>
-            </td> 
-          </tr>-->
-     
-         <tr>
-             <td width="30%"><div class="escudo"></div></td>
-             
-             <td width="5%" class="separador"></td>
-              
-             <td width="30%">
-                <div class="espace" align="left">
-                <input name="usuario" id="username" type="text" size="20"  class="caja-texto" placeholder="Usuario" required autofocus />
-                </div>
-                
-                <div class="espace" align="left">   
-                <input name="contraseña"  id="password" type="password" size="20"  class="caja-texto" placeholder="Contraseña" required />
-                </div>
-                
-                <div class="espace">
-                <div align="left" ><button onclick="envio();" class="button large blue">Iniciar Sesión </button></div>
-                </div>
-                <div class="espace"><a href="/colegio/inicio/olvidoclave" class="link">¿Olvidaste tu Contraseña?</a></div>
-                </td>
-                
-                <td width="5%" class="separador"></td>
-                
-                <td width="30%">
-                
-                <div class="espaceRed" align="left">
-                    <a href="/colegio/inicio/accesofb/face">
-                     <img src="utiles/imagenes/iconos/face.png" alt="facebook" 
-                         accesskey=""onmouseover="this.src='utiles/imagenes/iconos/faceOver.png'" 
-                        onmouseout="this.src='utiles/imagenes/iconos/face.png';"/>
-                </div>
-                    
-                 <div class="espaceRed" align="left">
-                   <a href="/colegio/inicio/accesofb/twitter">
-                      <img src="utiles/imagenes/iconos/twitter.png" alt="twitter"
-                        accesskey=""onmouseover="this.src='utiles/imagenes/iconos/twitterOver.png'" 
+     <div id="cuerpo">
+         <div class="escudo"><img height="419px" width="430px" src="utiles/imagenes/escudo.png"></div>
+         <div class="separador"></div>
+         <div id="login">
+         <h1>Iniciar Sesion</h1>
+            <div id="msg"></div>
+            <input name="usuario" id="username" type="text" class="cajaTexto" placeholder="Usuario" required autofocus />
+            <input name="contraseña"  id="password" type="password" class="cajaTexto" placeholder="Contraseña" required />
+            <button onclick="envio();" class="button blue">Iniciar Sesión </button>
+            <a href="/colegio/inicio/olvidoclave" class="olvidoPass"></br>¿Olvidaste tu Contraseña?</a>
+            <div class="mensaje"></br>tambien puedes Iniciar sesion con</br> tu red Social Favorita:</br></div>
+            
+            <a href="/colegio/inicio/accesofb/face">
+                     <img height="90px" width="90px" src="utiles/imagenes/iconos/facebook.png" alt="facebook" 
+                         accesskey=""onmouseover="this.src='utiles/imagenes/iconos/facebookHover.png'" 
+                        onmouseout="this.src='utiles/imagenes/iconos/facebook.png';"/>
+                     
+            <a href="/colegio/inicio/accesofb/twitter">
+                      <img height="90px" width="90px" src="utiles/imagenes/iconos/twitter.png" alt="twitter"
+                        accesskey=""onmouseover="this.src='utiles/imagenes/iconos/twitterHover.png'" 
                         onmouseout="this.src='utiles/imagenes/iconos/twitter.png';"/>
-                </div>    
-                
-                <div class="espaceRed" align="left">
-                   <a href="/colegio/inicio/accesofb/google">
-                       <img src="utiles/imagenes/iconos/googlep.png" alt="google plus" 
-                        accesskey=""onmouseover="this.src='utiles/imagenes/iconos/googlepOver.png'" 
-                        onmouseout="this.src='utiles/imagenes/iconos/googlep.png';"/>
-                   </a>
-                </div>  
-                
-                </td>
-         </tr>
-    </table>
-</div>
- 
-
+                      
+            <a href="/colegio/inicio/accesofb/google">
+                       <img height="90px" width="90px" src="utiles/imagenes/iconos/google.png" alt="google plus" 
+                        accesskey=""onmouseover="this.src='utiles/imagenes/iconos/googleHover.png'" 
+                        onmouseout="this.src='utiles/imagenes/iconos/google.png';"/>
+                       
+                 
+         </div>
+         </div>
+     </div> 
+    
    <div id="footer">
-       <table width="100%" border="0">
-        <tr>
-        <td width="50%"> <a href="#">© 2013 Innovar.dev S.A.S</a></td> 
-        <td align="right"><a href="#">Terminos</a></td>
-        <td align="right"><a href="#">Centro de Ayuda</a></td>
-        <td align="right"><a href="#">Reportar un Error</a></td>
-        <td align="right"><a href="#">Ayudanos a Mejorar</a></td>
-        </tr>  
-       </table>    
+       <div class="logo"><img height="150px" width="150px" src="utiles/imagenes/logoInnovar.png"></div>
+       <div id="opcionesFooter">
+        <li><a href="#">© 2013 Innovar.dev S.A.S</a></li>
+        <li><a href="#">Terminos</a></li>
+        <li><a href="#">Centro de Ayuda</a></li>
+        <li><a href="#">Reportar un Error</a></li>
+        <li><a href="#">Ayudanos a Mejorar</a></li>  
+       </div>    
    </div>
 
 </body>
 </html>
+
+
+
+
+
+        

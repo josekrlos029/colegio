@@ -1,7 +1,7 @@
    <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
         <title><?php echo $titulo; ?></title>
      
-<div id="flotante" style="display:none;"> </div>
+
 <script type="text/javascript">
 
 
@@ -178,7 +178,7 @@ var data="idPersona="+idPersona;
                     <td>Correo</td>
                     <td>consultar</td>
                     <td>editar</td>
-                    <td>Eliminar</td>
+                    <td>Inhabilitar</td>
                     
                 </tr> 
            
@@ -186,7 +186,7 @@ var data="idPersona="+idPersona;
             <tbody>
                   
                 <?php foreach ($docentes as $docente) { ?>
-                <tr  id="cebra">
+                <tr onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
                     <td><?php echo $docente->getIdPersona();?></a></td>
                     <td><?php echo $docente->getNombres();?></td>
                     <td><?php echo $docente->getPApellido();?></td>

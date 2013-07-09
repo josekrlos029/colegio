@@ -1,19 +1,120 @@
-body{
-background-color: #F0F0F0;
-font-size: 12px;
+
+#msg{
+position:adsolute;
+color: #b94a48;
+font-weight:bold;
+font-size:12px;
+font-family: Arial, Helvetica, sans-serif; 
+text-shadow: 0 1px 0 white;
 }
-
-
-#contenedor{
-    width:100%;
+.olvidoPass{
+font-family: 'Arial',Arial Narrow, sans-serif;
+text-decoration:none;
+font-size: 14px;
+color:#0089e1;
+margin-bottom: 0px;  
+text-shadow: 0 1px 0 white;
 }
-
+ .olvidoPass:hover{
+font-size: 14px;
+color: #2575CF;
+margin-bottom: 0px;
+text-shadow: 0 1px 0 white;
+ }
+.button {
+font-family: Arial, Helvetica, sans-serif;   
+color: #FFF;
+text-decoration: none;
+border-top: 0px;
+border-left: 0px;
+border-right: 0px;
+border-bottom: 0px solid rgba(0,0,0,0.25);
+position: relative;
+cursor:pointer;
+font-size:24px;
+width: 67%;
+padding: 10px 10px 10px 10px; 
+background-color: #0089e1;
+} 
+.button :hover{
+ background-color: #2575CF;    
+}
+.button:active{ 
+top: 1px;
+}
+/**********************CUERPO************************/
 #cuerpo{
-    width:100%;
+    width:90%;
     height:auto;
-    background-color:#FFF;
+    background-color:#fff;
     margin:auto;
+    padding-left: 10%;
+    padding-top: 15%;
 }
+.separador{
+   position:absolute;
+   width: 14px;
+   height: 45%;
+   margin-left: 40%;
+   background-color: #c9c9c9;
+   float:left;
+}
+
+.escudo{
+  float:left; 
+  position:relative;
+}
+
+#login{
+ float:left; 
+ position:relative;
+ margin-left: 10%;
+ width: 40%;
+ padding-left: 10%;
+}
+
+#login h1{
+    color:#444444;
+    font-size: 60px;
+   text-shadow: 0 1px 0 white;
+    font-family: 'Arial narrow', sans-serif;
+    font-weight: normal;
+    margin: 0px 0px 0px 0px;
+}
+
+#login input{
+  margin-top: 20px;  
+}
+#login button{
+  margin-top: 20px;  
+}
+
+.cajaTexto{
+                outline: none;
+                width: 60%;
+                padding: 15px 10px 10px 15px; 
+		color: #000000; 
+		font-family: Arial, Helvetica, sans-serif;   
+		font-size: 24px; 
+		border: 1px solid #c9c9c9 ;
+}
+.cajaTexto:focus{
+                outline: 0;
+		border: 1px solid #000000;
+}
+
+.mensaje{
+    margin-top: 10px;
+    color:#444444;
+    font-size: 16px;
+    text-shadow: 0 1px 0 white;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    margin: 0px 0px 0px 0px; 
+}
+/******************FIN CUERPO**************************/
+/**********************FOOTER**********************/
+
 #footer{
     width:100%;
     height:10%;
@@ -22,177 +123,38 @@ font-size: 12px;
     bottom:0px;
 }
 
-
-
-#msg{
-position:absolute;
-width:400px;
-height:45px;
-top:200px;
-right: 30px; 
-background-color: #f2dede;
-border: 1px solid;
-border-color:  #b94a48;
-color: #b94a48;
-font-weight:bold;
-text-align:center;
--moz-border-radius: 5px;
--webkit-border-radius: 5px;
-border-radius: 5px;    
+.logo{
+    position: relative;
+    margin-left: 3%;
+    margin-top: -5%;
+    float:left;
 }
 
-.caja-texto{
-                outline: none;
-                width: 90%;
-                padding: 10px 5px 5px 10px; 
-		color: #000000; 
-		font-family: Arial, Helvetica, sans-serif;   
-		font-size: 14px; 
-		border: 1px solid #c9c9c9 ;
+#opcionesFooter{
+   position: relative;
+    margin-left: 10%;
+    margin-top: 1%; 
+    float:left;
+}
+#opcionesFooter li{
+    display: inline
+      
 }
 
-.caja-texto:focus{
-                outline: 0;
-		border: 1px solid #000000;
+#opcionesFooter li a{
+    display: block;
+    float: left;
+    padding: 10px 20px;
+    color: #ffd1d1;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Arial',Arial Narrow, sans-serif;
 }
 
-.espace{
-margin-left: 10%;  
-margin-right: 10%;
-margin-top:3%;
-margin-bottom:3%;
+#opcionesFooter li a:hover {
+    color:#fff;	     
 }
 
-.espaceRed{
-font-weight: bold;
-font-size: 12px;
-color:#000;
-font-family: 'Arial',Arial Narrow, Arial, sans-serif;    
-margin-left: 10%;  
-margin-top:5%;
-margin-bottom:5%;
-}
-
-.iniciarSesion{
-height: 50px;
-background: #006594;
-border-radius: 0px 0px 0 0;
-}
-
-.contenedorBox { 
-
-    margin-top: 20%;
-    margin-left:20%;
-    position: absolute;
-    width: 60%;
-    height: 30%; 
-}
-
-.escudo{  
-width: 90%;
-height: 90%;
-background:url(../imagenes/escudo.png)no-repeat center; 
-}
-
-.separador {  
-width:0.5%;
-background-color:#f2dede;
-}
-
-h1, h2, h3, h4, h5, h6 {
-margin: 0px 0px 0px 0px;
-}
-h1, h2, h3, h4, h5, h6 {
-font-weight: normal;
-}
- 
-a{
-font-family: 'Arial',Arial Narrow, Arial, sans-serif;
-text-decoration:none;
-font-size: 12px;
-color:#fff;
-margin-bottom: 0px
-}
- 
- a:hover{
-font-size: 12px;
-color: #ffb2be;
-margin-bottom: 0px
- }
- 
-h2{
-padding-top: 10px;
-padding-left: 10px;
-font-size: 22px;
-font-weight: bold;
-color: #FFF;
-margin-bottom: 0px;
-font-family: 'Arial', sans-serif;
-}
-
-	h1{
-	color: #666;
-	font-size: 40px;
-	position:relative;
-	white-space: nowrap;
-	z-index: 10;
-	font-family: 'Arial Narrow', Arial, sans-serif;
-	font-weight: 700;
-        text-shadow: 0px 1px 1px #4d4d4d;
-	}
-
-        .link{  
-        color:#0089e1;
-        }
-        .link:hover{
-        color:#2575CF; 
-        }
-
-
-
-.button, .button:visited { /* botones genéricos */
-
-display: inline-block;
-padding: 5px 10px 6px;
-color: #FFF;
-text-decoration: none;
--moz-border-radius: 0px;
--webkit-border-radius: 0px;
--moz-box-shadow: 0 0px 0px rgba(0,0,0,0.6);
--webkit-box-shadow: 0 0px 0px rgba(0,0,0,0.6);
-text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-border-top: 0px;
-border-left: 0px;
-border-right: 0px;
-border-bottom: 0px solid rgba(0,0,0,0.25);
-position: relative;
-cursor:pointer;
- 
-}
-
-.large.button, .large.button:visited {
-font-size:14px;
-padding: 8px 55px 9px;
-}
-
-.blue.button, .blue.button:visited { background-color: #0089e1; }
-.blue.button:hover{ background-color: #2575CF; }
-
-button::-moz-focus-inner,
-input[type="reset"]::-moz-focus-inner,
-input[type="button"]::-moz-focus-inner,
-input[type="submit"]::-moz-focus-inner,
-input[type="file"] > input[type="button"]::-moz-focus-inner {
-border: none;
-}
-
-.button:hover { /* el efecto hover */
-background-color: #111;
-color:#FFF;
-}
-
-.button:active{ /* el efecto click */
-top: 1px;
-}
-		
+/********FIN DE EL FOOTER*****************/
 

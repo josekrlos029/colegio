@@ -104,7 +104,7 @@ function envio(){
                     <td>Nombre Del grado</td>
                 </tr>
                 <?php foreach ($grados as $grado) { ?>
-                <tr id="cebra">
+                <tr onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
                     <td><?php echo $grado->getIdGrado();?></td>
                     <td><?php echo $grado->getNombre();?></td>
                 </tr>

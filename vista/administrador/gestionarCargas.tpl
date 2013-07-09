@@ -168,7 +168,7 @@ var y = $("#mensaje");
             <table width="100%" border="0" cellspacing="0" cellpadding="2">  
         
                 <?php foreach ($docentes as $docente) { ?>
-                <tr id="cebra">
+                <tr onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
                     <td width="10%"><input onclick="leerCarga()" id="idDocente" name="idDocente" type="radio"  value="<?php echo $docente->getIdPersona();?>" />
                     <td width="30%"><?php echo $docente->getIdPersona();?></td>
                     <td width="30%"><?php echo $docente->getNombres();?></td>

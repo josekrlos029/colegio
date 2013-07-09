@@ -1,5 +1,22 @@
    <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
     <title>Usuario Administrador</title>
+    <script type="text/javascript">
+    
+ function estPreescolar(){    
+ $('#cargar').load('/colegio/administrador/estudiantesPreescolar');           
+}
+
+ function estPrimaria(){    
+ $('#cargar').load('/colegio/administrador/estudiantesPrimaria');           
+}
+
+ function estSecundaria(){    
+ $('#cargar').load('/colegio/administrador/estudiantesSecundaria');           
+}
+  </script>  
+    
+    
+    
     <body>
 	
 	 <div class="cabecera">
@@ -17,9 +34,9 @@
   <td>
   <ul>
       <div><h2>Estudiantes</h2></div>
-      <li><a href="#"onclick="preescolar()">Consulta Preescolar</a></li>
-      <li><a href="#"onclick="primaria()">Consulta Primaria</a></li>
-      <li><a href="#"onclick="secundaria()">Consulta Secundaria</a></li>
+      <li><a href="#"onclick="estPreescolar()">Consulta Preescolar</a></li>
+      <li><a href="#"onclick="estPrimaria()">Consulta Primaria</a></li>
+      <li><a href="#"onclick="estSecundaria()">Consulta Secundaria</a></li>
   </ul>
   </td>
   
@@ -38,6 +55,7 @@
 
 <hr>
 
+<div id="cargar">
 	   <table border="0" align="center" width="80%">
 	   <tr>
 	   <td align="right" class="color-text-gris"><h1>Gestion Administrativa</h1></td>

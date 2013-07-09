@@ -203,6 +203,20 @@ class Persona extends Modelo{
     
     public function leerPorRol($idRol) {
         $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo, p.fNacimiento, p.estado FROM persona p, rolespersona r WHERE p.idPersona=r.idPersona AND r.idRol='".$idRol."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pers = array();
+        foreach ($resultado as $fila) {
+            $persona = new Persona();
+            $this->mapearPersona($persona, $fila);
+            $pers[$persona->getIdPersona()] = $persona;
+        }
+        return $pers;
+    }
+    
+     public function leerPorSalon($idSalon) {
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo, p.fNacimiento, p.estado FROM persona p, matricula m WHERE p.idPersona=m.idPersona AND m.idSalon='".$idSalon."'";
+        $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();
         foreach ($resultado as $fila) {

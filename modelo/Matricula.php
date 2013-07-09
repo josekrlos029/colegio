@@ -106,6 +106,12 @@ class Matricula extends Modelo{
         $this->ejecutar($this->getParametros($matricula));
     }
     
+   
+    
 }
+  
+       
+    
 
 ?>
+

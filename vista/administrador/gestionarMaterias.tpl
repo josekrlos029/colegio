@@ -110,7 +110,7 @@ function envio(){
         
          
                 <?php foreach ($materias as $materia) { ?>
-                <tr id="cebra">
+                <tr onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
                     <td ><?php echo $materia->getIdMateria();?></td>
                     <td><?php echo $materia->getNombreMateria();?></td>
                     <td><?php echo $materia->getHoras();?></td>

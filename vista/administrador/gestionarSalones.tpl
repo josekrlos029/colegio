@@ -119,7 +119,7 @@ function envio(){
      
 
                 <?php foreach ($salones as $salon) { ?>
-                 <tr id="cebra">
+                 <tr onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
                     <td ><?php echo $salon->getIdSalon();?></td>
                     <td><?php echo $salon->getIdGrado();?></td>
                     <td><?php echo $salon->getGrupo();?></td>

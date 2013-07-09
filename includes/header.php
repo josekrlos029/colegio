@@ -9,8 +9,8 @@
      <!-- search -->
         <div class="top-search">
             <div id="searchform" >
-		<input type="text" value="" name="id" id="s" onkeypress="" placeholder="Numero De Documento" required />
-		<input  type="submit" id="searchsubmit" value=" " />
+		<input type="text"  name="id" id="s"  placeholder="Numero De Documento" required />
+		<input  type="submit" id="searchsubmit" onclick="" />
 	   </div>
 						
 	</div>
@@ -22,5 +22,7 @@
     </table>
 
 
+ <script type="text/javascript">
 
-   
+</script>
+

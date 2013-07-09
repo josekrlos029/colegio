@@ -123,6 +123,62 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+         /**
+         * Imprime La Vista de estudinate de preescolar
+         * @return type
+         */
+        public function estudiantesPreescolar(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'estudiantes Preescolar');
+            $idSalon='0-01';
+            $persona = new Persona();
+            $estudiante = $persona->leerPorSalon($idSalon);
+            $this->vista->set('estudiante', $estudiante);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        /**
+         * Imprime La Vista de estudinate de primaria
+         * @return type
+         */
+        public function estudiantesPrimaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'estudiantes Primaria');
+             $limI='1';
+             $limS='5';
+            $salones = new Salon();
+            $primaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('primaria', $primaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        /**
+         * Imprime La Vista de estudinate de secundaria
+         * @return type
+         */
+        public function estudiantesSecundaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'estudiantes Secundaria');
+             $limI='6';
+             $limS='11';
+            $salones = new Salon();
+            $secundaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('secundaria', $secundaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
         /**
          * Imprime La Vista de Gestión de Cargas de Docentes
          * @return type
@@ -209,7 +265,9 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
-     
+        
+         
+        
       
        
 //**************************************************************************************************//        
@@ -292,7 +350,7 @@ class AdministradorControl extends Controlador{
             $respuesta = "";
             if ($html == 'table'){
             foreach ($materias as $materia) {
-            $respuesta .= "<tr id='cebra'>";
+            $respuesta .= '<tr onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">';
              $respuesta.= '<td>'. strtoupper($materia->getIdMateria()).'</td>';
              $respuesta.= '<td>'. strtoupper($materia->getNombreMateria()).'</td>';
              $respuesta.= '<td>'. strtoupper($materia->getHoras()).'</td>';
@@ -414,7 +472,7 @@ class AdministradorControl extends Controlador{
             $respuesta = "";
             
                   foreach ($cargas as $carg) {
-                      $respuesta .= "<tr  id='cebra'>";
+                      $respuesta .= '<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">';
                       $respuesta.= '<td width="20%" align="center">'. strtoupper($carg->getIdSalon()).'</td>';
                       $materia = new Materia();
                       $materias = $materia->leerMateriaPorId($carg->getIdMateria());
@@ -563,8 +621,8 @@ class AdministradorControl extends Controlador{
                       $respuesta= 2;
                     }else{
                   
-                        $respuesta = "<table class='tabla'> 
-                                       <tr class='modo1'>
+                        $respuesta = '<table class="tabla"> 
+                                       <tr class="modo1">
                                         <td>Nombres:</td>
                                          <td>Primer Apellido:</td>
                                          <td>Segundo Apellido:</td>
@@ -575,7 +633,7 @@ class AdministradorControl extends Controlador{
                                          <td>Fecha De Nacimiento:</td>
                                         </tr>
                                         
-                                        <tr  id='cebra'>
+                                        <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
                                         <td>".$estudiante->getNombres()."</td>
                                         <td>".$estudiante->getPApellido()."</td>
                                         <td>".$estudiante->getSApellido()."</td>
@@ -583,11 +641,11 @@ class AdministradorControl extends Controlador{
                                         <td>".$estudiante->getTelefono()."</td>
                                         <td>".$estudiante->getDireccion()."</td>
                                         <td>".$estudiante->getCorreo()."</td>
-                                        <td>".$estudiante->getFNacimiento()->format('Y-m-d')."</td>
+                                        <td>".$estudiante->getFNacimiento()->format("Y-m-d")."</td>
                                         </tr>
                                     </table>
 
-                                     "; 
+                                     '; 
                   }
               
               }
@@ -631,6 +689,8 @@ class AdministradorControl extends Controlador{
              }
 
          }
+         
+        
       
          public function configurarUsuario() {
              parent::configurarUsuario();

@@ -30,6 +30,7 @@
 	*{margin-top:0;}
  body{
  	font-family: 'Arial Narrow', Arial, sans-serif;
+        text-shadow: 0 1px 0 white;
         background: #e0e3ec url(../imagenes/bg.jpg) repeat top left;
 	font-weight: 400;
 	font-size: 15px;
@@ -153,11 +154,11 @@ transition-delay:2s;
 	h1{
 	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
 	font-size: 36px;
-        text-shadow: 0 1px 0 #fff;
         overflow: hidden;
         margin:0; 
         padding:0; 
         border:0; 
+        text-shadow: 0 1px 0 white;
 	}
         
         .color-text-azul{
@@ -195,13 +196,13 @@ transition-delay:2s;
 	
 	a{
         font-family: 'LeagueGothicRegular', Arial, Helvetica, sans-serif;
-	color: #272727;
+	color: #5b6163;
 	text-decoration:none;
 	font-size: 16px;
 	}
 	
 	a:hover{
-        color:#666;
+        color:#000;
 	text-decoration:none;
 	}
         
@@ -275,6 +276,7 @@ position:relative;
 	height: 25px;
 	border: 0px;
 	background: transparent;
+        cursor:pointer;
 }
 /*END BUSCADOR DE CABECERA */
 

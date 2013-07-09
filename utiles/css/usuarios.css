@@ -17,6 +17,45 @@ padding-right: 3px;
 border: 1px solid #cccccc;
 }
 
+/************menu salones******************/
+#menu {
+	list-style: none;
+	padding: 0;
+	margin-left: 5%;
+	background: -moz-linear-gradient(top, #eeeeee , #cccccc);
+        background: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee),  to(#cccccc));
+	display: block;
+	overflow: hidden;
+	font-size: 0.9em;
+        width: 90%;
+	height:33px;
+	text-transform:capitalize;
+	border-radius: 3px;
+        border: 1px solid #cccccc;	
+        border-bottom: 3px solid #b7b7b7;
+        text-shadow: 0 1px 0 white;
+            
+}
+
+#menu li {
+	display: inline;
+}
+#menu li a {
+	display: block;
+	float: left;
+	padding: 10px 20px;
+	color: #777;
+	text-decoration: none;
+        font-size: 12px;
+        font-weight: bold;
+        border-right: 1px solid #eee;  
+}
+#menu li a:hover {
+    background: #cccccc;
+    color:black;	     
+}
+
+/***************************************/
 
 .avatar{
 padding-left: 30px;  

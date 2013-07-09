@@ -245,7 +245,7 @@
     </tr>
     
     <?php foreach ($resultado as $fila) { ?>
-    <tr class="recorrer" id="cebra" >
+    <tr class="recorrer" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
         <td align="left"><?php echo $fila['idPersona'];?></td>
         <td align="left"><?php echo strtoupper ($fila['pApellido']." ".$fila['sApellido']);?></td> 
         <td><?php echo strtoupper ($fila['nombres']);?></td>

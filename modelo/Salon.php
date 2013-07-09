@@ -79,6 +79,19 @@ public function crearSalon(Salon $salon) {
         }
         return $salones;
     }
+    
+    public function leerSalonesJornada($limS,$limI){
+        $sql = "SELECT idSalon FROM salon WHERE idGrado BETWEEN $limS AND $limI order by idGrado ";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $salones = array();
+        foreach ($resultado as $fila) {
+            $salon = new Salon();
+            $this->mapearSalon($salon, $fila);
+            $salones[$salon->getIdSalon()] = $salon;
+        }
+        return $salones;
+    }
 
     public function actualizarSalon(Salon $salon) {
         $sql = "UPDATE grado SET nombre=:nombre, horas=:horas WHERE idSalon=:idSalon";

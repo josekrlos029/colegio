@@ -185,7 +185,7 @@ $respuesta .= '
 <div class="contenedorCentro">
                  <table aling="right" width="100%"  border="0">
        <tr>
-           <td align="right" class="color-text-rojo" colspan="3"><h3>Datos Academicos</h3></td>    
+           <td align="right" class="color-text-gris" colspan="3"><h3>Datos Academicos</h3></td>    
        </tr>
        <tr>
            <td class="color-text-rojo">salones</td>
@@ -198,12 +198,10 @@ $respuesta .= '
           ';
       $resultado=0;
       $cont=0;
-      //Te falto llamar a Carga
       $carga = new Carga();
       $cargas = $carga->leerCargasPorDocente($idPersona);
       foreach ($cargas as $carg) { 
-          //Cada vez que vas a escribir html.. tienes que concatenar la $respuesta 
-          //y cerrar cuando vayas a hacer una operacion como foreach y luego volver a concatenar $respuesta
+        
           $respuesta .='<tr>
           <td>'.  $carg->getIdSalon().' </td>
          ';
@@ -226,12 +224,10 @@ $respuesta .= '
        </tr>   
        <tr>
            <td colspan="3" class="color-text-gris" align="center">
-               <h2>Total Horas Semanales:'.$resultado.'</h2>
+               <h2>Total Horas Semanales: '.$resultado.'</h2>
            </td>
        </tr>   
-        <tr>
-           <td colspan="3"><hr></td>
-       </tr> 
+     
    </table>     
 </div>
 
