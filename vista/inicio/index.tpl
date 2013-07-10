@@ -50,7 +50,7 @@ window.onload = function() {
 <body>
     
      <div id="cuerpo">
-         <div class="escudo"><img height="419px" width="430px" src="utiles/imagenes/escudo.png"></div>
+         <div class="escudo"><img height="100%" width="90%"  src="utiles/imagenes/escudo.png" alt="ESCUDO"></div>
          <div class="separador"></div>
          <div id="login">
          <h1>Iniciar Sesion</h1>
@@ -82,7 +82,7 @@ window.onload = function() {
      </div> 
     
    <div id="footer">
-     <div class="logo"><img height="80px" width="80px" src="utiles/imagenes/logoInnovar.png"></div>
+     <div class="logo"></div>
        <div id="opcionesFooter">
         <li><a href="#">© 2013 Innovar.dev S.A.S</a></li>
         <li><a href="#">Terminos</a></li>
