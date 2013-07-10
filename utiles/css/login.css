@@ -1,3 +1,7 @@
+body{  
+ line-height:1.6em;  
+}  
+
 
 #msg{
 position:adsolute;
@@ -44,25 +48,27 @@ top: 1px;
 }
 /**********************CUERPO************************/
 #cuerpo{
-    width:90%;
+    width:100%;
     height:auto;
     background-color:#fff;
     margin:auto;
-    padding-left: 10%;
-    padding-top: 15%;
+    padding-top: 10%
 }
-.separador{
-   position:absolute;
-   width: 14px;
-   height: 45%;
-   margin-left: 40%;
-   background-color: #c9c9c9;
-   float:left;
-}
-
 .escudo{
   float:left; 
   position:relative;
+  margin-left: 9%;
+  height:419px ;
+  width:40%; 
+}
+
+.separador{
+   float:left;
+   position:relative;
+   width: 1%;
+   height: 500px;
+   background-color: #c9c9c9;
+   
 }
 
 #login{
@@ -70,7 +76,6 @@ top: 1px;
  position:relative;
  margin-left: 10%;
  width: 40%;
- padding-left: 10%;
 }
 
 #login h1{
@@ -128,11 +133,14 @@ top: 1px;
     margin-left: 3%;
     margin-top: -3%;
     float:left;
+    height:80px ;
+    width:10%; 
+    background: url(../imagenes/logoFooter.png)no-repeat;
 }
 
 #opcionesFooter{
    position: relative;
-    margin-left: 10%;
+    margin-left: 8%;
     margin-top: 1.5%; 
     float:left;
 }
@@ -158,3 +166,111 @@ top: 1px;
 
 /********FIN DE EL FOOTER*****************/
 
+@media screen and (min-width:1200px){  
+ .escudo {  
+ height:419px ;
+ width:40%;  
+ }  
+  
+ #cuerpo{  
+ width:1100px;  
+ }    
+  
+ h1{  
+ font-size:300%;   
+ }                            
+  
+}
+
+@media screen and (max-width:480px){  
+ 
+#cuerpo{
+    width:90%;
+    height:50%;
+    margin:auto;
+    padding-top:0%;
+  
+}
+
+ .escudo{
+  float:center; 
+  position:relative;
+  height:250px;
+  width:80%; 
+  background: url(../imagenes/escudoMovil.png)no-repeat;
+  margin-left: 10%;
+}
+
+#login{ 
+ padding-top: 20px;
+ float:center; 
+ position:relative;
+ width: 100%;
+
+}
+
+.separador{
+   width: 0%;
+   height: 0;  
+}
+
+.logo{
+    position: relative;
+    margin-left: 40%;
+    margin-bottom:0;
+    float:center;
+    height:80px ;
+    width:100%; 
+    background: url(../imagenes/logoFooter.png)no-repeat;
+}
+
+.cajaTexto{
+                outline: none;
+                width: 60%;
+                padding: 15px 10px 10px 15px; 
+		color: #000000; 
+		font-family: Arial, Helvetica, sans-serif;   
+		font-size: 140%; 
+		border: 1px solid #c9c9c9 ;
+}
+
+#login input{
+  margin-top: 10px;  
+}
+#login button{
+  margin-top: 10px;  
+}
+
+.mensaje{
+    margin-top: 5px;
+}
+#footer{
+    padding-top: 30px;
+    float:center; 
+    width:100%;
+    height:0%;
+    background-color:#e62746;
+    position:relative;
+}
+
+#opcionesFooter li{
+    display:list;
+      
+}
+
+#opcionesFooter li a{
+   display: block;
+    float: left;
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Arial',Arial Narrow, sans-serif;
+    padding-left: 40px;
+}
+
+#opcionesFooter li a:hover {
+    color:#000;	     
+}
+  
+}  
