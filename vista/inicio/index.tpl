@@ -62,17 +62,17 @@ window.onload = function() {
             <div class="mensaje"></br>tambien puedes Iniciar sesion con</br> tu red Social Favorita:</br></div>
             
             <a href="/colegio/inicio/accesofb/face">
-                     <img height="90px" width="90px" src="utiles/imagenes/iconos/facebook.png" alt="facebook" 
+                     <img height="15%" width="15%" src="utiles/imagenes/iconos/facebook.png" alt="facebook" 
                          accesskey=""onmouseover="this.src='utiles/imagenes/iconos/facebookHover.png'" 
                         onmouseout="this.src='utiles/imagenes/iconos/facebook.png';"/>
                      
             <a href="/colegio/inicio/accesofb/twitter">
-                      <img height="90px" width="90px" src="utiles/imagenes/iconos/twitter.png" alt="twitter"
+                      <img height="15%" width="15%" src="utiles/imagenes/iconos/twitter.png" alt="twitter"
                         accesskey=""onmouseover="this.src='utiles/imagenes/iconos/twitterHover.png'" 
                         onmouseout="this.src='utiles/imagenes/iconos/twitter.png';"/>
                       
             <a href="/colegio/inicio/accesofb/google">
-                       <img height="90px" width="90px" src="utiles/imagenes/iconos/google.png" alt="google plus" 
+                       <img height="15%" width="15%" src="utiles/imagenes/iconos/google.png" alt="google plus" 
                         accesskey=""onmouseover="this.src='utiles/imagenes/iconos/googleHover.png'" 
                         onmouseout="this.src='utiles/imagenes/iconos/google.png';"/>
                        
@@ -82,7 +82,7 @@ window.onload = function() {
      </div> 
     
    <div id="footer">
-       <div class="logo"><img height="150px" width="150px" src="utiles/imagenes/logoInnovar.png"></div>
+     <div class="logo"><img height="80px" width="80px" src="utiles/imagenes/logoInnovar.png"></div>
        <div id="opcionesFooter">
         <li><a href="#">© 2013 Innovar.dev S.A.S</a></li>
         <li><a href="#">Terminos</a></li>
