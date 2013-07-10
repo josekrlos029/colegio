@@ -40,6 +40,19 @@ class Rol extends Modelo{
         return $roles;
     }
     
+    public function rolPersona($idPersona){
+      $sql =  "SELECT  idRol FROM rolesPersona WHERE idPersona=".$idPersona;
+       $this->__setSql($sql);
+       $resultado = $this->consultar($sql);
+        $rol=NULL;
+        foreach ($resultado as $fila) {
+            $rol = new Rol();
+            $this->mapearRol($rol, $fila);
+            
+        }
+        return $rol;
+    }
+    
     
  
 private function mapearRol(Rol $rol, array $props){

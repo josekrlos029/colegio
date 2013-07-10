@@ -18,6 +18,22 @@ var data="idPersona="+idPersona;
  
       
 }
+
+function leerEstudiantes(idSalon){
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+ 
+var y= $("#tablaEstudiantes"); 
+ var url="/colegio/administrador/estudiantesSalones";
+ var data="idSalon="+idSalon;
+ envioJson(url,data,function respuesta(res){   
+    x.hide();            
+    y.html (res);
+         });
+
+}
 </script>
   <p>&nbsp;</p>
             </br>
@@ -49,33 +65,16 @@ var data="idPersona="+idPersona;
                   <p>&nbsp;</p>
              <div  id="menu">   
                   <?php foreach ($primaria as $salon) { ?>    
-                   <li><a href="#" onClick="consulta( )"><?php echo $salon->getIdSalon();?></a></li>
+                   <li><a href="#" onClick="leerEstudiantes('<?=$salon->getIdSalon()?>')"><?php echo $salon->getIdSalon();?></a></li>
                   <?php } ?>
               </div>   
               <p>&nbsp;</p>
-         <table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
-                <tr class="modo1">
-                    <td>Documento</td>
-                    <td>Nombres</td>
-                    <td>P.Apellido</td>
-                    <td>S.Apellido</td>
-                    <td>Sexo</td>
-                    <td>Telefono</td>
-                    <td>Dirección</td>
-                    <td>Correo</td>
-                    <td>consultar</td>
-                    <td>editar</td>
-                    <td>Inhabilitar</td>
-                    
-                </tr> 
+        
            
- 
-            <tbody>
-              
-            
-           
-            </tbody>
-        </table>
+                <div id="tablaEstudiantes" >
+               <h1  style='margin-left:5%'>Seleccione un Salon...</h1>
+               </div>
+               
               
 <div id="fade" class="overlay"></div>
 <div id="light" class="modal">

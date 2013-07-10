@@ -179,6 +179,59 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+         /**
+         * Imprime estudiantes por salones
+         * @return type
+         */
+        public function estudiantesSalones(){
+            try {
+            $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+            $persona = new Persona();
+            $estudiante = $persona->leerPorSalon($idSalon);
+            $respuesta = "";
+            
+              $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+                     <tr class="modo1">
+                    <td>Documento</td>
+                    <td>Nombres</td>
+                    <td>P.Apellido</td>
+                    <td>S.Apellido</td>
+                    <td>Sexo</td>
+                    <td>Telefono</td>
+                    <td>Dirección</td>
+                    <td>Correo</td>
+                    <td>consultar</td>
+                    <td>editar</td>
+                    <td>Inhabilitar</td>
+                    </tr> ';
+                 foreach ($estudiante as $est){
+     $respuesta .= '<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
+                    <td>'. $est->getIdPersona().'</td>
+                    <td>'. $est->getNombres().'</td>
+                    <td>'. $est->getPApellido().'</td>
+                    <td>'. $est->getSApellido().'</td>
+                    <td>'. $est->getSexo().'</td>
+                    <td>'. $est->getTelefono().'</td>
+                    <td>'. $est->getDireccion().'</td>
+                    <td>'. $est->getCorreo().'</td>
+                    <td align="center"><a href="#" onclick="consultaPersona ('. strtoupper ($est->getIdPersona()).') "><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
+                    <td align="center"><a href="#" onclick="editarPersona   ('. strtoupper ($est->getIdPersona()).') "><img src="../utiles/imagenes/iconos/editarPersona.png" /></a></td>
+                    <td align="center"><a href="#" onclick="eliminarPersona ('. strtoupper ($est->getIdPersona()).') "><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a></td>
+                </tr>';     
+                  }
+                $respuesta.='</table>';
+               
+            if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            }
+            
+             } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+            
+        }
         /**
          * Imprime La Vista de Gestión de Cargas de Docentes
          * @return type

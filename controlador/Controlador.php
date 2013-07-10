@@ -150,6 +150,9 @@ class Controlador {
             try{
            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
             $pers = new Persona();
+            $rolPersona = new Rol();
+            $roles = $rolPersona->rolPersona($idPersona);
+            $rol=$roles->getIdRol(); 
             $persona = $pers->leerPorId($idPersona);
             $respuesta = "";
               
@@ -179,13 +182,14 @@ class Controlador {
                                     <tr><td>'. strtoupper($persona->getFNacimiento()->format('Y-m-d')).'</td></tr>
                                 </table>
              </div>';
-       
+             
+            if ($rol == 'D'){
 $respuesta .= ' 
      
 <div class="contenedorCentro">
                  <table aling="right" width="100%"  border="0">
        <tr>
-           <td align="right" class="color-text-gris" colspan="3"><h3>Datos Academicos</h3></td>    
+           <td align="right" class="color-text-gris" colspan="3"><h3>Datos Academicos del Docente</h3></td>    
        </tr>
        <tr>
            <td class="color-text-rojo">salones</td>
@@ -231,7 +235,19 @@ $respuesta .= '
    </table>     
 </div>
 
-                  ';
+    ';
+            }elseif($rol == 'E'){
+             $respuesta .= ' 
+            <div class="contenedorCentro">
+            <table aling="right" width="100%"  border="0">
+            <tr>
+            <td align="right" class="color-text-gris" colspan="3"><h3>Datos Academicos del Estudiante</h3></td>    
+            </tr>
+            </table>
+            </div>';   
+            }else{
+               echo json_encode("<tr> </tr>"); 
+            }
                       
             if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
