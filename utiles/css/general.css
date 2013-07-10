@@ -5,16 +5,9 @@
 /* mozilla firefox */
 ::-moz-selection { background:#000; color: #fff; }
 
-@font-face {
-    font-family:'Bebas';
-    src: url('../fonts/BebasNeue-webfont.ttf');
-}
 
-@font-face {
-		 font-family:'Monte';
-    src: url('../fonts/Montepetrum bold.ttf');
 
-	}
+
 	
 	@font-face {
     font-family: 'BebasNeueRegular';
