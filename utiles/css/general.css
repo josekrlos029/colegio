@@ -235,7 +235,7 @@ left:0px;
 position:relative;    
 width: 100%;  
 background: #e0e3ec url(../imagenes/bgCabecera.jpg) repeat top left;
-
+z-index: 99999;
 } 
  /*BUSCADOR DE CABECERA */
  .top-search{

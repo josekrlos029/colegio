@@ -89,33 +89,80 @@ class InicioControl extends Controlador{
      * @return type
      */
      public function enviardatosolvido() {
-        if (isset($_POST['botonenviar'])) {
-            $id = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
-            $email = isset($_POST['email']) ? $_POST['email'] : NULL;
+      
+            $campo = isset($_POST['campo']) ? $_POST['campo'] : NULL;
             $persona = new Persona();
-            if ($id!=NULL){
-             $per=$persona->leerPorId($id);   
-            }else{
-                $per=$persona->leerPorCorreo($email);
-            }
+            $per=$persona->leerParaRecuparacion($campo);
             
             if ($per == NULL) {
-                $this->vista->set('mensaje', 'No esta registrado');
-                return $this->vista->imprimir();
+                echo json_encode(0);
+            }else{
+                $key= "colegio";
+                $string = $per->getIdPersona();        
+                $cadena = $this->encrypt($string, $key);
+                $msg1 = "Para cambiar su clave, haga clic en el siguiente enlace:<br>";
+                $msg1 .= "http://localhost/colegio/inicio/cambiarClave/".$cadena;
+                $msg1 .= "<br>El administrador";
+                $asunto = "Cambio de Contraseña Aplicación";
+                $this->enviarCorreo($msg1,$per->getCorreo(),$asunto, $per->getNombres()." ".$per->getPApellido()) ;
             }
-            $msg1 = "Para cambiar su clave, haga clic en el siguiente enlace:<br>";
-            //TODO: Mejor URL Para recuperar clave, por ejemplo, 
-            //md5 o sha combinando usuario+mail+salt, etc.
-            $msg1 .= "http://localhost/colegio/inicio/cambiarclave/111";
-            $msg1 .= "<br>El administrador";
-            
-            $asunto = "Cambio de Contraseña Aplicación";
-
-            $this->enviarCorreo($msg1,$per->getCorreo(),$asunto, $per->getNombres()." ".$per->getPApellido()) ;
-              
         }
+    public function cambiarClave($string) {
+        try {
+        $key= "colegio";
+        $id = $this->decrypt($string, $key);
+        $persona  = new Persona();
+        $per = $persona->leerPorId($id);
+        $usuario = new Usuario();
+        $user = $usuario->leerPorId($id);
+        $this->vista->set('persona', $per);
+        $this->vista->set('usuario', $user);
+        $this->vista->set('titulo', 'Cambiar contrase&ntilde;a');
+        return $this->vista->imprimir();
+    
+        } catch (Exception $exc) {
+            echo $exc->getMessage();
+            return $this->vista->imprimir();
+        }
+
+     }
+        
+        
+    public function encrypt($string, $key) {
+        $result = '';
+        for($i=0; $i<strlen($string); $i++) {
+            $char = substr($string, $i, 1);
+            $keychar = substr($key, ($i % strlen($key))-1, 1);
+            $char = chr(ord($char)+ord($keychar));
+            $result.=$char;
+        }
+        return base64_encode($result);
+    }   
+
+    public function decrypt($string, $key) {
+        $result = '';
+        $string = base64_decode($string);
+        for($i=0; $i<strlen($string); $i++) {
+            $char = substr($string, $i, 1);
+            $keychar = substr($key, ($i % strlen($key))-1, 1);
+            $char = chr(ord($char)-ord($keychar));
+            $result.=$char;
+        }
+        return $result; 
     }
     
+    public function actualizarClave(){
+        try {
+            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $clave = isset($_POST['clave']) ? $_POST['clave'] : NULL;
+            $clave = sha1($clave);
+            $usuario = new Usuario();
+            $usuario->actualizarContraseña($idPersona, $clave);
+            echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode(0);
+        }
+        }
     
     public function accesofb($social) {
         session_start();

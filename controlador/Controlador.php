@@ -42,17 +42,16 @@ class Controlador {
             $mailer->IsSMTP();
             $mailer->Host = "smtp.gmail.com";
             $mailer->Port = 587;
-            $mailer->SMTPAuth = FALSE;
+            $mailer->SMTPAuth = true;
             $mailer->SMTPSecure = "tls";
             $mailer->Username = "josekrlos029@gmail.com";
             $mailer->Password = "1009jose";
+           
             if (!$mailer->Send()) {
                 
-                $this->vista->set("mensaje", "Error al enviar correo! (" . $mailer->ErrorInfo . ")");
-                return $this->vista->imprimir();
+                echo json_encode(2);
             } else {
-                $this->vista->set('mensaje', 'Se ha enviado la informaci&oacute;n de acceso a su correo.');
-                return $this->vista->imprimir();
+                echo json_encode(1);
             }
         
         
