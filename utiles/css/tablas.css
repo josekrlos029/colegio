@@ -17,11 +17,10 @@ text-shadow: 0 1px 0 white;
 
 }
 .tabla .modo1 td {
-padding: 3px;
-border-bottom: 5px;
-border-bottom-color: #000;
-border-bottom-style:solid; 
-text-align:center;
+padding: 5px;
+border: 1px solid #b1b1b1;
+background-color:#dbdbdb; 
+text-align:right;
 }
 
 
