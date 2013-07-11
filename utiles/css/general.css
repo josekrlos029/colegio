@@ -23,11 +23,11 @@
 	*{margin-top:0;}
  body{
  	font-family: 'Arial Narrow', Arial, sans-serif;
-        text-shadow: 0 1px 0 white;
+        
         background: #e0e3ec url(../imagenes/bg.jpg) repeat top left;
 	font-weight: 400;
 	font-size: 15px;
-	color: #5b6163;
+        color:#3a3a3a;
 	overflow-y: scroll;
 	margin-top: 0;
 	margin-left:0;	
@@ -52,6 +52,7 @@ font-family: 'Arial', Helvetica, sans-serif;
 color: #5b6163;
 text-decoration:none;
 font-size: 12px;    
+text-shadow: 0 1px 0 white;
 }
 
 .footer:hover{
@@ -173,11 +174,13 @@ transition-delay:2s;
         h2{
 	font-size: 20px;
         font-family: 'LeagueGothicRegular', Arial, Helvetica, sans-serif;
+        text-shadow: 0 1px 0 white;
 	}
         
         h3{
 	font-size: 28px;
         font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+        text-shadow: 0 1px 0 white;
 	}
        
 	
@@ -192,6 +195,7 @@ transition-delay:2s;
 	color: #5b6163;
 	text-decoration:none;
 	font-size: 16px;
+        text-shadow: 0 1px 0 white;
 	}
 	
 	a:hover{
