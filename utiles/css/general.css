@@ -28,9 +28,9 @@
 	font-weight: 400;
 	font-size: 15px;
         color:#3a3a3a;
-	overflow-y: scroll;
 	margin-top: 0;
 	margin-left:0;	
+        margin-right:0; 
   
 }
 
@@ -40,9 +40,7 @@
 padding-top: 25px
 }
 
-html {
- overflow-x:hidden;
-}
+
 
 
 .footer{
