@@ -267,6 +267,20 @@ class Persona extends Modelo{
         return $persona;
     }
     
+     public function leerParaRecuparacion($campo){
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo, p.estado,  p.fNacimiento FROM persona p, usuario u";
+        $sql .= " WHERE p.idPersona='".$campo."' or p.correo='".$campo."' or u.usuario='".$campo."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $persona=NULL;
+        foreach ($resultado as $fila) {
+            $persona = new Persona();
+            $this->mapearPersona($persona, $fila);
+            
+        }
+        return $persona;
+    }
+    
       public function actualizarCorreo($idPersona,$correo) {
         $sql = "UPDATE persona SET correo=:correo WHERE idPersona=:idPersona";
         $this->__setSql($sql);
