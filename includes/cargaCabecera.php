@@ -5,7 +5,7 @@
 		<link href="../utiles/css/general.css" rel="stylesheet" type="text/css" media="screen"/>
                 <link href="../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
                  <link href="../utiles/css/usuarios.css" rel="stylesheet" type="text/css" media="screen"/>             
-                <link href="../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
+                 <link href="../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
                 <link href="../utiles/css/tablas.css" rel="stylesheet" type="text/css" media="screen"/>
                 <script src="../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
                 <script src="../utiles/js/easing.js" type="text/javascript" ></script>

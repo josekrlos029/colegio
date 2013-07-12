@@ -107,14 +107,14 @@
                     
                 </div>
         </div> 
-                <p>&nbsp;</p>
+        <p>&nbsp;</p>
                       
-                         
+             
      <!--------------------------------------------------------------------> 
      <div class="contenedor" style="width: 70%; margin: 0 auto;" aling="center">
         <table align="center" width="100%"  border="0">
             <tr>
-                <td align="right" class="color-text-rojo" colspan="3"><h3>Ingreso De Notas</h3></td>    
+                <td align="left" class="color-text-rojo" colspan="3"><h3>Ingreso De Logros</h3></td>    
             </tr>
             <tr>
                 <td colspan="3" aling="center" class="color-text-gris"><h2>Ubicacion:</h2></td>

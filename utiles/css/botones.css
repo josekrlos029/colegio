@@ -65,17 +65,17 @@ padding: 8px 14px 9px;
 .pink.button { background-color: #E22092; }
 .pink.button:hover{ background-color: #C81E82; }
 
-.green.button, .green.button:visited { background-color: #aacc5b; }
-.green.button:hover{ background-color: #749A02; }
+.green.button, .green.button:visited { background-color: #00d73d; }
+.green.button:hover{ background-color: #aacc5b; }
 
-.red.button, .red.button:visited { background-color: #E62727; }
-.red.button:hover{ background-color: #CF2525; }
+.red.button, .red.button:visited { background-color: #fe2b35; }
+.red.button:hover{ background-color: #E62727; }
 
 .orange.button, .orange.button:visited { background-color: #FF5C00; }
 .orange.button:hover{ background-color: #D45500; }
 
-.blue.button, .blue.button:visited { background-color: #0089e1; }
-.blue.button:hover{ background-color: #2575CF; }
+.blue.button, .blue.button:visited { background-color: #4c6eff; }
+.blue.button:hover{ background-color: #0089e1; }
 
 .yellow.button, .yellow.button:visited { background-color: #FFB515; }
 .yellow.button:hover{ background-color: #FC9200; }
