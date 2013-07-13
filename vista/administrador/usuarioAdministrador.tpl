@@ -146,7 +146,7 @@
            
            <tr>
             <td width="10%" align="center">
-             <a href="#"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAño.png ></div></a>
+             <a href="cierreAcademico/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAño.png ></div></a>
              <div class="text-icon">Cierre de Año</div>
            </td>
            

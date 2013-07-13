@@ -319,7 +319,17 @@ class AdministradorControl extends Controlador{
         }
         }
         
-         
+         public function cierreAcademico(){
+          try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Cierre del Año');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        } 
+
         
       
        
@@ -687,7 +697,7 @@ class AdministradorControl extends Controlador{
                                         </tr>
                                         
                                         <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
-                                        <td>".$estudiante->getNombres()."</td>
+                                        <td>'.$estudiante->getNombres()."</td>
                                         <td>".$estudiante->getPApellido()."</td>
                                         <td>".$estudiante->getSApellido()."</td>
                                         <td>".$estudiante->getSexo()."</td>
@@ -698,7 +708,7 @@ class AdministradorControl extends Controlador{
                                         </tr>
                                     </table>
 
-                                     '; 
+                                     "; 
                   }
               
               }
@@ -743,7 +753,33 @@ class AdministradorControl extends Controlador{
 
          }
          
-        
+        public function procesarCierre(){
+             try {
+                 $nombreUsuario = isset($_POST['usuario']) ? $_POST['usuario'] : NULL;
+                 $clave = isset($_POST['clave']) ? $_POST['clave'] : NULL;
+                 $fecha = getdate();
+                if ($fecha["month"]== 'January' or $fecha["month"]== 'February' or $fecha["month"]== 'March'){
+                    $año=$fecha["year"] ;
+                    $añoLectivo=$año - 1  ;
+                }else{
+                    $añoLectivo=$fecha["year"];
+                }
+                $jornada="MAÑANA";
+                $usuario = new Usuario();
+                $user = $usuario->verificarAdmin($nombreUsuario, $clave); 
+                if ($user == NULL) {
+                        echo json_encode(2);
+                 }else{
+                        $admin = new Administrador();
+                        $admin->cierreAcademico($añoLectivo, $jornada);
+                        echo json_encode(1);
+                 }
+                
+             } catch (Exception $exc) {
+                 echo json_encode(0);
+             }
+                  }
+    
       
          public function configurarUsuario() {
              parent::configurarUsuario();

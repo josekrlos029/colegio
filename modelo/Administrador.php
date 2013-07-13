@@ -10,8 +10,16 @@
  *
  * @author JoseCarlos
  */
-class Administrador {
-    //put your code here
+class Administrador extends Modelo{
+     public function __construct() {
+        parent::__construct();
+    }
+    
+    public function cierreAcademico($añoLectivo,$jornada){
+         $sql = "CALL historial('".$añoLectivo."','".$jornada."')";
+        $this->__setSql($sql);
+        $this->ejecutar();
+    }
 }
 
 ?>

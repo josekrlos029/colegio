@@ -5,6 +5,14 @@
 
 <script type="text/javascript">
     
+function nuevo(){
+$("#idPersona").val("");
+$("#idPersona").removeAttr("disabled");
+$("#tabla").html(" ");
+$("#matricula").hide();
+$("#nuevo1").hide();
+}    
+    
 function envio(){ 
   
  var x = $("#mensaje");
@@ -42,7 +50,9 @@ function envio(){
             }else{
             y.html(res);
             $("#matricula").show();
+            $("#idPersona").attr("disabled","disabled");
             x.hide();
+            $("#nuevo1").show();
             }
             
          });
@@ -75,7 +85,7 @@ function matricular(){
                 x.html ("<p>Estudiante Matriculado Correctamente</p>");
                 exito();
                 ocultar();
-               document.location.href="/colegio/administrador/matricularEstudiante";
+               nuevo();
             }else{
                  x.html ("<p>"+res+"</p>");
                  error();
@@ -119,8 +129,9 @@ function matricular(){
        <table width="50%" border="0" cellspacing="0" cellpadding="2">
                 
            <td align="right">Digite Numero de Documento:</td>
-           <td><input name="idPersona" id="idPersona" type="text" class="box-text" required/></td>
-           <td><input name="consultarEstudiante" id="consultarEstudiante" type="submit" value="Consultar" class="button large blue" onclick="envio()" /></td>       
+           <td><input name="idPersona"  id="idPersona" type="text" class="box-text" required/></td>
+           <td><input name="consultarEstudiante" id="consultarEstudiante" type="submit" value="Consultar" class="button large blue" onclick="envio()" /></td>
+           <td id="nuevo1" hidden><input name="nuevo" id="nuevo" type="submit" value="Nuevo" class="button large green" onclick="nuevo()" /></td>
        </tr>
         </table>
       <p>&nbsp;</p>
