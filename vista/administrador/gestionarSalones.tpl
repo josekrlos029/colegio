@@ -104,7 +104,7 @@ function envio(){
      <p>&nbsp;</p>
      
       
-        <table border="0" width="50%" cellspacing="0" cellpadding="0" align="center" class="tabla">
+        <table border="0" width="30%" cellspacing="0" cellpadding="0" align="center" class="tabla">
                
               <tr>
                <td align="center" class="color-text-gris" colspan="3"><h1>Aulas De Clases Registradas</h1></td>
@@ -120,7 +120,7 @@ function envio(){
 
                 <?php foreach ($salones as $salon) { ?>
                  <tr onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
-                    <td ><?php echo $salon->getIdSalon();?></td>
+                    <td><?php echo $salon->getIdSalon();?></td>
                     <td><?php echo $salon->getIdGrado();?></td>
                     <td><?php echo $salon->getGrupo();?></td>
                 </tr>

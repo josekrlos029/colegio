@@ -179,6 +179,14 @@ class Persona extends Modelo{
         
     }
     
+     public function actualizarPersona(Persona $persona) {
+        $sql = "UPDATE persona SET nombres=?, pApellido=?, sApellido=?, sexo=?, telefono=?, direccion=?, correo=?, fNacimiento=? estado=? WHERE idPersona=?";
+        $this->__setSql($sql);
+        $this->ejecutar($this->getParametros($persona));        
+        }
+    
+    
+    
     public function asignarRol(Persona $persona){
         $sql = "INSERT INTO rolespersona (idPersona, idRol) VALUES ( :idPersona, :idRol)";
         $this->__setSql($sql);
@@ -227,12 +235,7 @@ class Persona extends Modelo{
         return $pers;
     }
 
-    public function actualizarPersona(Persona $persona) {
-        $sql = "UPDATE persona SET nombres=?, pApellido=?, sApellido=?, sexo=?, telefono=?, direccion=?, correo=?, fNacimiento=? WHERE idPersona=?";
-        $this->__setSql($sql);
-        $this->ejecutar($this->getParametros($persona));        
-        }
-    
+   
     
     public function eliminarPersona(Persona $persona) {
         $sql = "DELETE persona where idPersona=?";

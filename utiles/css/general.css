@@ -76,6 +76,16 @@ width: 100%;
     position:relative;
 } 
 
+#box img:hover{
+    -webkit-transform: scale(1.05,1.07);
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 250ms;
+    -moz-transform: scale(1.05,1.07);
+    -moz-transition-timing-function: ease-out;
+    -moz-transition-duration: 250ms;
+    position: relative;
+    z-index: 99;
+}
 
 
 .text-icon{

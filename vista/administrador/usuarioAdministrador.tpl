@@ -99,7 +99,7 @@
            </td>
            
            <td width="10%" align="center">
-            <a href="#"><div id="box" class="blue"><img height="40px" width="40px" src=../utiles/imagenes/iconos/actualizar.png ></div></a>
+            <a href="/colegio/administrador/actualizarEstudiante"><div id="box" class="blue"><img height="40px" width="40px" src=../utiles/imagenes/iconos/actualizar.png ></div></a>
            <div class="text-icon">Actualizar</div>  
            </td>
            

@@ -4,6 +4,8 @@
     <tr>
         <td colspan="5"><hr></td>
     </tr>
+</table>   
+    <table border="0" align="center" width="80%">
     <tr>
         <td width="50%">  <a class="footer" href="#">© 2013 Innovar.dev S.A.S</a></td> 
         <td align="right"><a class="footer" href="#">Terminos</a></td>

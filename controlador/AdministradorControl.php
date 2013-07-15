@@ -273,6 +273,16 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+          public function actualizarEstudiante(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Actualizar Estudiante');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
                    
     /**
     * imprime formulario de registro de estudiantes
@@ -779,7 +789,123 @@ class AdministradorControl extends Controlador{
                  echo json_encode(0);
              }
                   }
+                  
+        public function consultaActEstudiante(){
+        try {
+            $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            
+            $persona = new Persona();
+            $estudiante = $persona->leerPorId($idPersona);
+            if ($estudiante == NULL){
+                 $respuesta= 1;
+            }else{
+                $rol = new Rol();
+                $roles = $rol->leerRoles($idPersona);
+                $band = 0;
+                foreach ($roles  as $ro) {
+                  if ($ro->getIdRol() == 'E'){
+                      $band=1;
+                  } 
+                }
+                    if ($band!=1){
+                      $respuesta= 3;
+                    }else{
+                  
+                        $respuesta = ' <table width="40%" border="0" cellspacing="0" cellpadding="2">
+                                        <tr>
+                                        <td></td>
+                                        <td align="left" class="color-text-gris"><h1>DATOS DEL ESTUDIANTE</h1></td>
+                                        </tr>  
+                                       <tr>
+                                         <td  align="right" width="40%" >Nombres:</td>
+                                        <td><input name="nombres" id="nombres" type="text" class="box-text" value='.$estudiante->getNombres().' required/></td>
+                                        </tr>  
+                                        <tr>
+                                         <td align="right">Primer Apellido:</td>
+                                         <td><input name="pApellido" id="pApellido" type="text" class="box-text" value='.$estudiante->getPApellido().' required/></td>
+                                         </tr> 
+                                         <tr>
+                                         <td align="right">Segundo Apellido:</td>
+                                         <td><input name="sApellido" id="sApellido" type="text" class="box-text" value='.$estudiante->getSApellido().' required/></td>
+                                         </tr>
+                                         <tr>
+                                         <td align="right">Sexo:</td>
+                                          <td><select name="sexo" id="sexo" value='.$estudiante->getSexo().'>
+                                          <option>M</option>
+                                        <option>F</option>
+                                        </select></td>
+                                         </tr>
+                                         <tr>
+                                         <td align="right">Telefono:</td>
+                                          <td><input name="telefono" id="telefono" type="number" class="box-text" value="'.$estudiante->getTelefono().'" /></td>
+                                          </tr>  
+                                          <tr>
+                                         <td align="right">Direccion:</td>
+                                          <td><input name="direccion" id="direccion" type="text" class="box-text" value="'.$estudiante->getDireccion().'"  /></td>
+                                          </tr>    
+                                          <tr>
+                                         <td align="right">Correo:</td>
+                                          <td><input name="correo" id="correo" type="email" class="box-text" value="'.$estudiante->getCorreo().'" /></td>
+                                          </tr>  
+                                          <tr>
+                                         <td align="right">Fecha De Nacimiento:</td>
+                                         <td><input name="fNacimiento" id="fNacimiento" type="date"  class="box-text" value="'.$estudiante->getFNacimiento()->format("Y-m-d").'" required/></td>
+                                        </tr>
+                                        <td align="right">Estado:</td>
+                                         <td><input name="estado" id="estado" type="text"  class="box-text" value="'.$estudiante->getEstado().'" required/></td>
+                                        </tr>
+                                     <tr>
+                                        <td></td><td><input name="actualizaEstudiante" id="actualizaEstudiante" type="submit" value="Actualizar" class="button large blue" onclick="actualizarEstudiante()" /></td>
+                                         </tr>
+                                        </table>  
+
+                                     '; 
+                  }
+              
+              }
+            echo json_encode($respuesta);
+    } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+            
+         }     
     
+           /**
+         * guarda los datos que vienen del formulario actualizar Estudiantes
+         */
+        public function actualizaEstudiantes(){
+           try {
+             $idPersona= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $nombres = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
+             $pApellido = isset($_POST['pApellido']) ? $_POST['pApellido'] : NULL;
+             $sApellido = isset($_POST['sApellido']) ? $_POST['sApellido'] : NULL;
+             $sexo = isset($_POST['sexo']) ? $_POST['sexo'] : NULL;
+             $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : NULL;
+             $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : NULL;
+             $correo = isset($_POST['correo']) ? $_POST['correo'] : NULL;
+             $fNacimiento = isset($_POST['fNacimiento']) ? $_POST['fNacimiento'] : NULL;
+             $Estado = isset($_POST['Estado']) ? $_POST['Estado'] : NULL;
+             
+             $persona = new Persona();
+         
+             $persona->setIdPersona($idPersona);
+             $persona->setNombres($nombres);
+             $persona->setPApellido($pApellido);
+             $persona->setSApellido($sApellido);
+             $persona->setSexo($sexo);
+             $persona->setTelefono($telefono);
+             $persona->setDireccion($direccion);
+             $persona->setCorreo($correo);
+             $persona->setFNacimiento($fNacimiento);
+             $persona->setEstado($Estado);
+             
+             $persona->actualizarPersona($persona);
+             
+             echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }     
+        }
       
          public function configurarUsuario() {
              parent::configurarUsuario();

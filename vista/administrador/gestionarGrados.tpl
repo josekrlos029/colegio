@@ -94,13 +94,13 @@ function envio(){
      <hr>
      <p>&nbsp;</p>
         
-       <table width="50%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+       <table width="40%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
                <td align="center" class="color-text-gris" colspan="2"><h1>Grados Registrados</h1></td>
            </tr>
          
                 <tr class="modo1" >
-                    <td width="40%">ID de Grado</td>
+                    <td>ID de Grado</td>
                     <td>Nombre Del grado</td>
                 </tr>
                 <?php foreach ($grados as $grado) { ?>
