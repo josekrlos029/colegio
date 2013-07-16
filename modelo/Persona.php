@@ -180,9 +180,10 @@ class Persona extends Modelo{
     }
     
      public function actualizarPersona(Persona $persona) {
-        $sql = "UPDATE persona SET nombres=?, pApellido=?, sApellido=?, sexo=?, telefono=?, direccion=?, correo=?, fNacimiento=? estado=? WHERE idPersona=?";
+        $sql = "UPDATE persona SET nombres=:nombres, pApellido=:pApellido, sApellido=:sApellido, sexo=:sexo, telefono=:telefono, direccion=:direccion, correo=:correo, fNacimiento=:fNacimiento, estado=:estado  WHERE idPersona=:idPersona";
         $this->__setSql($sql);
-        $this->ejecutar($this->getParametros($persona));        
+        $this->ejecutar($this->getParametros($persona));
+       
         }
     
     

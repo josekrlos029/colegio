@@ -93,6 +93,8 @@ class EstudianteControl extends Controlador{
          public function configurarCorreo() {
              parent::configurarCorreo();
          }
+         
+        
 }
 
 ?>

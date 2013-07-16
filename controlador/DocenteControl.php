@@ -332,8 +332,8 @@ class DocenteControl extends Controlador{
              parent::configurarCorreo();
          }
                 
-      
-               
-}
+    
+}             
+
 
 ?>

@@ -49,6 +49,7 @@ function actualizarEstudiante(){
  cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
+ 
  var idPersona = document.getElementById("idPersona");
  var nombres = document.getElementById("nombres");
  var pApellido = document.getElementById("pApellido");
@@ -60,6 +61,7 @@ function actualizarEstudiante(){
  var fNacimiento = document.getElementById("fNacimiento");
  var Estado = document.getElementById("estado");
  
+ 
 
     if (idPersona.value=="" || nombres.value=="" || pApellido.value=="" || sApellido.value=="" || fNacimiento.value=="" || Estado.value==""){
     
@@ -67,8 +69,7 @@ function actualizarEstudiante(){
       error();
       ocultar();
     }else{
-
-        var url="/colegio/administrador/actualizaEstudiantes/";
+        var url="/colegio/administrador/actualizaPersonas/";
         var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&correo="+correo.value+"&fNacimiento="+fNacimiento.value+"&Estado="+Estado.value;
 
         envioJson(url,data,function respuesta(res){   
@@ -76,7 +77,7 @@ function actualizarEstudiante(){
                 x.html ( "<p>Estudiante Actualizado Correctamente</p>");
                 exito();
                 ocultar();
-                document.location.href="/colegio/administrador/actualizarEstudiantes";
+                document.location.href="/colegio/administrador/actualizarEstudiante";
             }else{
                 x.html ( "<p>"+res+"</p>");
                 idMateria.value="";

@@ -171,10 +171,13 @@ var passwordC = document.getElementById("passwordC");
     
             }); 
        }
- 
+       
  }
-</script>
+ 
 
+</script>
+ 
+   
 
     <body>
     <div class="cabecera">
@@ -203,6 +206,33 @@ var passwordC = document.getElementById("passwordC");
      <!--------------------------------------------------------------------> 
 
 <ul id="accordion">
+    
+ <li><div>Foto de Perfil</div>
+<ul>
+    
+<li>
+
+            <table width="80%" border="0" cellspacing="0" cellpadding="2">
+                <tr>
+                    <td align="left" class="color-text-gris"><h1>Guardar Foto de Perfil</h1></td>
+                    <td></td>
+                 
+                </tr>  
+                <tr>
+                    <td>  <INPUT type="file" id="fichero" name="fichero"></td>
+                    <td> <input name="guardarImagen" id="guardarImagen" type="submit" class="button large blue" onclick="guardarImagen()" value="Guardar">  </td>
+                </tr>    
+               </table>
+   
+   
+   
+    
+</li>
+
+</ul>
+</li>   
+
+
 <li><div>Cambiar Nombre De Usuario</div>
 <ul>
     

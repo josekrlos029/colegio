@@ -10,15 +10,22 @@ function eliminar(idSalon,idMateria){
 cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
- 
+
   var url="/colegio/administrador/eliminarCarga";
         var data="idSalon="+idSalon+"&idMateria="+idMateria;
  envioJson(url,data,function respuesta(res){   
-                
+    if (res == 1){
+                x.html ( "<p>Carga eliminada Correctamente</p>");
+                exito();
+                ocultar();
+                document.location.href="/colegio/administrador/gestionarCargas";
+    
+    }else{            
     x.html ("<p>"+res+"</p>");
     leerCarga();
     cargando();
     ocultar();
+    }
     });
 
 }

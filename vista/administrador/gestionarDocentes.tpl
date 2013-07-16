@@ -11,15 +11,15 @@ cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
   
- var idPersona = document.getElementById("idPersona");
- var nombres = document.getElementById("nombres");
- var pApellido = document.getElementById("pApellido");
- var sApellido = document.getElementById("sApellido");
- var sexo = document.getElementById("sexo");
- var telefono = document.getElementById("telefono");
- var direccion = document.getElementById("direccion");
- var correo = document.getElementById("correo");
- var fNacimiento = document.getElementById("fNacimiento");
+ var idPersona = document.getElementById("id");
+ var nombres = document.getElementById("name");
+ var pApellido = document.getElementById("primerApellido");
+ var sApellido = document.getElementById("segundoApellido");
+ var sexo = document.getElementById("sex");
+ var telefono = document.getElementById("tel");
+ var direccion = document.getElementById("dir");
+ var correo = document.getElementById("email");
+ var fNacimiento = document.getElementById("fechaNacimiento");
 
     if (idPersona.value=="" || nombres.value=="" || pApellido.value=="" || sApellido.value=="" || fNacimiento.value==""){
         x.html ( "<p>Error: Tiene Campos requeridos Vacios</p>");
@@ -67,6 +67,74 @@ var data="idPersona="+idPersona;
       
 }
 
+function vistaActualizarPersona(idPersona){
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+
+var y= $("#tablaConsulta"); 
+var url="/colegio/administrador/actualizarGeneralPersona";
+var data="idPersona="+idPersona;
+ envioJson(url,data,function respuesta(res){   
+   x.hide();            
+    y.html (res);
+    
+    document.getElementById('light').style.display='block';
+    document.getElementById('fade').style.display='block'
+});
+ 
+      
+}
+
+function actualizarPersona(){
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+
+ var idPersona = document.getElementById("idPersona");
+ var nombres = document.getElementById("nombres");
+ var pApellido = document.getElementById("pApellido");
+ var sApellido = document.getElementById("sApellido");
+ var sexo = document.getElementById("sexo");
+ var telefono = document.getElementById("telefono");
+ var direccion = document.getElementById("direccion");
+ var correo = document.getElementById("correo");
+ var fNacimiento = document.getElementById("fNacimiento");
+ var Estado = document.getElementById("estado");
+ 
+ 
+
+    if (idPersona.value=="" || nombres.value=="" || pApellido.value=="" || sApellido.value=="" || fNacimiento.value=="" || Estado.value==""){
+    
+    x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
+      error();
+      ocultar();
+    }else{
+        var url="/colegio/administrador/actualizaPersonas/";
+        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&correo="+correo.value+"&fNacimiento="+fNacimiento.value+"&Estado="+Estado.value;
+
+        envioJson(url,data,function respuesta(res){   
+            if (res == 1){
+                x.html ( "<p>Estudiante Actualizado Correctamente</p>");
+                exito();
+                ocultar();
+                document.location.href="/colegio/administrador/gestionarDocentes";
+            }else{
+                x.html ( "<p>"+res+"</p>");
+                idMateria.value="";
+                idGrado.setAttribute("autofocus","true");
+                nombre.value="";
+                error();
+                ocultar();
+                
+                
+            }
+         });
+    }   
+}
+
 
 
 </script>
@@ -111,23 +179,23 @@ var data="idPersona="+idPersona;
                 </tr>  
                 <tr>
                     <td align="right" width="40%">Identificación del Docente:</td>
-                    <td><input name="idPersona" id="idPersona" class="box-text"  type="text" required/></td>
+                    <td><input name="idPersona" id="id" class="box-text"  type="text" required/></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%">Nombres:</td>
-                    <td><input name="nombres" id="nombres" class="box-text"  type="text" required/></td>
+                    <td><input name="name" id="name" class="box-text"  type="text" required/></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%">Primer Apellido:</td>
-                    <td><input name="pApellido" id="pApellido" class="box-text"  type="text" required/></td>
+                    <td><input name="primerApellido" id="primerApellido" class="box-text"  type="text" required/></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%">Segundo Apellido:</td>
-                    <td><input name="sApellido" id="sApellido" class="box-text"  type="text" required/></td>
+                    <td><input name="segundoApellido" id="segundoApellido" class="box-text"  type="text" required/></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%">Sexo:</td>
-                    <td><select name="sexo" id="sexo" >
+                    <td><select name="sex" id="sex" >
                             <option>M</option>
                             <option>F</option>
                         </select>
@@ -135,19 +203,19 @@ var data="idPersona="+idPersona;
                 </tr>
                 <tr>
                     <td align="right" width="40%">Telefono:</td>
-                    <td><input name="telefono" id="telefono" class="box-text"  type="number" /></td>
+                    <td><input name="tel" id="tel" class="box-text"  type="number" /></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%">Direccion:</td>
-                    <td><input name="direccion" id="direccion" class="box-text"  type="text" /></td>
+                    <td><input name="dir" id="dir" class="box-text"  type="text" /></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%">Correo:</td>
-                    <td><input name="correo" id="correo" class="box-text"  type="email" /></td>
+                    <td><input name="email" id="email" class="box-text"  type="email" /></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%">Fecha de Nacimiento:</td>
-                    <td><input name="fNacimiento" id="fNacimiento" class="box-text"  type="date" required/></td>
+                    <td><input name="fechaNacimiento" id="fechaNacimiento" class="box-text"  type="date" required/></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -177,8 +245,8 @@ var data="idPersona="+idPersona;
                     <td>Dirección</td>
                     <td>Correo</td>
                     <td>consultar</td>
-                    <td>editar</td>
-                    <td>Inhabilitar</td>
+                    <td>actualizar</td>
+               
                     
                 </tr> 
            
@@ -195,9 +263,9 @@ var data="idPersona="+idPersona;
                     <td><?php echo $docente->getTelefono();?></td>
                     <td><?php echo $docente->getDireccion();?></td>
                     <td><?php echo $docente->getCorreo();?></td>
-                    <td align="center"><a href="#" onclick="consultaPersona('<?=$docente->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
-                    <td align="center"><a href="#" onclick="editarPersona('<?=$docente->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/editarPersona.png"  onclick=""/></a></td>
-                    <td align="center"><a href="#" onclick="eliminarPersona('<?=$docente->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/eliminarPersona.png"  onclick=""/></a></td>
+                    <td align="center"><a href="#" onclick="consultaPersona  ('<?=$docente->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
+                    <td align="center"><a href="#" onclick="vistaActualizarPersona('<?=$docente->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/editarPersona.png"/></a></td>
+                   
                 </tr>
                 <?php } ?>
               

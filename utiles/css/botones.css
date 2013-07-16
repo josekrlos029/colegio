@@ -65,6 +65,9 @@ padding: 8px 14px 9px;
 .pink.button { background-color: #E22092; }
 .pink.button:hover{ background-color: #C81E82; }
 
+.gris.button { background-color:#3a3a3a;  }
+.gris.button:hover{ background-color: #5b6163; }
+
 .green.button, .green.button:visited { background-color: #00d73d; }
 .green.button:hover{ background-color: #aacc5b; }
 

@@ -558,7 +558,7 @@ class AdministradorControl extends Controlador{
                          
                          $eliminar= "eliminar('".$carg->getIdSalon()."','".$carg->getIdMateria()."')";
                          $respuesta.= '<td width="20%" align="center">
-                                     <img src="../utiles/imagenes/iconos/eliminarPersona.png"  onclick="'.$eliminar.'"/>
+                                     <a href="#" onclick="'.$eliminar.'"><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a>
                                        </td>';
                         $respuesta .= "</tr>";
                        
@@ -621,11 +621,10 @@ class AdministradorControl extends Controlador{
              
              $idSalon =  isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
              $idMateria = isset($_POST['idMateria']) ? $_POST['idMateria'] : NULL;
-             
+             echo json_encode($idSalon);
              $c = new Carga();
              $c->eliminarCarga($idSalon, $idMateria);
-
-             echo json_encode("Carga Eliminada Correctamente");
+             echo json_encode(1);
         } catch (Exception $exc) {
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
@@ -852,7 +851,7 @@ class AdministradorControl extends Controlador{
                                          <td><input name="fNacimiento" id="fNacimiento" type="date"  class="box-text" value="'.$estudiante->getFNacimiento()->format("Y-m-d").'" required/></td>
                                         </tr>
                                         <td align="right">Estado:</td>
-                                         <td><input name="estado" id="estado" type="text"  class="box-text" value="'.$estudiante->getEstado().'" required/></td>
+                                         <td><input name="estado" id="estado" type="text"  class="box-text" value="'.$estudiante->getEstado().'" disabled="disabled"/></td>
                                         </tr>
                                      <tr>
                                         <td></td><td><input name="actualizaEstudiante" id="actualizaEstudiante" type="submit" value="Actualizar" class="button large blue" onclick="actualizarEstudiante()" /></td>
@@ -873,8 +872,9 @@ class AdministradorControl extends Controlador{
            /**
          * guarda los datos que vienen del formulario actualizar Estudiantes
          */
-        public function actualizaEstudiantes(){
+        public function actualizaPersonas(){
            try {
+               
              $idPersona= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
              $nombres = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
              $pApellido = isset($_POST['pApellido']) ? $_POST['pApellido'] : NULL;
@@ -886,8 +886,10 @@ class AdministradorControl extends Controlador{
              $fNacimiento = isset($_POST['fNacimiento']) ? $_POST['fNacimiento'] : NULL;
              $Estado = isset($_POST['Estado']) ? $_POST['Estado'] : NULL;
              
+           
+             
              $persona = new Persona();
-         
+        
              $persona->setIdPersona($idPersona);
              $persona->setNombres($nombres);
              $persona->setPApellido($pApellido);
@@ -898,7 +900,7 @@ class AdministradorControl extends Controlador{
              $persona->setCorreo($correo);
              $persona->setFNacimiento($fNacimiento);
              $persona->setEstado($Estado);
-             
+          
              $persona->actualizarPersona($persona);
              
              echo json_encode(1);
@@ -921,6 +923,111 @@ class AdministradorControl extends Controlador{
          
          public function consultaGeneralPersona() {
              parent::consultaGeneralPersona();
+         }
+         
+         public function actualizarGeneralPersona() {
+            try{
+            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+           
+            $pers = new Persona();
+            $persona = $pers->leerPorId($idPersona);
+            $respuesta = "";
+              
+            $respuesta = ' <div class="contenedorDp" >     
+                            <div class="marcoAvatar">
+                                <div class="avatar">
+                                    <span class="rounded">
+                                        <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                                    </span> 
+                                </div>    
+                            </div> 
+                            
+                            <table border="0" width="100%"> 
+                                       <tr><td class="color-text-gris">Numero de Identificacion:</td></tr> 
+                                       <tr><td>'. strtoupper($persona->getidPersona()).'</td></tr>
+                                      <tr><td class="color-text-gris">Nombres:</td></tr> 
+                                       <tr><td>'. strtoupper($persona->getNombres()).'</td></tr>
+                                       <tr><td class="color-text-gris">Apellidos:</td></tr>
+                                       <tr><td>'. strtoupper($persona->getPApellido()).' '. strtoupper($persona->getSApellido()).'</td></tr>  
+                                       <tr><td class="color-text-gris">Sexo:</td></tr>                                       
+                                       <tr><td>'. strtoupper($persona->getSexo()).'</td> </tr>                                        
+                                       <tr><td class="color-text-gris">Telefono:</td></tr>
+                                       <tr><td>'. strtoupper($persona->getTelefono()).'</td></tr> 
+                                       <tr><td class="color-text-gris">Direccion:</td></tr>
+                                       <tr><td>'. strtoupper($persona->getDireccion()).'</td</tr> 
+                                       <tr><td class="color-text-gris">Correo:</td></tr>    
+                                       <tr><td>'. strtoupper($persona->getCorreo()).'</td></tr>
+                                       <tr><td class="color-text-gris">Fecha De Nacimiento:</td></tr>
+                                    <tr><td>'. strtoupper($persona->getFNacimiento()->format('Y-m-d')).'</td></tr>
+                                </table>
+                             </div>
+                
+                                </br>
+                                <table width="60%" border="0" cellspacing="0" cellpadding="2">
+                                        <tr>
+                                        <td></td>
+                                        <td align="left" class="color-text-gris"><h1>ACtualizar Datos</h1></td>
+                                        </tr> 
+                                         <tr>
+                                         <td  align="right" width="40%" >Numero de Identificacion:</td>
+                                        <td><input name="idPersona" id="idPersona" type="text" class="box-text" value='.$persona->getidPersona().' disabled="disabled" readonly="readonly"/></td>
+                                        </tr>
+                                       <tr>
+                                         <td align="right">Nombres:</td>
+                                        <td><input name="nombres" id="nombres" type="text" class="box-text" value='.$persona->getNombres().' required/></td>
+                                        </tr>  
+                                        <tr>
+                                         <td align="right">Primer Apellido:</td>
+                                         <td><input name="pApellido" id="pApellido" type="text" class="box-text" value='.$persona->getPApellido().' required/></td>
+                                         </tr> 
+                                         <tr>
+                                         <td align="right">Segundo Apellido:</td>
+                                         <td><input name="sApellido" id="sApellido" type="text" class="box-text" value='.$persona->getSApellido().' required/></td>
+                                         </tr>
+                                         <tr>
+                                         <td align="right">Sexo:</td>
+                                          <td><select name="sexo" id="sexo" value='.$persona->getSexo().'>
+                                          <option>M</option>
+                                        <option>F</option>
+                                        </select></td>
+                                         </tr>
+                                         <tr>
+                                         <td align="right">Telefono:</td>
+                                          <td><input name="telefono" id="telefono" type="number" class="box-text" value="'.$persona->getTelefono().'" /></td>
+                                          </tr>  
+                                          <tr>
+                                         <td align="right">Direccion:</td>
+                                          <td><input name="direccion" id="direccion" type="text" class="box-text" value="'.$persona->getDireccion().'"  /></td>
+                                          </tr>    
+                                          <tr>
+                                         <td align="right">Correo:</td>
+                                          <td><input name="correo" id="correo" type="email" class="box-text" value="'.$persona->getCorreo().'" /></td>
+                                          </tr>  
+                                          <tr>
+                                         <td align="right">Fecha De Nacimiento:</td>
+                                         <td><input name="fNacimiento" id="fNacimiento" type="date"  class="box-text" value="'.$persona->getFNacimiento()->format("Y-m-d").'" required/></td>
+                                        </tr>
+                                        <td align="right">Estado:</td>
+                                         <td><input name="estado" id="estado" type="text"  class="box-text" value="'.$persona->getEstado().'" disabled="disabled"/></td>
+                                        </tr>
+                                     <tr>
+                                        <td></td><td><input name="actualizaPersona" id="actualizaPersona" type="submit" value="Actualizar" class="button large gris" onclick="actualizarPersona()" /></td>
+                                         </tr>
+                                        </table>
+                                        
+                           
+
+                                     '; 
+            
+            
+              if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            } 
+            } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
          }
        
 //**************************************************************************************************//        
