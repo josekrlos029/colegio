@@ -34,6 +34,73 @@ var y= $("#tablaEstudiantes");
          });
 
 }
+function vistaActualizarPersona(idPersona){
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+
+var y= $("#tablaConsulta"); 
+var url="/colegio/administrador/actualizarGeneralPersona";
+var data="idPersona="+idPersona;
+ envioJson(url,data,function respuesta(res){   
+   x.hide();            
+    y.html (res);
+    
+    document.getElementById('light').style.display='block';
+    document.getElementById('fade').style.display='block'
+});
+ 
+      
+}
+
+function actualizarPersona(){
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+
+ var idPersona = document.getElementById("idPersona");
+ var nombres = document.getElementById("nombres");
+ var pApellido = document.getElementById("pApellido");
+ var sApellido = document.getElementById("sApellido");
+ var sexo = document.getElementById("sexo");
+ var telefono = document.getElementById("telefono");
+ var direccion = document.getElementById("direccion");
+ var correo = document.getElementById("correo");
+ var fNacimiento = document.getElementById("fNacimiento");
+ var Estado = document.getElementById("estado");
+ 
+ 
+
+    if (idPersona.value=="" || nombres.value=="" || pApellido.value=="" || sApellido.value=="" || fNacimiento.value=="" || Estado.value==""){
+    
+    x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
+      error();
+      ocultar();
+    }else{
+        var url="/colegio/administrador/actualizaPersonas/";
+        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&correo="+correo.value+"&fNacimiento="+fNacimiento.value+"&Estado="+Estado.value;
+
+        envioJson(url,data,function respuesta(res){   
+            if (res == 1){
+                x.html ( "<p>Estudiante Actualizado Correctamente</p>");
+                exito();
+                ocultar();
+                document.location.href="/colegio/administrador/gestionarDocentes";
+            }else{
+                x.html ( "<p>"+res+"</p>");
+                idMateria.value="";
+                idGrado.setAttribute("autofocus","true");
+                nombre.value="";
+                error();
+                ocultar();
+                
+                
+            }
+         });
+    }   
+}
 </script>
   <p>&nbsp;</p>
             </br>

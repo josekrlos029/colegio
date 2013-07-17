@@ -109,7 +109,7 @@ function actualizarPersona(){
                 <p>&nbsp;</p>
 <table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
-               <td align="center" class="color-text-gris" colspan="11"><h1>Estudiantes Pre-escolar</h1></td>
+               <td align="center" class="color-text-gris" colspan="11"><h1>Docentes Pre-escolar</h1></td>
            </tr>
          
          
@@ -131,19 +131,19 @@ function actualizarPersona(){
    
             <tbody>
               
-                <?php foreach ($estudiante as $est) { ?>
+                <?php foreach ($docente as $doc) { ?>
                 <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
-                    <td><?php echo $est->getIdPersona();?></a></td>
-                    <td><?php echo $est->getNombres();?></td>
-                    <td><?php echo $est->getPApellido();?></td>
-                    <td><?php echo $est->getSApellido();?></td>
-                    <td><?php echo $est->getSexo();?></td>
-                    <td><?php echo $est->getTelefono();?></td>
-                    <td><?php echo $est->getDireccion();?></td>
-                    <td><?php echo $est->getCorreo();?></td>
-                    <td align="center"><a href="#" onclick="consultaPersona('<?=$est->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
-                    <td align="center"><a href="#" onclick="vistaActualizarPersona('<?=$est->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/editarPersona.png" /></a></td>
-                    <td align="center"><a href="#" onclick="eliminarPersona('<?=$est->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a></td>
+                    <td><?php echo $doc->getIdPersona();?></a></td>
+                    <td><?php echo $doc->getNombres();?></td>
+                    <td><?php echo $doc->getPApellido();?></td>
+                    <td><?php echo $doc->getSApellido();?></td>
+                    <td><?php echo $doc->getSexo();?></td>
+                    <td><?php echo $doc->getTelefono();?></td>
+                    <td><?php echo $doc->getDireccion();?></td>
+                    <td><?php echo $doc->getCorreo();?></td>
+                    <td align="center"><a href="#" onclick="consultaPersona('<?=$doc->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
+                    <td align="center"><a href="#" onclick="vistaActualizarPersona('<?=$doc->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/editarPersona.png" /></a></td>
+                    <td align="center"><a href="#" onclick="eliminarPersona('<?=$doc->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a></td>
                 </tr>
                 <?php }?>
             </tbody>

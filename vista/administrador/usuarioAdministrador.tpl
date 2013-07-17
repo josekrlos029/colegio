@@ -13,6 +13,17 @@
  function estSecundaria(){    
  $('#cargar').load('/colegio/administrador/estudiantesSecundaria');           
 }
+ function docPreescolar(){    
+ $('#cargar').load('/colegio/administrador/docentesPreescolar');           
+}
+
+ function docPrimaria(){    
+ $('#cargar').load('/colegio/administrador/docentesPrimaria');           
+}
+
+ function docSecundaria(){    
+ $('#cargar').load('/colegio/administrador/docentesSecundaria');           
+}
   </script>  
     
     
@@ -43,9 +54,9 @@
 <td>
   <ul>
   <div><h2>Docentes</h2></div>
-       <li><a href="#"onclick="preescolar()">Consulta Preescolar</a></li>
-       <li><a href="#"onclick="primaria()">Consulta Primaria</a></li>
-       <li><a href="#"onclick="secundaria()">Consulta Secundaria</a></li>
+       <li><a href="#"onclick="docPreescolar()">Consulta Preescolar</a></li>
+       <li><a href="#"onclick="docPrimaria()">Consulta Primaria</a></li>
+       <li><a href="#"onclick="docSecundaria()">Consulta Secundaria</a></li>
 	   </ul>
 </td>   
 

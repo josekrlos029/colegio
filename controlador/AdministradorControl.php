@@ -191,7 +191,9 @@ class AdministradorControl extends Controlador{
             $respuesta = "";
             
               $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
-                     <tr class="modo1">
+                     
+                    <td align="center" class="color-text-gris" colspan="11"><h1>Salon:'.$idSalon.'</h1></td></tr>
+                    <tr class="modo1">
                     <td>Documento</td>
                     <td>Nombres</td>
                     <td>P.Apellido</td>
@@ -201,7 +203,7 @@ class AdministradorControl extends Controlador{
                     <td>Dirección</td>
                     <td>Correo</td>
                     <td>consultar</td>
-                    <td>editar</td>
+                    <td>Actualizar</td>
                     <td>Inhabilitar</td>
                     </tr> ';
                  foreach ($estudiante as $est){
@@ -215,8 +217,115 @@ class AdministradorControl extends Controlador{
                     <td>'. $est->getDireccion().'</td>
                     <td>'. $est->getCorreo().'</td>
                     <td align="center"><a href="#" onclick="consultaPersona ('. strtoupper ($est->getIdPersona()).') "><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
-                    <td align="center"><a href="#" onclick="editarPersona   ('. strtoupper ($est->getIdPersona()).') "><img src="../utiles/imagenes/iconos/editarPersona.png" /></a></td>
+                    <td align="center"><a href="#" onclick="vistaActualizarPersona('.$est->getIdPersona().') "><img src="../utiles/imagenes/iconos/editarPersona.png" /></a></td>
                     <td align="center"><a href="#" onclick="eliminarPersona ('. strtoupper ($est->getIdPersona()).') "><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a></td>
+                </tr>';     
+                  }
+                $respuesta.='</table>';
+               
+            if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            }
+            
+             } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+            
+        }
+            /**
+         * Imprime La Vista de docentes de preescolar
+         * @return type
+         */
+        public function docentesPreescolar(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'docentes Preescolar');
+            $idSalon='0-01';
+            $persona = new Persona();
+            $docente = $persona->leerPorSalonDocente($idSalon);
+            $this->vista->set('docente', $docente);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        /**
+         * Imprime La Vista de docentes de primaria
+         * @return type
+         */
+        public function docentesPrimaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'docentes Primaria');
+             $limI='1';
+             $limS='5';
+            $salones = new Salon();
+            $primaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('primaria', $primaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        /**
+         * Imprime La Vista de docenters de secundaria
+         * @return type
+         */
+        public function docentesSecundaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'docentes Secundaria');
+             $limI='6';
+             $limS='11';
+            $salones = new Salon();
+            $secundaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('secundaria', $secundaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+         public function docentesSalones(){
+            try {
+            $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+            $persona = new Persona();
+            $docente = $persona->leerPorSalonDocente($idSalon);
+            $respuesta = "";
+            
+              $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+                     
+                    <td align="center" class="color-text-gris" colspan="11"><h1>Salon:'.$idSalon.'</h1></td></tr>
+                    <tr class="modo1">
+                    <td>Documento</td>
+                    <td>Nombres</td>
+                    <td>P.Apellido</td>
+                    <td>S.Apellido</td>
+                    <td>Sexo</td>
+                    <td>Telefono</td>
+                    <td>Dirección</td>
+                    <td>Correo</td>
+                    <td>consultar</td>
+                    <td>Actualizar</td>
+                    <td>Inhabilitar</td>
+                    </tr> ';
+                 foreach ($docente as $doc){
+     $respuesta .= '<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
+                    <td>'. $doc->getIdPersona().'</td>
+                    <td>'. $doc->getNombres().'</td>
+                    <td>'. $doc->getPApellido().'</td>
+                    <td>'. $doc->getSApellido().'</td>
+                    <td>'. $doc->getSexo().'</td>
+                    <td>'. $doc->getTelefono().'</td>
+                    <td>'. $doc->getDireccion().'</td>
+                    <td>'. $doc->getCorreo().'</td>
+                    <td align="center"><a href="#" onclick="consultaPersona ('. strtoupper ($doc->getIdPersona()).') "><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
+                    <td align="center"><a href="#" onclick="vistaActualizarPersona('.$doc->getIdPersona().') "><img src="../utiles/imagenes/iconos/editarPersona.png" /></a></td>
+                    <td align="center"><a href="#" onclick="eliminarPersona ('. strtoupper ($doc->getIdPersona()).') "><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a></td>
                 </tr>';     
                   }
                 $respuesta.='</table>';
@@ -930,19 +1039,37 @@ class AdministradorControl extends Controlador{
             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
            
             $pers = new Persona();
+            $rolPersona = new Rol();
+            $roles = $rolPersona->rolPersona($idPersona);
+            $rol=$roles->getIdRol(); 
             $persona = $pers->leerPorId($idPersona);
+             if ($rol == 'D'){ 
             $respuesta = "";
-              
+             
             $respuesta = ' <div class="contenedorDp" >     
-                            <div class="marcoAvatar">
+                            <div class="marcoAvatardoc">
                                 <div class="avatar">
                                     <span class="rounded">
                                         <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
                                     </span> 
                                 </div>    
                             </div> 
-                            
-                            <table border="0" width="100%"> 
+          ';
+            }elseif($rol == 'E'){
+            $respuesta = ' <div class="contenedorDp" >     
+                            <div class="marcoAvatarest">
+                                <div class="avatar">
+                                    <span class="rounded">
+                                        <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                                    </span> 
+                                </div>    
+                            </div> 
+          ';
+            
+            }else{
+                 echo json_encode("<tr> </tr>"); 
+            }
+             $respuesta .='              <table border="0" width="100%"> 
                                        <tr><td class="color-text-gris">Numero de Identificacion:</td></tr> 
                                        <tr><td>'. strtoupper($persona->getidPersona()).'</td></tr>
                                       <tr><td class="color-text-gris">Nombres:</td></tr> 
@@ -1018,8 +1145,6 @@ class AdministradorControl extends Controlador{
                            
 
                                      '; 
-            
-            
               if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
             }  else {

@@ -155,15 +155,33 @@ class Controlador {
             $persona = $pers->leerPorId($idPersona);
             $respuesta = "";
               
-            $respuesta .= '
-           <div class="contenedorDp" >     
-                            <div class="marcoAvatar">
+             if ($rol == 'D'){ 
+            $respuesta = "";
+             
+            $respuesta = ' <div class="contenedorDp" >     
+                            <div class="marcoAvatardoc">
                                 <div class="avatar">
                                     <span class="rounded">
                                         <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
                                     </span> 
                                 </div>    
-                            </div>  
+                            </div> 
+          ';
+            }elseif($rol == 'E'){
+            $respuesta = ' <div class="contenedorDp" >     
+                            <div class="marcoAvatarest">
+                                <div class="avatar">
+                                    <span class="rounded">
+                                        <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                                    </span> 
+                                </div>    
+                            </div> 
+          ';
+            
+            }else{
+                 echo json_encode("<tr> </tr>"); 
+            }
+             $respuesta .='    
                                    <table border="0" width="100%"> 
                                       <tr><td class="color-text-gris">Nombres:</td></tr> 
                                        <tr><td>'. strtoupper($persona->getNombres()).'</td></tr>
