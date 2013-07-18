@@ -79,7 +79,49 @@
          });  
     }
  }   
+ 
+function onChange1(val) {
+    var txt = $("#superior");
+     
+        txt.val(txt.val() + ' ' +val);
+    
+}
+
+function onChange2(val) {
+    var txt = $("#alto");
+     
+        txt.val(txt.val() + ' ' +val);
+    
+}
+function onChange3(val) {
+    var txt = $("#basico");
+     
+        txt.val(txt.val() + ' ' +val);
+    
+}
+function onChange4(val) {
+    var txt = $("#bajo");
+     
+        txt.val(txt.val() + ' ' +val);
+    
+}
+
  </script>
+ <style>
+
+#record1, #record2, #record3,#record4 {
+    font-size: 25px;
+    width: 25px;
+    height: 25px;
+    cursor:pointer;
+    border: none;
+    position: absolute;
+    margin-left: 5px;
+    outline: none;
+    background: transparent;
+}
+
+</style>
  </head>
  
  <body>
