@@ -203,7 +203,7 @@ var passwordC = document.getElementById("passwordC");
      <!--------------------------------------------------------------------> 
 
 <ul id="accordion">
-<li><div>Cambiar Nombre De Usuario</div>
+<li><span>Cambiar Nombre De Usuario</span>
 <ul>
     
 <li>
@@ -233,7 +233,7 @@ var passwordC = document.getElementById("passwordC");
 </ul>
 </li>
 
-<li><div>Cambiar Contraseña</div>
+<li><span>Cambiar Contraseña</span>
 <ul>
     
 <li>
@@ -264,7 +264,7 @@ var passwordC = document.getElementById("passwordC");
 </ul>
 </li>
 
-<li><div>Cambiar Correo electronico</div>
+<li><span>Cambiar Correo electronico</span>
 <ul>
 <li>
     <table width="80%" border="0" cellspacing="1" cellpadding="2">
@@ -292,7 +292,7 @@ var passwordC = document.getElementById("passwordC");
 </ul>
      
  <script type="text/javascript">
- $("#accordion > li > div").click(function(){
+ $("#accordion > li > span").click(function(){
  if(false == $(this).next().is(':visible')) {
  $('#accordion ul').slideUp(300);
  }

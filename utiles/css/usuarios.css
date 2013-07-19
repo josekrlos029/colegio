@@ -109,11 +109,11 @@ height:90%;
 #accordion {
  list-style: none;
  padding: 0 0 0 0;
- width: 60%;
- margin-left: 20%;
- margin-top:  10%;
+ width: 80%;
+ margin-left: 10%;
+ margin-top:  5%;
  }
- #accordion div {
+ #accordion span {
  display: block;
  font-size:16px;
  color:#000;

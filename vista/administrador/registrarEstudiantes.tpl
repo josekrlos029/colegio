@@ -100,13 +100,12 @@ var dirAcudiente = document.getElementById("dirAcudiente");
                      
                          
      <!-------------------------------------------------------------------->         
-         <p>&nbsp;</p>
-         <p>&nbsp;</p>
-     <div style="position: relative; float: left; width:30%">
-            <table width="100%" border="0" cellspacing="0" cellpadding="2">
-                <tr>
-                    <td colspan="2" align="right" class="color-text-gris"><h1>DATOS DEL ESTUDIANTE</h1></td>
-                </tr>  
+ 
+ <ul id="accordion">
+<li><span><h1>DATOS Personales</h1></span>
+<ul>
+<table width="50%" border="0" cellspacing="0" cellpadding="2">
+               
                 <tr>
                     <td align="right" width="40%" >Identificación del Estudiante:</td>
                     <td><input name="idPersona" id="idPersona" type="text" class="box-text" required/></td>
@@ -183,13 +182,13 @@ var dirAcudiente = document.getElementById("dirAcudiente");
                 </tr>
                 
             </table>
-         </div>
-     <!-- nuevosCampos--> 
-     <div style="position: relative; float: left; width:30%">
-     <table width="100%" border="0" cellspacing="0" cellpadding="2">
-                <tr>
-                    <td colspan="2" align="right" class="color-text-gris"><h1>DATOS DE NACIMIENTO</h1></td>
-                </tr>  
+</ul>
+</li>
+  
+ <li><span><h1>DATOS DE NACIMIENTO</h1></span>
+<ul>
+<table width="50%" border="0" cellspacing="0" cellpadding="2">
+                
                 <tr>
                     <td align="right">Fecha de Nacimiento:</td>
                     <td><input name="fNacimiento" id="fNacimiento" type="date"  class="box-text"  required/></td>
@@ -207,7 +206,7 @@ var dirAcudiente = document.getElementById("dirAcudiente");
                     <td><input name="municipioNacimiento" id="municipioNacimiento" type="text" class="box-text" value="Valledupar" required/></td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="right" class="color-text-gris"><h1>DATOS DE UBICACION</h1></td>
+                    <td colspan="2" align="left" class="color-text-gris"><h1>DATOS DE UBICACION</h1></td>
                 </tr>
                  <tr>
                     <td align="right">Direccion:</td>
@@ -231,12 +230,15 @@ var dirAcudiente = document.getElementById("dirAcudiente");
                 </tr>
                 </table>
      
-     </div>
-     <div style="position: relative; float: left; width:30%">
-      <table width="100%" border="0" cellspacing="0" cellpadding="2">
-                <tr>
-                    <td colspan="2" align="right" class="color-text-gris"><h1>DATOS DE EL ACUDIENTE</h1></td>
-                </tr>  
+    
+</ul>
+</li>   
+ 
+ <li><span><h1>DATOS DEl PADRE</h1> </span>
+<ul>
+ <table width="50%" border="0" cellspacing="0" cellpadding="2">
+             
+             
                  <tr>
                     <td align="right" width="40%" >Cedula:</td>
                     <td><input name="idAcudiente" id="idAcudiente" type="text" class="box-text" required/></td>
@@ -266,11 +268,101 @@ var dirAcudiente = document.getElementById("dirAcudiente");
                     <td><input name="dirAcudiente" id="dirAcudiente" type="text" class="box-text" required/></td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="right"><input name="guardarEstudiantes" id="guardarEstudiantes" type="submit" class="button large blue" value="Guardar" onclick="envio()" /></td>
+                    <td colspan="2" align="left" class="color-text-gris"><h1>DATOS DE La MADRE</h1></td>
                 </tr>
+                <tr>
+                    <td align="right" width="40%" >Cedula:</td>
+                    <td><input name="idAcudiente" id="idAcudiente" type="text" class="box-text" required/></td>
+                </tr>
+                 <tr>
+                    <td align="right" width="40%" >Nombres:</td>
+                    <td><input name="nombresAcudiente" id="nombresAcudiente" type="text" class="box-text" required/></td>
+                </tr>
+                <tr>
+                    <td align="right" width="40%" >Apellidos:</td>
+                    <td><input name="apellidosAcudiente" id="apellidosAcudiente" type="text" class="box-text" required/></td>
+                </tr>
+                <tr>
+                    <td align="right" width="40%" >Ocupacion:</td>
+                    <td><input name="ocupacion" id="ocupacion" type="text" class="box-text" required/></td>
+                </tr>
+                 <tr>
+                    <td align="right" width="40%" >Telefono:</td>
+                    <td><input name="telAcudiente" id="telAcudiente" type="text" class="box-text" required/></td>
+                </tr>
+                 <tr>
+                    <td align="right" width="40%" >Telefono de Oficina:</td>
+                    <td><input name="telOficina" id="telOficina" type="text" class="box-text" required/></td>
+                </tr>
+                 <tr>
+                    <td align="right" width="40%" >Direccion:</td>
+                    <td><input name="dirAcudiente" id="dirAcudiente" type="text" class="box-text" required/></td>
+                </tr>
+                
 
-       </table>         
+       </table>      
+    
+</ul>
+</li>  
+
+<li><span><h1>DATOS DEl acudiente</h1></span>
+<ul>
+    <table width="50%" border="0" cellspacing="0" cellpadding="2">
+ <tr>
+                    <td align="right" width="40%" >Cedula:</td>
+                    <td><input name="idAcudiente" id="idAcudiente" type="text" class="box-text" required/></td>
+                </tr>
+                 <tr>
+                    <td align="right" width="40%" >Nombres:</td>
+                    <td><input name="nombresAcudiente" id="nombresAcudiente" type="text" class="box-text" required/></td>
+                </tr>
+                <tr>
+                    <td align="right" width="40%" >Apellidos:</td>
+                    <td><input name="apellidosAcudiente" id="apellidosAcudiente" type="text" class="box-text" required/></td>
+                </tr>
+                <tr>
+                    <td align="right" width="40%" >Ocupacion:</td>
+                    <td><input name="ocupacion" id="ocupacion" type="text" class="box-text" required/></td>
+                </tr>
+                 <tr>
+                    <td align="right" width="40%" >Telefono:</td>
+                    <td><input name="telAcudiente" id="telAcudiente" type="text" class="box-text" required/></td>
+                </tr>
+                 <tr>
+                    <td align="right" width="40%" >Telefono de Oficina:</td>
+                    <td><input name="telOficina" id="telOficina" type="text" class="box-text" required/></td>
+                </tr>
+                 <tr>
+                    <td align="right" width="40%" >Direccion:</td>
+                    <td><input name="dirAcudiente" id="dirAcudiente" type="text" class="box-text" required/></td>
+                </tr>
+                </table>
+</ul>
+</li> 
+
+
+<li><span ><h1 class="color-text-azul">Guardar Datos</h1></span>
+<ul>
+    </br>
+<table>
+  <tr>
+      <td align="right"><input name="guardarEstudiantes" id="guardarEstudiantes" type="submit" class="button large blue" value="Guardar" onclick="envio()" /></td>
+ </tr> 
+ </table>
+</ul>
+</li> 
+
+</ul>
      
-     </div>
+ <script type="text/javascript">
+ $("#accordion > li > span").click(function(){
+ if(false == $(this).next().is(':visible')) {
+ $('#accordion ul').slideUp(300);
+ }
+ $(this).next().slideToggle(300);
+ });
+ $('#accordion ul:eq(0)').show();
+ </script>
+
     </body>
 </html>
