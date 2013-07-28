@@ -137,12 +137,12 @@
            </td>
            
            <td width="10%" align="center">
-               <a href="#"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/consolidados.png ></div></a>
+               <a href="consolidados/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/consolidados.png ></div></a>
            <div class="text-icon">Consolidados</div>
            </td>
            
            <td width="10%" align="center">
-           <a href="#"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/historialAnual.png ></div></a>
+           <a href=""><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/historialAnual.png ></div></a>
            <div class="text-icon">Historial Anual</div>
            </td>
            

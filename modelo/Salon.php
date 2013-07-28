@@ -92,6 +92,19 @@ public function crearSalon(Salon $salon) {
         }
         return $salones;
     }
+    
+    public function leerSalonesPreescolar(){
+        $sql = "SELECT idSalon FROM salon WHERE idGrado NOT IN('1','2','3','4','5','6','7','8','9','10','11') ";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $salones = array();
+        foreach ($resultado as $fila) {
+            $salon = new Salon();
+            $this->mapearSalon($salon, $fila);
+            $salones[$salon->getIdSalon()] = $salon;
+        }
+        return $salones;
+    }
 
     public function actualizarSalon(Salon $salon) {
         $sql = "UPDATE grado SET nombre=:nombre, horas=:horas WHERE idSalon=:idSalon";

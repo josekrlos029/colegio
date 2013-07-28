@@ -38,11 +38,13 @@ function cargadorClases(){
     require_once './modelo/Administrador.php';
     require_once './modelo/Grado.php';
     require_once './modelo/Materia.php';
+    require_once './modelo/Pensum.php';
     require_once './modelo/Salon.php';
     require_once './modelo/Inicio.php';
     require_once './modelo/Carga.php';
     require_once './modelo/Matricula.php';
     require_once './modelo/Logro.php';
+    require_once './modelo/Nota.php';
     require_once './controlador/Controlador.php';
     require_once './controlador/AdministradorControl.php';
     require_once './controlador/EstudianteControl.php';

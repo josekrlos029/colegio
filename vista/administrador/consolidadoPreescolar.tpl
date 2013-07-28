@@ -26,8 +26,9 @@ function leerEstudiantes(idSalon){
  x.show("slow");
  
 var y= $("#tablaEstudiantes"); 
- var url="/colegio/administrador/estudiantesSalones";
- var data="idSalon="+idSalon;
+ var url="/colegio/administrador/generarConsolidado";
+ var periodo = document.getElementById("periodo").value;
+    var data="idSalon="+idSalon+"&periodo="+periodo;
  envioJson(url,data,function respuesta(res){   
     x.hide();            
     y.html (res);
@@ -113,7 +114,7 @@ function actualizarPersona(){
                         <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
                          <tr>   
                             <td align="right">   
-                                <h1>Consulta Rapida por Salones</h1>
+                                <h1>Consolidado por Salones</h1>
                             </td>
                          </tr>
                         </table>
@@ -135,10 +136,25 @@ function actualizarPersona(){
                    <li><a href="#" onClick="leerEstudiantes('<?php echo $salon->getIdSalon();?>')"><?php echo $salon->getIdSalon();?></a></li>
                   <?php } ?>
               </div>   
+                  <div>   
+                      <table>
+                          <tr>
+                          <td><h5>SELECCIONE EL PERIODO</h5></td>
+                          <td><select id="periodo" >
+                          <option>PRIMERO</option>
+                          <option>SEGUNDO</option>
+                          <option>TERCERO</option>
+                          <option>CUARTO</option>
+                          <option>FINAL</option>
+                          </select></td>
+                          </tr>
+                      </table>
+                      
+              </div>
               <p>&nbsp;</p>
         
            
-                <div id="tablaEstudiantes" >
+                <div id="tablaEstudiantes" style="width: 100%">
                <h1  style='margin-left:5%'>Seleccione un Salon...</h1>
                </div>
                

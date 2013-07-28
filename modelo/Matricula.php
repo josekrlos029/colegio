@@ -58,7 +58,7 @@ class Matricula extends Modelo{
     public function setAñoLectivo($añoLectivo) {
         $this->añoLectivo = $añoLectivo;
     }
-
+    
     protected static function crearFecha($entrada) {
         parent::crearFecha($entrada);
     }

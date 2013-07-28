@@ -11,9 +11,6 @@ function envio(){
  cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
- 
-
- 
  var idPersona = document.getElementById("idPersona");
  var tipoDocumento = document.getElementById("tipoDocumento");
  var lugarExpedicion = document.getElementById("lugarExpedicion");
@@ -27,50 +24,61 @@ function envio(){
  var telefono = document.getElementById("telefono");
  var direccion = document.getElementById("direccion");
  var barrio = document.getElementById("barrio");
- var paisResidencia = document.getElementById("paisResidencia");
- var departamentoResidencia = document.getElementById("departamentoResidencia");
  var municipioResidencia = document.getElementById("municipioResidencia");
  var correo = document.getElementById("correo");
  var fNacimiento = document.getElementById("fNacimiento");
- var paisNacimiento = document.getElementById(" paisNacimiento");
+ var paisNacimiento = document.getElementById("paisNacimiento");
  var departamentoNacimiento = document.getElementById("departamentoNacimiento");
  var municipioNacimiento= document.getElementById("municipioNacimiento");
-var idAcudiente = document.getElementById("idAcudiente");
-var nombresAcudiente = document.getElementById("nombresAcudiente");
-var apellidosAcudiente = document.getElementById("apellidosAcudiente");
-var ocupacion  = document.getElementById("ocupacion ");
-var telAcudiente = document.getElementById("telAcudiente");
-var telOficina = document.getElementById("telOficina");
-var dirAcudiente = document.getElementById("dirAcudiente");
+ var instProcedencia= document.getElementById("instProcedencia");
+/* 
+ var idPadre = document.getElementById("idPadre");
+ var nombresPadre = document.getElementById("nombresPadre");
+ var apellidosPadre = document.getElementById("apellidosPadre");
+ var ocupacionPadre  = document.getElementById("ocupacionPAdre");
+ var telPadre = document.getElementById("telPadre");
+ var telOficinaPadre = document.getElementById("telOficinaPadre");
+ var dirPadre = document.getElementById("dirAcudiente");
 
- if (idPersona.value=="" || nombres.value=="" || pApellido.value=="" || sApellido.value=="" || fNacimiento.value==""  || tipoDocumento.value=="" || lugarExpedicion.value=="" ||fechaExpedicion.value=="" || tipoSanguineo.value=="" || eps.value=="" || barrio.value==""  || paisResidencia.value=="" || municipioResidencia.value=="" || departamentoResidencia.value=="" || paisNacimiento.value=="" || departamentoNacimiento.value=="" || municipioNacimiento.value=="" || idAcudiente.value=="" || nombresAcudiente.value=="" || apellidosAcudiente.value=="" || ocupacion.value=="" || telAcudiente.value=="" || telOficina.value=="" || dirAcudiente.value==""){
-    
-    x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
-      error();
-      ocultar();
-    }else{
+ var idMadre = document.getElementById("idMadre");
+ var nombresMadre = document.getElementById("nombresMadre");
+ var apellidosMadre = document.getElementById("apellidosMadre");
+ var ocupacionMadre  = document.getElementById("ocupacionMadre");
+ var telMadre = document.getElementById("telMadre");
+ var telOficinaMadre = document.getElementById("telOficinaMadre");
+ var dirMadre = document.getElementById("dirMadre");
 
+ var idAcudiente = document.getElementById("idAcudiente");
+ var nombresAcudiente = document.getElementById("nombresAcudiente");
+ var apellidosAcudiente = document.getElementById("apellidosAcudiente");
+ var ocupacionAcudiente  = document.getElementById("ocupacionAcudiente");
+ var telAcudiente = document.getElementById("telAcudiente");
+ var telOficinaAcudiente = document.getElementById("telOficinaAcudiente");
+ var dirAcudiente = document.getElementById("dirAcudiente");
+*/
+/// if (idPersona.value=="" || nombres.value=="" || pApellido.value=="" || sApellido.value=="" || fNacimiento.value==""  || tipoDocumento.value=="" ||  idAcudiente.value=="" || nombresAcudiente.value=="" || apellidosAcudiente.value=="" || ocupacionAcudiente.value=="" || telAcudiente.value==""  || dirAcudiente.value==""){
+  //  x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
+      //error();
+    //  ocultar();
+  //  }else{
         var url="/colegio/administrador/guardarEstudiantes/";
-        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&correo="+correo.value+"&fNacimiento="+fNacimiento.value+"&tipoDocumento="+tipoDocumento.value+"&lugarExpedicion="+lugarExpedicion.value+"&fechaExpedicion="+fechaExpedicion.value+"&tipoSanguieno="+tipoSanguineo.value+"&eps="+eps.value+"&barrio="+barrio.value+"&paisResidencia="+paisResidencia.value+"&municipioResidencia="+municipioResidencia.value+"&departamentoResidencia="+departamentoResidencia.value+"&paisNacimiento="+paisNacimiento.value+"&municipioNacimiento="+municipioRNacimiento.value+"&departamentoNacimiento="+departamentoNacimiento.value+"&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacion="+ocupacion.value+"&telAcudiente="+telAcudiente.value+"&dirAcudiente="+dirAcudiente.value+"&telOficina="+telOficina.value;
-
+        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&correo="+correo.value+"&fNacimiento="+fNacimiento.value+"&tipoDocumento="+tipoDocumento.value+"&lugarExpedicion="+lugarExpedicion.value+"&fechaExpedicion="+fechaExpedicion.value+"&tipoSanguieno="+tipoSanguineo.value+"&eps="+eps.value+"&barrio="+barrio.value+"&municipioResidencia="+municipioResidencia.value+"&paisNacimiento="+paisNacimiento.value+"&municipioNacimiento="+municipioNacimiento.value+"&departamentoNacimiento="+departamentoNacimiento.value+"&instProcedencia="+instProcedencia.value/*+"&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacionAcudiente="+ocupacionAcudiente.value+"&telAcudiente="+telAcudiente.value+"&dirAcudiente="+dirAcudiente.value+"&telOficinaAcudiente="+telOficinaAcudiente.value+"&idPadre="+idPadre.value+"&nombresPadre="+nombresPadre.value+"&apellidosPadre="+apellidosPadre.value+"&ocupacionPadre="+ocupacionPadre.value+"&telPadre="+telPadre.value+"&dirPadre="+dirPadre.value+"&telOficinaPadre="+telOficinaPadre.value+"&idMadre="+idMadre.value+"&nombresMadre="+nombresMadre.value+"&apellidosMadre="+apellidosMadre.value+"&ocupacionMadre="+ocupacionMadre.value+"&telMadre="+telMadre.value+"&dirMadre="+dirMadre.value+"&telOficinaMadre="+telOficinaMadre.value*/;
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
-                x.html ( "<p>Estudiante Registrador Correctamente</p>");
-                exito();
-                ocultar();
-                document.location.href="/colegio/administrador/RegistrarEstudiantes";
+                    x.html ( "<p>Estudiante Registrador Correctamente</p>");
+                    exito();
+                    ocultar();
+                //document.location.href="/colegio/administrador/RegistrarEstudiantes";
             }else{
                 x.html ( "<p>"+res+"</p>");
                 idMateria.value="";
                 idGrado.setAttribute("autofocus","true");
                 nombre.value="";
                 error();
-                ocultar();
-                
-                
+                ocultar();  
             }
          });
-    }   
+    //}   
 }
 </script>
     </head>
@@ -83,7 +91,7 @@ var dirAcudiente = document.getElementById("dirAcudiente");
             </br>
            <p>&nbsp;</p>
         <div id="encapsulador">
-            <div id="mensaje" hidden> </div>
+            <div id="mensaje" hidden><?php echo $mensaje; ?> </div>
                 <div id="cabecera" class="blue">
                     <div class="color-text-blanco" id="title-cab">
                         <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
@@ -100,12 +108,11 @@ var dirAcudiente = document.getElementById("dirAcudiente");
                      
                          
      <!-------------------------------------------------------------------->         
- 
  <ul id="accordion">
 <li><span><h1>DATOS Personales</h1></span>
-<ul>
+    <ul> 
 <table width="50%" border="0" cellspacing="0" cellpadding="2">
-               
+    
                 <tr>
                     <td align="right" width="40%" >Identificación del Estudiante:</td>
                     <td><input name="idPersona" id="idPersona" type="text" class="box-text" required/></td>
@@ -121,11 +128,11 @@ var dirAcudiente = document.getElementById("dirAcudiente");
                 </tr>
                   <tr>
                     <td align="right">Lugar de Expedicion:</td>
-                    <td><input name="lugarExpedicion" id="lugarExpedicion" type="text" class="box-text"  required/></td>
+                    <td><input name="lugarExpedicion" id="lugarExpedicion" type="text" class="box-text"  /></td>
                 </tr>
                   <tr>
                     <td align="right">fecha de expedicion:</td>
-                    <td><input name="fechaExpedicion" id="fechaExpedicion" type="text" class="box-text"  required/></td>
+                    <td><input name="fechaExpedicion" id="fechaExpedicion" type="date" class="box-text"  /></td>
                 </tr>
 <!-- EndNuevosCampos-->                  
                 <tr>
@@ -169,7 +176,7 @@ var dirAcudiente = document.getElementById("dirAcudiente");
 <!-- EndNuevosCampos-->
                 <tr>
                     <td align="right">Telefono:</td>
-                    <td><input name="telefono" id="telefono" type="number" class="box-text"  /></td>
+                    <td><input name="telefono" id="telefono" type="number" class="box-text"  required/></td>
                 </tr>
                
                 <tr>
@@ -178,7 +185,7 @@ var dirAcudiente = document.getElementById("dirAcudiente");
                 </tr>
                 <tr>
                     <td align="right">Institucion de Procedencia:</td>
-                    <td><input name="instProcedencia" id="instProcedencia" type="text" class="box-text"  /></td>
+                    <td><input name="instProcedencia" id="instProcedencia" type="text" class="box-text"  required/></td>
                 </tr>
                 
             </table>
@@ -210,19 +217,11 @@ var dirAcudiente = document.getElementById("dirAcudiente");
                 </tr>
                  <tr>
                     <td align="right">Direccion:</td>
-                    <td><input name="direccion" id="direccion" type="text" class="box-text"  /></td>
+                    <td><input name="direccion" id="direccion" type="text" class="box-text"  required/></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Barrio:</td>
                     <td><input name="barrio" id="barrio" type="text" class="box-text" required/></td>
-                </tr>
-                <tr>
-                    <td align="right" width="40%" >Pais:</td>
-                    <td><input name="paisResidencia" id="paisResidencia" type="text" class="box-text" value="Colombia" required/></td>
-                </tr>
-                <tr>
-                    <td align="right" width="40%" >Departamento:</td>
-                    <td><input name="departamentoResidencia" id="departamentoResidencia" type="text" class="box-text" value="Cesar" required/></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Municipio:</td>
@@ -241,62 +240,62 @@ var dirAcudiente = document.getElementById("dirAcudiente");
              
                  <tr>
                     <td align="right" width="40%" >Cedula:</td>
-                    <td><input name="idAcudiente" id="idAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="idPadre" id="idPadre" type="text" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Nombres:</td>
-                    <td><input name="nombresAcudiente" id="nombresAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="nombresPadre" id="nombresPadre" type="text" class="box-text" /></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Apellidos:</td>
-                    <td><input name="apellidosAcudiente" id="apellidosAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="apellidosPadre" id="apellidosPadre" type="text" class="box-text" /></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Ocupacion:</td>
-                    <td><input name="ocupacion" id="ocupacion" type="text" class="box-text" required/></td>
+                    <td><input name="ocupacionPadre" id="ocupacionPadre" type="text" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono:</td>
-                    <td><input name="telAcudiente" id="telAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="telPadre" id="telPadre" type="text" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono de Oficina:</td>
-                    <td><input name="telOficina" id="telOficina" type="text" class="box-text" required/></td>
+                    <td><input name="telOficinaPadre" id="telOficinaPadre" type="text" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Direccion:</td>
-                    <td><input name="dirAcudiente" id="dirAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="dirPadre" id="dirPadre" type="text" class="box-text" /></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="left" class="color-text-gris"><h1>DATOS DE La MADRE</h1></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Cedula:</td>
-                    <td><input name="idAcudiente" id="idAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="idMadre" id="idMadre" type="text" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Nombres:</td>
-                    <td><input name="nombresAcudiente" id="nombresAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="nombresMadre" id="nombresMadre" type="text" class="box-text" /></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Apellidos:</td>
-                    <td><input name="apellidosAcudiente" id="apellidosAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="apellidosMadre" id="apellidosMadre" type="text" class="box-text" /></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Ocupacion:</td>
-                    <td><input name="ocupacion" id="ocupacion" type="text" class="box-text" required/></td>
+                    <td><input name="ocupacionMadre" id="ocupacionMadre" type="text" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono:</td>
-                    <td><input name="telAcudiente" id="telAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="telMadre" id="telMadre" type="text" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono de Oficina:</td>
-                    <td><input name="telOficina" id="telOficina" type="text" class="box-text" required/></td>
+                    <td><input name="telOficinaMadre" id="telOficinaMadre" type="text" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Direccion:</td>
-                    <td><input name="dirAcudiente" id="dirAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="dirMadre" id="dirMadre" type="text" class="box-text" /></td>
                 </tr>
                 
 
@@ -322,7 +321,7 @@ var dirAcudiente = document.getElementById("dirAcudiente");
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Ocupacion:</td>
-                    <td><input name="ocupacion" id="ocupacion" type="text" class="box-text" required/></td>
+                    <td><input name="ocupacionAcudiente" id="ocupacionAcudiente" type="text" class="box-text" required/></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono:</td>
@@ -330,13 +329,13 @@ var dirAcudiente = document.getElementById("dirAcudiente");
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono de Oficina:</td>
-                    <td><input name="telOficina" id="telOficina" type="text" class="box-text" required/></td>
+                    <td><input name="telOficinaAcudiente" id="telOficinaAcudiente" type="text" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Direccion:</td>
                     <td><input name="dirAcudiente" id="dirAcudiente" type="text" class="box-text" required/></td>
                 </tr>
-                </table>
+                </table>  
 </ul>
 </li> 
 
@@ -346,14 +345,14 @@ var dirAcudiente = document.getElementById("dirAcudiente");
     </br>
 <table>
   <tr>
-      <td align="right"><input name="guardarEstudiantes" id="guardarEstudiantes" type="submit" class="button large blue" value="Guardar" onclick="envio()" /></td>
+      <td align="right"><input name="guardarEstudiantes" id="guardarEstudiantes" type="submit" class="button large blue" value="Guardar" onclick="envio()"/></td>
  </tr> 
  </table>
 </ul>
 </li> 
 
 </ul>
-     
+
  <script type="text/javascript">
  $("#accordion > li > span").click(function(){
  if(false == $(this).next().is(':visible')) {

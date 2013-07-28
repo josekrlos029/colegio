@@ -131,10 +131,9 @@ class AdministradorControl extends Controlador{
             try {
             if($this->verificarSession()){
             $this->vista->set('titulo', 'estudiantes Preescolar');
-            $idSalon='0-01';
-            $persona = new Persona();
-            $estudiante = $persona->leerPorSalon($idSalon);
-            $this->vista->set('estudiante', $estudiante);
+            $salon = new Salon();
+            $preescolar = $salon->leerSalonesPreescolar();
+            $this->vista->set('preescolar', $preescolar);
             return $this->vista->imprimir();
               }
         } catch (Exception $exc) {
@@ -179,6 +178,121 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+        
+        public function consolidadoPreescolar(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'estudiantes Preescolar');
+            $salon = new Salon();
+            $preescolar = $salon->leerSalonesPreescolar();
+            $this->vista->set('preescolar', $preescolar);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+         public function consolidadoPrimaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'estudiantes Primaria');
+             $limI='1';
+             $limS='5';
+            $salones = new Salon();
+            $primaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('primaria', $primaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+        public function consolidadoSecundaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'estudiantes Secundaria');
+             $limI='6';
+             $limS='11';
+            $salones = new Salon();
+            $secundaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('secundaria', $secundaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+        public function generarConsolidado(){
+            try {
+            $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+            $periodo = isset($_POST['periodo']) ? $_POST['periodo'] : NULL;
+            $pensum = new Pensum();
+            $pens = $pensum->leerPensum($idSalon);
+            
+            $respuesta = "";
+            
+              $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+                     
+                    <tr><td align="center" class="color-text-gris" colspan="11"><h1>Salon:'.$idSalon.'</h1></td></tr>
+                    <tr class="modo1">
+                    <td>N°</td>
+                    <td>Nombres</td>
+                    ';
+            foreach ($pens as $pen){
+                        $mat = new Materia();
+                        $materia = $mat->leerMateriaPorId($pen->getIdMateria());
+                         foreach ($materia as $mate){
+                              $respuesta.='<td>'.$mate->getNombreMateria().'</td>';
+                         }
+            }
+             $respuesta.='</tr>';
+             $persona = new Persona();
+             $personas=$persona->leerPorSalon($idSalon);
+             $cont = 0;
+              foreach ($personas as $per){
+                  $cont++;
+                  $respuesta.='<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)"> <td>'.$cont.'</td><td>'.$per->getPApellido().' '.$per->getSApellido().' '.$per->getNombres().'</td>';
+                foreach ($pens as $pen){
+                        $nota = new Nota();
+                        $not =$nota->leerNotaEstudiante( $per->getIdPersona(), $pen->getIdMateria());
+                        if($periodo == 'PRIMERO'){
+                            $respuesta.='<td>'.$not->getPrimerP().'</td>';
+                        }else if($periodo == 'SEGUNDO'){
+                            $respuesta.='<td>'.$not->getSegundoP().'</td>';
+                            
+                        }else if($periodo == 'TERCERO'){
+                            $respuesta.='<td>'.$not->getTerceroP().'</td>';
+                            
+                        }else if($periodo == 'CUARTO'){
+                            
+                            $respuesta.='<td>'.$not->getCuartoP().'</td>';
+                        }else if($periodo == 'FINAL'){
+                            $respuesta.='<td>'.$not->getDefinitiva().'</td>';
+                            
+                        }
+                            
+                        }
+              $respuesta.='</tr>';
+              
+             }
+                $respuesta.='</table>';
+               
+            if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            }
+            
+             } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+            
+        }
+        
+        
          /**
          * Imprime estudiantes por salones
          * @return type
@@ -241,11 +355,10 @@ class AdministradorControl extends Controlador{
         public function docentesPreescolar(){
             try {
             if($this->verificarSession()){
-            $this->vista->set('titulo', 'docentes Preescolar');
-            $idSalon='0-01';
-            $persona = new Persona();
-            $docente = $persona->leerPorSalonDocente($idSalon);
-            $this->vista->set('docente', $docente);
+            $this->vista->set('titulo', 'estudiantes Preescolar');
+            $salon = new Salon();
+            $preescolar = $salon->leerSalonesPreescolar();
+            $this->vista->set('preescolar', $preescolar);
             return $this->vista->imprimir();
               }
         } catch (Exception $exc) {
@@ -448,6 +561,17 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         } 
+        
+        public function consolidados(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Consolidados');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
 
         
       
@@ -744,34 +868,122 @@ class AdministradorControl extends Controlador{
          * guarda los datos que vienen del formulario Registrar Estudiantes
          */
         public function guardarEstudiantes(){
-           try {
-             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            try {
+                $estudiante2 = new Estudiante();
+            $estudiante2->eliminarPersona($idPersona);
+            $estudiante2->eliminarUsuario($idPersona);
+            $estudiante2->eliminarDatos($idPersona);
+             $tipoDocumento = isset($_POST['tipoDocumento']) ? $_POST['tipoDocumento'] : NULL;
+             $lugarExpedicion = isset($_POST['lugarExpedicion']) ? $_POST['lugarExpedicion'] : NULL;
+             $fechaExpedicion = isset($_POST['fechaExpedicion']) ? $_POST['fechaExpedicion'] : NULL;
+             $tipoSanguineo = isset($_POST['tipoSanguineo']) ? $_POST['tipoSanguineo'] : NULL;
+             $eps = isset($_POST['eps']) ? $_POST['eps'] : NULL;
              $nombres = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
              $pApellido = isset($_POST['pApellido']) ? $_POST['pApellido'] : NULL;
              $sApellido = isset($_POST['sApellido']) ? $_POST['sApellido'] : NULL;
              $sexo = isset($_POST['sexo']) ? $_POST['sexo'] : NULL;
              $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : NULL;
              $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : NULL;
+             $barrio = isset($_POST['barrio']) ? $_POST['barrio'] : NULL;
+             $municipioResidencia = isset($_POST['municipioResidencia']) ? $_POST['municipioResidencia'] : NULL;
              $correo = isset($_POST['correo']) ? $_POST['correo'] : NULL;
              $fNacimiento = isset($_POST['fNacimiento']) ? $_POST['fNacimiento'] : NULL;
+             $paisNacimiento = isset($_POST['paisNacimiento']) ? $_POST['paisNacimiento'] : NULL;
+             $departamentoNacimiento = isset($_POST['departamentoNacimiento']) ? $_POST['departamentoNacimiento'] : NULL;
+             $municipioNacimiento = isset($_POST['municipioNacimiento']) ? $_POST['municipioNacimiento'] : NULL;
+             $instProcedencia = isset($_POST['instProcedencia']) ? $_POST['instProcedencia'] : NULL;
+             
+             $idPadre = isset($_POST['idPadre']) ? $_POST['idPadre'] : NULL;
+             $nombresPadre = isset($_POST['nombresPadre']) ? $_POST['nombresPadre'] : NULL;
+             $apellidosPadre = isset($_POST['apellidosPadre']) ? $_POST['apellidosPadre'] : NULL;
+             $ocupacionPadre = isset($_POST['ocupacionPadre']) ? $_POST['ocupacionPadre'] : NULL;
+             $telPadre = isset($_POST['telAcudientePadre']) ? $_POST['telAcudientePadre'] : NULL;
+             $telOficinaPadre = isset($_POST['telOficinaPadre']) ? $_POST['telOficinaPadre'] : NULL;
+             $dirPadre = isset($_POST['dirPadre']) ? $_POST['dirPadre'] : NULL;
+             
+             $idMadre = isset($_POST['idMadre']) ? $_POST['idMadre'] : NULL;
+             $nombresMadre = isset($_POST['nombresMadre']) ? $_POST['nombresMadre'] : NULL;
+             $apellidosMadre = isset($_POST['apellidosMadre']) ? $_POST['apellidosMadre'] : NULL;
+             $ocupacionMadre = isset($_POST['ocupacionMadre']) ? $_POST['ocupacionMadre'] : NULL;
+             $telMadre = isset($_POST['telAcudienteMadre']) ? $_POST['telAcudienteMadre'] : NULL;
+             $telOficinaMadre = isset($_POST['telOficinaMadre']) ? $_POST['telOficinaMadre'] : NULL;
+             $dirMadre = isset($_POST['dirMadre']) ? $_POST['dirMadre'] : NULL;
+             
+             $idAcudiente = isset($_POST['idAcudiente']) ? $_POST['idAcudiente'] : NULL;
+             $nombresAcudiente = isset($_POST['nombresAcudiente']) ? $_POST['nombresAcudiente'] : NULL;
+             $apellidosAcudiente = isset($_POST['apellidosAcudiente']) ? $_POST['apellidosAcudiente'] : NULL;
+             $ocupacionAcudiente = isset($_POST['ocupacionAcudiente']) ? $_POST['ocupacionAcudiente'] : NULL;
+             $telAcudiente = isset($_POST['telAcudienteAcudiente']) ? $_POST['telAcudienteAcudiente'] : NULL;
+             $telOficinaAcudiente = isset($_POST['telOficinaAcudiente']) ? $_POST['telOficinaAcudiente'] : NULL;
+             $dirAcudiente = isset($_POST['dirAcudiente']) ? $_POST['dirAcudiente'] : NULL;
+             
              $estado='0';
              $idRol= 'E';
-             $persona = new Persona();
-             $usuario = new Usuario();
-             $persona->setIdPersona($idPersona);
-             $persona->setNombres($nombres);
-             $persona->setPApellido($pApellido);
-             $persona->setSApellido($sApellido);
-             $persona->setSexo($sexo);
-             $persona->setTelefono($telefono);
-             $persona->setDireccion($direccion);
-             $persona->setCorreo($correo);
-             $persona->setFNacimiento($fNacimiento);
-             $persona->setEstado($estado);
-             $persona->setIdRol($idRol);
-             $persona->crearPersona($persona);
+             
+             $estudiante = new Estudiante();
+             $estudiante->setIdPersona($idPersona);
+             $estudiante->setTipoDocumento($tipoDocumento);
+             $estudiante->setLugarExpedicion($lugarExpedicion);
+             $estudiante->setFechaExpedicion($fechaExpedicion);
+             $estudiante->setTipoSanguineo($tipoSanguineo);
+             $estudiante->setEps($eps);
+             $estudiante->setNombres($nombres);
+             $estudiante->setPApellido($pApellido);
+             $estudiante->setSApellido($sApellido);
+             $estudiante->setSexo($sexo);
+             $estudiante->setTelefono($telefono);
+             $estudiante->setDireccion($direccion);
+             $estudiante->setBarrio($barrio);
+             $estudiante->setMunicipioResidencia($municipioResidencia);
+             $estudiante->setCorreo($correo);
+             $estudiante->setFNacimiento($fNacimiento);
+             $estudiante->setPaisNacimiento($paisNacimiento);
+             $estudiante->setDepartamentoNacimiento($departamentoNacimiento);
+             $estudiante->setMunicipioNacimiento($municipioNacimiento);
+             $estudiante->setInstProcedencia($instProcedencia);
+             
+             $estudiante->setIdPadre($idPadre);
+             $estudiante->setNombresPadre($nombresPadre);
+             $estudiante->setApellidosPadre($apellidosPadre);
+             $estudiante->setOcupacionPadre($ocupacionPadre);
+             $estudiante->setTelPadre($telPadre);
+             $estudiante->setTelOficinaPadre($telOficinaPadre);
+             $estudiante->setDirPadre($dirPadre);
+             
+             $estudiante->setIdMadre($idMadre);
+             $estudiante->setNombresMadre($nombresMadre);
+             $estudiante->setApellidosMadre($apellidosMadre);
+             $estudiante->setOcupacionMadre($ocupacionMadre);
+             $estudiante->setTelMadre($telMadre);
+             $estudiante->setTelOficinaMadre($telOficinaMadre);
+             $estudiante->setDirMadre($dirMadre);
+             
+             $estudiante->setIdAcudiente($idAcudiente);
+             $estudiante->setNombresAcudiente($nombresAcudiente);
+             $estudiante->setApellidosAcudiente($apellidosAcudiente);
+             $estudiante->setOcupacionAcudiente($ocupacionAcudiente);
+             $estudiante->setTelAcudiente($telAcudiente);
+             $estudiante->setTelOficinaAcudiente($telOficinaAcudiente);
+             $estudiante->setDirAcudiente($dirAcudiente);
+             
+             $estudiante->setEstado($estado);
+             $estudiante->setIdRol($idRol);
+             
+             $estudiante->crearPersona($estudiante);
+             $estudiante->crearDatos($estudiante);
+             $estudiante->crearDatosNacimiento($estudiante);
+             $estudiante->crearDatosUbicacion($estudiante);
+             
+             
              echo json_encode(1);
         } catch (Exception $exc) {
+            $estudiante2 = new Estudiante();
+            $estudiante2->eliminarPersona($idPersona);
+            $estudiante2->eliminarUsuario($idPersona);
+            $estudiante2->eliminarDatos($idPersona);
+            $estudiante2->eliminarDatosNacimiento($idPersona);
+            $estudiante2->eliminarDatosUbicacion($idPersona);
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }     
         }
@@ -798,7 +1010,7 @@ class AdministradorControl extends Controlador{
                 }
                     if ($band!=1){
                       $respuesta= 3;
-                    }elseif ($estudiante->getEstado()== 1 ){
+                    }elseif ($estudiante->getEstado()!= 0 ){
                       $respuesta= 2;
                     }else{
                   
@@ -1154,7 +1366,9 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
          }
-       
+         
+         
+
 //**************************************************************************************************//        
 //**********************************FIN DE LOS METODOS*********************************************//
 //**************************************************************************************************// 

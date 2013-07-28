@@ -18,6 +18,22 @@ var data="idPersona="+idPersona;
  
       
 }
+
+function leerDocentes(idSalon){
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+ 
+var y= $("#tablaEstudiantes"); 
+ var url="/colegio/administrador/docentesSalones";
+ var data="idSalon="+idSalon;
+ envioJson(url,data,function respuesta(res){   
+    x.hide();            
+    y.html (res);
+         });
+
+}
 function vistaActualizarPersona(idPersona){
  var x = $("#mensaje");
  cargando();
@@ -107,47 +123,26 @@ function actualizarPersona(){
         </div> 
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
-<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+                
+                <table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
-               <td align="center" class="color-text-gris" colspan="11"><h1>Docentes Pre-escolar</h1></td>
+               <td align="center" class="color-text-gris" colspan="11"><h1>Docentes Primaria</h1></td>
            </tr>
-         
-         
-                <tr class="modo1">
-                    <td>Documento</td>
-                    <td>Nombres</td>
-                    <td>P.Apellido</td>
-                    <td>S.Apellido</td>
-                    <td>Sexo</td>
-                    <td>Telefono</td>
-                    <td>Dirección</td>
-                    <td>Correo</td>
-                    <td>consultar</td>
-                    <td>Actualizar</td>
-                    <td>Inhabilitar</td>
-                    
-                </tr> 
+           </table>
+                  <p>&nbsp;</p>
+             <div  id="menu">   
+                  <?php foreach ($preescolar as $salon) { ?>    
+                   <li><a href="#" onClick="leerDocentes('<?=$salon->getIdSalon()?>')"><?php echo $salon->getIdSalon();?></a></li>
+                  <?php } ?>
+              </div>   
+              <p>&nbsp;</p>
+        
            
-   
-            <tbody>
+                <div id="tablaEstudiantes" >
+               <h1  style='margin-left:5%'>Seleccione un Salon...</h1>
+               </div>
+               
               
-                <?php foreach ($docente as $doc) { ?>
-                <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
-                    <td><?php echo $doc->getIdPersona();?></a></td>
-                    <td><?php echo $doc->getNombres();?></td>
-                    <td><?php echo $doc->getPApellido();?></td>
-                    <td><?php echo $doc->getSApellido();?></td>
-                    <td><?php echo $doc->getSexo();?></td>
-                    <td><?php echo $doc->getTelefono();?></td>
-                    <td><?php echo $doc->getDireccion();?></td>
-                    <td><?php echo $doc->getCorreo();?></td>
-                    <td align="center"><a href="#" onclick="consultaPersona('<?=$doc->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
-                    <td align="center"><a href="#" onclick="vistaActualizarPersona('<?=$doc->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/editarPersona.png" /></a></td>
-                    <td align="center"><a href="#" onclick="eliminarPersona('<?=$doc->getIdPersona()?>')"><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a></td>
-                </tr>
-                <?php }?>
-            </tbody>
-        </table>
 <div id="fade" class="overlay"></div>
 <div id="light" class="modal">
   <div style="float:right">

@@ -18,7 +18,6 @@ var data="idPersona="+idPersona;
  
       
 }
-
 function leerEstudiantes(idSalon){
  var x = $("#mensaje");
  cargando();
@@ -26,8 +25,9 @@ function leerEstudiantes(idSalon){
  x.show("slow");
  
 var y= $("#tablaEstudiantes"); 
- var url="/colegio/administrador/estudiantesSalones";
- var data="idSalon="+idSalon;
+ var url="/colegio/administrador/generarConsolidado";
+ var periodo = document.getElementById("periodo").value;
+    var data="idSalon="+idSalon+"&periodo="+periodo;
  envioJson(url,data,function respuesta(res){   
     x.hide();            
     y.html (res);
@@ -41,7 +41,7 @@ function vistaActualizarPersona(idPersona){
  x.show("slow");
 
 var y= $("#tablaConsulta"); 
-var url="/colegio/administrador/actualizarGeneralPersona";
+var url="/colegio/administrador/generarConsolidado";
 var data="idPersona="+idPersona;
  envioJson(url,data,function respuesta(res){   
    x.hide();            
@@ -113,7 +113,7 @@ function actualizarPersona(){
                         <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
                          <tr>   
                             <td align="right">   
-                                <h1>Consulta Rapida por Salones</h1>
+                                <h1>Consolidado por Salones</h1>
                             </td>
                          </tr>
                         </table>
@@ -126,22 +126,35 @@ function actualizarPersona(){
                 
                 <table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
-               <td align="center" class="color-text-gris" colspan="11"><h1>Estudiantes Preescolar</h1></td>
+               <td align="center" class="color-text-gris" colspan="11"><h1>Estudiantes Secundaria</h1></td>
            </tr>
            </table>
                   <p>&nbsp;</p>
              <div  id="menu">   
-                  <?php foreach ($preescolar as $salon) { ?>    
-                   <li><a href="#" onClick="leerEstudiantes('<?php echo $salon->getIdSalon();?>')"><?php echo $salon->getIdSalon();?></a></li>
+                  <?php foreach ($secundaria as $salon) { ?>    
+                   <li><a href="#" onClick="leerEstudiantes('<?=$salon->getIdSalon()?>')"><?php echo $salon->getIdSalon();?></a></li>
                   <?php } ?>
-              </div>   
+              </div>
+                  <div>   
+                      <table>
+                          <tr>
+                          <td><h5>SELECCIONE EL PERIODO</h5></td>
+                          <td><select id="periodo" >
+                          <option>PRIMERO</option>
+                          <option>SEGUNDO</option>
+                          <option>TERCERO</option>
+                          <option>CUARTO</option>
+                          <option>FINAL</option>
+                          </select></td>
+                          </tr>
+                      </table>
+                      
+              </div>
               <p>&nbsp;</p>
         
-           
-                <div id="tablaEstudiantes" >
-               <h1  style='margin-left:5%'>Seleccione un Salon...</h1>
-               </div>
-               
+           <div id="tablaEstudiantes" style="width: 100%" >
+           <h1  style='margin-left:5%'>Seleccione un Salon...</h1>
+           </div>
               
 <div id="fade" class="overlay"></div>
 <div id="light" class="modal">
