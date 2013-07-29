@@ -178,7 +178,7 @@ class Persona extends Modelo{
     }
     
      public function actualizarPersona(Persona $persona) {
-        $sql = "UPDATE persona SET nombres=:nombres, pApellido=:pApellido, sApellido=:sApellido, sexo=:sexo, telefono=:telefono, direccion=:direccion, correo=:correo, fNacimiento=:fNacimiento, estado=:estado  WHERE idPersona=:idPersona";
+        $sql = "UPDATE persona SET nombres=:nombres, pApellido=:pApellido, sApellido=:sApellido, sexo=:sexo, telefono=:telefono, correo=:correo,  estado=:estado  WHERE idPersona=:idPersona";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($persona));
        
@@ -196,7 +196,7 @@ class Persona extends Modelo{
 
     
     public function leerPersonas() {
-        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo, p.estado, dn.fNacimiento FROM persona p, datos_nac_persona dn WHERE p.idPersona=dn.idPersona";
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, p.estado, dn.fNacimiento FROM persona p, datos_nac_persona dn, datos_ubicacion_persona du WHERE p.idPersona=dn.idPersona AND p.idPersona=du.idPersona";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();
@@ -209,7 +209,7 @@ class Persona extends Modelo{
     }
     
     public function leerPorRol($idRol) {
-        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo, p.estado FROM persona p, rolespersona r WHERE p.idPersona=r.idPersona  AND r.idRol='".$idRol."'";
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, p.estado FROM persona p, rolespersona r, datos_ubicacion_persona du WHERE p.idPersona=r.idPersona AND p.idPersona=du.idPersona  AND r.idRol='".$idRol."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();
@@ -222,7 +222,7 @@ class Persona extends Modelo{
     }
     
      public function leerPorSalon($idSalon) {
-        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p, matricula m, datos_nac_persona dn WHERE p.idPersona=m.idPersona AND p.idPersona=dn.idPersona AND m.idSalon='".$idSalon."' ORDER BY p.Papellido";
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p, matricula m, datos_nac_persona dn,datos_ubicacion_persona du WHERE p.idPersona=m.idPersona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND m.idSalon='".$idSalon."' ORDER BY p.Papellido";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();
@@ -234,7 +234,7 @@ class Persona extends Modelo{
         return $pers;
     }
      public function leerPorSalonDocente($idSalon) {
-        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo,  p.estado FROM persona p, carga c WHERE p.idPersona=c.idPersona AND c.idSalon='".$idSalon."'";
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo,  p.estado FROM persona p, carga c, datos_ubicacion_persona du WHERE p.idPersona=c.idPersona AND p.idPersona=du.idPersona AND c.idSalon='".$idSalon."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();
@@ -262,8 +262,8 @@ class Persona extends Modelo{
     
 
     public function leerPorId($id){
-        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo, p.estado, dn.fNacimiento FROM persona p,datos_nac_persona dn";
-        $sql .= " WHERE p.idPersona=dn.idPersona AND p.idPersona='".$id."'";
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, p.estado, dn.fNacimiento FROM persona p,datos_nac_persona dn, datos_ubicacion_persona du";
+        $sql .= " WHERE p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND p.idPersona='".$id."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $persona=NULL;
@@ -274,7 +274,7 @@ class Persona extends Modelo{
         return $persona;
     }
     public function leerPorCorreo($correo){
-        $sql = "SELECT idPersona, nombres, pApellido, sApellido, sexo, telefono, direccion, correo, estado FROM persona ";
+        $sql = "SELECT idPersona, nombres, pApellido, sApellido, sexo, telefono,  correo, estado FROM persona ";
         $sql .= "WHERE correo='".$correo."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
@@ -288,7 +288,7 @@ class Persona extends Modelo{
     }
     
      public function leerParaRecuparacion($campo){
-        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, p.direccion, p.correo, p.estado FROM persona p, usuario u";
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono,  p.correo, p.estado FROM persona p, usuario u";
         $sql .= " WHERE p.idPersona='".$campo."' or p.correo='".$campo."' or u.usuario='".$campo."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
