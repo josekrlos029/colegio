@@ -870,46 +870,58 @@ class AdministradorControl extends Controlador{
         public function guardarEstudiantes(){
             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
             try {
-                $estudiante2 = new Estudiante();
+               $estudiante2 = new Estudiante();
             $estudiante2->eliminarPersona($idPersona);
             $estudiante2->eliminarUsuario($idPersona);
             $estudiante2->eliminarDatos($idPersona);
+            
+             /**datos personales**/
              $tipoDocumento = isset($_POST['tipoDocumento']) ? $_POST['tipoDocumento'] : NULL;
              $lugarExpedicion = isset($_POST['lugarExpedicion']) ? $_POST['lugarExpedicion'] : NULL;
              $fechaExpedicion = isset($_POST['fechaExpedicion']) ? $_POST['fechaExpedicion'] : NULL;
-             $tipoSanguineo = isset($_POST['tipoSanguineo']) ? $_POST['tipoSanguineo'] : NULL;
-             $eps = isset($_POST['eps']) ? $_POST['eps'] : NULL;
              $nombres = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
              $pApellido = isset($_POST['pApellido']) ? $_POST['pApellido'] : NULL;
              $sApellido = isset($_POST['sApellido']) ? $_POST['sApellido'] : NULL;
              $sexo = isset($_POST['sexo']) ? $_POST['sexo'] : NULL;
+             $tipoSanguineo = isset($_POST['tipoSanguineo']) ? $_POST['tipoSanguineo'] : NULL;
+             $eps = isset($_POST['eps']) ? $_POST['eps'] : NULL;
              $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : NULL;
-             $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : NULL;
-             $barrio = isset($_POST['barrio']) ? $_POST['barrio'] : NULL;
-             $municipioResidencia = isset($_POST['municipioResidencia']) ? $_POST['municipioResidencia'] : NULL;
              $correo = isset($_POST['correo']) ? $_POST['correo'] : NULL;
+             $instProcedencia = isset($_POST['instProcedencia']) ? $_POST['instProcedencia'] : NULL;
+             /***fin de datos Personales**/
+             
+             // datos de nacimiento
              $fNacimiento = isset($_POST['fNacimiento']) ? $_POST['fNacimiento'] : NULL;
              $paisNacimiento = isset($_POST['paisNacimiento']) ? $_POST['paisNacimiento'] : NULL;
              $departamentoNacimiento = isset($_POST['departamentoNacimiento']) ? $_POST['departamentoNacimiento'] : NULL;
              $municipioNacimiento = isset($_POST['municipioNacimiento']) ? $_POST['municipioNacimiento'] : NULL;
-             $instProcedencia = isset($_POST['instProcedencia']) ? $_POST['instProcedencia'] : NULL;
+             //fin de datos de nacimiento
              
+             // datos de ubicacion
+             $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : NULL;
+             $barrio = isset($_POST['barrio']) ? $_POST['barrio'] : NULL;
+             $municipioResidencia = isset($_POST['municipioResidencia']) ? $_POST['municipioResidencia'] : NULL;
+             // fin de datos de ubicacion
+             
+             // datos del padre
              $idPadre = isset($_POST['idPadre']) ? $_POST['idPadre'] : NULL;
              $nombresPadre = isset($_POST['nombresPadre']) ? $_POST['nombresPadre'] : NULL;
              $apellidosPadre = isset($_POST['apellidosPadre']) ? $_POST['apellidosPadre'] : NULL;
              $ocupacionPadre = isset($_POST['ocupacionPadre']) ? $_POST['ocupacionPadre'] : NULL;
-             $telPadre = isset($_POST['telAcudientePadre']) ? $_POST['telAcudientePadre'] : NULL;
+             $telPadre = isset($_POST['telPadre']) ? $_POST['telPadre'] : NULL;
              $telOficinaPadre = isset($_POST['telOficinaPadre']) ? $_POST['telOficinaPadre'] : NULL;
              $dirPadre = isset($_POST['dirPadre']) ? $_POST['dirPadre'] : NULL;
              
+             //datos de la madre
              $idMadre = isset($_POST['idMadre']) ? $_POST['idMadre'] : NULL;
              $nombresMadre = isset($_POST['nombresMadre']) ? $_POST['nombresMadre'] : NULL;
              $apellidosMadre = isset($_POST['apellidosMadre']) ? $_POST['apellidosMadre'] : NULL;
              $ocupacionMadre = isset($_POST['ocupacionMadre']) ? $_POST['ocupacionMadre'] : NULL;
-             $telMadre = isset($_POST['telAcudienteMadre']) ? $_POST['telAcudienteMadre'] : NULL;
+             $telMadre = isset($_POST['telMadre']) ? $_POST['telMadre'] : NULL;
              $telOficinaMadre = isset($_POST['telOficinaMadre']) ? $_POST['telOficinaMadre'] : NULL;
              $dirMadre = isset($_POST['dirMadre']) ? $_POST['dirMadre'] : NULL;
              
+             //datps de el acudiente
              $idAcudiente = isset($_POST['idAcudiente']) ? $_POST['idAcudiente'] : NULL;
              $nombresAcudiente = isset($_POST['nombresAcudiente']) ? $_POST['nombresAcudiente'] : NULL;
              $apellidosAcudiente = isset($_POST['apellidosAcudiente']) ? $_POST['apellidosAcudiente'] : NULL;
@@ -921,27 +933,30 @@ class AdministradorControl extends Controlador{
              $estado='0';
              $idRol= 'E';
              
+             
              $estudiante = new Estudiante();
              $estudiante->setIdPersona($idPersona);
              $estudiante->setTipoDocumento($tipoDocumento);
              $estudiante->setLugarExpedicion($lugarExpedicion);
              $estudiante->setFechaExpedicion($fechaExpedicion);
-             $estudiante->setTipoSanguineo($tipoSanguineo);
-             $estudiante->setEps($eps);
              $estudiante->setNombres($nombres);
              $estudiante->setPApellido($pApellido);
              $estudiante->setSApellido($sApellido);
              $estudiante->setSexo($sexo);
+             $estudiante->setTipoSanguineo($tipoSanguineo);
+             $estudiante->setEps($eps);
              $estudiante->setTelefono($telefono);
-             $estudiante->setDireccion($direccion);
-             $estudiante->setBarrio($barrio);
-             $estudiante->setMunicipioResidencia($municipioResidencia);
              $estudiante->setCorreo($correo);
+             $estudiante->setInstProcedencia($instProcedencia);
+             
              $estudiante->setFNacimiento($fNacimiento);
              $estudiante->setPaisNacimiento($paisNacimiento);
              $estudiante->setDepartamentoNacimiento($departamentoNacimiento);
              $estudiante->setMunicipioNacimiento($municipioNacimiento);
-             $estudiante->setInstProcedencia($instProcedencia);
+             
+             $estudiante->setDireccion($direccion);
+             $estudiante->setBarrio($barrio);
+             $estudiante->setMunicipioResidencia($municipioResidencia);
              
              $estudiante->setIdPadre($idPadre);
              $estudiante->setNombresPadre($nombresPadre);
@@ -975,6 +990,9 @@ class AdministradorControl extends Controlador{
              $estudiante->crearDatosNacimiento($estudiante);
              $estudiante->crearDatosUbicacion($estudiante);
              
+             $estudiante->crearDatosPadre($estudiante);
+             $estudiante->crearDatosMadre($estudiante);
+             $estudiante->crearDatosAcudiente($estudiante);
              
              echo json_encode(1);
         } catch (Exception $exc) {

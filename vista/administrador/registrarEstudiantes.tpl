@@ -11,35 +11,47 @@ function envio(){
  cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
+ 
+ /**Datos Personales********************/
  var idPersona = document.getElementById("idPersona");
  var tipoDocumento = document.getElementById("tipoDocumento");
  var lugarExpedicion = document.getElementById("lugarExpedicion");
  var fechaExpedicion = document.getElementById("fechaExpedicion");
- var tipoSanguineo = document.getElementById("tipoSanguineo");
- var eps = document.getElementById("eps");
  var nombres = document.getElementById("nombres");
  var pApellido = document.getElementById("pApellido");
  var sApellido = document.getElementById("sApellido");
  var sexo = document.getElementById("sexo");
+ var tipoSanguineo = document.getElementById("tipoSanguineo");
+ var eps = document.getElementById("eps");
  var telefono = document.getElementById("telefono");
- var direccion = document.getElementById("direccion");
- var barrio = document.getElementById("barrio");
- var municipioResidencia = document.getElementById("municipioResidencia");
  var correo = document.getElementById("correo");
+ var instProcedencia= document.getElementById("instProcedencia");
+ /**fin de los datos personales********/
+ 
+ /***Datos de nacimiento***/
  var fNacimiento = document.getElementById("fNacimiento");
  var paisNacimiento = document.getElementById("paisNacimiento");
  var departamentoNacimiento = document.getElementById("departamentoNacimiento");
  var municipioNacimiento= document.getElementById("municipioNacimiento");
- var instProcedencia= document.getElementById("instProcedencia");
-/* 
+ /***fin de datos nacimiento****/
+ 
+ /** datos de ubicacion***/
+ var direccion = document.getElementById("direccion");
+ var barrio = document.getElementById("barrio");
+ var municipioResidencia = document.getElementById("municipioResidencia");
+ /**fin de datos ubicacion***/
+ 
+ /** datos del padre**/
  var idPadre = document.getElementById("idPadre");
  var nombresPadre = document.getElementById("nombresPadre");
  var apellidosPadre = document.getElementById("apellidosPadre");
- var ocupacionPadre  = document.getElementById("ocupacionPAdre");
+ var ocupacionPadre  = document.getElementById("ocupacionPadre");
  var telPadre = document.getElementById("telPadre");
  var telOficinaPadre = document.getElementById("telOficinaPadre");
- var dirPadre = document.getElementById("dirAcudiente");
-
+ var dirPadre = document.getElementById("dirPadre");
+ /** fin datos del padre***/
+ 
+ /*** datos  de la madre ***/
  var idMadre = document.getElementById("idMadre");
  var nombresMadre = document.getElementById("nombresMadre");
  var apellidosMadre = document.getElementById("apellidosMadre");
@@ -47,7 +59,9 @@ function envio(){
  var telMadre = document.getElementById("telMadre");
  var telOficinaMadre = document.getElementById("telOficinaMadre");
  var dirMadre = document.getElementById("dirMadre");
+/*** fin de datos de la madre****/
 
+/*** datos del acudiente***/
  var idAcudiente = document.getElementById("idAcudiente");
  var nombresAcudiente = document.getElementById("nombresAcudiente");
  var apellidosAcudiente = document.getElementById("apellidosAcudiente");
@@ -55,20 +69,47 @@ function envio(){
  var telAcudiente = document.getElementById("telAcudiente");
  var telOficinaAcudiente = document.getElementById("telOficinaAcudiente");
  var dirAcudiente = document.getElementById("dirAcudiente");
-*/
-/// if (idPersona.value=="" || nombres.value=="" || pApellido.value=="" || sApellido.value=="" || fNacimiento.value==""  || tipoDocumento.value=="" ||  idAcudiente.value=="" || nombresAcudiente.value=="" || apellidosAcudiente.value=="" || ocupacionAcudiente.value=="" || telAcudiente.value==""  || dirAcudiente.value==""){
-  //  x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
-      //error();
-    //  ocultar();
-  //  }else{
+/***fin datos del acudiente***/
+
+ if (idPersona.value=="" || tipoDocumento.value=="" || lugarExpedicion.value=="" || fechaExpedicion.value=="" || nombres.value==""  || pApellido.value=="" || sApellido.value=="" || sexo.value=="" || tipoSanguineo.value=="" || eps.value=="" || telefono.value=="" || correo.value=="" ){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos Personales</p>");
+      error();
+      ocultar();
+  }else if(fNacimiento.value=="" || paisNacimiento.value=="" || departamentoNacimiento.value=="" || municipioNacimiento.value=="" ){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos de Nacimiento</p>");
+      error();
+      ocultar();
+   }else if(direccion.value=="" || barrio.value=="" || municipioResidencia.value=="" ){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos de Ubicacion</p>");
+      error();
+      ocultar();
+   }else if(idPadre.value=="" || nombresPadre.value=="" || apellidosPadre.value=="" || ocupacionPadre.value=="" || telPadre.value=="" ||dirPadre.value==""){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos del Padre</p>");
+      error();
+      ocultar();
+   }else if(idMadre.value=="" || nombresMadre.value=="" || apellidosMadre.value=="" || ocupacionMadre.value=="" || telMadre.value=="" ||dirMadre.value==""){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos del Madre</p>");
+      error();
+      ocultar();
+   }else if(idAcudiente.value=="" || nombresAcudiente.value=="" || apellidosAcudiente.value=="" || ocupacionAcudiente.value=="" || telAcudiente.value=="" || dirAcudiente.value==""){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos del Acudiente</p>");
+      error();
+      ocultar();
+   }else{
+  
         var url="/colegio/administrador/guardarEstudiantes/";
-        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&correo="+correo.value+"&fNacimiento="+fNacimiento.value+"&tipoDocumento="+tipoDocumento.value+"&lugarExpedicion="+lugarExpedicion.value+"&fechaExpedicion="+fechaExpedicion.value+"&tipoSanguieno="+tipoSanguineo.value+"&eps="+eps.value+"&barrio="+barrio.value+"&municipioResidencia="+municipioResidencia.value+"&paisNacimiento="+paisNacimiento.value+"&municipioNacimiento="+municipioNacimiento.value+"&departamentoNacimiento="+departamentoNacimiento.value+"&instProcedencia="+instProcedencia.value/*+"&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacionAcudiente="+ocupacionAcudiente.value+"&telAcudiente="+telAcudiente.value+"&dirAcudiente="+dirAcudiente.value+"&telOficinaAcudiente="+telOficinaAcudiente.value+"&idPadre="+idPadre.value+"&nombresPadre="+nombresPadre.value+"&apellidosPadre="+apellidosPadre.value+"&ocupacionPadre="+ocupacionPadre.value+"&telPadre="+telPadre.value+"&dirPadre="+dirPadre.value+"&telOficinaPadre="+telOficinaPadre.value+"&idMadre="+idMadre.value+"&nombresMadre="+nombresMadre.value+"&apellidosMadre="+apellidosMadre.value+"&ocupacionMadre="+ocupacionMadre.value+"&telMadre="+telMadre.value+"&dirMadre="+dirMadre.value+"&telOficinaMadre="+telOficinaMadre.value*/;
+        var data="idPersona="+idPersona.value+"&tipoDocumento="+tipoDocumento.value+"&lugarExpedicion="+lugarExpedicion.value+"&fechaExpedicion="+fechaExpedicion.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&tipoSanguineo="+tipoSanguineo.value+"&eps="+eps.value+"&telefono="+telefono.value+"&correo="+correo.value+"&instProcedencia="+instProcedencia.value+
+                 "&fNacimiento="+fNacimiento.value+"departamentoNacimiento="+departamentoNacimiento.value+"&municipioNacimiento="+municipioNacimiento.value+
+                 "&direccion="+direccion.value+"&barrio="+barrio.value+"&municipioResidencia="+municipioResidencia.value+
+                 "&idPadre="+idPadre.value+"&nombresPadre="+nombresPadre.value+"&apellidosPadre="+apellidosPadre.value+"&ocupacionPadre="+ocupacionPadre.value+"&telPadre="+telPadre.value+"&telOficinaPadre="+telOficinaPadre.value+"&dirPadre="+dirPadre.value+
+                 "&idMadre="+idPadre.value+"&nombresMadre="+nombresMadre.value+"&apellidosMadre="+apellidosMadre.value+"&ocupacionMadre="+ocupacionMadre.value+"&telMadre="+telMadre.value+"&telOficinaMadre="+telOficinaMadre.value+"&dirMadre="+dirMadre.value+
+                 "&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacionAcudiente="+ocupacionPadre.value+"&telPadre="+telAcudiente.value+"&telOficinaAcudiente="+telOficinaAcudiente.value+"&dirAcudiente="+dirAcudiente.value;
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
                     x.html ( "<p>Estudiante Registrador Correctamente</p>");
                     exito();
                     ocultar();
-                //document.location.href="/colegio/administrador/RegistrarEstudiantes";
+                document.location.href="/colegio/administrador/RegistrarEstudiantes";
             }else{
                 x.html ( "<p>"+res+"</p>");
                 idMateria.value="";
@@ -78,7 +119,7 @@ function envio(){
                 ocultar();  
             }
          });
-    //}   
+    }   
 }
 </script>
     </head>
