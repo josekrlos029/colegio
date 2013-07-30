@@ -351,6 +351,49 @@ class Estudiante extends Persona {
         );
         return $parametros;
     }
+    private function getParametrosPadre(Estudiante $est){
+              
+        $parametros = array(
+            ':idPadre' => $est->getIdPadre(),
+            ':nombresPadre' => $est->getNombresPadre(),
+            ':apellidosPadre' => $est->getApellidosPadre(),
+            ':ocupacionPadre' => $est->getOcupacionPadre(),
+            ':telPadre' => $est->getTelPadre(),
+            ':telOficinaPadre' => $est->getTelOficinaPadre(),
+            ':dirPadre' => $est->getDirPadre()
+           
+        );
+        return $parametros;
+    }
+    
+    private function getParametrosMadre(Estudiante $est){
+              
+        $parametros = array(
+            ':idMadre' => $est->getIdMadre(),
+            ':nombresMadre' => $est->getNombresMadre(),
+            ':apellidosMadre' => $est->getApellidosMadre(),
+            ':ocupacionMadre' => $est->getOcupacionMadre(),
+            ':telMadre' => $est->getTelMadre(),
+            ':telOficinaMadre' => $est->getTelOficinaMadre(),
+            ':dirMadre' => $est->getDirMadre()
+           
+        );
+        return $parametros;
+    }
+     private function getParametrosAcudiente(Estudiante $est){
+              
+        $parametros = array(
+            ':idAcudiente' => $est->getIdAcudiente(),
+            ':nombresAcudiente' => $est->getNombresAcudiente(),
+            ':apellidosAcudiente' => $est->getApellidosAcudiente(),
+            ':ocupacionAcudiente' => $est->getOcupacionAcudiente(),
+            ':telAcudiente' => $est->getTelMadre(),
+            ':telOficinaAcudiente' => $est->getTelOficinaAcudiente(),
+            ':dirAcudiente' => $est->getDirAcudiente()
+           
+        );
+        return $parametros;
+    }
     
     public function crearDatosUbicacion(Estudiante $estudiante){
         $sql = "INSERT INTO datos_ubicacion_estudiante (idPersona, direccion, barrio, municipio) VALUES ( :idPersona, :direccion, :barrio, :municipio)";
@@ -367,6 +410,43 @@ class Estudiante extends Persona {
         $sql = "INSERT INTO datos_nac_persona (idPersona, fNacimiento, pais, departamento, municipio) VALUES ( :idPersona, :fNacimiento, :pais, :departamento, :municipio)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametrosNac($estudiante));
+    }
+       public function crearDatosPadre(Estudiante $estudiante){
+        $sql = "INSERT INTO padre (id_padre,nombre,apellido, ocupacion,telefono,tel_oficina,direccion) VALUES ( :idPadre, :nombresPadre, :apellidosPadre, :ocupacionPadre, :telPadre, :telOficinaPadre, :dirPadre)";
+        $this->__setSql($sql);
+        $this->ejecutar($this->getParametrosPadre($estudiante));
+    }
+    public function crearDatosMadre(Estudiante $estudiante){
+        $sql = "INSERT INTO madre (id_madre,nombre,apellido, ocupacion,telefono,tel_oficina,direccion) VALUES ( :idMadre, :nombresMadre, :apellidosMadre, :ocupacionMadre, :telMadre, :telOficinaMadre, :dirMadre)";
+        $this->__setSql($sql);
+        $this->ejecutar($this->getParametrosMadre($estudiante));
+    }
+    public function crearDatosAcudiente(Estudiante $estudiante){
+        $sql = "INSERT INTO acudiente (id_acudiente,nombre,apellido, ocupacion,telefono,tel_oficina,direccion) VALUES ( :idAcudiente, :nombresAcudiente, :apellidosAcudiente, :ocupacionAcudiente, :telAcudiente, :telOficinaAcudiente, :dirAcudiente)";
+        $this->__setSql($sql);
+        $this->ejecutar($this->getParametrosAcudiente($estudiante));
+    }
+    
+    public function estudiantePadre(Estudiante $estudiante){
+        $sql = "INSERT INTO padre_estudiante (id_estudiante,id_padre) VALUES (:idPersona,:idPadre)";
+        $this->__setSql($sql);
+        $this->ejecutar(array(
+            ':idPersona' => $estudiante->getIdPersona(),
+            ':idPadre' => $estudiante->getIdPadre()));
+    }
+    public function estudianteMadre(Estudiante $estudiante){
+        $sql = "INSERT INTO madre_estudiante (id_estudiante,id_madre) VALUES (:idPersona,:idMadre)";
+        $this->__setSql($sql);
+        $this->ejecutar(array(
+            ':idPersona' => $estudiante->getIdPersona(),
+            ':idMadre' => $estudiante->getIdMadre()));
+    }
+     public function estudianteAcudiente(Estudiante $estudiante){
+        $sql = "INSERT INTO acudiente_estudiante (id_estudiante,id_acudiente) VALUES (:idPersona,:idAcudiente)";
+        $this->__setSql($sql);
+        $this->ejecutar(array(
+            ':idPersona' => $estudiante->getIdPersona(),
+            ':idAcudiente' => $estudiante->getIdAcudiente()));
     }
     
     public function eliminarDatosUbicacion($idPersona){
@@ -385,6 +465,42 @@ class Estudiante extends Persona {
         $this->__setSql($sql);
         $this->ejecutar();
     }
+    
+    public function eliminarPadre($idPadre){
+        $sql = "DELETE FROM padre WHERE id_padre='".$idPadre."'";
+        $this->__setSql($sql);
+        $this->ejecutar();
+    }
+    
+    
+    public function eliminarMadre($idMadre){
+        $sql = "DELETE FROM madre WHERE id_madre='".$idMadre."'";
+        $this->__setSql($sql);
+        $this->ejecutar();
+    }
+    public function eliminarAcudiente($idAcudiente){
+        $sql = "DELETE FROM acudiente WHERE id_acudiente='".$idAcudiente."'";
+        $this->__setSql($sql);
+        $this->ejecutar();
+    }
+      public function eliminarEstudiantePadre($idPersona,$idPadre){
+        $sql = "DELETE FROM padre_estudiante WHERE id_padre='".$idPadre."' AND id_estudiante='".$idPersona."'";
+        $this->__setSql($sql);
+        $this->ejecutar();
+    }
+    public function eliminarEstudianteMadre($idPersona,$idMadre){
+        $sql = "DELETE FROM madre_estudiante WHERE id_madre='".$idMadre."' AND id_estudiante='".$idPersona."'";
+        $this->__setSql($sql);
+        $this->ejecutar();
+    }
+    public function eliminarEstudianteAcudiente($idPersona,$idAcudiente){
+        $sql = "DELETE FROM acudiente_estudiante WHERE id_acudiente='".$idAcudiente."' AND id_estudiante='".$idPersona."'";
+        $this->__setSql($sql);
+        $this->ejecutar();
+    }
+    
+    
+    
     
 }
 

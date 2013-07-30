@@ -868,14 +868,16 @@ class AdministradorControl extends Controlador{
          * guarda los datos que vienen del formulario Registrar Estudiantes
          */
         public function guardarEstudiantes(){
+           try {
             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
-            try {
-               $estudiante2 = new Estudiante();
+            echo json_encode($idPersona);
+           
+          /*  $estudiante2 = new Estudiante();
             $estudiante2->eliminarPersona($idPersona);
             $estudiante2->eliminarUsuario($idPersona);
-            $estudiante2->eliminarDatos($idPersona);
+            $estudiante2->eliminarDatos($idPersona);*/
             
-             /**datos personales**/
+             //datos personales
              $tipoDocumento = isset($_POST['tipoDocumento']) ? $_POST['tipoDocumento'] : NULL;
              $lugarExpedicion = isset($_POST['lugarExpedicion']) ? $_POST['lugarExpedicion'] : NULL;
              $fechaExpedicion = isset($_POST['fechaExpedicion']) ? $_POST['fechaExpedicion'] : NULL;
@@ -891,7 +893,7 @@ class AdministradorControl extends Controlador{
              /***fin de datos Personales**/
              
              // datos de nacimiento
-             $fNacimiento = isset($_POST['fNacimiento']) ? $_POST['fNacimiento'] : NULL;
+            $fNacimiento = isset($_POST['fNacimiento']) ? $_POST['fNacimiento'] : NULL;
              $paisNacimiento = isset($_POST['paisNacimiento']) ? $_POST['paisNacimiento'] : NULL;
              $departamentoNacimiento = isset($_POST['departamentoNacimiento']) ? $_POST['departamentoNacimiento'] : NULL;
              $municipioNacimiento = isset($_POST['municipioNacimiento']) ? $_POST['municipioNacimiento'] : NULL;
@@ -994,7 +996,11 @@ class AdministradorControl extends Controlador{
              $estudiante->crearDatosMadre($estudiante);
              $estudiante->crearDatosAcudiente($estudiante);
              
-             echo json_encode(1);
+             $estudiante->estudiantePadre($estudiante);
+             $estudiante->estudianteMadre($estudiante);
+             $estudiante->estudianteAcudiente($estudiante);
+            
+             
         } catch (Exception $exc) {
             $estudiante2 = new Estudiante();
             $estudiante2->eliminarPersona($idPersona);
@@ -1002,6 +1008,13 @@ class AdministradorControl extends Controlador{
             $estudiante2->eliminarDatos($idPersona);
             $estudiante2->eliminarDatosNacimiento($idPersona);
             $estudiante2->eliminarDatosUbicacion($idPersona);
+            $estudiante2->eliminarPadre($idPadre);
+            $estudiante2->eliminarMadre($idMadre);
+            $estudiante2->eliminarAcudiente($idAcudiente);
+            $estudiante2->eliminarEstudiantePadre($idPersona,$idPadre);
+            $estudiante2->eliminarEstudianteMadre($idPersona,$idMadre);
+            $estudiante2->eliminarEstudianteAcudiente($idPersona,$idAcudiente);
+            
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }     
         }
