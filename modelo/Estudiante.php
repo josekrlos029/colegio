@@ -396,7 +396,7 @@ class Estudiante extends Persona {
     }
     
     public function crearDatosUbicacion(Estudiante $estudiante){
-        $sql = "INSERT INTO datos_ubicacion_estudiante (idPersona, direccion, barrio, municipio) VALUES ( :idPersona, :direccion, :barrio, :municipio)";
+        $sql = "INSERT INTO datos_ubicacion_persona (idPersona, direccion, barrio, municipio) VALUES ( :idPersona, :direccion, :barrio, :municipio)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametrosUbic($estudiante));
     }
@@ -455,7 +455,7 @@ class Estudiante extends Persona {
         $this->ejecutar();
     }
     public function eliminarDatos($idPersona){
-        $sql = "DELETE FROM datos_ubicacion_estudiante WHERE idPersona='".$idPersona."'";
+        $sql = "DELETE FROM datos_ubicacion_persona WHERE idPersona='".$idPersona."'";
         $this->__setSql($sql);
         $this->ejecutar();
     }
@@ -499,6 +499,26 @@ class Estudiante extends Persona {
         $this->ejecutar();
     }
     
+    public function verificarPadre($idPadre){
+        $sql = "SELECT * FROM padre WHERE id_padre='".$idPadre."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        return $resultado;
+    }
+    
+    public function verificarMadre($idMadre){
+        $sql = "SELECT * FROM madre WHERE id_madre='".$idMadre."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        return $resultado;
+    }
+    
+    public function verificarAcudiente($idAcudiente){
+        $sql = "SELECT * FROM acudiente WHERE id_acudiente='".$idAcudiente."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        return $resultado;
+    }
     
     
     

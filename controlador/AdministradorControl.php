@@ -482,10 +482,11 @@ class AdministradorControl extends Controlador{
     * @return type
     */
     
-          public function matricularEstudiante(){
+          public function matricularEstudiante($id = null){
          try {
             if($this->verificarSession()){
             $this->vista->set('titulo', 'Matricular Estudiante');
+            $this->vista->set('id', $id);
             $salon= new Salon();
             $salones = $salon->leerSalones();
             $this->vista->set('salones', $salones);
@@ -868,15 +869,9 @@ class AdministradorControl extends Controlador{
          * guarda los datos que vienen del formulario Registrar Estudiantes
          */
         public function guardarEstudiantes(){
-           try {
-            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
-            echo json_encode($idPersona);
            
-          /*  $estudiante2 = new Estudiante();
-            $estudiante2->eliminarPersona($idPersona);
-            $estudiante2->eliminarUsuario($idPersona);
-            $estudiante2->eliminarDatos($idPersona);*/
-            
+            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+           
              //datos personales
              $tipoDocumento = isset($_POST['tipoDocumento']) ? $_POST['tipoDocumento'] : NULL;
              $lugarExpedicion = isset($_POST['lugarExpedicion']) ? $_POST['lugarExpedicion'] : NULL;
@@ -935,6 +930,16 @@ class AdministradorControl extends Controlador{
              $estado='0';
              $idRol= 'E';
              
+             $estudiante2 = new Estudiante();
+            $estudiante2->eliminarPersona($idPersona);
+            $estudiante2->eliminarUsuario($idPersona);
+            $estudiante2->eliminarDatos($idPersona);
+            $estudiante2->eliminarDatosNacimiento($idPersona);
+            $estudiante2->eliminarDatosUbicacion($idPersona);
+            $estudiante2->eliminarEstudiantePadre($idPersona,$idPadre);
+            $estudiante2->eliminarEstudianteMadre($idPersona,$idMadre);
+            $estudiante2->eliminarEstudianteAcudiente($idPersona,$idAcudiente);
+             try {
              
              $estudiante = new Estudiante();
              $estudiante->setIdPersona($idPersona);
@@ -992,14 +997,23 @@ class AdministradorControl extends Controlador{
              $estudiante->crearDatosNacimiento($estudiante);
              $estudiante->crearDatosUbicacion($estudiante);
              
-             $estudiante->crearDatosPadre($estudiante);
-             $estudiante->crearDatosMadre($estudiante);
-             $estudiante->crearDatosAcudiente($estudiante);
+             if ($estudiante->verificarPadre($idPadre) == NULL){
+               $estudiante->crearDatosPadre($estudiante);  
+             }
+             
+             if ($estudiante->verificarMadre($idMadre) == NULL){
+               $estudiante->crearDatosMadre($estudiante);
+             }
+             
+             if ($estudiante->verificarAcudiente($idAcudiente) == NULL){
+               $estudiante->crearDatosAcudiente($estudiante);
+             }
              
              $estudiante->estudiantePadre($estudiante);
              $estudiante->estudianteMadre($estudiante);
              $estudiante->estudianteAcudiente($estudiante);
-            
+                        
+             echo json_encode(1);
              
         } catch (Exception $exc) {
             $estudiante2 = new Estudiante();
@@ -1008,9 +1022,6 @@ class AdministradorControl extends Controlador{
             $estudiante2->eliminarDatos($idPersona);
             $estudiante2->eliminarDatosNacimiento($idPersona);
             $estudiante2->eliminarDatosUbicacion($idPersona);
-            $estudiante2->eliminarPadre($idPadre);
-            $estudiante2->eliminarMadre($idMadre);
-            $estudiante2->eliminarAcudiente($idAcudiente);
             $estudiante2->eliminarEstudiantePadre($idPersona,$idPadre);
             $estudiante2->eliminarEstudianteMadre($idPersona,$idMadre);
             $estudiante2->eliminarEstudianteAcudiente($idPersona,$idAcudiente);

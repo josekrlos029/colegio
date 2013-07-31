@@ -129,7 +129,7 @@ function matricular(){
        <table width="50%" border="0" cellspacing="0" cellpadding="2">
                 
            <td align="right">Digite Numero de Documento:</td>
-           <td><input name="idPersona"  id="idPersona" type="text" class="box-text" required/></td>
+           <td><input name="idPersona"  id="idPersona" type="text" class="box-text" value="<?php echo $id; ?>" required/></td>
            <td><input name="consultarEstudiante" id="consultarEstudiante" type="submit" value="Consultar" class="button large blue" onclick="envio()" /></td>
            <td id="nuevo1" hidden><input name="nuevo" id="nuevo" type="submit" value="Nuevo" class="button large green" onclick="nuevo()" /></td>
        </tr>

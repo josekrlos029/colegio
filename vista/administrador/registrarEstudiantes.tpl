@@ -106,10 +106,11 @@ function envio(){
                  "&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacionAcudiente="+ocupacionPadre.value+"&telPadre="+telAcudiente.value+"&telOficinaAcudiente="+telOficinaAcudiente.value+"&dirAcudiente="+dirAcudiente.value;
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
-                    x.html ( "<p>Estudiante Registrador Correctamente</p>");
+                    x.html ("<p>Estudiante Registrado Correctamente, HAGA CLICK <a href='/colegio/administrador/matricularEstudiante/"+idPersona.value+"'>AQUI</a> SI DESEA MATRICULARLO INMEDIATAMENTE, sino desea agregar otro estudiante por favor refresque la página (f5)</p>");
+                    $("#idPersona").attr("disabled","disabled");
                     exito();
                     ocultar();
-                document.location.href="/colegio/administrador/RegistrarEstudiantes";
+                
             }else{
                 x.html ( "<p>"+res+"</p>");
                 idMateria.value="";
