@@ -71,6 +71,19 @@ class Grado extends Modelo{
         }
         return $grads;
     }
+    
+    public function leerGradoPorId($idGrado) {
+        $sql = "SELECT idGrado, nombre FROM grado WHERE idGrado='".$idGrado."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $grado = new Grado();
+        foreach ($resultado as $fila) {
+            
+            $this->mapearGrado($grado, $fila);
+            
+        }
+        return $grado;
+    }
 
     public function actualizarGrado(Grado $grado) {
         $sql = "UPDATE grado SET nombre=:nombre, horas=:horas WHERE idGrado=:idGrado";

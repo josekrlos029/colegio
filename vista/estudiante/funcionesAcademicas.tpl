@@ -9,7 +9,7 @@
        </table>
   <table aling="centerright" width="20%"  border="0">
        <tr>
-       <td align="center" width="10%"><a href="/colegio/docente/actualizarLogros"><div id="box" class="blue"><img height="40px" width="40px"  src=../utiles/imagenes/iconos/ver.png ></div></a>
+       <td align="center" width="10%"><a href="/colegio/estudiante/consultarNotas"><div id="box" class="blue"><img height="40px" width="40px"  src=../utiles/imagenes/iconos/ver.png ></div></a>
         <div class="text-icon">Consultar Notas</div> 
        </td>
        <td align="center" width="10%"><a href="#"><div id="box" class="blue"><img height="40px" width="40px"  src=../utiles/imagenes/iconos/descargar.png ></div></a>

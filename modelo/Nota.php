@@ -91,7 +91,7 @@ class Nota extends Modelo {
     }
     
     
-  
+  /*
     private function getParametros(Nota $mat){
               
         $parametros = array(
@@ -103,7 +103,7 @@ class Nota extends Modelo {
         );
         return $parametros;
     }
-    
+    */
     public function leerNotaEstudiante($idPersona, $idMateria){
         $sql = "SELECT idNota, primerP, segundoP, tercerP, cuartoP, definitiva FROM notas WHERE idPersona='".$idPersona."' AND idMateria='".$idMateria."'";
         $this->__setSql($sql);
