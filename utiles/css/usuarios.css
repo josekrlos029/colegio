@@ -11,10 +11,10 @@ root {
 }
 
 #titulo-menu{
- background: -moz-linear-gradient(top, #eeeeee , #cccccc);
- background: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee),  to(#cccccc));
+background-color: #eeeeee;
 padding-right: 3px; 
 border: 1px solid #cccccc;
+border-bottom: 0px;
 }
 
 /************menu salones******************/
@@ -32,7 +32,7 @@ border: 1px solid #cccccc;
 	text-transform:capitalize;
 	border-radius: 3px;
         border: 1px solid #cccccc;	
-        border-bottom: 3px solid #b7b7b7;
+        border-bottom: 1px solid #b7b7b7;
         text-shadow: 0 1px 0 white;
             
 }
@@ -146,6 +146,7 @@ height:90%;
 }
 
 .rounded > img{
+     
     vertical-align:top;
     -webkit-border-radius:100em;
 }
@@ -153,6 +154,7 @@ height:90%;
 .rounded, .rounded:before{
     -moz-border-radius:100em;
     border-radius:100em;
+    
 }
 
 .rounded:before{
@@ -165,6 +167,7 @@ height:90%;
     height:100%;
     margin:-10em;
     border:10em solid white;
+   
 }​
 
 /*******************contenido ventane emergente de consulta*********************************/
@@ -199,5 +202,16 @@ padding-right: 4px;
 width:70%; 
 height:90%;
 }
-
 /***********************************fin*********************************************/
+#inf-Personal td{
+    border-bottom: 1px solid #d3d9dc;
+    color: #777;
+    padding-top: 10px;
+    padding-bottom: 10px;
+     font-size: 12px;
+    font-weight: bold;
+    font-family: 'Arial',Arial Narrow, sans-serif;
+}
+span{
+    color:#3b5998;
+}
