@@ -26,8 +26,16 @@ class EstudianteControl extends Controlador{
             $this->vista->set('titulo', 'Usuario Estudiante');
             $idPersona = $_SESSION['idUsuario'];
             $persona = new Persona();
+            $matricula = new Matricula();
+            $salon = new Salon();
+             $grado = new Grado();
             $estudiante = $persona->leerPorId($idPersona);
+            $matricula = $matricula->leerMatriculaPorId($idPersona);
+            $salon = $salon->leerSalonePorId($matricula->getIdSalon());
+            $grado= $grado->leerGradoPorId($salon->getIdGrado());
+            $this->vista->set('matricula', $matricula);
             $this->vista->set('estudiante', $estudiante);
+            $this->vista->set('grado', $grado);
             return $this->vista->imprimir();
             
             }
@@ -52,13 +60,17 @@ class EstudianteControl extends Controlador{
             
             $respuesta = "";
             
-              $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+              $respuesta.='<table width="95%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+                    <tr>
+                    <td align="right" class="color-text-azul" colspan="6"><h3>Datos Academicos</h3></td>    
+                    </tr>
                     <tr class="modo1">
                     <td>Materia</td>
                     <td>Primer Periodo</td>
                     <td>Segundo Periodo</td>
                     <td>Tercer Periodo</td>
                     <td>Cuarto Periodo</td>
+                    <td>promedio</td>
                     </tr>
                     ';
               $cont= 0;
@@ -80,6 +92,9 @@ class EstudianteControl extends Controlador{
                          $respuesta.='<td>'.$not->getSegundoP().'</td>';
                          $respuesta.='<td>'.$not->getTercerP().'</td>';
                          $respuesta.='<td>'.$not->getCuartoP().'</td>';
+                         $prom=$not->getprimerP()+$not->getSegundoP()+$not->getTercerP()+$not->getCuartoP();
+                         $prom=$prom/4;
+                         $respuesta.='<td class="color-text-azul">'.$prom.'</td>';
                 $respuesta.='</tr>';
                 
                 $s1 += $not->getPrimerP();
@@ -87,7 +102,7 @@ class EstudianteControl extends Controlador{
                 $s3 += $not->getTercerP();
                 $s4 += $not->getCuartoP();
             }
-             $respuesta.='</table>';
+            
              
             $p1 = $s1/$cont; 
             $p2 = $s2/$cont; 

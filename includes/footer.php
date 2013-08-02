@@ -1,17 +1,11 @@
-<footer>
-    </br>
-<table border="0" align="center" width="100%">
-    <tr>
-        <td colspan="5"><hr></td>
-    </tr>
-</table>   
-    <table border="0" align="center" width="80%">
-    <tr>
-        <td width="50%">  <a class="footer" href="#">© 2013 Innovar.dev S.A.S</a></td> 
-        <td align="right"><a class="footer" href="#">Terminos</a></td>
-        <td align="right"><a class="footer" href="#">Centro de Ayuda</a></td>
-        <td align="right"><a class="footer" href="#">Reportar un Error</a></td>
-        <td align="right"><a class="footer" href="#">Ayudanos a Mejorar</a></td>
-    </tr>   
-</table>    
-</footer>
+</body>
+<div id="footer">
+       <div id="opcionesFooter">
+        <li><a href="#">© 2013 Innovar.dev S.A.S</a></li>
+        <li><a href="#">Terminos</a></li>
+        <li><a href="#">Centro de Ayuda</a></li>
+        <li><a href="#">Reportar un Error</a></li>
+        <li><a href="#">Ayudanos a Mejorar</a></li>  
+       </div>    
+   </div>
+</html>
