@@ -81,7 +81,7 @@ public function crearSalon(Salon $salon) {
     }
     
      public function leerSalonePorId($idSalon) {
-        $sql = "SELECT idSalon, idGrado, grupo FROM salon";
+        $sql = "SELECT idSalon, idGrado, grupo FROM salon WHERE idSalon='".$idSalon."'" ;
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $salon = new Salon();

@@ -48,7 +48,7 @@ class EstudianteControl extends Controlador{
             $grado = new Grado();
             $grad= $grado->leerGradoPorId($sal->getIdGrado());
             $pensum = new Pensum();
-            $pens = $pensum->leerPensum($matr->getIdSalon());
+            $pens = $pensum->leerPensum($sal->getIdGrado());
             
             $respuesta = "";
             
