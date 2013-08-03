@@ -500,6 +500,18 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+        
+        public function pagos(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Registro de Pagos');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
           public function actualizarEstudiante(){
          try {
             if($this->verificarSession()){
@@ -1088,6 +1100,91 @@ class AdministradorControl extends Controlador{
 
                                      "; 
                   }
+              
+              }
+            echo json_encode($respuesta);
+    } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+            
+         }
+         
+         public function consultarPersona(){
+        try {
+            $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            
+            $persona = new Persona();
+            $estudiante = $persona->leerPorId($idPersona);
+            if ($estudiante == NULL){
+                 $respuesta= 1;
+            }else{
+                $rol = new Rol();
+                $roles = $rol->leerRoles($idPersona);
+                $band = 0;
+                foreach ($roles  as $ro) {
+                  if ($ro->getIdRol() == 'E'){
+                      $respuesta = '<table class="tabla"> 
+                                       <tr class="modo1">
+                                        <td>Nombres:</td>
+                                         <td>Primer Apellido:</td>
+                                         <td>Segundo Apellido:</td>
+                                         <td>Rol:</td>
+                                        </tr>
+                                        
+                                        <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
+                                        <td>'.$estudiante->getNombres()."</td>
+                                        <td>".$estudiante->getPApellido()."</td>
+                                        <td>".$estudiante->getSApellido()."</td>
+                                        <td>".$ro->getNombre()."</td>
+                                        </tr>
+                                        
+                                    </table> "; 
+                        $respuesta.="            
+                        <table align='center'>
+                     <tr>
+                    <td> Concepto: </td>
+                    <td colspan='2' align='center'>
+                    <select id='concepto' onclick='mostrarConcepto()'>
+                            <option>---</option>
+                            <option>PENSION</option>
+                            <option>CONSTANCIA</option>
+                    </select>
+                    </td>
+                </tr>
+               </table>";
+                                    
+                }elseif ($ro->getIdRol() == 'D'){$respuesta = '<table class="tabla"> 
+                                       <tr class="modo1">
+                                        <td>Nombres:</td>
+                                         <td>Primer Apellido:</td>
+                                         <td>Segundo Apellido:</td>
+                                         <td>Rol:</td>
+                                        </tr>
+                                        
+                                        <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
+                                        <td>'.$estudiante->getNombres()."</td>
+                                        <td>".$estudiante->getPApellido()."</td>
+                                        <td>".$estudiante->getSApellido()."</td>
+                                        <td>".$ro->getNombre()."</td>
+                                        </tr>
+                                        
+                                    </table> "; 
+                        $respuesta.="<p>&nbsp;</p>           
+                        <table align='center'>
+                     <tr>
+                    <td> Concepto: </td>
+                    <td colspan='2' align='center'>
+                    <select id='concepto' onchange='mostrarConcepto()'>
+                            <option>---</option>
+                            <option>SEGURO</option>
+                            
+                    </select>
+                    </td>
+                </tr>
+               </table><p>&nbsp;</p> ";}
+                        
+                }
+                   
               
               }
             echo json_encode($respuesta);

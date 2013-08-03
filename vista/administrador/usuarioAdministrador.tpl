@@ -181,7 +181,7 @@ function envio(){
              <div class="text-icon">Boletines</div>
            </td>
            <td width="10%" align="center">
-             <a href="cierreAcademico/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAño.png ></div></a>
+             <a href="/colegio/administrador/pagos"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAño.png ></div></a>
              <div class="text-icon">Pagos</div>
            </td>
            
