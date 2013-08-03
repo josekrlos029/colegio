@@ -45,6 +45,7 @@ function cargadorClases(){
     require_once './modelo/Matricula.php';
     require_once './modelo/Logro.php';
     require_once './modelo/Nota.php';
+    require_once './modelo/Falla.php';
     require_once './controlador/Controlador.php';
     require_once './controlador/AdministradorControl.php';
     require_once './controlador/EstudianteControl.php';

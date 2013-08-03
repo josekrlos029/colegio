@@ -148,6 +148,32 @@ class DocenteControl extends Controlador{
 
         }
         
+         public function asignarInasistencias(){
+            try {
+                 if($this->verificarSession()){
+             $this->vista->set('titulo', 'Actualizar Inasistencias');
+            $periodo =  isset($_POST['periodo']) ? $_POST['periodo'] : NULL;
+            $idSalon =  isset($_POST['salon']) ? $_POST['salon'] : NULL;
+            $idMateria =  isset($_POST['materia']) ? $_POST['materia'] : NULL; 
+            $materia = new Materia();
+            $materias= $materia->leerMateriaPorId($idMateria);
+            foreach ($materias as $mats) {
+                   $mat = $mats;
+                }
+            $docente = new Docente();
+            $resultado = $docente->crearConsulta2($idSalon, $idMateria);
+            $this->vista->set('periodo', $periodo);
+            $this->vista->set('idSalon', $idSalon);
+            $this->vista->set('materia', $mat);
+            $this->vista->set('resultado', $resultado);
+            return $this->vista->imprimir();
+                 }
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+
+        }
+        
         public function guardarNotas(){
             try {
                  if($this->verificarSession()){
@@ -157,6 +183,23 @@ class DocenteControl extends Controlador{
                 $docente = new Docente();
                 foreach($notas as $nota){
                     $docente->actualizarNota($nota[0], $idMateria, $nota[1], $nota[2], $nota[3], $nota[4]);
+                }
+                echo json_encode(1);
+                 }
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+                }
+                
+        public function guardarFallas(){
+            try {
+                 if($this->verificarSession()){
+                $arreglo =  isset($_POST['fallas']) ? $_POST['fallas'] : NULL;
+                $idMateria =  isset($_POST['idMateria']) ? $_POST['idMateria'] : NULL;
+                $fallas = json_decode($arreglo);
+                $docente = new Docente();
+                foreach($fallas as $falla){
+                    $docente->actualizarFalla($falla[0], $idMateria, $falla[1], $falla[2], $falla[3], $falla[4]);
                 }
                 echo json_encode(1);
                  }

@@ -57,6 +57,14 @@ class Docente extends Persona{
         return $resultado;
     }
     
+    public function crearConsulta2($idSalon,$idMateria){
+        
+        $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP FROM fallas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND n.idMateria='".$idMateria."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        return $resultado;
+    }
+    
     public function crearConsultaPorIdPersona($idPersona, $idSalon, $idMateria){
         
         $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP, n.definitiva as def FROM notas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND n.idMateria='".$idMateria."' AND n.idPersona='".$idPersona."'" ;
@@ -82,6 +90,26 @@ class Docente extends Persona{
         $sql = "UPDATE notas SET primerP=:primerP, segundoP=:segundoP, tercerP=:tercerP, cuartoP=:cuartoP, definitiva=:def WHERE idPersona=:idPersona and idMateria=:idMateria";
         $this->__setSql($sql);
         $param = array(':idPersona' => $idPersona, ':idMateria'=> $idMateria, ':primerP'=>$primerP, ':segundoP'=>$segundoP, ':tercerP'=>$tercerP, ':cuartoP'=>$cuartoP, ':def'=>$def);
+        $this->ejecutar($param);   
+    }
+    
+    public function actualizarFalla($idPersona,$idMateria,$primerP,$segundoP,$tercerP,$cuartoP){
+        if ($primerP==""){
+            $primerP=NULL;
+        }
+        if ($segundoP==""){
+            $segundoP=NULL;
+        }
+        if ($tercerP==""){
+            $tercerP=NULL;
+        }
+        if ($cuartoP==""){
+            $cuartoP=NULL;
+        }
+        $def= $this->calcularDef($primerP,$segundoP,$tercerP,$cuartoP);
+        $sql = "UPDATE fallas SET primerP=:primerP, segundoP=:segundoP, tercerP=:tercerP, cuartoP=:cuartoP WHERE idPersona=:idPersona and idMateria=:idMateria";
+        $this->__setSql($sql);
+        $param = array(':idPersona' => $idPersona, ':idMateria'=> $idMateria, ':primerP'=>$primerP, ':segundoP'=>$segundoP, ':tercerP'=>$tercerP, ':cuartoP'=>$cuartoP);
         $this->ejecutar($param);   
     }
     

@@ -1538,6 +1538,8 @@ class AdministradorControl extends Controlador{
                     }
                     $nota = new Nota();
                     $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $mat->getIdMateria());
+                    $falla = new Falla();
+                    $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $mat->getIdMateria());
                     $logro = new Logro();
                     $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $mat->getIdMateria());
                     
@@ -1554,6 +1556,19 @@ class AdministradorControl extends Controlador{
                     $pdf->Cell(1,1.5,$horas,1,0,"C");
                     $x=$x + 1;
                     $pdf->SetXY($x,$y);
+                    if ($periodo == "PRIMERO"){
+                        $pdf->Cell(1,1.5,$fal->getPrimerP(),1,0,"C");
+                        
+                    }elseif ($periodo == "SEGUNDO"){
+                        $pdf->Cell(1,1.5,$fal->getSegundoP(),1,0,"C");
+                        
+                    }elseif ($periodo == "TERCERO"){
+                        $pdf->Cell(1,1.5,$fal->getTercerP(),1,0,"C");
+                        
+                    }elseif ($periodo== "CUARTO"){
+                        $pdf->Cell(1,1.5,$fal->getCuartoP(),1,0,"C");
+                    }
+                    
                     $pdf->Cell(1,1.5,"",1,0,"C");
                     $x=$x + 1;
                     $pdf->SetXY($x,$y);

@@ -126,6 +126,14 @@ $(function(){
                 <input type="submit" name="Actualizar"  class="button large red" value="Actualizar Notas"/>
             </form>
         </td>
+        <td align="right"> 
+            <form action="/colegio/docente/asignarInasistencias" method="post">
+                <input type="hidden" name="salon" value="<?php echo $idSalon; ?>"/>
+                <input type="hidden" name="periodo" value="<?php echo $periodo; ?>"/>
+                <input type="hidden" name="materia" value="<?php echo $materia->getIdMateria(); ?>"/>
+                <input type="submit" name="inasistencias"  class="button large red" value="Actualizar Inasistencias"/>
+            </form>
+        </td>
     </tr>
 </table>
 </body>
