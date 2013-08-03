@@ -21,10 +21,10 @@ var data="idPersona="+idPersona;
 
 function leerEstudiantes(idSalon){
  var x = $("#mensaje");
+ if ($("#periodo").val() != "----"){
  cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
- 
 var y= $("#tablaEstudiantes"); 
  var url="/colegio/administrador/generarConsolidado";
  var periodo = document.getElementById("periodo").value;
@@ -33,7 +33,7 @@ var y= $("#tablaEstudiantes");
     x.hide();            
     y.html (res);
          });
-
+  }       
 }
 function vistaActualizarPersona(idPersona){
  var x = $("#mensaje");
@@ -141,6 +141,7 @@ function actualizarPersona(){
                           <tr>
                           <td><h5>SELECCIONE EL PERIODO</h5></td>
                           <td><select id="periodo" >
+                          <option>----</option>
                           <option>PRIMERO</option>
                           <option>SEGUNDO</option>
                           <option>TERCERO</option>

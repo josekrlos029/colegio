@@ -24,6 +24,22 @@
  function docSecundaria(){    
  $('#cargar').load('/colegio/administrador/docentesSecundaria');           
 }
+
+function vistaBoletines(){
+
+    document.getElementById('light').style.display='block';
+    document.getElementById('fade').style.display='block'
+
+}
+
+function envio(){ 
+ 
+ var idSalon = document.getElementById("idSalon");
+ var periodo = document.getElementById("periodo");
+
+      window.open("/colegio/administrador/generarBoletin")
+    }   
+
   </script>  
     
     
@@ -160,10 +176,52 @@
              <a href="cierreAcademico/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAño.png ></div></a>
              <div class="text-icon">Cierre de Año</div>
            </td>
+           <td width="10%" align="center">
+               <a href="#" onclick="vistaBoletines()"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAño.png ></div></a>
+             <div class="text-icon">Boletines</div>
+           </td>
+           <td width="10%" align="center">
+             <a href="cierreAcademico/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAño.png ></div></a>
+             <div class="text-icon">Pagos</div>
+           </td>
            
            </tr>
 	   </table>
-</div>       
+</div>
+<div id="fade" class="overlay"></div>
+<div id="light" class="modal">
+  <div style="float:right">
+      <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
+ </div>
+      <div style="margin: 0 auto;" id="tablaConsulta">
+          <h1 style="margin-left: 430px">IMPRIMIR BOLETINES</h1>
+          <table style="margin: 0 auto;">
+              <tr>
+                  <td><b>Salón</b></td>
+                  <td><b>Periodo</b></td>
+              </tr>
+              <tr>
+                  <td><select id="idSalon">
+                          <?php foreach ($salones as $salon) { ?>    
+                          <option><?php echo $salon->getIdSalon();?></option>
+                          <?php } ?>
+                      </select></td>
+                      <td><select id="periodo">
+                          <option>PRIMERO</option>
+                          <option>SEGUNDO</option>
+                          <option>TERCERO</option>
+                          <option>CUARTO</option>
+                          <option>FINAL</option>
+                      </select></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><input name="generarBoletin" id="generarBoletin" type="submit" value="Generar" class="button large green" onclick="envio()" /></td>
+              </tr>
+          </table>
+      </div>
+
+</div>
 </body>
  <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>

@@ -24,7 +24,10 @@ class AdministradorControl extends Controlador{
         public function usuarioAdministrador(){
         try {
             if($this->verificarSession()){
+            $salon = new Salon();
+            $salones = $salon->leerSalones();
             $this->vista->set('titulo', 'Usuario Administrador');
+            $this->vista->set('salones', $salones);
             $this->vista->set('titulo', 'Usuario Administrador');
             return $this->vista->imprimir();
             }
@@ -279,6 +282,7 @@ class AdministradorControl extends Controlador{
               
              }
                 $respuesta.='</table>';
+                 $respuesta.='<input type="hidden" id="idSalon" value="'.$idSalon.'" />';
                
             if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
@@ -574,9 +578,11 @@ class AdministradorControl extends Controlador{
         }
         }
 
-        
-      
-       
+
+
+
+
+
 //**************************************************************************************************//        
 //**********************************FIN IMPRIMIR VISTAS*********************************************//
 //**************************************************************************************************//        
@@ -1410,7 +1416,266 @@ class AdministradorControl extends Controlador{
          }
          
          
+         public function generarBoletin(){
+         $pdf = new FPDF();
+$pdf->AddPage();
+$pdf->SetFont('Arial','B',16);
+$pdf->Cell(40,10,utf8_decode('Aquí se genera el Boletin en formato PDF'));
+$pdf->Output();    
+             
+     /*       
+$pdf=new FPDF('P','cm','Legal');
+$pdf->AddPage();
+$pdf-> SetFont("Arial","B",16);
+$pdf->cell(19,1,"LICEO GALOIS",0,0,"C");
+$pdf->ln();
+$pdf->cell(4,4,"",0);
+$pdf->Image('utiles/imagenes/colegio/escudo_liceo_galois.png',1,1.5,4);
+$pdf-> SetFont("Arial","B",11);
+//CAbecera
+$pdf->Cell(11,1,utf8_decode("APROBADO SEGÚN RES. No. 1561 DE OCT. 22 DE 2001"),0,1);
+$pdf->SetX(5);
+$pdf->Cell(11,1,"NIT. 77171933-1  DANE 320001068479",0,1,"C");
+$pdf->SetX(5);
+$pdf->Cell(11,1,"VALLEDUPAR - CESAR",0,1,"C");
+$pdf->SetXY(16,2);
+$pdf-> SetFont("Arial","",10);
+$pdf->Cell(4,1,"Bajo: 0 - 29 ",0,0,"C");
+$pdf->SetXY(16,2.5);
+$pdf->Cell(4,1,"Basico: 30 - 39  ",0,0,"C");
+$pdf->SetXY(16,3);
+$pdf->Cell(4,1,"Alto: 40 - 45 ",0,0,"C");
+$pdf->SetXY(16,3.5);
+$pdf->Cell(4,1,"Superior : 46 - 50",0,0,"C");
+$pdf->SetXY(16,2);
+$pdf->Cell(4,3,"",1,0,"C");
 
+
+if ($periodo=="primero"){
+	$periodo3="PRIMER";
+}
+if ($periodo=="segundo"){
+	$periodo3="SEGUNDO";
+}
+
+if ($periodo=="tercero"){
+	$periodo3="TERCER";
+}
+
+if ($periodo=="cuarto"){
+	$periodo3="CUARTO";
+}
+
+
+//DATOS
+$pdf->SetXY(1,5.5);
+$pdf-> SetFont("Arial","B",10);
+$pdf->Cell(19,0.5,utf8_decode(strtoupper($nom)),1,0,"C");
+$pdf->SetXY(1,6);
+
+$pdf-> SetFont("Arial","",10);
+$pdf->Cell(4,0.5,$grado,1,0,"C");
+$pdf->SetXY(5,6);
+$pdf->Cell(3,0.5,"GRUPO: 01",1,0,"C");
+$pdf->SetXY(8,6);
+$pdf->Cell(12,0.5,utf8_decode("JORNADA: ".$jornada."     AÑO LECTIVO: ".date("Y",strtotime($da['fecha']))."   ".$periodo3." PERIODO"),1,0,"C");
+$pdf->SetXY(1,6.5);
+
+$pdf->Cell(4,0.5,$seccion,1,0,"C");
+$pdf->SetXY(5,6.5);
+$pdf->Cell(1,0.5,"",1,0,"C");
+$pdf->SetXY(6,6.5);
+$pdf->Cell(1,0.5,"",1,0,"C");
+$pdf->SetXY(7,6.5);
+$pdf->Cell(1,0.5,"",1,0,"C");
+$pdf->SetXY(8,6.5);
+$pdf->Cell(12,0.5,"MODALIDAD: ACADEMICA",1,0,"C");
+
+$pdf-> SetFont("Arial","B",10);
+$pdf->SetXY(1,7);
+$pdf->Cell(4,0.5,"AREAS/ASIGNATURAS",1,0,"C");
+$pdf->SetXY(5,7);
+$pdf->Cell(1,0.5,"IH",1,0,"C");
+$pdf->SetXY(6,7);
+$pdf->Cell(1,0.5,"Fallas",1,0,"C");
+$pdf->SetXY(7,7);
+$pdf->Cell(1,0.5,"Val.",1,0,"C");
+$pdf->SetXY(8,7);
+$pdf->Cell(12,0.5,"FORTALEZAS/ DEBILIDADES/ RECOMENDACIONES",1,0,"C");
+
+$pdf-> SetFont("Arial","",9);
+$y=7.5;
+$x=1;
+$suma=0;
+$cont=0;
+while ($a = mysql_fetch_array($notas)){
+
+$pdf->SetXY($x,$y);
+if (strlen($a['nombre_materia']) >20) {
+	$pdf-> SetFont("Arial","",8); 
+$pdf->Cell(4,1.5,$a['nombre_materia'],1,0,"C");
+$pdf-> SetFont("Arial","",9);
+}else{
+	$pdf->Cell(4,1.5,$a['nombre_materia'],1,0,"C");
+}
+$x=$x + 4;
+$pdf->SetXY($x,$y);
+$pdf->Cell(1,1.5,$a['horas'],1,0,"C");
+$x=$x + 1;
+$pdf->SetXY($x,$y);
+$pdf->Cell(1,1.5,"",1,0,"C");
+$x=$x + 1;
+$pdf->SetXY($x,$y);
+$x=$x + 1;
+$pdf->Cell(1,1.5,$a['nota1'],1,0,"C");
+$suma=$suma + $a['nota1'];
+$cont=$cont + 1;
+$pdf->SetXY($x,$y);
+$pdf->MultiCell(12,1.5,"",1);
+$pdf-> SetFont("Arial","",7.5);
+
+if ($periodo=="primero"){
+	$periodo2="PRIMERO";
+}
+if ($periodo=="segundo"){
+	$periodo2="SEGUNDO";
+}
+
+if ($periodo=="tercero"){
+	$periodo2="TERCERO";
+}
+
+if ($periodo=="cuarto"){
+	$periodo2="CUARTO";
+}
+
+$grado1=$da['id_salon'];
+$materia=$a['nombre_materia'];
+$qu= mysql_query("SELECT * FROM logros WHERE nombre_materia='$materia' AND id_salon='$grado1' AND periodo='$periodo2'");
+$d= mysql_fetch_array($qu);
+
+if ($periodo=="primero"){
+	$periodo1="nota1";
+}
+if ($periodo=="segundo"){
+	$periodo1="nota2";
+}
+
+if ($periodo=="tercero"){
+	$periodo1="nota3";
+}
+
+if ($periodo=="cuarto"){
+	$periodo1="nota4";
+}
+
+
+if ($a[$periodo1] < 3){
+$cadena=$d['logroBaj'];
+$desempeño=" BAJO";
+}
+if ($a[$periodo1] < 4 && $a[$periodo1] >= 3){
+$cadena=$d['logroBas'];
+$desempeño=" BASICO";
+}
+if ($a[$periodo1] < 4.6 && $a[$periodo1] >= 4){
+$cadena=$d['logroAlt'];
+$desempeño=" ALTO";
+}
+if ($a[$periodo1] > 4.5){
+$cadena=$d['logroSup'];
+$desempeño=" SUPERIOR";
+}
+
+
+$pdf->Text($x + 0.1,$y + 0.35,utf8_decode("DESEMPEÑO").$desempeño);
+
+
+if (strlen($cadena)>142){
+
+  if ($cadena[71]!=" "){
+  $pdf->Text($x + 0.1,$y + 0.69,utf8_decode(strtoupper(substr($cadena,0,71)))."-");	
+     
+	 
+	 if ($cadena[142]!=" "){
+	 $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,71,71)))."-");
+     $pdf->Text($x + 0.1,$y + 1.4,utf8_decode(strtoupper(substr($cadena,142,71)))); 
+     }else{
+	 	 $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,72,71))));
+	 $pdf->Text($x + 0.1,$y + 1.4,utf8_decode(strtoupper(substr($cadena,143,71)))); 
+	 }
+  }else{
+    $pdf->Text($x + 0.1,$y + 0.69,utf8_decode(strtoupper(substr($cadena,0,71))));
+	 if ($cadena[143]!=" "){
+	 $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,72,71)))."-");
+     $pdf->Text($x + 0.1,$y + 1.4,utf8_decode(strtoupper(substr($cadena,143,71)))); 
+     }else{
+	 $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,72,71))));
+	 $pdf->Text($x + 0.1,$y + 1.4,utf8_decode(strtoupper(substr($cadena,144,71)))); 
+	 }
+
+
+
+}
+//$pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,71,71))));
+
+}
+
+if (strlen($cadena)>70 ){
+  if ($cadena[71]!=" "){
+  $pdf->Text($x + 0.1,$y + 0.69,utf8_decode(strtoupper(substr($cadena,0,71)))."-");	
+   $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,71,71))));
+  }else{
+	   $pdf->Text($x + 0.1,$y + 0.69,utf8_decode(strtoupper(substr($cadena,0,71))));	
+   $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,72,71))));
+	   }
+}
+
+if(strlen($cadena)<71){
+$pdf->Text($x + 0.1,$y + 0.69,utf8_decode(strtoupper($cadena)));
+}
+
+$pdf-> SetFont("Arial","",9);
+$y=$y + 1.5;	
+$x=1;
+}
+$prom=$suma / $cont;
+$pdf-> SetFont("Arial","B",9);
+$pdf->SetXY($x,$y);
+$pdf->Cell(6,0.5,"Promedio Alumno:",0,0,"R");
+$pdf->SetXY(7,$y);
+$pdf->Cell(1,0.5, round($prom,2),0,0,"R");
+
+$y=$y + 1;
+$pdf-> SetFont("Arial","",9);
+$pdf->SetXY(1,$y);
+$pdf->Cell(4,0.5,"OBSERVACIONES:",0,0);
+$pdf->SetXY(4,$y);
+$pdf->Cell(16,0.5,"","B",0,"R");
+$y=$y + 0.5;
+$pdf->SetXY(1,$y);
+$pdf->Cell(19,0.5,"","B",0,"R");
+
+$y=$y + 1;
+$pdf->SetXY(2,$y);
+$pdf->Cell(6,0.5,"","B",0,"R");
+
+$pdf->SetXY(12,$y);
+$pdf->Cell(6,0.5,"","B",0,"R");
+
+$y=$y + 0.5;
+$pdf->SetXY(2,$y);
+$pdf->Cell(5,0.5,"RECTOR",0,0,"C");
+
+$pdf->SetXY(12,$y);
+$pdf->Cell(6,0.5,"DIRECTOR(A) DE GRUPO",0,0,"C");
+
+
+
+$pdf-> Output("Boletin ","I");
+      * */
+      
+         }
 //**************************************************************************************************//        
 //**********************************FIN DE LOS METODOS*********************************************//
 //**************************************************************************************************// 
