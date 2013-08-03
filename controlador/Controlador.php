@@ -268,7 +268,7 @@ $respuesta .= '
             $grado = new Grado();
             $grad= $grado->leerGradoPorId($sal->getIdGrado());
             $pensum = new Pensum();
-            $pens = $pensum->leerPensum($sal->getIdGrado());
+            $pens = $pensum->leerPensum($matr->getIdSalon());
             
               $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
                     <tr class="modo1">

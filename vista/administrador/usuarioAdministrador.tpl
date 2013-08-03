@@ -34,10 +34,10 @@ function vistaBoletines(){
 
 function envio(){ 
  
- var idSalon = document.getElementById("idSalon");
- var periodo = document.getElementById("periodo");
+ var idSalon = document.getElementById("idSalon").value;
+ var periodo = document.getElementById("periodo").value;
 
-      window.open("/colegio/administrador/generarBoletin")
+      window.open("/colegio/administrador/generarBoletin/"+idSalon+","+periodo)
     }   
 
   </script>  

@@ -1416,266 +1416,296 @@ class AdministradorControl extends Controlador{
          }
          
          
-         public function generarBoletin(){
-         $pdf = new FPDF();
-$pdf->AddPage();
-$pdf->SetFont('Arial','B',16);
-$pdf->Cell(40,10,utf8_decode('Aquí se genera el Boletin en formato PDF'));
-$pdf->Output();    
-             
-     /*       
-$pdf=new FPDF('P','cm','Legal');
-$pdf->AddPage();
-$pdf-> SetFont("Arial","B",16);
-$pdf->cell(19,1,"LICEO GALOIS",0,0,"C");
-$pdf->ln();
-$pdf->cell(4,4,"",0);
-$pdf->Image('utiles/imagenes/colegio/escudo_liceo_galois.png',1,1.5,4);
-$pdf-> SetFont("Arial","B",11);
-//CAbecera
-$pdf->Cell(11,1,utf8_decode("APROBADO SEGÚN RES. No. 1561 DE OCT. 22 DE 2001"),0,1);
-$pdf->SetX(5);
-$pdf->Cell(11,1,"NIT. 77171933-1  DANE 320001068479",0,1,"C");
-$pdf->SetX(5);
-$pdf->Cell(11,1,"VALLEDUPAR - CESAR",0,1,"C");
-$pdf->SetXY(16,2);
-$pdf-> SetFont("Arial","",10);
-$pdf->Cell(4,1,"Bajo: 0 - 29 ",0,0,"C");
-$pdf->SetXY(16,2.5);
-$pdf->Cell(4,1,"Basico: 30 - 39  ",0,0,"C");
-$pdf->SetXY(16,3);
-$pdf->Cell(4,1,"Alto: 40 - 45 ",0,0,"C");
-$pdf->SetXY(16,3.5);
-$pdf->Cell(4,1,"Superior : 46 - 50",0,0,"C");
-$pdf->SetXY(16,2);
-$pdf->Cell(4,3,"",1,0,"C");
+         public function generarBoletin($param){
+            $cadena = explode(",", $param);    
+            $idSalon = $cadena[0];
+            $periodo = $cadena[1];
+            
+            $persona = new Persona();
+            $estudiantes  = $persona->leerPorSalon($idSalon);
+            
+            $pdf=new FPDF('P','cm','Legal');
+            
+            foreach ($estudiantes as $estudiante){
+                
+                $matricula = new Matricula();
+                $matr = $matricula->leerMatriculaPorId($estudiante->getIdPersona());
+                $salon = new Salon();
+                $sal = $salon->leerSalonePorId($idSalon);
+                $grado = new Grado();
+                $grad = $grado->leerGradoPorId($sal->getIdGrado());
+                $pensum = new Pensum();
+                $pens = $pensum->leerPensum($matr->getIdSalon());
+                
+                if ($grad->getIdGrado() == 'p1' || $grad->getIdGrado() == 'p2' || $grad->getIdGrado() == 'p3'){
+                    $seccion = 'PREESCOLAR';
+                }else if ($grad->getIdGrado() == '1' || $grad->getIdGrado() == '2' || $grad->getIdGrado() == '3' || $grad->getIdGrado() == '4' || $grad->getIdGrado() == '5'){
+                    $seccion = 'BASICA PRIMARIA';
+                }else if ($grad->getIdGrado() == '6' || $grad->getIdGrado() == '7' || $grad->getIdGrado() == '8' || $grad->getIdGrado() == '9' || $grad->getIdGrado() == '10' || $grad->getIdGrado() == '11'){
+                    $seccion = 'BASICA SECUNDARIA';
+                }
+                
+                $pdf->AddPage();
+                $pdf-> SetFont("Arial","B",16);
+                $pdf->SetXY(1,1);
+                $pdf->cell(19,1,"LICEO GALOIS",0,0,"C");
+                $pdf->ln();
+                $pdf->cell(4,4,"",0);
+                $pdf->Image('utiles/imagenes/colegio/escudo_liceo_galois.png',1,1.5,4); 
+                $pdf-> SetFont("Arial","B",11);
+                //CAbecera
+                $pdf->SetXY(1,2);
+                $pdf->Cell(19,1,utf8_decode("APROBADO SEGÚN RES. No. 1561 DE OCT. 22 DE 2001"),0,1,"C");
+                $pdf->SetX(5);
+                $pdf->Cell(11,1,"NIT. 77171933-1  DANE 320001068479",0,1,"C");
+                $pdf->SetX(5);
+                $pdf->Cell(11,1,"VALLEDUPAR - CESAR",0,1,"C");
+                $pdf->SetXY(16,2);
+                $pdf-> SetFont("Arial","",10);
+                $pdf->Cell(4,1,"Bajo: 0 - 29 ",0,0,"C");
+                $pdf->SetXY(16,2.5);
+                $pdf->Cell(4,1,"Basico: 30 - 39  ",0,0,"C");
+                $pdf->SetXY(16,3);
+                $pdf->Cell(4,1,"Alto: 40 - 45 ",0,0,"C");
+                $pdf->SetXY(16,3.5);
+                $pdf->Cell(4,1,"Superior : 46 - 50",0,0,"C");
+                $pdf->SetXY(16,2);
+                $pdf->Cell(4,3,"",1,0,"C");
 
 
-if ($periodo=="primero"){
-	$periodo3="PRIMER";
-}
-if ($periodo=="segundo"){
-	$periodo3="SEGUNDO";
-}
+                if ($periodo=="PRIMERO"){
+                        $periodo3="PRIMER";
+                }
+                if ($periodo=="SEGUNDO"){
+                        $periodo3="SEGUNDO";
+                }
 
-if ($periodo=="tercero"){
-	$periodo3="TERCER";
-}
+                if ($periodo=="TERCERO"){
+                        $periodo3="TERCER";
+                }
 
-if ($periodo=="cuarto"){
-	$periodo3="CUARTO";
-}
+                if ($periodo=="CUARTO"){
+                        $periodo3="CUARTO";
+                }
+                
+                $pdf->SetXY(1,5.5);
+                $pdf-> SetFont("Arial","B",10);
+                $pdf->Cell(19,0.5,utf8_decode(strtoupper($estudiante->getPApellido()." ".$estudiante->getSApellido()." ".$estudiante->getNombres())),1,0,"C");
+                $pdf->SetXY(1,6);
+                $pdf-> SetFont("Arial","",10);
+                $pdf->Cell(4,0.5,$grad->getNombre(),1,0,"C");
+                $pdf->SetXY(5,6);
+                $pdf->Cell(3,0.5,"GRUPO: 01",1,0,"C");
+                $pdf->SetXY(8,6);
+                $pdf->Cell(12,0.5,utf8_decode("JORNADA: ".$matr->getJornada()."     AÑO LECTIVO: ".$matr->getAñoLectivo()."   ".$periodo3." PERIODO"),1,0,"C");
+                $pdf->SetXY(1,6.5);
 
+                $pdf->Cell(4,0.5,$seccion,1,0,"C");
+                $pdf->SetXY(5,6.5);
+                $pdf->Cell(1,0.5,"",1,0,"C");
+                $pdf->SetXY(6,6.5);
+                $pdf->Cell(1,0.5,"",1,0,"C");
+                $pdf->SetXY(7,6.5);
+                $pdf->Cell(1,0.5,"",1,0,"C");
+                $pdf->SetXY(8,6.5);
+                $pdf->Cell(12,0.5,"MODALIDAD: ACADEMICA",1,0,"C");
+                
+                $pdf-> SetFont("Arial","B",10);
+                $pdf->SetXY(1,7);
+                $pdf->Cell(4,0.5,"AREAS/ASIGNATURAS",1,0,"C");
+                $pdf->SetXY(5,7);
+                $pdf->Cell(1,0.5,"IH",1,0,"C");
+                $pdf->SetXY(6,7);
+                $pdf->Cell(1,0.5,"Fallas",1,0,"C");
+                $pdf->SetXY(7,7);
+                $pdf->Cell(1,0.5,"Val.",1,0,"C");
+                $pdf->SetXY(8,7);
+                $pdf->Cell(12,0.5,"FORTALEZAS/ DEBILIDADES/ RECOMENDACIONES",1,0,"C");
 
-//DATOS
-$pdf->SetXY(1,5.5);
-$pdf-> SetFont("Arial","B",10);
-$pdf->Cell(19,0.5,utf8_decode(strtoupper($nom)),1,0,"C");
-$pdf->SetXY(1,6);
+                $pdf-> SetFont("Arial","",9);
+                $y=7.5;
+                $x=1;
+                $suma=0;
+                $cont=0;
+                
+                foreach ($pens as $mat){
+                    $mate = new Materia();
+                    $materias = $mate->leerMateriaPorId($mat->getIdMateria());
+                    foreach ($materias as $materia){
+                        
+                        $nombreMateria = $materia->getNombreMateria();
+                        $horas = $materia->getHoras();
+                    }
+                    $nota = new Nota();
+                    $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $mat->getIdMateria());
+                    $logro = new Logro();
+                    $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $mat->getIdMateria());
+                    
+                    $pdf->SetXY($x,$y);
+                    if (strlen($nombreMateria) >20) {
+                            $pdf-> SetFont("Arial","",8); 
+                    $pdf->Cell(4,1.5,$nombreMateria,1,0,"C");
+                    $pdf-> SetFont("Arial","",9);
+                    }else{
+                            $pdf->Cell(4,1.5,$nombreMateria,1,0,"C");
+                    }
+                    $x=$x + 4;
+                    $pdf->SetXY($x,$y);
+                    $pdf->Cell(1,1.5,$horas,1,0,"C");
+                    $x=$x + 1;
+                    $pdf->SetXY($x,$y);
+                    $pdf->Cell(1,1.5,"",1,0,"C");
+                    $x=$x + 1;
+                    $pdf->SetXY($x,$y);
+                    $x=$x + 1;
+                    
+                    if ($periodo == "PRIMERO"){
+                        $pdf->Cell(1,1.5,$not->getPrimerP(),1,0,"C");
+                        $suma=$suma + $not->getPrimerP();
+                        
+                        if ($not->getPrimerP() < 30){
+                        $cadena=$log->getBajo();
+                        $desempeño=" BAJO";
+                        }
+                        if ($not->getPrimerP() < 40 && $not->getPrimerP() >= 30){
+                            $cadena=$log->getBasico();
+                            $desempeño=" BASICO";
+                        }
+                        if ($not->getPrimerP() < 46 && $not->getPrimerP() >= 40){
+                            $cadena=$log->getAlto();
+                            $desempeño=" ALTO";
+                        }
+                        if ($not->getPrimerP() > 45){
+                            $cadena=$log->getSuperior();
+                            $desempeño=" SUPERIOR";
+                        }
+                        
+                        
+                    }elseif ($periodo == "SEGUNDO"){
+                        $pdf->Cell(1,1.5,$not->getSegundoP(),1,0,"C");
+                        $suma=$suma + $not->getSegundoP();
+                        
+                        if ($not->getSegundoP() < 30){
+                        $cadena=$log->getBajo();
+                        $desempeño=" BAJO";
+                        }
+                        if ($not->getSegundoP() < 40 && $not->getSegundoP() >= 30){
+                            $cadena=$log->getBasico();
+                            $desempeño=" BASICO";
+                        }
+                        if ($not->getSegundoP() < 46 && $not->getSegundoP() >= 40){
+                            $cadena=$log->getAlto();
+                            $desempeño=" ALTO";
+                        }
+                        if ($not->getSegundoP() > 45){
+                            $cadena=$log->getSuperior();
+                            $desempeño=" SUPERIOR";
+                        }
+                        
+                    }elseif ($periodo == "TERCERO"){
+                        $pdf->Cell(1,1.5,$not->getTercerP(),1,0,"C");
+                        $suma=$suma + $not->getTercerP();
+                        
+                        if ($not->getTercerP() < 30){
+                        $cadena=$log->getBajo();
+                        $desempeño=" BAJO";
+                        }
+                        if ($not->getTercerP() < 40 && $not->getTercerP() >= 30){
+                            $cadena=$log->getBasico();
+                            $desempeño=" BASICO";
+                        }
+                        if ($not->getTercerP() < 46 && $not->getTercerP() >= 40){
+                            $cadena=$log->getAlto();
+                            $desempeño=" ALTO";
+                        }
+                        if ($not->getTercerP() > 45){
+                            $cadena=$log->getSuperior();
+                            $desempeño=" SUPERIOR";
+                        }
+                        
+                    }elseif ($periodo== "CUARTO"){
+                        $pdf->Cell(1,1.5,$not->getCuartoP(),1,0,"C");
+                        $suma=$suma + $not->getCuartoP();
+                        
+                        if ($not->getCuartoP() < 30){
+                        $cadena=$log->getBajo();
+                        $desempeño=" BAJO";
+                        }
+                        if ($not->getCuartoP() < 40 && $not->getCuartoP() >= 30){
+                            
+                            $cadena=$log->getBasico();
+                            $desempeño=" BASICO";
+                        }
+                        if ($not->getCuartoP() < 46 && $not->getCuartoP() >= 40){
+                            $cadena=$log->getAlto();
+                            $desempeño=" ALTO";
+                        }
+                        if ($not->getCuartoP() > 45){
+                            $cadena=$log->getSuperior();
+                            $desempeño=" SUPERIOR";
+                        }
+                        
+                    }
+                    
+                    
+                    $cont=$cont + 1;
+                    $pdf->SetXY($x,$y);
+                    $pdf->MultiCell(12,1.5,"",1);
+                    $pdf-> SetFont("Arial","",7.5);
+                    
 
-$pdf-> SetFont("Arial","",10);
-$pdf->Cell(4,0.5,$grado,1,0,"C");
-$pdf->SetXY(5,6);
-$pdf->Cell(3,0.5,"GRUPO: 01",1,0,"C");
-$pdf->SetXY(8,6);
-$pdf->Cell(12,0.5,utf8_decode("JORNADA: ".$jornada."     AÑO LECTIVO: ".date("Y",strtotime($da['fecha']))."   ".$periodo3." PERIODO"),1,0,"C");
-$pdf->SetXY(1,6.5);
-
-$pdf->Cell(4,0.5,$seccion,1,0,"C");
-$pdf->SetXY(5,6.5);
-$pdf->Cell(1,0.5,"",1,0,"C");
-$pdf->SetXY(6,6.5);
-$pdf->Cell(1,0.5,"",1,0,"C");
-$pdf->SetXY(7,6.5);
-$pdf->Cell(1,0.5,"",1,0,"C");
-$pdf->SetXY(8,6.5);
-$pdf->Cell(12,0.5,"MODALIDAD: ACADEMICA",1,0,"C");
-
-$pdf-> SetFont("Arial","B",10);
-$pdf->SetXY(1,7);
-$pdf->Cell(4,0.5,"AREAS/ASIGNATURAS",1,0,"C");
-$pdf->SetXY(5,7);
-$pdf->Cell(1,0.5,"IH",1,0,"C");
-$pdf->SetXY(6,7);
-$pdf->Cell(1,0.5,"Fallas",1,0,"C");
-$pdf->SetXY(7,7);
-$pdf->Cell(1,0.5,"Val.",1,0,"C");
-$pdf->SetXY(8,7);
-$pdf->Cell(12,0.5,"FORTALEZAS/ DEBILIDADES/ RECOMENDACIONES",1,0,"C");
-
-$pdf-> SetFont("Arial","",9);
-$y=7.5;
-$x=1;
-$suma=0;
-$cont=0;
-while ($a = mysql_fetch_array($notas)){
-
-$pdf->SetXY($x,$y);
-if (strlen($a['nombre_materia']) >20) {
-	$pdf-> SetFont("Arial","",8); 
-$pdf->Cell(4,1.5,$a['nombre_materia'],1,0,"C");
-$pdf-> SetFont("Arial","",9);
-}else{
-	$pdf->Cell(4,1.5,$a['nombre_materia'],1,0,"C");
-}
-$x=$x + 4;
-$pdf->SetXY($x,$y);
-$pdf->Cell(1,1.5,$a['horas'],1,0,"C");
-$x=$x + 1;
-$pdf->SetXY($x,$y);
-$pdf->Cell(1,1.5,"",1,0,"C");
-$x=$x + 1;
-$pdf->SetXY($x,$y);
-$x=$x + 1;
-$pdf->Cell(1,1.5,$a['nota1'],1,0,"C");
-$suma=$suma + $a['nota1'];
-$cont=$cont + 1;
-$pdf->SetXY($x,$y);
-$pdf->MultiCell(12,1.5,"",1);
-$pdf-> SetFont("Arial","",7.5);
-
-if ($periodo=="primero"){
-	$periodo2="PRIMERO";
-}
-if ($periodo=="segundo"){
-	$periodo2="SEGUNDO";
-}
-
-if ($periodo=="tercero"){
-	$periodo2="TERCERO";
-}
-
-if ($periodo=="cuarto"){
-	$periodo2="CUARTO";
-}
-
-$grado1=$da['id_salon'];
-$materia=$a['nombre_materia'];
-$qu= mysql_query("SELECT * FROM logros WHERE nombre_materia='$materia' AND id_salon='$grado1' AND periodo='$periodo2'");
-$d= mysql_fetch_array($qu);
-
-if ($periodo=="primero"){
-	$periodo1="nota1";
-}
-if ($periodo=="segundo"){
-	$periodo1="nota2";
-}
-
-if ($periodo=="tercero"){
-	$periodo1="nota3";
-}
-
-if ($periodo=="cuarto"){
-	$periodo1="nota4";
-}
-
-
-if ($a[$periodo1] < 3){
-$cadena=$d['logroBaj'];
-$desempeño=" BAJO";
-}
-if ($a[$periodo1] < 4 && $a[$periodo1] >= 3){
-$cadena=$d['logroBas'];
-$desempeño=" BASICO";
-}
-if ($a[$periodo1] < 4.6 && $a[$periodo1] >= 4){
-$cadena=$d['logroAlt'];
-$desempeño=" ALTO";
-}
-if ($a[$periodo1] > 4.5){
-$cadena=$d['logroSup'];
-$desempeño=" SUPERIOR";
-}
-
-
-$pdf->Text($x + 0.1,$y + 0.35,utf8_decode("DESEMPEÑO").$desempeño);
-
-
-if (strlen($cadena)>142){
-
-  if ($cadena[71]!=" "){
-  $pdf->Text($x + 0.1,$y + 0.69,utf8_decode(strtoupper(substr($cadena,0,71)))."-");	
-     
-	 
-	 if ($cadena[142]!=" "){
-	 $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,71,71)))."-");
-     $pdf->Text($x + 0.1,$y + 1.4,utf8_decode(strtoupper(substr($cadena,142,71)))); 
-     }else{
-	 	 $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,72,71))));
-	 $pdf->Text($x + 0.1,$y + 1.4,utf8_decode(strtoupper(substr($cadena,143,71)))); 
-	 }
-  }else{
-    $pdf->Text($x + 0.1,$y + 0.69,utf8_decode(strtoupper(substr($cadena,0,71))));
-	 if ($cadena[143]!=" "){
-	 $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,72,71)))."-");
-     $pdf->Text($x + 0.1,$y + 1.4,utf8_decode(strtoupper(substr($cadena,143,71)))); 
-     }else{
-	 $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,72,71))));
-	 $pdf->Text($x + 0.1,$y + 1.4,utf8_decode(strtoupper(substr($cadena,144,71)))); 
-	 }
-
-
-
-}
-//$pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,71,71))));
-
-}
-
-if (strlen($cadena)>70 ){
-  if ($cadena[71]!=" "){
-  $pdf->Text($x + 0.1,$y + 0.69,utf8_decode(strtoupper(substr($cadena,0,71)))."-");	
-   $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,71,71))));
-  }else{
-	   $pdf->Text($x + 0.1,$y + 0.69,utf8_decode(strtoupper(substr($cadena,0,71))));	
-   $pdf->Text($x + 0.1,$y + 1.05,utf8_decode(strtoupper(substr($cadena,72,71))));
-	   }
-}
-
-if(strlen($cadena)<71){
-$pdf->Text($x + 0.1,$y + 0.69,utf8_decode(strtoupper($cadena)));
-}
-
-$pdf-> SetFont("Arial","",9);
-$y=$y + 1.5;	
-$x=1;
-}
-$prom=$suma / $cont;
-$pdf-> SetFont("Arial","B",9);
-$pdf->SetXY($x,$y);
-$pdf->Cell(6,0.5,"Promedio Alumno:",0,0,"R");
-$pdf->SetXY(7,$y);
-$pdf->Cell(1,0.5, round($prom,2),0,0,"R");
-
-$y=$y + 1;
-$pdf-> SetFont("Arial","",9);
-$pdf->SetXY(1,$y);
-$pdf->Cell(4,0.5,"OBSERVACIONES:",0,0);
-$pdf->SetXY(4,$y);
-$pdf->Cell(16,0.5,"","B",0,"R");
-$y=$y + 0.5;
-$pdf->SetXY(1,$y);
-$pdf->Cell(19,0.5,"","B",0,"R");
-
-$y=$y + 1;
-$pdf->SetXY(2,$y);
-$pdf->Cell(6,0.5,"","B",0,"R");
-
-$pdf->SetXY(12,$y);
-$pdf->Cell(6,0.5,"","B",0,"R");
-
-$y=$y + 0.5;
-$pdf->SetXY(2,$y);
-$pdf->Cell(5,0.5,"RECTOR",0,0,"C");
-
-$pdf->SetXY(12,$y);
-$pdf->Cell(6,0.5,"DIRECTOR(A) DE GRUPO",0,0,"C");
+                    $pdf->SetXY($x,$y + 0.5);
+                    $pdf->SetMargins($x + 0.1, 1, 1);
+                    $pdf->MultiCell(12,0.3,utf8_decode(strtoupper($cadena)),0);
 
 
+                    $pdf->Text($x + 0.1,$y + 0.35,utf8_decode("DESEMPEÑO").$desempeño);
 
-$pdf-> Output("Boletin ","I");
-      * */
-      
+
+                    $pdf-> SetFont("Arial","",9);
+                    $y=$y + 1.5;	
+                    $x=1;
+                }
+            
+            $prom=$suma / $cont;
+            $pdf-> SetFont("Arial","B",9);
+            $pdf->SetXY($x,$y);
+            $pdf->Cell(6,0.5,"Promedio Alumno:",0,0,"R");
+            $pdf->SetXY(7,$y);
+            $pdf->Cell(1,0.5, round($prom,2),0,0,"R");
+
+            $y=$y + 1;
+            $pdf-> SetFont("Arial","",9);
+            $pdf->SetXY(1,$y);
+            $pdf->Cell(4,0.5,"OBSERVACIONES:",0,0);
+            $pdf->SetXY(4,$y);
+            $pdf->Cell(16,0.5,"","B",0,"R");
+            $y=$y + 0.5;
+            $pdf->SetXY(1,$y);
+            $pdf->Cell(19,0.5,"","B",0,"R");
+
+            $y=$y + 1;
+            $pdf->SetXY(2,$y);
+            $pdf->Cell(6,0.5,"","B",0,"R");
+
+            $pdf->SetXY(12,$y);
+            $pdf->Cell(6,0.5,"","B",0,"R");
+
+            $y=$y + 0.5;
+            $pdf->SetXY(2,$y);
+            $pdf->Cell(5,0.5,"RECTOR",0,0,"C");
+
+            $pdf->SetXY(12,$y);
+            $pdf->Cell(6,0.5,"DIRECTOR(A) DE GRUPO",0,0,"C");
+            
+            }
+
+
+            $pdf-> Output("Boletin ","I");
          }
+    
+      
+         
 //**************************************************************************************************//        
 //**********************************FIN DE LOS METODOS*********************************************//
 //**************************************************************************************************// 

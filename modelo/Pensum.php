@@ -68,7 +68,7 @@ private function mapearPensum(Pensum $pensum, array $props) {
 
     
     public function leerPensum($idSalon){
-        $sql = "SELECT id, idMateria, idGrado FROM pensum WHERE idGrado=(SELECT idGrado FROM salon WHERE idSalon='".$idSalon."')";
+        $sql = "SELECT id, idMateria, idGrado FROM pensum WHERE idGrado=(SELECT idGrado FROM salon WHERE idSalon='".$idSalon."') ORDER BY idMateria";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pens = array();
