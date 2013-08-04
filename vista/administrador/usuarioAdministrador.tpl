@@ -194,28 +194,25 @@ function envio(){
  </div>
       <div style="margin: 0 auto;" id="tablaConsulta">
           <h1 style="margin-left: 430px">IMPRIMIR BOLETINES</h1>
-          <table style="margin: 0 auto;">
+          <table border="0" style="margin: 0 auto; width: 50%;" >
               <tr>
                   <td><b>Salón</b></td>
                   <td><b>Periodo</b></td>
               </tr>
               <tr>
-                  <td><select id="idSalon">
+                  <td><select id="idSalon" class="box-text">
                           <?php foreach ($salones as $salon) { ?>    
                           <option><?php echo $salon->getIdSalon();?></option>
                           <?php } ?>
                       </select></td>
-                      <td><select id="periodo">
+                      <td><select id="periodo" class="box-text">
                           <option>PRIMERO</option>
                           <option>SEGUNDO</option>
                           <option>TERCERO</option>
                           <option>CUARTO</option>
                           <option>FINAL</option>
                       </select></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><input name="generarBoletin" id="generarBoletin" type="submit" value="Generar" class="button large green" onclick="envio()" /></td>
+                      <td><input name="generarBoletin" id="generarBoletin" type="submit" value="Generar" class="button large green" onclick="envio()" /></td>
               </tr>
           </table>
       </div>

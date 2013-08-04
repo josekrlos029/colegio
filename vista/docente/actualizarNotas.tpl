@@ -214,7 +214,8 @@
                       
                          
      <!--------------------------------------------------------------------> 
-<table  width="80%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla">
+<div style="margin-left: 5%;">
+     <table  width="50%" border="0" align="left" cellpadding="0" cellspacing="0" class="tabla">
     <tr class="modo1">
        <td>Salon</td>
        <td>Materia</td>
@@ -224,12 +225,16 @@
     <tr>
         <td><?php echo " ". $idSalon; ?></td>
         <td><?php echo " ". strtoupper ($materia->getNombreMateria());?></td>
-        <td><?php echo " ".$materia->getHoras();?></td>
+        <td align="center"><?php echo " ".$materia->getHoras();?></td>
     </tr>
+
 </table>
-      <p>&nbsp;</p>
-      <hr>
-       <p>&nbsp;</p>
+   </div> 
+     <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <hr>
+    <p>&nbsp;</p>
        
 <table  width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
     <tr class="modo1">

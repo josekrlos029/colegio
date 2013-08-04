@@ -65,13 +65,16 @@ class EstudianteControl extends Controlador{
                     <td align="right" class="color-text-azul" colspan="6"><h3>Datos Academicos</h3></td>    
                     </tr>
                     <tr class="modo1">
-                    <td>Materia</td>
-                    <td>Primer Periodo</td>
-                    <td>Segundo Periodo</td>
-                    <td>Tercer Periodo</td>
-                    <td>Cuarto Periodo</td>
-                    <td>promedio</td>
+                    <td width="25%">Materia</td>
+                    <td width="15%">Primer Periodo</td>
+                    <td width="15%">Segundo Periodo</td>
+                    <td width="15%">Tercer Periodo</td>
+                    <td width="15%">Cuarto Periodo</td>
+                    <td width="15%">promedio</td>
                     </tr>
+                    </table>
+                    <div style="padding-left:5px; overflow-x:hidden;width:100%; height:250px;">
+                    <table width="95%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
                     ';
               $cont= 0;
               $s1=0;
@@ -80,21 +83,22 @@ class EstudianteControl extends Controlador{
               $s4=0;
             foreach ($pens as $pen){
                 $cont++;
-                $respuesta.='<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">';
+                $respuesta.='
+                            <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">';
                         $mat = new Materia();
                         $materia = $mat->leerMateriaPorId($pen->getIdMateria());
                          foreach ($materia as $mate){
-                              $respuesta.='<td><b> '.$mate->getNombreMateria().'</b> </td>';
+                              $respuesta.='<td width="25%"><b> '.$mate->getNombreMateria().'</b> </td>';
                          }
                          $nota = new Nota();
                          $not =$nota->leerNotaEstudiante( $idPersona, $pen->getIdMateria());
-                         $respuesta.='<td>'.$not->getPrimerP().'</td>';
-                         $respuesta.='<td>'.$not->getSegundoP().'</td>';
-                         $respuesta.='<td>'.$not->getTercerP().'</td>';
-                         $respuesta.='<td>'.$not->getCuartoP().'</td>';
+                         $respuesta.='<td width="15%">'.$not->getPrimerP().'</td>';
+                         $respuesta.='<td width="15%">'.$not->getSegundoP().'</td>';
+                         $respuesta.='<td width="15%">'.$not->getTercerP().'</td>';
+                         $respuesta.='<td width="15%">'.$not->getCuartoP().'</td>';
                          $prom=$not->getprimerP()+$not->getSegundoP()+$not->getTercerP()+$not->getCuartoP();
                          $prom=$prom/4;
-                         $respuesta.='<td class="color-text-azul">'.$prom.'</td>';
+                         $respuesta.='<td width="15%" class="color-text-azul">'.$prom.'</td>';
                 $respuesta.='</tr>';
                 
                 $s1 += $not->getPrimerP();

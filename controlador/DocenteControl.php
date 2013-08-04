@@ -281,31 +281,31 @@ class DocenteControl extends Controlador{
                     }
                         
                     $respuesta = "<tr> 
-                                        <td align='center'><h5>Logro Superior </h5> </td>
+                                        <td align='left'>Logro Superior</td>
                                   </tr>
                                   <tr> 
-                                        <td align='center'><textarea id='superior' maxlength='213' autofocus placeholder='Aquí debes escribir el Logro Superior' rows='4' cols='60'  >".$superior."</textarea><input x-webkit-speech onwebkitspeechchange='onChange1(this.value)' id='record1'/> </td>
+                                        <td align='left'><textarea id='superior' maxlength='213' autofocus placeholder='Aquí debes escribir el Logro Superior' rows='4' cols='60' class='box-text' >".$superior."</textarea><input x-webkit-speech onwebkitspeechchange='onChange1(this.value)' id='record1'/> </td>
                                   </tr>
                                   <tr> 
-                                        <td align='center'><h5>Logro Alto </h5> </td>
+                                        <td align='left'>Logro Alto</td>
                                   </tr>
                                   <tr> 
-                                        <td align='center'><textarea id='alto' maxlength='213' placeholder='Aquí debes escribir el Logro Alto' rows='4' cols='60'  >".$alto."</textarea><input x-webkit-speech onwebkitspeechchange='onChange2(this.value)' id='record2'/> </td>
+                                        <td align='left'><textarea id='alto' maxlength='213' placeholder='Aquí debes escribir el Logro Alto' rows='4' cols='60' class='box-text' >".$alto."</textarea><input x-webkit-speech onwebkitspeechchange='onChange2(this.value)' id='record2'/> </td>
                                   </tr>
                                   <tr> 
-                                        <td align='center'><h5>Logro Basico </h5> </td>
+                                        <td align='left'>Logro Basico</td>
                                   </tr>
                                   <tr> 
-                                       <td align='center'><textarea id='basico' maxlength='213' placeholder='Aquí debes escribir el Logro Basico' rows='4' cols='60'  >".$basico."</textarea><input x-webkit-speech onwebkitspeechchange='onChange3(this.value)' id='record3'/> </td>
+                                       <td align='left'><textarea id='basico' maxlength='213' placeholder='Aquí debes escribir el Logro Basico' rows='4' cols='60' class='box-text' >".$basico."</textarea><input x-webkit-speech onwebkitspeechchange='onChange3(this.value)' id='record3'/> </td>
                                   </tr>
                                   <tr> 
-                                        <td align='center'><h5>Logro Bajo </h5> </td>
+                                        <td align='left'>Logro Bajo</td>
                                   </tr>
                                   <tr> 
-                                       <td align='center'><textarea id='bajo' maxlength='213' placeholder='Aquí debes escribir el Logro Bajo' rows='4' cols='60'  >".$bajo."</textarea><input x-webkit-speech onwebkitspeechchange='onChange4(this.value)' id='record4'/> </td>
+                                       <td align='left'><textarea id='bajo' maxlength='213' placeholder='Aquí debes escribir el Logro Bajo' rows='4' cols='60' class='box-text' >".$bajo."</textarea><input x-webkit-speech onwebkitspeechchange='onChange4(this.value)' id='record4'/> </td>
                                   </tr>
                                   <tr> 
-                                       <td align='center'><button name='guardarLogros' id='guardarLogros' class='button large red' onclick='guardarLogros()'>Guardar</button></td>
+                                       <td align='left'><button name='guardarLogros' id='guardarLogros' class='button large red' onclick='guardarLogros()'>Guardar</button></td>
                                   </tr>
                                   ";
                     echo json_encode($respuesta);

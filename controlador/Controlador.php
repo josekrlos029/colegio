@@ -182,21 +182,15 @@ class Controlador {
                  echo json_encode("<tr> </tr>"); 
             }
              $respuesta .='    
-                                   <table border="0" width="100%"> 
-                                      <tr><td class="color-text-gris">Nombres:</td></tr> 
-                                       <tr><td>'. strtoupper($persona->getNombres()).'</td></tr>
-                                       <tr><td class="color-text-gris">Apellidos:</td></tr>
-                                       <tr><td>'. strtoupper($persona->getPApellido()).' '. strtoupper($persona->getSApellido()).'</td></tr>  
-                                       <tr><td class="color-text-gris">Sexo:</td></tr>                                       
-                                       <tr><td>'. strtoupper($persona->getSexo()).'</td> </tr>                                        
-                                       <tr><td class="color-text-gris">Telefono:</td></tr>
-                                       <tr><td>'. strtoupper($persona->getTelefono()).'</td></tr> 
-                                       <tr><td class="color-text-gris">Direccion:</td></tr>
-                                       <tr><td>'. strtoupper($persona->getDireccion()).'</td</tr> 
-                                       <tr><td class="color-text-gris">Correo:</td></tr>    
-                                       <tr><td>'. strtoupper($persona->getCorreo()).'</td></tr>
-                                       <tr><td class="color-text-gris">Fecha De Nacimiento:</td></tr>
-                                    <tr><td>'. strtoupper($persona->getFNacimiento()->format('Y-m-d')).'</td></tr>
+                                   <table border="0" width="100%" id="inf-Personal"> 
+                                      <tr><td class="color-text-gris">Nombres : <span>'. strtoupper($persona->getNombres()).'</span></td></tr>
+                                       <tr><td class="color-text-gris">Apellidos :<span> '. strtoupper($persona->getPApellido()).' '. strtoupper($persona->getSApellido()).'</span></td></tr>  
+                                       <tr><td class="color-text-gris">Sexo :<span>'. strtoupper($persona->getSexo()).'</span></td> </tr>                                        
+                                       <tr><td class="color-text-gris">Telefono : <span>'. strtoupper($persona->getTelefono()).'</span></td></tr> 
+                                       <tr><td class="color-text-gris">Direccion :<span>'. strtoupper($persona->getDireccion()).'</span></td</tr> 
+                                       <tr><td class="color-text-gris">Correo :<span>'. strtoupper($persona->getCorreo()).'</span></td></tr>
+                                       <tr><td class="color-text-gris">Fecha De Nacimiento :<span>'. strtoupper($persona->getFNacimiento()->format('Y-m-d')).'</span></td></tr>
+      
                                 </table>
              </div>';
              
@@ -254,14 +248,7 @@ $respuesta .= '
 
     ';
             }elseif($rol == 'E'){
-             $respuesta .= ' 
-            <div class="contenedorCentro">
-            <table aling="right" width="100%"  border="0">
-            <tr>
-            <td align="right" class="color-text-gris" colspan="3"><h3>Datos Academicos del Estudiante</h3></td>    
-            </tr>
-            </table>';
-             $matricula = new Matricula();
+              $matricula = new Matricula();
             $matr = $matricula->leerMatriculaPorId($idPersona);
             $salon = new Salon();
             $sal = $salon->leerSalonePorId($matr->getIdSalon());
@@ -269,7 +256,22 @@ $respuesta .= '
             $grad= $grado->leerGradoPorId($sal->getIdGrado());
             $pensum = new Pensum();
             $pens = $pensum->leerPensum($matr->getIdSalon());
-            
+             $respuesta .= ' 
+            <div class="contenedorCentro">
+             
+             <table width="95%" align="center" id="inf-Personal" >      
+                                          <tr>
+                                               <td>Salón :<span>'.$matr->getIdSalon().'</span></td>
+                                                   <td>Grado :<span>'.$grad->getNombre(). '</span></td>
+                                                   <td>Jornada :<span>'.$matr->getJornada(). '</span></td>
+                                               </tr>
+                                               </table></br>    
+            <table aling="right" width="100%"  border="0">
+            <tr>
+            <td align="right" class="color-text-gris" colspan="3"><h3>Datos Academicos del Estudiante</h3></td>    
+            </tr>
+            </table>';
+        
               $respuesta.='<table width="95%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
                     <tr class="modo1">
                     <td>Materia</td>

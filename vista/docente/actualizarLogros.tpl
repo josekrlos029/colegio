@@ -1,6 +1,11 @@
 <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
  <title><?php echo $titulo; ?></title>
  <script>
+     
+  function nuevo(){
+location.reload();
+}  
+
  function cargarMaterias(){ 
  var a = $("#logros");
  a.html(" ");
@@ -70,6 +75,7 @@
             x.html("Logro Cargado Correctamente");
             exito();
             ocultar();
+            $("#nuevo1").show();
             }else{
             x.html("Error al Actualizar Logro");
             error();
@@ -190,20 +196,23 @@ function onChange4(val) {
                     </select>
                 </td>
             </tr>
+             </table>
+         </br>
+         <table align="right"  border="0">
             <tr>
-                <td colspan="3"><hr></td>
-            </tr>   
-            <tr>
-                <td colspan="3" align="center">
+                <td>
+                     <td id="nuevo1" hidden align="right"><input name="nuevo" id="nuevo" type="submit" value="Nuevo" class="button large red" onclick="nuevo()" /></td>
+                </td>    
+                <td align="right">
                     <button name="cargarLogros" id="cargarLogros" type="submit" class="button large red" onclick="cargarLogros()"  disabled>Actualizar Logros</button>  
                 </td>
         
             </tr>   
         </table> 
         <p>&nbsp;</p>
+        <p>&nbsp;</p>
         <table id="logros" align="center" width="100%"  border="0"></table>
          
       </div>
 </body>
-<?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>

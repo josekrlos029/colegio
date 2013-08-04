@@ -54,16 +54,14 @@ function cargarMaterias(){
                       
                </select>
            </td>
-       </tr>
-        <tr>
-           <td colspan="3"><hr></td>
-       </tr>   
+       </tr>  
+      </table>
+    </br>
+    <table align="right">
        <tr>
-          
            <td colspan="3" aling="center">
                <input name="ingresoNotas" id="ingresoNotas" type="submit" value="Ingresar Notas" class="button large red" onclick="ingresoNotas()"  disabled/>  
            </td>
-        
        </tr>   
    </table>    
 </form>

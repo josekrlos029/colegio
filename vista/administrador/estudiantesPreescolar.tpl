@@ -87,7 +87,7 @@ function actualizarPersona(){
                 x.html ( "<p>Estudiante Actualizado Correctamente</p>");
                 exito();
                 ocultar();
-                document.location.href="/colegio/administrador/gestionarDocentes";
+               
             }else{
                 x.html ( "<p>"+res+"</p>");
                 idMateria.value="";

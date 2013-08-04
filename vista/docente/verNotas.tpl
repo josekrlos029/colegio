@@ -66,7 +66,8 @@ $(function(){
                       
                          
      <!--------------------------------------------------------------------> 
-    <table  width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla">
+    <div style="margin-left: 5%;">
+     <table  width="50%" border="0" align="left" cellpadding="0" cellspacing="0" class="tabla">
     <tr class="modo1">
        <td>Salon</td>
        <td>Materia</td>
@@ -80,9 +81,13 @@ $(function(){
     </tr>
 
 </table>
-      <p>&nbsp;</p>
-      <hr>
-      <p>&nbsp;</p>
+   </div> 
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <hr>
+    <p>&nbsp;</p>
+      
 <table  width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
     <tr class="modo1">
         <td width="12%"><div align="right" >IDENTIFICACION</div></td>
@@ -97,7 +102,7 @@ $(function(){
     </tr>
     
     <?php foreach ($resultado as $fila) { ?>
-    <tr class="recorrer" id="cebra" >
+    <tr class="recorrer" id="cebra" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)"> >
           <td align="left"><?php echo $fila['idPersona'];?></td>
         <td align="left"><?php echo strtoupper ($fila['pApellido']." ".$fila['sApellido']);?></td> 
         <td align="left"><?php echo strtoupper ($fila['nombres']);?></td>
@@ -116,7 +121,8 @@ $(function(){
     </tr>
 </table>
 </br>
-<table  width="90%" border="0" align="center" cellpadding="1" cellspacing="0" class="tabla">
+<div style="margin-right: 5%;">
+<table   border="0" align="right" cellpadding="1" cellspacing="0" class="tabla">
     <tr>
         <td align="right"> 
             <form action="/colegio/docente/actualizarNotas" method="post">
@@ -136,6 +142,7 @@ $(function(){
         </td>
     </tr>
 </table>
+    </div>
 </body>
 <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>
