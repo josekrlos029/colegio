@@ -78,42 +78,7 @@ function envio(){
     }   
 } 
 
-function matricular(){ 
-  
- var x = $("#mensaje");
- cargando();
- x.html ("<p>Cargando...</p>");
- x.show("slow");
-   
- var idPersona = document.getElementById("idPersona");
- var idSalon = document.getElementById("idSalon");
- var jornada = document.getElementById("jornada");
 
-
-    if (idPersona.value==""){
-      x.html ( "<p>Error: Ingresar Numero de Documento</p>");
-       error();
-       ocultar();
-    }else{
-
-        var url="/colegio/administrador/matricular/";
-        var data="idPersona="+idPersona.value+"&idSalon="+idSalon.value+"&jornada="+jornada.value;
-
-        envioJson(url,data,function respuesta(res){   
-            if (res == "1"){
-                x.html ("<p>Estudiante Matriculado Correctamente</p>");
-                exito();
-                ocultar();
-               nuevo();
-            }else{
-                 x.html ("<p>"+res+"</p>");
-                 error();
-                ocultar();
-            }
-            
-         });
-    }   
-}   
 
 function mostrarConcepto(){
     var concepto = document.getElementById("concepto").value;
@@ -122,6 +87,42 @@ function mostrarConcepto(){
     }else{
     
     }
+}
+
+function guardarPension(){
+    var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+   
+ var idPersona = document.getElementById("idPersona").value;
+ var mes = document.getElementById("mes").value;
+ var añoPension = document.getElementById("añoPension").value;
+ var valorPension = document.getElementById("valorPension").value;
+ var concepto = document.getElementById("concepto").value;
+ if (idPersona=="" || mes =="" || añoPension == "" || valorPension == "" ){
+      x.html ( "<p>Error: Ingresar Datos Vacios</p>");
+       error();
+       ocultar();
+    }else{
+
+        var url="/colegio/administrador/guardarPension/";
+        var data="idPersona="+idPersona+"&mes="+mes+"&añoPension="+añoPension+"&valorPension="+valorPension+"&concepto="+concepto;
+
+        envioJson(url,data,function respuesta(res){   
+            if (res == "1"){
+                x.html ("<p>Pensión registrada correctamente</p>");
+                exito();
+                ocultar();
+                
+            }else{
+                 x.html ("<p>"+res+"</p>");
+                 error();
+                 ocultar();
+            }
+            
+         });
+    }   
 }
 
  </script>
@@ -176,6 +177,7 @@ function mostrarConcepto(){
                    <tr class="modo1">
                        <td>MES:</td>
                        <td>AÑO:</td>
+                       <td>VALOR:</td>
                    </tr>
                    <tr>
                        <td><select id="mes">
@@ -193,7 +195,8 @@ function mostrarConcepto(){
                                <option>NOBIEMBRE</option>
                                <option>DICIEMBRE</option>
                            </select></td>
-                           <td><input id="añoPension" type="text" value="<?php $fecha = getdate(); $año=$fecha['year'] ; echo $año; ?>" </td>
+                           <td><input id="añoPension" type="text" value="<?php $fecha = getdate(); $año=$fecha['year'] ; echo $año; ?>"/> </td>
+                           <td><input id="valorPension" type="text" value="" /></td>
                    </tr>
                </table>
                <table align='center'>

@@ -1228,6 +1228,32 @@ class AdministradorControl extends Controlador{
 
          }
          
+         public function guardarPension(){
+             try {
+                 
+                $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+                $mes = isset($_POST['mes']) ? $_POST['mes'] : NULL;
+                $añoPension = isset($_POST['añoPension']) ? $_POST['añoPension'] : NULL;
+                $valorPension = isset($_POST['valorPension']) ? $_POST['valorPension'] : NULL;
+                $concepto = isset($_POST['concepto']) ? $_POST['concepto'] : NULL;
+                $fecha = getdate();
+                $FechaTxt=$fecha["year"]."-".$fecha["mon"]."-".$fecha["mday"];
+                $pension = new Pago();
+                $pension->setIdPersona($idPersona);
+                $pension->setMes($mes);
+                $pension->setAno($añoPension);
+                $pension->setValor($valorPension);
+                $pension->setFecha($FechaTxt);
+                $pension->setConcepto($concepto);
+                $pension->crearPagoPension($pension);
+                echo json_encode("1");
+             
+             } catch (Exception $exc) {
+                 echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+             }
+
+         }
+         
         public function procesarCierre(){
              try {
                  $nombreUsuario = isset($_POST['usuario']) ? $_POST['usuario'] : NULL;

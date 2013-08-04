@@ -86,7 +86,7 @@ class Nota extends Modelo {
             $nota->setCuartoP($props['cuartoP']);
         }
         if (array_key_exists('definitiva', $props)) {
-            $nota->getDefinitiva($props['definitiva']);
+            $nota->setDefinitiva($props['definitiva']);
         }
     }
     
