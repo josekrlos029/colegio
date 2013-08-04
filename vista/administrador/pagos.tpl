@@ -1,22 +1,5 @@
-   <!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8" />
-		<link href="../../utiles/css/general.css" rel="stylesheet" type="text/css" media="screen"/>
-                <link href="../../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
-                 <link href="../../utiles/css/usuarios.css" rel="stylesheet" type="text/css" media="screen"/>             
-                 <link href="../../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
-                <link href="../../utiles/css/tablas.css" rel="stylesheet" type="text/css" media="screen"/>
-                <script src="../../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/easing.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/envios.js" type="text/javascript" ></script>
-                 <script src="../../utiles/js/jquery.sticky.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/inicio.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/tablas.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/estiloMensaje.js" type="text/javascript"></script>
-              <script src="../../utiles/js/mootools-core-1.4.5.js" type="text/javascript"></script>
-           <title><?php echo $titulo; ?></title>
-  
+<?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
+
 
 <script type="text/javascript">
     
@@ -154,33 +137,45 @@ function guardarPension(){
                      
                          
      <!-------------------------------------------------------------------->     
-     
-       <table width="50%" border="0" cellspacing="0" cellpadding="2">
+     <div style="position: relative; margin-left: 10%; width: 80%;">
+       <table width="60%" border="0" cellspacing="0" cellpadding="2">
            <tr>     
-           <td align="right">Digite Numero de Documento:</td>
+           <td align="left">Digite Numero de Documento:</td>
            <td><input name="idPersona"  id="idPersona" type="text" class="box-text" value="" required/></td>
-           <td><input name="consultarEstudiante" id="consultarEstudiante" type="submit" value="Siguiente" class="button large blue" onclick="envio()" /></td>
+           <td><input name="consultarEstudiante" id="consultarEstudiante" type="submit" value="Cosultar" class="button large green" onclick="envio()" /></td>
            <td id="nuevo1" hidden><input name="nuevo" id="nuevo" type="submit" value="Nuevo" class="button large green" onclick="nuevo()" /></td>
-           <td id="pagos1" hidden><input name="pagos" id="pagos" type="submit" value="Antiguos Pagos" class="button large red" onclick="pagosAntiguos()" /></td>
        </tr>
         </table>
+      </div>   
       <p>&nbsp;</p>
       <hr>
        <p>&nbsp;</p>
-       <div align="center">
-       <div  id="tabla">
-           
-        </div>
-           
-           <div id="pension" hidden>
-               <table class="tabla">
+       <table width="80%" align="center" border="0" >
+        <tr>
+            <td id="pagos1" hidden><input name="pagos" id="pagos" type="submit" value="Antiguos Pagos" class="button large red" onclick="pagosAntiguos()" /></td>
+       </tr>
+       </table>
+       </br>
+       <div style="position: relative; width: 80%; margin-left: 10%;" id="tabla" >
+                 
+       </div>  
+                        
+        <p>&nbsp;</p>
+       <p>&nbsp;</p> 
+        <p>&nbsp;</p> 
+                
+           <div id="pension" hidden style="margin-left: 10%; width:80%">
+               <table>
+                   <tr><td class="color-text-gris"><h1>Pension</h1></td></tr>
+                   </table>
+               <table class="tabla" width="50%">
                    <tr class="modo1">
                        <td>MES:</td>
                        <td>AÑO:</td>
                        <td>VALOR:</td>
                    </tr>
                    <tr>
-                       <td><select id="mes">
+                       <td><select id="mes" class="box-text">
                                <option>---</option>
                                <option>ENERO</option>
                                <option>FEBRERO</option>
@@ -195,13 +190,14 @@ function guardarPension(){
                                <option>NOBIEMBRE</option>
                                <option>DICIEMBRE</option>
                            </select></td>
-                           <td><input id="añoPension" type="text" value="<?php $fecha = getdate(); $año=$fecha['year'] ; echo $año; ?>"/> </td>
-                           <td><input id="valorPension" type="text" value="" /></td>
+                           <td><input id="añoPension" type="text" value="<?php $fecha = getdate(); $año=$fecha['year'] ; echo $año; ?>" class="box-text"/> </td>
+                           <td><input id="valorPension" type="text" value="" class="box-text" /></td>
                    </tr>
                </table>
-               <table align='center'>
+               </br>
+               <table align='left'>
                      <tr>
-                         <td><button id="guardarPension" onclick="guardarPension()" class="button large blue">Registrar</button> </td>
+                      <td><button id="guardarPension" onclick="guardarPension()" class="button large green">Registrar</button> </td>
                 </tr>
                </table>
            </div>

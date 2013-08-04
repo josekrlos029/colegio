@@ -111,7 +111,7 @@ function actualizarPersona(){
                 <div id="cabecera" class="green">
                     
                     <div class="color-text-blanco" id="title-cab">
-                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
+                        <table width="90%" align="center" border="0" cellspacing="0" cellpadding="2">
                          <tr>   
                             <td align="right">   
                                 <h1>Consolidado por Salones</h1>
@@ -131,16 +131,11 @@ function actualizarPersona(){
            </tr>
            </table>
                   <p>&nbsp;</p>
-             <div  id="menu">   
-                  <?php foreach ($preescolar as $salon) { ?>    
-                   <li><a href="#" onClick="leerEstudiantes('<?php echo $salon->getIdSalon();?>')"><?php echo $salon->getIdSalon();?></a></li>
-                  <?php } ?>
-              </div>   
-                  <div>   
-                      <table>
+                  <div style="margin-left: 5%">
+                  <table width="30%">
                           <tr>
-                          <td><h5>SELECCIONE EL PERIODO</h5></td>
-                          <td><select id="periodo" >
+                          <td>Seleccione Periodo:</td>
+                          <td><select id="periodo" class="box-text">
                           <option>----</option>
                           <option>PRIMERO</option>
                           <option>SEGUNDO</option>
@@ -150,13 +145,23 @@ function actualizarPersona(){
                           </select></td>
                           </tr>
                       </table>
+                  </div>    
+                
+                <p>&nbsp;</p>
+             <div  id="menu" style="width:90%; margin-left: 5%;">   
+                  <?php foreach ($preescolar as $salon) { ?>    
+                   <li><a href="#" onClick="leerEstudiantes('<?php echo $salon->getIdSalon();?>')"><?php echo $salon->getIdSalon();?></a></li>
+                  <?php } ?>
+              </div>   
+                  <div>   
+                      
                       
               </div>
               <p>&nbsp;</p>
         
            
-                <div id="tablaEstudiantes" style="width: 100%">
-               <h1  style='margin-left:5%'>Seleccione un Salon...</h1>
+                <div id="tablaEstudiantes" style="width: 90%; margin-left:5%">
+               <h1>Seleccione un Salon...</h1>
                </div>
                
               

@@ -1074,7 +1074,7 @@ class AdministradorControl extends Controlador{
                       $respuesta= 2;
                     }else{
                   
-                        $respuesta = '<table class="tabla"> 
+                        $respuesta = '<table class="tabla" width="100%"> 
                                        <tr class="modo1">
                                         <td>Nombres:</td>
                                          <td>Primer Apellido:</td>
@@ -1123,7 +1123,8 @@ class AdministradorControl extends Controlador{
                 $band = 0;
                 foreach ($roles  as $ro) {
                   if ($ro->getIdRol() == 'E'){
-                      $respuesta = '<table class="tabla"> 
+                      $respuesta = '<div style=" postion:relative; float: left; width:50%; ">
+                                        <table class="tabla" width="100%" border="0" cellspacing="0" cellpadding="2"> 
                                        <tr class="modo1">
                                         <td>Nombres:</td>
                                          <td>Primer Apellido:</td>
@@ -1138,20 +1139,26 @@ class AdministradorControl extends Controlador{
                                         <td>".$ro->getNombre()."</td>
                                         </tr>
                                         
-                                    </table> "; 
-                        $respuesta.="            
-                        <table align='center'>
-                     <tr>
-                    <td> Concepto: </td>
-                    <td colspan='2' align='center'>
-                    <select id='concepto' onclick='mostrarConcepto()'>
-                            <option>---</option>
-                            <option>PENSION</option>
-                            <option>CONSTANCIA</option>
-                    </select>
-                    </td>
-                </tr>
-               </table>";
+                                        </table>
+                                    </div> "; 
+                              
+                     $respuesta.=" <div style='postion:relative; float:left; margin-left:20px; padding-left:10px; border-left:4px solid #666; ' >
+                                    <table align='center'>
+                                    <tr>
+                                    <td> Concepto:</td>
+                                    <td colspan='2' align='center'>
+                                    <select id='concepto' class='box-text' onclick='mostrarConcepto()'>
+                                           <option>---</option>
+                                           <option>PENSION</option>
+                                           <option>CONSTANCIA</option>
+                                    </select>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                 </div>
+                         
+                            ";
+                         
                                     
                 }elseif ($ro->getIdRol() == 'D'){$respuesta = '<table class="tabla"> 
                                        <tr class="modo1">

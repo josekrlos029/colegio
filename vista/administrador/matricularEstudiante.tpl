@@ -137,16 +137,17 @@ function matricular(){
       <p>&nbsp;</p>
       <hr>
        <p>&nbsp;</p>
-       <div align="center">
+       <div style="position: relative; margin-left: 10%; width: 80%;">
+       <h1 class="color-text-gris">Datos del estudiante</h1>   
        <div  id="tabla">
            
         </div>
            <p>&nbsp;</p>
            <div id="matricula" hidden>
-               <table class="tabla" width="50%" >
+               <table class="tabla" width="50%" border="0" cellspacing="0" cellpadding="2" >
                    <tr>
                   
-                  <td colspan="2" align="center" class="color-text-gris"><h1>realizar matricula</h1></td>
+                  <td colspan="2" class="color-text-gris"><h1>realizar matricula</h1></td>
                    </tr>
                    <tr class="modo1">
                        <td>SALON</td>
@@ -171,9 +172,9 @@ function matricular(){
                      </tr>
                      </table>
                        <p>&nbsp;</p>
-                     <table align="center">
+                     <table>
                      <tr>
-                    <td colspan="2" align="center">
+                    <td colspan="2">
                     <input name="matricularEstudiante" id="matricularEstudiante" type="submit" value="Matricular" class="button large blue" onclick="matricular()" />
                     </td>
                 </tr>

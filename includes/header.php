@@ -1,5 +1,3 @@
- 
-<?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
 
 <table border="0" align="center" width="80%" >
     <tr>

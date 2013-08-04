@@ -270,13 +270,14 @@ $respuesta .= '
             $pensum = new Pensum();
             $pens = $pensum->leerPensum($matr->getIdSalon());
             
-              $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+              $respuesta.='<table width="95%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
                     <tr class="modo1">
                     <td>Materia</td>
                     <td>Primer Periodo</td>
                     <td>Segundo Periodo</td>
                     <td>Tercer Periodo</td>
                     <td>Cuarto Periodo</td>
+                    <td>Promedio </td>
                     </tr>
                     ';
               $cont= 0;
@@ -298,6 +299,9 @@ $respuesta .= '
                          $respuesta.='<td>'.$not->getSegundoP().'</td>';
                          $respuesta.='<td>'.$not->getTercerP().'</td>';
                          $respuesta.='<td>'.$not->getCuartoP().'</td>';
+                         $prom=$not->getprimerP()+$not->getSegundoP()+$not->getTercerP()+$not->getCuartoP();
+                         $prom=$prom/4;
+                         $respuesta.='<td class="color-text-azul">'.$prom.'</td>';
                 $respuesta.='</tr>';
                 
                 $s1 += $not->getPrimerP();
@@ -305,7 +309,7 @@ $respuesta .= '
                 $s3 += $not->getTercerP();
                 $s4 += $not->getCuartoP();
             }
-             $respuesta.='</table>';
+            
              
             $p1 = $s1/$cont; 
             $p2 = $s2/$cont; 
@@ -314,41 +318,24 @@ $respuesta .= '
             
             $pg = ($p1 + $p2 + $p3 + $p4 ) /4;
             
-            $respuesta .= '</br>
-            <table aling="center" width="100%"  border="0">
-       <tr>
-           <td class="color-text-azul" width="30%"><b>Periodos</b></td>
-           <td class="color-text-azul"><b>Promedios</b></td>
-          
+            $respuesta .= ' <tr>
+           <td colspan="6"><hr></td>
        </tr>
        <tr>
-           <td class="color-text-azul" width="30%"><b>Primero</b></td>
+           <td class="color-text-azul">PROMEDIO DE PERIODO</td>
            <td class="color-text-azul">'.$p1.'</td>
-          
-       </tr>
-       <tr>
-           <td class="color-text-azul" width="30%"><b>Segundo</b></td>
            <td class="color-text-azul">'.$p2.'</td>
-          
-       </tr>
-       <tr>
-           <td class="color-text-azul" width="30%"><b>Tercero</b></td>
            <td class="color-text-azul">'.$p3.'</td>
-          
-       </tr>
-       <tr>
-           <td class="color-text-azul" width="30%"><b>Cuarto</b></td>
            <td class="color-text-azul">'.$p4.'</td>
-          
-       </tr>
-        <tr>
-           <td colspan="2"><hr></td>
-       </tr>   
+           <td class="color-text-azul">'.$pg.'</td>
+          </tr>
+          </table>
+          </br>
+       <table width="95%" align="center" border="0">
        <tr>
-           <td aling="center" class="color-text-gris"><h2>Promedio General: </h2></td>
-           <td class="color-text-gris"><h2>'.$pg.'</h2></td>
+           <td class="color-text-gris" width="30%"><h2>Promedio General : '.$pg. '</h2></td>
        </tr>   
-   </table>    ';
+   </table> '  ;
             
             $respuesta.='</div>';   
             }else{
