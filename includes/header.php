@@ -8,7 +8,7 @@
         <div class="top-search">
             <div id="searchform" >
 		<input type="text"  name="id" id="s"  placeholder="Numero De Documento" required />
-		<input  type="submit" id="searchsubmit" onclick="" />
+		<input  type="submit" id="searchsubmit" onclick="consultaPersona()" />
 	   </div>
 						
 	</div>

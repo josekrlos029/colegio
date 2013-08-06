@@ -1424,6 +1424,10 @@ class AdministradorControl extends Controlador{
              parent::consultaGeneralPersona();
          }
          
+        
+         
+ 
+         
          public function actualizarGeneralPersona() {
             try{
             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;

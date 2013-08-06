@@ -38,7 +38,26 @@ function envio(){
  var periodo = document.getElementById("periodo").value;
 
       window.open("/colegio/administrador/generarBoletin/"+idSalon+","+periodo)
-    }   
+    }
+    
+ function consultaPersona(){
+ 
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+ var id = document.getElementById("s");
+var y= $("#tablaConsulta"); 
+var url="/colegio/administrador/consultaGeneralPersona";
+var data="idPersona="+id.value;
+
+ envioJson(url,data,function respuesta(res){   
+   x.hide();            
+    y.html (res);
+    document.getElementById('light').style.display='block';
+    document.getElementById('fade').style.display='block'
+});
+ }   
 
   </script>  
     
@@ -192,8 +211,8 @@ function envio(){
   <div style="float:right">
       <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
  </div>
-      <div style="margin: 0 auto;" id="tablaConsulta">
-          <h1 style="margin-left: 430px">IMPRIMIR BOLETINES</h1>
+     <div style="margin: 0 auto;" id="tablaConsulta">
+         <h1 style="margin-left: 430px">IMPRIMIR BOLETINES</h1>
           <table border="0" style="margin: 0 auto; width: 50%;" >
               <tr>
                   <td><b>Salón</b></td>
@@ -216,7 +235,6 @@ function envio(){
               </tr>
           </table>
       </div>
-
 </div>
 </body>
  <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
