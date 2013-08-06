@@ -12,11 +12,11 @@ location.reload();
  var y =$("#materia"); 
  var b= $("#cargarLogros");
   
- var idSalon = document.getElementById("salon").value;
+ var idGrado = document.getElementById("grado").value;
 
-    if (idSalon!=""){
+    if (idGrado!=""){
         var url="/colegio/docente/imprimirMaterias";
-        var data="idSalon="+idSalon;
+        var data="idGrado="+idGrado;
         envioJson(url,data,function respuesta(res){               
         y.html (res);
         b.removeAttr("disabled");
@@ -31,18 +31,17 @@ location.reload();
     x.html ("<p>Cargando...</p>");
     x.show("slow");
     var periodo = document.getElementById("periodo").value;    
-    var idSalon = document.getElementById("salon").value;
+    var idGrado = document.getElementById("grado").value;
     var idMateria = document.getElementById("materia").value;
     var superior = document.getElementById("superior").value;
     var alto = document.getElementById("alto").value;
     var basico = document.getElementById("basico").value;
     var bajo = document.getElementById("bajo").value;
-          if (idSalon!="" && idMateria != ""){
+          if (idGrado !="" && idMateria != ""){
         var url="/colegio/docente/guardarLogro";
-        var data="periodo="+periodo+"&idSalon="+idSalon+"&idMateria="+idMateria+"&superior="+superior+"&alto="+alto+"&basico="+basico+"&bajo="+bajo;
+        var data="periodo="+periodo+"&idGrado="+idGrado+"&idMateria="+idMateria+"&superior="+superior+"&alto="+alto+"&basico="+basico+"&bajo="+bajo;
         envioJson(url,data,function respuesta(res){               
             if (res==1){
-            
             x.html("Logro Actualizado Correctamente");
             exito();
             ocultar();
@@ -63,12 +62,12 @@ location.reload();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
     var periodo = document.getElementById("periodo").value;    
-    var idSalon = document.getElementById("salon").value;
+    var idGrado = document.getElementById("grado").value;
     var idMateria = document.getElementById("materia").value;
         
-          if (idSalon!="" && idMateria != ""){
+          if (idGrado !="" && idMateria != ""){
         var url="/colegio/docente/cargarLogros";
-        var data="periodo="+periodo+"&idSalon="+idSalon+"&idMateria="+idMateria;
+        var data="periodo="+periodo+"&idGrado="+idGrado+"&idMateria="+idMateria;
         envioJson(url,data,function respuesta(res){               
             if (res!=0){
             y.html (res);
@@ -169,7 +168,7 @@ function onChange4(val) {
             </tr> 
             <tr>
                 <td class="color-text-rojo" width="30%">Periodo</td>
-                <td class="color-text-rojo" width="30%" align="right">Salon</td>
+                <td class="color-text-rojo" width="30%" align="right">Grado</td>
                 <td class="color-text-rojo" width="30%" align="right">Materia</td>
             </tr>
             <tr>
@@ -183,10 +182,10 @@ function onChange4(val) {
                         <option>CUARTO</option>
                     </select>
                 </td>
-                <td align="right"><select name="salon" class="box-text" id="salon" onchange="cargarMaterias()" required focus>
+                <td align="right"><select name="grado" class="box-text" id="grado" onchange="cargarMaterias()" required focus>
                                     <option></option>
-                                        <?php foreach ($cargas as $carga) { ?>
-                                        <option><?php echo $carga->getIdSalon(); ?></option>
+                                        <?php foreach($grados as $grado){ ?>
+                                        <option value="<?php echo $grado->getIdGrado(); ?>"><?php echo $grado->getNombre(); ?></option>
                                         <?php } ?>
                                    </select>
                 </td>

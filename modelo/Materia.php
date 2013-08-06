@@ -127,8 +127,25 @@ public function getIdMateria() {
         $this->ejecutar($param);
     }
     public function leerMateriasPorCarga($idSalon, $idPersona){
-        $sql = "SELECT m.idMateria as idMateria, m.nombre as nombre, m.horas as horas FROM materia m, carga c WHERE c.idMateria=m.idMateria AND c.idSalon='".$idSalon."' AND c.idPersona='".$idPersona."'";
+        $sql = "SELECT DISTINCT  m.idMateria as idMateria, m.nombre as nombre, m.horas as horas FROM materia m, carga c WHERE c.idMateria=m.idMateria AND c.idSalon='".$idSalon."' AND c.idPersona='".$idPersona."'";
         $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $mats = array();
+        foreach ($resultado as $fila) {
+            $materia = new Materia();
+            $this->mapearMateria($materia, $fila);
+            $mats[$materia->getIdMateria()] = $materia;
+        }
+        return $mats;
+  }
+  public function leerMateriasPorCargaYGrado($idGrado, $idPersona){
+     $sql = " SELECT m.idMateria as idMateria, m.nombre as nombre, m.horas as horas 
+                FROM  materia m,  carga c,  salon s
+                WHERE m.idMateria = c.idMateria 
+                AND c.idSalon = s.idSalon 
+                AND s.idGrado =  '".$idGrado."'
+                AND c.idPersona =  '".$idPersona."'";
+     $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $mats = array();
         foreach ($resultado as $fila) {

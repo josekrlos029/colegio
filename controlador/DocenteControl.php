@@ -58,7 +58,16 @@ class DocenteControl extends Controlador{
             $carga = new Carga();
             $idDocente = $_SESSION['idUsuario'];
             $Cargas = $carga->leerCargasPorDocente($idDocente);
-            $this->vista->set('cargas', $Cargas);
+            $salones= array();
+            $i=0;
+            foreach ($Cargas as $carga) {
+                $salones[$i]= $carga->getIdSalon();
+                $i++;
+            }
+            $sals= array_unique($salones);
+            
+            
+            $this->vista->set('salones', $sals);
             return $this->vista->imprimir();
             }
         } catch (Exception $exc) {
@@ -80,6 +89,23 @@ class DocenteControl extends Controlador{
         }
         
         public function imprimirMaterias(){
+            try {
+                session_start();
+                $idGrado =  isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
+                $idDocente = $_SESSION['idUsuario'];
+                $materia = new Materia();
+                $materias = $materia->leerMateriasPorCargaYGrado($idGrado, $idDocente);
+                $respuesta = "";
+                foreach ($materias as $mat) {
+                   $respuesta.="<option value='".$mat->getIdMateria()."'>".$mat->getNombreMateria()."</option>";
+                }
+                echo json_encode($respuesta);
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }    
+        }
+        
+        public function imprimirMateriasPorSalon(){
             try {
                 session_start();
                 $idSalon =  isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
@@ -245,7 +271,25 @@ class DocenteControl extends Controlador{
                             $carga = new Carga();
                             $idDocente = $_SESSION['idUsuario'];
                             $Cargas = $carga->leerCargasPorDocente($idDocente);
-                            $this->vista->set('cargas', $Cargas);
+                            $salones = array();
+                            foreach ($Cargas as $carga) {
+                                $salon = new Salon();
+                                $sal = $salon->leerSalonePorId($carga->getIdSalon());
+                                $salones[$sal->getIdSalon()] = $sal;       
+                            }
+                            $grados = array();
+                            $i=0;
+                            foreach ($salones as $salon){
+                                $grados[$i]= $salon->getIdGrado();
+                                $i++;
+                            }                            
+                            $grads = array_unique($grados);
+                            $gradosNetos = array();
+                            for($i = 0;$i < count($grads); $i++){
+                                $gra = new Grado();
+                                $gradosNetos[$grads[$i]]= $gra->leerGradoPorId($grads[$i]);
+                            }
+                            $this->vista->set('grados', $gradosNetos);
                             return $this->vista->imprimir();
                      } catch (Exception $exc) {
                          echo $exc->getTraceAsString();
@@ -255,18 +299,18 @@ class DocenteControl extends Controlador{
             
             public function cargarLogros(){
                 try {
-                    $idSalon =  isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+                    $idGrado =  isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
                     $idMateria =  isset($_POST['idMateria']) ? $_POST['idMateria'] : NULL;
                     $periodo =  isset($_POST['periodo']) ? $_POST['periodo'] : NULL;
                     $logro = new Logro();
-                    $log = $logro->leerLogro($periodo, $idSalon, $idMateria);
+                    $log = $logro->leerLogro($periodo, $idGrado, $idMateria);
                     $superior=NULL;
                     $alto=NULL;
                     $basico=NULL;
                     $bajo = NULL;
                     if ($log == NULL ){
                         $logro->setPeriodo($periodo);
-                        $logro->setIdSalon($idSalon);
+                        $logro->setIdSalon($idGrado);
                         $logro->setIdMateria($idMateria);
                         $logro->setSuperior($superior);
                         $logro->setAlto($alto);
@@ -318,7 +362,7 @@ class DocenteControl extends Controlador{
             
             public function guardarLogro(){
                 try {
-                    $idSalon =  isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+                    $idGrado =  isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
                     $idMateria =  isset($_POST['idMateria']) ? $_POST['idMateria'] : NULL;
                     $periodo =  isset($_POST['periodo']) ? $_POST['periodo'] : NULL;
                     $superior=isset($_POST['superior']) ? $_POST['superior'] : NULL;
@@ -327,13 +371,13 @@ class DocenteControl extends Controlador{
                     $bajo = isset($_POST['bajo']) ? $_POST['bajo'] : NULL;
                     $logro = new Logro();
                     $logro->setPeriodo($periodo);
-                    $logro->setIdSalon($idSalon);
+                    $logro->setIdGrado($idGrado);
                     $logro->setIdMateria($idMateria);
                     $logro->setSuperior($superior);
                     $logro->setBasico($basico);
                     $logro->setAlto($alto);
                     $logro->setBajo($bajo);
-                    $logro->crearLogro($logro);
+                    $logro->actualizarLogro($logro);
                     echo json_encode(1);
                 } catch (Exception $exc) {
                     echo json_encode(0);

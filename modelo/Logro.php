@@ -117,7 +117,7 @@ private function mapearLogro(Logro $logro, array $props) {
     }
     
     public function crearLogro(Logro $logro) {
-        $sql = "INSERT INTO logro (periodo, idGrado, idMateria, superior, alto, basico, bajo) VALUES (:periodo, :idSalon, :idMateria, :superior, :alto, :basico, :bajo)";
+        $sql = "INSERT INTO logro (periodo, idGrado, idMateria, superior, alto, basico, bajo) VALUES (:periodo, :idGrado, :idMateria, :superior, :alto, :basico, :bajo)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($logro));
     }
@@ -148,7 +148,7 @@ private function mapearLogro(Logro $logro, array $props) {
     }
     
     public function actualizarLogro(Logro $logro) {
-        $sql = "UPDATE logro SET superior=:superior, alto=:alto, basico=:basico, bajo=:bajo WHERE periodo=:periodo AND idSalon=:idGrado AND idMateria=:idMateria";
+        $sql = "UPDATE logro SET superior=:superior, alto=:alto, basico=:basico, bajo=:bajo WHERE periodo=:periodo AND idGrado=:idGrado AND idMateria=:idMateria";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($logro));        
         }

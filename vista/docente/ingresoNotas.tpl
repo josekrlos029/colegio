@@ -7,7 +7,7 @@ function cargarMaterias(){
  var idSalon = document.getElementById("salon").value;
 
     if (idSalon!=""){
-        var url="/colegio/docente/imprimirMaterias";
+        var url="/colegio/docente/imprimirMateriasPorSalon";
         var data="idSalon="+idSalon;
         envioJson(url,data,function respuesta(res){               
         y.html (res);
@@ -44,8 +44,8 @@ function cargarMaterias(){
            </td>
            <td align="right"><select name="salon" class="box-text" id="salon" onchange="cargarMaterias()" required focus>
                         <option></option>
-                        <?php foreach ($cargas as $carga) { ?>
-                        <option><?php echo $carga->getIdSalon(); ?></option>
+                        <?php foreach($salones as $salon) { ?>
+                        <option><?php  echo $salon; ?></option>
                         <?php } ?>
                </select>
            </td>
