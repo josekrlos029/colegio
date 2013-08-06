@@ -1853,8 +1853,348 @@ class AdministradorControl extends Controlador{
             $pdf-> Output("Boletin ","I");
          }
     
-      
-         
+      public function imprimirMatricula($idPersona){
+            $estudiante = new Estudiante();
+            
+            $est = $estudiante->leerPorId($idPersona);
+            $estudiante->leerDatos($idPersona, $est);
+            $estudiante->leerNacimiento($idPersona, $est);
+            $estudiante->leerUbicacion($idPersona, $est);
+            $estudiante->leerPadre($idPersona, $est);
+            $estudiante->leerMadre($idPersona, $est);
+            $estudiante->leerAcudiente($idPersona, $est);
+            
+            $matricula = new Matricula();
+            $mat = $matricula->leerMatriculaPorId($idPersona);
+            
+            $salon = new Salon();
+            $sal = $salon->leerSalonePorId($mat->getIdSalon());
+            
+            $grado = new Grado();
+            $grad = $grado->leerGradoPorId($sal->getIdGrado());
+            
+            $ape= $est->getPApellido()." ".$est->getSApellido();
+            $nom= $est->getNombres();
+            $sexo= $est->getSexo();
+            $tel= $est->getTelefono();
+
+            $fecha_nac=$est->getFNacimiento();
+            $lugar_nac=$est->getMunicipioNacimiento();
+
+            $direccion=$est->getDireccion();
+            $barrio=$est->getBarrio();
+            
+            $tipo_doc=$est->getTipoDocumento();
+            $eps=$est->getEps();
+            $procedencia=$est->getInstProcedencia();
+
+            
+            $id_padre=$est->getIdPadre();
+        
+            $nom_padre=$est->getNombresPadre();
+            $ape_padre=$est->getApellidosPadre();
+            $ocupacion_padre=$est->getOcupacionPadre();
+            $tel1_padre=$est->getTelPadre();
+            $tel2_padre=$est->getTelOficinaPadre();
+            $direccion_padre=$est->getDirPadre();
+            
+            $id_madre=$est->getIdMadre();
+        
+            $nom_madre=$est->getNombresMadre();
+            $ape_madre=$est->getApellidosMadre();
+            $ocupacion_madre=$est->getOcupacionMadre();
+            $tel1_madre=$est->getTelMadre();
+            $tel2_madre=$est->getTelOficinaMadre();
+            $direccion_madre=$est->getDirMadre();
+
+
+            
+
+            $id_acud=$est->getIdAcudiente();
+        
+            $nom_acu=$est->getNombresAcudiente();
+            $ape_acu=$est->getApellidosAcudiente();
+            $ocupacion_acu=$est->getOcupacionAcudiente();
+            $tel1_acu=$est->getTelAcudiente();
+            $tel2_acu=$est->getTelOficinaAcudiente();
+            $direccion_acu=$est->getDirAcudiente();
+            
+            $grado2=$grad->getNombre();   
+            $año1 = $mat->getAñoLectivo();
+            $jornada = $mat->getJornada();
+            
+            list($ano,$mes,$dia) = explode("-",$fecha_nac);
+                $ano_diferencia  = date("Y") - $ano;
+                $mes_diferencia = date("m") - $mes;
+                $dia_diferencia   = date("d") - $dia;
+                if ($dia_diferencia < 0 || $mes_diferencia <= 0)
+                    $ano_diferencia--;
+
+
+            $pdf=new FPDF('P','cm','Letter');
+            $pdf->AddPage();
+
+            $pdf-> SetFont("Arial","B",20);
+            $pdf->SetXY(2,1);
+            $pdf->cell(18,1,"LICEO GALOIS",0,0,"C");
+            $pdf-> SetFont("Arial","B",14);
+            $pdf->SetXY(2,2);
+            $pdf->Cell(18,1,"HOJA DE MATRICULA",0,0,"C");
+            $pdf->SetXY(2,3);
+            $pdf->Cell(18,1,utf8_decode("AÑO LECTIVO ".$año1),0,0,"C");
+            $pdf->Image('utiles/imagenes/colegio/foto.png',15,1.5,3.7);
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(2,4);
+            $pdf->Cell(3,0.5,"GRADO:",0,0,"L");
+            $pdf->SetXY(2,4.5);
+            $pdf->Cell(3,0.5,"JORNADA:",0,0,"L");
+
+            $pdf->SetFillColor(211,211,211);
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(5,4);
+            $pdf->Cell(3,0.5,utf8_decode(strtoupper($grado2)),0,0,"L",true);
+            $pdf->SetXY(5,4.5);
+            $pdf->Cell(3,0.5,utf8_decode(strtoupper($jornada)),0,0,"L",true);
+            $pdf->SetXY(2,6);
+            $pdf->Cell(18,6.5,"",1,0,"L");
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(2,6);
+            $pdf->Cell(3,0.5,"APELLIDOS:",0,0,"L");
+            $pdf->SetXY(2,6.5);
+            $pdf->Cell(3,0.5,"NOMBRES:",0,0,"L");
+
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(5,6);
+            $pdf->Cell(14.96,0.5,utf8_decode(strtoupper($ape)),0,0,"L",true);
+            $pdf->SetXY(5,6.5);
+            $pdf->Cell(9,0.5,utf8_decode(strtoupper($nom)),0,0,"L",true);
+
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(14,6.5);
+            $pdf->Cell(2,0.5,"SEXO    M:",0,0,"L",false);
+
+            $pdf->SetXY(16,6.5);
+            $pdf->Cell(1,0.5,"",1,0,"C",true);
+
+            $pdf->SetXY(17,6.5);
+            $pdf->Cell(1,0.5,"  F:",0,0,"C");
+
+            $pdf->SetXY(18,6.5);
+            $pdf->Cell(1,0.5,"",1,0,"C",true);
+            if ($sexo=="F"){
+            $pdf->SetXY(18,6.5);
+            $pdf->Cell(1,0.5,"X",0,0,"C");	
+            }else {
+            $pdf->SetXY(16,6.5);
+            $pdf->Cell(1,0.5,"X",0,0,"C");	
+
+            }
+
+
+            $pdf->SetXY(2,7.5);
+            $pdf->Cell(5,0.5,"FECHA DE NACIMIENTO: ",0,0,"L");
+
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(7,7.5);
+            $pdf->Cell(5,0.5,$fecha_nac,0,0,"L",true);
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(12,7.5);
+            $pdf->Cell(5,0.5,"LUGAR DE NACIMIENTO: ",0,0,"L");
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(17,7.5);
+            $pdf->Cell(2.96,0.5,utf8_decode(strtoupper($lugar_nac)),0,0,"L",true);
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(2,8.5);
+            $pdf->Cell(3,0.5,"DIRECCION: ",0,0,"L");
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(5,8.5);
+            $pdf->Cell(7,0.5,utf8_decode(strtoupper($direccion)),0,0,"L",true);
+            $pdf->SetXY(12,8.5);
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->Cell(2,0.5,"BARRIO: ",0,0,"L");
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(14,8.5);
+            $pdf->Cell(5.96,0.5,utf8_decode(strtoupper($barrio)),0,0,"L",true);
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(2,9.5);
+            $pdf->Cell(5,0.5,"IDENTIFICACION:",0,0,"L");
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(6,9.5);
+            $pdf->Cell(6,0.5,$tipo_doc." ".$idPersona,0,0,"L",true);
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(12,9.5);
+            $pdf->Cell(2,0.5,"EDAD:",0,0,"L");
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(13.96,9.5);
+            $pdf->Cell(6,0.5,$ano_diferencia +1 ,0,0,"L",true);// SACAR EDAD
+
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(2,10.5);
+            $pdf->Cell(4,0.5,"TELEFONO:",0,0,"L");
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(6,10.5);
+            $pdf->Cell(4,0.5,$tel,0,0,"L",true);
+
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(10,10.5);
+            $pdf->Cell(4,0.5,"CARNET DE SALUD:",0,0,"L");
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(14,10.5);
+            $pdf->Cell(5.96,0.5,utf8_decode(strtoupper($eps)),0,0,"L",true);
+
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(2,11.5);
+            $pdf->Cell(6,0.5,"INSTITUCION DE PROCEDENCIA:",0,0,"L");
+
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(8,11.5);
+            $pdf->Cell(11.96,0.5,utf8_decode(strtoupper($procedencia)),0,0,"L",true);
+
+
+            $pdf->SetXY(2,13);
+            $pdf->Cell(18,2.5,"",1,0,"L");
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(2,13);
+            $pdf->Cell(18,0.5,"DATOS DEL PADRE",0,0,"C");
+
+            $pdf->SetXY(2,13.5);
+            $pdf->Cell(3,0.5,"NOMBRE:",0,0,"L");
+            $pdf->SetXY(2,14);
+            $pdf->Cell(3,0.5,"DIRECCION:",0,0,"L");
+            $pdf->SetXY(2,14.5);
+            $pdf->Cell(3,0.5,"OCUPACION:",0,0,"L");
+
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(5,13.5);
+            $pdf->Cell(7,0.5,utf8_decode(strtoupper($nom_padre." ".$ape_padre)),0,0,"L",TRUE);
+            $pdf->SetXY(5,14);
+            $pdf->Cell(7,0.5,utf8_decode(strtoupper($direccion_padre)),0,0,"L",TRUE);
+            $pdf->SetXY(5,14.5);
+            $pdf->Cell(7,0.5,utf8_decode(strtoupper($ocupacion_padre)),0,0,"L",TRUE);
+
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(12,13.5);
+            $pdf->Cell(3,0.5,"C.C. No.",0,0,"L");
+            $pdf->SetXY(12,14);
+            $pdf->Cell(3,0.5,"TELEFONO:",0,0,"L");
+            $pdf->SetXY(12,14.5);
+            $pdf->Cell(3,0.5,"TELEFONO 2:",0,0,"L");
+
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(14.96,13.5);
+            $pdf->Cell(5,0.5,utf8_decode(strtoupper($id_padre)),0,0,"L",TRUE);
+            $pdf->SetXY(14.96,14);
+            $pdf->Cell(5,0.5,$tel1_padre,0,0,"L",TRUE);
+            $pdf->SetXY(14.96,14.5);
+            $pdf->Cell(5,0.5,$tel2_padre,0,0,"L",TRUE);
+
+
+            $pdf->SetXY(2,16);
+            $pdf->Cell(18,2.5,"",1,0,"L");
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(2,16);
+            $pdf->Cell(18,0.5,"DATOS DE LA MADRE",0,0,"C");
+
+            $pdf->SetXY(2,16.5);
+            $pdf->Cell(3,0.5,"NOMBRE:",0,0,"L");
+            $pdf->SetXY(2,17);
+            $pdf->Cell(3,0.5,"DIRECCION:",0,0,"L");
+            $pdf->SetXY(2,17.5);
+            $pdf->Cell(3,0.5,"OCUPACION:",0,0,"L");
+
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(5,16.5);
+            $pdf->Cell(7,0.5,utf8_decode(strtoupper($nom_madre." ".$ape_madre)),0,0,"L",TRUE);
+            $pdf->SetXY(5,17);
+            $pdf->Cell(7,0.5,utf8_decode(strtoupper($direccion_madre)),0,0,"L",TRUE);
+            $pdf->SetXY(5,17.5);
+            $pdf->Cell(7,0.5,utf8_decode(strtoupper($ocupacion_madre)),0,0,"L",TRUE);
+
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(12,16.5);
+            $pdf->Cell(3,0.5,"C.C. No.",0,0,"L");
+            $pdf->SetXY(12,17);
+            $pdf->Cell(3,0.5,"TELEFONO:",0,0,"L");
+            $pdf->SetXY(12,17.5);
+            $pdf->Cell(3,0.5,"TELEFONO 2:",0,0,"L");
+
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(14.96,16.5);
+            $pdf->Cell(5,0.5,utf8_decode(strtoupper($id_madre)),0,0,"L",TRUE);
+            $pdf->SetXY(14.96,17);
+            $pdf->Cell(5,0.5,$tel1_madre,0,0,"L",TRUE);
+            $pdf->SetXY(14.96,17.5);
+            $pdf->Cell(5,0.5,$tel2_madre,0,0,"L",TRUE);
+
+
+
+            $pdf->SetXY(2,19);
+            $pdf->Cell(18,2.5,"",1,0,"L");
+
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(2,19);
+            $pdf->Cell(18,0.5,"DATOS DEL ACUDIENTE",0,0,"C");
+
+            $pdf->SetXY(2,19.5);
+            $pdf->Cell(3,0.5,"NOMBRE:",0,0,"L");
+            $pdf->SetXY(2,20);
+            $pdf->Cell(3,0.5,"DIRECCION:",0,0,"L");
+            $pdf->SetXY(2,20.5);
+            $pdf->Cell(3,0.5,"OCUPACION:",0,0,"L");
+
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(5,19.5);
+            $pdf->Cell(7,0.5,utf8_decode(strtoupper($nom_acu." ".$ape_acu)),0,0,"L",TRUE);
+            $pdf->SetXY(5,20);
+            $pdf->Cell(7,0.5,utf8_decode(strtoupper($direccion_acu)),0,0,"L",TRUE);
+            $pdf->SetXY(5,20.5);
+            $pdf->Cell(7,0.5,utf8_decode(strtoupper($ocupacion_acu)),0,0,"L",TRUE);
+
+            $pdf-> SetFont("Arial","B",10);
+            $pdf->SetXY(12,19.5);
+            $pdf->Cell(3,0.5,"C.C. No.",0,0,"L");
+            $pdf->SetXY(12,20);
+            $pdf->Cell(3,0.5,"TELEFONO:",0,0,"L");
+            $pdf->SetXY(12,20.5);
+            $pdf->Cell(3,0.5,"TELEFONO 2:",0,0,"L");
+
+            $pdf-> SetFont("Arial","",10);
+            $pdf->SetXY(14.96,19.5);
+            $pdf->Cell(5,0.5,utf8_decode(strtoupper($id_acud)),0,0,"L",TRUE);
+            $pdf->SetXY(14.96,20);
+            $pdf->Cell(5,0.5,$tel1_acu,0,0,"L",TRUE);
+            $pdf->SetXY(14.96,20.5);
+            $pdf->Cell(5,0.5,$tel2_acu,0,0,"L",TRUE);
+
+
+            $pdf->SetXY(3,22.5);
+            $pdf->Cell(6,0.5,"","B",0,"R");
+
+            $pdf->SetXY(12,22.5);
+            $pdf->Cell(6,0.5,"","B",0,"R");
+
+            $pdf->SetXY(3.5,23);
+            $pdf->Cell(5,0.5,"FIRMA ESTUDIANTE",0,0,"C");
+
+            $pdf->SetXY(12,23);
+            $pdf->Cell(6,0.5,"FIRMA ACUDIENTE",0,0,"C");
+
+            $pdf->SetXY(3,24.5);
+            $pdf->Cell(6,0.5,"","B",0,"R");
+
+            $pdf->SetXY(12,24.5);
+            $pdf->Cell(6,0.5,"","B",0,"R");
+
+            $pdf->SetXY(3.5,25);
+            $pdf->Cell(5,0.5,"FIRMA RECTOR",0,0,"C");
+
+            $pdf->SetXY(12,25);
+            $pdf->Cell(6,0.5,"FIRMA SECRETARIA",0,0,"C");
+
+            $pdf-> Output("Matricula ".$nom." ".$ape,"I");
+      }
+
+
 //**************************************************************************************************//        
 //**********************************FIN DE LOS METODOS*********************************************//
 //**************************************************************************************************// 

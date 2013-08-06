@@ -313,31 +313,61 @@ class Estudiante extends Persona {
     public function setInstProcedencia($instProcedencia) {
         $this->instProcedencia = $instProcedencia;
     }
+    
+    private function mapearPersona(Estudiante $persona, array $props) {
+        if (array_key_exists('idPersona', $props)) {
+            $persona->setIdPersona($props['idPersona']);
+        }
+         if (array_key_exists('nombres', $props)) {
+            $persona->setNombres($props['nombres']);
+        }
+        if (array_key_exists('pApellido', $props)) {
+            $persona->setPApellido($props['pApellido']);
+        }
+        if (array_key_exists('sApellido', $props)) {
+            $persona->setSApellido($props['sApellido']);
+        }
+        if (array_key_exists('sexo', $props)) {
+            $persona->setSexo($props['sexo']);
+        }
+        if (array_key_exists('telefono', $props)) {
+            $persona->setTelefono($props['telefono']);
+        }
+        if (array_key_exists('direccion', $props)) {
+            $persona->setDireccion($props['direccion']);
+        }
+        if (array_key_exists('correo', $props)) {
+            $persona->setCorreo($props['correo']);
+        }
+        if (array_key_exists('estado', $props)) {
+            $persona->setEstado($props['estado']);
+        }
+        if (array_key_exists('fNacimiento', $props)) {
+            $persona->setFNacimiento(self::crearFecha($props['fNacimiento']));
+        }
 
-        
-    private function getParametrosNac(Estudiante $est){
-              
-        $parametros = array(
-            ':idPersona' => $est->getIdPersona(),
-            ':fNacimiento' => $est->getFNacimiento(),
-            ':pais' => $est->getPaisNacimiento(),
-            ':departamento' => $est->getDepartamentoNacimiento(),
-            ':municipio' => $est->getMunicipioNacimiento(),
-        );
-        return $parametros;
     }
-    
-    private function getParametrosUbic(Estudiante $est){
-              
-        $parametros = array(
-            ':idPersona' => $est->getIdPersona(),
-            ':direccion' => $est->getDireccion(),
-            ':barrio' => $est->getBarrio(),
-            ':municipio' => $est->getMunicipioResidencia()
-        );
-        return $parametros;
+
+     private function mapearDatos(Estudiante $estudiante, array $props) {
+        if (array_key_exists('tipoDocumento', $props)) {
+            $estudiante->setTipoDocumento($props['tipoDocumento']);
+        }
+         if (array_key_exists('lugarExpedicion', $props)) {
+            $estudiante->setLugarExpedicion($props['lugarExpedicion']);
+        }
+        if (array_key_exists('fechaExpedicion', $props)) {
+            $estudiante->setFechaExpedicion($props['fechaExpedicion']);
+        }
+        if (array_key_exists('tipoSanguineo', $props)) {
+            $estudiante->setTipoSanguineo($props['tipoSanguineo']);
+        }
+        if (array_key_exists('eps', $props)) {
+            $estudiante->setEps($props['eps']);
+        }
+        if (array_key_exists('institucionProcedencia', $props)) {
+            $estudiante->setInstProcedencia($props['institucionProcedencia']);
+        }
     }
-    
     private function getParametrosDat(Estudiante $est){
               
         $parametros = array(
@@ -351,6 +381,81 @@ class Estudiante extends Persona {
         );
         return $parametros;
     }
+    
+    private function mapearNacimiento(Estudiante $estudiante, array $props) {
+        if (array_key_exists('fNacimiento', $props)) {
+            $estudiante->setFNacimiento($props['fNacimiento']);
+        }
+         if (array_key_exists('pais', $props)) {
+            $estudiante->setPaisNacimiento($props['pais']);
+        }
+        if (array_key_exists('departamento', $props)) {
+            $estudiante->setDepartamentoNacimiento($props['departamento']);
+        }
+        if (array_key_exists('municipio', $props)) {
+            $estudiante->setMunicipioNacimiento($props['municipio']);
+        }
+    }
+    
+    private function getParametrosNac(Estudiante $est){
+              
+        $parametros = array(
+            ':idPersona' => $est->getIdPersona(),
+            ':fNacimiento' => $est->getFNacimiento(),
+            ':pais' => $est->getPaisNacimiento(),
+            ':departamento' => $est->getDepartamentoNacimiento(),
+            ':municipio' => $est->getMunicipioNacimiento(),
+        );
+        return $parametros;
+    }
+    
+    private function mapearUbicacion(Estudiante $estudiante, array $props) {
+        if (array_key_exists('direccion', $props)) {
+            $estudiante->setDireccion($props['direccion']);
+        }
+         if (array_key_exists('barrio', $props)) {
+            $estudiante->setBarrio($props['barrio']);
+        }
+        if (array_key_exists('municipio', $props)) {
+            $estudiante->setMunicipioResidencia($props['municipio']);
+        }
+    }
+    
+    private function getParametrosUbic(Estudiante $est){
+              
+        $parametros = array(
+            ':idPersona' => $est->getIdPersona(),
+            ':direccion' => $est->getDireccion(),
+            ':barrio' => $est->getBarrio(),
+            ':municipio' => $est->getMunicipioResidencia()
+        );
+        return $parametros;
+    }
+    
+     private function mapearPadre(Estudiante $estudiante, array $props) {
+        if (array_key_exists('id_padre', $props)) {
+            $estudiante->setIdPadre($props['id_padre']);
+        }
+         if (array_key_exists('nombre', $props)) {
+            $estudiante->setNombresPadre($props['nombre']);
+        }
+        if (array_key_exists('apellido', $props)) {
+            $estudiante->setApellidosPadre($props['apellido']);
+        }
+        if (array_key_exists('ocupacion', $props)) {
+            $estudiante->setOcupacionPadre($props['ocupacion']);
+        }
+        if (array_key_exists('telefono', $props)) {
+            $estudiante->setTelPadre($props['telefono']);
+        }
+        if (array_key_exists('tel_oficina', $props)) {
+            $estudiante->setTelOficinaPadre($props['tel_oficina']);
+        }
+        if (array_key_exists('direccion', $props)) {
+            $estudiante->setDirPadre($props['direccion']);
+        }
+    }   
+    
     private function getParametrosPadre(Estudiante $est){
               
         $parametros = array(
@@ -366,6 +471,30 @@ class Estudiante extends Persona {
         return $parametros;
     }
     
+    private function mapearMadre(Estudiante $estudiante, array $props) {
+        if (array_key_exists('id_madre', $props)) {
+            $estudiante->setIdMadre($props['id_madre']);
+        }
+         if (array_key_exists('nombre', $props)) {
+            $estudiante->setNombresMadre($props['nombre']);
+        }
+        if (array_key_exists('apellido', $props)) {
+            $estudiante->setApellidosMadre($props['apellido']);
+        }
+        if (array_key_exists('ocupacion', $props)) {
+            $estudiante->setOcupacionMadre($props['ocupacion']);
+        }
+        if (array_key_exists('telefono', $props)) {
+            $estudiante->setTelMadre($props['telefono']);
+        }
+        if (array_key_exists('tel_oficina', $props)) {
+            $estudiante->setTelOficinaMadre($props['tel_oficina']);
+        }
+        if (array_key_exists('direccion', $props)) {
+            $estudiante->setDirMadre($props['direccion']);
+        }
+    }   
+    
     private function getParametrosMadre(Estudiante $est){
               
         $parametros = array(
@@ -380,6 +509,30 @@ class Estudiante extends Persona {
         );
         return $parametros;
     }
+    
+    private function mapearAcudiente(Estudiante $estudiante, array $props) {
+        if (array_key_exists('id_acudiente', $props)) {
+            $estudiante->setIdAcudiente($props['id_acudiente']);
+        }
+         if (array_key_exists('nombre', $props)) {
+            $estudiante->setNombresAcudiente($props['nombre']);
+        }
+        if (array_key_exists('apellido', $props)) {
+            $estudiante->setApellidosAcudiente($props['apellido']);
+        }
+        if (array_key_exists('ocupacion', $props)) {
+            $estudiante->setOcupacionAcudiente($props['ocupacion']);
+        }
+        if (array_key_exists('telefono', $props)) {
+            $estudiante->setTelAcudiente($props['telefono']);
+        }
+        if (array_key_exists('tel_oficina', $props)) {
+            $estudiante->setTelOficinaAcudiente($props['tel_oficina']);
+        }
+        if (array_key_exists('direccion', $props)) {
+            $estudiante->setDirAcudiente($props['direccion']);
+        }
+    }   
      private function getParametrosAcudiente(Estudiante $est){
               
         $parametros = array(
@@ -520,7 +673,83 @@ class Estudiante extends Persona {
         return $resultado;
     }
     
+    public function leerDatos($idPersona, Estudiante $estudiante){
+        $sql = "SELECT tipoDocumento, lugarExpedicion, fechaExpedicion, tipoSanguineo, eps, institucionProcedencia FROM datos_persona WHERE idPersona='".$idPersona."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        foreach ($resultado as $fila) {
+            
+            $this->mapearDatos($estudiante, $fila);
+            
+        }
+    }
+    public function leerNacimiento($idPersona, Estudiante $estudiante){
+        $sql = "SELECT fNacimiento, pais, departamento, municipio FROM datos_nac_persona WHERE idPersona='".$idPersona."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        foreach ($resultado as $fila) {
+            
+            $this->mapearNacimiento($estudiante, $fila);
+            
+        }
+    }
     
+    public function leerUbicacion($idPersona, Estudiante $estudiante){
+        $sql = "SELECT direccion, barrio, municipio FROM datos_ubicacion_persona WHERE idPersona='".$idPersona."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        foreach ($resultado as $fila) {
+            
+            $this->mapearUbicacion($estudiante, $fila);
+            
+        }
+    }
+    
+     public function leerPorId($id){
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, p.estado, dn.fNacimiento FROM persona p,datos_nac_persona dn, datos_ubicacion_persona du";
+        $sql .= " WHERE p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND p.idPersona='".$id."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $persona=NULL;
+        foreach ($resultado as $fila) {
+            $persona = new Estudiante();
+            $this->mapearPersona($persona, $fila);
+        }
+        return $persona;
+    }
+    
+    public function leerPadre($idPersona, Estudiante $estudiante){
+        $sql = "SELECT p.id_padre,p.nombre,p.apellido, p.ocupacion,p.telefono,p.tel_oficina,p.direccion FROM padre p , padre_estudiante pe WHERE p.id_padre= pe.id_padre AND pe.id_estudiante='".$idPersona."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        foreach ($resultado as $fila) {
+            
+            $this->mapearPadre($estudiante, $fila);
+            
+        }
+    }
+    
+    public function leerMadre($idPersona, Estudiante $estudiante){
+        $sql = "SELECT m.id_madre,m.nombre,m.apellido, m.ocupacion,m.telefono,m.tel_oficina,m.direccion FROM madre m , madre_estudiante me WHERE m.id_madre= me.id_madre AND me.id_estudiante='".$idPersona."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        foreach ($resultado as $fila) {
+            
+            $this->mapearMadre($estudiante, $fila);
+            
+        }
+    }
+    
+     public function leerAcudiente($idPersona, Estudiante $estudiante){
+        $sql = "SELECT a.id_acudiente,a.nombre,a.apellido, a.ocupacion,a.telefono,a.tel_oficina,a.direccion FROM acudiente a , acudiente_estudiante ae WHERE a.id_acudiente= ae.id_acudiente AND ae.id_estudiante='".$idPersona."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        foreach ($resultado as $fila) {
+            
+            $this->mapearAcudiente($estudiante, $fila);
+            
+        }
+    }
     
 }
 
