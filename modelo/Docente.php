@@ -51,7 +51,7 @@ class Docente extends Persona{
   
     public function crearConsulta($idSalon,$idMateria){
         
-        $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP, n.definitiva as def FROM notas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND n.idMateria='".$idMateria."'";
+        $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP, n.definitiva as def FROM notas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND n.idMateria='".$idMateria."' ORDER BY p.pApellido";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         return $resultado;
@@ -59,7 +59,7 @@ class Docente extends Persona{
     
     public function crearConsulta2($idSalon,$idMateria){
         
-        $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP FROM fallas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND n.idMateria='".$idMateria."'";
+        $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP FROM fallas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND n.idMateria='".$idMateria."' ORDER BY p.pApellido";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         return $resultado;
@@ -67,7 +67,7 @@ class Docente extends Persona{
     
     public function crearConsultaPorIdPersona($idPersona, $idSalon, $idMateria){
         
-        $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP, n.definitiva as def FROM notas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND n.idMateria='".$idMateria."' AND n.idPersona='".$idPersona."'" ;
+        $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP, n.definitiva as def FROM notas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND n.idMateria='".$idMateria."' AND n.idPersona='".$idPersona."' ORDER BY p.pApellido"  ;
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         return $resultado;
