@@ -16,6 +16,9 @@
        <td align="center" width="10%"><a href="#"><div id="box" class="red"><img height="40px" width="40px"  src=../utiles/imagenes/iconos/descargar.png ></div></a>
        <div class="text-icon">Descargar Planillas</div> 
        </td>
+       <td align="center" width="10%"><a href="/colegio/docente/asignarSeguimiento"><div id="box" class="red"><img height="40px" width="40px"  src=../utiles/imagenes/iconos/actualizar.png ></div></a>
+        <div class="text-icon">Ingresar Seguimiento</div> 
+       </td>
       
        </tr>
        

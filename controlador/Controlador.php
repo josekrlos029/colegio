@@ -354,9 +354,25 @@ $respuesta .= '
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
        }
-         
-         
-         
+       
+       public function guardarSeguimiento(){
+           try {
+             $idPersona=isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $fecha = isset($_POST['fecha']) ? $_POST['fecha'] : NULL;
+             $msj = isset($_POST['msj']) ? $_POST['msj'] : NULL;
+             $tipo = isset($_POST['tipo']) ? $_POST['tipo'] : NULL;
+             $seguimiento = new Seguimiento();
+             $seguimiento->setIdPersona($idPersona);
+             $seguimiento->setTipoSeguimiento($tipo);
+             $seguimiento->setMensaje($msj);
+             $seguimiento->setFecha($fecha);
+             $seguimiento->crearSeguimiento($seguimiento);
+             echo json_encode(1);
+           } catch (Exception $exc) {
+               echo json_encode($exc->getTraceAsString());
+           }
+              }
+             
    }
     
 

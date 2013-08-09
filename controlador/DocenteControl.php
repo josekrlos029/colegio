@@ -418,6 +418,64 @@ class DocenteControl extends Controlador{
          public function configurarCorreo() {
              parent::configurarCorreo();
          }
+         
+         
+         public function asignarSeguimiento(){
+             if($this->verificarSession()){
+            $this->vista->set('titulo', 'Asignar Seguimiento Academico y Disciplinario');
+            $carga = new Carga();
+            $idDocente = $_SESSION['idUsuario'];
+            $Cargas = $carga->leerCargasPorDocente($idDocente);
+            $salones= array();
+            $i=0;
+            foreach ($Cargas as $carga) {
+                $salones[$i]= $carga->getIdSalon();
+                $i++;
+            }
+            $sals= array_unique($salones);
+            $this->vista->set('salones', $sals);
+            return $this->vista->imprimir();
+            }
+         }
+
+         public function guardarSeguimiento() {
+             parent::guardarSeguimiento();
+         }
+         
+         public function consultaSalon(){
+             
+             $idSalon =  isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+             try {
+                 
+             $persona = new Persona();
+             $personas = $persona->leerPorSalon($idSalon);
+             
+             
+             $respuesta = '<table  width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
+                                <tr class="modo1">
+                                 <td><div align="center">.</div></td>
+                                    <td width="12%"><div align="right" >IDENTIFICACION</div></td>
+                                    <td><div align="center">APELLIDOS</div></td>
+                                    <td><div align="center" >NOMBRES</div></td>
+                                </tr>';
+    
+            foreach ($personas as $person) { 
+                $respuesta .='<tr class="recorrer" id="cebra" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
+                <td align="left"><input type="radio" name="select" id="select" value="'.$person->getIdPersona().'" onclick="asignar()"/></td>
+                <td align="left">'.$person->getIdPersona().'</td>
+                <td align="left">'.strtoupper($person->getPApellido().' '.$person->getSApellido()).'</td> 
+                <td align="left">'.strtoupper($person->getNombres()).'</td>';
+
+
+            }//fin del For 
+                $respuesta .='</tr>
+                    </table>';
+                 echo json_encode($respuesta);
+             } catch (Exception $exc) {
+                 echo json_encode("1");
+             }
+
+         }
                 
     
 }             
