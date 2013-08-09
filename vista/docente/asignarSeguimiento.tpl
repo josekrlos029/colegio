@@ -176,7 +176,7 @@ function envio(){
                   <td><b>Tipo</b></td>
               </tr>
               <tr>
-                  <td><select id="tipo" ><option></option><option>BUENO</option><option>MALO</option></select></td>
+                  <td><select id="tipo" ><option></option><option>ACADEMICO</option><option>DISCIPLINARIO</option></select></td>
               </tr>
               
           </table>

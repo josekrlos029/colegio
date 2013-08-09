@@ -80,8 +80,8 @@ class Pago extends Modelo{
     }
 
  private function mapearPago(Pago $pago, array $props) {
-        if (array_key_exists('idPago', $props)) {
-            $pago->setIdPago($props['idPago']);
+        if (array_key_exists('id', $props)) {
+            $pago->setIdPago($props['id']);
         }
         if (array_key_exists('idPersona', $props)) {
             $pago->setIdPersona($props['idPersona']);
@@ -141,6 +141,31 @@ class Pago extends Modelo{
        $sql = "INSERT INTO pago (idPersona, concepto, valor, fecha, mes, año) VALUES ( :idPersona, :concepto, :valor, :fecha, :mes, :ano)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($pago)); 
+    }
+    
+    public function leerPensionesPorIdPersona($idPersona){
+        $sql = "SELECT * FROM pago WHERE idPersona='".$idPersona."' AND concepto='PENSION' ORDER BY fecha";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pagos = array();
+        foreach ($resultado as $fila) {
+            $pago = new Pago();
+            $this->mapearPago($pago, $fila);
+            $pagos[$pago->getIdPago()] = $pago;
+        }
+        return $pagos;
+    }
+    public function leerPagosPorIdPersona(){
+        $sql = "SELECT * FROM pago WHERE idPersona='".$idPersona."' ORDER BY fecha DESC";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pagos = array();
+        foreach ($resultado as $fila) {
+            $pago = new Pago();
+            $this->mapearPago($pago, $fila);
+            $pagos[$pago->getIdPago()] = $pago;
+        }
+        return $pagos;
     }
 }
 

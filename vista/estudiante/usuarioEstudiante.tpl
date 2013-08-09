@@ -26,6 +26,12 @@ interface usuarioEstudiante {
  function funcionesAcademicas(){  
  $('#cargar').load('/colegio/estudiante/funcionesAcademicas');           
 }
+function seguimiento(){  
+ $('#cargar').load('/colegio/estudiante/seguimiento');           
+}
+function pension(){  
+ $('#cargar').load('/colegio/estudiante/pension');           
+}
   </script>  
     
     <body>
@@ -103,7 +109,13 @@ interface usuarioEstudiante {
                            <tr> 
                                <td width="55"></td>
                                 <td width="20%" align="right">
-                                    <a href="#"onclick="datosAcademicos()" class="link-menu">Datos Academicos</a>
+                                    <a href="#"onclick="datosAcademicos()" class="link-menu">Resultados Academicos</a>
+                                </td>
+                                <td width="20%" align="right">
+                                    <a href="#"onclick="seguimiento()" class="link-menu">Seguimiento Academico y Disciplinario</a>
+                                </td>
+                                <td width="20%" align="right">
+                                    <a href="#"onclick="pension()" class="link-menu">Pensión</a>
                                 </td>
                                 <td width="25%" align="right">
                                     <a href="#"onclick="funcionesAcademicas()" class="link-menu">Funciones Academicas</a>

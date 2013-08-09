@@ -104,7 +104,7 @@ class Seguimiento extends Modelo{
     }
     
     public function leerSeguimientosPorIdPersona($idPersona){
-        $sql = "SELECT * FROM seguimiento WHERE idPersona='".$idPersona."'";
+        $sql = "SELECT * FROM seguimiento WHERE idPersona='".$idPersona."' ORDER BY fecha DESC";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $seguimientos = array();
@@ -115,7 +115,19 @@ class Seguimiento extends Modelo{
         }
         return $seguimientos;
     }
-
+    
+    public function leerSeguimientosPorIdPersonaYTipo($idPersona, $tipo){
+        $sql = "SELECT * FROM seguimiento WHERE idPersona='".$idPersona."' AND tipoSeguimiento='".$tipo."' ORDER BY fecha DESC";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $seguimientos = array();
+        foreach ($resultado as $fila) {
+            $seguimiento = new Seguimiento();
+            $this->mapearSeguimiento($seguimiento, $fila);
+            $seguimientos[$seguimiento->getId()] = $seguimiento;
+        }
+        return $seguimientos;
+    }
 
     
 }

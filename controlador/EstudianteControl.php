@@ -141,7 +141,61 @@ class EstudianteControl extends Controlador{
             
         }
         
-             /**
+        public function seguimiento(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Seguimiento Academico');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+        
+        public function pension(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Pensión');
+            $idPersona = $_SESSION['idUsuario'];
+            $pension = new Pago();
+            $pensiones = $pension->leerPensionesPorIdPersona($idPersona);
+            $this->vista->set('pensiones', $pensiones);
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+        
+        public function cargarSeguimientos(){
+            try {
+                if($this->verificarSession()){
+                $idPersona = $_SESSION['idUsuario'];
+                $tipo =  isset($_POST['tipo']) ? $_POST['tipo'] : NULL;
+                $seguimiento = new Seguimiento();
+                $seguimientos = $seguimiento->leerSeguimientosPorIdPersonaYTipo($idPersona, $tipo);
+                
+                $respuesta = '<table width="95%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">';
+                $i=1;
+                foreach ($seguimientos as $seg) {
+                   $respuesta .= "<tr>
+                        <td><b>".$i.".</b> ".$seg->getMensaje()." </br> <b>FECHA: ".$seg->getFecha()."</b></td>
+                    </tr>";
+                   $i++;
+                }
+                $respuesta .="</table>";
+                echo json_encode($respuesta);
+                }
+            } catch (Exception $exc) {
+                echo json_encode(1);
+            }
+
+            
+        }
+
+        /**
     * imprime formulario de configuracion de usuario
     * @return type
     */

@@ -102,7 +102,7 @@ $(function(){
     </tr>
     
     <?php foreach ($resultado as $fila) { ?>
-    <tr class="recorrer" id="cebra" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)"> >
+    <tr class="recorrer" id="cebra" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
           <td align="left"><?php echo $fila['idPersona'];?></td>
         <td align="left"><?php echo strtoupper ($fila['pApellido']." ".$fila['sApellido']);?></td> 
         <td align="left"><?php echo strtoupper ($fila['nombres']);?></td>
