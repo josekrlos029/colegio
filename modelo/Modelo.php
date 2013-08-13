@@ -41,9 +41,9 @@ abstract class Modelo {
     /**
      * Cierra la comunicación con la base de datos.
      */
-    public function __destruct() {
-        $this->db = null;
-    }
+//    public function __destruct() {
+//        $this->db = null;
+//    }
 
     /**
      * Establece la cadena de consulta actual para el modelo.

@@ -6,7 +6,9 @@
 <script type="text/javascript">
     
 function envio(){ 
-  
+  if($("#activarMatricula").is(':checked')) { 
+    envio2();
+  }else{
  var x = $("#mensaje");
  cargando();
  x.html ("<p>Cargando...</p>");
@@ -106,7 +108,134 @@ function envio(){
                  "&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacionAcudiente="+ocupacionPadre.value+"&telPadre="+telAcudiente.value+"&telOficinaAcudiente="+telOficinaAcudiente.value+"&dirAcudiente="+dirAcudiente.value;
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
-                    x.html ("<p>Estudiante Registrado Correctamente,  SI DESEA MATRICULARLO INMEDIATAMENTE, sino desea agregar otro estudiante por favor refresque la página (f5)</p>");
+                    
+                    x.html ( "<p>Estudiante Registrado Correctamente</p>");
+                    $("#idPersona").attr("disabled","disabled");
+                    exito();
+                    ocultar();
+                
+            }else{
+                x.html ( "<p>"+res+"</p>");
+                idMateria.value="";
+                idGrado.setAttribute("autofocus","true");
+                nombre.value="";
+                error();
+                ocultar();  
+            }
+         });
+    }  
+    }
+}
+
+function envio2(){ 
+  
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+ 
+ /**Datos Personales********************/
+ var idPersona = document.getElementById("idPersona");
+ var tipoDocumento = document.getElementById("tipoDocumento");
+ var lugarExpedicion = document.getElementById("lugarExpedicion");
+ var fechaExpedicion = document.getElementById("fechaExpedicion");
+ var nombres = document.getElementById("nombres");
+ var pApellido = document.getElementById("pApellido");
+ var sApellido = document.getElementById("sApellido");
+ var sexo = document.getElementById("sexo");
+ var tipoSanguineo = document.getElementById("tipoSanguineo");
+ var eps = document.getElementById("eps");
+ var telefono = document.getElementById("telefono");
+ var correo = document.getElementById("correo");
+ var instProcedencia= document.getElementById("instProcedencia");
+ /**fin de los datos personales********/
+ 
+ /***Datos de nacimiento***/
+ var fNacimiento = document.getElementById("fNacimiento");
+ var paisNacimiento = document.getElementById("paisNacimiento");
+ var departamentoNacimiento = document.getElementById("departamentoNacimiento");
+ var municipioNacimiento= document.getElementById("municipioNacimiento");
+ /***fin de datos nacimiento****/
+ 
+ /** datos de ubicacion***/
+ var direccion = document.getElementById("direccion");
+ var barrio = document.getElementById("barrio");
+ var municipioResidencia = document.getElementById("municipioResidencia");
+ /**fin de datos ubicacion***/
+ 
+ /** datos del padre**/
+ var idPadre = document.getElementById("idPadre");
+ var nombresPadre = document.getElementById("nombresPadre");
+ var apellidosPadre = document.getElementById("apellidosPadre");
+ var ocupacionPadre  = document.getElementById("ocupacionPadre");
+ var telPadre = document.getElementById("telPadre");
+ var telOficinaPadre = document.getElementById("telOficinaPadre");
+ var dirPadre = document.getElementById("dirPadre");
+ /** fin datos del padre***/
+ 
+ /*** datos  de la madre ***/
+ var idMadre = document.getElementById("idMadre");
+ var nombresMadre = document.getElementById("nombresMadre");
+ var apellidosMadre = document.getElementById("apellidosMadre");
+ var ocupacionMadre  = document.getElementById("ocupacionMadre");
+ var telMadre = document.getElementById("telMadre");
+ var telOficinaMadre = document.getElementById("telOficinaMadre");
+ var dirMadre = document.getElementById("dirMadre");
+/*** fin de datos de la madre****/
+
+/*** datos del acudiente***/
+ var idAcudiente = document.getElementById("idAcudiente");
+ var nombresAcudiente = document.getElementById("nombresAcudiente");
+ var apellidosAcudiente = document.getElementById("apellidosAcudiente");
+ var ocupacionAcudiente  = document.getElementById("ocupacionAcudiente");
+ var telAcudiente = document.getElementById("telAcudiente");
+ var telOficinaAcudiente = document.getElementById("telOficinaAcudiente");
+ var dirAcudiente = document.getElementById("dirAcudiente");
+/***fin datos del acudiente***/
+
+
+//MATRICULA
+var idSalon = document.getElementById("idSalon");
+var jornada = document.getElementById("jornada");
+//FIN MATRICULA
+
+ if (idPersona.value=="" || tipoDocumento.value=="" || lugarExpedicion.value=="" || fechaExpedicion.value=="" || nombres.value==""  || pApellido.value=="" || sApellido.value=="" || sexo.value=="" || tipoSanguineo.value=="" || eps.value=="" || telefono.value=="" || correo.value=="" ){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos Personales</p>");
+      error();
+      ocultar();
+  }else if(fNacimiento.value=="" || paisNacimiento.value=="" || departamentoNacimiento.value=="" || municipioNacimiento.value=="" ){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos de Nacimiento</p>");
+      error();
+      ocultar();
+   }else if(direccion.value=="" || barrio.value=="" || municipioResidencia.value=="" ){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos de Ubicacion</p>");
+      error();
+      ocultar();
+   }else if(idPadre.value=="" || nombresPadre.value=="" || apellidosPadre.value=="" || ocupacionPadre.value=="" || telPadre.value=="" ||dirPadre.value==""){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos del Padre</p>");
+      error();
+      ocultar();
+   }else if(idMadre.value=="" || nombresMadre.value=="" || apellidosMadre.value=="" || ocupacionMadre.value=="" || telMadre.value=="" ||dirMadre.value==""){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos del Madre</p>");
+      error();
+      ocultar();
+   }else if(idAcudiente.value=="" || nombresAcudiente.value=="" || apellidosAcudiente.value=="" || ocupacionAcudiente.value=="" || telAcudiente.value=="" || dirAcudiente.value==""){
+      x.html ( "<p>Error: Tiene Campos Vacios en los Datos del Acudiente</p>");
+      error();
+      ocultar();
+   }else{
+  
+        var url="/colegio/administrador/registrarYGuardarEstudiantes/";
+        var data="idPersona="+idPersona.value+"&tipoDocumento="+tipoDocumento.value+"&lugarExpedicion="+lugarExpedicion.value+"&fechaExpedicion="+fechaExpedicion.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&tipoSanguineo="+tipoSanguineo.value+"&eps="+eps.value+"&telefono="+telefono.value+"&correo="+correo.value+"&instProcedencia="+instProcedencia.value+
+                 "&fNacimiento="+fNacimiento.value+"departamentoNacimiento="+departamentoNacimiento.value+"&municipioNacimiento="+municipioNacimiento.value+
+                 "&direccion="+direccion.value+"&barrio="+barrio.value+"&municipioResidencia="+municipioResidencia.value+
+                 "&idPadre="+idPadre.value+"&nombresPadre="+nombresPadre.value+"&apellidosPadre="+apellidosPadre.value+"&ocupacionPadre="+ocupacionPadre.value+"&telPadre="+telPadre.value+"&telOficinaPadre="+telOficinaPadre.value+"&dirPadre="+dirPadre.value+
+                 "&idMadre="+idPadre.value+"&nombresMadre="+nombresMadre.value+"&apellidosMadre="+apellidosMadre.value+"&ocupacionMadre="+ocupacionMadre.value+"&telMadre="+telMadre.value+"&telOficinaMadre="+telOficinaMadre.value+"&dirMadre="+dirMadre.value+
+                 "&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacionAcudiente="+ocupacionPadre.value+"&telPadre="+telAcudiente.value+"&telOficinaAcudiente="+telOficinaAcudiente.value+"&dirAcudiente="+dirAcudiente.value+
+                 "&idSalon="+idSalon.value+"&jornada="+jornada.value;
+        envioJson(url,data,function respuesta(res){   
+            if (res === 1){
+                    x.html ("<p>Estudiante Registrado y Matriculado Correctamente</p>");
                     $("#idPersona").attr("disabled","disabled");
                     exito();
                     ocultar();
@@ -379,7 +508,33 @@ function envio(){
                 </tr>
                 </table>  
 </ul>
-</li> 
+</li>
+<li><span><h1>MATRICULA</h1></span>
+<ul>
+    <table width="50%" border="0" cellspacing="0" cellpadding="2">
+ <tr>
+                    <td align="right" width="40%" >Salón:</td>
+                    <td><select id="idSalon" class="box-text">
+                   <?php foreach ($salones as $salon) { ?>
+                   <option><?php echo $salon->getIdSalon();?></option>
+                    <?php } ?>
+               </select></td>
+                </tr>
+                 <tr>
+                    <td align="right" width="40%" >Jornada:</td>
+                    <td><select id="jornada" class="box-text">
+                                 <option>MAÑANA</option>
+                                 <option>TARDE</option>
+                                 <option>NOCHE</option>
+                             </select></td>
+                </tr>
+                <tr>
+                    <td align="right" width="40%" >Activar Matricula:</td>
+                    <td><input name="activarMatricula" id="activarMatricula" type="checkbox" required/></td>
+                </tr>
+                </table>  
+</ul>
+</li>
 
 
 <li><span ><h1 class="color-text-azul">Guardar Datos</h1></span>

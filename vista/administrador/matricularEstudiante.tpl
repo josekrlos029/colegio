@@ -86,6 +86,7 @@ function matricular(){
                 exito();
                 ocultar();
                nuevo();
+               window.open("/colegio/administrador/imprimirMatricula/"+idPersona.value);
             }else{
                  x.html ("<p>"+res+"</p>");
                  error();
