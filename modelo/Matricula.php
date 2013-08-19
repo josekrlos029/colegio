@@ -107,7 +107,7 @@ class Matricula extends Modelo{
     }
     
     public function leerMatriculaPorId($idPersona){
-        $sql = "SELECT * FROM matricula WHERE idPersona='".$idPersona."'";
+        $sql = "SELECT * FROM matricula WHERE idPersona='".$idPersona."' AND estado='1'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $matricula = NULL;
@@ -119,7 +119,11 @@ class Matricula extends Modelo{
         return $matricula;
     }
     
-   
+    public function retirarEstudiante($idPersona, $Alectivo){
+         $sql = "UPDATE matricula SET estado='2' WHERE idPersona='".$idPersona."' AND año_lectivo='".$Alectivo."'";
+        $this->__setSql($sql);
+        $this->ejecutar();
+    }
     
 }
   

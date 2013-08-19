@@ -143,14 +143,14 @@ var data="idPersona="+id.value;
             <a href="/colegio/administrador/matricularEstudiante"><div id="box" class="blue"><img height="40px" width="40px" src=../utiles/imagenes/iconos/matricular.png ></div></a>
            <div class="text-icon">Matricular</div>
            </td>
-           
-           <td width="10%" align="center">
-            <a href="/colegio/administrador/actualizarEstudiante"><div id="box" class="blue"><img height="40px" width="40px" src=../utiles/imagenes/iconos/actualizar.png ></div></a>
-           <div class="text-icon">Actualizar</div>  
+           <td  width="10%" align="center">
+            <a href="/colegio/administrador/retirarEstudiante"><div id="box" class="blue"><img height="40px" width="40px" src=../utiles/imagenes/iconos/matricular.png ></div></a>
+           <div class="text-icon">Retirar</div>
            </td>
            
-	   <td></td>
+          
            
+           <td></td>
 	   <td width="10%" align="center"> 
            <a href="/colegio/administrador/gestionarDocentes"><div id="box" class="red"><img height="40px" width="40px" src=../utiles/imagenes/iconos/registrar.png ></div></a>
            <div class="text-icon">Gestionar Docentes</div> 
@@ -183,6 +183,11 @@ var data="idPersona="+id.value;
            
            <td></td>
            
+            <td width="10%" align="center">
+            <a href="/colegio/administrador/actualizarEstudiante"><div id="box" class="blue"><img height="40px" width="40px" src=../utiles/imagenes/iconos/actualizar.png ></div></a>
+           <div class="text-icon">Actualizar</div>  
+           </td>
+           
            <td valign="top" align="center">
                <a href="#"><div id="box" class="blue"><img height="40px" width="40px" src=../utiles/imagenes/iconos/historial.png ></div></a>
                <div class="text-icon">Historial</div>             
@@ -195,16 +200,22 @@ var data="idPersona="+id.value;
                <a href="#" onclick="vistaBoletines()"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/boletines.png ></div></a>
              <div class="text-icon">Boletines</div>
            </td>
+           
+           
            <td width="10%" align="center">
              <a href="/colegio/administrador/pagos"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/pagos.png ></div></a>
              <div class="text-icon">Pagos</div>
            </td>
+           <td  width="10%" align="center">
+           <a href="/colegio/administrador/gestionarRoles"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/registrar.png ></div></a>
+           <div class="text-icon">Gestionar Usuarios</div> 
+           </td>
+           </tr>
+           <tr>
            <td width="10%" align="center">
              <a href="/colegio/administrador/notificaciones"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/notificacion.png ></div></a>
              <div class="text-icon">Difundir Mensaje</div>
            </td>
-           </tr>
-           <tr>
            <td width="10%" align="center">
              <a href="cierreAcademico/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAño.png ></div></a>
              <div class="text-icon">Cierre de Año</div>

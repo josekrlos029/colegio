@@ -29,11 +29,10 @@ function envioJson2(url,data,respuesta){
 				dataType:"json",
 				success: function(data){
                                     
-				    //JSON.decode( data );
+				    //var json=JSON.decode( data );
                                     //var json = eval("(" + data + ")");
-                                    respuesta(data);
 				    //var json= jQuery.parseJSON(data);     
-                                    
+                                    respuesta(json);
 				    }
 		        });
 }

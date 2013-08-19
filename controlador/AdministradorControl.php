@@ -589,8 +589,19 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+        
+        public function retirarEstudiante(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Retirar Estudiante');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
 
- public function notificaciones(){
+        public function notificaciones(){
             try {
             if($this->verificarSession()){
             $this->vista->set('titulo', 'Difundir Mensaje');
@@ -1331,6 +1342,69 @@ class AdministradorControl extends Controlador{
             
             $persona = new Persona();
             $estudiante = $persona->leerPorId($idPersona);
+            $matricula = new Matricula();
+            $mat = $matricula->leerMatriculaPorId($idPersona);
+            if ($estudiante == NULL){
+                 $respuesta= 1;
+            }else{
+                $rol = new Rol();
+                $roles = $rol->leerRoles($idPersona);
+                $band = 0;
+                foreach ($roles  as $ro) {
+                  if ($ro->getIdRol() == 'E'){
+                      $band=1;
+                  } 
+                }
+                    if ($band!=1){
+                      $respuesta= 3;
+                    }elseif ($mat == NULL){
+                      $respuesta= 2;
+                    }else{
+                  
+                        $respuesta = '<table class="tabla" width="100%"> 
+                                       <tr class="modo1">
+                                        <td>Nombres:</td>
+                                         <td>Primer Apellido:</td>
+                                         <td>Segundo Apellido:</td>
+                                         <td>Sexo:</td>
+                                         <td>Telefono:</td>
+                                         <td>Direccion:</td>
+                                         <td>Correo:</td>
+                                         <td>Fecha De Nacimiento:</td>
+                                        </tr>
+                                        
+                                        <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
+                                        <td>'.$estudiante->getNombres()."</td>
+                                        <td>".$estudiante->getPApellido()."</td>
+                                        <td>".$estudiante->getSApellido()."</td>
+                                        <td>".$estudiante->getSexo()."</td>
+                                        <td>".$estudiante->getTelefono()."</td>
+                                        <td>".$estudiante->getDireccion()."</td>
+                                        <td>".$estudiante->getCorreo()."</td>
+                                        <td>".$estudiante->getFNacimiento()->format("Y-m-d")."</td>
+                                        </tr>
+                                    </table>
+
+                                     "; 
+                  }
+              
+              }
+            echo json_encode($respuesta);
+    } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+            
+         }
+         
+             /**
+         * proceso de consultar persona/estudiante por numero de identificacion
+         */
+    public function consultarEstudiante2(){
+        try {
+            $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            
+            $persona = new Persona();
+            $estudiante = $persona->leerPorId($idPersona);
             if ($estudiante == NULL){
                  $respuesta= 1;
             }else{
@@ -1502,6 +1576,26 @@ class AdministradorControl extends Controlador{
              $mat->setAñoLectivo(strval($añoLectivo));
              $mat->matricularEstudiante($mat);
              echo json_encode("1");
+             
+             } catch (Exception $exc) {
+                 echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+             }
+
+         }
+         
+         public function retirar(){
+             try {
+                 
+             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             
+             $fecha = getdate();
+            
+                    $Alectivo=$fecha["year"];
+              
+
+             $mat = new Matricula();
+             $mat->retirarEstudiante($idPersona, $Alectivo);
+             echo json_encode('{"1":1}');
              
              } catch (Exception $exc) {
                  echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
