@@ -110,9 +110,9 @@ class Matricula extends Modelo{
         $sql = "SELECT * FROM matricula WHERE idPersona='".$idPersona."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
-        $matricula = new Matricula();
+        $matricula = NULL;
         foreach ($resultado as $fila) {
-           
+            $matricula = new Matricula();
             $this->mapearMatricula($matricula, $fila);
 
         }

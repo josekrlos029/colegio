@@ -9,11 +9,31 @@ function envioJson(url,data,respuesta){
 				url:	url,
 				dataType:"html",
 				success: function(data){
-                       
+                                    
 				    //JSON.decode( data );
-					 //var json = eval("(" + data + ")");
-				    var json= jQuery.parseJSON(data);     
+                                    var json = eval("(" + data + ")");
                                     respuesta(json);
+				    //var json= jQuery.parseJSON(data);     
+                                    
+				    }
+		        });
+}
+function envioJson2(url,data,respuesta){
+    
+    
+     $.ajax({
+			        async:	true, 
+				type:	"post",
+				data:	data,
+				url:	url,
+				dataType:"json",
+				success: function(data){
+                                    
+				    //JSON.decode( data );
+                                    //var json = eval("(" + data + ")");
+                                    respuesta(data);
+				    //var json= jQuery.parseJSON(data);     
+                                    
 				    }
 		        });
 }

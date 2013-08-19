@@ -947,7 +947,7 @@ class AdministradorControl extends Controlador{
              
              $estado='0';
              $idRol= 'E';
-             
+             /*
              $estudiante2 = new Estudiante();
             $estudiante2->eliminarPersona($idPersona);
             $estudiante2->eliminarUsuario($idPersona);
@@ -957,9 +957,18 @@ class AdministradorControl extends Controlador{
             $estudiante2->eliminarEstudiantePadre($idPersona,$idPadre);
             $estudiante2->eliminarEstudianteMadre($idPersona,$idMadre);
             $estudiante2->eliminarEstudianteAcudiente($idPersona,$idAcudiente);
-             try {
-             
+            
+              * 
+              */
+              try {
+                     
              $estudiante = new Estudiante();
+             
+             $persona = $estudiante->leerPorId($idPersona);
+             if($persona != NULL){
+                 echo json_encode(2);
+             }else{
+                 
              $estudiante->setIdPersona($idPersona);
              $estudiante->setTipoDocumento($tipoDocumento);
              $estudiante->setLugarExpedicion($lugarExpedicion);
@@ -1032,6 +1041,9 @@ class AdministradorControl extends Controlador{
              $estudiante->estudianteAcudiente($estudiante);
             
               echo json_encode(1);
+             
+             }
+             
              
         } catch (Exception $exc) {
             $estudiante2 = new Estudiante();
@@ -1114,19 +1126,14 @@ class AdministradorControl extends Controlador{
              
              $estado='0';
              $idRol= 'E';
-             
-             $estudiante2 = new Estudiante();
-            $estudiante2->eliminarPersona($idPersona);
-            $estudiante2->eliminarUsuario($idPersona);
-            $estudiante2->eliminarDatos($idPersona);
-            $estudiante2->eliminarDatosNacimiento($idPersona);
-            $estudiante2->eliminarDatosUbicacion($idPersona);
-            $estudiante2->eliminarEstudiantePadre($idPersona,$idPadre);
-            $estudiante2->eliminarEstudianteMadre($idPersona,$idMadre);
-            $estudiante2->eliminarEstudianteAcudiente($idPersona,$idAcudiente);
+
              try {
              
              $estudiante = new Estudiante();
+             $persona = $estudiante->leerPorId($idPersona);
+             if($persona != NULL){
+                 echo json_encode(2);
+             }else{
              $estudiante->setIdPersona($idPersona);
              $estudiante->setTipoDocumento($tipoDocumento);
              $estudiante->setLugarExpedicion($lugarExpedicion);
@@ -1210,18 +1217,26 @@ class AdministradorControl extends Controlador{
                 }
 
              $mat = new Matricula();
-             $mat->setIdPersona($idPersona);
-             $mat->setIdSalon($idSalon);
-             $mat->setJornada($jornada);
-             $mat->setFecha($FechaTxt);
-             $mat->setAñoLectivo(strval($añoLectivo));
-             $mat->matricularEstudiante($mat);
+             $matricula = $mat->leerMatriculaPorId($idPersona);
+             if ($matricula != NULL){
+                    echo json_encode(3);
+             }else{
+                    $mat->setIdPersona($idPersona);
+                    $mat->setIdSalon($idSalon);
+                    $mat->setJornada($jornada);
+                    $mat->setFecha($FechaTxt);
+                    $mat->setAñoLectivo(strval($añoLectivo));
+                    $mat->matricularEstudiante($mat);
+
+             
              
              //**
              
              
              echo json_encode(1);
+             }
              
+             }
         } catch (Exception $exc) {
             $estudiante2 = new Estudiante();
             $estudiante2->eliminarPersona($idPersona);

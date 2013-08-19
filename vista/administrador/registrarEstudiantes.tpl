@@ -114,11 +114,12 @@ function envio(){
                     exito();
                     ocultar();
                 
+            }else if (res == 2){
+                x.html ( "<p>Error: El estudiante ya se encuentra Registrado en Base de Datos</p>");
+                error();
+                ocultar();
             }else{
                 x.html ( "<p>"+res+"</p>");
-                idMateria.value="";
-                idGrado.setAttribute("autofocus","true");
-                nombre.value="";
                 error();
                 ocultar();  
             }
@@ -233,18 +234,23 @@ var jornada = document.getElementById("jornada");
                  "&idMadre="+idPadre.value+"&nombresMadre="+nombresMadre.value+"&apellidosMadre="+apellidosMadre.value+"&ocupacionMadre="+ocupacionMadre.value+"&telMadre="+telMadre.value+"&telOficinaMadre="+telOficinaMadre.value+"&dirMadre="+dirMadre.value+
                  "&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacionAcudiente="+ocupacionPadre.value+"&telPadre="+telAcudiente.value+"&telOficinaAcudiente="+telOficinaAcudiente.value+"&dirAcudiente="+dirAcudiente.value+
                  "&idSalon="+idSalon.value+"&jornada="+jornada.value;
-        envioJson(url,data,function respuesta(res){   
+        envioJson2(url,data,function respuesta(res){   
             if (res === 1){
                     x.html ("<p>Estudiante Registrado y Matriculado Correctamente</p>");
                     $("#idPersona").attr("disabled","disabled");
                     exito();
                     ocultar();
                 
+            }else if (res == 2){
+                x.html ( "<p>Error: El estudiante ya se encuentra Registrado en Base de Datos</p>");
+                error();
+                ocultar();
+            }else if (res == 3){
+                x.html ( "<p>Error: El estudiante ya se encuentra Matriculado</p>");
+                error();
+                ocultar();
             }else{
-                x.html ( "<p>"+res+"</p>");
-                idMateria.value="";
-                idGrado.setAttribute("autofocus","true");
-                nombre.value="";
+            x.html ( "<p>"+res+"</p>");
                 error();
                 ocultar();  
             }
