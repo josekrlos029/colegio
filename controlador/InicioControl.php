@@ -73,7 +73,11 @@ class InicioControl extends Controlador{
                          echo json_encode("/colegio/docente/usuarioDocente");
                     }elseif ($idRol == 'E') {
                          echo json_encode("/colegio/estudiante/usuarioEstudiante");
-                    }       
+                    }elseif ($idRol == 'C') {
+                         echo json_encode("/colegio/coordinador/usuarioCoordinador");
+                    }elseif ($idRol == 'AC') {
+                         echo json_encode("/colegio/acudiente/usuarioAcudiente");
+                    }                   
         }
         /**
          * Imprime la Vista DE olvido de contraseña

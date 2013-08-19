@@ -200,6 +200,12 @@ var data="idPersona="+id.value;
              <div class="text-icon">Pagos</div>
            </td>
            <td width="10%" align="center">
+             <a href="/colegio/administrador/notificaciones"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/notificacion.png ></div></a>
+             <div class="text-icon">Difundir Mensaje</div>
+           </td>
+           </tr>
+           <tr>
+           <td width="10%" align="center">
              <a href="cierreAcademico/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAño.png ></div></a>
              <div class="text-icon">Cierre de Año</div>
            </td>

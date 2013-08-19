@@ -590,6 +590,76 @@ class AdministradorControl extends Controlador{
         }
         }
 
+ public function notificaciones(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Difundir Mensaje');
+            $notificacion = new Notificacion();
+            $noti = $notificacion->leerNotificaciones();
+             $this->vista->set('noti', $noti);
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+        public function registrarNotificacion(){
+            try {
+            $asunto = isset($_POST['asunto']) ? $_POST['asunto'] : NULL;
+             $mensaje = isset($_POST['mensaje']) ? $_POST['mensaje'] : NULL;
+             $fecha_evento = isset($_POST['fecha']) ? $_POST['fecha'] : NULL;
+             $hora = isset($_POST['hora']) ? $_POST['hora'] : NULL;
+             $destino = isset($_POST['destino']) ? $_POST['destino'] : NULL;
+             
+            $fecha = getdate();
+             $fecha_ingreso=$fecha["year"]."-".$fecha["mon"]."-".$fecha["mday"];
+
+             $notificacion = new Notificacion();
+             $notificacion->setAsunto($asunto);
+             $notificacion->setMensaje($mensaje);
+             $notificacion->setFecha_ingreso($fecha_ingreso);
+             $notificacion->setFecha_evento($fecha_evento);
+             $notificacion->setHora($hora);
+             $notificacion->setDestino($destino);
+            $notificacion->crearNotificacion($notificacion);
+            
+           
+             echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+        }
+        
+        public function  consultaNotificacion(){
+             try{
+           $id = isset($_POST['id']) ? $_POST['id'] : NULL;  
+           
+           $noti = new Notificacion();
+           $not = $noti->leerPorId($id);
+         $respuesta="";
+             
+           $respuesta.='             <table border="0" width="100%" id="inf-Personal"> 
+                                      <tr><td class="color-text-gris">Asunto : <span>'. strtoupper($not->getAsunto()).'</span></td></tr>
+                                      <tr><td class="color-text-gris">Mensaje :<span> '. strtoupper($not->getMensaje()).'</td></tr>  
+                                       <tr><td class="color-text-gris">Fecha del Evento :<span>'. strtoupper($not->getFecha_evento()).'</span></td> </tr>                                        
+                                       <tr><td class="color-text-gris">Hora : <span>'. strtoupper($not->getHora()).'</span></td></tr> 
+                                       <tr><td class="color-text-gris">Destino :<span>'. strtoupper($not->getDestino()).'</span></td</tr> 
+                                       <tr><td class="color-text-gris">Fecha de Registro :<span>'. strtoupper($not->getFecha_ingreso()).'</span></td></tr>
+                       
+                                </table>
+             ';
+        
+            if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            } else {
+                echo json_encode("<tr></tr>"); 
+            } 
+           } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+        }
+
 
 
 

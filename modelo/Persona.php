@@ -273,6 +273,18 @@ class Persona extends Modelo{
         }
         return $persona;
     }
+    public function leerAcudientePersona($id){
+        $sql = "SELECT * FROM acudiente_estudiante ";
+        $sql .= " WHERE id_acudiente='".$id."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $persona=NULL;
+        foreach ($resultado as $fila) {
+            $persona = new Persona();
+            $this->mapearPersona($persona, $fila);
+        }
+        return $persona;
+    }
     public function leerPorCorreo($correo){
         $sql = "SELECT idPersona, nombres, pApellido, sApellido, sexo, telefono,  correo, estado FROM persona ";
         $sql .= "WHERE correo='".$correo."'";

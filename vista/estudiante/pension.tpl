@@ -9,7 +9,7 @@
        </tr> 
        </table>
   <table aling="centerright" width="80%"  border="0">
-       <tr class="modo1">
+       <tr class="modo1" >
            <td>MES</td>
            <td>VALOR</td>
            <td>FECHA</td>

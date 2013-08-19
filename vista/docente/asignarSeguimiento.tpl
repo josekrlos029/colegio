@@ -110,9 +110,9 @@ function envio(){
         </div> 
         <p>&nbsp;</p>
                       
-             
      <!--------------------------------------------------------------------> 
-     <div class="contenedor" style="width: 70%; margin: 0 auto;" aling="center">
+     <div class="contenedor" style="width: 80%; margin: 0 auto;" aling="center">
+         </br>  </br>
         <table aling="center" width="100%"  border="0">
        <tr>
            <td align="right" class="color-text-rojo" colspan="3"><h3>Ingreso De Seguimiento</h3></td>    
@@ -120,35 +120,38 @@ function envio(){
         <tr>
            <td colspan="3" aling="center" class="color-text-gris"><h2>Ubicacion:</h2></td>
        </tr> 
-       <tr>
-           <td class="color-text-rojo" width="30%" align="right">Salon</td>
-       </tr>
         <tr>
            <td colspan="3"><hr></td>
        </tr> 
        <tr>
-           <td align="right"><select name="salon" class="box-text" id="salon" required focus>
+             <td class="color-text-rojo" >Salon:</td>
+           <td><select name="salon" class="box-text" id="salon" required focus>
                         <option></option>
                         <?php foreach($salones as $salon) { ?>
                         <option><?php  echo $salon; ?></option>
                         <?php } ?>
                </select>
            </td>
+            <td width="70%" align="left">
+               <input name="ingresoSeguimiento" id="ingresoSeguimiento" type="submit" value="Siguiente" class="button large red" onclick="cargarSalon()" />  
+           </td>
        </tr>  
       </table>
     </br>
-    <table align="right">
+    <table>
        <tr>
-           <td colspan="3" aling="center">
-               <input name="ingresoSeguimiento" id="ingresoSeguimiento" type="submit" value="Siguiente" class="button large red" onclick="cargarSalon()" />  
-           </td>
+          
        </tr>   
    </table>    
+      
+     </br>
+     
+      <div  id="tabla" align="left" >
+          
       </div>
      
-      <div  id="tabla" align="left">
-          
-           </div>
+     
+     </div>
       <div id="fade" class="overlay"></div>
 <div id="light" class="modal">
   <div style="float:right">
@@ -164,25 +167,25 @@ function envio(){
                   <td><b>Fecha</b></td>
               </tr>
               <tr>
-                  <td><input id="fecha" type="date" /></td>
+                  <td><input id="fecha" type="date" class="box-text" /></td>
               </tr>
               <tr>
                   <td><b>Seguimiento</b></td>
               </tr>
               <tr>
-                  <td><textarea id="msj" cols="40" rows="9" ></textarea></td>
+                  <td><textarea id="msj" cols="40" rows="9" class="box-text"></textarea></td>
               </tr>
               <tr>
                   <td><b>Tipo</b></td>
               </tr>
               <tr>
-                  <td><select id="tipo" ><option></option><option>ACADEMICO</option><option>DISCIPLINARIO</option></select></td>
+                  <td><select id="tipo" class="box-text"><option></option><option>ACADEMICO</option><option>DISCIPLINARIO</option></select></td>
               </tr>
               
           </table>
          <table border="0" style="margin: 0 auto; width: 50%;" >
          <tr>    
-                      <td><input name="guardarSeguimiento" id="guardarSeguimiento" type="submit" value="Guardar" class="button large green" onclick="envio()" /></td>
+                      <td><input name="guardarSeguimiento" id="guardarSeguimiento" type="submit" value="Guardar" class="button large red" onclick="envio()" /></td>
               </tr>
               </table>
       </div>

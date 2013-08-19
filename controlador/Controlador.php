@@ -189,10 +189,11 @@ class Controlador {
                                        <tr><td class="color-text-gris">Telefono : <span>'. strtoupper($persona->getTelefono()).'</span></td></tr> 
                                        <tr><td class="color-text-gris">Direccion :<span>'. strtoupper($persona->getDireccion()).'</span></td</tr> 
                                        <tr><td class="color-text-gris">Correo :<span>'. strtoupper($persona->getCorreo()).'</span></td></tr>
-                                       <tr><td class="color-text-gris">Fecha De Nacimiento :<span>'. strtoupper($persona->getFNacimiento()->format('Y-m-d')).'</span></td></tr>
-                                           <tr><td class="color-text-gris"><span><a  href="/colegio/administrador/imprimirMatricula/'.$idPersona.'" target="_blank" >Ficha de Matricula</a></span></td></tr>
-      
-                                </table>
+                                       <tr><td class="color-text-gris">Fecha De Nacimiento :<span>'. strtoupper($persona->getFNacimiento()->format('Y-m-d')).'</span></td></tr>';
+                                     if($rol == 'E'){ 
+                               $respuesta .='<tr><td class="color-text-gris"><span><a  href="/colegio/administrador/imprimirMatricula/'.$idPersona.'" target="_blank" >Ficha de Matricula</a></span></td></tr>';
+                                        }
+                              $respuesta .='   </table>
              </div>';
              
             if ($rol == 'D'){

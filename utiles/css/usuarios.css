@@ -82,6 +82,12 @@ height:199px;
 position: relative;
 background-color:#4c6eff;
 }
+.marcoAvatarCoor{  
+width: 215px; 
+height:199px; 
+position: relative;
+background-color:#00d73d;
+}
 
 .marcoAvatar{
  width: 100%; 

@@ -29,7 +29,9 @@ function ingresoNotas(){
 function funcionesAcademicas(){    
   $('#cargar').load('/colegio/docente/funcionesAcademicas.');        
 }
-
+ function notificaciones(){  
+ $('#cargar').load('/colegio/docente/notificaciones');           
+}
 
   </script>  
     
@@ -116,6 +118,9 @@ function funcionesAcademicas(){
                         <td width="25%" align="right">
                             <a href="#"onclick="funcionesAcademicas()" class="link-menu">Funciones Academicas</a>
                         </td>
+                         <td width="20%" align="right">
+                                    <a href="#"onclick="notificaciones()" class="link-menu">Notificaciones</a>
+                         </td>
                         
               </table>    
              

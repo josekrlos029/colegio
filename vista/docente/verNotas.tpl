@@ -144,5 +144,4 @@ $(function(){
 </table>
     </div>
 </body>
-<?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>

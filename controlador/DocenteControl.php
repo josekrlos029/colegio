@@ -451,7 +451,7 @@ class DocenteControl extends Controlador{
              $personas = $persona->leerPorSalon($idSalon);
              
              
-             $respuesta = '<table  width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
+             $respuesta = '<table  width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
                                 <tr class="modo1">
                                  <td><div align="center">.</div></td>
                                     <td width="12%"><div align="right" >IDENTIFICACION</div></td>
@@ -476,6 +476,22 @@ class DocenteControl extends Controlador{
              }
 
          }
+            public function notificaciones(){
+         try {
+             if($this->verificarSession()){
+            $this->vista->set('titulo', 'Notificaciones');
+            $destino1=2;
+            $destino2=3;
+            $notificacion = new Notificacion();
+            $noti = $notificacion->leerPorDestino($destino1,$destino2);
+             $this->vista->set('noti', $noti);
+            return $this->vista->imprimir();;
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
                 
     
 }             

@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -13,45 +14,25 @@ interface usuarioEstudiante {
     //put your code here
 }
 
-?>
-   <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
-        <title>Usuario Estudiante</title>
+
+ include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
+        <title>Usuario Acudiente</title>
     </head>
-    
-    <script type="text/javascript">
-    
- function datosAcademicos(){    
- $('#cargar').load('/colegio/estudiante/datosAcademicos');           
-}
- function funcionesAcademicas(){  
- $('#cargar').load('/colegio/estudiante/funcionesAcademicas');           
-}
-function seguimiento(){  
- $('#cargar').load('/colegio/estudiante/seguimiento');           
-}
-function pension(){  
- $('#cargar').load('/colegio/estudiante/pension');           
-}
- function notificaciones(){  
- $('#cargar').load('/colegio/estudiante/notificaciones');           
-}
-  </script>  
-    
-    <body>
+     <body>
 	
 	 <div class="cabecera">
-	<?php include HOME . DS . 'includes' . DS . 'headerEstudiante.php'; ?>
+	<?php include HOME . DS . 'includes' . DS . 'headerAcudiente.php'; ?>
         </div>
-<div style="margin-top: 3%; position: relative; width: 100%;"> 
+     <div style="margin-top: 3%; position: relative; width: 100%;"> 
     <div style="position: relative; width: 100%; padding-top:10px; padding-bottom: 3%;">
         <table border="0" align="center" width="90%" >
          <tr>
             <td width="40%" >
-            Hola <?php echo $estudiante->getNombres();?> Bienvenido(a) a tu Cuenta.</br> 
-            <img src="../utiles/imagenes/tag_estudiante.png"/>
+            Hola <?php echo $acu->getNombre();?> Bienvenido(a) a tu Cuenta.</br> 
+            <img src="../utiles/imagenes/tag_acudiente.png"/>
             <?php include HOME . DS . 'includes' . DS . 'fecha.php'; ?>
             </td>
-            <td align="right" class="color-text-gris"><h1><?php echo $estudiante->getNombres()." ".$estudiante->getPApellido()." ".$estudiante->getSApellido(); ?></h1></td>                                     
+            <td align="right" class="color-text-gris"><h1><?php echo $acu->getNombre()." ".$acu->getApellido();?></h1></td>                                     
             </tr>
         </table>
     </div>  
@@ -78,29 +59,19 @@ function pension(){
                              <table border="0" width="100%" id="inf-Personal"> 
 
                                                <tr>
-                                                 <td>Salón:<span><?php echo " ".$matricula->getIdSalon(); ?></span></td>
+                                                 <td>Ocupacion:<span><?php echo " ".$acu->getOcupacion(); ?></span></td>
                                                </tr>  
                                                <tr>
-                                                   <td>Grado:<span><?php echo " ".$grado->getNombre(); ?></span></td>
+                                                   <td>Telefono:<span><?php echo " ".$acu->getTelefono(); ?></span></td>
                                                </tr>
                                                <tr>
-                                                   <td>Jornada:<span><?php echo " ".$matricula->getJornada(); ?></span></td>
+                                                   <td>Telefono de Oficina:<span><?php echo " ".$acu->getTel_oficina(); ?></span></td>
+                                               </tr>                                   
+                                               <tr>
+                                                   <td>Direccion:<span><?php echo " ".$acu->getDireccion(); ?></span></td>
                                                </tr>
-                                               <tr>
-                                                   <td>Sexo:<span><?php echo " ".$estudiante->getSexo(); ?></span></td> 
-                                               </tr> 
-                                               <tr>
-                                                   <td>Telefono:<span><?php echo " ".$estudiante->getTelefono(); ?></span></td>
-                                               </tr>                                      
-                                               <tr>
-                                                   <td>Direccion:<span><?php echo " ".$estudiante->getDireccion(); ?></span></td>
-                                               </tr>
-                                               <tr>
-                                                   <td>Correo:<span><?php echo " ".$estudiante->getCorreo(); ?></span></td>
-                                               </tr>   
-                                               <tr>
-                                                   <td>Fecha De Nacimiento:<span> <?php echo " ".$estudiante->getFNacimiento()->format('Y-m-d'); ?></span></td>
-                                               </tr>                   
+                                                 
+                                                              
                            </table>
                             </td>
 
@@ -133,7 +104,7 @@ function pension(){
                             <tr>  
                                 <td>
                                     <div id="cargar" class="carga-pag">
-                                     Gestion academica del estudiante, seleccione la opcion que desea
+                                    sus Acudidos:<?php echo " ".$acudido->getId_persona(); ?>
                                     </div>
                                 </td>
                             </tr>
@@ -147,4 +118,5 @@ function pension(){
 </div>
  </body>
   <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
-</html>
+</html>    
+    

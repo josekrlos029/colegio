@@ -285,5 +285,5 @@
                 
             </form>
 </body>
-<?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
+
 </html>

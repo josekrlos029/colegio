@@ -44,11 +44,19 @@ window.onload = function() {
         };
     });          
 }
+
 </script>
 <title><?php echo $titulo; ?></title>
 </head>
 <body>
     
+    <?php 
+   /*
+    $clave="ilba";
+    $clave1= sha1($clave) ;
+    echo $clave1;
+   */
+    ?>
      <div id="cuerpo">
          <div class="escudo"><img height="100%" width="90%"  src="utiles/imagenes/escudo.png" alt="ESCUDO"></div>
          <div class="separador"></div>

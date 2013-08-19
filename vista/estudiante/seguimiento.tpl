@@ -1,5 +1,4 @@
 <script>
-
 function cargarSeguimientos(){
             var y = $("#respuesta");
      var x = $("#mensaje");
@@ -38,10 +37,10 @@ function cargarSeguimientos(){
            <td colspan="2"><hr></td>
        </tr> 
        </table>
-  <table aling="centerright" width="10%"  border="0">
+  <table aling="center">
        <tr>
-       <td align="center" width="10%">TIPO DE SEGUIMIENTO:</td>
-       <td align="center" width="10%"><select id="tipo" onchange="cargarSeguimientos()">
+       <td align="right">TIPO DE SEGUIMIENTO:</td>
+       <td align="left"><select id="tipo" onchange="cargarSeguimientos()" class="box-text">
                                             <option></option>
                                             <option>ACADEMICO</option>
                                             <option>DISCIPLINARIO</option>                       

@@ -247,6 +247,23 @@ class EstudianteControl extends Controlador{
              }
          }
          
+           public function notificaciones(){
+         try {
+             if($this->verificarSession()){
+            $this->vista->set('titulo', 'Notificaciones');
+            $destino1=1;
+            $destino2=3;
+            $notificacion = new Notificacion();
+            $noti = $notificacion->leerPorDestino($destino1,$destino2);
+             $this->vista->set('noti', $noti);
+            return $this->vista->imprimir();;
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+         
         
 }
 
