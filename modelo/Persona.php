@@ -233,6 +233,20 @@ class Persona extends Modelo{
         }
         return $pers;
     }
+    
+    public function leerPorAcudiente($idAcudiente) {
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p,  datos_nac_persona dn,datos_ubicacion_persona du, acudiente_estudiante ae WHERE p.idPersona=ae.id_persona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND ae.id_acudiente='".$idAcudiente."' ORDER BY p.Papellido";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pers = array();
+        foreach ($resultado as $fila) {
+            $persona = new Persona();
+            $this->mapearPersona($persona, $fila);
+            $pers[$persona->getIdPersona()] = $persona;
+        }
+        return $pers;
+    }
+    
      public function leerPorSalonDocente($idSalon) {
         $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo,  p.estado FROM persona p, carga c, datos_ubicacion_persona du WHERE p.idPersona=c.idPersona AND p.idPersona=du.idPersona AND c.idSalon='".$idSalon."'";
         $this->__setSql($sql);
