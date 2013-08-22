@@ -234,6 +234,9 @@ class AdministradorControl extends Controlador{
             $this->vista->set('titulo', 'estudiantes Preescolar');
             $salon = new Salon();
             $preescolar = $salon->leerSalonesPreescolar();
+            $pago= new Pago();
+            $anios  = $pago->leerAnios();
+            $this->vista->set('anios', $anios);
             $this->vista->set('preescolar', $preescolar);
             return $this->vista->imprimir();
               }
@@ -249,6 +252,9 @@ class AdministradorControl extends Controlador{
              $limI='1';
              $limS='5';
             $salones = new Salon();
+            $pago= new Pago();
+            $anios  = $pago->leerAnios();
+            $this->vista->set('anios', $anios);
             $primaria = $salones->leerSalonesJornada($limI,$limS);
             $this->vista->set('primaria', $primaria);
             return $this->vista->imprimir();
@@ -265,6 +271,9 @@ class AdministradorControl extends Controlador{
              $limI='6';
              $limS='11';
             $salones = new Salon();
+            $pago= new Pago();
+            $anios  = $pago->leerAnios();
+            $this->vista->set('anios', $anios);
             $secundaria = $salones->leerSalonesJornada($limI,$limS);
             $this->vista->set('secundaria', $secundaria);
             return $this->vista->imprimir();
@@ -345,19 +354,20 @@ class AdministradorControl extends Controlador{
         public function generarPension(){
             try {
             $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+            $anio = isset($_POST['anio']) ? $_POST['anio'] : NULL;
             
             $persona = new Persona();
             $personas = $persona->leerPorSalon($idSalon);
            
-            $pagos = ['MATRICULA','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE'];
+            $pagos = ['MATRICULA','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','VR.PENSION'];
             
             $respuesta = "";
             
-              $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+              $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla" id="tabla">
                      
                     <tr><td align="center" class="color-text-gris" colspan="11"><h1>Salon:'.$idSalon.'</h1></td></tr>
                     <tr class="modo1">
-                    <td>N°</td>
+                    <td>ID</td>
                     <td>Nombres</td>
                     ';
               foreach ($pagos as $pag){
@@ -366,12 +376,12 @@ class AdministradorControl extends Controlador{
                         
             }
              $respuesta.='</tr>';
-             $cont = 0;
+             
               foreach ($personas as $per){
-                  $cont++;
-                  $respuesta.='<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)"> <td>'.$cont.'</td><td>'.$per->getPApellido().' '.$per->getSApellido().' '.$per->getNombres().'</td>';
+              
+                  $respuesta.='<tr class="recorrer" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)"> <td>'.$per->getIdPersona().'</td><td>'.$per->getPApellido().' '.$per->getSApellido().' '.$per->getNombres().'</td>';
                 $pago = new Pago();
-                $pens = $pago->leerPensionesPorIdPersona($per->getIdPersona());
+                $pens = $pago->leerPensionesPorIdPersonaYAnio($per->getIdPersona(),$anio);
                   
                 foreach ($pagos as $pag){
                     $band = 0;
@@ -399,7 +409,7 @@ class AdministradorControl extends Controlador{
              }
                 $respuesta.='</table>';
                  $respuesta.='<input type="hidden" id="idSalon" value="'.$idSalon.'" />';
-               
+               $respuesta.='<button id="btnRecorrer" onclick="recorrer()"class="button large green" style="margin-left:5%">Guardar</button>';
             if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
             }  else {
@@ -2758,6 +2768,51 @@ class AdministradorControl extends Controlador{
 
             $pdf-> Output("Matricula ".$nom." ".$ape,"I");
       }
+      
+      public function guardarPensiones(){
+            try {
+                 if($this->verificarSession()){
+                $arreglo =  isset($_POST['pensiones']) ? $_POST['pensiones'] : NULL;
+                $anio =  isset($_POST['anio']) ? $_POST['anio'] : NULL;
+                $pensiones = json_decode($arreglo);
+                $fecha = getdate();
+                $FechaTxt=$fecha["year"]."-".$fecha["mon"]."-".$fecha["mday"];
+               $pagos = ['MATRICULA','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','VR.PENSION'];
+                foreach($pensiones as $pen){
+                    
+                    for($i=0;$i<= count($pagos);$i++){
+                            
+                                $pension = new Pago();
+                                $pension->setIdPersona($pen[0]);
+                                $pension->setMes($pagos[$i]);
+                                $pension->setConcepto("PENSION");
+                                $pension->setValor($pen[$i+1]);
+                                $pension->setFecha($FechaTxt);
+                                $pension->setAno($anio);
+                                if($pen[$i+1] != "" && $pen[$i+1] != NULL){
+                                    $pg=$pension->leerPensionesPorIdPersonaMesYAnio($pen[0], $anio, $pagos[$i]);
+                                    if($pg != NULL){
+                                        
+                                        if($pg->getValor()!=$pen[$i+1]){
+                                            $pension->actualizarValorPension($pg->getIdPago(), $pen[$i+1], $FechaTxt);
+                                        }
+                                        
+                                    }else{
+                                        $pension->crearPagoPension($pension);
+                                    }
+                                     
+                                }
+                              
+                    }       
+                    
+                }
+                echo json_encode(1);
+                 }
+            } catch (Exception $exc) {
+                echo json_encode($exc->getTraceAsString());
+            }
+                }
+                
 
 
 //**************************************************************************************************//        

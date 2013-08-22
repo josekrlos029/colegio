@@ -155,7 +155,31 @@ class Pago extends Modelo{
         }
         return $pagos;
     }
-    public function leerPagosPorIdPersona(){
+    public function leerPensionesPorIdPersonaYAnio($idPersona, $anio){
+        $sql = "SELECT * FROM pago WHERE idPersona='".$idPersona."' AND concepto='PENSION' AND año=".$anio." ORDER BY fecha";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pagos = array();
+        foreach ($resultado as $fila) {
+            $pago = new Pago();
+            $this->mapearPago($pago, $fila);
+            $pagos[$pago->getIdPago()] = $pago;
+        }
+        return $pagos;
+    }
+     public function leerPensionesPorIdPersonaMesYAnio($idPersona, $anio, $mes){
+        $sql = "SELECT * FROM pago WHERE idPersona='".$idPersona."' AND concepto='PENSION' AND año=".$anio." AND mes='".$mes."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pago = NULL;
+        foreach ($resultado as $fila) {
+            $pago = new Pago();
+            $this->mapearPago($pago, $fila);
+            
+        }
+        return $pago;
+    }
+    public function leerPagosPorIdPersona($idPersona){
         $sql = "SELECT * FROM pago WHERE idPersona='".$idPersona."' ORDER BY fecha DESC";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
@@ -166,6 +190,23 @@ class Pago extends Modelo{
             $pagos[$pago->getIdPago()] = $pago;
         }
         return $pagos;
+    }
+    
+    public function leerAnios(){
+        $sql = "SELECT DISTINCT año FROM pago ORDER BY año DESC";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $años = array();
+        
+        foreach ($resultado as $fila) {
+           $años[] = $fila['año'];
+        }
+        return $años;
+    }
+    public function actualizarValorPension($id, $valor, $fecha){
+        $sql = "UPDATE pago SET valor=".$valor.", fecha='".$fecha."' WHERE id=".$id;
+        $this->__setSql($sql);
+        $this->ejecutar();
     }
 }
 
