@@ -339,6 +339,13 @@ class Persona extends Modelo{
         $this->__setSql($sql);
         $this->ejecutar(array(':idPersona'=> $idPersona, ':correo'=>$correo));    
         }
+        
+        public function actualizarId($idPersona,$idPersonaN) {
+        $sql = "UPDATE persona SET idPersona=:idPersonaN WHERE idPersona=:idPersona";
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=> $idPersona, ':idPersonaN'=>$idPersonaN));    
+        }
+        
 }
 
 ?>

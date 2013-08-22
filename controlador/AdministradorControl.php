@@ -2764,7 +2764,63 @@ class AdministradorControl extends Controlador{
 //**********************************FIN DE LOS METODOS*********************************************//
 //**************************************************************************************************// 
     
-}
+///___________________________LLENADO DE TABLA USUARIO y ROL ACUDIENTE NO TOCAR
+      
+      public function  llenarUsuarios(){
+      
+      $acudiente = new Acudiente();
+      $acudientes = $acudiente->leerAcudientes();
+      foreach ($acudientes as $acu){
+          $usuario = new Usuario();
+          $usuario->setIdPersona($acu->getId_acudiente());
+          $usuario->setUsuario($acu->getId_acudiente());
+          $usuario->setContraseña($acu->getId_acudiente());
+          $usuario->crearUsuario($usuario);
+      }
+      
+      $persona = new Persona();
+      $personas = $persona->leerPersonas();
+      foreach ($personas as $person){
+          $usuario = new Usuario();
+          $usuario->setIdPersona($person->getIdPersona());
+          $usuario->setUsuario($person->getIdPersona());
+          $usuario->setContraseña($person->getIdPersona());
+          $user = $usuario->leerPorId($person->getIdPersona());
+          if($user == NULL){
+              $usuario->crearUsuario($usuario);
+          }else{
+              $rol = new Rol();
+              $roles = $rol->leerRoles($person->getIdPersona());
+              foreach($roles as $ro){
+                  if ($ro->getIdRol()== 'E'){
+                      $persona->actualizarId($person->getIdPersona(), $person->getIdPersona()."0");
+                      $usuario->setIdPersona($person->getIdPersona()."0");
+                  }
+              }
+              
+          }
+          
+      }
+      
+      
+      }
+      
+      public function llenarRolAcudiente(){
+            $acudiente = new Acudiente();
+            $acudientes = $acudiente->leerAcudientes();
+            foreach ($acudientes as $acu){
+                $persona = new Persona();
+                $persona->asignarRol2($acu->getId_acudiente(), 'AC');
+            }
+      }
+
+
+//____________________________________________________________      
+      
+      
+      
+      
+            }
 
 
 

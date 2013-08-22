@@ -63,7 +63,7 @@ class Usuario extends Modelo{
         $parametros = array(
             ':idPersona' => $adm->getIdPersona(),
             ':usuario' => $adm->getUsuario(),
-            ':clave' => sha1( $adm->getContraseña())
+            ':clave' =>  $adm->getContraseña()
             );
         return $parametros;
     }

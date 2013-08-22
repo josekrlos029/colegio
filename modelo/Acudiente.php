@@ -112,6 +112,19 @@ class Acudiente extends Modelo{
         return $acudiente;
     }
     
+     public function leerAcudientes(){
+        $sql = "SELECT * FROM acudiente";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $acudientes=array();
+        foreach ($resultado as $fila) {
+            $acudiente = new Acudiente();
+            $this->mapearAcudiente($acudiente, $fila);
+            $acudientes[$acudiente->getId_acudiente()] = $acudiente;
+        }
+        return $acudientes;
+    }
+    
    
 
 
