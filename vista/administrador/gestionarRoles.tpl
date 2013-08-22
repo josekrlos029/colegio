@@ -40,7 +40,7 @@ return true;
 }
 }
 
-function leerCarga(){
+function leerUsuarios(){
  var x = $("#mensaje");
  cargando();
  x.html ("<p>Cargando...</p>");
@@ -48,51 +48,26 @@ function leerCarga(){
  
 var y= $("#tablaCargas"); 
  var idDocente =$("input[name=idDocente]:checked").val();
-  var url="/colegio/administrador/imprimirCarga";
+  var url="/colegio/administrador/imprimirUsuarios";
         var data="idDocente="+idDocente;
- envioJson(url,data,function respuesta(res){   
-    x.hide();            
-    y.html (res);
-         });
+        $.ajax({
+			        async:	true, 
+				type:	"post",
+				data:	data,
+				url:	url,
+				dataType:"html",
+				success: function(data){
+                                    
+				    //JSON.decode( data );
+                                    var json = eval("(" + data + ")");
+                                     x.hide();            
+                                    y.html (json);
+				    //var json= jQuery.parseJSON(data);     
+                                    
+				    }
+		        });
 
 }
-
-function cargarMaterias(){ 
- if (validarRadio()==false){
-    
-    alert("Por Favor Escoja un Docente (Paso 1)");
-
-}else{
-  var x = $("#mensaje");
- cargando();
- x.html ("<p>Cargando...</p>");
- x.show("slow");
- 
- var y =$("#materias"); 
-  
- var idSalon = document.getElementById("salones").value;
-  var salon  = idSalon.split("-");
-var grado = salon[0];
-
-
-
-    if (idSalon=="" || idSalon == "---"){
-    y.html(" ");  
-     x.html ( "<p>Error: por favor escoja un salon</p>");
-     error();
-     ocultar();
-    }else{
-
-        var url="/colegio/administrador/imprimirMateriasPorGrado/select";
-        var data="idGrado="+grado;
-
-        envioJson(url,data,function respuesta(res){   
-    x.hide();            
-    y.html (res);
-         });
-    }
-    }
-    }
 function agregar(){
 
 var y = $("#mensaje");
@@ -101,30 +76,21 @@ var y = $("#mensaje");
  y.show("slow");
  
  var idDocente =$("input[name=idDocente]:checked").val();
- var idSalon = document.getElementById("salones");
-  var materias = document.getElementById("materias").options;
-  var arreglo = new Array();
-  var j=0;
-  for (var i=0; i<materias.length; i++){ 
-   if (materias[i].selected == true){
-    arreglo[j]=materias[i].value;
-    j++;
-    }
-  }   
-
-    if (idDocente=="" || idSalon.value=="---" || materias.length == 0){
+ var idRol = document.getElementById("usuarios");
+ 
+    if (idDocente=="" || idRol.value=="---" ){
           y.html ( "<p>Error: Seleccion invalida</p>");
       error();
       ocultar();
     }else{
 
-        var url="/colegio/administrador/agregarCarga/";
-        var data="idDocente="+idDocente+"&idSalon="+idSalon.value + "&materias="+ arreglo;
+        var url="/colegio/administrador/agregarRol/";
+        var data="idDocente="+idDocente+"&idRol="+idRol.value;
 
         envioJson(url,data,function respuesta(res){   
                 y.html ( res);
                 y.hide();
-                leerCarga()
+                leerUsuarios();
          });
     }   
 
@@ -147,7 +113,7 @@ var y = $("#mensaje");
                         <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
                          <tr>   
                             <td align="right">   
-                                <h1>Gestion De Cargas Academicas</h1>
+                                <h1>Gestion De Usuarios</h1>
                             </td>
                          </tr>
                         </table>
@@ -176,7 +142,7 @@ var y = $("#mensaje");
         
                 <?php foreach ($docentes as $docente) { ?>
                 <tr onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
-                    <td width="10%"><input onclick="leerCarga()" id="idDocente" name="idDocente" type="radio"  value="<?php echo $docente->getIdPersona();?>" />
+                    <td width="10%"><input onclick="leerUsuarios()" id="idDocente" name="idDocente" type="radio"  value="<?php echo $docente->getIdPersona();?>" />
                     <td width="30%"><?php echo $docente->getIdPersona();?></td>
                     <td width="30%"><?php echo $docente->getNombres();?></td>
                     <td width="30%"><?php echo $docente->getPApellido()." ".$docente->getSApellido();?></td> 
@@ -190,31 +156,26 @@ var y = $("#mensaje");
           <table width="650" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                   <td width="10%"></td>
-                  <td align="left" class="color-text-gris"><h1>Escoger aula de clases</h1></td>
-                   <td align="right" class="color-text-gris" colspan="3"><h1>Escoger Materias</h1></td>
+                  <td align="left" class="color-text-gris"><h1>Escoger Usuario</h1></td>
+                   
               </tr>
                 <tr>
                     <td></td>
-                    <td>Salon:</td>
-                     <td align="right">Materias:</td>
+                    <td>Usuario:</td>
+                     
                 </tr>
             <tbody>
                 <tr>
                     <td></td>
                     <td>
-                        <select id="salones" name="salones" class="box-text" onchange="cargarMaterias()">
+                        <select id="usuarios" name="salones" class="box-text">
                             <option value="---">---</option>
-            <?php foreach ($salones as $salon) { ?>
-            <option value="<?php echo $salon->getIdSalon();?>"><?php echo $salon->getIdSalon();?></option>
-            <?php } ?>
+                            <option value="C">Coordinador</option>
             </select>
             </td>
-            <td align="right"><select id="materias" name="materias" multiple class="box-text">
-                        </select>
-                </td>
                 </tr>
                 <tr>
-                    <td colspan="3" align="right"><button onclick="agregar()" class="button large red"> Guardar Carga </button></td>
+                    <td colspan="3" align="right"><button onclick="agregar()" class="button large red"> Guardar </button></td>
                     </tr>
             </tbody>
         </table>
@@ -225,13 +186,11 @@ var y = $("#mensaje");
      </br>
          <table width="50%" align="center" border="0" cellspacing="0" cellpadding="2" class="tabla">
                 <tr>
-                  <td align="center" class="color-text-gris" colspan="4"><h1>cargas asignadas a docentes</h1></td>
+                  <td align="center" class="color-text-gris" colspan="4"><h1>Usuarios Asignados al Docente</h1></td>
               </tr>
                 <tr class="modo1">
-                    <td width="20%">Salon</td>
-                    <td width="40%">Materia</td>
-                    <td width="10%">Horas</td>
-                    <td width="20%">Eliminar</td>
+                    <td width="20%">N°</td>
+                    <td width="40%">ROL</td>
                 </tr>   
           </table>
                <table width="50%" align="center" border="0" cellspacing="0" cellpadding="2"  >

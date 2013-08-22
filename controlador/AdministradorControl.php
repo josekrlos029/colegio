@@ -228,6 +228,52 @@ class AdministradorControl extends Controlador{
         }
         }
         
+        public function pensionPreescolar(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'estudiantes Preescolar');
+            $salon = new Salon();
+            $preescolar = $salon->leerSalonesPreescolar();
+            $this->vista->set('preescolar', $preescolar);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+         public function pensionPrimaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Estudiantes Primaria');
+             $limI='1';
+             $limS='5';
+            $salones = new Salon();
+            $primaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('primaria', $primaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+        public function pensionSecundaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Estudiantes Secundaria');
+             $limI='6';
+             $limS='11';
+            $salones = new Salon();
+            $secundaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('secundaria', $secundaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
         public function generarConsolidado(){
             try {
             $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
@@ -278,6 +324,76 @@ class AdministradorControl extends Controlador{
                         }
                             
                         }
+              $respuesta.='</tr>';
+              
+             }
+                $respuesta.='</table>';
+                 $respuesta.='<input type="hidden" id="idSalon" value="'.$idSalon.'" />';
+               
+            if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            }
+            
+             } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+            
+        }
+        
+        public function generarPension(){
+            try {
+            $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+            
+            $persona = new Persona();
+            $personas = $persona->leerPorSalon($idSalon);
+           
+            $pagos = ['MATRICULA','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE'];
+            
+            $respuesta = "";
+            
+              $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+                     
+                    <tr><td align="center" class="color-text-gris" colspan="11"><h1>Salon:'.$idSalon.'</h1></td></tr>
+                    <tr class="modo1">
+                    <td>N°</td>
+                    <td>Nombres</td>
+                    ';
+              foreach ($pagos as $pag){
+                        
+                              $respuesta.='<td width="6%">'.$pag.'</td>';
+                        
+            }
+             $respuesta.='</tr>';
+             $cont = 0;
+              foreach ($personas as $per){
+                  $cont++;
+                  $respuesta.='<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)"> <td>'.$cont.'</td><td>'.$per->getPApellido().' '.$per->getSApellido().' '.$per->getNombres().'</td>';
+                $pago = new Pago();
+                $pens = $pago->leerPensionesPorIdPersona($per->getIdPersona());
+                  
+                foreach ($pagos as $pag){
+                    $band = 0;
+                    if ($pens == NULL){
+                        $respuesta .= '<td  align="center" ><input style="width:50px; type="text" value=""/></td>';
+                    }else{
+                        foreach ($pens as $pen){
+                    
+                          if ($pen->getMes()==$pag){
+                              $respuesta .= '<td align="center" ><input style="width:50px;" type="text" title="'.$pen->getFecha().'" value="'.$pen->getValor().'"/></td>';
+                              $band = 1;                         
+                              
+                          }
+                          
+                          
+                      }
+                      
+                          if($band ==0 ){
+                              $respuesta .= '<td  align="center" ><input style="width:50px; type="text" value=""/></td>';
+                          }
+                }
+                  }
               $respuesta.='</tr>';
               
              }
@@ -479,6 +595,22 @@ class AdministradorControl extends Controlador{
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
         }
+        
+        public function gestionarRoles(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Gestión de Usuarios');
+            $idRol='D';
+            $persona = new Persona();
+            $docentes = $persona->leerPorRol($idRol);
+            $this->vista->set('docentes', $docentes);
+           
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
             
                     
     /**
@@ -583,6 +715,16 @@ class AdministradorControl extends Controlador{
             try {
             if($this->verificarSession()){
             $this->vista->set('titulo', 'Consolidados');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        public function pensiones(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Pensiones');
             return $this->vista->imprimir();
             }
         } catch (Exception $exc) {
@@ -913,6 +1055,47 @@ class AdministradorControl extends Controlador{
         }    
             
         }
+        
+        public function imprimirUsuarios(){
+            try {
+            $cont=0;
+            $idPersona = isset($_POST['idDocente']) ? $_POST['idDocente'] : NULL;
+            $rol = new Rol();
+            $roles = $rol->leerRoles($idPersona);
+                  foreach ($roles as $ro) {
+                      $cont++;
+                      $respuesta .= '<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">';
+                  
+                              $respuesta.= '<td width="40%">'.$cont.'</td>'.
+                                           '<td width="10%" align="center">'. strtoupper($ro->getNombre()).'</td>';
+                                            
+                                             
+                       
+                         $eliminar= "eliminar('".$ro->getIdRol()."')";
+                         $respuesta.= '<td width="20%" align="center">
+                                     <a href="#" onclick="'.$eliminar.'"><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a>
+                                       </td>';
+                        $respuesta .= "</tr>";
+                       
+                  }
+                   $respuesta .= '<tr><td colspan="4" align="center"><hr></td></tr>
+                                   <tr>
+                                     <td colspan="4" align="center" class="color-text-gris"><h2>Total Horas Semanales:'. $total.'</h2></td>
+                                  </tr>';
+               
+            if (strlen($respuesta)>0){
+          
+                echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            }
+            
+             } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+            
+        }
+
 
         /**
          * Función Llamada Por Json Desde El formulario para Agregar Carga
@@ -944,6 +1127,20 @@ class AdministradorControl extends Controlador{
              }
              
              echo json_encode("Carga Agregada Correctamente");
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+        }
+        
+        public function agregarRol(){
+            try {
+             
+             
+             $idRol =  isset($_POST['idRol']) ? $_POST['idRol'] : NULL;
+             $idPersona =  isset($_POST['idDocente']) ? $_POST['idDocente'] : NULL;
+             $persona = new Persona();
+             $persona->asignarRol2($idPersona, $idRol);
+             echo json_encode("Usuario Agregado Correctamente");
         } catch (Exception $exc) {
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    

@@ -193,6 +193,13 @@ class Persona extends Modelo{
             ':idPersona' => $persona->getIdPersona(),
             ':idRol' => $persona->getIdRol()));
     }
+    
+     public function asignarRol2($idPersona, $idRol){
+        $sql = "INSERT INTO rolespersona (idPersona, idRol) VALUES ( '".$idPersona."', '".$idRol."')";
+        $this->__setSql($sql);
+        $this->ejecutar();
+    }
+   
 
     
     public function leerPersonas() {
