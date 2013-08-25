@@ -87,10 +87,9 @@ window.onload = function() {
                  
          </div>
          </div>
-     </div> 
-    
+   
+    </br>
    <div id="footer">
-     <div class="logo"></div>
        <div id="opcionesFooter">
         <li><a href="#">© 2013 Innovar.dev S.A.S</a></li>
         <li><a href="#">Terminos</a></li>

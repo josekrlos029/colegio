@@ -77,7 +77,8 @@ interface usuarioAcudiente {
 </br>
 <hr>
 <div id="cargar">
- <table border="0" align="center" width="90%" height="100%">
+<div style="padding-right: 5%; padding-left: 5%;" > 
+ <table border="0" align=right" width="100%" >
       <tr>
 	   <td class="color-text-green" width="10%">  
                   
@@ -85,8 +86,22 @@ interface usuarioAcudiente {
            <td align="right" class="color-text-gris"><h1>Gestion Academica Del Coordiandor</h1></td>
          </tr>
          <tr>
-         <td width="10%">
-             <table class="fondo" width="99%">
+         </table>
+</div>             
+      <div style="margin-top:0%; position: relative; width:100%; height: 100%;">  
+        <table border="0" align="center" width="90%" height="100%">
+                 <tr>
+                 <td>
+                     <div class="formularios">
+                         <div class="cab-form">
+                             <table  width="100%" border="0">
+                             <tr>                                     
+                                 <td>Informacion de Perfil</td>
+                             </tr>
+                             </table>
+                             
+                         </div>
+             <table  width="100%">
                 <tr> 
                     <td>
                       
@@ -103,31 +118,27 @@ interface usuarioAcudiente {
                 <tr>
                     <td>
                        
-                        <table border="0" width="100%"> 
-                                       <tr><td class="color-text-green">Nombres:</td></tr> 
-                                       <tr><td><?php echo $coordinador->getNombres(); ?></td></tr>
-                                       <tr><td class="color-text-green">Apellidos:</td></tr>
-                                       <tr><td><?php echo $coordinador->getPApellido()." ".$coordinador->getSApellido(); ?></td></tr>  
-                                       <tr><td class="color-text-green">Sexo:</td></tr>                                       
-                                       <tr><td><?php echo $coordinador->getSexo(); ?></td> </tr>                                        
-                                       <tr><td class="color-text-green">Telefono:</td></tr>
-                                       <tr><td><?php echo $coordinador->getTelefono(); ?></td></tr> 
-                                       <tr><td class="color-text-green">Direccion:</td></tr>
-                                       <tr><td><?php echo $coordinador->getDireccion(); ?></td</tr> 
-                                       <tr><td class="color-text-green">Correo:</td></tr>    
-                                       <tr><td><?php echo $coordinador->getCorreo(); ?></td></tr>
-                                       <tr><td class="color-text-green">Fecha De Nacimiento:</td></tr>
-                                       <tr><td><?php echo $coordinador->getFNacimiento()->format('Y-m-d'); ?></td></tr>
+                         <table border="0" width="100%" id="inf-Personal"> 
+                                       <tr><td class="color-text-green">Nombres:<?php echo $coordinador->getNombres(); ?></td></tr>
+                                       <tr><td class="color-text-green">Apellidos:<?php echo $coordinador->getPApellido()." ".$coordinador->getSApellido(); ?></td></tr>  
+                                       <tr><td class="color-text-green">Sexo:<?php echo $coordinador->getSexo(); ?></td> </tr>                                        
+                                       <tr><td class="color-text-green">Telefono:<?php echo $coordinador->getTelefono(); ?></td></tr> 
+                                       <tr><td class="color-text-green">Direccion:<?php echo $coordinador->getDireccion(); ?></td</tr> 
+                                       <tr><td class="color-text-green">Correo:<?php echo $coordinador->getCorreo(); ?></td></tr>
+                                       <tr><td class="color-text-green">Fecha De Nacimiento:<?php echo $coordinador->getFNacimiento()->format('Y-m-d'); ?></td></tr>
                                      
                    </table>
                     </td>
                 </tr>
              </table>   
-         </td> 
-          <td>
-              <table  width="100%" height="8%" border="0" id="titulo-menu">
+            </div>    
+               </td> 
+               <td width="90%" >
+                <div class="formularios">
+                    <div class="cab-form">
+                      <table  width="100%" border="0">
                    <tr> 
-                       <td width="55"></td>
+                       
                         <td width="10%" align="right" >
                             <a href="#"onclick="datosAcademicos()" class="link-menu">Boletines</a>
                         </td>
@@ -142,8 +153,9 @@ interface usuarioAcudiente {
                          </td>
                         
               </table>    
-             
-                <table class="fondo" width="100%" height="92%" border="0">
+                  </div>
+                    <div class="den-form">
+                        <table  width="100%"  border="0">
                     <tr>  
                         <td>
                             <div id="cargar" class="carga-pag">
@@ -152,9 +164,12 @@ interface usuarioAcudiente {
                         </td>
                     </tr>
                 </table> 
+                  </div>
          </td>  
          </tr>      
  </table>
+                   </div>
+                </div>
 </div>
  </body>
   <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>

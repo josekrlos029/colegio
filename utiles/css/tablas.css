@@ -23,13 +23,48 @@ background-color:#dbdbdb;
 }
 
 
-/***** FONDO DE MENU ******/
-.fondo{
-background-color: white; 
-border: 1px solid #cccccc;
-padding-left:0px;
-padding-top:0px;
-   
+.formularios{
+ background-color:white;   
+ border: 1px solid #d3d6db;  
+ position: relative;
+ height:100%; 
+}
+.cab-form{
+ margin: 0;
+ background-color: #f6f7f8;
+ border-bottom:  1px solid #d3d6db; 
+ font-size: 16px;
+ font-weight:bold;
+ color: #434343;
+ text-shadow: 0 1px 0 white;
+ padding-left : 30px;
+ padding-top: 15px;
+ padding-bottom: 15px;
+ padding-right: 10px;
 }
 
+.den-form{
+ padding:30px; 
+}
+.den-form td{
+padding-left:5px; 
+padding-right: 5px;
+padding-top: 5px;
+}
+
+.datos-consulta{
+ font-family: 'arial';
+ font-size: 13px;   
+ color:#666;
+}
+.datos-consulta a{
+ font-family: 'arial';
+ font-size: 13px; 
+ font-weight:bold;
+ color: #3b5998;
+}
+
+.datos-consulta a:hover{
+  color: #000;  
+}
 

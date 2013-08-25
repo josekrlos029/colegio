@@ -242,7 +242,9 @@ class Persona extends Modelo{
     }
     
     public function leerPorAcudiente($idAcudiente) {
-        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p,  datos_nac_persona dn,datos_ubicacion_persona du, acudiente_estudiante ae WHERE p.idPersona=ae.id_persona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND ae.id_acudiente='".$idAcudiente."' ORDER BY p.Papellido";
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado, ae.id_acudiente, ae.id_persona  ";
+        $sql .="FROM persona p,  datos_nac_persona dn,datos_ubicacion_persona du, acudiente_estudiante ae ";
+        $sql .="WHERE p.idPersona=ae.id_persona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND ae.id_acudiente='".$idAcudiente."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();

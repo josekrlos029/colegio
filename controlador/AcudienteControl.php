@@ -29,7 +29,7 @@ class AcudienteControl extends Controlador{
             $acu = $acudiente->leerPorId($idPersona);
             $this->vista->set('acu', $acu);
             $persona = new Persona();
-            $acudido = $persona->leerAcudientePersona($idPersona);
+            $acudido = $persona->leerPorAcudiente($acu->getId_Acudiente());
             $this->vista->set('acudido', $acudido);
             
             return $this->vista->imprimir();

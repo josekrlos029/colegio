@@ -451,7 +451,7 @@ class DocenteControl extends Controlador{
              $personas = $persona->leerPorSalon($idSalon);
              
              
-             $respuesta = '<table  width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
+             $respuesta = '<table  width="60%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
                                 <tr class="modo1">
                                  <td><div align="center">.</div></td>
                                     <td width="12%"><div align="right" >IDENTIFICACION</div></td>
@@ -462,9 +462,9 @@ class DocenteControl extends Controlador{
             foreach ($personas as $person) { 
                 $respuesta .='<tr class="recorrer" id="cebra" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
                 <td align="left"><input type="radio" name="select" id="select" value="'.$person->getIdPersona().'" onclick="asignar()"/></td>
-                <td align="left">'.$person->getIdPersona().'</td>
-                <td align="left">'.strtoupper($person->getPApellido().' '.$person->getSApellido()).'</td> 
-                <td align="left">'.strtoupper($person->getNombres()).'</td>';
+                <td align="rigth">'.$person->getIdPersona().'</td>
+                <td align="right">'.strtoupper($person->getPApellido().' '.$person->getSApellido()).'</td> 
+                <td align="right">'.strtoupper($person->getNombres()).'</td>';
 
 
             }//fin del For 

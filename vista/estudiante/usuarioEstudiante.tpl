@@ -57,10 +57,18 @@ function pension(){
     </div>  
     <div style="margin-top:0%; position: relative; width:100%; height: 100%;">  
         <table border="0" align="center" width="90%" height="100%">
-
                  <tr>
-                 <td width="">
-                     <table class="fondo" width="100%" height="100%">
+                 <td>
+                     <div class="formularios">
+                         <div class="cab-form">
+                             <table  width="100%" border="0">
+                             <tr>                                     
+                                 <td>Informacion de Perfil</td>
+                             </tr>
+                             </table>
+                             
+                         </div>
+                     <table  width="100%">
                         <tr> 
                             <td>
                                 <div class="marcoAvatarest">
@@ -74,8 +82,7 @@ function pension(){
                         </tr>
                         <tr>
                             <td>
-
-                             <table border="0" width="100%" id="inf-Personal"> 
+                      <table border="0" width="100%" id="inf-Personal"> 
 
                                                <tr>
                                                  <td>Salón:<span><?php echo " ".$matricula->getIdSalon(); ?></span></td>
@@ -108,37 +115,42 @@ function pension(){
                      </table>   
                  </td> 
                   <td width="90%" >
-                      <table id="titulo-menu" width="100%" height="8%" border="0">
+                     
+              <div class="formularios">
+                    <div class="cab-form">
+                      <table  width="100%"  border="0">
                            <tr> 
-                               <td></td>
-                                <td width="20%" align="right">
+                              
+                                <td>
                                     <a href="#"onclick="datosAcademicos()" class="link-menu">Resultados Academicos</a>
                                 </td>
-                                <td width="30%" align="right">
+                                <td  align="center">
                                     <a href="#"onclick="seguimiento()" class="link-menu">Seguimiento Academico y Disciplinario</a>
                                 </td>
-                                <td width="10%" align="right">
+                                <td  align="right">
                                     <a href="#"onclick="pension()" class="link-menu">Pensión</a>
                                 </td>
-                                <td width="20%" align="right">
+                                <td align="right">
                                     <a href="#"onclick="funcionesAcademicas()" class="link-menu">Funciones Academicas</a>
                                 </td>
-                                <td width="15%" align="right">
+                                <td  align="right">
                                     <a href="#"onclick="notificaciones()" class="link-menu">Notificaciones</a>
                                 </td>
 
                       </table>    
-
-                        <table class="fondo" width="100%" height="92%" border="0">
-                            <tr>  
-                                <td>
-                                    <div id="cargar" class="carga-pag">
-                                     Gestion academica del estudiante, seleccione la opcion que desea
-                                    </div>
-                                </td>
-                            </tr>
-                        </table> 
-
+                    </div>
+                            <div class="den-form">
+                                <table  width="100%" border="0">
+                                    <tr>  
+                                        <td>
+                                            <div id="cargar" class="carga-pag">
+                                             Gestion academica del estudiante, seleccione la opcion que desea
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table> 
+                            </div>
+                    </div>
                  </td>  
                  </tr>      
          </table> 
