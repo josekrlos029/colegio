@@ -1,6 +1,4 @@
-<?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
- <title><?php echo $titulo; ?></title>
- <script>
+<script>
 function asignar(){
 
     document.getElementById('light').style.display='block';
@@ -15,7 +13,7 @@ var x = $("#mensaje");
  x.show("slow");
  
   var y = $("#tabla");
- var idSalon = document.getElementById("salon");
+ var idSalon = document.getElementById("idSalon");
 
 
     if (idSalon.value==""){
@@ -72,72 +70,27 @@ function envio(){
          });
     }   
 }
+
+
 </script>
- </head>
- 
- <body>
-    <div class="cabecera">
-        <?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
-        </div>
-     
-          <!------------------------------cabecera--------------------------->  
-          <p>&nbsp;</p>
-            </br>
-           <p>&nbsp;</p>
-        <div id="encapsulador">
-            <div id="mensaje" hidden> </div>
-                <div id="cabecera" class="red">
-                    
-                    <div class="color-text-blanco" id="title-cab">
-                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="0">
-                         <tr>  
-                            <td align="right">   
-                                <h1>Asignar Seguimientos Acedemicos y Disciplinarios</h1>
-                            </td>
-                         </tr>
-                        </table>
-                    </div>
-                    
-                </div>
-        </div> 
-        <p>&nbsp;</p>
-                      
-     <!--------------------------------------------------------------------> 
-     <div class="contenedor" style="width: 80%; margin: 0 auto;" aling="center">
-         </br>  </br>
-        <table aling="center" width="100%"  border="0">
-       <tr>
-           <td align="right" class="color-text-rojo" colspan="3"><h3>Ingreso De Seguimiento</h3></td>    
-       </tr>
-        <tr>
-           <td colspan="3" aling="center" class="color-text-gris"><h2>Ubicacion:</h2></td>
-       </tr> 
-        <tr>
-           <td colspan="3"><hr></td>
-       </tr> 
-       <tr>
-             <td class="color-text-rojo" >Salon:</td>
-           <td><select name="salon" class="box-text" id="salon" required focus>
-                        <option></option>
-                        <?php foreach($salones as $salon) { ?>
-                        <option><?php  echo $salon; ?></option>
-                        <?php } ?>
-               </select>
-           </td>
-            <td width="70%" align="left">
-               <input name="ingresoSeguimiento" id="ingresoSeguimiento" type="submit" value="Siguiente" class="button large red" onclick="cargarSalon()" />  
-           </td>
-       </tr>  
-      </table>
-    </br>
-    <table>
-       <tr>
-          
-       </tr>   
-   </table>    
-      
-     </br>
-     
+    <div id="mensaje" hidden> </div>
+<div style="margin: 0 auto;" id="tablaConsulta">
+         <h1 style="margin-left: 235px">Escoger el Salon:</h1>
+          <table border="0" style="margin: 0 auto; width: 50%;" >
+              <tr>
+                  <td><b>Salón</b></td>
+              </tr>
+              <tr>
+                  <td><select id="idSalon" class="box-text">
+                          <?php foreach ($salones as $salon) { ?>    
+                          <option><?php echo $salon->getIdSalon();?></option>
+                          <?php } ?>
+                      </select></td>
+                      <td><input name="imprimirCurso" id="imprimirCurso" type="submit" value="Siguiente" class="button large green" onclick="cargarSalon()" /></td>
+              </tr>
+          </table>
+</div>
+
       <div  id="tabla" align="left" >
           
       </div>
@@ -183,7 +136,3 @@ function envio(){
       </div>
 </div>
            
-     
-
-</body>
-</html>

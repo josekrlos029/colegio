@@ -40,6 +40,20 @@ interface usuarioAcudiente {
  $('#cargar').load('/colegio/coordinador/docentesSecundaria');           
 }
 
+function boletines(){
+$('#cargar2').load('/colegio/coordinador/boletines'); 
+}
+
+function consolidados(){
+$('#cargar').load('/colegio/coordinador/consolidados'); 
+}
+
+function pensiones(){
+$('#cargar').load('/colegio/coordinador/pensiones'); 
+}
+function seguimientos(){
+$('#cargar2').load('/colegio/coordinador/seguimientos'); 
+}
 </script>
  <body>
      <div class="cabecera">
@@ -140,16 +154,16 @@ interface usuarioAcudiente {
                    <tr> 
                        
                         <td width="10%" align="right" >
-                            <a href="#"onclick="datosAcademicos()" class="link-menu">Boletines</a>
+                            <a href="#"onclick="boletines()" class="link-menu">Boletines</a>
                         </td>
                         <td width="10%" align="right">
-                            <a href="#"onclick="ingresoNotas()" class="link-menu">Consolidados</a>
+                            <a href="#"onclick="consolidados()" class="link-menu">Consolidados</a>
                         </td>
                         <td width="10%" align="right">
-                            <a href="#"onclick="funcionesAcademicas()" class="link-menu">Pensiones</a>
+                            <a href="#"onclick="pensiones()" class="link-menu">Pensiones</a>
                         </td>
                          <td width="10%" align="right">
-                                    <a href="#"onclick="notificaciones()" class="link-menu">Observador</a>
+                                    <a href="#"onclick="seguimientos()" class="link-menu">Observador</a>
                          </td>
                         
               </table>    
@@ -158,7 +172,7 @@ interface usuarioAcudiente {
                         <table  width="100%"  border="0">
                     <tr>  
                         <td>
-                            <div id="cargar" class="carga-pag">
+                            <div id="cargar2" class="carga-pag">
                              Gestion academica del Coordinador, seleccione la opcion que desea
                             </div>
                         </td>
