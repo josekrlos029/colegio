@@ -18,7 +18,7 @@
                     <td>Fecha de Registro</td>
                     <td>Estado</td>
                     <td>Consultar</td>
-                    <td>Modificar</td>
+             
                 </tr>
               
         
@@ -41,7 +41,7 @@
                     
                     ?>                    
                   <td align="center"><a href="#" onclick="consulta  ('<?=$not->getId()?>')"><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
-                    <td align="center"><a href="#" onclick="Actualizar('<?=$not->getId()?>')"><img src="../utiles/imagenes/iconos/editarPersona.png"/></a></td> 
+                  
                 </tr>
                 <?php } ?>
            

@@ -24,7 +24,7 @@
  function docSecundaria(){    
  $('#cargar').load('/colegio/administrador/docentesSecundaria');           
 }
-
+  
 function vistaBoletines(){
 
     document.getElementById('light').style.display='block';
