@@ -100,7 +100,7 @@ class Usuario extends Modelo{
     
     public function verificarUsuario($usuario, $clave) {
         $sql = "SELECT * FROM usuario WHERE usuario=? AND contraseña=?";
-        $clave1= sha1($clave);
+        $clave1= $clave;
         $param = array($usuario,$clave1);
         $this->__setSql($sql);
         $res = $this->consultar($sql, $param);

@@ -252,6 +252,54 @@ class CoordinadorControl extends Controlador{
             
         }
         
+        public function boletines(){
+            try {
+            if($this->verificarSession()){
+            $salon = new Salon();
+            $salones = $salon->leerSalones();
+            $this->vista->set('salones', $salones);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+        public function consolidados(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Consolidados');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+        public function pensiones(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Pensiones');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+       
+         public function seguimientos(){
+            try {
+            if($this->verificarSession()){
+            $salon = new Salon();
+            $salones = $salon->leerSalones();
+            $this->vista->set('salones', $salones);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+       
     
 }
 
