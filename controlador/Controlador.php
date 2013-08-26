@@ -145,6 +145,8 @@ class Controlador {
              }
          }
          
+    
+         
           public function consultaGeneralPersona(){
             try{
            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
@@ -153,12 +155,31 @@ class Controlador {
             $roles = $rolPersona->rolPersona($idPersona);
             $rol=$roles->getIdRol(); 
             $persona = $pers->leerPorId($idPersona);
-            $respuesta = "";
+            $respuesta = "
+             
+            ";
               
              if ($rol == 'D'){ 
-            $respuesta = "";
+                
+          
+                 
+          $respuesta = "";
              
-            $respuesta = ' <div class="contenedorDp" >     
+            $respuesta = '  <table border="0" align="center" width="100%" height="100%">
+              <tr>
+                 <td>    
+                    <div class="formularios" > 
+                     <div class="cab-form">
+                             <table  width="100%" border="0">
+                             <tr>                                     
+                                 <td>Informacion de Perfil</td>
+                             </tr>
+                             </table>
+                             
+                         </div>
+                         <table  width="100%">
+                        <tr> 
+                            <td>    
                             <div class="marcoAvatardoc">
                                 <div class="avatar">
                                     <span class="rounded">
@@ -166,16 +187,40 @@ class Controlador {
                                     </span> 
                                 </div>    
                             </div> 
+                             </td>
+                        </tr>
+                        <tr>
+                            <td>
           ';
             }elseif($rol == 'E'){
-            $respuesta = ' <div class="contenedorDp" >     
-                            <div class="marcoAvatarest">
-                                <div class="avatar">
-                                    <span class="rounded">
-                                        <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
-                                    </span> 
-                                </div>    
-                            </div> 
+            $respuesta = ' 
+            <table border="0" align="center" width="100%" height="100%">
+              <tr>
+                 <td>    
+                    <div class="formularios" > 
+                     <div class="cab-form">
+                             <table  width="100%" border="0">
+                             <tr>                                     
+                                 <td>Informacion de Perfil</td>
+                             </tr>
+                             </table>
+                             
+                         </div>
+                         <table  width="100%">
+                        <tr> 
+                            <td>
+                                  <div class="marcoAvatarest">
+                                      <div class="avatar">
+                                          <span class="rounded">
+                                              <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                                          </span> 
+                                      </div>    
+                                  </div>
+                                     </td>
+                        </tr>
+                        <tr>
+                            <td>
+
           ';
             
             }else{
@@ -183,6 +228,7 @@ class Controlador {
             }
              $respuesta .='    
                                    <table border="0" width="100%" id="inf-Personal"> 
+                                   <tr><td class="color-text-gris">N° de Identificacion : <span>'. strtoupper($persona->getIdPersona()).'</span></td></tr>
                                       <tr><td class="color-text-gris">Nombres : <span>'. strtoupper($persona->getNombres()).'</span></td></tr>
                                        <tr><td class="color-text-gris">Apellidos :<span> '. strtoupper($persona->getPApellido()).' '. strtoupper($persona->getSApellido()).'</span></td></tr>  
                                        <tr><td class="color-text-gris">Sexo :<span>'. strtoupper($persona->getSexo()).'</span></td> </tr>                                        
@@ -193,14 +239,21 @@ class Controlador {
                                      if($rol == 'E'){ 
                                $respuesta .='<tr><td class="color-text-gris"><span><a  href="/colegio/administrador/imprimirMatricula/'.$idPersona.'" target="_blank" >Ficha de Matricula</a></span></td></tr>';
                                         }
-                              $respuesta .='   </table>
-             </div>';
+                              $respuesta .='     </table>
+                    </td>
+                </tr>
+             </table>   
+           </div>
+         </td>
+            ';
              
             if ($rol == 'D'){
 $respuesta .= ' 
      
-<div class="contenedorCentro">
-                 <table aling="right" width="100%"  border="0">
+   
+        <td width="90%" >     
+       <div class="formularios">
+                 <table aling="right" width="100%"  border="0" class="tabla">
        <tr>
            <td align="right" class="color-text-gris" colspan="3"><h3>Datos Academicos del Docente</h3></td>    
        </tr>
@@ -219,7 +272,7 @@ $respuesta .= '
       $cargas = $carga->leerCargasPorDocente($idPersona);
       foreach ($cargas as $carg) { 
         
-          $respuesta .='<tr>
+          $respuesta .='<tr onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
           <td>'.  $carg->getIdSalon().' </td>
          ';
           $materia = new Materia();
@@ -246,7 +299,10 @@ $respuesta .= '
        </tr>   
      
    </table>     
-</div>
+    </td>  
+         </tr>      
+ </table>
+      </div>
 
     ';
             }elseif($rol == 'E'){
@@ -258,10 +314,36 @@ $respuesta .= '
             $grad= $grado->leerGradoPorId($sal->getIdGrado());
             $pensum = new Pensum();
             $pens = $pensum->leerPensum($matr->getIdSalon());
+            $var = "datosAcademicos";
+        
              $respuesta .= ' 
-            <div class="contenedorCentro">
+         
+        <td width="90%" >     
+       <div class="formularios">
+       <div class="cab-form">
+                      <table  width="100%" border="0" >
+                   <tr> 
+                   <td align="right">
+                            <a href="javascript:mostrarAcademico()" class="link-menu">Datos Academicos</a>
+                        </td>
+                        <td align="right">
+                            <a href="javascript:mostrarFamilia()" class="link-menu">familia</a>
+                        </td>
+                         <td  align="right" width="35%">
+                                    <a href="#"onclick="seguimiento()" class="link-menu">Seguimiento Academico y Disciplinario</a>
+                         </td>
+                         <td  align="right">
+                                    <a href="#"onclick="pension()" class="link-menu">Pension</a>
+                         </td>
+                        
+              </table>    
+             </div>
              
-             <table width="95%" align="center" id="inf-Personal" >      
+       <div class="den-form">
+         <div id="carga" style="display:block">Consulte Datos de el Estudiante</div>
+         
+        <div id="datosAcademicos" style="display:none">
+             <table width="100%" align="center" id="inf-Personal" >      
                                           <tr>
                                                <td>Salón :<span>'.$matr->getIdSalon().'</span></td>
                                                    <td>Grado :<span>'.$grad->getNombre(). '</span></td>
@@ -274,13 +356,13 @@ $respuesta .= '
             </tr>
             </table>';
         
-              $respuesta.='<table width="95%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+              $respuesta.='<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
                     <tr class="modo1">
                     <td>Materia</td>
-                    <td>Primer Periodo</td>
-                    <td>Segundo Periodo</td>
-                    <td>Tercer Periodo</td>
-                    <td>Cuarto Periodo</td>
+                    <td>Periodo 1</td>
+                    <td>Periodo 2</td>
+                    <td>Periodo 3</td>
+                    <td>Periodo 4</td>
                     <td>Promedio </td>
                     </tr>
                     ';
@@ -339,13 +421,131 @@ $respuesta .= '
        <tr>
            <td class="color-text-gris" width="30%"><h2>Promedio General : '.$pg. '</h2></td>
        </tr>   
-   </table> '  ;
+   </table>
+ </div>
+   <div id="familia" style="display:none">
+          <h3 align="right">DATOS DE LOS FAMILIARES</h3></br> ';
+            $est = new Estudiante();
+            $acudiente = $est->leerAcudiente($idPersona,$est);
+            $padre = $est->leerPadre($idPersona,$est);
+            $madre = $est->leerMadre($idPersona,$est);
+      $respuesta .= ' 
+          <div style=" float:left; width:30%;  border: 1px solid #d3d6db;"  >
+          <div class="cab-form">
+                             <table  width="100%" border="0">
+                             <tr>                                     
+                                 <td>Datos del Acudiente</td>
+                             </tr>
+                             </table>
+                             
+                         </div>
+          <table id="inf-Personal">
+          <tr>
+          <td class="color-text-gris">N° de Identificacion:<span>'.  $acudiente->getIdAcudiente().'</td>
+          </tr>
+          <tr>
+          <td class="color-text-gris">Nombres:<span>'.  $acudiente->getNombresAcudiente().'</td>
+          </tr>
+           <tr>
+          <td class="color-text-gris">Apellidos:<span>'.  $acudiente->getApellidosAcudiente().'</td>
+          </tr>
+          <tr>
+          <td class="color-text-gris">Ocupacion:<span>'.  $acudiente->getOcupacionAcudiente().'</td>
+          </tr>
+          <tr>
+          <td class="color-text-gris">Telefono:<span>'.  $acudiente->gettelAcudiente().'</td>
+          </tr>
+          <tr>
+          <td class="color-text-gris">Telefono de Oficina:<span>'.  $acudiente->getTelOficinaAcudiente().'</td>
+          </tr>
+          <tr>
+          <td class="color-text-gris">Direccion:<span>'.  $acudiente->getDirAcudiente().'</td>
+          </tr>
+          </table>
+          </div>
+          <div style=" float:left; width:30%; border: 1px solid #d3d6db; margin-left:2%">
+         <div class="cab-form">
+                             <table  width="100%" border="0">
+                             <tr>                                     
+                                 <td>Datos del Padre</td>
+                             </tr>
+                             </table>
+                             
+                         </div>
+           <table id="inf-Personal">
+          <tr>
+           <td class="color-text-gris">N° de Identificacion:<span>'. $padre->getIdPadre().'</td>
+          </tr> 
+          <tr>
+           <td class="color-text-gris">Nombres:<span>'.  $padre->getNombresPadre().'</td>
+          </tr>
+           <tr>
+           <td class="color-text-gris">Apellidos:<span>'.  $padre->getApellidosPadre().'</td>
+          </tr>
+          <tr>
+           <td class="color-text-gris">Ocupacion:<span>'.  $padre->getOcupacionPadre().'</td>
+          </tr>
+          <tr>
+           <td class="color-text-gris">Telefono:<span>'.  $padre->getTelPadre().'</td>
+          </tr>
+          <tr>
+           <td class="color-text-gris">Telefono de Oficina:<span>'.  $padre->getTelOficinaPadre().'</td>
+          </tr>
+          <tr>
+           <td class="color-text-gris">Direccion:<span>'.  $padre->getDirPadre().'</td>
+          </tr>
+          </table>
+          </div>
+          <div style=" float:left; width:30%; border: 1px solid #d3d6db; margin-left:2%">
+          <div class="cab-form">
+                             <table  width="100%" border="0">
+                             <tr>                                     
+                                 <td>Datos de la Madre</td>
+                             </tr>
+                             </table>
+                             
+                         </div>
+           <table id="inf-Personal">
+          <tr>
+           <td class="color-text-gris">N° de Identificacion:<span>'.  $madre->getIdMadre().'</td>
+          </tr>
+          <tr>
+           <td class="color-text-gris">Nombres:<span>'.  $madre->getNombresMadre().'</td>
+          </tr>
+           <tr>
+          <td class="color-text-gris">Apellidos:<span>'.  $madre->getApellidosMadre().'</td>
+          </tr>
+          <tr>
+           <td class="color-text-gris">Ocupacion:<span>'.  $madre->getOcupacionMadre().'</td>
+          </tr>
+          <tr>
+           <td class="color-text-gris">Telefono:<span>'.  $madre->getTelMadre().'</td>
+          </tr>
+          <tr>
+           <td class="color-text-gris">Telefono de Oficina:<span>'.  $madre->getTelOficinaMadre().'</td>
+          </tr>
+          <tr>
+           <td class="color-text-gris">Direccion:<span>'.  $madre->getDirMadre().'</td>
+          </tr>
+          </table>
+          </div>
+      
+     </div>
+    
+ </div><!-- end dentro del form-->
+ 
+     
+       </td>  
+         </tr>      
+ </table>
+ 
+  '  ;
             
             $respuesta.='</div>';   
             }else{
                echo json_encode("<tr> </tr>"); 
             }
-                      
+                 
             if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
             }  else {
