@@ -47,9 +47,7 @@ class InicioControl extends Controlador{
                 $rol = new Rol();
                 $roles = $rol->leerRoles($usuario->getIdPersona());
                 if (count($roles)>1){
-                    $this->setVista('escogeRol');
-                    $this->vista->set('roles',$roles);
-                    return $this->vista->imprimir();
+                   echo json_encode("/colegio/inicio/escogeRol/"); 
                 }else{
                    foreach($roles as $rol) {
                        $this->imprimeRol($rol->getIdRol());
@@ -61,12 +59,27 @@ class InicioControl extends Controlador{
         }   
         }
         
+        public function escogeRol(){
+         try {
+             session_start();
+             $idPersona= $_SESSION['idUsuario'];
+                $rol = new Rol();
+                $roles = $rol->leerRoles($idPersona);
+                $this->vista->set('roles', $roles);
+                $this->vista->set('titulo', 'Escoger Rol');
+                return $this->vista->imprimir();
+            
+        } catch (Exception $exc){
+            echo  json_encode('Error de aplicacion: ' . $exc->getMessage());
+        }   
+        }
+        
         /**
          * Imprime el la Vista de acuerdo al Rol
          * @param type $idRol
          */
-        public function imprimeRol($idRol){
-                      
+        public function imprimeRol($idRol=NULL){
+                      $idRol = isset($_POST['idRol']) ? $_POST['idRol'] : NULL;
                     if ($idRol == 'A'){
                         echo json_encode("/colegio/administrador/usuarioAdministrador");   
                     }elseif ($idRol =='D') {
