@@ -19,7 +19,7 @@ function envio(){
       setTimeout("$('#msg').hide();", 1000);
     }else{
 //esta linea si se moidifica no altera nd? //
-        var url="/colegio/inicio/verificarUsuario/";
+        var url="/colegio/inicio/verificarUsuario";
         var data="usuario="+usuario.value+"&clave="+contraseña.value;
 
         envioJson(url,data,function respuesta(res){   

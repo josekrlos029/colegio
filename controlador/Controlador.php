@@ -78,7 +78,7 @@ class Controlador {
              $password = isset($_POST['password']) ? $_POST['password'] : NULL;
              $user = new Usuario();
              $usuario = $user->leerPorId($idPersona);
-             $passDesc= sha1($password);
+             $passDesc= $password;
              
           if($passDesc != $usuario->getContraseña()){
                 echo json_encode(2); 
@@ -102,8 +102,8 @@ class Controlador {
              $user = new Usuario();
              $usuario = $user->leerPorId($idPersona);
              
-             $passDesc= sha1($passwordActual);
-             $clave= sha1($passwordNew);
+             $passDesc= $passwordActual;
+             $clave= $passwordNew;
               
             if($passDesc != $usuario->getContraseña()){
                 echo json_encode(2); 
@@ -130,7 +130,7 @@ class Controlador {
              $user = new Usuario();
              $usuario = $user->leerPorId($idPersona);
              
-             $passDesc= sha1($password);
+             $passDesc= $password;
              
               if($passDesc != $usuario->getContraseña()){
                 echo json_encode(2); 

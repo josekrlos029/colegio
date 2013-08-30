@@ -47,7 +47,7 @@ class InicioControl extends Controlador{
                 $rol = new Rol();
                 $roles = $rol->leerRoles($usuario->getIdPersona());
                 if (count($roles)>1){
-                   echo json_encode("/colegio/inicio/escogeRol/"); 
+                   echo json_encode("/colegio/inicio/escogeRol"); 
                 }else{
                    foreach($roles as $rol) {
                        $this->imprimeRol($rol->getIdRol());
@@ -78,7 +78,22 @@ class InicioControl extends Controlador{
          * Imprime el la Vista de acuerdo al Rol
          * @param type $idRol
          */
-        public function imprimeRol($idRol=NULL){
+        public function imprimeRol($idRol){
+                      
+                    if ($idRol == 'A'){
+                        echo json_encode("/colegio/administrador/usuarioAdministrador");   
+                    }elseif ($idRol =='D') {
+                         echo json_encode("/colegio/docente/usuarioDocente");
+                    }elseif ($idRol == 'E') {
+                         echo json_encode("/colegio/estudiante/usuarioEstudiante");
+                    }elseif ($idRol == 'C') {
+                         echo json_encode("/colegio/coordinador/usuarioCoordinador");
+                    }elseif ($idRol == 'AC') {
+                         echo json_encode("/colegio/acudiente/usuarioAcudiente");
+                    }                   
+        }
+        
+        public function imprimeRol2(){
                       $idRol = isset($_POST['idRol']) ? $_POST['idRol'] : NULL;
                     if ($idRol == 'A'){
                         echo json_encode("/colegio/administrador/usuarioAdministrador");   
@@ -172,7 +187,6 @@ class InicioControl extends Controlador{
         try {
             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
             $clave = isset($_POST['clave']) ? $_POST['clave'] : NULL;
-            $clave = sha1($clave);
             $usuario = new Usuario();
             $usuario->actualizarContraseña($idPersona, $clave);
             echo json_encode(1);

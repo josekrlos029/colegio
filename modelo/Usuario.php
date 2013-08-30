@@ -148,7 +148,7 @@ class Usuario extends Modelo{
     }
  
     public function verificarAdmin($usuario, $clave) {
-        $sql = "SELECT u.idPersona as idPersona, u.usuario as usuario, u.contraseña as contraseña FROM usuario u, rolespersona r WHERE u.idPersona=r.idPersona AND u.usuario='".$usuario."' AND u.contraseña='".sha1($clave)."' AND r.idRol='A'";
+        $sql = "SELECT u.idPersona as idPersona, u.usuario as usuario, u.contraseña as contraseña FROM usuario u, rolespersona r WHERE u.idPersona=r.idPersona AND u.usuario='".$usuario."' AND u.contraseña='".$clave."' AND r.idRol='A'";
         $this->__setSql($sql);
         $res = $this->consultar($sql);
         $usuario = NULL;

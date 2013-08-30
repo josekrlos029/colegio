@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="../../utiles/css/login.css" rel="stylesheet" type="text/css" media="screen"/>
-<link href="../../utiles/css/general.css" rel="stylesheet" type="text/css" media="screen"/>
-<script src="../../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
-<script src="../../utiles/js/envios.js" type="text/javascript" ></script>
-<script type="text/javascript">
-  
+   <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
+   
+        <title><?php echo $titulo; ?></title>
+        <script>
 function envio(){ 
  var x = $("#msg");
  x.html ("<p>Cargando...</p>");
@@ -20,7 +15,7 @@ function envio(){
       setTimeout("$('#msg').hide();", 1000);
     }else{
 //esta linea si se moidifica no altera nd? //
-        var url="/colegio/inicio/imprimeRol/";
+        var url="/colegio/inicio/imprimeRol2/";
         var data="idRol="+idRol.value;
 
         envioJson(url,data,function respuesta(res){   
