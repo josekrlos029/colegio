@@ -426,9 +426,9 @@ $respuesta .= '
    <div id="familia" style="display:none">
           <h3 align="right">DATOS DE LOS FAMILIARES</h3></br> ';
             $est = new Estudiante();
-            $acudiente = $est->leerAcudiente($idPersona,$est);
-            $padre = $est->leerPadre($idPersona,$est);
-            $madre = $est->leerMadre($idPersona,$est);
+            $est->leerAcudiente($idPersona,$est);
+            $est->leerPadre($idPersona,$est);
+            $est->leerMadre($idPersona,$est);
       $respuesta .= ' 
           <div style=" float:left; width:30%;  border: 1px solid #d3d6db;"  >
           <div class="cab-form">
@@ -441,25 +441,25 @@ $respuesta .= '
                          </div>
           <table id="inf-Personal">
           <tr>
-          <td class="color-text-gris">N° de Identificacion:<span>'.  $acudiente->getIdAcudiente().'</td>
+          <td class="color-text-gris">N° de Identificacion:<span>'.  $est->getIdAcudiente().'</td>
           </tr>
           <tr>
-          <td class="color-text-gris">Nombres:<span>'.  $acudiente->getNombresAcudiente().'</td>
+          <td class="color-text-gris">Nombres:<span>'.  $est->getNombresAcudiente().'</td>
           </tr>
            <tr>
-          <td class="color-text-gris">Apellidos:<span>'.  $acudiente->getApellidosAcudiente().'</td>
+          <td class="color-text-gris">Apellidos:<span>'.  $est->getApellidosAcudiente().'</td>
           </tr>
           <tr>
-          <td class="color-text-gris">Ocupacion:<span>'.  $acudiente->getOcupacionAcudiente().'</td>
+          <td class="color-text-gris">Ocupacion:<span>'.  $est->getOcupacionAcudiente().'</td>
           </tr>
           <tr>
-          <td class="color-text-gris">Telefono:<span>'.  $acudiente->gettelAcudiente().'</td>
+          <td class="color-text-gris">Telefono:<span>'.  $est->gettelAcudiente().'</td>
           </tr>
           <tr>
-          <td class="color-text-gris">Telefono de Oficina:<span>'.  $acudiente->getTelOficinaAcudiente().'</td>
+          <td class="color-text-gris">Telefono de Oficina:<span>'.  $est->getTelOficinaAcudiente().'</td>
           </tr>
           <tr>
-          <td class="color-text-gris">Direccion:<span>'.  $acudiente->getDirAcudiente().'</td>
+          <td class="color-text-gris">Direccion:<span>'.  $est->getDirAcudiente().'</td>
           </tr>
           </table>
           </div>
@@ -474,25 +474,25 @@ $respuesta .= '
                          </div>
            <table id="inf-Personal">
           <tr>
-           <td class="color-text-gris">N° de Identificacion:<span>'. $padre->getIdPadre().'</td>
+           <td class="color-text-gris">N° de Identificacion:<span>'. $est->getIdPadre().'</td>
           </tr> 
           <tr>
-           <td class="color-text-gris">Nombres:<span>'.  $padre->getNombresPadre().'</td>
+           <td class="color-text-gris">Nombres:<span>'.  $est->getNombresPadre().'</td>
           </tr>
            <tr>
-           <td class="color-text-gris">Apellidos:<span>'.  $padre->getApellidosPadre().'</td>
+           <td class="color-text-gris">Apellidos:<span>'.  $est->getApellidosPadre().'</td>
           </tr>
           <tr>
-           <td class="color-text-gris">Ocupacion:<span>'.  $padre->getOcupacionPadre().'</td>
+           <td class="color-text-gris">Ocupacion:<span>'.  $est->getOcupacionPadre().'</td>
           </tr>
           <tr>
-           <td class="color-text-gris">Telefono:<span>'.  $padre->getTelPadre().'</td>
+           <td class="color-text-gris">Telefono:<span>'.  $est->getTelPadre().'</td>
           </tr>
           <tr>
-           <td class="color-text-gris">Telefono de Oficina:<span>'.  $padre->getTelOficinaPadre().'</td>
+           <td class="color-text-gris">Telefono de Oficina:<span>'.  $est->getTelOficinaPadre().'</td>
           </tr>
           <tr>
-           <td class="color-text-gris">Direccion:<span>'.  $padre->getDirPadre().'</td>
+           <td class="color-text-gris">Direccion:<span>'.  $est->getDirPadre().'</td>
           </tr>
           </table>
           </div>
@@ -507,25 +507,25 @@ $respuesta .= '
                          </div>
            <table id="inf-Personal">
           <tr>
-           <td class="color-text-gris">N° de Identificacion:<span>'.  $madre->getIdMadre().'</td>
+           <td class="color-text-gris">N° de Identificacion:<span>'.  $est->getIdMadre().'</td>
           </tr>
           <tr>
-           <td class="color-text-gris">Nombres:<span>'.  $madre->getNombresMadre().'</td>
+           <td class="color-text-gris">Nombres:<span>'.  $est->getNombresMadre().'</td>
           </tr>
            <tr>
-          <td class="color-text-gris">Apellidos:<span>'.  $madre->getApellidosMadre().'</td>
+          <td class="color-text-gris">Apellidos:<span>'.  $est->getApellidosMadre().'</td>
           </tr>
           <tr>
-           <td class="color-text-gris">Ocupacion:<span>'.  $madre->getOcupacionMadre().'</td>
+           <td class="color-text-gris">Ocupacion:<span>'.  $est->getOcupacionMadre().'</td>
           </tr>
           <tr>
-           <td class="color-text-gris">Telefono:<span>'.  $madre->getTelMadre().'</td>
+           <td class="color-text-gris">Telefono:<span>'.  $est->getTelMadre().'</td>
           </tr>
           <tr>
-           <td class="color-text-gris">Telefono de Oficina:<span>'.  $madre->getTelOficinaMadre().'</td>
+           <td class="color-text-gris">Telefono de Oficina:<span>'.  $est->getTelOficinaMadre().'</td>
           </tr>
           <tr>
-           <td class="color-text-gris">Direccion:<span>'.  $madre->getDirMadre().'</td>
+           <td class="color-text-gris">Direccion:<span>'.  $est->getDirMadre().'</td>
           </tr>
           </table>
           </div>

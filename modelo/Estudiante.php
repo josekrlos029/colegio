@@ -721,10 +721,10 @@ class Estudiante extends Persona {
     public function leerPadre($idPersona, Estudiante $estudiante){
         $sql = "SELECT p.id_padre,p.nombre,p.apellido, p.ocupacion,p.telefono,p.tel_oficina,p.direccion FROM padre p , padre_estudiante pe WHERE p.id_padre= pe.id_padre AND pe.id_estudiante='".$idPersona."'";
         $this->__setSql($sql);
-     $estudiante=NULL;
+     
         $resultado = $this->consultar($sql);
         foreach ($resultado as $fila) {
-              $estudiante  = new Estudiante();
+              
             $this->mapearPadre($estudiante, $fila);
             
         }return $estudiante;
@@ -735,7 +735,7 @@ class Estudiante extends Persona {
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         foreach ($resultado as $fila) {
-             $estudiante  = new Estudiante();
+            
             $this->mapearMadre($estudiante, $fila);
             
         }return $estudiante;
@@ -745,9 +745,9 @@ class Estudiante extends Persona {
         $sql = "SELECT a.id_acudiente,a.nombre,a.apellido, a.ocupacion,a.telefono,a.tel_oficina,a.direccion FROM acudiente a , acudiente_estudiante ae WHERE a.id_acudiente= ae.id_acudiente AND ae.id_persona='".$idPersona."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
-         $estudiante=NULL;
+        
         foreach ($resultado as $fila) {
-            $estudiante  = new Estudiante();
+            
             $this->mapearAcudiente($estudiante, $fila);
             
         }
