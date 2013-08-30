@@ -198,6 +198,8 @@ function envio2(){
 //MATRICULA
 var idSalon = document.getElementById("idSalon");
 var jornada = document.getElementById("jornada");
+//var foto = document.getElementById("canvas")
+var foto = $("#foto");
 //FIN MATRICULA
 
  if (idPersona.value=="" || tipoDocumento.value=="" || lugarExpedicion.value=="" || fechaExpedicion.value=="" || nombres.value==""  || pApellido.value=="" || sApellido.value=="" || sexo.value=="" || tipoSanguineo.value=="" || eps.value=="" || telefono.value=="" || correo.value=="" ){
@@ -233,7 +235,7 @@ var jornada = document.getElementById("jornada");
                  "&idPadre="+idPadre.value+"&nombresPadre="+nombresPadre.value+"&apellidosPadre="+apellidosPadre.value+"&ocupacionPadre="+ocupacionPadre.value+"&telPadre="+telPadre.value+"&telOficinaPadre="+telOficinaPadre.value+"&dirPadre="+dirPadre.value+
                  "&idMadre="+idPadre.value+"&nombresMadre="+nombresMadre.value+"&apellidosMadre="+apellidosMadre.value+"&ocupacionMadre="+ocupacionMadre.value+"&telMadre="+telMadre.value+"&telOficinaMadre="+telOficinaMadre.value+"&dirMadre="+dirMadre.value+
                  "&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacionAcudiente="+ocupacionPadre.value+"&telPadre="+telAcudiente.value+"&telOficinaAcudiente="+telOficinaAcudiente.value+"&dirAcudiente="+dirAcudiente.value+
-                 "&idSalon="+idSalon.value+"&jornada="+jornada.value;
+                 "&idSalon="+idSalon.value+"&jornada="+jornada.value+"&foto="+foto.attr("src");
         envioJson2(url,data,function respuesta(res){   
             if (res === 1){
                     x.html ("<p>Estudiante Registrado y Matriculado Correctamente</p>");
@@ -256,6 +258,68 @@ var jornada = document.getElementById("jornada");
             }
          });
     }   
+}
+window.onload = function() {
+
+    //Compatibility
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+
+    var canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d"),
+        video = document.getElementById("video"),
+        btnStart = document.getElementById("btnStart"),
+        btnStop = document.getElementById("btnStop"),
+        btnPhoto = document.getElementById("btnPhoto"),
+        videoObj = {
+            video: true,
+            audio: true
+        };
+
+    btnStart.addEventListener("click", function() {
+        var localMediaStream;
+
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia(videoObj, function(stream) {              
+                video.src = (navigator.webkitGetUserMedia) ? window.webkitURL.createObjectURL(stream) : stream;
+                localMediaStream = stream;
+                
+            }, function(error) {
+                console.error("Video capture error: ", error.code);
+            });
+
+            btnStop.addEventListener("click", function() {
+                localMediaStream.stop();
+            });
+
+            btnPhoto.addEventListener("click", function() {
+                limpiar(); 
+                context.drawImage(video, 0, 0, 320, 240);
+               var img = document.getElementById("imagen");
+               img.appendChild(convertCanvasToImage(canvas));
+                $("#imagen2").append($("#foto").attr("src"));
+            });
+        }
+    });
+};
+
+function convertCanvasToImage(canvas) {
+	var image = new Image();
+	image.src = canvas.toDataURL();
+        image.setAttribute('id','foto');
+        //image.src=image.src.replace("image/png",'image/octet-stream');
+	return image;
+}
+function abrir(){
+
+    document.getElementById('light').style.display='block';
+    document.getElementById('fade').style.display='block'
+
+}
+function limpiar(){
+        var canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        $("#imagen").html(" ");
 }
 </script>
     </head>
@@ -535,6 +599,11 @@ var jornada = document.getElementById("jornada");
                              </select></td>
                 </tr>
                 <tr>
+                    <td align="right" width="40%"><button class="button large green" id="insertarImagen" onclick="abrir()">Insetar Imagen</button></td>
+                    <td><p id="imagen" style="float: left;"><img id="foto" src="" /></p></td>
+                    <td><p id="imagen2" style="float: left;"></p></td>
+                </tr>
+                <tr>
                     <td align="right" width="40%" >Activar Matricula:</td>
                     <td><input name="activarMatricula" id="activarMatricula" type="checkbox" required/></td>
                 </tr>
@@ -555,7 +624,27 @@ var jornada = document.getElementById("jornada");
 </li> 
 
 </ul>
-
+<div id="fade" class="overlay"></div>
+<div id="light" class="modal">
+  <div style="float:right">
+      <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
+ </div>
+     <div style="margin: 0 auto;" id="tablaConsulta">
+         <h1 style="margin-left: 430px">Capturar Foto</h1>
+          <table border="0" style="margin: 0 auto; width: 50%;" >
+              <article>
+            <video  id="video" width="320" height="200" autoplay></video>
+            <section style="float: left;">
+                <button id="btnStart">Encender WebCam</button>
+                <button id="btnStop">Pausar</button>            
+                <button id="btnPhoto">Tomar Foto</button>
+            </section>
+            <canvas id="canvas" width="320" height="240" style="float: left;"></canvas>
+        </article>
+              </tr>
+          </table>
+      </div>
+</div>
  <script type="text/javascript">
  $("#accordion > li > span").click(function(){
  if(false == $(this).next().is(':visible')) {

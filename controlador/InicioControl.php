@@ -268,7 +268,11 @@ class InicioControl extends Controlador{
                          header("Location: /colegio/docente/usuarioDocente");
                     }elseif ($rol->getIdRol() == 'E') {
                          header("Location: /colegio/estudiante/usuarioEstudiante");
-                    }       
+                    }elseif ($rol->getIdRol() == 'C') {
+                         header("Location: /colegio/coordinador/usuarioCoordinador");
+                    }elseif ($rol->getIdRol() == 'AC') {
+                         header("Location: /colegio/acudiente/usuarioAcudiente");
+                    }            
                        
                     }
                 } 

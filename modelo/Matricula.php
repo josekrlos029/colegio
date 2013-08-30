@@ -17,7 +17,7 @@ class Matricula extends Modelo{
     private $idSalon;
     private $jornada;
     private $fecha;
-    private $añoLectivo;
+    private $anoLectivo;
     
     public function getIdPersona() {
         return $this->idPersona;
@@ -51,12 +51,12 @@ class Matricula extends Modelo{
         $this->fecha = $fecha;
     }
 
-    public function getAñoLectivo() {
-        return $this->añoLectivo;
+    public function getAnoLectivo() {
+        return $this->anoLectivo;
     }
 
-    public function setAñoLectivo($añoLectivo) {
-        $this->añoLectivo = $añoLectivo;
+    public function setAnoLectivo($anoLectivo) {
+        $this->anoLectivo = $anoLectivo;
     }
     
     protected static function crearFecha($entrada) {
@@ -82,7 +82,7 @@ class Matricula extends Modelo{
             $matricula->setFecha(self::crearFecha($props['fecha_matricula']));
         }
         if (array_key_exists('año_lectivo', $props)) {
-            $matricula->setAñoLectivo($props['año_lectivo']);
+            $matricula->setAnoLectivo($props['ano_lectivo']);
         }
     }
     
@@ -95,7 +95,7 @@ class Matricula extends Modelo{
             ':idSalon' => $mat->getIdSalon(),
             ':jornada' => $mat->getJornada(),
             ':fecha' => $mat->getFecha(),
-            ':anoLectivo' => $this->getAñoLectivo()
+            ':anoLectivo' => $this->getAnoLectivo()
         );
         return $parametros;
     }

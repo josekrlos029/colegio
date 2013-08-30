@@ -99,7 +99,7 @@ class Nota extends Modelo {
             ':segundoP' => $mat->getIdSalon(),
             ':tercerP' => $mat->getJornada(),
             ':cuartoP' => $mat->getFecha(),
-            ':definitiva' => $this->getAñoLectivo()
+            ':definitiva' => $this->getAnoLectivo()
         );
         return $parametros;
     }

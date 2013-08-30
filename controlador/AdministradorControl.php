@@ -1410,6 +1410,7 @@ class AdministradorControl extends Controlador{
              
              $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
              $jornada = isset($_POST['jornada']) ? $_POST['jornada'] : NULL;
+             $foto = isset($_POST['foto']) ? $_POST['foto'] : NULL;
              
              
              $estado='0';
@@ -1422,6 +1423,13 @@ class AdministradorControl extends Controlador{
              if($persona != NULL){
                  echo json_encode(2);
              }else{
+                 $foto = json_decode($foto);
+                 $foto = $this->limpia_espacios($foto);
+             $contents= file_get_contents($foto);
+             $savefile = fopen($idPersona.'.png', 'w');
+             fwrite($savefile, $contents);
+             fclose($savefile);    
+                 
              $estudiante->setIdPersona($idPersona);
              $estudiante->setTipoDocumento($tipoDocumento);
              $estudiante->setLugarExpedicion($lugarExpedicion);
@@ -1513,7 +1521,7 @@ class AdministradorControl extends Controlador{
                     $mat->setIdSalon($idSalon);
                     $mat->setJornada($jornada);
                     $mat->setFecha($FechaTxt);
-                    $mat->setAñoLectivo(strval($añoLectivo));
+                    $mat->setAnoLectivo(strval($añoLectivo));
                     $mat->matricularEstudiante($mat);
 
              
@@ -1539,7 +1547,10 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }     
         }
-        
+        function limpia_espacios($cadena){
+            $cadena = str_replace(' ', '', $cadena);
+            return $cadena;
+        }   
         /**
          * proceso de consultar persona/estudiante por numero de identificacion
          */
@@ -1780,7 +1791,7 @@ class AdministradorControl extends Controlador{
              $mat->setIdSalon($idSalon);
              $mat->setJornada($jornada);
              $mat->setFecha($FechaTxt);
-             $mat->setAñoLectivo(strval($añoLectivo));
+             $mat->setAnoLectivo(strval($añoLectivo));
              $mat->matricularEstudiante($mat);
              echo json_encode("1");
              
@@ -2144,7 +2155,7 @@ class AdministradorControl extends Controlador{
                 $grado = new Grado();
                 $grad = $grado->leerGradoPorId($sal->getIdGrado());
                 $pensum = new Pensum();
-                $pens = $pensum->leerPensum($matr->getIdSalon());
+                $pens = $pensum->leerPensum($idSalon);
                 
                 if ($grad->getIdGrado() == 'p1' || $grad->getIdGrado() == 'p2' || $grad->getIdGrado() == 'p3'){
                     $seccion = 'PREESCOLAR';
@@ -2206,7 +2217,7 @@ class AdministradorControl extends Controlador{
                 $pdf->SetXY(5,6);
                 $pdf->Cell(3,0.5,"GRUPO: 01",1,0,"C");
                 $pdf->SetXY(8,6);
-                $pdf->Cell(12,0.5,utf8_decode("JORNADA: ".$matr->getJornada()."     AÑO LECTIVO: ".$matr->getAñoLectivo()."   ".$periodo3." PERIODO"),1,0,"C");
+                $pdf->Cell(12,0.5,utf8_decode("JORNADA: ".$matr->getJornada()."     AÑO LECTIVO: ".$matr->getAnoLectivo()."   ".$periodo3." PERIODO"),1,0,"C");
                 $pdf->SetXY(1,6.5);
 
                 $pdf->Cell(4,0.5,$seccion,1,0,"C");
@@ -2495,7 +2506,7 @@ class AdministradorControl extends Controlador{
             $direccion_acu=$est->getDirAcudiente();
             
             $grado2=$grad->getNombre();   
-            $año1 = $mat->getAñoLectivo();
+            $año1 = $mat->getAnoLectivo();
             $jornada = $mat->getJornada();
             
             list($ano,$mes,$dia) = explode("-",$fecha_nac);

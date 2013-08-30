@@ -595,7 +595,7 @@ class Estudiante extends Persona {
             ':idMadre' => $estudiante->getIdMadre()));
     }
      public function estudianteAcudiente(Estudiante $estudiante){
-        $sql = "INSERT INTO acudiente_estudiante (id_estudiante,id_acudiente) VALUES (:idPersona,:idAcudiente)";
+        $sql = "INSERT INTO acudiente_estudiante (id_persona,id_acudiente) VALUES (:idPersona,:idAcudiente)";
         $this->__setSql($sql);
         $this->ejecutar(array(
             ':idPersona' => $estudiante->getIdPersona(),
