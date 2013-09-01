@@ -103,28 +103,6 @@ function actualizarPersona(){
     }   
 }
 </script>
-  <p>&nbsp;</p>
-            </br>
-           <p>&nbsp;</p>
-        <div id="encapsulador">
-            <div id="mensaje" hidden> </div>
-                <div id="cabecera" class="green">
-                    
-                    <div class="color-text-blanco" id="title-cab">
-                        <table width="90%" align="center" border="0" cellspacing="0" cellpadding="2">
-                         <tr>   
-                            <td align="right">   
-                                <h1>Consolidado por Salones</h1>
-                            </td>
-                         </tr>
-                        </table>
-                    </div>
-                    
-                </div>
-        </div> 
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                
                 <table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
                <td align="center" class="color-text-gris" colspan="11"><h1>Estudiantes Preescolar</h1></td>

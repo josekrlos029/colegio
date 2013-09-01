@@ -69,6 +69,29 @@ var data="id="+id;
  
       
 }
+function eliminar(id){
+
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+var y= $("#tablaConsulta"); 
+var url="/colegio/administrador/eliminarNotificacion";
+var data="id="+id;
+ envioJson(url,data,function respuesta(res){   
+            if (res == 1){
+                x.html ( "<p>Mensaje Eliminado Correctamente</p>");
+                exito();
+                ocultar();
+                document.location.href="/colegio/administrador/notificaciones";
+            }else{
+                x.html ( "<p>"+res+"</p>");
+                ocultar();
+            }
+         });
+ 
+      
+}
 
 </script>
 
@@ -130,7 +153,7 @@ var data="id="+id;
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type = "checkbox" id = "est"  />Estudiantes</td>
+                    <td><input type = "checkbox" id = "est"  />Estudiantes y Acudientes</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -160,7 +183,7 @@ var data="id="+id;
                     <td>Fecha de Registro</td>
                     <td>Estado</td>
                     <td>Consultar</td>
-                    <td>Modificar</td>
+                    <td>Eliminar</td>
                 </tr>
               
         
@@ -175,7 +198,7 @@ var data="id="+id;
                     <td><?php echo $not->getHora();?></td>
                     <?php 
                     if( $not->getDestino()== 1){
-                    $destino= "ESTUDIANTES";
+                    $destino= "ESTUDIANTES Y ACUDIENTES";
                     }
                     if($not->getDestino() == 2){
                     $destino = "DOCENTES";
@@ -195,7 +218,7 @@ var data="id="+id;
                     
                     ?>                    
                   <td align="center"><a href="#" onclick="consulta  ('<?=$not->getId()?>')"><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
-                    <td align="center"><a href="#" onclick="Actualizar('<?=$not->getId()?>')"><img src="../utiles/imagenes/iconos/editarPersona.png"/></a></td> 
+                    <td align="center"><a href="#" onclick="eliminar('<?=$not->getId()?>')"><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a></td> 
                 </tr>
                 <?php } ?>
            

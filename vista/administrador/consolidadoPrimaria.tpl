@@ -103,44 +103,19 @@ function actualizarPersona(){
     }   
 }
 </script>
-  <p>&nbsp;</p>
-            </br>
-           <p>&nbsp;</p>
-        <div id="encapsulador">
-            <div id="mensaje" hidden> </div>
-                <div id="cabecera" class="green">
-                    
-                    <div class="color-text-blanco" id="title-cab">
-                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
-                         <tr>   
-                            <td align="right">   
-                                <h1>Consolidado por Salones</h1>
-                            </td>
-                         </tr>
-                        </table>
-                    </div>
-                    
-                </div>
-        </div> 
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
+  
                 
                 <table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
                <td align="center" class="color-text-gris" colspan="11"><h1>Estudiantes Primaria</h1></td>
            </tr>
            </table>
-                  <p>&nbsp;</p>
-             <div  id="menu">   
-                  <?php foreach ($primaria as $salon) { ?>    
-                   <li><a href="#" onClick="leerEstudiantes('<?=$salon->getIdSalon()?>')"><?php echo $salon->getIdSalon();?></a></li>
-                  <?php } ?>
-              </div>   
-                  <div>   
-                      <table>
+                   <p>&nbsp;</p>
+                  <div style="margin-left: 5%">
+                  <table width="30%">
                           <tr>
-                          <td><h5>SELECCIONE EL PERIODO</h5></td>
-                          <td><select id="periodo" >
+                          <td>Seleccione Periodo:</td>
+                          <td><select id="periodo" class="box-text">
                           <option>----</option>
                           <option>PRIMERO</option>
                           <option>SEGUNDO</option>
@@ -150,11 +125,16 @@ function actualizarPersona(){
                           </select></td>
                           </tr>
                       </table>
-                      
-              </div>
-              <p>&nbsp;</p>
-        
-           
+                  </div>    
+                
+                <p>&nbsp;</p>
+             <div  id="menu">   
+                  <?php foreach ($primaria as $salon) { ?>    
+                   <li><a href="#" onClick="leerEstudiantes('<?=$salon->getIdSalon()?>')"><?php echo $salon->getIdSalon();?></a></li>
+                  <?php } ?>
+              </div>   
+                  <div>   
+                  
                 <div id="tablaEstudiantes" style="width: 100%">
                <h1  style='margin-left:5%'>Seleccione un Salon...</h1>
                </div>

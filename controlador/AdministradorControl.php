@@ -798,21 +798,31 @@ class AdministradorControl extends Controlador{
              try{
            $id = isset($_POST['id']) ? $_POST['id'] : NULL;  
            
-           $noti = new Notificacion();
-           $not = $noti->leerPorId($id);
+           $notificacion = new Notificacion();
+           $not = $notificacion->leerPorId($id);
          $respuesta="";
-             
-           $respuesta.='             <table border="0" width="100%" id="inf-Personal"> 
-                                      <tr><td class="color-text-gris">Asunto : <span>'. strtoupper($not->getAsunto()).'</span></td></tr>
-                                      <tr><td class="color-text-gris">Mensaje :<span> '. strtoupper($not->getMensaje()).'</td></tr>  
-                                       <tr><td class="color-text-gris">Fecha del Evento :<span>'. strtoupper($not->getFecha_evento()).'</span></td> </tr>                                        
-                                       <tr><td class="color-text-gris">Hora : <span>'. strtoupper($not->getHora()).'</span></td></tr> 
-                                       <tr><td class="color-text-gris">Destino :<span>'. strtoupper($not->getDestino()).'</span></td</tr> 
-                                       <tr><td class="color-text-gris">Fecha de Registro :<span>'. strtoupper($not->getFecha_ingreso()).'</span></td></tr>
+             if( $not->getDestino()== 1){
+                    $destino= "ESTUDIANTES Y ACUDIENTES";
+                    }
+                    if($not->getDestino() == 2){
+                    $destino = "DOCENTES";
+                    }
+                    if($not->getDestino()== 3){
+                    $destino = "ESTUDIANTE Y DOCENTES";
+                    }
+           $respuesta.='      
+                        
+                           <table border="0" width="100%" id="inf-Personal"> 
+                                      <tr><td>Asunto : <span>'.$not->getAsunto().'</span></td></tr>
+                                      <tr><td>Mensaje :<span> '.$not->getMensaje().'</td></tr>  
+                                       <tr><td> Fecha del Evento :<span>'.$not->getFecha_evento().'</span></td> </tr>                                        
+                                       <tr><td>Hora : <span>'.$not->getHora().'</span></td></tr> 
+                                       <tr><td>Destino :<span>'.$destino.'</span></td</tr> 
+                                       <tr><td>Fecha de Registro :<span>'.$not->getFecha_ingreso().'</span></td></tr>
                        
                                 </table>
              ';
-        
+          
             if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
             } else {
@@ -822,6 +832,20 @@ class AdministradorControl extends Controlador{
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
         }
+        
+        public function  eliminarNotificacion(){
+             try{
+           $id = isset($_POST['id']) ? $_POST['id'] : NULL;  
+           
+           $notificacion = new Notificacion();
+           $not = $notificacion->eliminar($id);
+         
+            echo json_encode(1);
+           } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+        }
+         
 
 
 

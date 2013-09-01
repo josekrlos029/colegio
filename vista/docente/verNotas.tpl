@@ -111,7 +111,7 @@ $(function(){
         <td align="center"><?php echo $fila['tercerP'];?></td>
         <td align="center"><?php echo $fila['cuartoP'];?></td>
         <td align="center"><?php echo $fila['def'];?></td>
-        <?php  if($fila['def']>='3'){   ?>
+        <?php  if($fila['def']>='30'){   ?>
         <td align="center" ><img src="../utiles/imagenes/iconos/exitoCalificacion.png"/></td>
         <?php }else{ ?>
         <td align="center"><img src="../utiles/imagenes/iconos/errorCalificacion.png" /></td>

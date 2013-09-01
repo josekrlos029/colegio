@@ -127,17 +127,23 @@ private function mapearNotificaciones(Notificacion $notificacion, array $props) 
         }
         return $noti;
     }
-public function leerPorId($id) {
+public function leerPorId($id) { 
+   
         $sql = "SELECT * FROM notificacion WHERE id='".$id."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $noti = array();
+        $notificacion=NULL;
         foreach ($resultado as $fila) {
             $notificacion = new Notificacion();
             $this->mapearNotificaciones($notificacion, $fila);
-            $noti[$notificacion->getId()] = $notificacion;
         }
-        return $noti;
+        return $notificacion;
+    }
+    public function eliminar($id) { 
+        $sql = "DELETE  FROM notificacion WHERE id='".$id."'";
+         $this->__setSql($sql);
+        $this->ejecutar();    
     }
 
 public function leerPorDestino($destino1,$destino2) {

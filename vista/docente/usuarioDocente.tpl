@@ -41,23 +41,23 @@ function funcionesAcademicas(){
      <div class="cabecera">
 	<?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
     </div>
-</br>
 
-<table border="0" align="center" width="80%" >
- <tr>
-  <td width="40%" >
+
+ <div style="margin-top: 3%; position: relative; width: 100%;"> 
+    <div style="position: relative; width: 100%; padding-top:10px; padding-bottom: 3%;">
+        <table border="0" align="center" width="90%" >
+         <tr>
+            <td width="40%" >
   Hola <?php echo $docente->getNombres();?> Bienvenido(a) a tu Cuenta.</br> 
-  <img src="../utiles/imagenes/tag_docente.png"/>
+  <a href="/colegio/docente/usuarioDocente"><img src="../utiles/imagenes/tag_docente.png"/></a>
    <?php include HOME . DS . 'includes' . DS . 'fecha.php'; ?>
   </td>
-  <td align="right" class="color-text-gris"><h1>Gestion Academica Del Docente</h1></td>
+  <td align="right" class="color-text-gris"><h1><?php echo $docente->getNombres()." ". $docente->getPApellido()." ".$docente->getSApellido(); ?></h1></td>
 </tr>
 </table >
-</br>
-<hr>
-
+</div>
  <div style="margin-top:0%; position: relative; width:100%; height: 100%;">  
-        <table border="0" align="center" width="80%" height="100%">
+        <table border="0" align="center" width="90%" height="100%">
                  <tr>
                  <td>
                      <div class="formularios">
@@ -84,14 +84,12 @@ function funcionesAcademicas(){
                         <tr>
                             <td>
                       <table border="0" width="100%" id="inf-Personal"> 
-                                       <tr><td class="color-text-rojo">Nombres:
-                                       <?php echo $docente->getNombres(); ?></td></tr>
-                                       <tr><td class="color-text-rojo">Apellidos:<?php echo $docente->getPApellido()." ".$docente->getSApellido(); ?></td></tr>  
-                                       <tr><td class="color-text-rojo">Sexo:<?php echo $docente->getSexo(); ?></td> </tr>                                        
-                                       <tr><td class="color-text-rojo">Telefono:<?php echo $docente->getTelefono(); ?></td></tr> 
-                                       <tr><td class="color-text-rojo">Direccion:<?php echo $docente->getDireccion(); ?></td</tr> 
-                                       <tr><td class="color-text-rojo">Correo:<?php echo $docente->getCorreo(); ?></td></tr>
-                                       <tr><td class="color-text-rojo">Fecha De Nacimiento:<?php echo $docente->getFNacimiento()->format('Y-m-d'); ?></td></tr>
+                 
+                                       <tr><td>Sexo:<span><?php echo $docente->getSexo(); ?></td> </span></tr>                                        
+                                       <tr><td>Telefono:<span><?php echo $docente->getTelefono(); ?></td></span></tr> 
+                                       <tr><td>Direccion:<span><?php echo $docente->getDireccion(); ?></td></span></tr> 
+                                       <tr><td>Correo:<span><?php echo $docente->getCorreo(); ?></td></span></tr>
+                                       <tr><td>Fecha De Nacimiento:<span><?php echo $docente->getFNacimiento()->format('Y-m-d'); ?></td></span></tr>
                                      
                    </table>
                     </td>
@@ -136,7 +134,17 @@ function funcionesAcademicas(){
          </tr>      
  </table>
       </div>
+</div>
+         <div id="fade" class="overlay"></div>
+            <div id="light" class="modal">
+                <div style="float:right">
+                    <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
+               </div>
+                  <div id="tablaConsulta">
 
+                  </div>
+
+            </div>
  </body>
   <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>

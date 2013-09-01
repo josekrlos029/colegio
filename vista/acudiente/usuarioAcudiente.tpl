@@ -116,7 +116,7 @@ var data="idPersona="+idPersona;
                                 <div class="marcoAvatarest">
                                     <div class="avatar">
                                     <span class="rounded">
-                                    <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                                        <a href="/colegio/acudiente/usuarioAcudiente"><img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png"></a>
                                     </span> 
                                     </div>    
                                     </div>   
@@ -125,9 +125,7 @@ var data="idPersona="+idPersona;
                         <tr>
                             <td>
                              <table border="0" width="100%" id="inf-Personal"> 
-                                                <tr>
-                                                 <td>N° de Identificacion:<span><?php echo " ".$acu->getId_acudiente(); ?></span></td>
-                                               </tr>  
+                     
                                                <tr>
                                                  <td>Ocupacion:<span><?php echo " ".$acu->getOcupacion(); ?></span></td>
                                                </tr>  
@@ -153,7 +151,7 @@ var data="idPersona="+idPersona;
                       <table  width="100%" border="0">
                            <tr> 
                                <td></td>
-                               
+                              
                                 <td width="20%" align="right">
                                     <a href="#"onclick="funcionesAcademicas()" class="link-menu">Funciones Academicas</a>
                                 </td>
@@ -235,13 +233,3 @@ var data="idPersona="+idPersona;
 
   <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>    
-  <!-- 
- <td width="20%" align="right">
-                                    <a href="#"onclick="datosAcademicos()" class="link-menu">Resultados Academicos</a>
-                                </td>
-                                <td width="30%" align="right">
-                                    <a href="#"onclick="seguimiento()" class="link-menu">Seguimiento Academico y Disciplinario</a>
-                                </td>
-                                <td width="10%" align="right">
-                                    <a href="#"onclick="pension()" class="link-menu">Pensión</a>
-                              </td>-->

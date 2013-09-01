@@ -82,7 +82,7 @@ class Matricula extends Modelo{
             $matricula->setFecha(self::crearFecha($props['fecha_matricula']));
         }
         if (array_key_exists('año_lectivo', $props)) {
-            $matricula->setAnoLectivo($props['ano_lectivo']);
+          $matricula->setAnoLectivo($props['año_lectivo']);
         }
     }
     

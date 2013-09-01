@@ -1,5 +1,24 @@
-
-   <table aling="center" width="100%"  border="0">
+<script type="text/javascript">
+function consulta(id){
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+var y= $("#tablaConsulta"); 
+var url="/colegio/administrador/consultaNotificacion";
+var data="id="+id;
+ envioJson(url,data,function respuesta(res){   
+   x.hide();            
+    y.html (res);
+    
+    document.getElementById('light').style.display='block';
+    document.getElementById('fade').style.display='block'
+});
+ 
+      
+}
+ </script>
+ <table aling="center" width="100%"  border="0">
        <tr>
            <td align="right" class="color-text-azul" colspan="3"><h3>Notificaciones</h3></td>    
        </tr>

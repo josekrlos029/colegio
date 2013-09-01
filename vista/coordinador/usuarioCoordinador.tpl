@@ -59,12 +59,12 @@ $('#cargar2').load('/colegio/coordinador/seguimientos');
      <div class="cabecera">
 	<?php include HOME . DS . 'includes' . DS . 'headerCoordinador.php'; ?>
     </div>
-    </br>
+    </br></br>
     <table border="0" align="center" width="90%" >
   <tr>
   <td width="40%" >
   Hola <?php echo $coordinador->getNombres();?> Bienvenido(a) a tu Cuenta.</br>
-  <img src="../utiles/imagenes/tag_coordinador.png"/>
+  <a href="/colegio/coordiandor/usuarioCoordinador"><img src="../utiles/imagenes/tag_coordinador.png"/></a>
    <?php include HOME . DS . 'includes' . DS . 'fecha.php'; ?>
   </td>
   <td>
@@ -89,8 +89,8 @@ $('#cargar2').load('/colegio/coordinador/seguimientos');
 </tr>
 </table >
 </br>
-<hr>
 <div id="cargar">
+<hr>    
 <div style="padding-right: 5%; padding-left: 5%;" > 
  <table border="0" align=right" width="100%" >
       <tr>
@@ -133,13 +133,13 @@ $('#cargar2').load('/colegio/coordinador/seguimientos');
                     <td>
                        
                          <table border="0" width="100%" id="inf-Personal"> 
-                                       <tr><td class="color-text-green">Nombres:<?php echo $coordinador->getNombres(); ?></td></tr>
-                                       <tr><td class="color-text-green">Apellidos:<?php echo $coordinador->getPApellido()." ".$coordinador->getSApellido(); ?></td></tr>  
-                                       <tr><td class="color-text-green">Sexo:<?php echo $coordinador->getSexo(); ?></td> </tr>                                        
-                                       <tr><td class="color-text-green">Telefono:<?php echo $coordinador->getTelefono(); ?></td></tr> 
-                                       <tr><td class="color-text-green">Direccion:<?php echo $coordinador->getDireccion(); ?></td</tr> 
-                                       <tr><td class="color-text-green">Correo:<?php echo $coordinador->getCorreo(); ?></td></tr>
-                                       <tr><td class="color-text-green">Fecha De Nacimiento:<?php echo $coordinador->getFNacimiento()->format('Y-m-d'); ?></td></tr>
+                                       <tr><td>Nombres:<span><?php echo $coordinador->getNombres(); ?></span></td></tr>
+                                       <tr><td>Apellidos:<span><?php echo $coordinador->getPApellido()." ".$coordinador->getSApellido(); ?></span></td></tr>  
+                                       <tr><td>Sexo:<span><?php echo $coordinador->getSexo(); ?></span></td> </tr>                                        
+                                       <tr><td>Telefono:<span><?php echo $coordinador->getTelefono(); ?></span></td></tr> 
+                                       <tr><td>Direccion:<span><?php echo $coordinador->getDireccion(); ?></span></td</tr> 
+                                       <tr><td>Correo:<span><?php echo $coordinador->getCorreo(); ?></span></td></tr>
+                                       <tr><td>Fecha De Nacimiento:<span><?php echo $coordinador->getFNacimiento()->format('Y-m-d'); ?></span></td></tr>
                                      
                    </table>
                     </td>

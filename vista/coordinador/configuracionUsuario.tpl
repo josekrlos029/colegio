@@ -23,7 +23,7 @@ function envioUser(){
       ocultar();
     }else{
 
-        var url="/colegio/estudiante/configurarUsuario/";
+        var url="/colegio/coordiandor/configurarUsuario/";
         var data="idPersona="+idPersona.value+"&username="+username.value+"&password="+password.value;
 
         envioJson(url,data,function respuesta(res){
@@ -34,7 +34,7 @@ function envioUser(){
          x.html ( "<p>Datos Actualizados Correctamente</p>");
          exito();
          ocultar();
-         document.location.href="/colegio/estudiante/configuracionUsuario";
+         document.location.href="/colegio/coordiandor/configuracionUsuario";
         break;
 
         case 2:
@@ -83,7 +83,7 @@ var confPasswordNew = document.getElementById("confPasswordNew");
             
        }else{
        
-            var url="/colegio/estudiante/configurarContraseña/";
+            var url="/colegio/coordiandor/configurarContraseña/";
             var data="idPersona="+idPersona.value+"&passwordActual="+passwordActual.value+"&passwordNew="+passwordNew.value;
 
             envioJson(url,data,function respuesta(res){
@@ -93,7 +93,7 @@ var confPasswordNew = document.getElementById("confPasswordNew");
             x.html ( "<p>Datos Actualizados Correctamente</p>");
             exito();
             ocultar();
-            document.location.href="/colegio/estudiante/configuracionUsuario";
+            document.location.href="/colegio/coordiandor/configuracionUsuario";
             break;
 
             case 2:
@@ -138,7 +138,7 @@ var passwordC = document.getElementById("passwordC");
              ocultar(); 
              
        }else{
-            var url="/colegio/estudiante/configurarCorreo/";
+            var url="/colegio/coordiandor/configurarCorreo/";
             var data="idPersona="+idPersona.value+"&correo="+correo.value+"&passwordC="+passwordC.value;
 
             envioJson(url,data,function respuesta(res){
@@ -148,7 +148,7 @@ var passwordC = document.getElementById("passwordC");
             x.html ( "<p>Datos Actualizados Correctamente</p>");
             exito();
             ocultar();
-            document.location.href="/colegio/estudiante/configuracionUsuario";
+            document.location.href="/colegio/coordiandor/configuracionUsuario";
             break;
 
             case 2:
@@ -171,17 +171,14 @@ var passwordC = document.getElementById("passwordC");
     
             }); 
        }
-       
+ 
  }
- 
-
 </script>
- 
-   
+
 
     <body>
     <div class="cabecera">
-        <?php include HOME . DS . 'includes' . DS . 'headerEstudiante.php'; ?>
+        <?php include HOME . DS . 'includes' . DS . 'headerCoordinador.php'; ?>
           <input type="hidden" name="idPersona" id="idPersona" value="<?php echo $_SESSION['idUsuario'] ?>">
         </div>
           <!------------------------------cabecera--------------------------->  
@@ -190,7 +187,7 @@ var passwordC = document.getElementById("passwordC");
            <p>&nbsp;</p>
         <div id="encapsulador">
             <div id="mensaje" hidden> </div>
-                <div id="cabecera" class="blue">
+                <div id="cabecera" class="green">
                     <div class="color-text-blanco" id="title-cab">
                         <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
                          <tr>   
@@ -206,8 +203,6 @@ var passwordC = document.getElementById("passwordC");
      <!--------------------------------------------------------------------> 
 
 <ul id="accordion">
-    
- 
 <li><span>Cambiar Nombre De Usuario</span>
 <ul>
     
@@ -228,7 +223,7 @@ var passwordC = document.getElementById("passwordC");
                 </tr>
                 <tr>
                     <td></td>
-                    <td colspan="2"><input name="configurarUsuario" id="configurarUsuario" type="submit" class="button large blue" value="Guardar" onclick="envioUser()" /></td>
+                    <td colspan="2"><input name="configurarUsuario" id="configurarUsuario" type="submit" class="button large green" value="Guardar" onclick="envioUser()" /></td>
                 </tr>
                </table>
     
@@ -261,7 +256,7 @@ var passwordC = document.getElementById("passwordC");
                 </tr>
                 <tr>
                     <td></td>
-                    <td colspan="2"><input name="configurarContraseña" id="configurarContraseña" type="submit" class="button large blue" value="Guardar" onclick="envioPassword()" /></td>
+                    <td colspan="2"><input name="configurarContraseña" id="configurarContraseña" type="submit" class="button large green" value="Guardar" onclick="envioPassword()" /></td>
                 </tr>
 </table>
 </li>
@@ -287,7 +282,7 @@ var passwordC = document.getElementById("passwordC");
                 </tr>
                 <tr>
                     <td></td>
-                    <td colspan="2"><input name="configurarEmail" id="configurarEmail" type="submit" class="button large blue" value="Guardar" onclick="envioEmail()" /></td>
+                    <td colspan="2"><input name="configurarEmail" id="configurarEmail" type="submit" class="button large green" value="Guardar" onclick="envioEmail()" /></td>
                 </tr>
                </table>  
 

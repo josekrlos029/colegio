@@ -102,47 +102,26 @@ var arreglo = new Array();
          });  
 }
 </script>
-  <p>&nbsp;</p>
-            </br>
-           <p>&nbsp;</p>
-        <div id="encapsulador">
-            <div id="mensaje" hidden> </div>
-                <div id="cabecera" class="green">
-                    
-                    <div class="color-text-blanco" id="title-cab">
-                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
-                         <tr>   
-                            <td align="right">   
-                                <h1>Pension por Salones</h1>
-                            </td>
-                         </tr>
-                        </table>
-                    </div>
-                    
-                </div>
-        </div> 
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
+ 
                 
                 <table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
                <td align="center" class="color-text-gris" colspan="11"><h1>Estudiantes Primaria</h1></td>
            </tr>
            </table>
+                  <div style="margin-left:  5%; margin-top: 2%; width:15%;"><table width="100%"><tr><td>AÑO:</td><td><select class="box-text" id="años" onchange="ocultarTabla()">
+                  <?php foreach ($anios as $anio) { ?>    
+                  <option><?php echo $anio; ?></option>
+                  <?php } ?>
+              </select> </td></tr></table>
+           </div>
                   <p>&nbsp;</p>
              <div  id="menu">   
                   <?php foreach ($primaria as $salon) { ?>    
                    <li><a href="#" onClick="leerEstudiantes('<?=$salon->getIdSalon()?>')"><?php echo $salon->getIdSalon();?></a></li>
                   <?php } ?>
               </div>   
-              
               <p>&nbsp;</p>
-              <div style="margin-left:  5%"><b>AÑO:</b><select id="años" onchange="ocultarTabla()">
-                  <?php foreach ($anios as $anio) { ?>    
-                  <option><?php echo $anio; ?></option>
-                  <?php } ?>
-              </select>  
-           </div>
                 <div id="tablaEstudiantes" style="width: 100%">
                <h1  style='margin-left:5%'>Seleccione un Salon...</h1>
                </div>

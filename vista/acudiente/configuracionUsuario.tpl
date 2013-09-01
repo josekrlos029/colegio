@@ -1,4 +1,19 @@
+<?php
 
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author andy henry
+ */
+interface usuarioDocente {
+    //put your code here
+}
+
+?>
 <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
 <head>
 <title><?php echo $titulo; ?></title>
@@ -23,7 +38,7 @@ function envioUser(){
       ocultar();
     }else{
 
-        var url="/colegio/estudiante/configurarUsuario/";
+        var url="/colegio/acudiente/configurarUsuario/";
         var data="idPersona="+idPersona.value+"&username="+username.value+"&password="+password.value;
 
         envioJson(url,data,function respuesta(res){
@@ -34,7 +49,7 @@ function envioUser(){
          x.html ( "<p>Datos Actualizados Correctamente</p>");
          exito();
          ocultar();
-         document.location.href="/colegio/estudiante/configuracionUsuario";
+         document.location.href="/colegio/acudiente/configuracionUsuario";
         break;
 
         case 2:
@@ -83,7 +98,7 @@ var confPasswordNew = document.getElementById("confPasswordNew");
             
        }else{
        
-            var url="/colegio/estudiante/configurarContraseña/";
+            var url="/colegio/acudiente/configurarContraseña/";
             var data="idPersona="+idPersona.value+"&passwordActual="+passwordActual.value+"&passwordNew="+passwordNew.value;
 
             envioJson(url,data,function respuesta(res){
@@ -93,7 +108,7 @@ var confPasswordNew = document.getElementById("confPasswordNew");
             x.html ( "<p>Datos Actualizados Correctamente</p>");
             exito();
             ocultar();
-            document.location.href="/colegio/estudiante/configuracionUsuario";
+            document.location.href="/colegio/acudiente/configuracionUsuario";
             break;
 
             case 2:
@@ -138,7 +153,7 @@ var passwordC = document.getElementById("passwordC");
              ocultar(); 
              
        }else{
-            var url="/colegio/estudiante/configurarCorreo/";
+            var url="/colegio/acudiente/configurarCorreo/";
             var data="idPersona="+idPersona.value+"&correo="+correo.value+"&passwordC="+passwordC.value;
 
             envioJson(url,data,function respuesta(res){
@@ -148,7 +163,7 @@ var passwordC = document.getElementById("passwordC");
             x.html ( "<p>Datos Actualizados Correctamente</p>");
             exito();
             ocultar();
-            document.location.href="/colegio/estudiante/configuracionUsuario";
+            document.location.href="/colegio/acudiente/configuracionUsuario";
             break;
 
             case 2:
@@ -181,7 +196,7 @@ var passwordC = document.getElementById("passwordC");
 
     <body>
     <div class="cabecera">
-        <?php include HOME . DS . 'includes' . DS . 'headerEstudiante.php'; ?>
+        <?php include HOME . DS . 'includes' . DS . 'headerAcudiente.php'; ?>
           <input type="hidden" name="idPersona" id="idPersona" value="<?php echo $_SESSION['idUsuario'] ?>">
         </div>
           <!------------------------------cabecera--------------------------->  
