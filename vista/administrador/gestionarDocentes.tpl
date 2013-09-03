@@ -27,7 +27,7 @@ cargando();
         ocultar();
     }else{
 
-        var url="/colegio/administrador/agregarDocente/";
+        var url="/colegio/administrador/agregarDocente";
         var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&correo="+correo.value+"&fNacimiento="+fNacimiento.value;
 
         envioJson(url,data,function respuesta(res){   
@@ -112,7 +112,7 @@ function actualizarPersona(){
       error();
       ocultar();
     }else{
-        var url="/colegio/administrador/actualizaPersonas/";
+        var url="/colegio/administrador/actualizaPersonas";
         var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&correo="+correo.value+"&fNacimiento="+fNacimiento.value+"&Estado="+Estado.value;
 
         envioJson(url,data,function respuesta(res){   

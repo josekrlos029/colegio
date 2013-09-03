@@ -838,9 +838,10 @@ class AdministradorControl extends Controlador{
            $id = isset($_POST['id']) ? $_POST['id'] : NULL;  
            
            $notificacion = new Notificacion();
-           $not = $notificacion->eliminar($id);
+           $notificacion->eliminar($id);
          
             echo json_encode(1);
+            
            } catch (Exception $exc) {
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    

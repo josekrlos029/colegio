@@ -217,7 +217,7 @@ var data="idPersona="+id.value;
              <div class="text-icon">Difundir Mensaje</div>
            </td>
            <td width="10%" align="center">
-             <a href="cierreAcademico/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAño.png ></div></a>
+             <a href="cierreAcademico/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAnio.png ></div></a>
              <div class="text-icon">Cierre de Año</div>
            </td>
            </tr>
