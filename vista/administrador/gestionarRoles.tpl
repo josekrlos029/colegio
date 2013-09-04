@@ -140,30 +140,29 @@ var y = $("#mensaje");
         </div>  
     </div>    
     <div style="float:right" >
-          <table width="650" border="0" cellspacing="0" cellpadding="2">
+          <table width="400" border="0" cellspacing="0" cellpadding="2">
                 <tr>
-                  <td width="10%"></td>
+                  
                   <td align="left" class="color-text-gris"><h1>Escoger Usuario</h1></td>
                    
               </tr>
                 <tr>
-                    <td></td>
+                    
                     <td>Usuario:</td>
                      
                 </tr>
             <tbody>
                 <tr>
-                    <td></td>
+                    
                     <td>
                         <select id="usuarios" name="salones" class="box-text">
                             <option value="---">---</option>
                             <option value="C">Coordinador</option>
-            </select>
-            </td>
+                       </select>
+                  </td>
+                   <td  align="right"><button onclick="agregar()" class="button large red"> Guardar </button></td>
                 </tr>
-                <tr>
-                    <td colspan="3" align="right"><button onclick="agregar()" class="button large red"> Guardar </button></td>
-                    </tr>
+               
             </tbody>
         </table>
     </div>

@@ -30,7 +30,7 @@ destino = 3;
       error();
       ocultar();
     }else{
-        var url="/colegio/administrador/registrarNotificacion/";
+        var url="/colegio/administrador/registrarNotificacion";
         var data="asunto="+asunto.value+
                  "&mensaje="+mensaje.value+
                 "&hora="+hora.value+

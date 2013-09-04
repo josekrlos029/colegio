@@ -39,26 +39,27 @@ function envio(){
 
       window.open("/colegio/administrador/generarBoletin/"+idSalon+","+periodo)
     }
-    
- function consultaPersona(){
- 
+      
+
+function consultaPersona(){
  var x = $("#mensaje");
  cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
- var id = document.getElementById("s");
+var idPersona = document.getElementById("s").value;
 var y= $("#tablaConsulta"); 
 var url="/colegio/administrador/consultaGeneralPersona";
-var data="idPersona="+id.value;
-
+var data="idPersona="+idPersona;
  envioJson(url,data,function respuesta(res){   
    x.hide();            
     y.html (res);
+    
     document.getElementById('light').style.display='block';
     document.getElementById('fade').style.display='block'
 });
- }   
-
+ 
+      
+}
   </script>  
     
     
@@ -217,7 +218,7 @@ var data="idPersona="+id.value;
              <div class="text-icon">Difundir Mensaje</div>
            </td>
            <td width="10%" align="center">
-             <a href="cierreAcademico/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAño.png ></div></a>
+             <a href="cierreAcademico/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAnio.png ></div></a>
              <div class="text-icon">Cierre de Año</div>
            </td>
            </tr>
