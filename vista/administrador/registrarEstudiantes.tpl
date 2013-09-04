@@ -99,7 +99,7 @@ function envio(){
       ocultar();
    }else{
   
-        var url="/colegio/administrador/guardarEstudiantes/";
+        var url="/colegio/administrador/guardarEstudiantes";
         var data="idPersona="+idPersona.value+"&tipoDocumento="+tipoDocumento.value+"&lugarExpedicion="+lugarExpedicion.value+"&fechaExpedicion="+fechaExpedicion.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&tipoSanguineo="+tipoSanguineo.value+"&eps="+eps.value+"&telefono="+telefono.value+"&correo="+correo.value+"&instProcedencia="+instProcedencia.value+
                  "&fNacimiento="+fNacimiento.value+"departamentoNacimiento="+departamentoNacimiento.value+"&municipioNacimiento="+municipioNacimiento.value+
                  "&direccion="+direccion.value+"&barrio="+barrio.value+"&municipioResidencia="+municipioResidencia.value+
@@ -228,16 +228,28 @@ var foto = $("#foto");
       ocultar();
    }else{
   
-        var url="/colegio/administrador/registrarYGuardarEstudiantes/";
-        var data="idPersona="+idPersona.value+"&tipoDocumento="+tipoDocumento.value+"&lugarExpedicion="+lugarExpedicion.value+"&fechaExpedicion="+fechaExpedicion.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&tipoSanguineo="+tipoSanguineo.value+"&eps="+eps.value+"&telefono="+telefono.value+"&correo="+correo.value+"&instProcedencia="+instProcedencia.value+
+        var url="/colegio/administrador/registrarYGuardarEstudiantes";
+        var data ="";
+        if(foto.attr("src")==null || foto.attr("src")==""){
+         data="idPersona="+idPersona.value+"&tipoDocumento="+tipoDocumento.value+"&lugarExpedicion="+lugarExpedicion.value+"&fechaExpedicion="+fechaExpedicion.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&tipoSanguineo="+tipoSanguineo.value+"&eps="+eps.value+"&telefono="+telefono.value+"&correo="+correo.value+"&instProcedencia="+instProcedencia.value+
                  "&fNacimiento="+fNacimiento.value+"departamentoNacimiento="+departamentoNacimiento.value+"&municipioNacimiento="+municipioNacimiento.value+
                  "&direccion="+direccion.value+"&barrio="+barrio.value+"&municipioResidencia="+municipioResidencia.value+
                  "&idPadre="+idPadre.value+"&nombresPadre="+nombresPadre.value+"&apellidosPadre="+apellidosPadre.value+"&ocupacionPadre="+ocupacionPadre.value+"&telPadre="+telPadre.value+"&telOficinaPadre="+telOficinaPadre.value+"&dirPadre="+dirPadre.value+
                  "&idMadre="+idPadre.value+"&nombresMadre="+nombresMadre.value+"&apellidosMadre="+apellidosMadre.value+"&ocupacionMadre="+ocupacionMadre.value+"&telMadre="+telMadre.value+"&telOficinaMadre="+telOficinaMadre.value+"&dirMadre="+dirMadre.value+
                  "&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacionAcudiente="+ocupacionPadre.value+"&telPadre="+telAcudiente.value+"&telOficinaAcudiente="+telOficinaAcudiente.value+"&dirAcudiente="+dirAcudiente.value+
-                 "&idSalon="+idSalon.value+"&jornada="+jornada.value+"&foto="+foto.attr("src");
-        envioJson2(url,data,function respuesta(res){   
-            if (res === 1){
+                 "&idSalon="+idSalon.value+"&jornada="+jornada.value;
+        }else{
+         data="idPersona="+idPersona.value+"&tipoDocumento="+tipoDocumento.value+"&lugarExpedicion="+lugarExpedicion.value+"&fechaExpedicion="+fechaExpedicion.value+"&nombres="+nombres.value+"&pApellido="+pApellido.value+"&sApellido="+sApellido.value+"&sexo="+sexo.value+"&tipoSanguineo="+tipoSanguineo.value+"&eps="+eps.value+"&telefono="+telefono.value+"&correo="+correo.value+"&instProcedencia="+instProcedencia.value+
+                 "&fNacimiento="+fNacimiento.value+"departamentoNacimiento="+departamentoNacimiento.value+"&municipioNacimiento="+municipioNacimiento.value+
+                 "&direccion="+direccion.value+"&barrio="+barrio.value+"&municipioResidencia="+municipioResidencia.value+
+                 "&idPadre="+idPadre.value+"&nombresPadre="+nombresPadre.value+"&apellidosPadre="+apellidosPadre.value+"&ocupacionPadre="+ocupacionPadre.value+"&telPadre="+telPadre.value+"&telOficinaPadre="+telOficinaPadre.value+"&dirPadre="+dirPadre.value+
+                 "&idMadre="+idPadre.value+"&nombresMadre="+nombresMadre.value+"&apellidosMadre="+apellidosMadre.value+"&ocupacionMadre="+ocupacionMadre.value+"&telMadre="+telMadre.value+"&telOficinaMadre="+telOficinaMadre.value+"&dirMadre="+dirMadre.value+
+                 "&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacionAcudiente="+ocupacionPadre.value+"&telPadre="+telAcudiente.value+"&telOficinaAcudiente="+telOficinaAcudiente.value+"&dirAcudiente="+dirAcudiente.value+
+                 "&idSalon="+idSalon.value+"&jornada="+jornada.value+"&foto="+foto.attr("src"); 
+        }
+        
+        envioJson(url,data,function respuesta(res){   
+            if (res == 1){
                     x.html ("<p>Estudiante Registrado y Matriculado Correctamente</p>");
                     $("#idPersona").attr("disabled","disabled");
                     exito();
@@ -296,7 +308,7 @@ window.onload = function() {
                 context.drawImage(video, 0, 0, 320, 240);
                var img = document.getElementById("imagen");
                img.appendChild(convertCanvasToImage(canvas));
-                $("#imagen2").append($("#foto").attr("src"));
+               // $("#imagen2").append($("#foto").attr("src"));
             });
         }
     });
@@ -601,7 +613,6 @@ function limpiar(){
                 <tr>
                     <td align="right" width="40%"><button class="button large green" id="insertarImagen" onclick="abrir()">Insetar Imagen</button></td>
                     <td><p id="imagen" style="float: left;"><img id="foto" src="" /></p></td>
-                    <td><p id="imagen2" style="float: left;"></p></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Activar Matricula:</td>

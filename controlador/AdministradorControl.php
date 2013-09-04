@@ -1448,13 +1448,18 @@ class AdministradorControl extends Controlador{
              if($persona != NULL){
                  echo json_encode(2);
              }else{
-                 $foto = json_decode($foto);
-                 $foto = $this->limpia_espacios($foto);
-             $contents= file_get_contents($foto);
-             $savefile = fopen($idPersona.'.png', 'w');
-             fwrite($savefile, $contents);
-             fclose($savefile);    
-                 
+                if($foto!=""){
+                 //$foto = json_decode($foto);
+                //$foto = base64_decode(substr($foto,22));
+                
+                    //$foto = $this->limpia_espacios($foto);
+                //$foto = base64_decode($foto);
+                //
+                //$contents= file_get_contents($foto);
+                $savefile = fopen($idPersona.'.png', 'w');
+                fwrite($savefile, $foto);
+                fclose($savefile);       
+                }
              $estudiante->setIdPersona($idPersona);
              $estudiante->setTipoDocumento($tipoDocumento);
              $estudiante->setLugarExpedicion($lugarExpedicion);
@@ -1573,7 +1578,8 @@ class AdministradorControl extends Controlador{
         }     
         }
         function limpia_espacios($cadena){
-            $cadena = str_replace(' ', '', $cadena);
+            $cadena = str_replace(" ", "", $cadena);
+            //$cadena = preg_replace('[\s+]',"", $cadena);
             return $cadena;
         }   
         /**
@@ -1600,7 +1606,7 @@ class AdministradorControl extends Controlador{
                 }
                     if ($band!=1){
                       $respuesta= 3;
-                    }elseif ($mat == NULL){
+                    }elseif ($mat != NULL){
                       $respuesta= 2;
                     }else{
                   
@@ -2466,7 +2472,6 @@ class AdministradorControl extends Controlador{
     
       public function imprimirMatricula($idPersona){
             $estudiante = new Estudiante();
-            
             $est = $estudiante->leerPorId($idPersona);
             $estudiante->leerDatos($idPersona, $est);
             $estudiante->leerNacimiento($idPersona, $est);

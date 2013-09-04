@@ -60,12 +60,25 @@ class Controlador {
     protected function verificarSession(){
              session_start();
             if (!isset($_SESSION['idUsuario'])) {
-                
-                $inicio = new InicioControl("inicio","index");
-                $inicio->index();
+               header("Location: /colegio/inicio/index");
                 return false;
             }else{
-                return true;
+                $rol= new Rol();
+                $idPersona=$_SESSION['idUsuario'];
+                $roles = $rol->leerRoles($idPersona);
+                $band=0;
+                foreach($roles as $rol) {
+                    if(strtoupper($rol->getNombre())== strtoupper($this->nombreModelo)){
+                        $band = 1;
+                    }
+                }
+                if ($band ==1){
+                return true;    
+                }else{
+                    header("Location: /");
+                    return false;
+                }
+                
             }
                
     }
