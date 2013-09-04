@@ -1,3 +1,4 @@
+ <div class="menu-principal">
 <table border="0" align="center" width="90%" >
     <tr>
     <td align="left" width="10%"><a href="/colegio/estudiante/usuarioEstudiante"><img src="../utiles/imagenes/iconos/inicio.png"/></a></td>
@@ -6,7 +7,7 @@
     <td align="right" width="10%"><a href="#"><img  src="../utiles/imagenes/iconos/salir.png"/></a></td>
     </tr>
     </table>
-
+ </div>
 
 
    

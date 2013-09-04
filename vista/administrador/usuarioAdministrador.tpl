@@ -65,11 +65,7 @@ var data="idPersona="+idPersona;
     
     
     <body>
-	
-	 <div class="cabecera">
 	<?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
-        </div>
-
 </br>
 <table border="0" align="center" width="80%" >
   <tr>
@@ -173,7 +169,7 @@ var data="idPersona="+idPersona;
            </td>
            
            <td width="10%" align="center">
-               <a href="consolidados/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/consolidados.png ></div></a>
+           <a href="/colegio/administrador/consolidados"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/consolidados.png ></div></a>
            <div class="text-icon">Consolidados</div>
            </td>
            

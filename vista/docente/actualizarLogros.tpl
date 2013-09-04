@@ -130,9 +130,9 @@ function onChange4(val) {
  </head>
  
  <body>
-    <div class="cabecera">
+   
         <?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
-        </div>
+     
        
           <!------------------------------cabecera--------------------------->  
           <p>&nbsp;</p>

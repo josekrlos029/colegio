@@ -29,7 +29,7 @@ background-color:#dbdbdb;
  position: relative;
  height:100%; 
 }
-.cab-form{
+.cab-form{  
  margin: 0;
  background-color: #f6f7f8;
  border-bottom:  1px solid #d3d6db; 
@@ -42,6 +42,8 @@ background-color:#dbdbdb;
  padding-bottom: 15px;
  padding-right: 10px;
 }
+
+
 
 .den-form{
  padding:30px; 

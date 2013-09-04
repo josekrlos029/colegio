@@ -97,9 +97,9 @@ var data="id="+id;
 
     </head>
     <body>
-         <div class="cabecera">
+
         <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
-        </div>
+
        <!------------------------------cabecera--------------------------->  
         <p>&nbsp;</p>
             </br>

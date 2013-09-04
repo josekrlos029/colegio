@@ -39,9 +39,9 @@ function pension(){
     
     <body>
 	
-	 <div class="cabecera">
+	
 	<?php include HOME . DS . 'includes' . DS . 'headerEstudiante.php'; ?>
-        </div>
+     
 <div style="margin-top: 3%; position: relative; width: 100%;"> 
     <div style="position: relative; width: 100%; padding-top:10px; padding-bottom: 3%;">
         <table border="0" align="center" width="90%" >

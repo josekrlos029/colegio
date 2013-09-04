@@ -1,3 +1,3 @@
 $(document).ready(function(){
-    $(".cabecera").sticky({topSpacing:0});
+    $(".menu-principal").sticky({topSpacing:0});
   });

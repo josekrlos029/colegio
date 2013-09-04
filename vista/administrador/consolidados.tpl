@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8" />
-		<link href="../../utiles/css/general.css" rel="stylesheet" type="text/css" media="screen"/>
-                <link href="../../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
-                 <link href="../../utiles/css/usuarios.css" rel="stylesheet" type="text/css" media="screen"/>             
-                 <link href="../../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
-                <link href="../../utiles/css/tablas.css" rel="stylesheet" type="text/css" media="screen"/>
-                <script src="../../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/easing.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/envios.js" type="text/javascript" ></script>
-                 <script src="../../utiles/js/jquery.sticky.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/inicio.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/tablas.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/estiloMensaje.js" type="text/javascript"></script>
-              <script src="../../utiles/js/mootools-core-1.4.5.js" type="text/javascript"></script>
-           <title><?php echo $titulo;?></title>
+  <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
+   
+        <title><?php echo $titulo; ?></title>
            <script type="text/javascript">
     
  function estPreescolar(){    
@@ -35,30 +20,26 @@
     </head>
     <body>
 	
-	 <div class="cabecera">
-	<table border="0" align="center" width="80%" >
-    <tr>
-    <td align="left" width="10%"><a href="/colegio/administrador/usuarioAdministrador"><img src="../../utiles/imagenes/iconos/inicio.png"/></a></td>
-    <td align="left" width="50%"><a href="/colegio/administrador/configuracionUsuario"><img src="../../utiles/imagenes/iconos/Power.png"/></td>
-     <td align="right">
-     <!-- search -->
-        <div class="top-search">
-            <div id="searchform" >
-		<input type="text"  name="id" id="s"  placeholder="Numero De Documento" required />
-		<input  type="submit" id="searchsubmit" onclick="" />
-	   </div>
-						
-	</div>
-        <!-- END search -->   
-         
-     </td>
-    <td align="right" width="10%"><a href="#"><img  src="../../utiles/imagenes/iconos/salir.png"/></a></td>
-    </tr>
-    </table>
-
-        </div>
-
-</br>
+	 <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
+          <p>&nbsp;</p>
+            </br>
+           <p>&nbsp;</p>
+ <div id="encapsulador">
+            <div id="mensaje" hidden> </div>
+                <div id="cabecera" class="green">
+                    <div class="color-text-blanco" id="title-cab">
+                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
+                         <tr>   
+                            <td align="right">   
+                                <h1>Consolidados Academicos</h1>
+                            </td>
+                         </tr>
+                        </table>
+                    </div>
+                </div>
+        </div> 
+          <p>&nbsp;</p>
+              
 <table border="0" align="center" width="80%" >
   <tr>
       <td width="30%">

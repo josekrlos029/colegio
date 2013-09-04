@@ -56,9 +56,9 @@ $('#cargar2').load('/colegio/coordinador/seguimientos');
 }
 </script>
  <body>
-     <div class="cabecera">
+    
 	<?php include HOME . DS . 'includes' . DS . 'headerCoordinador.php'; ?>
-    </div>
+
     </br></br>
     <table border="0" align="center" width="90%" >
   <tr>

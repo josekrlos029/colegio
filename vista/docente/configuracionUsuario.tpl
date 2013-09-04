@@ -177,10 +177,10 @@ var passwordC = document.getElementById("passwordC");
 
 
     <body>
-    <div class="cabecera">
+ 
         <?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
           <input type="hidden" name="idPersona" id="idPersona" value="<?php echo $_SESSION['idUsuario'] ?>">
-        </div>
+    
           <!------------------------------cabecera--------------------------->  
       <p>&nbsp;</p>
             </br>

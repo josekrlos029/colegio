@@ -44,13 +44,12 @@ function envio(){
 </script>
     </head>
     <body>
-         <div class="cabecera">
+      
         <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
-        </div>
-       <!------------------------------cabecera--------------------------->  
-        <p>&nbsp;</p>
+    <p>&nbsp;</p>
             </br>
            <p>&nbsp;</p>
+       <!------------------------------cabecera--------------------------->  
         <div id="encapsulador">
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="green">

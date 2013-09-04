@@ -65,6 +65,7 @@ window.onload = function() {
 </script>
 <title><?php echo $titulo; ?></title>
 </head>
+ <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
 <body> 
 <p>&nbsp;</p><p>&nbsp;</p>
 <p>&nbsp;</p><p>&nbsp;</p>
