@@ -586,7 +586,34 @@ $respuesta .= '
                echo json_encode($exc->getTraceAsString());
            }
               }
-             
+     
+              public function seguimiento(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Seguimiento Academico');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+        
+        public function pension(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Pensión');
+            $idPersona = $_SESSION['idUsuario'];
+            $pension = new Pago();
+            $pensiones = $pension->leerPensionesPorIdPersona($idPersona);
+            $this->vista->set('pensiones', $pensiones);
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
    }
     
 

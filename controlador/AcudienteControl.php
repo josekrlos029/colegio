@@ -73,8 +73,41 @@ class AcudienteControl extends Controlador{
          public function configurarCorreo() {
              parent::configurarCorreo();
          }
+          public function seguimiento() {
+             parent::seguimiento();
+         }
+          public function pension() {
+             parent::pension();
+         }
         
-    
+     public function funcionesAcademicas(){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'funciones Academicas');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+         public function notificaciones(){
+         try {
+             if($this->verificarSession()){
+            $this->vista->set('titulo', 'Notificaciones');
+            $destino1=1;
+            $destino2=3;
+            $notificacion = new Notificacion();
+            $noti = $notificacion->leerPorDestino($destino1,$destino2);
+             $this->vista->set('noti', $noti);
+            return $this->vista->imprimir();;
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+        
 }
 
 ?>

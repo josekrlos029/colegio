@@ -82,6 +82,12 @@ height:199px;
 position: relative;
 background-color:#4c6eff;
 }
+.pic{
+ position:absolute;  
+ margin-top: 3px;
+ margin-left:185px;
+}
+
 .marcoAvatarCoor{  
 width: 215px; 
 height:199px; 

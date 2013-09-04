@@ -15,7 +15,7 @@
                 <script src="../utiles/js/inicio.js" type="text/javascript" ></script>
                 <script src="../utiles/js/tablas.js" type="text/javascript" ></script>
                 <script src="../utiles/js/estiloMensaje.js" type="text/javascript"></script>
-                <script src="../utiles/js/consulta.js" type="text/javascript"></script>    
+                 
                 
     </head>
 

@@ -2041,6 +2041,14 @@ class AdministradorControl extends Controlador{
              parent::consultaGeneralPersona();
          }
          
+         public function seguimiento() {
+             parent::seguimiento();
+         }
+          public function pension() {
+             parent::pension();
+         }
+         
+         
         
          
  

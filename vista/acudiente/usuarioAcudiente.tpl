@@ -38,12 +38,39 @@ var data="idPersona="+idPersona;
     
 }
 
- function funcionesAcademicas(){ 
- $('#cargar').load('/colegio/estudiante/funcionesAcademicas');           
+ function funcionesAcademicas(){
+ $('#cargar').load('/colegio/acudiente/funcionesAcademicas');           
 }
  function notificaciones(){  
- $('#cargar').load('/colegio/estudiante/notificaciones');           
+ $('#cargar').load('/colegio/acudiente/notificaciones');           
 }
+ function seguimiento(){
+          
+            ocultar("familia");
+            ocultar("datosAcademicos");
+            $('#carga').load('/colegio/acudiente/seguimiento'); 
+            document.getElementById('carga').style.display="block";
+            }
+            function pension(){ 
+            
+            ocultar("familia");
+            ocultar("datosAcademicos");
+            $('#carga').load('/colegio/acudiente/pension');
+             document.getElementById('carga').style.display="block";
+            }
+            function ocultar(id){
+            document.getElementById(id).style.display="none";
+            }
+            function mostrarAcademico(){
+            ocultar("carga");
+            ocultar("familia");
+            document.getElementById('datosAcademicos').style.display="block";
+            }
+            function mostrarFamilia(){
+            ocultar("carga");
+            ocultar("datosAcademicos");
+            document.getElementById('familia').style.display="block";
+            }
 
     
           
@@ -82,8 +109,10 @@ var data="idPersona="+idPersona;
                          </div>
                      <table  width="100%">
                         <tr> 
-                            <td>
+                            <td> 
                                 <div class="marcoAvatarest">
+                  
+                                 <a href="#" class="pic"><img height="24px" width="24px" src="../utiles/imagenes/cambiar-img.png"></a>
                                     <div class="avatar">
                                     <span class="rounded">
                                         <a href="/colegio/acudiente/usuarioAcudiente"><img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png"></a>
