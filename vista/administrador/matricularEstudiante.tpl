@@ -77,7 +77,7 @@ function matricular(){
        ocultar();
     }else{
 
-        var url="/colegio/administrador/matricular/";
+        var url="/colegio/administrador/matricular";
         var data="idPersona="+idPersona.value+"&idSalon="+idSalon.value+"&jornada="+jornada.value;
 
         envioJson(url,data,function respuesta(res){   
@@ -85,8 +85,9 @@ function matricular(){
                 x.html ("<p>Estudiante Matriculado Correctamente</p>");
                 exito();
                 ocultar();
-               nuevo();
+               
                window.open("/colegio/administrador/imprimirMatricula/"+idPersona.value);
+               nuevo();
             }else{
                  x.html ("<p>"+res+"</p>");
                  error();

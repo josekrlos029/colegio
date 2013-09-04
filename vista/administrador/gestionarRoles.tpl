@@ -48,24 +48,11 @@ function leerUsuarios(){
  
 var y= $("#tablaCargas"); 
  var idDocente =$("input[name=idDocente]:checked").val();
-  var url="/colegio/administrador/imprimirUsuarios";
+  var url="/colegio/administrador/imprimirUsuarios/";
         var data="idDocente="+idDocente;
-        $.ajax({
-			        async:	true, 
-				type:	"post",
-				data:	data,
-				url:	url,
-				dataType:"html",
-				success: function(data){
-                                    
-				    //JSON.decode( data );
-                                    var json = eval("(" + data + ")");
-                                     x.hide();            
-                                    y.html (json);
-				    //var json= jQuery.parseJSON(data);     
-                                    
-				    }
-		        });
+       envioJson(url,data,function respuesta(res){   
+        y.html(res);
+    });
 
 }
 function agregar(){
