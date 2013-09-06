@@ -32,7 +32,23 @@ var y= $("#tablaEstudiantes");
     x.hide();            
     y.html (res);
          });
+   onload=estInhabilitados(idSalon);      
 
+}
+function estInhabilitados(idSalon){
+
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+ 
+var y= $("#estInhabilitados"); 
+ var url="/colegio/administrador/estudiantesSalonesInhabilitados";
+ var data="idSalon="+idSalon;
+ envioJson(url,data,function respuesta(res){   
+    x.hide();            
+    y.html (res);
+         });
 }
 function vistaActualizarPersona(idPersona){
  var x = $("#mensaje");
@@ -128,7 +144,7 @@ function actualizarPersona(){
                 
                 <table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
            <tr>
-               <td align="center" class="color-text-gris" colspan="11"><h1>Estudiantes Preescolar</h1></td>
+               <td align="left" class="color-text-gris" colspan="11"><h1>Estudiantes Preescolar</h1></td>
            </tr>
            </table>
                   <p>&nbsp;</p>
@@ -143,6 +159,10 @@ function actualizarPersona(){
                 <div id="tablaEstudiantes" >
                <h1  style='margin-left:5%'>Seleccione un Salon...</h1>
                </div>
+              <p>&nbsp;</p>
+              <div id="estInhabilitados" >
+                  
+              </div>    
                
               
 <div id="fade" class="overlay"></div>

@@ -278,5 +278,4 @@ var data="idPersona="+idPersona;
       </div>
 </div>
 </body>
- <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>

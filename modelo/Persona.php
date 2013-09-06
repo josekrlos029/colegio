@@ -229,7 +229,7 @@ class Persona extends Modelo{
     }
     
      public function leerPorSalon($idSalon) {
-        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p, matricula m, datos_nac_persona dn,datos_ubicacion_persona du WHERE p.idPersona=m.idPersona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND m.idSalon='".$idSalon."' ORDER BY p.Papellido";
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p, matricula m, datos_nac_persona dn,datos_ubicacion_persona du WHERE p.idPersona=m.idPersona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND p.estado='1' AND m.idSalon='".$idSalon."' ORDER BY p.Papellido";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();
@@ -240,6 +240,28 @@ class Persona extends Modelo{
         }
         return $pers;
     }
+    public function leerPorSalonInhabilitado($idSalon) {
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p, matricula m, datos_nac_persona dn,datos_ubicacion_persona du WHERE p.idPersona=m.idPersona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND p.estado='0' AND m.idSalon='".$idSalon."' ORDER BY p.Papellido";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pers = array();
+        foreach ($resultado as $fila) {
+            $persona = new Persona();
+            $this->mapearPersona($persona, $fila);
+            $pers[$persona->getIdPersona()] = $persona;
+        }
+        return $pers;
+    }
+    public function inhabilitarPersona($idPersona) {
+        $sql = "UPDATE persona SET estado='0' WHERE idPersona=:idPersona";
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=> $idPersona));    
+        }
+         public function habilitarPersona($idPersona) {
+        $sql = "UPDATE persona SET estado='1' WHERE idPersona=:idPersona";
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=> $idPersona));    
+        }
     
     public function leerPorAcudiente($idAcudiente) {
         $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado, ae.id_acudiente, ae.id_persona  ";

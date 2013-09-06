@@ -33,6 +33,21 @@ var y= $("#tablaEstudiantes");
          });
 
 }
+function estInhabilitados(idSalon){
+
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+ 
+var y= $("#estInhabilitados"); 
+ var url="/colegio/administrador/estudiantesSalonesInhabilitados";
+ var data="idSalon="+idSalon;
+ envioJson(url,data,function respuesta(res){   
+    x.hide();            
+    y.html (res);
+         });
+}
 function vistaActualizarPersona(idPersona){
  var x = $("#mensaje");
  cargando();
@@ -140,6 +155,10 @@ function actualizarPersona(){
            <div id="tablaEstudiantes" >
            <h1  style='margin-left:5%'>Seleccione un Salon...</h1>
            </div>
+              <p>&nbsp;</p>
+              <div id="estInhabilitados" >
+                  
+              </div> 
               
 <div id="fade" class="overlay"></div>
 <div id="light" class="modal">
