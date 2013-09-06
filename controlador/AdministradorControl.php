@@ -1527,16 +1527,11 @@ class AdministradorControl extends Controlador{
                  echo json_encode(2);
              }else{
                 if($foto!=""){
-                 //$foto = json_decode($foto);
-                //$foto = base64_decode(substr($foto,22));
-                
-                    //$foto = $this->limpia_espacios($foto);
-                //$foto = base64_decode($foto);
-                //
-                //$contents= file_get_contents($foto);
-                $savefile = fopen($idPersona.'.png', 'w');
-                fwrite($savefile, $foto);
-                fclose($savefile);       
+                $foto = $this->limpia_espacios($foto);
+                $contents= file_get_contents($foto);
+                $savefile = fopen('utiles/imagenes/fotos/'.$idPersona.'.png', 'w');
+                fwrite($savefile,$contents);
+                fclose($savefile);           
                 }
              $estudiante->setIdPersona($idPersona);
              $estudiante->setTipoDocumento($tipoDocumento);
@@ -1656,7 +1651,7 @@ class AdministradorControl extends Controlador{
         }     
         }
         function limpia_espacios($cadena){
-            $cadena = str_replace(" ", "", $cadena);
+            $cadena = str_replace(" ", "+", $cadena);
             //$cadena = preg_replace('[\s+]',"", $cadena);
             return $cadena;
         }   
