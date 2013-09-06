@@ -36,6 +36,17 @@ class EstudianteControl extends Controlador{
             $this->vista->set('matricula', $matricula);
             $this->vista->set('estudiante', $estudiante);
             $this->vista->set('grado', $grado);
+            $ruta = 'utiles/imagenes/fotos/';
+            if (file_exists($ruta.$idPersona.'.jpg')) {
+                $img= '<a href="/colegio/acudiente/usuarioAcudiente"><img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.jpg"></a>';
+            }elseif (file_exists($ruta.$idPersona.'.png')) {
+                $img= '<a href="/colegio/acudiente/usuarioAcudiente"><img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.png"></a>';
+            }elseif (file_exists($ruta.$idPersona.'.jpeg')) {
+                $img= '<a href="/colegio/acudiente/usuarioAcudiente"><img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.jpeg"></a>';
+            }else{
+                $img= '<a href="/colegio/acudiente/usuarioAcudiente"><img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png"></a>';
+            }
+            $this->vista->set('img', $img);
             return $this->vista->imprimir();
             
             }

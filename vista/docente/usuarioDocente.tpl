@@ -72,7 +72,7 @@ function funcionesAcademicas(){
                                      <a href="#" class="pic"><img height="24px" width="24px" src="../utiles/imagenes/cambiar-img.png"></a>
                                     <div class="avatar">
                                     <span class="rounded">
-                                    <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                                    <?php echo $img; ?>
                                     </span> 
                                     </div>    
                                     </div>   
