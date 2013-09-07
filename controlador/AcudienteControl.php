@@ -110,12 +110,18 @@ class AcudienteControl extends Controlador{
             $notificacion = new Notificacion();
             $noti = $notificacion->leerPorDestino($destino1,$destino2);
              $this->vista->set('noti', $noti);
-            return $this->vista->imprimir();;
+            return $this->vista->imprimir();
             }
         } catch (Exception $exc) {
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }
             
+        }
+        
+        public function actualizarFoto() {
+            parent::actualizarFoto();
+            $this->vista->set('url', $_POST['url']);
+            return $this->vista->imprimir();
         }
         
 }

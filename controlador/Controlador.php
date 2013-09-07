@@ -614,6 +614,38 @@ $respuesta .= '
         }
             
         }
+        
+        public function actualizarFoto(){
+            session_start();
+            $idPersona=$_SESSION['idUsuario'];
+            $archivo = $_FILES["foto"]['name'];
+            $trozos = explode(".", $archivo); 
+            $extension = end($trozos); 
+            $ruta = 'utiles/imagenes/fotos/';
+            $destino = $ruta.$idPersona.".".$extension;
+            $extensiones = ['jpg', 'jpeg', 'png'];
+            
+            if ($archivo != "") {
+                $band=0;    
+                for($i=0; $i<count($extensiones); $i++){
+                    if ($extensiones[$i]==$extension){
+                        $band = 1;
+                    }
+                }
+                    if($band == 1){
+                        if (file_exists($ruta.$idPersona.'.jpg')) {
+                        unlink($ruta.$idPersona.'.jpg');
+                        }elseif (file_exists($ruta.$idPersona.'.png')) {
+                            unlink($ruta.$idPersona.'.png');
+                        }elseif (file_exists($ruta.$idPersona.'.jpeg')) {
+                            unlink($ruta.$idPersona.'.jpeg');
+                        }
+                        copy($_FILES['foto']['tmp_name'],$destino);
+                    }
+                    
+            }
+            
+        }
    }
     
 

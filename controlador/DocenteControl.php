@@ -504,7 +504,12 @@ class DocenteControl extends Controlador{
             
         }
                 
-    
+        public function actualizarFoto() {
+                parent::actualizarFoto();
+                $this->vista->set('url', $_POST['url']);
+                return $this->vista->imprimir();
+            }
+        
 }             
 
 

@@ -86,6 +86,7 @@ background-color:#4c6eff;
  position:absolute;  
  margin-top: 3px;
  margin-left:185px;
+ z-index: 999;
 }
 
 .marcoAvatarCoor{  

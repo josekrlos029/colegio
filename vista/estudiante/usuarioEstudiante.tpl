@@ -72,7 +72,6 @@ function pension(){
                         <tr> 
                             <td>
                                 <div class="marcoAvatarest">
-                                     <a href="#" class="pic"><img height="24px" width="24px" src="../utiles/imagenes/cambiar-img.png"></a>
                                     <div class="avatar">
                                     <span class="rounded">
                                      <?php echo $img; ?>

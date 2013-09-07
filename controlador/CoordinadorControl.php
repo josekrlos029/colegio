@@ -348,7 +348,12 @@ class CoordinadorControl extends Controlador{
              parent::consultaGeneralPersona();
          }
          
-    
+         public function actualizarFoto() {
+            parent::actualizarFoto();
+            $this->vista->set('url', $_POST['url']);
+            return $this->vista->imprimir();
+        }
+        
 }
 
 ?>

@@ -67,6 +67,7 @@ function cargadorClases(){
     require_once './utiles/php/Facebook.php';
     require_once './utiles/php/Google.php';
     require_once './utiles/php/Twitter.php';
+    require_once './utiles/php/Reportes.php';
     require_once './utiles/php/fpdf/fpdf.php';
     
 }
