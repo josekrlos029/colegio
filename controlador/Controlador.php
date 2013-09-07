@@ -633,14 +633,17 @@ $respuesta .= '
                     }
                 }
                     if($band == 1){
-                        if (file_exists($ruta.$idPersona.'.jpg')) {
-                        unlink($ruta.$idPersona.'.jpg');
-                        }elseif (file_exists($ruta.$idPersona.'.png')) {
-                            unlink($ruta.$idPersona.'.png');
-                        }elseif (file_exists($ruta.$idPersona.'.jpeg')) {
-                            unlink($ruta.$idPersona.'.jpeg');
-                        }
-                        copy($_FILES['foto']['tmp_name'],$destino);
+                        if (($_FILES["foto"]["size"])/1048576 <= 4){
+                       
+                            if (file_exists($ruta.$idPersona.'.jpg')) {
+                            unlink($ruta.$idPersona.'.jpg');
+                            }elseif (file_exists($ruta.$idPersona.'.png')) {
+                                unlink($ruta.$idPersona.'.png');
+                            }elseif (file_exists($ruta.$idPersona.'.jpeg')) {
+                                unlink($ruta.$idPersona.'.jpeg');
+                            }
+                            copy($_FILES['foto']['tmp_name'],$destino);
+                        }    
                     }
                     
             }
