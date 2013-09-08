@@ -204,7 +204,7 @@ var passwordC = document.getElementById("passwordC");
 <li><span>Cambiar Nombre De Usuario</span>
 <ul>
     
-<li>
+
     
                 <table width="80%" border="0" cellspacing="0" cellpadding="2">
                 <tr>
@@ -226,7 +226,7 @@ var passwordC = document.getElementById("passwordC");
                </table>
     
     
-</li>
+
 
 </ul>
 </li>
@@ -234,7 +234,7 @@ var passwordC = document.getElementById("passwordC");
 <li><span>Cambiar Contraseña</span>
 <ul>
     
-<li>
+
  <table width="80%" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                     <td></td>
@@ -257,14 +257,14 @@ var passwordC = document.getElementById("passwordC");
                     <td colspan="2"><input name="configurarContraseña" id="configurarContraseña" type="submit" class="button large green" value="Guardar" onclick="envioPassword()" /></td>
                 </tr>
 </table>
-</li>
+
 
 </ul>
 </li>
 
 <li><span>Cambiar Correo electronico</span>
 <ul>
-<li>
+
     <table width="80%" border="0" cellspacing="1" cellpadding="2">
                 <tr>
                     <td></td>
@@ -282,14 +282,15 @@ var passwordC = document.getElementById("passwordC");
                     <td></td>
                     <td colspan="2"><input name="configurarEmail" id="configurarEmail" type="submit" class="button large green" value="Guardar" onclick="envioEmail()" /></td>
                 </tr>
-               </table>  
+        </table>  
 
-</li>
+
 </ul>
 </li>
 </ul>
-     
- <script type="text/javascript">
+     </body>
+</html>   
+<script type="text/javascript">
  $("#accordion > li > span").click(function(){
  if(false == $(this).next().is(':visible')) {
  $('#accordion ul').slideUp(300);
@@ -299,5 +300,4 @@ var passwordC = document.getElementById("passwordC");
  $('#accordion ul:eq(0)').show();
  </script>
 
-    </body>
-</html>
+ 

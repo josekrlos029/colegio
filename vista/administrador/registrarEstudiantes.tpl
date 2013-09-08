@@ -611,8 +611,12 @@ function limpiar(){
                              </select></td>
                 </tr>
                 <tr>
-                    <td align="right" width="40%"><button class="button large green" id="insertarImagen" onclick="abrir()">Insetar Imagen</button></td>
-                    <td><p id="imagen" style="float: left;"><img id="foto" src="" /></p></td>
+                    <td align="right" width="40%"></td>
+                    <td><button class="button large blue" id="insertarImagen" onclick="abrir()">Insertar Imagen</button></td>
+               </tr>
+               <tr>
+                   <td></td>
+                   <td><p id="imagen" style="float: left;"><img id="foto" src="" /></p></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Activar Matricula:</td>
@@ -640,21 +644,22 @@ function limpiar(){
   <div style="float:right">
       <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
  </div>
-     <div style="margin: 0 auto;" id="tablaConsulta">
-         <h1 style="margin-left: 430px">Capturar Foto</h1>
-          <table border="0" style="margin: 0 auto; width: 50%;" >
-              <article>
-            <video  id="video" width="320" height="200" autoplay></video>
+    
+   
+    
+        <div style="margin:20%; ">
+         <h1>Capturar Foto</h1> 
+          
+        <article>
+         <video  id="video" width="320" height="200" autoplay></video>
             <section style="float: left;">
-                <button id="btnStart">Encender WebCam</button>
-                <button id="btnStop">Pausar</button>            
-                <button id="btnPhoto">Tomar Foto</button>
+                <button id="btnStart" class="button large blue" >Encender WebCam</button>
+                 <button id="btnStop"  class="button large blue">Pausar</button>           
+                 <button id="btnPhoto" class="button large blue">Tomar Foto</button>
             </section>
             <canvas id="canvas" width="320" height="240" style="float: left;"></canvas>
         </article>
-              </tr>
-          </table>
-      </div>
+        </div>    
 </div>
  <script type="text/javascript">
  $("#accordion > li > span").click(function(){

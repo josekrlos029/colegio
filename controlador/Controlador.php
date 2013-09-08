@@ -480,6 +480,9 @@ $respuesta .= '
           <tr>
           <td class="color-text-gris">Direccion:<span>'.  $est->getDirAcudiente().'</td>
           </tr>
+          <tr>
+          <td class="color-text-gris"><span><a href="#" onclick="vistaActualizarAcudiente('.$idPersona.') " >Actualizar</a></span></td>
+          </tr>
           </table>
           </div>
           <div style=" float:left; width:30%; border: 1px solid #d3d6db; margin-left:2%">
@@ -513,6 +516,9 @@ $respuesta .= '
           <tr>
            <td class="color-text-gris">Direccion:<span>'.  $est->getDirPadre().'</td>
           </tr>
+           <tr>
+          <td class="color-text-gris"><span><a href="#" onclick="vistaActualizarPadre('.$idPersona.') ">Actualizar</a></span></td>
+          </tr>
           </table>
           </div>
           <div style=" float:left; width:30%; border: 1px solid #d3d6db; margin-left:2%">
@@ -545,6 +551,9 @@ $respuesta .= '
           </tr>
           <tr>
            <td class="color-text-gris">Direccion:<span>'.  $est->getDirMadre().'</td>
+          </tr>
+           <tr>
+          <td class="color-text-gris"><span><a href="#" onclick="vistaActualizarMadre('.$idPersona.') ">Actualizar</a></span></td>
           </tr>
           </table>
           </div>
@@ -620,7 +629,180 @@ $respuesta .= '
         }
             
         }
-        
+
+   
+    public function actualizarAcudiente(){
+            try{
+            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $est = new Estudiante();
+            $est->leerAcudiente($idPersona,$est);
+            $respuesta = "";
+             $respuesta .='  
+                                <table width="60%" border="0" cellspacing="0" cellpadding="2">
+                                        <tr>
+                                        <td></td>
+                                        <td align="left" class="color-text-gris"><h1>ACtualizar Datos del acudiente</h1></td>
+                                        </tr> 
+                                         <tr>
+                                         <td  align="right" width="40%" >Numero de Identificacion:</td>
+                                        <td><input name="idPersona" id="idPersona" type="text" class="box-text" value="'. $est->getIdAcudiente().'" disabled="disabled" readonly="readonly"/></td>
+                                        </tr>
+                                       <tr>
+                                         <td align="right">Nombres:</td>
+                                        <td><input name="nombres" id="nombres" type="text" class="box-text" value="'.$est->getNombresAcudiente().'" required/></td>
+                                        </tr>  
+                                        <tr>
+                                         <td align="right">Apellido:s</td>
+                                         <td><input name="apellidos" id="apellidos" type="text" class="box-text" value="'.$est->getApellidosAcudiente().'" required/></td>
+                                         </tr>
+                                          <tr>
+                                         <td align="right">Ocupacion:</td>
+                                          <td><input name="ocupacion" id="ocupacion" type="text" class="box-text" value="'.$est->getOcupacionAcudiente().'" /></td>
+                                          </tr>
+                                         <tr>
+                                         <td align="right">Telefono:</td>
+                                          <td><input name="telefono" id="telefono" type="number" class="box-text" value="'.$est->gettelAcudiente().'" /></td>
+                                          </tr>
+                                          <tr>
+                                          <td align="right">Telefono de Oficina:</td>
+                                         <td><input name="telOfi" id="telOfi" type="text"  class="box-text" value="'.$est->getTelOficinaAcudiente().'" /></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="right">Direccion:</td>
+                                         <td><input name="direccion" id="direccion" type="text"  class="box-text" value="'.$est->getDirAcudiente().'" /></td>
+                                        </tr>
+                                     
+                                     <tr>
+                                        <td></td><td><input name="actualizaAcudiente" id="actualizaAcudiente" type="submit" value="Actualizar" class="button large gris" onclick="actualizaAcudiente()" /></td>
+                                         </tr>
+                                        </table>
+                                                      '; 
+              if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            } 
+            } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+         }
+    public function actualizarPadre(){
+            try{
+            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $est = new Estudiante();
+            $est->leerPadre($idPersona,$est);
+            $respuesta = "";
+             $respuesta .='  
+                                <table width="60%" border="0" cellspacing="0" cellpadding="2">
+                                        <tr>
+                                        <td></td>
+                                        <td align="left" class="color-text-gris"><h1>ACtualizar Datos del Padre</h1></td>
+                                        </tr> 
+                                         <tr>
+                                         <td  align="right" width="40%" >Numero de Identificacion:</td>
+                                        <td><input name="idPersona" id="idPersona" type="text" class="box-text" value="'. $est->getIdPadre().'" disabled="disabled" readonly="readonly"/></td>
+                                        </tr>
+                                       <tr>
+                                         <td align="right">Nombres:</td>
+                                        <td><input name="nombres" id="nombres" type="text" class="box-text" value="'.$est->getNombresPadre().'" required/></td>
+                                        </tr>  
+                                        <tr>
+                                         <td align="right">Apellido:s</td>
+                                         <td><input name="pApellido" id="pApellido" type="text" class="box-text" value="'.$est->getApellidosPadre().'" required/></td>
+                                         </tr>
+                                          <tr>
+                                         <td align="right">Ocupacion:</td>
+                                          <td><input name="ocupacion" id="ocupacion" type="text" class="box-text" value="'.$est->getOcupacionPadre().'" /></td>
+                                          </tr>
+                                         <tr>
+                                         <td align="right">Telefono:</td>
+                                          <td><input name="telefono" id="telefono" type="number" class="box-text" value="'.$est->gettelPadre().'" /></td>
+                                          </tr>
+                                          <tr>
+                                          <td align="right">Telefono de Oficina:</td>
+                                         <td><input name="estado" id="estado" type="text"  class="box-text" value="'.$est->getTelOficinaPadre().'" /></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="right">Direccion:</td>
+                                         <td><input name="direccion" id="direccion" type="text"  class="box-text" value="'.$est->getDirPadre().'" /></td>
+                                        </tr>
+                                     
+                                     <tr>
+                                        <td></td><td><input name="actualizaPadre" id="actualizaPadre" type="submit" value="Actualizar" class="button large gris" onclick="actualizaPadre()" /></td>
+                                         </tr>
+                                        </table>
+                                        
+                           
+
+                                     '; 
+              if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            } 
+            } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+         }
+         public function actualizarMadre(){
+            try{
+            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $est = new Estudiante();
+            $est->leerMadre($idPersona,$est);
+            $respuesta = "";
+             $respuesta .='  
+                                <table width="60%" border="0" cellspacing="0" cellpadding="2">
+                                        <tr>
+                                        <td></td>
+                                        <td align="left" class="color-text-gris"><h1>ACtualizar Datos de la madre</h1></td>
+                                        </tr> 
+                                         <tr>
+                                         <td  align="right" width="40%" >Numero de Identificacion:</td>
+                                        <td><input name="idPersona" id="idPersona" type="text" class="box-text" value="'. $est->getIdMadre().'" disabled="disabled" readonly="readonly"/></td>
+                                        </tr>
+                                       <tr>
+                                         <td align="right">Nombres:</td>
+                                        <td><input name="nombres" id="nombres" type="text" class="box-text" value="'.$est->getNombresMadre().'" required/></td>
+                                        </tr>  
+                                        <tr>
+                                         <td align="right">Apellido:s</td>
+                                         <td><input name="pApellido" id="pApellido" type="text" class="box-text" value="'.$est->getApellidosMadre().'" required/></td>
+                                         </tr>
+                                          <tr>
+                                         <td align="right">Ocupacion:</td>
+                                          <td><input name="ocupacion" id="ocupacion" type="text" class="box-text" value="'.$est->getOcupacionMadre().'" /></td>
+                                          </tr>
+                                         <tr>
+                                         <td align="right">Telefono:</td>
+                                          <td><input name="telefono" id="telefono" type="number" class="box-text" value="'.$est->gettelMadre().'" /></td>
+                                          </tr>
+                                          <tr>
+                                          <td align="right">Telefono de Oficina:</td>
+                                         <td><input name="estado" id="estado" type="text"  class="box-text" value="'.$est->getTelOficinaMadre().'" /></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="right">Direccion:</td>
+                                         <td><input name="direccion" id="direccion" type="text"  class="box-text" value="'.$est->getDirMadre().'" /></td>
+                                        </tr>
+                                     
+                                     <tr>
+                                        <td></td><td><input name="actualizaMadre" id="actualizaMadre" type="submit" value="Actualizar" class="button large gris" onclick="actualizaMadre()" /></td>
+                                         </tr>
+                                        </table>
+                                        
+                           
+
+                                     '; 
+              if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            } 
+            } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+         }
+           
         public function actualizarFoto(){
             session_start();
             $idPersona=$_SESSION['idUsuario'];
@@ -656,7 +838,6 @@ $respuesta .= '
             
         }
    }
-    
 
 
 ?>

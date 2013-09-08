@@ -195,9 +195,9 @@ function foto(){
                 <div style="float:right">
                     <a href = "javascript:void(0)" onclick = "document.getElementById('light2').style.display='none';document.getElementById('fade2').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
                </div>
-                  <div style="margin: 0 auto;"> 
+                  <div style="margin:20%;"> 
                       <h1>INSERTAR IMAGEN</h1>
-                      <p>POR FAVOR SELECCIONE SU IMAGEN QUE DESEA PARA SU PERFIL (EXTENSIONES ACEPTADAS: .jpeg .jpg .png; TAMAÑO MAXIMO: 4MB)</p>
+                      <p>Por favor Seleccion la imagen que desea para su Perfil.</br>EXTENSIONES ACEPTADAS: .jpeg .jpg .png </br> TAMAÑO MAXIMO: 4MB</p>
                       <form action="/colegio/acudiente/actualizarFoto/" method="post" enctype="multipart/form-data" name="form1">
                           <input type="file" name="foto" id="foto">
                           <input type="hidden" name="url" value="/colegio/coordinador/usuarioCoordinador">

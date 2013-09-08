@@ -569,16 +569,33 @@ class Estudiante extends Persona {
         $this->__setSql($sql);
         $this->ejecutar($this->getParametrosPadre($estudiante));
     }
+     public function actDatosPadre(Estudiante $estudiante) {
+        $sql = "UPDATE padre SET  nombre=:nombresPadre, apellido:apellidosPadre, ocupacion:ocupacionPadre, telefono=:telPadre, tel_oficina:telOficinaPadre,  direccion=:dirPadre  WHERE id_padre=:idPadre";
+        $this->__setSql($sql);
+        $this->ejecutar($this->getParametrosAcudiente($estudiante));
+        }
+    
     public function crearDatosMadre(Estudiante $estudiante){
         $sql = "INSERT INTO madre (id_madre,nombre,apellido, ocupacion,telefono,tel_oficina,direccion) VALUES ( :idMadre, :nombresMadre, :apellidosMadre, :ocupacionMadre, :telMadre, :telOficinaMadre, :dirMadre)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametrosMadre($estudiante));
     }
+    public function actDatosMadre(Estudiante $estudiante) {
+        $sql = "UPDATE madre SET  nombre=:nombresMadre, apellido:apellidosMadre, ocupacion:ocupacionMadre, telefono=:telMadre, tel_oficina:telOficinaMadre,  direccion=:dirMadre  WHERE id_madre=:idMadre";
+        $this->__setSql($sql);
+        $this->ejecutar($this->getParametrosAcudiente($estudiante));
+        }
+    
     public function crearDatosAcudiente(Estudiante $estudiante){
         $sql = "INSERT INTO acudiente (id_acudiente,nombre,apellido, ocupacion,telefono,tel_oficina,direccion) VALUES ( :idAcudiente, :nombresAcudiente, :apellidosAcudiente, :ocupacionAcudiente, :telAcudiente, :telOficinaAcudiente, :dirAcudiente)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametrosAcudiente($estudiante));
     }
+    public function actDatosAcudiente(Estudiante $estudiante) {
+        $sql = "UPDATE acudiente SET  nombres=:nombresAcudiente, apellidos:apellidosAcudiente, ocupacion:ocupacionAcudiente, telefono=:telAcudiente, tel_oficina:telOficinaAcudiente,  direccion=:dirAcudiente  WHERE id_acudiente=:idAcudiente";
+        $this->__setSql($sql);
+        $this->ejecutar($this->getParametrosAcudiente($estudiante));
+        }
     
     public function estudiantePadre(Estudiante $estudiante){
         $sql = "INSERT INTO padre_estudiante (id_estudiante,id_padre) VALUES (:idPersona,:idPadre)";
