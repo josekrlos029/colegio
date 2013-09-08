@@ -295,7 +295,9 @@ var passwordC = document.getElementById("passwordC");
 </ul>
 </li>
 </ul>
-     
+    </body>
+</html>  
+
  <script type="text/javascript">
  $("#accordion > li > span").click(function(){
  if(false == $(this).next().is(':visible')) {
@@ -306,5 +308,4 @@ var passwordC = document.getElementById("passwordC");
  $('#accordion ul:eq(0)').show();
  </script>
 
-    </body>
-</html>
+   

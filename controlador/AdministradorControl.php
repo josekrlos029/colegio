@@ -646,7 +646,7 @@ class AdministradorControl extends Controlador{
                     <td>'. $doc->getCorreo().'</td>
                     <td align="center"><a href="#" onclick="consultaPersona ('. strtoupper ($doc->getIdPersona()).') "><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
                     <td align="center"><a href="#" onclick="vistaActualizarPersona('.$doc->getIdPersona().') "><img src="../utiles/imagenes/iconos/editarPersona.png" /></a></td>
-                    <td align="center"><a href="#" onclick="eliminarPersona ('. strtoupper ($doc->getIdPersona()).') "><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a></td>
+                    <td align="center"><a href="#" onclick="eliminarPersona ('. strtoupper ($doc->getIdPersona()).') "><img src="../utiles/imagenes/iconos/InhabilitarPersona.png"/></a></td>
                 </tr>';     
                   }
                 $respuesta.='</table>';
@@ -1338,19 +1338,9 @@ class AdministradorControl extends Controlador{
              
              $estado='0';
              $idRol= 'E';
-             /*
-             $estudiante2 = new Estudiante();
-            $estudiante2->eliminarPersona($idPersona);
-            $estudiante2->eliminarUsuario($idPersona);
-            $estudiante2->eliminarDatos($idPersona);
-            $estudiante2->eliminarDatosNacimiento($idPersona);
-            $estudiante2->eliminarDatosUbicacion($idPersona);
-            $estudiante2->eliminarEstudiantePadre($idPersona,$idPadre);
-            $estudiante2->eliminarEstudianteMadre($idPersona,$idMadre);
-            $estudiante2->eliminarEstudianteAcudiente($idPersona,$idAcudiente);
+         
             
-              * 
-              */
+            
               try {
                      
              $estudiante = new Estudiante();
@@ -2120,8 +2110,99 @@ class AdministradorControl extends Controlador{
           public function pension() {
              parent::pension();
          }
-         
-         
+          public function actualizarAcudiente() {
+             parent::actualizarAcudiente();
+         }
+         public function actualizaAcudiente(){
+           try {
+               
+             $idAcudiente= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $nombresAcudiente = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
+             $apellidosAcudiente = isset($_POST['apellidos']) ? $_POST['apellidos'] : NULL;
+             $telAcudiente = isset($_POST['telefono']) ? $_POST['telefono'] : NULL;
+             $telOficinaAcudiente = isset($_POST['telOfi']) ? $_POST['telOfi'] : NULL;
+             $dirAcudiente = isset($_POST['direccion']) ? $_POST['direccion'] : NULL;
+             $ocupacionAcudiente = isset($_POST['ocupacion']) ? $_POST['ocupacion'] : NULL;
+        
+             $estudiante = new Estudiante();
+             
+             $estudiante->setIdAcudiente($idAcudiente);
+             $estudiante->setNombresAcudiente($nombresAcudiente);
+             $estudiante->setApellidosAcudiente($apellidosAcudiente);
+             $estudiante->setOcupacionAcudiente($ocupacionAcudiente);
+             $estudiante->setTelAcudiente($telAcudiente);
+             $estudiante->setTelOficinaAcudiente($telOficinaAcudiente);
+             $estudiante->setDirAcudiente($dirAcudiente);
+          
+             $estudiante->actDatosAcudiente($estudiante);  
+             
+            echo json_encode(1);
+            }catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }     
+        }
+          public function actualizarPadre() {
+             parent::actualizarPadre();
+         }
+           public function actualizaPadre(){
+           try {
+               
+             $idPadre= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $nombresPadre = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
+             $apellidosPadre = isset($_POST['apellidos']) ? $_POST['apellidos'] : NULL;
+             $telPadre = isset($_POST['telefono']) ? $_POST['telefono'] : NULL;
+             $telOficinaPadre = isset($_POST['telOfi']) ? $_POST['telOfi'] : NULL;
+             $dirPadre = isset($_POST['direccion']) ? $_POST['direccion'] : NULL;
+             $ocupacionPadre = isset($_POST['ocupacion']) ? $_POST['ocupacion'] : NULL;
+        
+             $estudiante = new Estudiante();
+        
+             $estudiante->setIdPadre($idPadre);
+             $estudiante->setNombresPadre($nombresPadre);
+             $estudiante->setApellidosPadre($apellidosPadre);
+             $estudiante->setOcupacionPadre($ocupacionPadre);
+             $estudiante->setTelPadre($telPadre);
+             $estudiante->setTelOficinaPadre($telOficinaPadre);
+             $estudiante->setDirPadre($dirPadre);
+     
+             $estudiante->actDatosPadre($estudiante);  
+             
+             echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }     
+        }
+          public function actualizarMadre() {
+             parent::actualizarMadre();
+         }
+          public function actualizaMadre(){
+           try {
+               
+             $idMadre= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $nombresMadre = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
+             $apellidosMadre = isset($_POST['apellidos']) ? $_POST['apellidos'] : NULL;
+             $telMadre = isset($_POST['telefono']) ? $_POST['telefono'] : NULL;
+             $telOficinaMadre = isset($_POST['telOfi']) ? $_POST['telOfi'] : NULL;
+             $dirMadre = isset($_POST['direccion']) ? $_POST['direccion'] : NULL;
+             $ocupacionMadre = isset($_POST['ocupacion']) ? $_POST['ocupacion'] : NULL;
+        
+             $estudiante = new Estudiante();
+             $estudiante->setIdMadre($idMadre);
+             $estudiante->setNombresMadre($nombresMadre);
+             $estudiante->setApellidosMadre($apellidosMadre);
+             $estudiante->setOcupacionMadre($ocupacionMadre);
+             $estudiante->setTelMadre($telMadre);
+             $estudiante->setTelOficinaMadre($telOficinaMadre);
+             $estudiante->setDirMadre($dirMadre);
+           
+             $estudiante->actDatosMadre($estudiante);  
+             
+             echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }     
+        }
+        
         
          
  
@@ -2189,15 +2270,15 @@ class AdministradorControl extends Controlador{
                                         </tr> 
                                          <tr>
                                          <td  align="right" width="40%" >Numero de Identificacion:</td>
-                                        <td><input name="idPersona" id="idPersona" type="text" class="box-text" value='.$persona->getidPersona().' disabled="disabled" readonly="readonly"/></td>
+                                        <td><input name="idPersona" id="idPersona" type="text" class="box-text" value="'.$persona->getidPersona().'" disabled="disabled" readonly="readonly"/></td>
                                         </tr>
                                        <tr>
                                          <td align="right">Nombres:</td>
-                                        <td><input name="nombres" id="nombres" type="text" class="box-text" value='.$persona->getNombres().' required/></td>
+                                        <td><input name="nombres" id="nombres" type="text" class="box-text" value="'.$persona->getNombres().'" required/></td>
                                         </tr>  
                                         <tr>
                                          <td align="right">Primer Apellido:</td>
-                                         <td><input name="pApellido" id="pApellido" type="text" class="box-text" value='.$persona->getPApellido().' required/></td>
+                                         <td><input name="pApellido" id="pApellido" type="text" class="box-text" value="'.$persona->getPApellido().'" required/></td>
                                          </tr> 
                                          <tr>
                                          <td align="right">Segundo Apellido:</td>

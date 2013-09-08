@@ -69,7 +69,6 @@ var data="idPersona="+idPersona;
  
       
 }
-
 function actualizarPersona(){
  var x = $("#mensaje");
  cargando();

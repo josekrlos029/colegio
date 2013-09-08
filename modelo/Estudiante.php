@@ -569,6 +569,7 @@ class Estudiante extends Persona {
         $this->__setSql($sql);
         $this->ejecutar($this->getParametrosPadre($estudiante));
     }
+    
     public function crearDatosMadre(Estudiante $estudiante){
         $sql = "INSERT INTO madre (id_madre,nombre,apellido, ocupacion,telefono,tel_oficina,direccion) VALUES ( :idMadre, :nombresMadre, :apellidosMadre, :ocupacionMadre, :telMadre, :telOficinaMadre, :dirMadre)";
         $this->__setSql($sql);
@@ -579,6 +580,11 @@ class Estudiante extends Persona {
         $this->__setSql($sql);
         $this->ejecutar($this->getParametrosAcudiente($estudiante));
     }
+    public function actDatosAcudiente(Estudiante $estudiante) {
+        $sql = "UPDATE acudiente SET nombres=:nombresAcudiente,apellidos:apellidosAcudiente,ocupacion:ocupacionAcudiente, telefono=:telAcudiente, tel_oficina:telOficinaAcudiente,  direccion=:dirAcudiente  WHERE id_acudiente=:idAcudiente";
+        $this->__setSql($sql);
+        $this->ejecutar($this->getParametrosAcudiente($estudiante));
+        }
     
     public function estudiantePadre(Estudiante $estudiante){
         $sql = "INSERT INTO padre_estudiante (id_estudiante,id_padre) VALUES (:idPersona,:idPadre)";

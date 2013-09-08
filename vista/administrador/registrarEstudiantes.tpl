@@ -611,8 +611,12 @@ function limpiar(){
                              </select></td>
                 </tr>
                 <tr>
-                    <td align="right" width="40%"><button class="button large green" id="insertarImagen" onclick="abrir()">Insetar Imagen</button></td>
-                    <td><p id="imagen" style="float: left;"><img id="foto" src="" /></p></td>
+                    <td align="right" width="40%"></td>
+                    <td><button class="button large blue" id="insertarImagen" onclick="abrir()">Insertar Imagen</button></td>
+               </tr>
+               <tr>
+                   <td></td>
+                   <td><p id="imagen" style="float: left;"><img id="foto" src="" /></p></td>
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Activar Matricula:</td>
