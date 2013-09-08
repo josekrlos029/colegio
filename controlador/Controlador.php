@@ -164,9 +164,15 @@ class Controlador {
             try{
            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
             $pers = new Persona();
-            $rolPersona = new Rol();
-            $roles = $rolPersona->rolPersona($idPersona);
-            $rol=$roles->getIdRol(); 
+             $rolPersona = new Rol();
+            $roles = $rolPersona->leerRoles($idPersona);
+            foreach ($roles as $ro){
+                if ($ro->getIdRol()== 'D'){
+                    $rol = $ro->getIdRol();
+                }elseif ($ro->getIdRol()== 'E'){
+                    $rol = $ro->getIdRol();
+                }
+            }
             $persona = $pers->leerPorId($idPersona);
             $respuesta = "
              

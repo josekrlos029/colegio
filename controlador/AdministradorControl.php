@@ -2133,7 +2133,7 @@ class AdministradorControl extends Controlador{
              $estudiante->setTelAcudiente($telAcudiente);
              $estudiante->setTelOficinaAcudiente($telOficinaAcudiente);
              $estudiante->setDirAcudiente($dirAcudiente);
-          
+                       
              $estudiante->actDatosAcudiente($estudiante);  
              
             echo json_encode(1);
@@ -2147,7 +2147,7 @@ class AdministradorControl extends Controlador{
            public function actualizaPadre(){
            try {
                
-             $idPadre= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $idPadre= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
              $nombresPadre = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
              $apellidosPadre = isset($_POST['apellidos']) ? $_POST['apellidos'] : NULL;
              $telPadre = isset($_POST['telefono']) ? $_POST['telefono'] : NULL;
@@ -2165,7 +2165,7 @@ class AdministradorControl extends Controlador{
              $estudiante->setTelOficinaPadre($telOficinaPadre);
              $estudiante->setDirPadre($dirPadre);
      
-             $estudiante->actDatosPadre($estudiante);  
+            $estudiante->actDatosPadre($estudiante);  
              
              echo json_encode(1);
         } catch (Exception $exc) {
