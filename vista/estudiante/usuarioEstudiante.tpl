@@ -72,10 +72,13 @@ function pension(){
                         <tr> 
                             <td>
                                 <div class="marcoAvatarest">
+<<<<<<< HEAD
                                  
+=======
+>>>>>>> branch 'master' of https://github.com/josekrlos029/colegio.git
                                     <div class="avatar">
                                     <span class="rounded">
-                                    <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                                     <?php echo $img; ?>
                                     </span> 
                                     </div>    
                                     </div>   

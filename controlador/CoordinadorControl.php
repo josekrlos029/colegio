@@ -28,6 +28,17 @@ class CoordinadorControl extends Controlador{
             $persona = new Persona();
             $coordinador = $persona->leerPorId($idPersona);
             $this->vista->set('coordinador', $coordinador);
+            $ruta = 'utiles/imagenes/fotos/';
+            if (file_exists($ruta.$idPersona.'.jpg')) {
+                $img= '<a href="/colegio/acudiente/usuarioAcudiente"><img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.jpg"></a>';
+            }elseif (file_exists($ruta.$idPersona.'.png')) {
+                $img= '<a href="/colegio/acudiente/usuarioAcudiente"><img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.png"></a>';
+            }elseif (file_exists($ruta.$idPersona.'.jpeg')) {
+                $img= '<a href="/colegio/acudiente/usuarioAcudiente"><img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.jpeg"></a>';
+            }else{
+                $img= '<a href="/colegio/acudiente/usuarioAcudiente"><img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png"></a>';
+            }
+            $this->vista->set('img', $img);
             return $this->vista->imprimir();
             }
         } catch (Exception $exc) {
@@ -337,7 +348,12 @@ class CoordinadorControl extends Controlador{
              parent::consultaGeneralPersona();
          }
          
-    
+         public function actualizarFoto() {
+            parent::actualizarFoto();
+            $this->vista->set('url', $_POST['url']);
+            return $this->vista->imprimir();
+        }
+        
 }
 
 ?>

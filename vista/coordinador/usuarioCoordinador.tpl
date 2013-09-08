@@ -54,6 +54,10 @@ $('#cargar').load('/colegio/coordinador/pensiones');
 function seguimientos(){
 $('#cargar2').load('/colegio/coordinador/seguimientos'); 
 }
+function foto(){
+    document.getElementById('light2').style.display='block';
+    document.getElementById('fade2').style.display='block';
+}
 </script>
  <body>
     
@@ -120,10 +124,10 @@ $('#cargar2').load('/colegio/coordinador/seguimientos');
                     <td>
                       
                         <div class="marcoAvatarCoor">
-                             <a href="#" class="pic"><img height="24px" width="24px" src="../utiles/imagenes/cambiar-img.png"></a>
+                             <a href="#" class="pic" onclick="foto()"><img height="24px" width="24px" src="../utiles/imagenes/cambiar-img.png"></a>
                             <div class="avatar">
                             <span class="rounded">
-                            <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                            <?php echo $img; ?>
                             </span> 
                             </div>    
                             </div>  
@@ -186,6 +190,22 @@ $('#cargar2').load('/colegio/coordinador/seguimientos');
                    </div>
                 </div>
 </div>
+<div id="fade2" class="overlay"></div>
+            <div id="light2" class="modal">
+                <div style="float:right">
+                    <a href = "javascript:void(0)" onclick = "document.getElementById('light2').style.display='none';document.getElementById('fade2').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
+               </div>
+                  <div style="margin: 0 auto;"> 
+                      <h1>INSERTAR IMAGEN</h1>
+                      <p>POR FAVOR SELECCIONE SU IMAGEN QUE DESEA PARA SU PERFIL (EXTENSIONES ACEPTADAS: .jpeg .jpg .png; TAMAÑO MAXIMO: 4MB)</p>
+                      <form action="/colegio/acudiente/actualizarFoto/" method="post" enctype="multipart/form-data" name="form1">
+                          <input type="file" name="foto" id="foto">
+                          <input type="hidden" name="url" value="/colegio/coordinador/usuarioCoordinador">
+                          <input type="submit" name="enviar" value="Enviar" class="button large green" >
+                      </form>
+                  </div>
+
+            </div>
  </body>
   <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>

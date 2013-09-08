@@ -623,6 +623,7 @@ $respuesta .= '
         }
             
         }
+
    
     public function actualizarAcudiente(){
             try{
@@ -669,10 +670,7 @@ $respuesta .= '
                                         <td></td><td><input name="actualizaAcudiente" id="actualizaAcudiente" type="submit" value="Actualizar" class="button large gris" onclick="actualizaAcudiente()" /></td>
                                          </tr>
                                         </table>
-                                        
-                           
-
-                                     '; 
+                                                      '; 
               if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
             }  else {
@@ -798,6 +796,42 @@ $respuesta .= '
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
          }
+           
+        public function actualizarFoto(){
+            session_start();
+            $idPersona=$_SESSION['idUsuario'];
+            $archivo = $_FILES["foto"]['name'];
+            $trozos = explode(".", $archivo); 
+            $extension = end($trozos); 
+            $ruta = 'utiles/imagenes/fotos/';
+            $destino = $ruta.$idPersona.".".$extension;
+            $extensiones = ['jpg', 'jpeg', 'png'];
+            
+            if ($archivo != "") {
+                $band=0;    
+                for($i=0; $i<count($extensiones); $i++){
+                    if ($extensiones[$i]==$extension){
+                        $band = 1;
+                    }
+                }
+                    if($band == 1){
+                        if (($_FILES["foto"]["size"])/1048576 <= 4){
+                       
+                            if (file_exists($ruta.$idPersona.'.jpg')) {
+                            unlink($ruta.$idPersona.'.jpg');
+                            }elseif (file_exists($ruta.$idPersona.'.png')) {
+                                unlink($ruta.$idPersona.'.png');
+                            }elseif (file_exists($ruta.$idPersona.'.jpeg')) {
+                                unlink($ruta.$idPersona.'.jpeg');
+                            }
+                            copy($_FILES['foto']['tmp_name'],$destino);
+                        }    
+                    }
+                    
+            }
+            
+        }
+   }
 
 }
 ?>
