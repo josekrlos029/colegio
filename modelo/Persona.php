@@ -176,6 +176,18 @@ class Persona extends Modelo{
         $this->asignarRol($persona);
         
     }
+      public function leerEstado($idPersona) {
+        $sql = "SELECT  * FROM persona WHERE idPersona='".$idPersona."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pers = array();
+        foreach ($resultado as $fila) {
+            $persona = new Persona();
+            $this->mapearPersona($persona, $fila);
+            $pers[$persona->getIdPersona()] = $persona;
+        }
+        return $pers;
+    }
     
      public function actualizarPersona(Persona $persona) {
         $sql = "UPDATE persona SET nombres=:nombres, pApellido=:pApellido, sApellido=:sApellido, sexo=:sexo, telefono=:telefono, correo=:correo,  estado=:estado  WHERE idPersona=:idPersona";

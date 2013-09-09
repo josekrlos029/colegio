@@ -23,6 +23,10 @@ class EstudianteControl extends Controlador{
         public function usuarioEstudiante(){
         try {
             if($this->verificarSession()){
+            
+            
+             
+             
             $this->vista->set('titulo', 'Usuario Estudiante');
             $idPersona = $_SESSION['idUsuario'];
             $persona = new Persona();
@@ -30,6 +34,9 @@ class EstudianteControl extends Controlador{
             $salon = new Salon();
              $grado = new Grado();
             $estudiante = $persona->leerPorId($idPersona);
+            if($estudiante->getEstado()=='0'){
+                 echo "El estudiante se encuentra Ihabilitado";
+            }else{
             $matricula = $matricula->leerMatriculaPorId($idPersona);
             $salon = $salon->leerSalonePorId($matricula->getIdSalon());
             $grado= $grado->leerGradoPorId($salon->getIdGrado());
@@ -49,6 +56,7 @@ class EstudianteControl extends Controlador{
             $this->vista->set('img', $img);
             return $this->vista->imprimir();
             
+            }
             }
         } catch (Exception $exc) {
             echo 'Error de aplicacion: ' . $exc->getMessage();

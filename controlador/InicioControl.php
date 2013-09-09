@@ -45,6 +45,7 @@ class InicioControl extends Controlador{
                 session_start();
                 $_SESSION['idUsuario'] = $usuario->getIdPersona();
                 $rol = new Rol();
+               
                 $roles = $rol->leerRoles($usuario->getIdPersona());
                 if (count($roles)>1){
                    echo json_encode("/colegio/inicio/escogeRol"); 
@@ -54,6 +55,7 @@ class InicioControl extends Controlador{
                     }
                 } 
             }
+          
         } catch (Exception $exc){
             echo  json_encode('Error de aplicacion: ' . $exc->getMessage());
         }   
@@ -86,6 +88,7 @@ class InicioControl extends Controlador{
                          echo json_encode("/colegio/docente/usuarioDocente");
                     }elseif ($idRol == 'E') {
                          echo json_encode("/colegio/estudiante/usuarioEstudiante");
+                     
                     }elseif ($idRol == 'C') {
                          echo json_encode("/colegio/coordinador/usuarioCoordinador");
                     }elseif ($idRol == 'AC') {
