@@ -570,9 +570,9 @@ class Estudiante extends Persona {
         $this->ejecutar($this->getParametrosPadre($estudiante));
     }
      public function actDatosPadre(Estudiante $estudiante) {
-        $sql = "UPDATE padre SET  nombre=:nombresPadre, apellido:apellidosPadre, ocupacion:ocupacionPadre, telefono=:telPadre, tel_oficina:telOficinaPadre,  direccion=:dirPadre  WHERE id_padre=:idPadre";
+        $sql = "UPDATE padre SET  nombre=:nombresPadre, apellido=:apellidosPadre, ocupacion=:ocupacionPadre, telefono=:telPadre, tel_oficina=:telOficinaPadre,  direccion=:dirPadre  WHERE id_padre=:idPadre";
         $this->__setSql($sql);
-        $this->ejecutar($this->getParametrosAcudiente($estudiante));
+        $this->ejecutar($this->getParametrosPadre($estudiante));
         }
     
     public function crearDatosMadre(Estudiante $estudiante){
@@ -581,9 +581,9 @@ class Estudiante extends Persona {
         $this->ejecutar($this->getParametrosMadre($estudiante));
     }
     public function actDatosMadre(Estudiante $estudiante) {
-        $sql = "UPDATE madre SET  nombre=:nombresMadre, apellido:apellidosMadre, ocupacion:ocupacionMadre, telefono=:telMadre, tel_oficina:telOficinaMadre,  direccion=:dirMadre  WHERE id_madre=:idMadre";
+        $sql = "UPDATE madre SET  nombre=:nombresMadre, apellido=:apellidosMadre, ocupacion=:ocupacionMadre, telefono=:telMadre, tel_oficina=:telOficinaMadre,  direccion=:dirMadre  WHERE id_madre=:idMadre";
         $this->__setSql($sql);
-        $this->ejecutar($this->getParametrosAcudiente($estudiante));
+        $this->ejecutar($this->getParametrosMadre($estudiante));
         }
     
     public function crearDatosAcudiente(Estudiante $estudiante){
@@ -592,7 +592,7 @@ class Estudiante extends Persona {
         $this->ejecutar($this->getParametrosAcudiente($estudiante));
     }
     public function actDatosAcudiente(Estudiante $estudiante) {
-        $sql = "UPDATE acudiente SET  nombres=:nombresAcudiente, apellidos:apellidosAcudiente, ocupacion:ocupacionAcudiente, telefono=:telAcudiente, tel_oficina:telOficinaAcudiente,  direccion=:dirAcudiente  WHERE id_acudiente=:idAcudiente";
+        $sql = "UPDATE acudiente SET  nombre=:nombresAcudiente, apellido=:apellidosAcudiente, ocupacion=:ocupacionAcudiente, telefono=:telAcudiente, tel_oficina=:telOficinaAcudiente,  direccion=:dirAcudiente  WHERE id_acudiente=:idAcudiente";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametrosAcudiente($estudiante));
         }
