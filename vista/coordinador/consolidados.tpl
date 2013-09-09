@@ -2,15 +2,15 @@
            <script type="text/javascript">
     
  function estPreescolar(){    
- $('#cargar3').load('/colegio/administrador/consolidadoPreescolar');           
+ $('#cargar3').load('/colegio/coordinador/consolidadoPreescolar');           
 }
 
  function estPrimaria(){    
- $('#cargar3').load('/colegio/administrador/consolidadoPrimaria');           
+ $('#cargar3').load('/colegio/coordinador/consolidadoPrimaria');           
 }
 
  function estSecundaria(){    
- $('#cargar3').load('/colegio/administrador/consolidadoSecundaria');           
+ $('#cargar3').load('/colegio/coordinador/consolidadoSecundaria');           
 }
 
   </script>  

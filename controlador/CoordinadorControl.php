@@ -353,6 +353,51 @@ class CoordinadorControl extends Controlador{
             $this->vista->set('url', $_POST['url']);
             return $this->vista->imprimir();
         }
+           public function consolidadoPreescolar(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'estudiantes Preescolar');
+            $salon = new Salon();
+            $preescolar = $salon->leerSalonesPreescolar();
+            $this->vista->set('preescolar', $preescolar);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+         public function consolidadoPrimaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'estudiantes Primaria');
+             $limI='1';
+             $limS='5';
+            $salones = new Salon();
+            $primaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('primaria', $primaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+        public function consolidadoSecundaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'estudiantes Secundaria');
+             $limI='6';
+             $limS='11';
+            $salones = new Salon();
+            $secundaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('secundaria', $secundaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
         
 }
 
