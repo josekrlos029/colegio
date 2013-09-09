@@ -115,7 +115,7 @@ function actualizaPadre(){
 
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
-                x.html ( "<p>Acudiente Actualizado Correctamente</p>");
+                x.html ( "<p>Padre Actualizado Correctamente</p>");
                 exito();
                 ocultar();
                
@@ -179,7 +179,7 @@ function actualizaMadre(){
 
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
-                x.html ( "<p>Acudiente Actualizado Correctamente</p>");
+                x.html ( "<p>Madre Actualizado Correctamente</p>");
                 exito();
                 ocultar();
                

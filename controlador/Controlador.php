@@ -704,7 +704,7 @@ $respuesta .= '
             $est->leerPadre($idPersona,$est);
             $respuesta = "";
              $respuesta .='  
-                                <table width="60%" border="0" cellspacing="0" cellpadding="2">
+                                 <table width="60%" border="0" cellspacing="0" cellpadding="2">
                                         <tr>
                                         <td></td>
                                         <td align="left" class="color-text-gris"><h1>ACtualizar Datos del Padre</h1></td>
@@ -719,7 +719,7 @@ $respuesta .= '
                                         </tr>  
                                         <tr>
                                          <td align="right">Apellido:s</td>
-                                         <td><input name="pApellido" id="pApellido" type="text" class="box-text" value="'.$est->getApellidosPadre().'" required/></td>
+                                         <td><input name="apellidos" id="apellidos" type="text" class="box-text" value="'.$est->getApellidosPadre().'" required/></td>
                                          </tr>
                                           <tr>
                                          <td align="right">Ocupacion:</td>
@@ -727,11 +727,11 @@ $respuesta .= '
                                           </tr>
                                          <tr>
                                          <td align="right">Telefono:</td>
-                                          <td><input name="telefono" id="telefono" type="number" class="box-text" value="'.$est->gettelPadre().'" /></td>
+                                          <td><input name="telefono" id="telefono" type="number" class="box-text" value="'.$est->getTelPadre().'" /></td>
                                           </tr>
                                           <tr>
                                           <td align="right">Telefono de Oficina:</td>
-                                         <td><input name="estado" id="estado" type="text"  class="box-text" value="'.$est->getTelOficinaPadre().'" /></td>
+                                         <td><input name="telOfi" id="telOfi" type="text"  class="box-text" value="'.$est->getTelOficinaPadre().'" /></td>
                                         </tr>
                                         <tr>
                                           <td align="right">Direccion:</td>
@@ -742,10 +742,7 @@ $respuesta .= '
                                         <td></td><td><input name="actualizaPadre" id="actualizaPadre" type="submit" value="Actualizar" class="button large gris" onclick="actualizaPadre()" /></td>
                                          </tr>
                                         </table>
-                                        
-                           
-
-                                     '; 
+                                                      '; 
               if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
             }  else {
@@ -762,10 +759,10 @@ $respuesta .= '
             $est->leerMadre($idPersona,$est);
             $respuesta = "";
              $respuesta .='  
-                                <table width="60%" border="0" cellspacing="0" cellpadding="2">
+                                 <table width="60%" border="0" cellspacing="0" cellpadding="2">
                                         <tr>
                                         <td></td>
-                                        <td align="left" class="color-text-gris"><h1>ACtualizar Datos de la madre</h1></td>
+                                        <td align="left" class="color-text-gris"><h1>ACtualizar Datos de la Madre</h1></td>
                                         </tr> 
                                          <tr>
                                          <td  align="right" width="40%" >Numero de Identificacion:</td>
@@ -777,7 +774,7 @@ $respuesta .= '
                                         </tr>  
                                         <tr>
                                          <td align="right">Apellido:s</td>
-                                         <td><input name="pApellido" id="pApellido" type="text" class="box-text" value="'.$est->getApellidosMadre().'" required/></td>
+                                         <td><input name="apellidos" id="apellidos" type="text" class="box-text" value="'.$est->getApellidosMadre().'" required/></td>
                                          </tr>
                                           <tr>
                                          <td align="right">Ocupacion:</td>
@@ -785,11 +782,11 @@ $respuesta .= '
                                           </tr>
                                          <tr>
                                          <td align="right">Telefono:</td>
-                                          <td><input name="telefono" id="telefono" type="number" class="box-text" value="'.$est->gettelMadre().'" /></td>
+                                          <td><input name="telefono" id="telefono" type="number" class="box-text" value="'.$est->getTelMadre().'" /></td>
                                           </tr>
                                           <tr>
                                           <td align="right">Telefono de Oficina:</td>
-                                         <td><input name="estado" id="estado" type="text"  class="box-text" value="'.$est->getTelOficinaMadre().'" /></td>
+                                         <td><input name="telOfi" id="telOfi" type="text"  class="box-text" value="'.$est->getTelOficinaMadre().'" /></td>
                                         </tr>
                                         <tr>
                                           <td align="right">Direccion:</td>
@@ -800,10 +797,7 @@ $respuesta .= '
                                         <td></td><td><input name="actualizaMadre" id="actualizaMadre" type="submit" value="Actualizar" class="button large gris" onclick="actualizaMadre()" /></td>
                                          </tr>
                                         </table>
-                                        
-                           
-
-                                     '; 
+                                                      ';  
               if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
             }  else {
