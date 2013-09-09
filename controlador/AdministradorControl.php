@@ -2216,14 +2216,27 @@ class AdministradorControl extends Controlador{
             $roles = $rolPersona->rolPersona($idPersona);
             $rol=$roles->getIdRol(); 
             $persona = $pers->leerPorId($idPersona);
+             $ruta = 'utiles/imagenes/fotos/';
+            if (file_exists($ruta.$idPersona.'.jpg')) {
+                $img= '<img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.jpg">';
+            }elseif (file_exists($ruta.$idPersona.'.png')) {
+                $img= '<img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.png">';
+            }elseif (file_exists($ruta.$idPersona.'.jpeg')) {
+                $img= '<img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.jpeg">';
+            }else{
+                $img= '<img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">';
+            }
+            
              if ($rol == 'D'){ 
             $respuesta = "";
-             
+            
+            
+            
             $respuesta = ' <div class="contenedorDp" >     
                             <div class="marcoAvatardoc">
                                 <div class="avatar">
                                     <span class="rounded">
-                                        <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                                        '.$img.'
                                     </span> 
                                 </div>    
                             </div> 
@@ -2233,7 +2246,7 @@ class AdministradorControl extends Controlador{
                             <div class="marcoAvatarest">
                                 <div class="avatar">
                                     <span class="rounded">
-                                        <img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">
+                                        '.$img.'
                                     </span> 
                                 </div>    
                             </div> 

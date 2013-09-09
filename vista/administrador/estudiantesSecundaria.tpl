@@ -31,6 +31,8 @@ var y= $("#tablaEstudiantes");
     x.hide();            
     y.html (res);
          });
+         
+   onload=estInhabilitados(idSalon);      
 
 }
 function estInhabilitados(idSalon){

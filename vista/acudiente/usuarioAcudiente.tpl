@@ -180,11 +180,22 @@ function foto(){
                         <?php 
                         $cont=0;
                         foreach ($acudido as $acud) { 
+                        $idPersona=$acud->getIdPersona();
+                        $ruta = 'utiles/imagenes/fotos/';
+                        if (file_exists($ruta.$idPersona.'.jpg')) {
+                            $img= '<img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.jpg">';
+                        }elseif (file_exists($ruta.$idPersona.'.png')) {
+                            $img= '<img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.png">';
+                        }elseif (file_exists($ruta.$idPersona.'.jpeg')) {
+                            $img= '<img height="150px" width="150px" src="../utiles/imagenes/fotos/'.$idPersona.'.jpeg">';
+                        }else{
+                            $img= '<img height="150px" width="150px" src="../utiles/imagenes/avatarDefaul.png">';
+                        }
                         ?>
                        <td>
                                  <div class="avatar">
                                       <span class="rounded">
-                                        <img height="80px" width="80px" src="../utiles/imagenes/avatarDefaul.png">
+                                        <?php echo $img; ?> 
                                       </span> 
                                  </div>    
                        </td>
