@@ -89,6 +89,28 @@ class AcudienteControl extends Controlador{
           public function pension() {
              parent::pension();
          }
+           public function actualizarAcudiente() {
+             parent::actualizarAcudiente();
+         }
+       
+          public function actualizarPadre() {
+             parent::actualizarPadre();
+         }
+          
+          public function actualizarMadre() {
+             parent::actualizarMadre();
+         }
+           public function actualizaAcudiente() {
+             parent::actualizaAcudiente();
+         }
+       
+          public function actualizaPadre() {
+             parent::actualizaPadre();
+         }
+          
+          public function actualizaMadre() {
+             parent::actualizaMadre();
+         }
         
      public function funcionesAcademicas(){
          try {

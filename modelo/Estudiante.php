@@ -540,7 +540,7 @@ class Estudiante extends Persona {
             ':nombresAcudiente' => $est->getNombresAcudiente(),
             ':apellidosAcudiente' => $est->getApellidosAcudiente(),
             ':ocupacionAcudiente' => $est->getOcupacionAcudiente(),
-            ':telAcudiente' => $est->getTelMadre(),
+            ':telAcudiente' => $est->getTelAcudiente(),
             ':telOficinaAcudiente' => $est->getTelOficinaAcudiente(),
             ':dirAcudiente' => $est->getDirAcudiente()
            

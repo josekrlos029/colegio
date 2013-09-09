@@ -697,6 +697,36 @@ $respuesta .= '
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
          }
+         
+           public function actualizaAcudiente(){
+           try {
+               
+             $idAcudiente= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $nombresAcudiente = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
+             $apellidosAcudiente = isset($_POST['apellidos']) ? $_POST['apellidos'] : NULL;
+             $telAcudiente = isset($_POST['telefono']) ? $_POST['telefono'] : NULL;
+             $telOficinaAcudiente = isset($_POST['telOfi']) ? $_POST['telOfi'] : NULL;
+             $dirAcudiente = isset($_POST['direccion']) ? $_POST['direccion'] : NULL;
+             $ocupacionAcudiente = isset($_POST['ocupacion']) ? $_POST['ocupacion'] : NULL;
+        
+             $estudiante = new Estudiante();
+             
+             $estudiante->setIdAcudiente($idAcudiente);
+             $estudiante->setNombresAcudiente($nombresAcudiente);
+             $estudiante->setApellidosAcudiente($apellidosAcudiente);
+             $estudiante->setOcupacionAcudiente($ocupacionAcudiente);
+             $estudiante->setTelAcudiente($telAcudiente);
+             $estudiante->setTelOficinaAcudiente($telOficinaAcudiente);
+             $estudiante->setDirAcudiente($dirAcudiente);
+                       
+             $estudiante->actDatosAcudiente($estudiante);  
+             
+            echo json_encode(1);
+            }catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }     
+        }
+        
     public function actualizarPadre(){
             try{
             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
@@ -752,6 +782,36 @@ $respuesta .= '
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
          }
+         
+          public function actualizaPadre(){
+           try {
+               
+            $idPadre= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $nombresPadre = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
+             $apellidosPadre = isset($_POST['apellidos']) ? $_POST['apellidos'] : NULL;
+             $telPadre = isset($_POST['telefono']) ? $_POST['telefono'] : NULL;
+             $telOficinaPadre = isset($_POST['telOfi']) ? $_POST['telOfi'] : NULL;
+             $dirPadre = isset($_POST['direccion']) ? $_POST['direccion'] : NULL;
+             $ocupacionPadre = isset($_POST['ocupacion']) ? $_POST['ocupacion'] : NULL;
+        
+             $estudiante = new Estudiante();
+        
+             $estudiante->setIdPadre($idPadre);
+             $estudiante->setNombresPadre($nombresPadre);
+             $estudiante->setApellidosPadre($apellidosPadre);
+             $estudiante->setOcupacionPadre($ocupacionPadre);
+             $estudiante->setTelPadre($telPadre);
+             $estudiante->setTelOficinaPadre($telOficinaPadre);
+             $estudiante->setDirPadre($dirPadre);
+     
+            $estudiante->actDatosPadre($estudiante);  
+             
+             echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }     
+        }
+        
          public function actualizarMadre(){
             try{
             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
@@ -807,6 +867,36 @@ $respuesta .= '
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
          }
+         
+          public function actualizaMadre(){
+           try {
+               
+             $idMadre= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $nombresMadre = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
+             $apellidosMadre = isset($_POST['apellidos']) ? $_POST['apellidos'] : NULL;
+             $telMadre = isset($_POST['telefono']) ? $_POST['telefono'] : NULL;
+             $telOficinaMadre = isset($_POST['telOfi']) ? $_POST['telOfi'] : NULL;
+             $dirMadre = isset($_POST['direccion']) ? $_POST['direccion'] : NULL;
+             $ocupacionMadre = isset($_POST['ocupacion']) ? $_POST['ocupacion'] : NULL;
+        
+             $estudiante = new Estudiante();
+             $estudiante->setIdMadre($idMadre);
+             $estudiante->setNombresMadre($nombresMadre);
+             $estudiante->setApellidosMadre($apellidosMadre);
+             $estudiante->setOcupacionMadre($ocupacionMadre);
+             $estudiante->setTelMadre($telMadre);
+             $estudiante->setTelOficinaMadre($telOficinaMadre);
+             $estudiante->setDirMadre($dirMadre);
+           
+             $estudiante->actDatosMadre($estudiante);  
+             
+             echo json_encode(1);
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }     
+        }
+         
+         
            
         public function actualizarFoto(){
             session_start();
@@ -842,6 +932,7 @@ $respuesta .= '
             }
             
         }
+        
    }
 
 
