@@ -10,7 +10,7 @@
         <!-- END search -->   
          
    </td>
-    <td align="center" width="10%"><a href="#"><img  src="../utiles/imagenes/iconos/salir.png"/></a></td>
+    <td align="center" width="10%"><a href="/colegio/administrador/cerrarSesion"><img  src="../utiles/imagenes/iconos/salir.png"/></a></td>
     </tr>
     </table>
  </div>

@@ -203,12 +203,9 @@ var passwordC = document.getElementById("passwordC");
 <ul id="accordion">
 <li><span>Cambiar Nombre De Usuario</span>
 <ul>
-    
-
-    
-                <table width="80%" border="0" cellspacing="0" cellpadding="2">
-                <tr>
-                    <td></td>
+          <table width="80%" border="0" cellspacing="0" cellpadding="2">
+            <tr>
+             <td></td>
                     <td align="left" class="color-text-gris"><h1>Nombre DE USUARIO</h1></td>
                 </tr>  
                 <tr>
@@ -224,17 +221,10 @@ var passwordC = document.getElementById("passwordC");
                     <td colspan="2"><input name="configurarUsuario" id="configurarUsuario" type="submit" class="button large green" value="Guardar" onclick="envioUser()" /></td>
                 </tr>
                </table>
-    
-    
-
-
 </ul>
 </li>
-
 <li><span>Cambiar Contraseña</span>
 <ul>
-    
-
  <table width="80%" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                     <td></td>
@@ -257,14 +247,10 @@ var passwordC = document.getElementById("passwordC");
                     <td colspan="2"><input name="configurarContraseña" id="configurarContraseña" type="submit" class="button large green" value="Guardar" onclick="envioPassword()" /></td>
                 </tr>
 </table>
-
-
 </ul>
 </li>
-
 <li><span>Cambiar Correo electronico</span>
 <ul>
-
     <table width="80%" border="0" cellspacing="1" cellpadding="2">
                 <tr>
                     <td></td>
@@ -283,8 +269,6 @@ var passwordC = document.getElementById("passwordC");
                     <td colspan="2"><input name="configurarEmail" id="configurarEmail" type="submit" class="button large green" value="Guardar" onclick="envioEmail()" /></td>
                 </tr>
         </table>  
-
-
 </ul>
 </li>
 </ul>

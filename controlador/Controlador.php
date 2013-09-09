@@ -82,6 +82,18 @@ class Controlador {
             }
                
     }
+     public function cerrarSesion(){
+        try {
+            if($this->verificarSession()){
+            session_unset();
+	    session_destroy();
+	    header ('Location:../');
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
     
     protected function configurarUsuario(){
          try{

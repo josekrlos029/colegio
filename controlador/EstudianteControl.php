@@ -55,6 +55,10 @@ class EstudianteControl extends Controlador{
         }
             
         }
+        public function cerrarSesion() {
+             parent::cerrarSesion();
+         }
+         
           public function datosAcademicos(){
          try {
             if($this->verificarSession()){

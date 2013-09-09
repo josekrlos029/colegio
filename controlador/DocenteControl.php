@@ -46,6 +46,9 @@ class DocenteControl extends Controlador{
         }
             
         }
+        public function cerrarSesion() {
+             parent::cerrarSesion();
+         }
         
          public function datosAcademicos(){
          try {

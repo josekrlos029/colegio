@@ -49,6 +49,9 @@ class AcudienteControl extends Controlador{
         }
             
         }
+        public function cerrarSesion() {
+             parent::cerrarSesion();
+         }
           /**
     * imprime formulario de configuracion de usuario
     * @return type

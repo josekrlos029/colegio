@@ -46,6 +46,9 @@ class CoordinadorControl extends Controlador{
         }
             
         }
+        public function cerrarSesion() {
+             parent::cerrarSesion();
+         }
            /**
          * Imprime La Vista de estudinate de preescolar
          * @return type

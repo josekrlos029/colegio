@@ -36,6 +36,10 @@ class AdministradorControl extends Controlador{
         }
             
         }
+         public function cerrarSesion() {
+             parent::cerrarSesion();
+         }
+         
         /**
          * Imprime La Vista de Gestión de Materias
          * @return type
