@@ -29,7 +29,7 @@ function envio(){
       ocultar();
     }else{
 
-        var url="/colegio/administrador/consultarEstudiante/";
+        var url="/colegio/administrador/consultarEstudiante2/";
         var data="idPersona="+idPersona.value;
 
         envioJson(url,data,function respuesta(res){   
@@ -77,7 +77,7 @@ function retirar(){
         var url="/colegio/administrador/retirar/";
         var data="idPersona="+idPersona.value;
 
-        envioJson2(url,data,function respuesta(res){   
+        envioJson(url,data,function respuesta(res){   
             if (res == 1){
                 x.html ("<p>Estudiante Retirado Correctamente</p>");
                 exito();

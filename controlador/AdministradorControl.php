@@ -1721,6 +1721,8 @@ class AdministradorControl extends Controlador{
             
             $persona = new Persona();
             $estudiante = $persona->leerPorId($idPersona);
+            $matricula = new Matricula();
+            $mat = $matricula->leerMatriculaPorId($idPersona);
             if ($estudiante == NULL){
                  $respuesta= 1;
             }else{
@@ -1734,7 +1736,7 @@ class AdministradorControl extends Controlador{
                 }
                     if ($band!=1){
                       $respuesta= 3;
-                    }elseif ($estudiante->getEstado()!= 0 ){
+                    }elseif ($mat == NULL){
                       $respuesta= 2;
                     }else{
                   
@@ -1901,18 +1903,12 @@ class AdministradorControl extends Controlador{
          
          public function retirar(){
              try {
-                 
              $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
-             
              $fecha = getdate();
-            
                     $Alectivo=$fecha["year"];
-              
-
              $mat = new Matricula();
              $mat->retirarEstudiante($idPersona, $Alectivo);
-             echo json_encode('{"1":1}');
-             
+             echo json_encode(1);
              } catch (Exception $exc) {
                  echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
              }
