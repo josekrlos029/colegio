@@ -174,13 +174,7 @@ var passwordC = document.getElementById("passwordC");
  
  }
 
- $("#accordion > li > span").click(function(){
- if(false == $(this).next().is(':visible')) {
- $('#accordion ul').slideUp(300);
- }
- $(this).next().slideToggle(300);
- });
- $('#accordion ul:eq(0)').show();
+
 
 </script>
 
@@ -209,10 +203,8 @@ var passwordC = document.getElementById("passwordC");
       <p>&nbsp;</p>                
      <!--------------------------------------------------------------------> 
 
-<ul id="accordion">
-<li><span>Cambiar Nombre De Usuario</span>
-<ul>
-          <table width="80%" border="0" cellspacing="0" cellpadding="2">
+
+          <table width="40%" border="0" cellspacing="0" cellpadding="2">
             <tr>
              <td></td>
                     <td align="left" class="color-text-gris"><h1>Nombre DE USUARIO</h1></td>
@@ -230,11 +222,8 @@ var passwordC = document.getElementById("passwordC");
                     <td colspan="2"><input name="configurarUsuario" id="configurarUsuario" type="submit" class="button large green" value="Guardar" onclick="envioUser()" /></td>
                 </tr>
                </table>
-</ul>
-</li>
-<li><span>Cambiar Contraseña</span>
-<ul>
- <table width="80%" border="0" cellspacing="0" cellpadding="2">
+</br>
+ <table width="40%" border="0" cellspacing="0" cellpadding="2">
                 <tr>
                     <td></td>
                     <td align="left" class="color-text-gris"><h1>contraseÑa</h1></td>
@@ -256,11 +245,9 @@ var passwordC = document.getElementById("passwordC");
                     <td colspan="2"><input name="configurarContraseña" id="configurarContraseña" type="submit" class="button large green" value="Guardar" onclick="envioPassword()" /></td>
                 </tr>
 </table>
-</ul>
-</li>
-<li><span>Cambiar Correo electronico</span>
-<ul>
-    <table width="80%" border="0" cellspacing="1" cellpadding="2">
+</br>
+
+    <table width="40%" border="1" cellspacing="1" cellpadding="2">
                 <tr>
                     <td></td>
                     <td align="left" class="color-text-gris"><h1>correo electronico</h1></td>
@@ -278,9 +265,8 @@ var passwordC = document.getElementById("passwordC");
                     <td colspan="2"><input name="configurarEmail" id="configurarEmail" type="submit" class="button large green" value="Guardar" onclick="envioEmail()" /></td>
                 </tr>
         </table>  
-</ul>
-</li>
-</ul>
+
+    
      </body>
 </html>   
 
