@@ -375,7 +375,7 @@ $respuesta .= '
                                     <a href="#"onclick="seguimiento()" class="link-menu">Seguimiento Academico y Disciplinario</a>
                          </td>
                          <td  align="right">
-                                    <a href="#"onclick="pension()" class="link-menu">Pension</a>
+                                    <a href="#"onclick="pension('.$idPersona.')" class="link-menu">Pension</a>
                          </td>
                         
               </table>    
@@ -640,6 +640,7 @@ $respuesta .= '
         public function pension(){
          try {
             if($this->verificarSession()){
+                
             $this->vista->set('titulo', 'Pensión');
             $idPersona = $_SESSION['idUsuario'];
             $pension = new Pago();

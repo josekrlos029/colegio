@@ -161,7 +161,7 @@ class DocenteControl extends Controlador{
             }
 
         }
-        
+         
         public function actualizarNotas(){
             try {
                  if($this->verificarSession()){
@@ -169,18 +169,26 @@ class DocenteControl extends Controlador{
             $periodo =  isset($_POST['periodo']) ? $_POST['periodo'] : NULL;
             $idSalon =  isset($_POST['salon']) ? $_POST['salon'] : NULL;
             $idMateria =  isset($_POST['materia']) ? $_POST['materia'] : NULL; 
-            $materia = new Materia();
-            $materias= $materia->leerMateriaPorId($idMateria);
-            foreach ($materias as $mats) {
+            $salon = new Salon();
+            $sal = $salon->leerSalonePorId($idSalon);
+            $logro = new Logro();
+            $log=$logro->leerLogro($periodo, $sal->getIdGrado(), $idMateria);
+            if($log==NULL){
+                $this->setVista('verNotas');
+            }
+                $materia = new Materia();
+                $materias= $materia->leerMateriaPorId($idMateria);
+                foreach ($materias as $mats) {
                    $mat = $mats;
                 }
-            $docente = new Docente();
-            $resultado = $docente->crearConsulta($idSalon, $idMateria);
-            $this->vista->set('periodo', $periodo);
-            $this->vista->set('idSalon', $idSalon);
-            $this->vista->set('materia', $mat);
-            $this->vista->set('resultado', $resultado);
-            return $this->vista->imprimir();
+                $docente = new Docente();
+                $resultado = $docente->crearConsulta($idSalon, $idMateria);
+                $this->vista->set('periodo', $periodo);
+                $this->vista->set('idSalon', $idSalon);
+                $this->vista->set('materia', $mat);
+                $this->vista->set('resultado', $resultado);
+                $this->vista->set('error', 'Error: Ingresar Logros De este periodo');
+                return $this->vista->imprimir();            
                  }
             } catch (Exception $exc) {
                 echo $exc->getTraceAsString();
@@ -324,7 +332,7 @@ class DocenteControl extends Controlador{
                     $bajo = NULL;
                     if ($log == NULL ){
                         $logro->setPeriodo($periodo);
-                        $logro->setIdSalon($idGrado);
+                        $logro->setIdGrado($idGrado);
                         $logro->setIdMateria($idMateria);
                         $logro->setSuperior($superior);
                         $logro->setAlto($alto);

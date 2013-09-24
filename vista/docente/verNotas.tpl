@@ -22,11 +22,25 @@
 };
 $(function(){
     $('#filter').keyup(searchOnTable);
+    
 });
+
+function alerta(error){
+    alert(error);
+}
  </script>
  </head>
- 
- <body>
+<?php 
+if(isset($error)){
+?>
+<body onload="alerta('<?php echo $error; ?>')">
+<?php 
+}else{
+?>
+<body>
+<?php 
+}
+?>
     <div class="cabecera">
         <?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
         </div>

@@ -47,6 +47,7 @@ function cargadorClases(){
     require_once './modelo/Nota.php';
     require_once './modelo/Falla.php';
     require_once './modelo/Pago.php';
+    require_once './modelo/Historial.php';
     require_once './modelo/Seguimiento.php';
     require_once './modelo/Notificacion.php';
     require_once './modelo/Coordinador.php';

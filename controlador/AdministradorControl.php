@@ -287,6 +287,61 @@ class AdministradorControl extends Controlador{
         }
         }
         
+        public function historialPreescolar(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Estudiantes Preescolar');
+            $salon = new Salon();
+            $preescolar = $salon->leerSalonesPreescolar();
+            $historial = new Historial();
+            $anios  = $historial->leerAnios();
+            $this->vista->set('anios', $anios);
+            $this->vista->set('preescolar', $preescolar);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+         public function historialPrimaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Estudiantes Primaria');
+             $limI='1';
+             $limS='5';
+            $salones = new Salon();
+            $historial = new Historial();
+            $anios  = $historial->leerAnios();
+            $this->vista->set('anios', $anios);
+            $primaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('primaria', $primaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+        public function historialSecundaria(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Estudiantes Secundaria');
+             $limI='6';
+             $limS='11';
+            $salones = new Salon();
+            $historial = new Historial();
+            $anios  = $historial->leerAnios();
+            $this->vista->set('anios', $anios);
+            $secundaria = $salones->leerSalonesJornada($limI,$limS);
+            $this->vista->set('secundaria', $secundaria);
+            return $this->vista->imprimir();
+              }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
         public function generarConsolidado(){
             try {
             $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
@@ -359,6 +414,79 @@ class AdministradorControl extends Controlador{
             try {
             $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
             $anio = isset($_POST['anio']) ? $_POST['anio'] : NULL;
+            
+            $persona = new Persona();
+            $personas = $persona->leerPorSalon($idSalon);
+           
+            $pagos = ['MATRICULA','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','VR.PENSION'];
+            
+            $respuesta = "";
+            
+              $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla" id="tabla">
+                     
+                    <tr><td align="center" class="color-text-gris" colspan="11"><h1>Salon:'.$idSalon.'</h1></td></tr>
+                    <tr class="modo1">
+                    <td>ID</td>
+                    <td>Nombres</td>
+                    ';
+              foreach ($pagos as $pag){
+                        
+                              $respuesta.='<td width="6%">'.$pag.'</td>';
+                        
+            }
+             $respuesta.='</tr>';
+             
+              foreach ($personas as $per){
+              
+                  $respuesta.='<tr class="recorrer" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)"> <td>'.$per->getIdPersona().'</td><td>'.$per->getPApellido().' '.$per->getSApellido().' '.$per->getNombres().'</td>';
+                $pago = new Pago();
+                $pens = $pago->leerPensionesPorIdPersonaYAnio($per->getIdPersona(),$anio);
+                  
+                foreach ($pagos as $pag){
+                    $band = 0;
+                    if ($pens == NULL){
+                        $respuesta .= '<td  align="center" ><input style="width:50px; type="text" value=""/></td>';
+                    }else{
+                        foreach ($pens as $pen){
+                    
+                          if ($pen->getMes()==$pag){
+                              $respuesta .= '<td align="center" ><input style="width:50px;" type="text" title="'.$pen->getFecha().'" value="'.$pen->getValor().'"/></td>';
+                              $band = 1;                         
+                              
+                          }
+                          
+                          
+                      }
+                      
+                          if($band ==0 ){
+                              $respuesta .= '<td  align="center" ><input style="width:50px; type="text" value=""/></td>';
+                          }
+                }
+                  }
+              $respuesta.='</tr>';
+              
+             }
+                $respuesta.='</table>';
+                 $respuesta.='<input type="hidden" id="idSalon" value="'.$idSalon.'" />';
+               $respuesta.='<button id="btnRecorrer" onclick="recorrer()"class="button large green" style="margin-left:5%">Guardar</button>';
+            if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            }
+            
+             } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+            
+        }
+        
+        public function generarHistorial(){
+            try {
+            $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+            $anio = isset($_POST['anio']) ? $_POST['anio'] : NULL;
+            
+            $historial = new Historial();
             
             $persona = new Persona();
             $personas = $persona->leerPorSalon($idSalon);
@@ -824,6 +952,18 @@ class AdministradorControl extends Controlador{
         }
         }
         
+        public function historialGeneral(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Historial Anual General');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+        
         public function retirarEstudiante(){
             try {
             if($this->verificarSession()){
@@ -1103,8 +1243,7 @@ class AdministradorControl extends Controlador{
              $fNacimiento = isset($_POST['fNacimiento']) ? $_POST['fNacimiento'] : NULL;
              $estado='1';
              $idRol= 'D';
-             $persona = new Persona();
-             $usuario = new Usuario();
+             $persona = new Estudiante();
              $persona->setIdPersona($idPersona);
              $persona->setNombres($nombres);
              $persona->setPApellido($pApellido);
@@ -1117,7 +1256,10 @@ class AdministradorControl extends Controlador{
              $persona->setEstado($estado);
              $persona->setIdRol($idRol);
              $persona->crearPersona($persona);
-            
+             $persona->crearDatos($persona);
+             $persona->crearDatosNacimiento($persona);
+             $persona->crearDatosUbicacion($persona);
+             
              echo json_encode(1);
         } catch (Exception $exc) {
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
@@ -1336,7 +1478,7 @@ class AdministradorControl extends Controlador{
              $nombresAcudiente = isset($_POST['nombresAcudiente']) ? $_POST['nombresAcudiente'] : NULL;
              $apellidosAcudiente = isset($_POST['apellidosAcudiente']) ? $_POST['apellidosAcudiente'] : NULL;
              $ocupacionAcudiente = isset($_POST['ocupacionAcudiente']) ? $_POST['ocupacionAcudiente'] : NULL;
-             $telAcudiente = isset($_POST['telAcudienteAcudiente']) ? $_POST['telAcudienteAcudiente'] : NULL;
+             $telAcudiente = isset($_POST['telAcudiente']) ? $_POST['telAcudiente'] : NULL;
              $telOficinaAcudiente = isset($_POST['telOficinaAcudiente']) ? $_POST['telOficinaAcudiente'] : NULL;
              $dirAcudiente = isset($_POST['dirAcudiente']) ? $_POST['dirAcudiente'] : NULL;
              
@@ -1500,7 +1642,7 @@ class AdministradorControl extends Controlador{
              $nombresAcudiente = isset($_POST['nombresAcudiente']) ? $_POST['nombresAcudiente'] : NULL;
              $apellidosAcudiente = isset($_POST['apellidosAcudiente']) ? $_POST['apellidosAcudiente'] : NULL;
              $ocupacionAcudiente = isset($_POST['ocupacionAcudiente']) ? $_POST['ocupacionAcudiente'] : NULL;
-             $telAcudiente = isset($_POST['telAcudienteAcudiente']) ? $_POST['telAcudienteAcudiente'] : NULL;
+             $telAcudiente = isset($_POST['telAcudiente']) ? $_POST['telAcudiente'] : NULL;
              $telOficinaAcudiente = isset($_POST['telOficinaAcudiente']) ? $_POST['telOficinaAcudiente'] : NULL;
              $dirAcudiente = isset($_POST['dirAcudiente']) ? $_POST['dirAcudiente'] : NULL;
              

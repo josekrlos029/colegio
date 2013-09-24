@@ -201,7 +201,7 @@ var data="idPersona="+idPersona;
            </td>
            
            <td width="10%" align="center">
-           <a href=""><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/historialAnual.png ></div></a>
+           <a href="/colegio/administrador/historialGeneral"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/historialAnual.png ></div></a>
            <div class="text-icon">Historial Anual</div>
            </td>
            
@@ -241,7 +241,7 @@ var data="idPersona="+idPersona;
              <div class="text-icon">Difundir Mensaje</div>
            </td>
            <td width="10%" align="center">
-             <a href="cierreAcademico/"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAnio.png ></div></a>
+             <a href="/colegio/administrador/cierreAcademico"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/cierreAnio.png ></div></a>
              <div class="text-icon">Cierre de Año</div>
            </td>
            </tr>

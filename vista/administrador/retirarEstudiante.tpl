@@ -29,7 +29,7 @@ function envio(){
       ocultar();
     }else{
 
-        var url="/colegio/administrador/consultarEstudiante2/";
+        var url="/colegio/administrador/consultarEstudiante2";
         var data="idPersona="+idPersona.value;
 
         envioJson(url,data,function respuesta(res){   
@@ -74,7 +74,7 @@ function retirar(){
        ocultar();
     }else{
 
-        var url="/colegio/administrador/retirar/";
+        var url="/colegio/administrador/retirar";
         var data="idPersona="+idPersona.value;
 
         envioJson(url,data,function respuesta(res){   

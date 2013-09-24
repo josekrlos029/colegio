@@ -101,7 +101,7 @@ class Matricula extends Modelo{
     }
  //   
     public function matricularEstudiante(Matricula $matricula){
-         $sql = "INSERT INTO matricula(idPersona, idSalon, jornada, fecha_matricula, año_lectivo) VALUES(:idPersona, :idSalon, :jornada, :fecha, :anoLectivo)";
+         $sql = "INSERT INTO matricula(idPersona, idSalon, jornada, fecha_matricula, año_lectivo, estado) VALUES(:idPersona, :idSalon, :jornada, :fecha, :anoLectivo, '1')";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($matricula));
     }

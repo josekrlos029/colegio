@@ -1,19 +1,6 @@
-<html lang="es">
-    <head>
-        <meta charset="utf-8" />
-		<link href="../../utiles/css/general.css" rel="stylesheet" type="text/css" media="screen"/>
-                <link href="../../utiles/css/botones.css" rel="stylesheet" type="text/css" media="screen"/>
-                 <link href="../../utiles/css/usuarios.css" rel="stylesheet" type="text/css" media="screen"/>             
-                 <link href="../../utiles/css/formularios.css" rel="stylesheet" type="text/css" media="screen"/>
-                <link href="../../utiles/css/tablas.css" rel="stylesheet" type="text/css" media="screen"/>
-                <script src="../../utiles/js/jquery-1.9.1.min.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/easing.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/envios.js" type="text/javascript" ></script>
-                 <script src="../../utiles/js/jquery.sticky.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/inicio.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/tablas.js" type="text/javascript" ></script>
-                <script src="../../utiles/js/estiloMensaje.js" type="text/javascript"></script>
-              <script src="../../utiles/js/mootools-core-1.4.5.js" type="text/javascript"></script>
+ <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
+        
+   <title><?php echo $titulo; ?></title>
 <script type="text/javascript">
 
 function envio(){ 
@@ -30,7 +17,7 @@ function envio(){
       setTimeout("$('#msg').hide();", 4000);
     }else{
 
-        var url="/colegio/administrador/procesarCierre/";
+        var url="/colegio/administrador/procesarCierre";
         var data="usuario="+usuario.value+"&clave="+contraseña.value;
 
         envioJson(url,data,function respuesta(res){   
