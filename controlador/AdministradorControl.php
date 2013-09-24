@@ -2130,11 +2130,20 @@ class AdministradorControl extends Controlador{
                     if ($band!=1){
                       $respuesta= 3;
                     }else{
-                  
-                        $respuesta = ' <table width="40%" border="0" cellspacing="0" cellpadding="2">
+                   $est = new Estudiante();
+                   $est->leerAcudiente($idPersona,$est);
+                   $est->leerPadre($idPersona,$est);
+                   $est->leerMadre($idPersona,$est);
+            
+                        $respuesta = ' 
+                                
+                                 <table width="90%">
+                                 <tr>
+                                 <td>
+                                       <table border="0" cellspacing="0" cellpadding="2">
                                         <tr>
                                         <td></td>
-                                        <td align="left" class="color-text-gris"><h1>DATOS DEL ESTUDIANTE</h1></td>
+                                        <td align="left" class="color-text-gris"><h1>ESTUDIANTE</h1></td>
                                         </tr>  
                                        <tr>
                                          <td  align="right" width="40%" >Nombres:</td>
@@ -2175,10 +2184,141 @@ class AdministradorControl extends Controlador{
                                          <td><input name="estado" id="estado" type="text"  class="box-text" value="'.$estudiante->getEstado().'" disabled="disabled"/></td>
                                         </tr>
                                      <tr>
-                                        <td></td><td><input name="actualizaEstudiante" id="actualizaEstudiante" type="submit" value="Actualizar" class="button large blue" onclick="actualizarEstudiante()" /></td>
+                                        <td></td><td><input name="actualizaEstudiante" id="actualizaEstudiante" type="submit" value="Actualizar Estudiante" class="button large blue" onclick="actualizarEstudiante()" /></td>
                                          </tr>
                                         </table>  
-
+                                   </td>
+                                   <td>
+                                        <table border="0" cellspacing="0" cellpadding="2">
+                                        <tr>
+                                        <td></td>
+                                        <td align="left" class="color-text-gris"><h1>acudiente</h1></td>
+                                        </tr> 
+                                         <tr>
+                                         <td  align="right" width="40%" >Numero de Identificacion:</td>
+                                        <td><input name="idAcudiente" id="idAcudiente" type="text" class="box-text" value="'. $est->getIdAcudiente().'" disabled="disabled" readonly="readonly"/></td>
+                                        </tr>
+                                       <tr>
+                                         <td align="right">Nombres:</td>
+                                        <td><input name="nombresAcu" id="nombresAcu" type="text" class="box-text" value="'.$est->getNombresAcudiente().'" required/></td>
+                                        </tr>  
+                                        <tr>
+                                         <td align="right">Apellidos:</td>
+                                         <td><input name="apellidosAcu" id="apellidosAcu" type="text" class="box-text" value="'.$est->getApellidosAcudiente().'" required/></td>
+                                         </tr>
+                                          <tr>
+                                         <td align="right">Ocupacion:</td>
+                                          <td><input name="ocupacionAcu" id="ocupacionAcu" type="text" class="box-text" value="'.$est->getOcupacionAcudiente().'" /></td>
+                                          </tr>
+                                         <tr>
+                                         <td align="right">Telefono:</td>
+                                          <td><input name="telefonoAcu" id="telefonoAcu" type="number" class="box-text" value="'.$est->gettelAcudiente().'" /></td>
+                                          </tr>
+                                          <tr>
+                                          <td align="right">Telefono de Oficina:</td>
+                                         <td><input name="telOfiAcu" id="telOfiAcu" type="text"  class="box-text" value="'.$est->getTelOficinaAcudiente().'" /></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="right">Direccion:</td>
+                                         <td><input name="direccionAcu" id="direccionAcu" type="text"  class="box-text" value="'.$est->getDirAcudiente().'" /></td>
+                                        </tr>
+              
+                                     <tr>
+                                        <td></td><td><input name="actualizaAcudiente" id="actualizaAcudiente" type="submit" value="Actualizar Acudiente" class="button large blue" onclick="actualizaAcudiente()" /></td>
+                                         </tr>
+                                        </table>
+                                      </td>
+                                      </tr>
+                                      </table>
+                                      
+                                      </br>
+                                      </br>
+                                    
+                                     <table width="90%">
+                                      <tr>
+                                      <td>
+                                        <table border="0" cellspacing="0" cellpadding="2">
+                                        <tr>
+                                        <td></td>
+                                        <td align="left" class="color-text-gris"><h1>Padre</h1></td>
+                                        </tr> 
+                                         <tr>
+                                         <td  align="right" width="40%" >Numero de Identificacion:</td>
+                                        <td><input name="idPadre" id="idPadre" type="text" class="box-text" value="'. $est->getIdPadre().'" disabled="disabled" readonly="readonly"/></td>
+                                        </tr>
+                                       <tr>
+                                         <td align="right">Nombres:</td>
+                                        <td><input name="nombresPad" id="nombresPad" type="text" class="box-text" value="'.$est->getNombresPadre().'" required/></td>
+                                        </tr>  
+                                        <tr>
+                                         <td align="right">Apellido:s</td>
+                                         <td><input name="apellidosPad" id="apellidosPad" type="text" class="box-text" value="'.$est->getApellidosPadre().'" required/></td>
+                                         </tr>
+                                          <tr>
+                                         <td align="right">Ocupacion:</td>
+                                          <td><input name="ocupacionPad" id="ocupacionPad" type="text" class="box-text" value="'.$est->getOcupacionPadre().'" /></td>
+                                          </tr>
+                                         <tr>
+                                         <td align="right">Telefono:</td>
+                                          <td><input name="telefonoPad" id="telefonoPad" type="number" class="box-text" value="'.$est->getTelPadre().'" /></td>
+                                          </tr>
+                                          <tr>
+                                          <td align="right">Telefono de Oficina:</td>
+                                         <td><input name="telOfiPad" id="telOfiPad" type="text"  class="box-text" value="'.$est->getTelOficinaPadre().'" /></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="right">Direccion:</td>
+                                         <td><input name="direccionPad" id="direccionPad" type="text"  class="box-text" value="'.$est->getDirPadre().'" /></td>
+                                        </tr>
+                                     
+                                     <tr>
+                                        <td></td><td><input name="actualizaPadre" id="actualizaPadre" type="submit" value="Actualizar Padre" class="button large blue" onclick="actualizaPadre()" /></td>
+                                         </tr>
+                                        </table>
+                                     </td>
+                                 <td>
+                                        <table  border="0" cellspacing="0" cellpadding="2">
+                                        <tr>
+                                        <td></td>
+                                        <td align="left" class="color-text-gris"><h1>Madre</h1></td>
+                                        </tr> 
+                                         <tr>
+                                         <td  align="right" width="40%" >Numero de Identificacion:</td>
+                                        <td><input name="idMadre" id="idMadre" type="text" class="box-text" value="'. $est->getIdMadre().'" disabled="disabled" readonly="readonly"/></td>
+                                        </tr>
+                                       <tr>
+                                         <td align="right">Nombres:</td>
+                                        <td><input name="nombresMad" id="nombresMad" type="text" class="box-text" value="'.$est->getNombresMadre().'" required/></td>
+                                        </tr>  
+                                        <tr>
+                                         <td align="right">Apellidos:</td>
+                                         <td><input name="apellidosMad" id="apellidosMad" type="text" class="box-text" value="'.$est->getApellidosMadre().'" required/></td>
+                                         </tr>
+                                          <tr>
+                                         <td align="right">Ocupacion:</td>
+                                          <td><input name="ocupacionMad" id="ocupacionMad" type="text" class="box-text" value="'.$est->getOcupacionMadre().'" /></td>
+                                          </tr>
+                                         <tr>
+                                         <td align="right">Telefono:</td>
+                                          <td><input name="telefonoMad" id="telefonoMad" type="number" class="box-text" value="'.$est->getTelMadre().'" /></td>
+                                          </tr>
+                                          <tr>
+                                          <td align="right">Telefono de Oficina:</td>
+                                         <td><input name="telOfiMad" id="telOfiMad" type="text"  class="box-text" value="'.$est->getTelOficinaMadre().'" /></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="right">Direccion:</td>
+                                         <td><input name="direccionMad" id="direccionMad" type="text"  class="box-text" value="'.$est->getDirMadre().'" /></td>
+                                        </tr>
+                                     
+                                     <tr>
+                                        <td></td><td><input name="actualizaMadre" id="actualizaMadre" type="submit" value="Actualizar Madre" class="button large blue" onclick="actualizaMadre()" /></td>
+                                         </tr>
+                                        </table>
+                                   </td>
+                                      </tr>
+                                      </table>
+                                      </div>
                                      '; 
                   }
               

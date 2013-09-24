@@ -22,6 +22,7 @@ var data="idPersona="+idPersona;
       
 }
 function actualizaAcudiente(){
+
  document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'
  var x = $("#mensaje");
  cargando();

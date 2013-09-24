@@ -92,6 +92,136 @@ function actualizarEstudiante(){
     }   
 }
 
+function actualizaAcudiente(){
+
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+
+ var idPersona = document.getElementById("idAcudiente");
+ var nombres = document.getElementById("nombresAcu");
+ var apellidos = document.getElementById("apellidosAcu");
+ var ocupacion = document.getElementById("ocupacionAcu");
+ var telefono = document.getElementById("telefonoAcu");
+ var telOfi = document.getElementById("telOfiAcu");
+ var direccion = document.getElementById("direccionAcu");
+
+    if (idPersona.value=="" || nombres.value=="" || apellidos.value=="" || ocupacion.value=="" || direccion.value==""){
+    
+    x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
+      error();
+      ocultar();
+    }else{
+        var url="/colegio/administrador/actualizaAcudiente/";
+        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&apellidos="+apellidos.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&telOfi="+telOfi.value+"&ocupacion="+ocupacion.value;
+
+        envioJson(url,data,function respuesta(res){   
+            if (res == 1){
+                x.html ( "<p>Acudiente Actualizado Correctamente</p>");
+                exito();
+                ocultar();
+                document.location.href="/colegio/administrador/actualizarEstudiante";
+            }else{
+                x.html ( "<p>"+res+"</p>");
+                idMateria.value="";
+                idGrado.setAttribute("autofocus","true");
+                nombre.value="";
+                error();
+                ocultar();
+                
+                
+            }
+         });
+    }   
+}
+function actualizaPadre(){
+
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+ 
+        var idPersona = document.getElementById("idPadre");
+        var nombres = document.getElementById("nombresPad");
+        var apellidos = document.getElementById("apellidosPad");
+        var ocupacion = document.getElementById("ocupacionPad");
+        var telefono = document.getElementById("telefonoPad");
+        var telOfi = document.getElementById("telOfiPad");
+        var direccion = document.getElementById("direccionPad");
+        
+    if (idPersona.value=="" || nombres.value=="" || apellidos.value=="" || ocupacion.value=="" || direccion.value==""){
+    x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
+    error();
+    ocultar();
+    }else{
+       
+        var url="/colegio/administrador/actualizaPadre/";
+        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&apellidos="+apellidos.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&telOfi="+telOfi.value+"&ocupacion="+ocupacion.value;
+
+        envioJson(url,data,function respuesta(res){   
+            if (res == 1){
+                x.html ( "<p>Padre Actualizado Correctamente</p>");
+                exito();
+                ocultar();
+                document.location.href="/colegio/administrador/actualizarEstudiante";
+            }else{
+                x.html ( "<p>"+res+"</p>");
+                idMateria.value="";
+                idGrado.setAttribute("autofocus","true");
+                nombre.value="";
+                error();
+                ocultar();
+                
+                
+            }
+         });
+    }   
+}
+function actualizaMadre(){
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+ 
+        var idPersona = document.getElementById("idMadre");
+        var nombres = document.getElementById("nombresMad");
+        var apellidos = document.getElementById("apellidosMad");
+        var ocupacion = document.getElementById("ocupacionMad");
+        var telefono = document.getElementById("telefonoMad");
+        var telOfi = document.getElementById("telOfiMad");
+        var direccion = document.getElementById("direccionMad");
+        
+    if (idPersona.value=="" || nombres.value=="" || apellidos.value=="" || ocupacion.value=="" || direccion.value==""){
+    x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
+    error();
+    ocultar();
+    }else{
+       
+        var url="/colegio/administrador/actualizaMadre/";
+        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&apellidos="+apellidos.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&telOfi="+telOfi.value+"&ocupacion="+ocupacion.value;
+
+        envioJson(url,data,function respuesta(res){   
+            if (res == 1){
+                x.html ( "<p>Madre Actualizado Correctamente</p>");
+                exito();
+                ocultar();
+                document.location.href="/colegio/administrador/actualizarEstudiante";
+            }else{
+                x.html ( "<p>"+res+"</p>");
+                idMateria.value="";
+                idGrado.setAttribute("autofocus","true");
+                nombre.value="";
+                error();
+                ocultar();
+                
+                
+            }
+         });
+    }   
+}
+
+
 
  </script>
  
@@ -137,7 +267,17 @@ function actualizarEstudiante(){
      
 
            </div>
-    
+        <!-------------------------------------------------------------------->         
+
+    <script type="text/javascript">
+ $("#accordion > li > span").click(function(){
+ if(false == $(this).next().is(':visible')) {
+ $('#accordion ul').slideUp(300);
+ }
+ $(this).next().slideToggle(300);
+ });
+ $('#accordion ul:eq(0)').show();
+ </script>
         
     </body>
 </html>
