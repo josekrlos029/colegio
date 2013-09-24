@@ -64,14 +64,14 @@ var data="idPersona="+idPersona;
            
             ocultar("familia");
             ocultar("datosAcademicos");
-            $('#carga').load('/colegio/administrador/seguimiento'); 
+            $('#carga').load('/colegio/administrador/seguimiento2/'+idPersona); 
             document.getElementById('carga').style.display="block";
             }
-            function pension(){ 
+            function pension(idPersona){ 
             
             ocultar("familia");
             ocultar("datosAcademicos");
-            $('#carga').load('/colegio/administrador/pension');
+            $('#carga').load('/colegio/administrador/pension2/'+idPersona);
              document.getElementById('carga').style.display="block";
             }
             function ocultar(id){

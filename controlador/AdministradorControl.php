@@ -2252,7 +2252,10 @@ class AdministradorControl extends Controlador{
           public function pension() {
              parent::pension();
          }
-          public function actualizarAcudiente() {
+         public function pension2($idPersona) {
+             parent::pension2($idPersona);
+         }
+         public function actualizarAcudiente() {
              parent::actualizarAcudiente();
          }
        

@@ -279,6 +279,10 @@ class CoordinadorControl extends Controlador{
         }
         }
         
+        public function pension2($idPersona) {
+            parent::pension2($idPersona);
+        }
+        
         public function consolidados(){
             try {
             if($this->verificarSession()){
