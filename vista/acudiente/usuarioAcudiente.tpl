@@ -56,11 +56,11 @@ function foto(){
             $('#carga').load('/colegio/acudiente/seguimiento'); 
             document.getElementById('carga').style.display="block";
             }
-            function pension(){ 
+           function pension(idPersona){ 
             
             ocultar("familia");
             ocultar("datosAcademicos");
-            $('#carga').load('/colegio/acudiente/pension');
+            $('#carga').load('/colegio/administrador/pension2/'+idPersona);
              document.getElementById('carga').style.display="block";
             }
             function ocultar(id){

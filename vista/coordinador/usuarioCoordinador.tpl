@@ -39,6 +39,13 @@ interface usuarioAcudiente {
  function docSecundaria(){    
  $('#cargar').load('/colegio/coordinador/docentesSecundaria');           
 }
+function pension(idPersona){ 
+            
+            ocultar("familia");
+            ocultar("datosAcademicos");
+            $('#carga').load('/colegio/administrador/pension2/'+idPersona);
+             document.getElementById('carga').style.display="block";
+            }
 
 function boletines(){
 $('#cargar2').load('/colegio/coordinador/boletines'); 

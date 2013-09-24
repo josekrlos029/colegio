@@ -41,7 +41,7 @@ class Rol extends Modelo{
     }
     
     public function rolPersona($idPersona){
-      $sql =  "SELECT  idRol FROM rolesPersona WHERE idPersona=".$idPersona;
+      $sql =  "SELECT  idRol FROM rolespersona WHERE idPersona=".$idPersona;
        $this->__setSql($sql);
        $resultado = $this->consultar($sql);
         $rol=NULL;

@@ -1,5 +1,5 @@
 <script>
-function cargarSeguimientos(){
+function cargarSeguimientos(idPersona){
             var y = $("#respuesta");
      var x = $("#mensaje");
  cargando();
@@ -12,8 +12,8 @@ function cargarSeguimientos(){
         ocultar();
   }else{
       
-             var url="/colegio/estudiante/cargarSeguimientos";
-        var data="tipo="+tipo;
+             var url="/colegio/administrador/cargarSeguimientos";
+        var data="idPersona="+idPersona+"&tipo="+tipo;
         envioJson(url,data,function respuesta(res){               
             if (res==1){
              x.html ( "<p>Error Al cargar Seguimiento</p>");
