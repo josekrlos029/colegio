@@ -98,6 +98,31 @@ class Historial extends Modelo{
         return $parametros;
     }
     
+    public function leerHistorialPorIdPersona($anio, $idPersona) {
+        $sql = "SELECT * FROM historial WHERE idPersona='".$idPersona."' AND añoLectivo='".$anio."' ORDER BY idMateria";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $hist = array();
+        foreach ($resultado as $fila) {
+            $historial = new Historial();
+            $this->mapearHistorial($historial, $fila);
+            $hist[$historial->getIdMateria()]=$historial;
+        }
+        return $hist;
+    }
+    
+    public function leerHistorialPorIdMateria($anio, $idPersona, $idMateria) {
+        $sql = "SELECT * FROM historial WHERE idPersona='".$idPersona."' AND añoLectivo='".$anio."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $hist = NULL;
+        foreach ($resultado as $fila) {
+            $historial = new Historial();
+            $this->mapearHistorial($historial, $fila);
+        }
+        return $hist;
+    }
+    
     public function leerAnios(){
         $sql = "SELECT DISTINCT añoLectivo FROM historial ORDER BY añoLectivo DESC";
         $this->__setSql($sql);
@@ -116,7 +141,7 @@ class Historial extends Modelo{
         $años = array();
         
         foreach ($resultado as $fila) {
-           $años[] = $fila['añoLectivo'];
+           $años[] = $fila['idMateria'];
         }
         return $años;
     }

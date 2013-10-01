@@ -156,8 +156,4 @@ public function getIdMateria() {
         return $mats;
   }
 }
-
- 
-
-
 ?>

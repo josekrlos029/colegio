@@ -487,61 +487,46 @@ class AdministradorControl extends Controlador{
             $anio = isset($_POST['anio']) ? $_POST['anio'] : NULL;
             
             $historial = new Historial();
-            
+            $matricula = new Matricula();
+            $matriculas = $matricula->leerMatriculasPorAnio($anio, $idSalon);            
             $persona = new Persona();
-            $personas = $persona->leerPorSalon($idSalon);
-           
-            $pagos = ['MATRICULA','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','VR.PENSION'];
-            
             $respuesta = "";
-            
-              $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla" id="tabla">
-                     
-                    <tr><td align="center" class="color-text-gris" colspan="11"><h1>Salon:'.$idSalon.'</h1></td></tr>
+             $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla" id="tabla">
                     <tr class="modo1">
-                    <td>ID</td>
+                    <td>Identificación</td>
+                    <td>P.Apellido</td>
+                    <td>S.Apellido</td>
                     <td>Nombres</td>
                     ';
-              foreach ($pagos as $pag){
-                        
-                              $respuesta.='<td width="6%">'.$pag.'</td>';
-                        
+             $band =0;
+            foreach ($matriculas as $mat){
+                    $hist = $historial->leerHistorialPorIdPersona($anio, $mat->getIdPersona());
+                    if(count($hist) > 0){
+                        $per = $persona->leerPorId($mat->getIdPersona());
+                        if($band==0){
+                            foreach ($hist as $h){
+                                $materia = new Materia();
+                                $mate = $materia->leerMateriaPorId($h->getIdMateria());
+                                foreach ($mate as $mm){
+                                    echo '<td>'.$mm->getNombreMateria().'</td>';
+                                }   
+                            }
+                            $respuesta.='</tr>';
+                            $band = 1;
+                        }
+                        if($per!=NULL  && count($hist)>0){
+                            $respuesta.='<tr><td>'.$per->getIdPersona().'</td>
+                                             <td>'.$per->getPApellido().'</td>
+                                             <td>'.$per->getSApellido().'</td>
+                                             <td>'.$per->getNombres().'</td>';
+                            foreach ($hist as $hh){
+                                $respuesta.='<td>'.$hh->getDefinitiva().'</td>';
+                            }
+                             $respuesta.='</tr>';
+                        }
+                        $respuesta.='</table>';
+                    }
             }
-             $respuesta.='</tr>';
-             
-              foreach ($personas as $per){
-              
-                  $respuesta.='<tr class="recorrer" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)"> <td>'.$per->getIdPersona().'</td><td>'.$per->getPApellido().' '.$per->getSApellido().' '.$per->getNombres().'</td>';
-                $pago = new Pago();
-                $pens = $pago->leerPensionesPorIdPersonaYAnio($per->getIdPersona(),$anio);
-                  
-                foreach ($pagos as $pag){
-                    $band = 0;
-                    if ($pens == NULL){
-                        $respuesta .= '<td  align="center" ><input style="width:50px; type="text" value=""/></td>';
-                    }else{
-                        foreach ($pens as $pen){
-                    
-                          if ($pen->getMes()==$pag){
-                              $respuesta .= '<td align="center" ><input style="width:50px;" type="text" title="'.$pen->getFecha().'" value="'.$pen->getValor().'"/></td>';
-                              $band = 1;                         
-                              
-                          }
-                          
-                          
-                      }
-                      
-                          if($band ==0 ){
-                              $respuesta .= '<td  align="center" ><input style="width:50px; type="text" value=""/></td>';
-                          }
-                }
-                  }
-              $respuesta.='</tr>';
-              
-             }
-                $respuesta.='</table>';
-                 $respuesta.='<input type="hidden" id="idSalon" value="'.$idSalon.'" />';
-               $respuesta.='<button id="btnRecorrer" onclick="recorrer()"class="button large green" style="margin-left:5%">Guardar</button>';
             if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
             }  else {
@@ -3309,9 +3294,4 @@ class AdministradorControl extends Controlador{
       
       
             }
-
-
-
 ?>
-
- 

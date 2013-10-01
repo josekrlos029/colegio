@@ -117,7 +117,5 @@ class Nota extends Modelo {
         return $nota;
     }
     
-
 }
-
 ?>

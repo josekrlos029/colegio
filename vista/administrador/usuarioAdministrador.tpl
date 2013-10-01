@@ -60,7 +60,7 @@ var data="idPersona="+idPersona;
  
       
 }
- function seguimiento(){
+ function seguimiento(idPersona){
            
             ocultar("familia");
             ocultar("datosAcademicos");

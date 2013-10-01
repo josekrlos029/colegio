@@ -372,7 +372,7 @@ $respuesta .= '
                             <a href="javascript:mostrarFamilia()" class="link-menu">familia</a>
                         </td>
                          <td  align="right" width="35%">
-                                    <a href="#"onclick="seguimiento()" class="link-menu">Seguimiento Academico y Disciplinario</a>
+                                    <a href="#"onclick="seguimiento('.$idPersona.')" class="link-menu">Seguimiento Academico y Disciplinario</a>
                          </td>
                          <td  align="right">
                                     <a href="#"onclick="pension('.$idPersona.')" class="link-menu">Pension</a>
@@ -625,10 +625,23 @@ $respuesta .= '
            }
               }
      
-              public function seguimiento(){
+         public function seguimiento(){
          try {
             if($this->verificarSession()){
             $this->vista->set('titulo', 'Seguimiento Academico');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+        
+        public function seguimiento2($idPersona){
+         try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Seguimiento Academico');
+            $this->vista->set('idPersona', $idPersona);
             return $this->vista->imprimir();
             }
         } catch (Exception $exc) {
