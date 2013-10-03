@@ -381,7 +381,7 @@ class AdministradorControl extends Controlador{
                             $respuesta.='<td>'.$not->getSegundoP().'</td>';
                             
                         }else if($periodo == 'TERCERO'){
-                            $respuesta.='<td>'.$not->getTerceroP().'</td>';
+                            $respuesta.='<td>'.$not->getTercerP().'</td>';
                             
                         }else if($periodo == 'CUARTO'){
                             
@@ -2564,13 +2564,26 @@ class AdministradorControl extends Controlador{
                 $grad = $grado->leerGradoPorId($sal->getIdGrado());
                 $pensum = new Pensum();
                 $pens = $pensum->leerPensum($idSalon);
-                
+                $vec = array();
                 if ($grad->getIdGrado() == 'p1' || $grad->getIdGrado() == 'p2' || $grad->getIdGrado() == 'p3'){
                     $seccion = 'PREESCOLAR';
+                    $vec=["PMAT","PLEC","ING","PCN","PCS","ER","EV","ART","EF","COM"];
                 }else if ($grad->getIdGrado() == '1' || $grad->getIdGrado() == '2' || $grad->getIdGrado() == '3' || $grad->getIdGrado() == '4' || $grad->getIdGrado() == '5'){
                     $seccion = 'BASICA PRIMARIA';
+                    $vec=["MAT","ING","LC","CN","CS","ER","INF","EF","ART","EV","COM"];
                 }else if ($grad->getIdGrado() == '6' || $grad->getIdGrado() == '7' || $grad->getIdGrado() == '8' || $grad->getIdGrado() == '9' || $grad->getIdGrado() == '10' || $grad->getIdGrado() == '11'){
                     $seccion = 'BASICA SECUNDARIA';
+                    if ($grad->getIdGrado() == '6' || $grad->getIdGrado() == '7' || $grad->getIdGrado() == '8'){
+                        $vec=["AYG","EST","ING","LC","CN","GEO","HIS","CONS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '9'){
+                        $vec=["ALYG","EST","ING","LC","CN","GEO","HIS","CONS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '10'){
+                        $vec=["TRI","EST","ING","LC","QUI","FIS","FIL","CS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '11'){
+                        $vec=["CALC","EST","ING","LC","QUI","FIS","FIL","CS","ER","INF","EF","ART","EV","COM"];
+                    }
+                    
+                    
                 }
                 
                 $pdf->AddPage();
@@ -2656,20 +2669,22 @@ class AdministradorControl extends Controlador{
                 $suma=0;
                 $cont=0;
                 
-                foreach ($pens as $mat){
+                foreach ($vec as $v){
                     $mate = new Materia();
-                    $materias = $mate->leerMateriaPorId($mat->getIdMateria());
+                    $materias = $mate->leerMateriaPorId($v);
                     foreach ($materias as $materia){
                         
                         $nombreMateria = $materia->getNombreMateria();
                         $horas = $materia->getHoras();
                     }
                     $nota = new Nota();
-                    $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $mat->getIdMateria());
+                    $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $v);
                     $falla = new Falla();
-                    $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $mat->getIdMateria());
+                    $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $v);
                     $logro = new Logro();
-                    $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $mat->getIdMateria());
+                    $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $v);
+                    $desempeño = "";
+                    $cadena = "";
                     
                     $pdf->SetXY($x,$y);
                     if (strlen($nombreMateria) >20) {
@@ -2701,6 +2716,8 @@ class AdministradorControl extends Controlador{
                     $x=$x + 1;
                     $pdf->SetXY($x,$y);
                     $x=$x + 1;
+                    
+                    if($log != NULL){
                     
                     if ($periodo == "PRIMERO"){
                         $pdf->Cell(1,1.5,$not->getPrimerP(),1,0,"C");
@@ -2750,8 +2767,10 @@ class AdministradorControl extends Controlador{
                         $suma=$suma + $not->getTercerP();
                         
                         if ($not->getTercerP() < 30){
-                        $cadena=$log->getBajo();
-                        $desempeño=" BAJO";
+                            
+                            $cadena=$log->getBajo();
+                            $desempeño=" BAJO";
+                            
                         }
                         if ($not->getTercerP() < 40 && $not->getTercerP() >= 30){
                             $cadena=$log->getBasico();
@@ -2790,7 +2809,7 @@ class AdministradorControl extends Controlador{
                         
                     }
                     
-                    
+                    }
                     $cont=$cont + 1;
                     $pdf->SetXY($x,$y);
                     $pdf->MultiCell(12,1.5,"",1);
