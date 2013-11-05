@@ -19,6 +19,22 @@ var data="idPersona="+idPersona;
       
 }
 
+function imprimir(idSalon , periodo){
+     var x = $("#mensaje");
+
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+
+ var url="/colegio/administrador/imprimirConsolidado";
+ var periodo = document.getElementById("periodo").value;
+    var data="idSalon="+idSalon+"&periodo="+periodo;
+ envioJson(url,data,function respuesta(res){   
+    x.hide();            
+         });
+        
+}
+
 function leerEstudiantes(idSalon){
  var x = $("#mensaje");
  if ($("#periodo").val() != "----"){

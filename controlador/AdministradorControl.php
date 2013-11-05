@@ -348,7 +348,32 @@ class AdministradorControl extends Controlador{
             $periodo = isset($_POST['periodo']) ? $_POST['periodo'] : NULL;
             $pensum = new Pensum();
             $pens = $pensum->leerPensum($idSalon);
+            //__________________________-
+            $salon = new Salon();
+                $sal = $salon->leerSalonePorId($idSalon);
+            $grado = new Grado();
+                $grad = $grado->leerGradoPorId($sal->getIdGrado());
+            $vec = array();
+                if ($grad->getIdGrado() == 'p1' || $grad->getIdGrado() == 'p2' || $grad->getIdGrado() == 'p3'){
+                    $seccion = 'PREESCOLAR';
+                    $vec=["PMAT","PLEC","ING","PCN","PCS","ER","EV","ART","EF","COM"];
+                }else if ($grad->getIdGrado() == '1' || $grad->getIdGrado() == '2' || $grad->getIdGrado() == '3' || $grad->getIdGrado() == '4' || $grad->getIdGrado() == '5'){
+                    $seccion = 'BASICA PRIMARIA';
+                    $vec=["MAT","ING","LC","CN","CS","ER","INF","EF","ART","EV","COM"];
+                }else if ($grad->getIdGrado() == '6' || $grad->getIdGrado() == '7' || $grad->getIdGrado() == '8' || $grad->getIdGrado() == '9' || $grad->getIdGrado() == '10' || $grad->getIdGrado() == '11'){
+                    $seccion = 'BASICA SECUNDARIA';
+                    if ($grad->getIdGrado() == '6' || $grad->getIdGrado() == '7' || $grad->getIdGrado() == '8'){
+                        $vec=["AYG","EST","ING","LC","CN","GEO","HIS","CONS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '9'){
+                        $vec=["ALYG","EST","ING","LC","CN","GEO","HIS","CONS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '10'){
+                        $vec=["TRI","EST","ING","LC","QUI","FIS","FIL","CS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '11'){
+                        $vec=["CALC","EST","ING","LC","QUI","FIS","FIL","CS","ER","INF","EF","ART","EV","COM"];
+                    }
+                }            
             
+            //:___________________________-
             $respuesta = "";
             
               $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
@@ -358,13 +383,40 @@ class AdministradorControl extends Controlador{
                     <td>N°</td>
                     <td>Nombres</td>
                     ';
-            foreach ($pens as $pen){
+              $notaa = new Nota();
+              $proms= array();
+              
+            foreach ($vec as $v){
                         $mat = new Materia();
-                        $materia = $mat->leerMateriaPorId($pen->getIdMateria());
+                        $materia = $mat->leerMateriaPorId($v);
+                        $notas1=$notaa->leerPorMateria($idSalon, $v);
+                        $suma=0;
+                        
+                        foreach ($notas1 as $n1){
+                            if($periodo == 'PRIMERO'){
+                            $suma += $n1->getPrimerP(); 
+                        }else if($periodo == 'SEGUNDO'){
+                            $suma += $n1->getSegundoP(); 
+                            
+                        }else if($periodo == 'TERCERO'){
+                            $suma += $n1->getTercerP(); 
+                            
+                        }else if($periodo == 'CUARTO'){
+                            
+                            $suma += $n1->getCuartoP(); 
+                        }else if($periodo == 'FINAL'){
+                            $suma += $n1->getDefinitiva(); 
+                            
+                        }                           
+                        }
+                        
                          foreach ($materia as $mate){
                               $respuesta.='<td>'.$mate->getNombreMateria().'</td>';
+                              $proms[$mate->getNombreMateria()]= $suma / count($notas1);
                          }
             }
+            
+            $proms = json_encode($proms);
              $respuesta.='</tr>';
              $persona = new Persona();
              $personas=$persona->leerPorSalon($idSalon);
@@ -372,9 +424,9 @@ class AdministradorControl extends Controlador{
               foreach ($personas as $per){
                   $cont++;
                   $respuesta.='<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)"> <td>'.$cont.'</td><td>'.$per->getPApellido().' '.$per->getSApellido().' '.$per->getNombres().'</td>';
-                foreach ($pens as $pen){
+                foreach ($vec as $v){
                         $nota = new Nota();
-                        $not =$nota->leerNotaEstudiante( $per->getIdPersona(), $pen->getIdMateria());
+                        $not =$nota->leerNotaEstudiante( $per->getIdPersona(), $v);
                         if($periodo == 'PRIMERO'){
                             $respuesta.='<td>'.$not->getPrimerP().'</td>';
                         }else if($periodo == 'SEGUNDO'){
@@ -396,7 +448,50 @@ class AdministradorControl extends Controlador{
               
              }
                 $respuesta.='</table>';
-                 $respuesta.='<input type="hidden" id="idSalon" value="'.$idSalon.'" />';
+
+                $s = "'".$idSalon."'";
+                $p = "'".$periodo."'";
+                $respuesta .= '<form method="post" target="_blank" action="/colegio/administrador/imprimirConsolidado" >';
+                $respuesta.='<input type="hidden" id="idSalon" name="idSalon" value="'.$idSalon.'" />';
+                $respuesta.='<input type="hidden" id="periodo" name="periodo" value="'.$periodo.'" />';
+                $respuesta.='<input type="submit" id="imprimir" value="Imprimir" class="button large red" />';
+                $uno="'light'";
+                $dos="'none'";
+                $tres="'fade'";
+                $cua="'block'";
+                $respuesta.='</form><a href="#"><button id="btn" onclick="vistaRendimiento()" class="button large blue">Rendimiento</button></a>
+                    <div id="fade" class="overlay"></div>
+<div id="light" class="modal">
+  <div style="float:right">
+      <a href = "javascript:void(0)" onclick = "document.getElementById('.$uno.').style.display='.$dos.';document.getElementById('.$tres.').style.display='.$dos.'"><img src="../utiles/imagenes/iconos/close.png"/></a>
+ </div>
+     <div style="margin: 0 auto;" id="tablaConsulta">
+         <h1 style="margin-left: 430px">Rendimiento.. Salon:</h1>
+          <div id="chart2" class="example-chart" style="height:300px;width:500px"></div>
+      </div>
+</div><script>function vistaRendimiento(){
+
+    document.getElementById('.$uno.').style.display='.$cua.';
+    document.getElementById('.$tres.').style.display='.$cua.';
+        var line1 = [['.$uno.', 4],['.$uno.', 6],['.$uno.', 2],['.$uno.', 5],['.$uno.', 6]];
+
+    $("#chart2").jqplot([line1], {
+        title:"Bar Chart with Varying Colors",
+        seriesDefaults:{
+            renderer:$.jqplot.BarRenderer,
+            rendererOptions: {
+                // Set the varyBarColor option to true to use different colors for each bar.
+                // The default series colors are used.
+                varyBarColor: true
+            }
+        },
+        axes:{
+            xaxis:{
+                renderer: $.jqplot.CategoryAxisRenderer
+            }
+        }
+    });
+}</script>';
                
             if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
@@ -409,6 +504,209 @@ class AdministradorControl extends Controlador{
         }    
             
         }
+        
+        public function imprimirConsolidado(){
+            try {
+            $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+            $periodo = isset($_POST['periodo']) ? $_POST['periodo'] : NULL;
+            $pensum = new Pensum();
+            $pens = $pensum->leerPensum($idSalon);
+            
+            $pdf=new FPDF('L','cm','Legal');
+            
+            $salon = new Salon();
+                $sal = $salon->leerSalonePorId($idSalon);
+            $grado = new Grado();
+                $grad = $grado->leerGradoPorId($sal->getIdGrado());
+            $vec = array();
+                if ($grad->getIdGrado() == 'p1' || $grad->getIdGrado() == 'p2' || $grad->getIdGrado() == 'p3'){
+                    $seccion = 'PREESCOLAR';
+                    $vec=["PMAT","PLEC","ING","PCN","PCS","ER","EV","ART","EF","COM"];
+                }else if ($grad->getIdGrado() == '1' || $grad->getIdGrado() == '2' || $grad->getIdGrado() == '3' || $grad->getIdGrado() == '4' || $grad->getIdGrado() == '5'){
+                    $seccion = 'BASICA PRIMARIA';
+                    $vec=["MAT","ING","LC","CN","CS","ER","INF","EF","ART","EV","COM"];
+                }else if ($grad->getIdGrado() == '6' || $grad->getIdGrado() == '7' || $grad->getIdGrado() == '8' || $grad->getIdGrado() == '9' || $grad->getIdGrado() == '10' || $grad->getIdGrado() == '11'){
+                    $seccion = 'BASICA SECUNDARIA';
+                    if ($grad->getIdGrado() == '6' || $grad->getIdGrado() == '7' || $grad->getIdGrado() == '8'){
+                        $vec=["AYG","EST","ING","LC","CN","GEO","HIS","CONS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '9'){
+                        $vec=["ALYG","EST","ING","LC","CN","GEO","HIS","CONS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '10'){
+                        $vec=["TRI","EST","ING","LC","QUI","FIS","FIL","CS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '11'){
+                        $vec=["CALC","EST","ING","LC","QUI","FIS","FIL","CS","ER","INF","EF","ART","EV","COM"];
+                    }
+                }    
+                    
+                $pdf->AddPage();     
+                $pdf-> SetFont("Arial","B",18);
+                $pdf->SetXY(1,1);
+                $pdf->cell(33,1,"CONSOLIDADO ACADEMICO DE ".$idSalon.", PERIODO: ".$periodo,1,0,"C");
+                   
+              $x = 1;
+              $y = 2;
+              $pdf-> SetFont("Arial","B",8);
+              $pdf->SetXY($x,$y);
+              $pdf->Cell(1,1,utf8_decode("N°"),1,0,"C");
+              $x++;
+              $pdf->SetXY($x,$y);
+              $pdf->Cell(3,1,"NOMBRE",1,0,"C");
+              $x=5;
+              foreach ($vec as $v){
+                    $mate = new Materia();
+                    $materias = $mate->leerMateriaPorId($v);
+                    foreach ($materias as $materia){
+                        
+                        $nombreMateria = $materia->getNombreMateria();
+                        $pdf->SetXY($x,$y);
+                        $pdf-> SetFont("Arial","B",7);                        
+                        if(strlen($nombreMateria)<12){
+                            $nombreMateria .= "\n   ";
+                        }
+                                               
+                        //$pdf->Cell(3,0.5,$nombreMateria,1,0,"C");
+                        $pdf->MultiCell(2.071,0.5,utf8_decode(strtoupper($nombreMateria)),1,"C");
+                        $x = $x+2.071;
+                    }
+                    
+              }
+              $y++;
+              $x=1;
+              $persona = new Persona();
+              $personas=$persona->leerPorSalon($idSalon);
+              $cont = 0;
+              foreach ($personas as $per){
+                  $cont++;
+                  if($cont==17){
+                      $pdf->AddPage();
+                      $y=1;
+//                      $x = 5;
+//                        $pdf-> SetFont("Arial","B",8);
+//                        $pdf->SetXY(1,$y);
+//                        $pdf->Cell(1,1,utf8_decode("N°"),1,0,"C");
+//                        $pdf->SetXY(2,$y);
+//                        $pdf->Cell(3,1,"NOMBRE",1,0,"C");
+//                        foreach ($vec as $v){
+//                        $mate = new Materia();
+//                        $materias = $mate->leerMateriaPorId($v);
+//                            foreach ($materias as $materia){                        
+//                                $nombreMateria = $materia->getNombreMateria();
+//                                $pdf->SetXY($x,$y);
+//                                $pdf-> SetFont("Arial","B",7);                        
+//                                if(strlen($nombreMateria)<12){
+//                                    $nombreMateria .= "\n   ";
+//                                }                                               
+//                            //$pdf->Cell(3,0.5,$nombreMateria,1,0,"C");
+//                            $pdf->MultiCell(2.071,0.5,utf8_decode(strtoupper($nombreMateria)),1,"C");
+//                            $x = $x+2.071;
+                            //}                    
+                        //}
+                        
+                        }
+                  $x=1;
+                  //$y++;
+                  $pdf->SetXY($x,$y);
+                  $pdf-> SetFont("Arial","B",8);
+                  $pdf->Cell(1,1,utf8_decode($cont),1,0,"C");
+                  $pdf->SetXY(2,$y);
+                  $nombre=$per->getPApellido()." ".$per->getNombres();
+                  $pdf-> SetFont("Arial","B",7);
+                  if(strlen($nombre)<19){
+                            $nombre .= "\n   ";
+                        }
+                  $pdf->MultiCell(3,0.5,utf8_decode($nombre),1,"C");
+                  $x=5;
+                  
+                 foreach ($vec as $v){
+                     $pdf-> SetFont("Arial","",10);
+                        $nota = new Nota();
+                        $not =$nota->leerNotaEstudiante( $per->getIdPersona(), $v);
+                        if($periodo == 'PRIMERO'){
+                            $n=$not->getPrimerP();
+                        }else if($periodo == 'SEGUNDO'){
+                            $n=$not->getSegundoP();
+                        }else if($periodo == 'TERCERO'){
+                            $n=$not->getTercerP();                            
+                        }else if($periodo == 'CUARTO'){                            
+                            $n=$not->getCuartoP();
+                        }else if($periodo == 'FINAL'){
+                            $n = $nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
+                        }
+                        $pdf->SetXY($x,$y);
+                        if ( $n < 30 ){
+                            $pdf->SetTextColor(255,0,0);
+                        }                            
+                        $pdf->MultiCell(2.071,0.5,utf8_decode($n."\n  "),1,"C");
+                        $pdf->SetTextColor(0,0,0);
+                        $x = $x+2.071;
+                       }
+                       
+                       $x=1;
+                       $y++;
+              
+             }
+
+              
+              
+              $pdf-> Output("Consolidado ".$idSalon,"I");
+//            foreach ($pens as $pen){
+//                        $mat = new Materia();
+//                        $materia = $mat->leerMateriaPorId($pen->getIdMateria());
+//                         foreach ($materia as $mate){
+//                              $respuesta.='<td>'.$mate->getNombreMateria().'</td>';
+//                         }
+//            }
+//             $respuesta.='</tr>';
+//             $persona = new Persona();
+//             $personas=$persona->leerPorSalon($idSalon);
+//             $cont = 0;
+//              foreach ($personas as $per){
+//                  $cont++;
+//                  $respuesta.='<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)"> <td>'.$cont.'</td><td>'.$per->getPApellido().' '.$per->getSApellido().' '.$per->getNombres().'</td>';
+//                foreach ($pens as $pen){
+//                        $nota = new Nota();
+//                        $not =$nota->leerNotaEstudiante( $per->getIdPersona(), $pen->getIdMateria());
+//                        if($periodo == 'PRIMERO'){
+//                            $respuesta.='<td>'.$not->getPrimerP().'</td>';
+//                        }else if($periodo == 'SEGUNDO'){
+//                            $respuesta.='<td>'.$not->getSegundoP().'</td>';
+//                            
+//                        }else if($periodo == 'TERCERO'){
+//                            $respuesta.='<td>'.$not->getTercerP().'</td>';
+//                            
+//                        }else if($periodo == 'CUARTO'){
+//                            
+//                            $respuesta.='<td>'.$not->getCuartoP().'</td>';
+//                        }else if($periodo == 'FINAL'){
+//                            $respuesta.='<td>'.$not->getDefinitiva().'</td>';
+//                            
+//                        }
+//                            
+//                        }
+//              $respuesta.='</tr>';
+//              
+//             }
+//                $respuesta.='</table>';
+//
+//                $s = "'".$idSalon."'";
+//                $p = "'".$periodo."'";
+//                
+//                $respuesta.='<input type="submit" id="imprimir" value="Imprimir" class="button large red" onclick="imprimir('.$s.','.$p.')" />';
+//                $respuesta.='<input type="hidden" id="idSalon" value="'.$idSalon.'" />';
+//               
+            if (strlen($respuesta)>0){
+            echo json_encode($respuesta);  
+            }  else {
+                echo json_encode("<tr> </tr>"); 
+            }
+            
+             } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+            
+        }
+        
+        
         
         public function generarPension(){
             try {
@@ -3305,8 +3603,8 @@ class AdministradorControl extends Controlador{
                 $persona->asignarRol2($acu->getId_acudiente(), 'AC');
             }
       }
-
-
+      
+     
 //____________________________________________________________      
       
       

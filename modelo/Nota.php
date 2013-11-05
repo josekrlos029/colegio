@@ -117,5 +117,92 @@ class Nota extends Modelo {
         return $nota;
     }
     
+    public function leerPorMateria($idSalon, $idMateria){
+        $sql = "SELECT n.idNota as idNota, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP, n.definitiva as definitiva FROM notas n, matricula m WHERE n.idPersona=m.idPersona AND m.idSalon='".$idSalon."' AND m.estado='1' AND n.idMateria='".$idMateria."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $notas = array();
+        foreach ($resultado as $fila) {
+           $nota = new Nota();
+            $this->mapearNota($nota, $fila);
+            $notas[$nota->getId()]=$nota;
+        }
+        return $notas;
+    }
+
+        public function calcularDef($n1,$n2,$n3,$n4){
+        if($n1 == NULL && $n2 == NULL && $n3 == NULL && $n4 == NULL ){
+        $def =NULL;
+        }elseif ($n2 == NULL && $n3 == NULL && $n4 == NULL  ){
+            $def = $n1;
+        }elseif($n1 == NULL && $n3 == NULL && $n4 == NULL ){
+            $def= $n2;
+        }elseif($n1 == NULL && $n2 == NULL && $n4 == NULL ){
+            $def= $n3;
+        }elseif($n1 == NULL && $n2 == NULL && $n3 == NULL ){
+            $def= $n4;
+        }elseif($n3 == NULL && $n4 == NULL ){
+            $def= ($n1+$n2)/2;
+        }elseif($n2 == NULL && $n4 == NULL ){
+            $def= ($n1+$n3)/2;
+        }elseif($n1 == NULL && $n4 == NULL ){
+            $def= ($n2+$n3)/2;
+        }elseif($n2 == NULL && $n3 == NULL ){
+            $def= ($n1+$n4)/2;
+        }elseif($n1 == NULL && $n3 == NULL ){
+            $def= ($n2+$n4)/2;
+        }elseif($n1 == NULL && $n2 == NULL ){
+            $def= ($n4+$n3)/2;
+        }elseif($n4 == NULL ){
+            $def= ($n1+$n2+$n3)/3;
+        }elseif($n3 == NULL ){
+            $def= ($n1+$n2+$n4)/3;
+        }elseif($n2 == NULL ){
+            $def= ($n1+$n3+$n4)/3;
+        }elseif($n1 == NULL ){
+            $def= ($n2+$n3+$n4)/3;
+        }else{
+            $def= ($n1 + $n2 + $n3 + $n4)/4;
+        }
+        return $def;
+    }
+    
+     public function calcularDef2($n1,$n2,$n3,$n4){
+        if($n1 == 0 && $n2 == 0 && $n3 == 0 && $n4 == 0 ){
+        $def =0;
+        }elseif ($n2 == 0 && $n3 == 0 && $n4 == 0  ){
+            $def = $n1;
+        }elseif($n1 == 0 && $n3 == 0 && $n4 == 0 ){
+            $def= $n2;
+        }elseif($n1 == 0 && $n2 == 0 && $n4 == 0 ){
+            $def= $n3;
+        }elseif($n1 == 0 && $n2 == 0 && $n3 == 0 ){
+            $def= $n4;
+        }elseif($n3 == 0 && $n4 == 0 ){
+            $def= ($n1+$n2)/2;
+        }elseif($n2 == 0 && $n4 == 0 ){
+            $def= ($n1+$n3)/2;
+        }elseif($n1 == 0 && $n4 == 0 ){
+            $def= ($n2+$n3)/2;
+        }elseif($n2 == 0 && $n3 == 0 ){
+            $def= ($n1+$n4)/2;
+        }elseif($n1 == 0 && $n3 == 0 ){
+            $def= ($n2+$n4)/2;
+        }elseif($n1 == 0 && $n2 == 0 ){
+            $def= ($n4+$n3)/2;
+        }elseif($n4 == 0 ){
+            $def= ($n1+$n2+$n3)/3;
+        }elseif($n3 == 0 ){
+            $def= ($n1+$n2+$n4)/3;
+        }elseif($n2 == 0 ){
+            $def= ($n1+$n3+$n4)/3;
+        }elseif($n1 == 0 ){
+            $def= ($n2+$n3+$n4)/3;
+        }else{
+            $def= ($n1 + $n2 + $n3 + $n4)/4;
+        }
+        return $def;
+    }
+    
 }
 ?>

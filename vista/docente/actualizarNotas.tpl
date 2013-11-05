@@ -249,7 +249,10 @@
         <td width="6%"><div align="center" >ESTADO</div></td>
     </tr>
     
-    <?php foreach ($resultado as $fila) { ?>
+    <?php foreach ($resultado as $fila) { 
+    $nota = new Nota();
+    $prom=round($nota->calcularDef2($fila['primerP'],$fila['segundoP'],$fila['tercerP'],$fila['cuartoP']),2);
+    ?>
     <tr class="recorrer" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
         <td align="left"><?php echo $fila['idPersona'];?></td>
         <td align="left"><?php echo strtoupper ($fila['pApellido']." ".$fila['sApellido']);?></td> 
@@ -258,8 +261,8 @@
         <td><input type="text" value="<?php echo $fila['segundoP'];?>" class="box-text" /></td>
         <td><input type="text" value="<?php echo $fila['tercerP'];?>" class="box-text"/></td>
         <td align="center"><input type="text" value="<?php echo $fila['cuartoP'];?>" class="box-text"/></td>
-        <td align="center">  <?php echo $fila['def'];?></td>
-        <?php  if($fila['def']>='3'){   ?>
+        <td align="center">  <?php echo $prom;?></td>
+        <?php  if($prom>='30'){   ?>
         <td align="center"><img src="../utiles/imagenes/iconos/exitoCalificacion.png"  /></td>
         <?php }else{ ?>
         <td align="center"><img src="../utiles/imagenes/iconos/errorCalificacion.png" /></td>

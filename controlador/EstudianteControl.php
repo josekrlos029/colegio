@@ -119,8 +119,8 @@ class EstudianteControl extends Controlador{
                          $respuesta.='<td width="15%">'.$not->getSegundoP().'</td>';
                          $respuesta.='<td width="15%">'.$not->getTercerP().'</td>';
                          $respuesta.='<td width="15%">'.$not->getCuartoP().'</td>';
-                         $prom=$not->getprimerP()+$not->getSegundoP()+$not->getTercerP()+$not->getCuartoP();
-                         $prom=$prom/4;
+                         $prom=round($nota->calcularDef2($not->getprimerP(),$not->getSegundoP(),$not->getTercerP(),$not->getCuartoP()),2);
+                         //$prom=$prom/4;
                          $respuesta.='<td width="15%" class="color-text-azul">'.$prom.'</td>';
                 $respuesta.='</tr>';
                 
@@ -131,12 +131,13 @@ class EstudianteControl extends Controlador{
             }
             
              
-            $p1 = $s1/$cont; 
-            $p2 = $s2/$cont; 
-            $p3 = $s3/$cont; 
-            $p4 = $s4/$cont; 
+            $p1 = round($s1/$cont,2); 
+            $p2 = round($s2/$cont,2); 
+            $p3 = round($s3/$cont,2); 
+            $p4 = round($s4/$cont,2); 
             
-            $pg = ($p1 + $p2 + $p3 + $p4 ) /4;
+            //$pg = round((($p1 + $p2 + $p3 + $p4 ) /4), 2);
+            $pg = round($nota->calcularDef2($p1 , $p2 , $p3 , $p4 ), 2);
             $this->vista->set('grado', $grad);
             $this->vista->set('matricula', $matr);
             $this->vista->set('tabla', $respuesta);
