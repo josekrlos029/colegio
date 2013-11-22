@@ -26,13 +26,13 @@ function envioJson2(url,data,respuesta){
 				type:	"post",
 				data:	data,
 				url:	url,
-				dataType:"json",
+				dataType:"html",
 				success: function(data){
                                     
 				    //var json=JSON.decode( data );
                                     //var json = eval("(" + data + ")");
 				    //var json= jQuery.parseJSON(data);     
-                                    respuesta(json);
+                                    respuesta(data);
 				    }
 		        });
 }

@@ -79,7 +79,7 @@ class Matricula extends Modelo{
             $matricula->setJornada($props['jornada']);
         }
         if (array_key_exists('fecha_matricula', $props)) {
-            $matricula->setFecha(self::crearFecha($props['fecha_matricula']));
+            $matricula->setFecha($props['fecha_matricula']);
         }
         if (array_key_exists('año_lectivo', $props)) {
           $matricula->setAnoLectivo($props['año_lectivo']);
@@ -130,6 +130,19 @@ class Matricula extends Modelo{
 
         }
         return $matricula;
+    }
+    
+    public function leerMatriculasPorId($idPersona){
+        $sql = "SELECT * FROM matricula WHERE idPersona='".$idPersona."' AND estado<>'1' ORDER BY año_lectivo";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $mats = array();
+        foreach ($resultado as $fila) {
+            $matricula = new Matricula();
+            $this->mapearMatricula($matricula, $fila);
+            $mats[$matricula->getIdPersona()] = $matricula;
+        }
+        return $mats;
     }
     
     public function retirarEstudiante($idPersona, $Alectivo){

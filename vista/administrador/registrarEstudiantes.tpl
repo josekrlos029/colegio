@@ -108,12 +108,11 @@ function envio(){
                  "&idAcudiente="+idAcudiente.value+"&nombresAcudiente="+nombresAcudiente.value+"&apellidosAcudiente="+apellidosAcudiente.value+"&ocupacionAcudiente="+ocupacionPadre.value+"&telAcudiente="+telAcudiente.value+"&telOficinaAcudiente="+telOficinaAcudiente.value+"&dirAcudiente="+dirAcudiente.value;
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
-                    
                     x.html ( "<p>Estudiante Registrado Correctamente</p>");
                     $("#idPersona").attr("disabled","disabled");
                     exito();
                     ocultar();
-                
+                    window.open("/colegio/administrador/imprimirRegistro/"+idPersona.value);
             }else if (res == 2){
                 x.html ( "<p>Error: El estudiante ya se encuentra Registrado en Base de Datos</p>");
                 error();
@@ -254,7 +253,8 @@ var foto = $("#foto");
                     $("#idPersona").attr("disabled","disabled");
                     exito();
                     ocultar();
-                
+            window.open("/colegio/administrador/imprimirMatricula/"+idPersona.value);        
+            window.open("/colegio/administrador/imprimirMatricula/"+idPersona.value);
             }else if (res == 2){
                 x.html ( "<p>Error: El estudiante ya se encuentra Registrado en Base de Datos</p>");
                 error();
