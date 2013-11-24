@@ -73,7 +73,7 @@ function envio(){
  var dirAcudiente = document.getElementById("dirAcudiente");
 /***fin datos del acudiente***/
 
- if (idPersona.value=="" || tipoDocumento.value=="" || lugarExpedicion.value=="" || fechaExpedicion.value=="" || nombres.value==""  || pApellido.value=="" || sApellido.value=="" || sexo.value=="" || tipoSanguineo.value=="" || eps.value=="" || telefono.value=="" || correo.value=="" ){
+ if (idPersona.value=="" || tipoDocumento.value=="" || nombres.value==""  || pApellido.value=="" || sApellido.value=="" || sexo.value=="" || tipoSanguineo.value=="" || eps.value=="" || telefono.value=="" ){
       x.html ( "<p>Error: Tiene Campos Vacios en los Datos Personales</p>");
       error();
       ocultar();
@@ -83,14 +83,6 @@ function envio(){
       ocultar();
    }else if(direccion.value=="" || barrio.value=="" || municipioResidencia.value=="" ){
       x.html ( "<p>Error: Tiene Campos Vacios en los Datos de Ubicacion</p>");
-      error();
-      ocultar();
-   }else if(idPadre.value=="" || nombresPadre.value=="" || apellidosPadre.value=="" || ocupacionPadre.value=="" || telPadre.value=="" ||dirPadre.value==""){
-      x.html ( "<p>Error: Tiene Campos Vacios en los Datos del Padre</p>");
-      error();
-      ocultar();
-   }else if(idMadre.value=="" || nombresMadre.value=="" || apellidosMadre.value=="" || ocupacionMadre.value=="" || telMadre.value=="" ||dirMadre.value==""){
-      x.html ( "<p>Error: Tiene Campos Vacios en los Datos del Madre</p>");
       error();
       ocultar();
    }else if(idAcudiente.value=="" || nombresAcudiente.value=="" || apellidosAcudiente.value=="" || ocupacionAcudiente.value=="" || telAcudiente.value=="" || dirAcudiente.value==""){
@@ -201,7 +193,7 @@ var jornada = document.getElementById("jornada");
 var foto = $("#foto");
 //FIN MATRICULA
 
- if (idPersona.value=="" || tipoDocumento.value=="" || lugarExpedicion.value=="" || fechaExpedicion.value=="" || nombres.value==""  || pApellido.value=="" || sApellido.value=="" || sexo.value=="" || tipoSanguineo.value=="" || eps.value=="" || telefono.value=="" || correo.value=="" ){
+ if (idPersona.value=="" || tipoDocumento.value==""  || nombres.value==""  || pApellido.value=="" || sApellido.value=="" || sexo.value=="" || tipoSanguineo.value=="" || eps.value=="" || telefono.value=="" ){
       x.html ( "<p>Error: Tiene Campos Vacios en los Datos Personales</p>");
       error();
       ocultar();
@@ -211,14 +203,6 @@ var foto = $("#foto");
       ocultar();
    }else if(direccion.value=="" || barrio.value=="" || municipioResidencia.value=="" ){
       x.html ( "<p>Error: Tiene Campos Vacios en los Datos de Ubicacion</p>");
-      error();
-      ocultar();
-   }else if(idPadre.value=="" || nombresPadre.value=="" || apellidosPadre.value=="" || ocupacionPadre.value=="" || telPadre.value=="" ||dirPadre.value==""){
-      x.html ( "<p>Error: Tiene Campos Vacios en los Datos del Padre</p>");
-      error();
-      ocultar();
-   }else if(idMadre.value=="" || nombresMadre.value=="" || apellidosMadre.value=="" || ocupacionMadre.value=="" || telMadre.value=="" ||dirMadre.value==""){
-      x.html ( "<p>Error: Tiene Campos Vacios en los Datos del Madre</p>");
       error();
       ocultar();
    }else if(idAcudiente.value=="" || nombresAcudiente.value=="" || apellidosAcudiente.value=="" || ocupacionAcudiente.value=="" || telAcudiente.value=="" || dirAcudiente.value==""){
@@ -253,7 +237,7 @@ var foto = $("#foto");
                     $("#idPersona").attr("disabled","disabled");
                     exito();
                     ocultar();
-            window.open("/colegio/administrador/imprimirMatricula/"+idPersona.value);        
+            window.open("/colegio/administrador/imprimirRegistro/"+idPersona.value);        
             window.open("/colegio/administrador/imprimirMatricula/"+idPersona.value);
             }else if (res == 2){
                 x.html ( "<p>Error: El estudiante ya se encuentra Registrado en Base de Datos</p>");

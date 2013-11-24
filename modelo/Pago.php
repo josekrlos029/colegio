@@ -133,7 +133,9 @@ class Pago extends Modelo{
     }
     
     public function crearPago(Pago $pago){
-        $sql = "INSERT INTO pago (idPersona, concepto, valor, fecha) VALUES ( :idPersona, :concepto, :valor, :fecha)";
+        $fecha = getdate();
+        $anio=$fecha["year"];
+        $sql = "INSERT INTO pago (idPersona, concepto, valor, fecha, año) VALUES ( :idPersona, :concepto, :valor, :fecha,".$anio.")";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros1($pago));
     }
@@ -191,7 +193,96 @@ class Pago extends Modelo{
         }
         return $pagos;
     }
+    public function leerPagosPorIdPersonaYAño($idPersona,$anio){
+        $sql = "SELECT * FROM pago WHERE idPersona='".$idPersona."' AND año=".$anio;
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pagos = array();
+        foreach ($resultado as $fila) {
+            $pago = new Pago();
+            $this->mapearPago($pago, $fila);
+            $pagos[$pago->getIdPago()] = $pago;
+        }
+        return $pagos;
+    }
     
+    public function leerPagosPorIdPersonayRangoFecha($idPersona,$inicio,$fin){
+        $sql = "SELECT * FROM pago WHERE idPersona='".$idPersona."' AND fecha BETWEEN '".$inicio."' AND '".$fin."' ORDER BY fecha DESC";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pagos = array();
+        foreach ($resultado as $fila) {
+            $pago = new Pago();
+            $this->mapearPago($pago, $fila);
+            $pagos[$pago->getIdPago()] = $pago;
+        }
+        return $pagos;
+    }
+    
+    public function leerPensionesPorIdPersonayRangoFecha($idPersona,$inicio,$fin){
+        $sql = "SELECT * FROM pago WHERE idPersona='".$idPersona."' AND concepto='PENSION' AND fecha BETWEEN '".$inicio."' AND '".$fin."' ORDER BY fecha DESC";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pagos = array();
+        foreach ($resultado as $fila) {
+            $pago = new Pago();
+            $this->mapearPago($pago, $fila);
+            $pagos[$pago->getIdPago()] = $pago;
+        }
+        return $pagos;
+    }
+    
+    public function leerPensionesPorRangoFecha($inicio,$fin){
+        $sql = "SELECT * FROM pago WHERE concepto='PENSION' AND fecha BETWEEN '".$inicio."' AND '".$fin."' ORDER BY fecha DESC";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pagos = array();
+        foreach ($resultado as $fila) {
+            $pago = new Pago();
+            $this->mapearPago($pago, $fila);
+            $pagos[$pago->getIdPago()] = $pago;
+        }
+        return $pagos;
+    }
+    
+    public function leerPagosPorRangoFecha($inicio,$fin){
+        $sql = "SELECT * FROM pago WHERE fecha BETWEEN '".$inicio."' AND '".$fin."' ORDER BY fecha DESC";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pagos = array();
+        foreach ($resultado as $fila) {
+            $pago = new Pago();
+            $this->mapearPago($pago, $fila);
+            $pagos[$pago->getIdPago()] = $pago;
+        }
+        return $pagos;
+    }
+    
+     public function leerPensionesPorFecha($fecha){
+        $sql = "SELECT * FROM pago WHERE fecha='".$fecha."' AND concepto='PENSION'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pagos = array();
+        foreach ($resultado as $fila) {
+            $pago = new Pago();
+            $this->mapearPago($pago, $fila);
+            $pagos[$pago->getIdPago()] = $pago;
+        }
+        return $pagos;
+    }
+    
+    public function leerPagosPorFecha($fecha){
+        $sql = "SELECT * FROM pago WHERE fecha='".$fecha."' AND concepto='PENSION'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pagos = array();
+        foreach ($resultado as $fila) {
+            $pago = new Pago();
+            $this->mapearPago($pago, $fila);
+            $pagos[$pago->getIdPago()] = $pago;
+        }
+        return $pagos;
+    }
     public function leerAnios(){
         $sql = "SELECT DISTINCT año FROM pago ORDER BY año DESC";
         $this->__setSql($sql);

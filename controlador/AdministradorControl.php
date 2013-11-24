@@ -2148,92 +2148,24 @@ class AdministradorControl extends Controlador{
             
          }
          
-         public function consultarPersona(){
+         public function consultarParaPago(){
         try {
             $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
             
             $persona = new Persona();
             $estudiante = $persona->leerPorId($idPersona);
             if ($estudiante == NULL){
-                 $respuesta= 1;
+                 $this->setVista('mensaje');
+                 $msj ="El Número de Documento no existe en el sistema";
+                 $this->vista->set('msj', $msj);
+                return $this->vista->imprimir();
             }else{
                 $rol = new Rol();
                 $roles = $rol->leerRoles($idPersona);
-                $band = 0;
-                foreach ($roles  as $ro) {
-                  if ($ro->getIdRol() == 'E'){
-                      $respuesta = '<div style=" postion:relative; float: left; width:50%; ">
-                                        <table class="tabla" width="100%" border="0" cellspacing="0" cellpadding="2"> 
-                                       <tr class="modo1">
-                                        <td>Nombres:</td>
-                                         <td>Primer Apellido:</td>
-                                         <td>Segundo Apellido:</td>
-                                         <td>Rol:</td>
-                                        </tr>
-                                        
-                                        <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
-                                        <td>'.$estudiante->getNombres()."</td>
-                                        <td>".$estudiante->getPApellido()."</td>
-                                        <td>".$estudiante->getSApellido()."</td>
-                                        <td>".$ro->getNombre()."</td>
-                                        </tr>
-                                        
-                                        </table>
-                                    </div> "; 
-                              
-                     $respuesta.=" <div style='postion:relative; float:left; margin-left:20px; padding-left:10px; border-left:4px solid #666; ' >
-                                    <table align='center'>
-                                    <tr>
-                                    <td> Concepto:</td>
-                                    <td colspan='2' align='center'>
-                                    <select id='concepto' class='box-text' onclick='mostrarConcepto()'>
-                                           <option>---</option>
-                                           <option>PENSION</option>
-                                           <option>CONSTANCIA</option>
-                                    </select>
-                                    </td>
-                                    </tr>
-                                    </table>
-                                 </div>
-                         
-                            ";
-                         
-                                    
-                }elseif ($ro->getIdRol() == 'D'){$respuesta = '<table class="tabla"> 
-                                       <tr class="modo1">
-                                        <td>Nombres:</td>
-                                         <td>Primer Apellido:</td>
-                                         <td>Segundo Apellido:</td>
-                                         <td>Rol:</td>
-                                        </tr>
-                                        
-                                        <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
-                                        <td>'.$estudiante->getNombres()."</td>
-                                        <td>".$estudiante->getPApellido()."</td>
-                                        <td>".$estudiante->getSApellido()."</td>
-                                        <td>".$ro->getNombre()."</td>
-                                        </tr>
-                                        
-                                    </table> "; 
-                        $respuesta.="<p>&nbsp;</p>           
-                        <table align='center'>
-                     <tr>
-                    <td> Concepto: </td>
-                    <td colspan='2' align='center'>
-                    <select id='concepto' onchange='mostrarConcepto()'>
-                            <option>---</option>
-                            <option>SEGURO</option>
-                            
-                    </select>
-                    </td>
-                </tr>
-               </table><p>&nbsp;</p> ";}
-                        
-                }
-                   
-              
+                $this->vista->set('roles', $roles);
+                $this->vista->set('estudiante', $estudiante);
+                return $this->vista->imprimir();
               }
-            echo json_encode($respuesta);
     } catch (Exception $exc) {
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
@@ -2313,6 +2245,129 @@ class AdministradorControl extends Controlador{
                  echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
              }
 
+         }
+         public function guardarPago(){
+             $this->setVista('mensaje');
+                try {
+                $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+                $valorPago = isset($_POST['valorPago']) ? $_POST['valorPago'] : NULL;
+                $concepto = isset($_POST['concepto']) ? $_POST['concepto'] : NULL;
+                $fecha = getdate();
+                $FechaTxt=$fecha["year"]."-".$fecha["mon"]."-".$fecha["mday"];
+                $pension = new Pago();
+                $pension->setIdPersona($idPersona);
+                $pension->setValor($valorPago);
+                $pension->setFecha($FechaTxt);
+                $pension->setConcepto($concepto);
+                $pension->crearPago($pension);
+                $msj ="El Pago se registró correctamente";
+                $this->vista->set('msj', $msj);
+                return $this->vista->imprimir();
+             
+             } catch (Exception $exc) {
+                 $msj ="El Pago No se pudo registrar";
+                $this->vista->set('msj', $msj);
+                return $this->vista->imprimir();
+             }
+
+         }
+         
+         public function pagosAntiguos(){
+             try {
+                $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+                $pago = new Pago();
+                $pagos=$pago->leerPagosPorIdPersona($idPersona);
+                $pensiones=$pago->leerPensionesPorIdPersona($idPersona);
+                $this->vista->set('pagos', $pagos);
+                $this->vista->set('pensiones', $pensiones);
+                return $this->vista->imprimir();
+             
+             } catch (Exception $exc) {
+                 $this->setVista('mensaje');
+                 $msj ="ERROR... La consulta no se pudo ejecutar.. !";
+                $this->vista->set('msj', $msj);
+                return $this->vista->imprimir();
+             }
+         }
+         
+         public function pagosDelDia(){
+             try {
+                $fecha = getdate();
+                $FechaTxt=$fecha["year"]."-".$fecha["mon"]."-".$fecha["mday"];
+                $pago = new Pago();
+                $pagos=$pago->leerPagosPorFecha($FechaTxt);
+                $pensiones=$pago->leerPensionesPorFecha($FechaTxt);
+                $this->vista->set('pagos', $pagos);
+                $this->vista->set('pensiones', $pensiones);
+                return $this->vista->imprimir();
+             
+             } catch (Exception $exc) {
+                 $this->setVista('mensaje');
+                 $msj ="ERROR... La consulta no se pudo ejecutar.. !";
+                $this->vista->set('msj', $msj);
+                return $this->vista->imprimir();
+             }
+         }
+         
+         public function pagosActuales(){
+             try {
+                $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+                $fecha = getdate();
+                $anio=$fecha["year"];
+                $pago = new Pago();
+                $pagos=$pago->leerPagosPorIdPersonaYAño($idPersona,$anio);
+                $pensiones=$pago->leerPensionesPorIdPersonaYAnio($idPersona,$anio);
+                $this->setVista('pagosAntiguos');
+                $this->vista->set('pagos', $pagos);
+                $this->vista->set('pensiones', $pensiones);
+                return $this->vista->imprimir();
+             
+             } catch (Exception $exc) {
+                 $this->setVista('mensaje');
+                 $msj ="ERROR... La consulta no se pudo ejecutar.. !";
+                $this->vista->set('msj', $msj);
+                return $this->vista->imprimir();
+             }
+         }
+         public function pagosPorFecha(){
+             try {
+                $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+                $inicio = isset($_POST['inicio']) ? $_POST['inicio'] : NULL;
+                $fin = isset($_POST['fin']) ? $_POST['fin'] : NULL;
+                $pago = new Pago();
+                $pagos=$pago->leerPagosPorIdPersonayRangoFecha($idPersona,$inicio,$fin);
+                $pensiones=$pago->leerPensionesPorIdPersonayRangoFecha($idPersona,$inicio,$fin);
+                $this->setVista('pagosAntiguos');
+                $this->vista->set('pagos', $pagos);
+                $this->vista->set('pensiones', $pensiones);
+                return $this->vista->imprimir();
+             
+             } catch (Exception $exc) {
+                 $this->setVista('mensaje');
+                 $msj ="ERROR... La consulta no se pudo ejecutar.. !";
+                $this->vista->set('msj', $msj);
+                return $this->vista->imprimir();
+             }
+         }
+         
+         public function pagosPorFecha2(){
+             try {
+                $inicio = isset($_POST['inicio']) ? $_POST['inicio'] : NULL;
+                $fin = isset($_POST['fin']) ? $_POST['fin'] : NULL;
+                $pago = new Pago();
+                $pagos=$pago->leerPagosPorRangoFecha($inicio,$fin);
+                $pensiones=$pago->leerPensionesPorRangoFecha($inicio,$fin);
+                $this->setVista('pagosDelDia');
+                $this->vista->set('pagos', $pagos);
+                $this->vista->set('pensiones', $pensiones);
+                return $this->vista->imprimir();
+             
+             } catch (Exception $exc) {
+                 $this->setVista('mensaje');
+                 $msj ="ERROR... La consulta no se pudo ejecutar.. !";
+                $this->vista->set('msj', $msj);
+                return $this->vista->imprimir();
+             }
          }
          
         public function procesarCierre(){

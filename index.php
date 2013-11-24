@@ -3,7 +3,7 @@
 define('DS', DIRECTORY_SEPARATOR);
 define('HOME', dirname(__FILE__));
 
-
+date_default_timezone_set("America/Bogota");
 ini_set('display_erros', 1);
 /**
  * Esta funcion se utiliza para cambiar de INFORMACION DE ERRORES
