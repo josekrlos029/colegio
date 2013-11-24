@@ -1023,9 +1023,23 @@ class AdministradorControl extends Controlador{
             $this->vista->set('id', $id);
             return $this->vista->imprimir();
             }
-        } catch (Exception $exc) {
-            echo 'Error de aplicacion: ' . $exc->getMessage();
+            } catch (Exception $exc) {
+                echo 'Error de aplicacion: ' . $exc->getMessage();
+            }
         }
+        
+        public function personas(){
+              try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Transferir Estudiante');
+            $persona = new Persona();
+            $personas = $persona->leerPersonas();
+            $this->vista->set('personas', $personas);
+            return $this->vista->imprimir();
+            }
+            } catch (Exception $exc) {
+                echo 'Error de aplicacion: ' . $exc->getMessage();
+            }
         }
         
         public function pagos(){
@@ -3027,6 +3041,6 @@ class AdministradorControl extends Controlador{
              $this->vista->set('url', $_POST['url']);
             return $this->vista->imprimir(); 
         }
-            
+        
 }
 ?>
