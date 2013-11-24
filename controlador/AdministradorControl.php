@@ -578,32 +578,9 @@ class AdministradorControl extends Controlador{
                   $cont++;
                   if($cont==17){
                       $pdf->AddPage();
-                      $y=1;
-//                      $x = 5;
-//                        $pdf-> SetFont("Arial","B",8);
-//                        $pdf->SetXY(1,$y);
-//                        $pdf->Cell(1,1,utf8_decode("N°"),1,0,"C");
-//                        $pdf->SetXY(2,$y);
-//                        $pdf->Cell(3,1,"NOMBRE",1,0,"C");
-//                        foreach ($vec as $v){
-//                        $mate = new Materia();
-//                        $materias = $mate->leerMateriaPorId($v);
-//                            foreach ($materias as $materia){                        
-//                                $nombreMateria = $materia->getNombreMateria();
-//                                $pdf->SetXY($x,$y);
-//                                $pdf-> SetFont("Arial","B",7);                        
-//                                if(strlen($nombreMateria)<12){
-//                                    $nombreMateria .= "\n   ";
-//                                }                                               
-//                            //$pdf->Cell(3,0.5,$nombreMateria,1,0,"C");
-//                            $pdf->MultiCell(2.071,0.5,utf8_decode(strtoupper($nombreMateria)),1,"C");
-//                            $x = $x+2.071;
-                            //}                    
-                        //}
-                        
+                      $y=1;                        
                         }
                   $x=1;
-                  //$y++;
                   $pdf->SetXY($x,$y);
                   $pdf-> SetFont("Arial","B",8);
                   $pdf->Cell(1,1,utf8_decode($cont),1,0,"C");
@@ -648,51 +625,6 @@ class AdministradorControl extends Controlador{
               
               
               $pdf-> Output("Consolidado ".$idSalon,"I");
-//            foreach ($pens as $pen){
-//                        $mat = new Materia();
-//                        $materia = $mat->leerMateriaPorId($pen->getIdMateria());
-//                         foreach ($materia as $mate){
-//                              $respuesta.='<td>'.$mate->getNombreMateria().'</td>';
-//                         }
-//            }
-//             $respuesta.='</tr>';
-//             $persona = new Persona();
-//             $personas=$persona->leerPorSalon($idSalon);
-//             $cont = 0;
-//              foreach ($personas as $per){
-//                  $cont++;
-//                  $respuesta.='<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)"> <td>'.$cont.'</td><td>'.$per->getPApellido().' '.$per->getSApellido().' '.$per->getNombres().'</td>';
-//                foreach ($pens as $pen){
-//                        $nota = new Nota();
-//                        $not =$nota->leerNotaEstudiante( $per->getIdPersona(), $pen->getIdMateria());
-//                        if($periodo == 'PRIMERO'){
-//                            $respuesta.='<td>'.$not->getPrimerP().'</td>';
-//                        }else if($periodo == 'SEGUNDO'){
-//                            $respuesta.='<td>'.$not->getSegundoP().'</td>';
-//                            
-//                        }else if($periodo == 'TERCERO'){
-//                            $respuesta.='<td>'.$not->getTercerP().'</td>';
-//                            
-//                        }else if($periodo == 'CUARTO'){
-//                            
-//                            $respuesta.='<td>'.$not->getCuartoP().'</td>';
-//                        }else if($periodo == 'FINAL'){
-//                            $respuesta.='<td>'.$not->getDefinitiva().'</td>';
-//                            
-//                        }
-//                            
-//                        }
-//              $respuesta.='</tr>';
-//              
-//             }
-//                $respuesta.='</table>';
-//
-//                $s = "'".$idSalon."'";
-//                $p = "'".$periodo."'";
-//                
-//                $respuesta.='<input type="submit" id="imprimir" value="Imprimir" class="button large red" onclick="imprimir('.$s.','.$p.')" />';
-//                $respuesta.='<input type="hidden" id="idSalon" value="'.$idSalon.'" />';
-//               
             if (strlen($respuesta)>0){
             echo json_encode($respuesta);  
             }  else {
@@ -1077,6 +1009,18 @@ class AdministradorControl extends Controlador{
             $salon= new Salon();
             $salones = $salon->leerSalones();
             $this->vista->set('salones', $salones);
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+        public function transferirEstudiante($id = null){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Transferir Estudiante');
+            $this->vista->set('id', $id);
             return $this->vista->imprimir();
             }
         } catch (Exception $exc) {
@@ -1759,21 +1703,26 @@ class AdministradorControl extends Controlador{
              $estudiante->crearDatosNacimiento($estudiante);
              $estudiante->crearDatosUbicacion($estudiante);
              
-             if ($estudiante->verificarPadre($idPadre) == NULL){
-               $estudiante->crearDatosPadre($estudiante);  
+             if($idPadre !=NULL){
+                 if ($estudiante->verificarPadre($idPadre) == NULL){
+                    $estudiante->crearDatosPadre($estudiante);  
+                 }
+                 $estudiante->estudiantePadre($estudiante);
              }
              
+             if($idMadre !=NULL){
              if ($estudiante->verificarMadre($idMadre) == NULL){
                $estudiante->crearDatosMadre($estudiante);
              }
+             $estudiante->estudianteMadre($estudiante);
+             }
              
+             if($idAcudiente !=NULL){
              if ($estudiante->verificarAcudiente($idAcudiente) == NULL){
                $estudiante->crearDatosAcudiente($estudiante);
              }
-             
-             $estudiante->estudiantePadre($estudiante);
-             $estudiante->estudianteMadre($estudiante);
              $estudiante->estudianteAcudiente($estudiante);
+             }
             
               echo json_encode(1);
              
@@ -2009,6 +1958,7 @@ class AdministradorControl extends Controlador{
          */
     public function consultarEstudiante(){
         try {
+            
             $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
             
             $persona = new Persona();
@@ -2016,7 +1966,9 @@ class AdministradorControl extends Controlador{
             $matricula = new Matricula();
             $mat = $matricula->leerMatriculaPorId($idPersona);
             if ($estudiante == NULL){
-                 $respuesta= 1;
+                 $this->setVista('mensaje');
+                $msj= "El Número de Documento no existe en el sistema";
+                $this->vista->set('msj', $msj);
             }else{
                 $rol = new Rol();
                 $roles = $rol->leerRoles($idPersona);
@@ -2027,45 +1979,77 @@ class AdministradorControl extends Controlador{
                   } 
                 }
                     if ($band!=1){
-                      $respuesta= 3;
+                      $this->setVista('mensaje');
+                      $msj= "El Número de Documento ingresado no corresponde al de un estudiante";
+                      $this->vista->set('msj', $msj);
                     }elseif ($mat != NULL){
-                      $respuesta= 2;
+                      $this->setVista('mensaje');
+                      $msj= "El estudiante ya se encuentra matriculado";
+                      $this->vista->set('msj', $msj);                   
                     }else{
-                  
-                        $respuesta = '<table class="tabla" width="100%"> 
-                                       <tr class="modo1">
-                                        <td>Nombres:</td>
-                                         <td>Primer Apellido:</td>
-                                         <td>Segundo Apellido:</td>
-                                         <td>Sexo:</td>
-                                         <td>Telefono:</td>
-                                         <td>Direccion:</td>
-                                         <td>Correo:</td>
-                                         <td>Fecha De Nacimiento:</td>
-                                        </tr>
-                                        
-                                        <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
-                                        <td>'.$estudiante->getNombres()."</td>
-                                        <td>".$estudiante->getPApellido()."</td>
-                                        <td>".$estudiante->getSApellido()."</td>
-                                        <td>".$estudiante->getSexo()."</td>
-                                        <td>".$estudiante->getTelefono()."</td>
-                                        <td>".$estudiante->getDireccion()."</td>
-                                        <td>".$estudiante->getCorreo()."</td>
-                                        <td>".$estudiante->getFNacimiento()->format("Y-m-d")."</td>
-                                        </tr>
-                                    </table>
-
-                                     "; 
+                        $this->vista->set('estudiante', $estudiante);
+                        $salon= new Salon();
+                        $salones = $salon->leerSalones();
+                        $this->vista->set('salones', $salones);
                   }
-              
               }
-            echo json_encode($respuesta);
-    } catch (Exception $exc) {
-            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
-        }    
-            
-         }
+              return $this->vista->imprimir();
+            } catch (Exception $exc) {
+                    $this->setVista('mensaje');
+                    $msj= "Error en la aplicación, Colocarse en contacto con el Desarrollador";
+                    $this->vista->set('msj', $msj);
+                    return $this->vista->imprimir();
+            }                   
+        }
+        
+        public function consultaTransferencia(){
+            try{
+            $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $persona = new Persona();
+            $estudiante = $persona->leerPorId($idPersona);
+            $matricula = new Matricula();
+            $mat = $matricula->leerMatriculaPorId($idPersona);
+            $salon = new Salon();
+            $sal = $salon->leerSalonePorId($mat->getIdSalon());
+            $salones = $salon->leerSalonePorIdGrado($sal->getIdGrado());
+            if ($estudiante == NULL){
+                 $this->setVista('mensaje');
+                $msj= "El Número de Documento no existe en el sistema";
+                $this->vista->set('msj', $msj);
+            }else{
+                $rol = new Rol();
+                $roles = $rol->leerRoles($idPersona);
+                $band = 0;
+                foreach ($roles  as $ro) {
+                  if ($ro->getIdRol() == 'E'){
+                      $band=1;
+                  } 
+                }
+                    if ($band!=1){
+                      $this->setVista('mensaje');
+                      $msj= "El Número de Documento ingresado no corresponde al de un estudiante";
+                      $this->vista->set('msj', $msj);
+                    }elseif ($mat != NULL){
+                        $this->vista->set('estudiante', $estudiante);
+                        $this->vista->set('salones', $salones);
+                        $this->vista->set('idSalon', $mat->getIdSalon());
+                                       
+                    }else{
+                        $this->setVista('mensaje');
+                      $msj= "El estudiante NO se encuentra matriculado";
+                      $this->vista->set('msj', $msj);  
+                  }
+              }
+              return $this->vista->imprimir();
+            } catch (Exception $exc) {
+                    $this->setVista('mensaje');
+                    $msj= "Error en la aplicación, Colocarse en contacto con el Desarrollador";
+                    $this->vista->set('msj', $msj);
+                    return $this->vista->imprimir();
+            }                   
+        }
+        
+
          
              /**
          * proceso de consultar persona/estudiante por numero de identificacion
@@ -2194,6 +2178,28 @@ class AdministradorControl extends Controlador{
              
              } catch (Exception $exc) {
                  echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+             }
+
+         }
+         
+         public function transferir(){
+             try {
+                 
+             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
+             $mat = new Matricula();
+             $mat->transferirEstudiante($idPersona,$idSalon);
+             $this->setVista('mensaje');
+             $msj = "Estudiante Transferido Correctamente";        
+             $this->vista->set('msj', $msj);
+             return $this->vista->imprimir();
+             
+             
+             } catch (Exception $exc) {
+                 $this->setVista('mensaje');
+                $msj = "Error Fatal al transferir estudiante...";        
+                $this->vista->set('msj', $msj);
+                return $this->vista->imprimir();
              }
 
          }
@@ -3019,9 +3025,8 @@ class AdministradorControl extends Controlador{
                     
             }
              $this->vista->set('url', $_POST['url']);
-            return $this->vista->imprimir();
-            
+            return $this->vista->imprimir(); 
         }
-      
+            
 }
 ?>

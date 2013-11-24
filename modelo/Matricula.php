@@ -148,13 +148,13 @@ class Matricula extends Modelo{
     public function retirarEstudiante($idPersona, $Alectivo){
          $sql = "UPDATE matricula SET estado='2' WHERE idPersona='".$idPersona."' AND año_lectivo='".$Alectivo."'";
         $this->__setSql($sql);
-        $this->ejecutar();
+        $this->ejecutar(null);
     }
     
+    public function transferirEstudiante($idPersona, $idSalon){
+         $sql = "UPDATE matricula SET idSalon='".$idSalon."' WHERE idPersona='".$idPersona."' AND estado='1'";
+        $this->__setSql($sql);
+        $this->ejecutar(null);
+    }   
 }
-  
-       
-    
-
 ?>
-

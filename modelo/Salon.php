@@ -93,6 +93,20 @@ public function crearSalon(Salon $salon) {
         return $salon;
     }
     
+    public function leerSalonePorIdGrado($idGrado) {
+        $sql = "SELECT idSalon, idGrado, grupo FROM salon WHERE idGrado='".$idGrado."'" ;
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $salones = array();
+        foreach ($resultado as $fila) {
+            $salon = new Salon();
+            $this->mapearSalon($salon, $fila);
+            $salones[$salon->getIdSalon()] = $salon;
+        }
+        return $salones;
+        return $salon;
+    }
+    
     public function leerSalonesJornada($limS,$limI){
         $sql = "SELECT idSalon FROM salon WHERE idGrado BETWEEN $limS AND $limI order by idGrado ";
         $this->__setSql($sql);

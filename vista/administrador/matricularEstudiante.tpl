@@ -31,29 +31,12 @@ function envio(){
         var url="/colegio/administrador/consultarEstudiante/";
         var data="idPersona="+idPersona.value;
 
-        envioJson(url,data,function respuesta(res){   
-            if (res == "1"){
-                x.html ("<p>El Número de Documento no existe en el sistema</p>");
-                error(); 
-                ocultar();
-               
-            }else if(res==2){
-                 x.html ("<p>El estudiante ya se encuentra matriculado</p>");
-                error();
-                ocultar()
-    
-            }else if(res==3){
-            x.html ("<p>El Número de Documento ingresado no corresponde al de un estudiante</p>");
-                error();
-                ocultar();
-            }else{
-            y.html(res);
+        envioJson2(url,data,function respuesta(res){   
+            $("#matricula").html(res);
             $("#matricula").show();
             $("#idPersona").attr("disabled","disabled");
             x.hide();
-            $("#nuevo1").show();
-            }
-            
+            $("#nuevo1").show();            
          });
     }   
 } 
@@ -203,79 +186,27 @@ function limpiar(){
       <hr>
        <p>&nbsp;</p>
        <div style="position: relative; margin-left: 10%; width: 80%;">
-       <h1 class="color-text-gris">Datos del estudiante</h1>   
-       <div  id="tabla">
-           
-        </div>
-           <p>&nbsp;</p>
-           <div id="matricula" hidden>
-               <table class="tabla" width="50%" border="0" cellspacing="0" cellpadding="2" >
-                   <tr>
-                  
-                  <td colspan="2" class="color-text-gris"><h1>realizar matricula</h1></td>
-                   </tr>
-                   <tr class="modo1">
-                       <td>SALON</td>
-                       <td>JORNADA</td>
-                   </tr>
-                   
-                     <tr><td>
-                          <select id="idSalon" class="box-text">
-                   <?php foreach ($salones as $salon) { ?>
-                   <option><?php echo $salon->getIdSalon();?></option>
-                    <?php } ?>
-               </select>
-                         </td>
-                     
-                         <td>
-                             <select id="jornada" class="box-text">
-                                 <option>MAÑANA</option>
-                                 <option>TARDE</option>
-                                 <option>NOCHE</option>
-                             </select>
-                         </td>
-                     </tr>
-                     <tr>
-                    <td align="right" width="40%"></td>
-                    <td><button class="button large blue" id="insertarImagen" onclick="abrir()">Insertar Imagen</button></td>
-               </tr>
-               <tr>
-                   <td></td>
-                   <td><p id="imagen" style="float: left;"><img id="foto" src="" /></p></td>
-                </tr>
-                     </table>
-                       <p>&nbsp;</p>
-                     <table>
-                     <tr>
-                    <td colspan="2">
-                    <input name="matricularEstudiante" id="matricularEstudiante" type="submit" value="Matricular" class="button large blue" onclick="matricular()" />
-                    </td>
-                </tr>
-               </table>
-               
-               
-           </div>
+       <div id="matricula" hidden></div>
+       
        </div>
-       <div id="fade" class="overlay"></div>
-<div id="light" class="modal">
-  <div style="float:right">
-      <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
- </div>
-    
-   
-    
+       
+        <div id="fade" class="overlay"></div>
+        <div id="light" class="modal">
+        <div style="float:right">
+            <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
+        </div>
         <div style="margin:20%; ">
-         <h1>Capturar Foto</h1> 
+            <h1>Capturar Foto</h1> 
           
-        <article>
-         <video  id="video" width="320" height="200" autoplay></video>
-            <section style="float: left;">
-                <button id="btnStart" class="button large blue" >Encender WebCam</button>
-                 <button id="btnStop"  class="button large blue">Pausar</button>           
-                 <button id="btnPhoto" class="button large blue">Tomar Foto</button>
-            </section>
-            <canvas id="canvas" width="320" height="240" style="float: left;"></canvas>
-        </article>
+            <article>
+                <video  id="video" width="320" height="200" autoplay></video>
+                <section style="float: left;">
+                    <button id="btnStart" class="button large blue" >Encender WebCam</button>
+                    <button id="btnStop"  class="button large blue">Pausar</button>           
+                    <button id="btnPhoto" class="button large blue">Tomar Foto</button>
+                </section>
+                <canvas id="canvas" width="320" height="240" style="float: left;"></canvas>
+            </article>
         </div>    
 </div>
         
