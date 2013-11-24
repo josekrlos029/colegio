@@ -1548,40 +1548,17 @@ class AdministradorControl extends Controlador{
         
         public function imprimirUsuarios(){
             try {
-            $cont=0;
+            
             $idPersona = isset($_POST['idDocente']) ? $_POST['idDocente'] : NULL;
             $rol = new Rol();
             $roles = $rol->leerRoles($idPersona);
-                  foreach ($roles as $ro) {
-                      $cont++;
-                      $respuesta .= '<tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">';
-                  
-                              $respuesta.= '<td width="40%">'.$cont.'</td>'.
-                                           '<td width="10%" align="center">'. strtoupper($ro->getNombre()).'</td>';
-                                            
-                                             
-                       
-                         $eliminar= "eliminar('".$ro->getIdRol()."')";
-                         $respuesta.= '<td width="20%" align="center">
-                                     <a href="#" onclick="'.$eliminar.'"><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a>
-                                       </td>';
-                        $respuesta .= "</tr>";
-                       
-                  }
-                   $respuesta .= '<tr><td colspan="4" align="center"><hr></td></tr>
-                                   <tr>
-                                     <td colspan="4" align="center" class="color-text-gris"><h2>Total Horas Semanales:'. $total.'</h2></td>
-                                  </tr>';
-               
-            if (strlen($respuesta)>0){
-          
-                echo json_encode($respuesta);  
-            }  else {
-                echo json_encode("<tr> </tr>"); 
-            }
-            
+            $this->vista->set('roles', $roles);
+            return $this->vista->imprimir();
+           
              } catch (Exception $exc) {
-            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+                 $this->setVista('mensaje');
+                $this->vista->set('msj', "Error Al Cargar Roles");
+                return $this->vista->imprimir();
         }    
             
         }

@@ -48,10 +48,11 @@ function leerUsuarios(){
  
 var y= $("#tablaCargas"); 
  var idDocente =$("input[name=idDocente]:checked").val();
-  var url="/colegio/administrador/imprimirUsuarios/";
+  var url="/colegio/administrador/imprimirUsuarios";
         var data="idDocente="+idDocente;
-       envioJson(url,data,function respuesta(res){   
+       envioJson2(url,data,function respuesta(res){   
         y.html(res);
+        x.hide();
     });
 
 }
@@ -177,6 +178,7 @@ var y = $("#mensaje");
                 <tr class="modo1">
                     <td width="20%">N°</td>
                     <td width="40%">ROL</td>
+                    <td width="10%">ELIMINAR?</td>
                 </tr>   
           </table>
                <table width="50%" align="center" border="0" cellspacing="0" cellpadding="2"  >
