@@ -946,7 +946,7 @@ $respuesta .= '
             $archivo = $_FILES["foto"]['name'];
             $trozos = explode(".", $archivo); 
             $extension = end($trozos); 
-            $ruta = 'utiles/imagenes/fotos/';
+            $ruta = HOME.DS.'utiles/imagenes/fotos/';
             $destino = $ruta.$idPersona.".".$extension;
             $extensiones = ['jpg', 'jpeg', 'png'];
             

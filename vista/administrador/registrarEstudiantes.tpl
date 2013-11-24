@@ -268,7 +268,7 @@ window.onload = function() {
         btnPhoto = document.getElementById("btnPhoto"),
         videoObj = {
             video: true,
-            audio: true
+            audio: false
         };
 
     btnStart.addEventListener("click", function() {

@@ -154,7 +154,7 @@ function foto(){
                   <div style="margin:20%;"> 
                       <h1>INSERTAR IMAGEN</h1>
                       <p>Por favor Seleccion la imagen que desea para su Perfil.</br>EXTENSIONES ACEPTADAS: .jpeg .jpg .png </br> TAMAÑO MAXIMO: 4MB</p>
-                      <form action="/colegio/acudiente/actualizarFoto/" method="post" enctype="multipart/form-data" name="form1">
+                      <form action="/colegio/acudiente/actualizarFoto" method="post" enctype="multipart/form-data" name="form1">
                           <input type="file" name="foto" id="foto">
                           <input type="hidden" name="url" value="/colegio/docente/usuarioDocente">
                           <input type="submit" name="enviar" value="Guardar" class="button large red" >

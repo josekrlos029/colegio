@@ -22,7 +22,6 @@ function envio(){
    var y = $("#tabla");
  var idPersona = document.getElementById("idPersona");
 
-
     if (idPersona.value==""){
       x.html ( "<p>Error: Ingresar Numero de Documento</p>");
       error(); 
@@ -69,6 +68,7 @@ function matricular(){
  var idPersona = document.getElementById("idPersona");
  var idSalon = document.getElementById("idSalon");
  var jornada = document.getElementById("jornada");
+var foto = $("#foto");
 
 
     if (idPersona.value==""){
@@ -78,7 +78,7 @@ function matricular(){
     }else{
 
         var url="/colegio/administrador/matricular";
-        var data="idPersona="+idPersona.value+"&idSalon="+idSalon.value+"&jornada="+jornada.value;
+        var data="idPersona="+idPersona.value+"&idSalon="+idSalon.value+"&jornada="+jornada.value+"&foto="+foto.attr("src");
 
         envioJson(url,data,function respuesta(res){   
             if (res == "1"){
@@ -96,7 +96,70 @@ function matricular(){
             
          });
     }   
-}   
+}
+
+window.onload = function() {
+
+    //Compatibility
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+
+    var canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d"),
+        video = document.getElementById("video"),
+        btnStart = document.getElementById("btnStart"),
+        btnStop = document.getElementById("btnStop"),
+        btnPhoto = document.getElementById("btnPhoto"),
+        videoObj = {
+            video: true,
+            audio: false
+        };
+
+    btnStart.addEventListener("click", function() {
+        var localMediaStream;
+
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia(videoObj, function(stream) {              
+                video.src = (navigator.webkitGetUserMedia) ? window.webkitURL.createObjectURL(stream) : stream;
+                localMediaStream = stream;
+                
+            }, function(error) {
+                console.error("Video capture error: ", error.code);
+            });
+
+            btnStop.addEventListener("click", function() {
+                localMediaStream.stop();
+            });
+
+            btnPhoto.addEventListener("click", function() {
+                limpiar(); 
+                context.drawImage(video, 0, 0, 320, 240);
+               var img = document.getElementById("imagen");
+               img.appendChild(convertCanvasToImage(canvas));
+               // $("#imagen2").append($("#foto").attr("src"));
+            });
+        }
+    });
+};
+
+function convertCanvasToImage(canvas) {
+	var image = new Image();
+	image.src = canvas.toDataURL();
+        image.setAttribute('id','foto');
+        //image.src=image.src.replace("image/png",'image/octet-stream');
+	return image;
+}
+function abrir(){
+
+    document.getElementById('light').style.display='block';
+    document.getElementById('fade').style.display='block'
+
+}
+function limpiar(){
+        var canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        $("#imagen").html(" ");
+}
 
  </script>
  
@@ -172,6 +235,14 @@ function matricular(){
                              </select>
                          </td>
                      </tr>
+                     <tr>
+                    <td align="right" width="40%"></td>
+                    <td><button class="button large blue" id="insertarImagen" onclick="abrir()">Insertar Imagen</button></td>
+               </tr>
+               <tr>
+                   <td></td>
+                   <td><p id="imagen" style="float: left;"><img id="foto" src="" /></p></td>
+                </tr>
                      </table>
                        <p>&nbsp;</p>
                      <table>
@@ -185,6 +256,28 @@ function matricular(){
                
            </div>
        </div>
+       <div id="fade" class="overlay"></div>
+<div id="light" class="modal">
+  <div style="float:right">
+      <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
+ </div>
+    
+   
+    
+        <div style="margin:20%; ">
+         <h1>Capturar Foto</h1> 
+          
+        <article>
+         <video  id="video" width="320" height="200" autoplay></video>
+            <section style="float: left;">
+                <button id="btnStart" class="button large blue" >Encender WebCam</button>
+                 <button id="btnStop"  class="button large blue">Pausar</button>           
+                 <button id="btnPhoto" class="button large blue">Tomar Foto</button>
+            </section>
+            <canvas id="canvas" width="320" height="240" style="float: left;"></canvas>
+        </article>
+        </div>    
+</div>
         
     </body>
 </html>

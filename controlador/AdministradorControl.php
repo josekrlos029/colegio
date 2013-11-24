@@ -1955,21 +1955,26 @@ class AdministradorControl extends Controlador{
              $estudiante->crearDatosNacimiento($estudiante);
              $estudiante->crearDatosUbicacion($estudiante);
              
-             if ($estudiante->verificarPadre($idPadre) == NULL){
-               $estudiante->crearDatosPadre($estudiante);  
+             if($idPadre !=NULL){
+                 if ($estudiante->verificarPadre($idPadre) == NULL){
+                    $estudiante->crearDatosPadre($estudiante);  
+                 }
+                 $estudiante->estudiantePadre($estudiante);
              }
              
+             if($idMadre !=NULL){
              if ($estudiante->verificarMadre($idMadre) == NULL){
                $estudiante->crearDatosMadre($estudiante);
              }
+             $estudiante->estudianteMadre($estudiante);
+             }
              
+             if($idAcudiente !=NULL){
              if ($estudiante->verificarAcudiente($idAcudiente) == NULL){
                $estudiante->crearDatosAcudiente($estudiante);
              }
-             
-             $estudiante->estudiantePadre($estudiante);
-             $estudiante->estudianteMadre($estudiante);
              $estudiante->estudianteAcudiente($estudiante);
+             }
              
              //Matricula ¨**
              $fecha = getdate();
@@ -2181,6 +2186,15 @@ class AdministradorControl extends Controlador{
              $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
              $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
              $jornada = isset($_POST['jornada']) ? $_POST['jornada'] : NULL;
+             $foto = isset($_POST['foto']) ? $_POST['foto'] : NULL;
+             
+             if($foto!=""){
+                $foto = $this->limpia_espacios($foto);
+                $contents= file_get_contents($foto);
+                $savefile = fopen('utiles/imagenes/fotos/'.$idPersona.'.png', 'w');
+                fwrite($savefile,$contents);
+                fclose($savefile);           
+                }
              $fecha = getdate();
              $FechaTxt=$fecha["year"]."-".$fecha["mon"]."-".$fecha["mday"];
 
@@ -2606,6 +2620,17 @@ class AdministradorControl extends Controlador{
                                       </tr>
                                       </table>
                                       </div>
+                                      <div style="margin:5%;"> 
+                      <h1>MODIFICAR IMAGEN</h1>
+                      <p>Por favor Seleccion la imagen que desea para su Perfil.</br>EXTENSIONES ACEPTADAS: .jpeg .jpg .png </br> TAMAÑO MAXIMO: 4MB</p>
+                      <form action="/colegio/administrador/actualizarFotoEstudiante" method="post" enctype="multipart/form-data" name="form1">
+                          <input type="file" name="foto" id="foto">
+                          <input type="hidden" name="url" value="/colegio/administrador/actualizarEstudiante">
+                          <input type="hidden" name="idPersona" value="'.$idPersona.'">
+                          <input type="submit" name="enviar" value="Enviar" class="button large blue" >
+                      </form>
+                  </div>
+
                                      '; 
                   }
               
@@ -2984,7 +3009,42 @@ class AdministradorControl extends Controlador{
               $reporte->registroSantaTeresita($idPersona);
           }
       }
-      
-      
+      public function actualizarFotoEstudiante(){
+            
+            $idPersona=isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $archivo = $_FILES["foto"]['name'];
+            $trozos = explode(".", $archivo); 
+            $extension = end($trozos); 
+            $ruta = HOME.DS.'utiles/imagenes/fotos/';
+            $destino = $ruta.$idPersona.".".$extension;
+            $extensiones = ['jpg', 'jpeg', 'png'];
+            
+            if ($archivo != "") {
+                $band=0;    
+                for($i=0; $i<count($extensiones); $i++){
+                    if ($extensiones[$i]==$extension){
+                        $band = 1;
+                    }
+                }
+                    if($band == 1){
+                        if (($_FILES["foto"]["size"])/1048576 <= 4){
+                       
+                            if (file_exists($ruta.$idPersona.'.jpg')) {
+                            unlink($ruta.$idPersona.'.jpg');
+                            }elseif (file_exists($ruta.$idPersona.'.png')) {
+                                unlink($ruta.$idPersona.'.png');
+                            }elseif (file_exists($ruta.$idPersona.'.jpeg')) {
+                                unlink($ruta.$idPersona.'.jpeg');
+                            }
+                            copy($_FILES['foto']['tmp_name'],$destino);
+                        }    
+                    }
+                    
             }
+             $this->vista->set('url', $_POST['url']);
+            return $this->vista->imprimir();
+            
+        }
+      
+}
 ?>
