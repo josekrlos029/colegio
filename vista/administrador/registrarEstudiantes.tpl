@@ -4,7 +4,50 @@
 
 
 <script type="text/javascript">
+
+function llenarAcudiente(){
+ var idPadre = document.getElementById("idPadre");
+ var nombresPadre = document.getElementById("nombresPadre");
+ var apellidosPadre = document.getElementById("apellidosPadre");
+ var ocupacionPadre  = document.getElementById("ocupacionPadre");
+ var telPadre = document.getElementById("telPadre");
+ var telOficinaPadre = document.getElementById("telOficinaPadre");
+ var dirPadre = document.getElementById("dirPadre");
+ /** fin datos del padre***/
+ 
+ /*** datos  de la madre ***/
+ var idMadre = document.getElementById("idMadre");
+ var nombresMadre = document.getElementById("nombresMadre");
+ var apellidosMadre = document.getElementById("apellidosMadre");
+ var ocupacionMadre  = document.getElementById("ocupacionMadre");
+ var telMadre = document.getElementById("telMadre");
+ var telOficinaMadre = document.getElementById("telOficinaMadre");
+ var dirMadre = document.getElementById("dirMadre");
+/*** fin de datos de la madre****/
+
+/*** datos del acudiente***/
+ 
+var check =$("input[name=acud]:checked").val();
+if (check=="padre"){
+ document.getElementById("idAcudiente").value = idPadre.value;
+ document.getElementById("nombresAcudiente").value= nombresPadre.value;
+ document.getElementById("apellidosAcudiente").value=apellidosPadre.value;
+ document.getElementById("ocupacionAcudiente").value=ocupacionPadre.value;
+ document.getElementById("telAcudiente").value=telPadre.value;
+ document.getElementById("telOficinaAcudiente").value=telOficinaPadre.value;
+ document.getElementById("dirAcudiente").value=dirPadre.value;
     
+}else if(check=="madre"){
+    document.getElementById("idAcudiente").value = idMadre.value;
+    document.getElementById("nombresAcudiente").value= nombresMadre.value;
+    document.getElementById("apellidosAcudiente").value=apellidosMadre.value;
+    document.getElementById("ocupacionAcudiente").value=ocupacionMadre.value;
+    document.getElementById("telAcudiente").value=telMadre.value;
+    document.getElementById("telOficinaAcudiente").value=telOficinaMadre.value;
+    document.getElementById("dirAcudiente").value=dirMadre.value;
+}
+}
+
 function envio(){ 
   if($("#activarMatricula").is(':checked')) { 
     envio2();
@@ -470,7 +513,7 @@ function limpiar(){
 </ul>
 </li>   
  
- <li><span><h1>DATOS DEl PADRE</h1> </span>
+<li><span><h1>DATOS DEl PADRE</h1> </span>
 <ul>
  <table width="50%" border="0" cellspacing="0" cellpadding="2">
              
@@ -504,6 +547,10 @@ function limpiar(){
                     <td><input name="dirPadre" id="dirPadre" type="text" class="box-text" /></td>
                 </tr>
                 <tr>
+                    <td align="right" width="40%" >Acudiente:</td>
+                    <td><input name="acud" id="acud" value="padre" type="radio" onchange="llenarAcudiente()" class="box-text" /></td>
+                </tr>
+                <tr>
                     <td colspan="2" align="left" class="color-text-gris"><h1>DATOS DE La MADRE</h1></td>
                 </tr>
                 <tr>
@@ -534,7 +581,10 @@ function limpiar(){
                     <td align="right" width="40%" >Direccion:</td>
                     <td><input name="dirMadre" id="dirMadre" type="text" class="box-text" /></td>
                 </tr>
-                
+                <tr>
+                    <td align="right" width="40%" >Acudiente:</td>
+                    <td><input name="acud" id="acud" value="madre" type="radio" onchange="llenarAcudiente()" class="box-text" /></td>
+                </tr>
 
        </table>      
     
