@@ -129,6 +129,13 @@ class Nota extends Modelo {
         }
         return $notas;
     }
+    
+    public function calcularDefNeta($n1,$n2,$n3,$n4){
+        
+            $def= ($n1 + $n2 + $n3 + $n4)/4;
+        
+        return $def;
+    }
 
         public function calcularDef($n1,$n2,$n3,$n4){
         if($n1 == NULL && $n2 == NULL && $n3 == NULL && $n4 == NULL ){

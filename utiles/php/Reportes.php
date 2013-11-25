@@ -462,9 +462,19 @@ class Reportes {
                 $pdf->SetXY(5,7);
                 $pdf->Cell(1,0.5,"IH",1,0,"C");
                 $pdf->SetXY(6,7);
-                $pdf->Cell(1,0.5,"Fallas",1,0,"C");
+                if($periodo=="CUARTO"){
+                    $pdf->Cell(1,0.5,utf8_decode("P.4°"),1,0,"C");
+                }else{
+                    $pdf->Cell(1,0.5,"Fallas",1,0,"C");
+                }
+                
                 $pdf->SetXY(7,7);
-                $pdf->Cell(1,0.5,"Val.",1,0,"C");
+                if($periodo=="CUARTO"){
+                    $pdf->Cell(1,0.5,"FINAL",1,0,"C");
+                }else{
+                    $pdf->Cell(1,0.5,"Val.",1,0,"C");
+                }
+                
                 $pdf->SetXY(8,7);
                 $pdf->Cell(12,0.5,"FORTALEZAS/ DEBILIDADES/ RECOMENDACIONES",1,0,"C");
 
@@ -514,7 +524,7 @@ class Reportes {
                         $pdf->Cell(1,1.5,$fal->getTercerP(),1,0,"C");
                         
                     }elseif ($periodo== "CUARTO"){
-                        $pdf->Cell(1,1.5,$fal->getCuartoP(),1,0,"C");
+                        $pdf->Cell(1,1.5,$not->getCuartoP(),1,0,"C");
                     }
                     
                     $pdf->Cell(1,1.5,"",1,0,"C");
@@ -591,23 +601,47 @@ class Reportes {
                         }
                         
                     }elseif ($periodo== "CUARTO"){
-                        $pdf->Cell(1,1.5,$not->getCuartoP(),1,0,"C");
-                        $suma=$suma + $not->getCuartoP();
+                        $def=round($not->calcularDefNeta($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP()),2);
+                        $pdf->Cell(1,1.5,$def,1,0,"C");
+                        $suma=$suma + $def;
                         
-                        if ($not->getCuartoP() < 30){
+                        if ($def < 30){
                         $cadena=$log->getBajo();
                         $desempeño=" BAJO";
                         }
-                        if ($not->getCuartoP() < 40 && $not->getCuartoP() >= 30){
+                        if ($def < 40 && $def >= 30){
                             
                             $cadena=$log->getBasico();
                             $desempeño=" BASICO";
                         }
-                        if ($not->getCuartoP() < 46 && $not->getCuartoP() >= 40){
+                        if ($def < 46 && $def >= 40){
                             $cadena=$log->getAlto();
                             $desempeño=" ALTO";
                         }
-                        if ($not->getCuartoP() > 45){
+                        if ($def > 45){
+                            $cadena=$log->getSuperior();
+                            $desempeño=" SUPERIOR";
+                        }
+                        
+                    }elseif ($periodo== "FINAL"){
+                        $def=$nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
+                        $pdf->Cell(1,1.5,$def,1,0,"C");
+                        $suma=$suma + $def;
+                        
+                        if ($def < 30){
+                        $cadena=$log->getBajo();
+                        $desempeño=" BAJO";
+                        }
+                        if ($def < 40 && $def >= 30){
+                            
+                            $cadena=$log->getBasico();
+                            $desempeño=" BASICO";
+                        }
+                        if ($def < 46 && $def >= 40){
+                            $cadena=$log->getAlto();
+                            $desempeño=" ALTO";
+                        }
+                        if ($def > 45){
                             $cadena=$log->getSuperior();
                             $desempeño=" SUPERIOR";
                         }
