@@ -42,7 +42,7 @@ class InicioControl extends Controlador{
                 echo json_encode(0);
             }else{
                 //MANEJO DE SESSIONES
-                session_start();
+                
                 $_SESSION['idUsuario'] = $usuario->getIdPersona();
                 $rol = new Rol();
                
@@ -63,7 +63,7 @@ class InicioControl extends Controlador{
         
         public function escogeRol(){
          try {
-             session_start();
+             
              $idPersona= $_SESSION['idUsuario'];
                 $rol = new Rol();
                 $roles = $rol->leerRoles($idPersona);
@@ -199,7 +199,7 @@ class InicioControl extends Controlador{
         }
     
     public function accesofb($social) {
-        session_start();
+        
         $cfg = Configuracion::getConfiguracion('social_login');
         $app_id = '';
         $app_secret = '';

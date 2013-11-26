@@ -104,7 +104,7 @@ class DocenteControl extends Controlador{
         
         public function imprimirMaterias(){
             try {
-                session_start();
+                
                 $idGrado =  isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
                 $idDocente = $_SESSION['idUsuario'];
                 $materia = new Materia();
@@ -121,7 +121,7 @@ class DocenteControl extends Controlador{
         
         public function imprimirMateriasPorSalon(){
             try {
-                session_start();
+                
                 $idSalon =  isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
                 $idDocente = $_SESSION['idUsuario'];
                 $materia = new Materia();

@@ -58,7 +58,7 @@ class Controlador {
     }
     
     protected function verificarSession(){
-             session_start();
+             
             if (!isset($_SESSION['idUsuario'])) {
                header("Location: /colegio/inicio/index");
                 return false;
@@ -941,7 +941,7 @@ $respuesta .= '
          
            
         public function actualizarFoto(){
-            session_start();
+            
             $idPersona=$_SESSION['idUsuario'];
             $archivo = $_FILES["foto"]['name'];
             $trozos = explode(".", $archivo); 
