@@ -136,7 +136,9 @@ class InicioControl extends Controlador{
                 $string = $per->getIdPersona();        
                 $cadena = $this->encrypt($string, $key);
                 $msg1 = "Para cambiar su clave, haga clic en el siguiente enlace:<br>";
-                $msg1 .= "http://localhost/colegio/inicio/cambiarClave/".$cadena;
+                $cfg = Configuracion::getConfiguracion('colegio');
+                $url= $cfg['URL'];
+                $msg1 .= $url."/inicio/cambiarClave/".$cadena;
                 $msg1 .= "<br>El administrador";
                 $asunto = "Cambio de Contraseña Aplicación";
                 $this->enviarCorreo($msg1,$per->getCorreo(),$asunto, $per->getNombres()." ".$per->getPApellido()) ;

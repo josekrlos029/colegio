@@ -33,7 +33,7 @@ function alerta(error){
 <body>
 
     <div class="cabecera">
-        <?php include HOME . DS . 'includes' . DS . 'headerDocente.php'; ?>
+        <?php include HOME . DS . 'includes' . DS . 'header.php'; ?>
         </div>
        
           <!------------------------------cabecera--------------------------->  
