@@ -207,7 +207,7 @@ var data="idPersona="+idPersona;
            
            <td></td>
            <td width="10%" align="center">
-            <a href="/colegio/administrador/transferirEstudiante"><div id="box" class="blue"><img height="40px" width="40px" src=../utiles/imagenes/iconos/actualizar.png ></div></a>
+            <a href="/colegio/administrador/transferirEstudiante"><div id="box" class="blue"><img height="40px" width="40px" src=../utiles/imagenes/iconos/transferir.png ></div></a>
            <div class="text-icon">Transferir</div>  
            </td>
             <td width="10%" align="center">
@@ -240,7 +240,7 @@ var data="idPersona="+idPersona;
            </tr>
            <tr>
            <td width="10%" align="center">
-             <a href="/colegio/administrador/personas"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/notificacion.png ></div></a>
+             <a href="/colegio/administrador/personas"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/personas.png ></div></a>
              <div class="text-icon">Personas</div>
            </td>
            <td width="10%" align="center">
