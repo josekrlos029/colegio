@@ -11,6 +11,7 @@ cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
 
+alert(idSalon + " " +idMateria);
   var url="/colegio/administrador/eliminarCarga";
         var data="idSalon="+idSalon+"&idMateria="+idMateria;
  envioJson(url,data,function respuesta(res){   
@@ -50,7 +51,7 @@ var y= $("#tablaCargas");
  var idDocente =$("input[name=idDocente]:checked").val();
   var url="/colegio/administrador/imprimirCarga";
         var data="idDocente="+idDocente;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
     x.hide();            
     y.html (res);
          });
@@ -86,7 +87,7 @@ var grado = salon[0];
         var url="/colegio/administrador/imprimirMateriasPorGrado/select";
         var data="idGrado="+grado;
 
-        envioJson(url,data,function respuesta(res){   
+        envioJson2(url,data,function respuesta(res){   
     x.hide();            
     y.html (res);
          });

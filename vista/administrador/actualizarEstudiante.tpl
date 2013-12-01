@@ -24,22 +24,12 @@ function envio(){
         var url="/colegio/administrador/consultaActEstudiante/";
         var data="idPersona="+idPersona.value;
 
-        envioJson(url,data,function respuesta(res){   
-            if (res == "1"){
-                x.html ("<p>El Número de Documento no existe en el sistema</p>");
-                error(); 
-                ocultar();
-            }else if(res==3){
-            x.html ("<p>El Número de Documento ingresado no corresponde al de un estudiante</p>");
-                error();
-                ocultar();
-            }else{
+        envioJson2(url,data,function respuesta(res){   
+            
             y.html(res);
-           
             $("#idPersona").attr("disabled","disabled");
             x.hide();
-            }
-            
+                        
          });
     }   
 } 

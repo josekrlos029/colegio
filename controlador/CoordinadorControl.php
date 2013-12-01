@@ -198,7 +198,7 @@ class CoordinadorControl extends Controlador{
                     <td>'. $est->getCorreo().'</td>
                     <td align="center"><a href="#" onclick="consultaPersona ('. strtoupper ($est->getIdPersona()).') "><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
                     <td align="center"><a href="#" onclick="vistaActualizarPersona('.$est->getIdPersona().') "><img src="../utiles/imagenes/iconos/editarPersona.png" /></a></td>
-                    <td align="center"><a href="#" onclick="eliminarPersona ('. strtoupper ($est->getIdPersona()).') "><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a></td>
+                    <td align="center"><a href="#" onclick="eliminarPersona ('. strtoupper ($est->getIdPersona()).') "><img src="../utiles/imagenes/iconos/errorCalificacion.png"/></a></td>
                 </tr>';     
                   }
                 $respuesta.='</table>';
@@ -249,7 +249,7 @@ class CoordinadorControl extends Controlador{
                     <td>'. $doc->getCorreo().'</td>
                     <td align="center"><a href="#" onclick="consultaPersona ('. strtoupper ($doc->getIdPersona()).') "><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
                     <td align="center"><a href="#" onclick="vistaActualizarPersona('.$doc->getIdPersona().') "><img src="../utiles/imagenes/iconos/editarPersona.png" /></a></td>
-                    <td align="center"><a href="#" onclick="eliminarPersona ('. strtoupper ($doc->getIdPersona()).') "><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a></td>
+                    <td align="center"><a href="#" onclick="eliminarPersona ('. strtoupper ($doc->getIdPersona()).') "><img src="../utiles/imagenes/iconos/errorCalificacion.png"/></a></td>
                 </tr>';     
                   }
                 $respuesta.='</table>';

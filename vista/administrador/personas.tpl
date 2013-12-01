@@ -81,6 +81,7 @@ function alerta(error){
         <td width="8%"><div align="center" >TELEFONO</div></td>
         <td width="8%"><div align="center" >DIRECCION</div></td>
         <td width="8%"><div align="center" >CORREO</div></td>
+        <td width="8%"><div align="center" >INSCRIPCION</div></td>
     </tr>
     
     <?php foreach ($personas as $persona) {
@@ -93,6 +94,7 @@ function alerta(error){
         <td align="center"><?php echo $persona->getTelefono();?></td>
         <td align="center"><?php echo $persona->getDireccion();?></td>
         <td align="center"><?php echo $persona->getCorreo();?></td>
+        <td align="center"><a href="/colegio/administrador/imprimirRegistro/<?php echo $persona->getIdPersona();?>"><img alt="inscripcion" src="../utiles/imagenes/iconos/consultarPersona.png" /></a></td>
     <?php    
     }//fin del For ?>
     </tr>

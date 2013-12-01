@@ -59,7 +59,7 @@ function consulta(id){
 var y= $("#tablaConsulta"); 
 var url="/colegio/administrador/consultaNotificacion";
 var data="id="+id;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
    x.hide();            
     y.html (res);
     
@@ -218,7 +218,7 @@ var data="id="+id;
                     
                     ?>                    
                   <td align="center"><a href="#" onclick="consulta  ('<?=$not->getId()?>')"><img src="../utiles/imagenes/iconos/consultarPersona.png"/></a></td>
-                    <td align="center"><a href="#" onclick="eliminar('<?=$not->getId()?>')"><img src="../utiles/imagenes/iconos/eliminarPersona.png"/></a></td> 
+                    <td align="center"><a href="#" onclick="eliminar('<?=$not->getId()?>')"><img src="../utiles/imagenes/iconos/errorCalificacion.png"/></a></td> 
                 </tr>
                 <?php } ?>
            

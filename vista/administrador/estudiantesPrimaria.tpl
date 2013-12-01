@@ -28,7 +28,7 @@ function leerEstudiantes(idSalon){
 var y= $("#tablaEstudiantes"); 
  var url="/colegio/administrador/estudiantesSalones";
  var data="idSalon="+idSalon;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
     x.hide();            
     y.html (res);
          });
@@ -44,7 +44,7 @@ function estInhabilitados(idSalon){
 var y= $("#estInhabilitados"); 
  var url="/colegio/administrador/estudiantesSalonesInhabilitados";
  var data="idSalon="+idSalon;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
     x.hide();            
     y.html (res);
          });
@@ -58,7 +58,7 @@ function vistaActualizarPersona(idPersona){
 var y= $("#tablaConsulta"); 
 var url="/colegio/administrador/actualizarGeneralPersona";
 var data="idPersona="+idPersona;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
    x.hide();            
     y.html (res);
     

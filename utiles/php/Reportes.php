@@ -65,9 +65,6 @@ class Reportes {
             $tel2_madre=$est->getTelOficinaMadre();
             $direccion_madre=$est->getDirMadre();
 
-
-            
-
             $id_acud=$est->getIdAcudiente();
         
             $nom_acu=$est->getNombresAcudiente();
@@ -148,7 +145,6 @@ class Reportes {
 
             }
 
-
             $pdf->SetXY(2,7.5);
             $pdf->Cell(5,0.5,"FECHA DE NACIMIENTO: ",0,0,"L");
 
@@ -208,7 +204,6 @@ class Reportes {
             $pdf->SetXY(8,11.5);
             $pdf->Cell(11.96,0.5,utf8_decode(strtoupper($procedencia)),0,0,"L",true);
 
-
             $pdf->SetXY(2,13);
             $pdf->Cell(18,2.5,"",1,0,"L");
             $pdf-> SetFont("Arial","B",10);
@@ -245,7 +240,6 @@ class Reportes {
             $pdf->Cell(5,0.5,$tel1_padre,0,0,"L",TRUE);
             $pdf->SetXY(14.96,14.5);
             $pdf->Cell(5,0.5,$tel2_padre,0,0,"L",TRUE);
-
 
             $pdf->SetXY(2,16);
             $pdf->Cell(18,2.5,"",1,0,"L");
@@ -284,8 +278,6 @@ class Reportes {
             $pdf->SetXY(14.96,17.5);
             $pdf->Cell(5,0.5,$tel2_madre,0,0,"L",TRUE);
 
-
-
             $pdf->SetXY(2,19);
             $pdf->Cell(18,2.5,"",1,0,"L");
 
@@ -323,7 +315,6 @@ class Reportes {
             $pdf->Cell(5,0.5,$tel1_acu,0,0,"L",TRUE);
             $pdf->SetXY(14.96,20.5);
             $pdf->Cell(5,0.5,$tel2_acu,0,0,"L",TRUE);
-
 
             $pdf->SetXY(3,22.5);
             $pdf->Cell(6,0.5,"","B",0,"R");
@@ -386,9 +377,7 @@ class Reportes {
                         $vec=["TRI","EST","ING","LC","QUI","FIS","FIL","CS","ER","INF","EF","ART","EV","COM"];
                     }else if ($grad->getIdGrado() == '11'){
                         $vec=["CALC","EST","ING","LC","QUI","FIS","FIL","CS","ER","INF","EF","ART","EV","COM"];
-                    }
-                    
-                    
+                    }     
                 }
                 
                 $pdf->AddPage();
@@ -417,7 +406,6 @@ class Reportes {
                 $pdf->Cell(4,1,"Superior : 46 - 50",0,0,"C");
                 $pdf->SetXY(16,2);
                 $pdf->Cell(4,3,"",1,0,"C");
-
 
                 if ($periodo=="PRIMERO"){
                         $periodo3="PRIMER";
@@ -1084,7 +1072,6 @@ class Reportes {
             $pdf->SetXY($x+7.5,$y);
             $pdf->Cell(7.5,0.5,"","B",0,"R");
             
-            
             $pdf-> Output("Inscripción ".$nom." ".$ape,"I");
     }
     
@@ -1124,7 +1111,6 @@ class Reportes {
             $eps=$est->getEps();
             $procedencia=$est->getInstProcedencia();
 
-            
             $id_padre=$est->getIdPadre();
         
             $nom_padre=$est->getNombresPadre();
@@ -1231,8 +1217,7 @@ class Reportes {
             $pdf-> SetFont("Arial","",10);
             $pdf->SetXY($x+14,$y);
             $pdf->Cell(5.5,0.5,utf8_decode(strtoupper($est->getMunicipioResidencia())),1,0,"L");
-            
-            
+                        
             $y += 0.5;
             $pdf-> SetFont("Arial","B",10);
             $pdf->SetXY($x,$y);
@@ -1432,87 +1417,6 @@ class Reportes {
                 }
                 $x++;    
             }
-//            v
-//            $y += 0.5;
-//            $pdf->SetXY($x,$y);
-//            $pdf-> SetFont("Arial","",12);
-//            $pdf->Cell(2,1,utf8_decode("AÑO"),1,0,"C",true);
-//
-//            $pdf->SetXY($x+2,$y);
-//            $pdf->Cell(2,1,utf8_decode("GRADO"),1,0,"C",true);
-//
-//            $pdf->SetXY($x+4,$y);
-//            $pdf->Cell(2,1,utf8_decode("EDAD"),1,0,"C",true);
-//
-//            $pdf->SetXY($x+6,$y);
-//            $pdf->Cell(2,1,utf8_decode("N° MAT"),1,0,"C",true);
-//
-//            $pdf->SetXY($x+8,$y);
-//            $pdf->Cell(11.5,1,utf8_decode("FIRMA DEL EDUCANDO"),1,0,"C",true);
-//            
-//            $y += 0.5;
-//            
-//            if($matriculas != null){
-//                foreach($matriculas as $ma){
-//
-//                    $y += 0.5;
-//                $pdf->SetXY($x,$y);
-//                $pdf-> SetFont("Arial","",10);
-//                $pdf->Cell(2,0.5,utf8_decode($ma->getAnoLectivo()),1,0,"C");
-//                $salon = new Salon();
-//                $sal = $salon->leerSalonePorId($ma->getIdSalon());
-//
-//                $pdf->SetXY($x+2,$y);
-//                $pdf->Cell(2,0.5,utf8_decode($sal->getIdGrado()),1,0,"C");
-//
-//                list($ano,$mes,$dia) = explode("-",$fecha_nac);
-//                list($ano_mat,$mes_mat,$dia_mat) = explode("-",$ma->getFecha());
-//                    $ano_diferencia  = $ano_mat - $ano;
-//                    $mes_diferencia = $mes_mat - $mes;
-//                    $dia_diferencia   = $dia_mat - $dia;
-//                    if ($dia_diferencia < 0 || $mes_diferencia <= 0)
-//                        $ano_diferencia--;
-//
-//
-//                $pdf->SetXY($x+4,$y);
-//                $pdf->Cell(2,0.5,utf8_decode($ano_diferencia+1),1,0,"C");
-//
-//                $pdf->SetXY($x+6,$y);
-//                $pdf->Cell(2,0.5,utf8_decode(""),1,0,"C");
-//
-//                $pdf->SetXY($x+8,$y);
-//                $pdf->Cell(11.5,0.5,utf8_decode(""),1,0,"C");
-//
-//                }
-//            } 
-//            
-//                    $y += 0.5;
-//                $pdf->SetXY($x,$y);
-//                $pdf-> SetFont("Arial","",10);
-//                $pdf->Cell(2,0.5,utf8_decode($mat->getAnoLectivo()),1,0,"C");
-//                $salon = new Salon();
-//                $sal = $salon->leerSalonePorId($mat->getIdSalon());
-//
-//                $pdf->SetXY($x+2,$y);
-//                $pdf->Cell(2,0.5,utf8_decode($sal->getIdGrado()),1,0,"C");
-//
-//                list($ano,$mes,$dia) = explode("-",$fecha_nac);
-//                list($ano_mat,$mes_mat,$dia_mat) = explode("-",$mat->getFecha());
-//                    $ano_diferencia  = $ano_mat - $ano;
-//                    $mes_diferencia = $mes_mat - $mes;
-//                    $dia_diferencia   = $dia_mat - $dia;
-//                    if ($dia_diferencia < 0 || $mes_diferencia <= 0)
-//                        $ano_diferencia--;
-//
-//
-//                $pdf->SetXY($x+4,$y);
-//                $pdf->Cell(2,0.5,utf8_decode($ano_diferencia+1),1,0,"C");
-//
-//                $pdf->SetXY($x+6,$y);
-//                $pdf->Cell(2,0.5,utf8_decode(""),1,0,"C");
-//
-//                $pdf->SetXY($x+8,$y);
-//                $pdf->Cell(11.5,0.5,utf8_decode(""),1,0,"C");
                     $x=1;
                     $y += 4;
             $pdf->Line($x+3.5, $y+0.5, $x+19.5, $y+0.5);
@@ -1533,10 +1437,151 @@ class Reportes {
             $pdf->SetXY($x+12,$y);
             $pdf->Cell(4,0.5,"Firma del Rector",0,0,"C");
 
-           
             $pdf-> Output("Matricula ".$nom." ".$ape,"I");
     }
     
-    
+    public function consolidadoGalois($idSalon,$periodo){
+        $pensum = new Pensum();
+            $pens = $pensum->leerPensum($idSalon);
+            
+            $pdf=new FPDF('L','cm','Legal');
+            
+            $salon = new Salon();
+                $sal = $salon->leerSalonePorId($idSalon);
+            $grado = new Grado();
+                $grad = $grado->leerGradoPorId($sal->getIdGrado());
+            $vec = array();
+                if ($grad->getIdGrado() == 'p1' || $grad->getIdGrado() == 'p2' || $grad->getIdGrado() == 'p3'){
+                    $seccion = 'PREESCOLAR';
+                    $vec=["PMAT","PLEC","ING","PCN","PCS","ER","EV","ART","EF","COM"];
+                }else if ($grad->getIdGrado() == '1' || $grad->getIdGrado() == '2' || $grad->getIdGrado() == '3' || $grad->getIdGrado() == '4' || $grad->getIdGrado() == '5'){
+                    $seccion = 'BASICA PRIMARIA';
+                    $vec=["MAT","ING","LC","CN","CS","ER","INF","EF","ART","EV","COM"];
+                }else if ($grad->getIdGrado() == '6' || $grad->getIdGrado() == '7' || $grad->getIdGrado() == '8' || $grad->getIdGrado() == '9' || $grad->getIdGrado() == '10' || $grad->getIdGrado() == '11'){
+                    $seccion = 'BASICA SECUNDARIA';
+                    if ($grad->getIdGrado() == '6' || $grad->getIdGrado() == '7' || $grad->getIdGrado() == '8'){
+                        $vec=["AYG","EST","ING","LC","CN","GEO","HIS","CONS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '9'){
+                        $vec=["ALYG","EST","ING","LC","CN","GEO","HIS","CONS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '10'){
+                        $vec=["TRI","EST","ING","LC","QUI","FIS","FIL","CS","ER","INF","EF","ART","EV","COM"];
+                    }else if ($grad->getIdGrado() == '11'){
+                        $vec=["CALC","EST","ING","LC","QUI","FIS","FIL","CS","ER","INF","EF","ART","EV","COM"];
+                    }
+                }    
+                    
+                $pdf->AddPage();     
+                $pdf-> SetFont("Arial","B",18);
+                $pdf->SetXY(1,1);
+                $pdf->cell(33,1,"CONSOLIDADO ACADEMICO DE ".$idSalon.", PERIODO: ".$periodo,1,0,"C");
+                   
+              $x = 1;
+              $y = 2;
+              $pdf-> SetFont("Arial","B",8);
+              $pdf->SetXY($x,$y);
+              $pdf->Cell(1,1,utf8_decode("N°"),1,0,"C");
+              $x++;
+              $pdf->SetXY($x,$y);
+              $pdf->Cell(3,1,"NOMBRE",1,0,"C");
+              $x=5;
+              foreach ($vec as $v){
+                    $mate = new Materia();
+                    $materias = $mate->leerMateriaPorId($v);
+                    foreach ($materias as $materia){
+                        
+                        $nombreMateria = $materia->getNombreMateria();
+                        $pdf->SetXY($x,$y);
+                        $pdf-> SetFont("Arial","B",7);                        
+                        if(strlen($nombreMateria)<12){
+                            $nombreMateria .= "\n   ";
+                        }
+                                               
+                        //$pdf->Cell(3,0.5,$nombreMateria,1,0,"C");
+                        $pdf->MultiCell(2.071,0.5,utf8_decode(strtoupper($nombreMateria)),1,"C");
+                        $x = $x+2.071;
+                    }
+                    
+              }
+              $y++;
+              $x=1;
+              $persona = new Persona();
+              $personas=$persona->leerPorSalon($idSalon);
+              $cont = 0;
+              foreach ($personas as $per){
+                  $cont++;
+                  if($cont==17){
+                      $pdf->AddPage();
+                      $y=1;  
+                      $pdf-> SetFont("Arial","B",8);
+              $pdf->SetXY($x,$y);
+              $pdf->Cell(1,1,utf8_decode("N°"),1,0,"C");
+              $x++;
+              $pdf->SetXY($x,$y);
+              $pdf->Cell(3,1,"NOMBRE",1,0,"C");
+              $x=5;
+              foreach ($vec as $v){
+                    $mate = new Materia();
+                    $materias = $mate->leerMateriaPorId($v);
+                    foreach ($materias as $materia){
+                        
+                        $nombreMateria = $materia->getNombreMateria();
+                        $pdf->SetXY($x,$y);
+                        $pdf-> SetFont("Arial","B",7);                        
+                        if(strlen($nombreMateria)<12){
+                            $nombreMateria .= "\n   ";
+                        }
+                                               
+                        //$pdf->Cell(3,0.5,$nombreMateria,1,0,"C");
+                        $pdf->MultiCell(2.071,0.5,utf8_decode(strtoupper($nombreMateria)),1,"C");
+                        $x = $x+2.071;
+                    }
+                    
+              }
+              $y++;    
+                        }
+                  $x=1;
+                  $pdf->SetXY($x,$y);
+                  $pdf-> SetFont("Arial","B",8);
+                  $pdf->Cell(1,1,utf8_decode($cont),1,0,"C");
+                  $pdf->SetXY(2,$y);
+                  $nombre=$per->getPApellido()." ".$per->getNombres();
+                  $pdf-> SetFont("Arial","B",7);
+                  if(strlen($nombre)<19){
+                            $nombre .= "\n   ";
+                        }
+                  $pdf->MultiCell(3,0.5,utf8_decode($nombre),1,"C");
+                  $x=5;
+                  
+                 foreach ($vec as $v){
+                     $pdf-> SetFont("Arial","",10);
+                        $nota = new Nota();
+                        $not =$nota->leerNotaEstudiante( $per->getIdPersona(), $v);
+                        if($periodo == 'PRIMERO'){
+                            $n=$not->getPrimerP();
+                        }else if($periodo == 'SEGUNDO'){
+                            $n=$not->getSegundoP();
+                        }else if($periodo == 'TERCERO'){
+                            $n=$not->getTercerP();                            
+                        }else if($periodo == 'CUARTO'){                            
+                            $n=$not->getCuartoP();
+                        }else if($periodo == 'FINAL'){
+                            $n = $nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
+                        }
+                        $pdf->SetXY($x,$y);
+                        if ( $n < 30 ){
+                            $pdf->SetTextColor(255,0,0);
+                        }                            
+                        $pdf->MultiCell(2.071,0.5,utf8_decode($n."\n  "),1,"C");
+                        $pdf->SetTextColor(0,0,0);
+                        $x = $x+2.071;
+                       }
+                       
+                       $x=1;
+                       $y++;
+              
+             }              
+              $pdf-> Output("Consolidado ".$idSalon,"I");
+        
+    }
 }
 ?>

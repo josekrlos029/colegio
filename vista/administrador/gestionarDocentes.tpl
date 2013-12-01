@@ -76,7 +76,7 @@ function vistaActualizarPersona(idPersona){
 var y= $("#tablaConsulta"); 
 var url="/colegio/administrador/actualizarGeneralPersona";
 var data="idPersona="+idPersona;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
    x.hide();            
     y.html (res);
     

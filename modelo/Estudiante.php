@@ -722,6 +722,19 @@ class Estudiante extends Persona {
         }
     }
     
+    public function leerPorIdYRol($id){
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, p.estado, dn.fNacimiento FROM persona p,datos_nac_persona dn, datos_ubicacion_persona du, rolespersona r";
+        $sql .= " WHERE p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND p.idPersona=r.idPersona AND p.idPersona='".$id."' AND r.idRol='E'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $persona=NULL;
+        foreach ($resultado as $fila) {
+            $persona = new Estudiante();
+            $this->mapearPersona($persona, $fila);
+        }
+        return $persona;
+    }
+    
      public function leerPorId($id){
         $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, p.estado, dn.fNacimiento FROM persona p,datos_nac_persona dn, datos_ubicacion_persona du";
         $sql .= " WHERE p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND p.idPersona='".$id."'";

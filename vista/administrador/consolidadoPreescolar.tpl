@@ -29,7 +29,7 @@ function imprimir(idSalon , periodo){
  var url="/colegio/administrador/imprimirConsolidado";
  var periodo = document.getElementById("periodo").value;
     var data="idSalon="+idSalon+"&periodo="+periodo;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
     x.hide();            
          });
         

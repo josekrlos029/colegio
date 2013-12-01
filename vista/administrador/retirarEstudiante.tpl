@@ -32,28 +32,13 @@ function envio(){
         var url="/colegio/administrador/consultarEstudiante2";
         var data="idPersona="+idPersona.value;
 
-        envioJson(url,data,function respuesta(res){   
-            if (res == "1"){
-                x.html ("<p>El Número de Documento no existe en el sistema</p>");
-                error(); 
-                ocultar();
-               
-            }else if(res==2){
-                 x.html ("<p>El estudiante No tiene una matricula Activa</p>");
-                error();
-                ocultar()
-    
-            }else if(res==3){
-            x.html ("<p>El Número de Documento ingresado no corresponde al de un estudiante</p>");
-                error();
-                ocultar();
-            }else{
+        envioJson2(url,data,function respuesta(res){   
+     
             y.html(res);
             $("#matricula").show();
             $("#idPersona").attr("disabled","disabled");
             x.hide();
             $("#nuevo1").show();
-            }
             
          });
     }   
@@ -140,18 +125,6 @@ function retirar(){
        <div  id="tabla">
            
         </div>
-           <p>&nbsp;</p>
-           <div id="matricula" hidden >  
-           <table>
-                     <tr>
-                    <td colspan="2">
-                    <input name="retirarEstudiante" id="retirarEstudiante" type="submit" value="Retirar" class="button large blue" onclick="retirar()" />
-                    </td>
-                </tr>
-               </table>
-               
-               
-           </div>
        </div>
         
     </body>

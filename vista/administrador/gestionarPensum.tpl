@@ -21,7 +21,7 @@ function consultarMaterias(){
         var url="/colegio/administrador/listaMateriasNoPertenecientes/";
         var data="idGrado="+idGrado.value;
 
-        envioJson(url,data,function respuesta(res){   
+        envioJson2(url,data,function respuesta(res){   
            
                 x.html ( res);
                 y.hide();
@@ -49,7 +49,7 @@ function envio(){
         var url="/colegio/administrador/listaMateriasNoPertenecientes/";
         var data="idGrado="+idGrado.value;
 
-        envioJson(url,data,function respuesta(res){   
+        envioJson2(url,data,function respuesta(res){   
            
                 x.html ( res);
                 y.hide();
@@ -76,7 +76,7 @@ var x = $("#tablaMaterias");
         var url="/colegio/administrador/imprimirMateriasPorGrado/table";
         var data="idGrado="+idGrado.value;
 
-        envioJson(url,data,function respuesta(res){   
+        envioJson2(url,data,function respuesta(res){   
            
                 x.html ( res);
                 y.hide();
