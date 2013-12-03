@@ -65,6 +65,34 @@ function foto(){
     document.getElementById('light2').style.display='block';
     document.getElementById('fade2').style.display='block';
 }
+
+ function seguimiento(idPersona){
+           
+            ocultar("familia");
+            ocultar("datosAcademicos");
+            $('#carga').load('/colegio/administrador/seguimiento2/'+idPersona); 
+            document.getElementById('carga').style.display="block";
+            }
+            function pension(idPersona){ 
+            
+            ocultar("familia");
+            ocultar("datosAcademicos");
+            $('#carga').load('/colegio/administrador/pension2/'+idPersona);
+             document.getElementById('carga').style.display="block";
+            }
+            function ocultar(id){
+            document.getElementById(id).style.display="none";
+            }
+            function mostrarAcademico(){
+            ocultar("carga");
+            ocultar("familia");
+            document.getElementById('datosAcademicos').style.display="block";
+            }
+            function mostrarFamilia(){
+            ocultar("carga");
+            ocultar("datosAcademicos");
+            document.getElementById('familia').style.display="block";
+            }
 </script>
  <body>
     

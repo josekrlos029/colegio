@@ -11,7 +11,7 @@ var x = $("#mensaje");
 var y= $("#tablaConsulta"); 
 var url="/colegio/administrador/actualizarAcudiente";
 var data="idPersona="+idPersona;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
    x.hide();            
     y.html (res);
     
@@ -80,7 +80,7 @@ function vistaActualizarPadre(idPersona){
 var y= $("#tablaConsulta"); 
 var url="/colegio/administrador/actualizarPadre";
 var data="idPersona="+idPersona;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
    x.hide();            
     y.html (res);
     
@@ -144,7 +144,7 @@ function vistaActualizarMadre(idPersona){
 var y= $("#tablaConsulta"); 
 var url="/colegio/administrador/actualizarMadre";
 var data="idPersona="+idPersona;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
    x.hide();            
     y.html (res);
     
