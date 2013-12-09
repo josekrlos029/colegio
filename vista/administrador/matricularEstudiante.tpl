@@ -70,6 +70,7 @@ var foto = $("#foto");
                 ocultar();
                
                window.open("/colegio/administrador/imprimirMatricula/"+idPersona.value);
+               window.open("/colegio/administrador/imprimirObservador/"+idPersona.value);
                nuevo();
             }else{
                  x.html ("<p>"+res+"</p>");

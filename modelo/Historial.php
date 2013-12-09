@@ -134,6 +134,18 @@ class Historial extends Modelo{
         }
         return $años;
     }
+    
+    public function leerAniosEstudiante($idPersona){
+        $sql = "SELECT DISTINCT añoLectivo FROM historial WHERE idPersona='".$idPersona."' ORDER BY añoLectivo DESC";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $años = array();
+        
+        foreach ($resultado as $fila) {
+           $años[] = $fila['añoLectivo'];
+        }
+        return $años;
+    }
     public function leerMaterias($anio,$idSalon){
         $sql = "SELECT DISTINCT h.idMateria FROM historial h, matricula m WHERE h.añoLectivo = m.año_lectivo AND h.añoLectivo='".$anio."' AND m.idSalon='".$idSalon."' ORDER BY idMateria";
         $this->__setSql($sql);
@@ -145,7 +157,17 @@ class Historial extends Modelo{
         }
         return $años;
     }
+    
+    public function leerNotaEstudiante($anio, $idPersona, $idMateria){
+        $sql = "SELECT * FROM historial WHERE idPersona='".$idPersona."' AND añoLectivo='".$anio."' AND idMateria='".$idMateria."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $historial = NULL;
+        foreach ($resultado as $fila) {
+            $historial = new Historial();
+            $this->mapearHistorial($historial, $fila);
+        }
+        return $historial;
+    }
 }
-
-
 ?>

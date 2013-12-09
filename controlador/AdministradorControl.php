@@ -4,7 +4,7 @@
  *
  * @author JoseCarlos
  */
- 
+
   
 class AdministradorControl extends Controlador{
     
@@ -408,7 +408,47 @@ class AdministradorControl extends Controlador{
             
         }
         
+        public function imprimirHistorialSalon($param){
+            try {
+            $vec = explode(",", $param);    
+            $idSalon = $vec[1];
+            $anio = $vec[0];
+    
+            $cfg = Configuracion::getConfiguracion('colegio');
+            $colegio= $cfg['NOMBRE'];
+            $reporte = new Reportes();
+            if ($colegio=="galois"){
+                $reporte->consolidadoHistorialGalois($idSalon, $anio);
+            }elseif ($colegio=="santaTeresita"){
+                
+            }
+            
+             } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }    
+            
+        }
         
+        public function imprimirHistorialSalonIndividual($param){
+            try {
+            $vec = explode(",", $param);    
+            $idSalon = $vec[1];
+            $anio = $vec[0];
+    
+            $cfg = Configuracion::getConfiguracion('colegio');
+            $colegio= $cfg['NOMBRE'];
+            $reporte = new Reportes();
+            if ($colegio=="galois"){
+                $reporte->consolidadoHistorialIndividualGalois($idSalon, $anio);
+            }elseif ($colegio=="santaTeresita"){
+                
+            }
+            
+             } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }    
+            
+        }
         
         public function generarPension(){
             try {
@@ -437,60 +477,73 @@ class AdministradorControl extends Controlador{
             try {
             $idSalon = isset($_POST['idSalon']) ? $_POST['idSalon'] : NULL;
             $anio = isset($_POST['anio']) ? $_POST['anio'] : NULL;
-            
-            $historial = new Historial();
             $matricula = new Matricula();
             $matriculas = $matricula->leerMatriculasPorAnio($anio, $idSalon);            
-            $persona = new Persona();
-            $respuesta = "";
-             $respuesta.='<table width="90%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla" id="tabla">
-                    <tr class="modo1">
-                    <td>Identificación</td>
-                    <td>P.Apellido</td>
-                    <td>S.Apellido</td>
-                    <td>Nombres</td>
-                    ';
-             $band =0;
-            foreach ($matriculas as $mat){
-                    $hist = $historial->leerHistorialPorIdPersona($anio, $mat->getIdPersona());
-                    if(count($hist) > 0){
-                        $per = $persona->leerPorId($mat->getIdPersona());
-                        if($band==0){
-                            foreach ($hist as $h){
-                                $materia = new Materia();
-                                $mate = $materia->leerMateriaPorId($h->getIdMateria());
-                                foreach ($mate as $mm){
-                                    echo '<td>'.$mm->getNombreMateria().'</td>';
-                                }   
-                            }
-                            $respuesta.='</tr>';
-                            $band = 1;
-                        }
-                        if($per!=NULL  && count($hist)>0){
-                            $respuesta.='<tr><td>'.$per->getIdPersona().'</td>
-                                             <td>'.$per->getPApellido().'</td>
-                                             <td>'.$per->getSApellido().'</td>
-                                             <td>'.$per->getNombres().'</td>';
-                            foreach ($hist as $hh){
-                                $respuesta.='<td>'.$hh->getDefinitiva().'</td>';
-                            }
-                             $respuesta.='</tr>';
-                        }
-                        $respuesta.='</table>';
-                    }
-            }
-            if (strlen($respuesta)>0){
-            echo json_encode($respuesta);  
-            }  else {
-                echo json_encode("<tr> </tr>"); 
-            }
+            $this->vista->set('matriculas', $matriculas);
+            $this->vista->set('anio', $anio);
+            $this->vista->set('idSalon', $idSalon);
+                return $this->vista->imprimir();
+            
             
              } catch (Exception $exc) {
-            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+             $this->setVista('mensaje');
+                $msj= "Error en la aplicación.. Coloquese en contacto con el Desarrollador";
+                $this->vista->set('msj', $msj);
+                return $this->vista->imprimir();
         }    
             
         }
         
+        public function historialEstudiante(){
+            try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Historial del Estudiante');
+            return $this->vista->imprimir();
+            }
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+        }
+        
+        public function consultaHistorialEstudiante(){
+            try {
+            $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            
+            $persona = new Persona();
+            $estudiante = $persona->leerPorId($idPersona);
+            if ($estudiante == NULL){
+                 $this->setVista('mensaje');
+                      $msj= "El Número de Documento no existe en el sistema";
+                      $this->vista->set('msj', $msj);
+            }else{
+                $rol = new Rol();
+                $roles = $rol->leerRoles($idPersona);
+                $band = 0;
+                foreach ($roles  as $ro) {
+                  if ($ro->getIdRol() == 'E'){
+                      $band=1;
+                  } 
+                }
+                    if ($band!=1){
+                      $this->setVista('mensaje');
+                      $msj= "El Número de Documento ingresado no corresponde al de un estudiante";
+                      $this->vista->set('msj', $msj);
+                    }else{
+                   $historial = new Historial();
+                   $anios = $historial->leerAniosEstudiante($idPersona);
+                   $this->vista->set('anios', $anios);
+                   $this->vista->set('idPersona', $idPersona);
+                  }
+              
+              }
+            return $this->vista->imprimir();
+    } catch (Exception $exc) {
+            $this->setVista('mensaje');
+                 $msj ="ERROR... La consulta no se pudo ejecutar.. !";
+                $this->vista->set('msj', $msj);
+                return $this->vista->imprimir();
+        }    
+        }
         
          /**
          * Imprime estudiantes por salones
@@ -702,7 +755,7 @@ class AdministradorControl extends Controlador{
             if($this->verificarSession()){
             $this->vista->set('titulo', 'Personas Registradas');
             $persona = new Persona();
-            $personas = $persona->leerPersonas();
+            $personas = $persona->leerPorRol('E');
             $this->vista->set('personas', $personas);
             return $this->vista->imprimir();
             }
@@ -2170,6 +2223,21 @@ class AdministradorControl extends Controlador{
             }
             
          }
+         
+         public function imprimirInformeFinal($param){
+            $cadena = explode(",", $param);    
+            $idPersona = $cadena[0];
+            $anio = $cadena[1];
+            $cfg = Configuracion::getConfiguracion('colegio');
+            $colegio= $cfg['NOMBRE'];
+            $reporte = new Reportes();
+            if ($colegio=="galois"){
+                $reporte->informeFinalGalois($idPersona, $anio);
+            }elseif ($colegio=="santaTeresita"){
+                
+            }
+            
+         }
     
       public function imprimirMatricula($idPersona){
            $cfg = Configuracion::getConfiguracion('colegio');
@@ -2179,6 +2247,18 @@ class AdministradorControl extends Controlador{
               $reporte->matriculaGalois($idPersona);
           }elseif ($colegio=="santaTeresita"){
               $reporte->matriculaSantaTeresita($idPersona);
+          }
+          
+      }
+      
+      public function imprimirObservador($idPersona){
+           $cfg = Configuracion::getConfiguracion('colegio');
+           $colegio= $cfg['NOMBRE'];
+          $reporte = new Reportes();
+          if ($colegio=="galois"){
+              //$reporte->observadorGalois($idPersona);
+          }elseif ($colegio=="santaTeresita"){
+              $reporte->observadorSantaTeresita($idPersona);
           }
           
       }

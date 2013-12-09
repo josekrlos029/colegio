@@ -22,6 +22,11 @@ border: 1px solid #b1b1b1;
 background-color:#dbdbdb; 
 }
 
+.tabla .modo1 th {
+padding: 5px;
+border: 1px solid #b1b1b1;
+background-color:#dbdbdb; 
+}
 
 .formularios{
  background-color:white;   

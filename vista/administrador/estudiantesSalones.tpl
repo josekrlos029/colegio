@@ -14,11 +14,14 @@
         <td>Inhabilitar</td>
     </tr>
 <?php
+    
     foreach ($estudiante as $est){
+    $usuario= new Usuario();
+    $user = $usuario->leerPorId($est->getIdPersona());
 ?>    
-    <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
-        <td><?php echo $est->getIdPersona();?></td>
-        <td><?php echo $est->getNombres();?></td>
+<tr title=""  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
+        <td title="<?php if ($user != NULL){ echo $user->getUsuario().','.$user->getContraseña();}?>"><?php echo $est->getIdPersona();?></td>
+        <td title=""><?php echo $est->getNombres();?></td>
         <td><?php echo $est->getPApellido();?></td>
         <td><?php echo $est->getSApellido();?></td>
         <td><?php echo $est->getSexo();?></td>

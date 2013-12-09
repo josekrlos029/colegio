@@ -132,6 +132,19 @@ class Matricula extends Modelo{
         return $matricula;
     }
     
+    public function leerMatriculaPorIdyAnio($idPersona, $anio){
+        $sql = "SELECT * FROM matricula WHERE idPersona='".$idPersona."' AND año_lectivo='".$anio."'";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $matricula = NULL;
+        foreach ($resultado as $fila) {
+            $matricula = new Matricula();
+            $this->mapearMatricula($matricula, $fila);
+
+        }
+        return $matricula;
+    }
+    
     public function leerMatriculasPorId($idPersona){
         $sql = "SELECT * FROM matricula WHERE idPersona='".$idPersona."' AND estado<>'1' ORDER BY año_lectivo";
         $this->__setSql($sql);

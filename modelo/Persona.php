@@ -228,7 +228,7 @@ class Persona extends Modelo{
     }
     
     public function leerPorRol($idRol) {
-        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, p.estado FROM persona p, rolespersona r, datos_ubicacion_persona du WHERE p.idPersona=r.idPersona AND p.idPersona=du.idPersona  AND r.idRol='".$idRol."'";
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, p.estado FROM persona p, rolespersona r, datos_ubicacion_persona du WHERE p.idPersona=r.idPersona AND p.idPersona=du.idPersona  AND r.idRol='".$idRol."' ORDER BY p.Papellido";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();
@@ -244,6 +244,20 @@ class Persona extends Modelo{
         $fecha = getdate();
         $anio=$fecha["year"];
         $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p, matricula m, datos_nac_persona dn,datos_ubicacion_persona du WHERE p.idPersona=m.idPersona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND p.estado='1' AND m.idSalon='".$idSalon."' AND m.estado='1' AND m.año_lectivo='".$anio."' ORDER BY p.Papellido";
+        $this->__setSql($sql);
+        $resultado = $this->consultar($sql);
+        $pers = array();
+        foreach ($resultado as $fila) {
+            $persona = new Persona();
+            $this->mapearPersona($persona, $fila);
+            $pers[$persona->getIdPersona()] = $persona;
+        }
+        return $pers;
+    }
+    
+    public function leerPorSalonYAnio($idSalon,$anio) {
+        
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p, matricula m, datos_nac_persona dn,datos_ubicacion_persona du WHERE p.idPersona=m.idPersona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona  AND m.idSalon='".$idSalon."' AND m.año_lectivo='".$anio."' ORDER BY p.Papellido";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();

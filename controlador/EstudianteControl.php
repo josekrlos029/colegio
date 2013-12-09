@@ -153,6 +153,92 @@ class EstudianteControl extends Controlador{
         }
             
         }
+        
+        public function datosAcademicosMovil(){
+         try {
+            $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $this->vista->set('titulo', 'Datos Academicos');
+            $matricula = new Matricula();
+            $matr = $matricula->leerMatriculaPorId($idPersona);
+            $salon = new Salon();
+            $sal = $salon->leerSalonePorId($matr->getIdSalon());
+            $grado = new Grado();
+            $grad= $grado->leerGradoPorId($sal->getIdGrado());
+            $pensum = new Pensum();
+            $pens = $pensum->leerPensum($matr->getIdSalon());
+            
+            $respuesta = "";
+            
+              $respuesta.='<table width="95%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+                    <tr>
+                    <td align="right" class="color-text-azul" colspan="6"><h3>Datos Academicos</h3></td>    
+                    </tr>
+                    <tr class="modo1">
+                    <td width="25%">Materia</td>
+                    <td width="15%">Primer Periodo</td>
+                    <td width="15%">Segundo Periodo</td>
+                    <td width="15%">Tercer Periodo</td>
+                    <td width="15%">Cuarto Periodo</td>
+                    <td width="15%">promedio</td>
+                    </tr>
+                    </table>
+                    <div style="padding-left:5px; overflow-x:hidden;width:100%; height:250px;">
+                    <table width="95%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+                    ';
+              $cont= 0;
+              $s1=0;
+              $s2=0;
+              $s3=0;
+              $s4=0;
+            foreach ($pens as $pen){
+                $cont++;
+                $respuesta.='
+                            <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">';
+                        $mat = new Materia();
+                        $materia = $mat->leerMateriaPorId($pen->getIdMateria());
+                         foreach ($materia as $mate){
+                              $respuesta.='<td width="25%"><b> '.$mate->getNombreMateria().'</b> </td>';
+                         }
+                         $nota = new Nota();
+                         $not =$nota->leerNotaEstudiante( $idPersona, $pen->getIdMateria());
+                         $respuesta.='<td width="15%">'.$not->getPrimerP().'</td>';
+                         $respuesta.='<td width="15%">'.$not->getSegundoP().'</td>';
+                         $respuesta.='<td width="15%">'.$not->getTercerP().'</td>';
+                         $respuesta.='<td width="15%">'.$not->getCuartoP().'</td>';
+                         $prom=round($nota->calcularDef2($not->getprimerP(),$not->getSegundoP(),$not->getTercerP(),$not->getCuartoP()),2);
+                         //$prom=$prom/4;
+                         $respuesta.='<td width="15%" class="color-text-azul">'.$prom.'</td>';
+                $respuesta.='</tr>';
+                
+                $s1 += $not->getPrimerP();
+                $s2 += $not->getSegundoP();
+                $s3 += $not->getTercerP();
+                $s4 += $not->getCuartoP();
+            }
+            
+             
+            $p1 = round($s1/$cont,2); 
+            $p2 = round($s2/$cont,2); 
+            $p3 = round($s3/$cont,2); 
+            $p4 = round($s4/$cont,2); 
+            
+            //$pg = round((($p1 + $p2 + $p3 + $p4 ) /4), 2);
+            $pg = round($nota->calcularDef2($p1 , $p2 , $p3 , $p4 ), 2);
+            $this->vista->set('grado', $grad);
+            $this->vista->set('matricula', $matr);
+            $this->vista->set('tabla', $respuesta);
+            $this->vista->set('p1', $p1);
+            $this->vista->set('p2', $p2);
+            $this->vista->set('p3', $p3);
+            $this->vista->set('p4', $p4);
+            $this->vista->set('pg', $pg);
+            return $this->vista->imprimir();
+            
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
          public function funcionesAcademicas(){
          try {
             if($this->verificarSession()){

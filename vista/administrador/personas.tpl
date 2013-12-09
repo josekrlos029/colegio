@@ -74,19 +74,24 @@ function alerta(error){
     
 <table  width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
     <tr class="modo1">
+        <td width="4%"><div align="center">N°</div></td>
         <td width="12%"><div align="right" >IDENTIFICACION</div></td>
-        <td><div align="center">APELLIDOS</div></td>
-        <td><div align="center" >NOMBRES</div></td>
-        <td width="8%"><div align="center" >SEXO</div></td>
-        <td width="8%"><div align="center" >TELEFONO</div></td>
-        <td width="8%"><div align="center" >DIRECCION</div></td>
-        <td width="8%"><div align="center" >CORREO</div></td>
-        <td width="8%"><div align="center" >INSCRIPCION</div></td>
+        <td><div align="center" width="10%">APELLIDOS</div></td>
+        <td><div align="center" width="10%">NOMBRES</div></td>
+        <td width="4%"><div align="center" >SEXO</div></td>
+        <td width="9%"><div align="center" >TELEFONO</div></td>
+        <td width="15%"><div align="center" >DIRECCION</div></td>
+        <td width="7%"><div align="center" >CORREO</div></td>
+        <td width="4%"><div align="center" >INSCRIPCION</div></td>
     </tr>
     
-    <?php foreach ($personas as $persona) {
+    <?php 
+    $cont=0;
+    foreach ($personas as $persona) {
+    $cont++;
     ?>
     <tr class="recorrer" id="cebra" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
+        <td align="left"><?php echo $cont;?></td>
           <td align="left"><?php echo $persona->getIdPersona();?></td>
         <td align="left"><?php echo strtoupper ($persona->getPApellido()." ".$persona->getSApellido());?></td> 
         <td align="left"><?php echo strtoupper ($persona->getNombres());?></td>

@@ -216,7 +216,7 @@ var data="idPersona="+idPersona;
            </td>
            
            <td valign="top" align="center">
-               <a href="#"><div id="box" class="blue"><img height="40px" width="40px" src=../utiles/imagenes/iconos/historial.png ></div></a>
+               <a href="/colegio/administrador/historialEstudiante"><div id="box" class="blue"><img height="40px" width="40px" src=../utiles/imagenes/iconos/historial.png ></div></a>
                <div class="text-icon">Historial</div>             
            </td>
            

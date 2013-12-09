@@ -105,14 +105,18 @@
        </tr> 
         <tr>
         <td  align="right" width="40%" >Numero de Identificacion:</td>
+        <?php if($est->getIdPadre() != NULL && $est->getIdPadre() != ""){ ?>
        <td><input name="idPadre" id="idPadre" type="text" class="box-text" value="<?php echo $est->getIdPadre();?>" disabled="disabled" readonly="readonly"/></td>
-       </tr>
+       <?php }else{ ?>
+       <td><input name="idPadre" id="idPadre" type="text" class="box-text" /></td>
+       <?php } ?>
+        </tr>
       <tr>
         <td align="right">Nombres:</td>
        <td><input name="nombresPad" id="nombresPad" type="text" class="box-text" value="<?php echo $est->getNombresPadre();?>" required/></td>
        </tr>  
        <tr>
-        <td align="right">Apellido:s</td>
+        <td align="right">Apellidos:</td>
         <td><input name="apellidosPad" id="apellidosPad" type="text" class="box-text" value="<?php echo $est->getApellidosPadre();?>" required/></td>
         </tr>
          <tr>
@@ -145,8 +149,12 @@
        </tr> 
         <tr>
         <td  align="right" width="40%" >Numero de Identificacion:</td>
+        <?php if($est->getIdMadre() != NULL && $est->getIdMadre() != ""){ ?>
        <td><input name="idMadre" id="idMadre" type="text" class="box-text" value="<?php echo $est->getIdMadre();?>" disabled="disabled" readonly="readonly"/></td>
-       </tr>
+       <?php }else{ ?>
+       <td><input name="idMadre" id="idMadre" type="text" class="box-text" /></td>
+        <?php } ?>
+        </tr>
       <tr>
         <td align="right">Nombres:</td>
        <td><input name="nombresMad" id="nombresMad" type="text" class="box-text" value="<?php echo $est->getNombresMadre();?>" required/></td>

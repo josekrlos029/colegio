@@ -4,7 +4,7 @@
     
 
 <script type="text/javascript">
-    
+
 function envio(){ 
   
  var x = $("#mensaje");
@@ -131,7 +131,7 @@ function actualizaPadre(){
  cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
- 
+ var idEstudiante = document.getElementById("idPersona");
         var idPersona = document.getElementById("idPadre");
         var nombres = document.getElementById("nombresPad");
         var apellidos = document.getElementById("apellidosPad");
@@ -147,7 +147,7 @@ function actualizaPadre(){
     }else{
        
         var url="/colegio/administrador/actualizaPadre/";
-        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&apellidos="+apellidos.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&telOfi="+telOfi.value+"&ocupacion="+ocupacion.value;
+        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&apellidos="+apellidos.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&telOfi="+telOfi.value+"&ocupacion="+ocupacion.value+"&idEstudiante="+idEstudiante.value;
 
         envioJson(url,data,function respuesta(res){   
             if (res == 1){
@@ -173,7 +173,7 @@ function actualizaMadre(){
  cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
- 
+  var idEstudiante = document.getElementById("idPersona");
         var idPersona = document.getElementById("idMadre");
         var nombres = document.getElementById("nombresMad");
         var apellidos = document.getElementById("apellidosMad");
@@ -189,7 +189,7 @@ function actualizaMadre(){
     }else{
        
         var url="/colegio/administrador/actualizaMadre/";
-        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&apellidos="+apellidos.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&telOfi="+telOfi.value+"&ocupacion="+ocupacion.value;
+        var data="idPersona="+idPersona.value+"&nombres="+nombres.value+"&apellidos="+apellidos.value+"&telefono="+telefono.value+"&direccion="+direccion.value+"&telOfi="+telOfi.value+"&ocupacion="+ocupacion.value+"&idEstudiante="+idEstudiante.value;
 
         envioJson(url,data,function respuesta(res){   
             if (res == 1){

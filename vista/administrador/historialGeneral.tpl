@@ -16,6 +16,15 @@
  $('#cargar').load('/colegio/administrador/historialSecundaria');           
 }
 
+function imprimirInforme(anio,idSalon){
+    var param = anio + "," + idSalon;
+    window.open('/colegio/administrador/imprimirHistorialSalon/'+param);
+}
+
+function imprimirInformeIndividual(anio,idSalon){
+    var param = anio + "," + idSalon;
+    window.open('/colegio/administrador/imprimirHistorialSalonIndividual/'+param);
+}
   </script>  
     
     </head>

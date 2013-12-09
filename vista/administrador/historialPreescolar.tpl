@@ -9,7 +9,7 @@ var y= $("#tablaEstudiantes");
  var url="/colegio/administrador/generarHistorial";
  var anio = $("#años").val();
     var data="idSalon="+idSalon+"&anio="+anio;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
     x.hide();            
     y.html (res);
          });

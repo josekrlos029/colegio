@@ -272,7 +272,7 @@ class Pago extends Modelo{
     }
     
     public function leerPagosPorFecha($fecha){
-        $sql = "SELECT * FROM pago WHERE fecha='".$fecha."' AND concepto='PENSION'";
+        $sql = "SELECT * FROM pago WHERE fecha='".$fecha."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pagos = array();

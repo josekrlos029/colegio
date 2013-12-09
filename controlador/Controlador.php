@@ -335,7 +335,7 @@ class Controlador {
          
           public function actualizaPadre(){
            try {
-               
+               $idPersona= isset($_POST['idEstudiante']) ? $_POST['idEstudiante'] : NULL;
             $idPadre= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
              $nombresPadre = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
              $apellidosPadre = isset($_POST['apellidos']) ? $_POST['apellidos'] : NULL;
@@ -345,16 +345,22 @@ class Controlador {
              $ocupacionPadre = isset($_POST['ocupacion']) ? $_POST['ocupacion'] : NULL;
         
              $estudiante = new Estudiante();
-        
              $estudiante->setIdPadre($idPadre);
-             $estudiante->setNombresPadre($nombresPadre);
-             $estudiante->setApellidosPadre($apellidosPadre);
-             $estudiante->setOcupacionPadre($ocupacionPadre);
-             $estudiante->setTelPadre($telPadre);
-             $estudiante->setTelOficinaPadre($telOficinaPadre);
-             $estudiante->setDirPadre($dirPadre);
-     
-            $estudiante->actDatosPadre($estudiante);  
+            $estudiante->setNombresPadre($nombresPadre);
+            $estudiante->setApellidosPadre($apellidosPadre);
+            $estudiante->setOcupacionPadre($ocupacionPadre);
+            $estudiante->setTelPadre($telPadre);
+            $estudiante->setTelOficinaPadre($telOficinaPadre);
+            $estudiante->setDirPadre($dirPadre);
+             if(count($estudiante->verificarPadre($idPadre))>0){
+                 $estudiante->actDatosPadre($estudiante);  
+             }else{
+                 $estudiante->setIdPersona($idPersona);
+                 $estudiante->crearDatosPadre($estudiante);
+                 $estudiante->estudiantePadre($estudiante);
+             }
+             
+             
              
              echo json_encode(1);
         } catch (Exception $exc) {
@@ -379,7 +385,7 @@ class Controlador {
          
           public function actualizaMadre(){
            try {
-               
+               $idPersona= isset($_POST['idEstudiante']) ? $_POST['idEstudiante'] : NULL;
              $idMadre= isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
              $nombresMadre = isset($_POST['nombres']) ? $_POST['nombres'] : NULL;
              $apellidosMadre = isset($_POST['apellidos']) ? $_POST['apellidos'] : NULL;
@@ -397,7 +403,13 @@ class Controlador {
              $estudiante->setTelOficinaMadre($telOficinaMadre);
              $estudiante->setDirMadre($dirMadre);
            
-             $estudiante->actDatosMadre($estudiante);  
+             if(count($estudiante->verificarMadre($idMadre))>0){
+                 $estudiante->actDatosMadre($estudiante);  
+             }else{
+                 $estudiante->setIdPersona($idPersona);
+                 $estudiante->crearDatosMadre($estudiante);
+                 $estudiante->estudianteMadre($estudiante);
+             }
              
              echo json_encode(1);
         } catch (Exception $exc) {

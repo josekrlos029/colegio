@@ -18,6 +18,7 @@
                 <script src="../utiles/js/tablas.js" type="text/javascript" ></script>
                 <script src="../utiles/js/actualizarDatos.js" type="text/javascript" ></script>
                 <script src="../utiles/js/estiloMensaje.js" type="text/javascript"></script>
+                <script src="../utiles/js/stupidtable.min.js" type="text/javascript"></script>
                  
                 
     </head>

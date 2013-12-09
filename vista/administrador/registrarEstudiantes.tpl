@@ -282,6 +282,7 @@ var foto = $("#foto");
                     ocultar();
             window.open("/colegio/administrador/imprimirRegistro/"+idPersona.value);        
             window.open("/colegio/administrador/imprimirMatricula/"+idPersona.value);
+            window.open("/colegio/administrador/imprimirObservador/"+idPersona.value);
             }else if (res == 2){
                 x.html ( "<p>Error: El estudiante ya se encuentra Registrado en Base de Datos</p>");
                 error();

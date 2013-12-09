@@ -84,6 +84,7 @@ $ruta = 'utiles/imagenes/fotos/';
 <?php
                                 if($rol == 'E'){  ?>
                         <tr><td class="color-text-gris"><span><a  href="/colegio/administrador/imprimirMatricula/<?php echo $idPersona;?>" target="_blank" >Ficha de Matricula</a></span></td></tr>
+                        <tr><td class="color-text-gris"><span><a  href="/colegio/administrador/imprimirObservador/<?php echo $idPersona;?>" target="_blank" >Imprimir Observador</a></span></td></tr>
                           <?php       } ?>
                             </table>
              </td>

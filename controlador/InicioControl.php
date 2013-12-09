@@ -61,6 +61,36 @@ class InicioControl extends Controlador{
         }   
         }
         
+        /**
+         * Recibe datos de usuario y contraseña para logueo desde el formulario de loguin... Json por POST y los devuelve 
+         */
+        public function verificarUsuarioMovil(){
+         try {
+             
+            $nombreUsuario = isset($_POST['usuario']) ? $_POST['usuario'] : NULL;
+            $clave = isset($_POST['clave']) ? $_POST['clave'] : NULL;
+             $user = new Usuario();
+             $usuario = $user->verificarUsuario($nombreUsuario,$clave);
+            if ($usuario == NULL) {
+                    echo json_encode(0); 
+            }else{
+                $rol = new Rol();
+               
+                $roles = $rol->leerRoles($usuario->getIdPersona());
+                if (count($roles)>1){
+                   echo json_encode("Vista/escogeRol,".$usuario->getIdPersona());
+                }else{
+                   foreach($roles as $rol) {
+                       $this->imprimeRolMovil($rol->getIdRol(),$usuario->getIdPersona());
+                    }
+                } 
+            }
+          
+        } catch (Exception $exc){
+            echo  json_encode('Error de aplicacion: ' . $exc->getMessage());
+        }   
+        }
+        
         public function escogeRol(){
          try {
              
@@ -76,6 +106,19 @@ class InicioControl extends Controlador{
         }   
         }
         
+        public function escogeRolMovil($idPersona){
+         try {
+           
+                $rol = new Rol();
+                $roles = $rol->leerRoles($idPersona);
+                $this->vista->set('roles', $roles);
+                $this->vista->set('titulo', 'Escoger Rol');
+                return $this->vista->imprimir();
+            
+        } catch (Exception $exc){
+            echo  json_encode('Error de aplicacion: ' . $exc->getMessage());
+        }   
+        }
         /**
          * Imprime el la Vista de acuerdo al Rol
          * @param type $idRol
@@ -93,6 +136,21 @@ class InicioControl extends Controlador{
                          echo json_encode("/colegio/coordinador/usuarioCoordinador");
                     }elseif ($idRol == 'AC') {
                          echo json_encode("/colegio/acudiente/usuarioAcudiente");
+                    }                   
+        }
+        
+        public function imprimeRolMovil($idRol, $idPersona){
+                      
+                    if ($idRol == 'A'){
+                        echo json_encode("Vista/usuarioAdministrador,".$idPersona);   
+                    }elseif ($idRol =='D') {
+                         echo json_encode("Vista/usuarioDocente,".$idPersona);
+                    }elseif ($idRol == 'E') {
+                         echo json_encode("Vista/usuarioEstudiante,".$idPersona);
+                    }elseif ($idRol == 'C') {
+                         echo json_encode("Vista/usuarioCoordinador,".$idPersona);
+                    }elseif ($idRol == 'AC') {
+                         echo json_encode("Vista/usuarioAcudiente,".$idPersona);
                     }                   
         }
         
