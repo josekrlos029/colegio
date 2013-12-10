@@ -78,7 +78,7 @@ class InicioControl extends Controlador{
                
                 $roles = $rol->leerRoles($usuario->getIdPersona());
                 if (count($roles)>1){
-                   echo json_encode("Vista/escogeRol,".$usuario->getIdPersona());
+                   echo json_encode("Vista/escogeRol.html,".$usuario->getIdPersona());
                 }else{
                    foreach($roles as $rol) {
                        $this->imprimeRolMovil($rol->getIdRol(),$usuario->getIdPersona());
@@ -142,15 +142,15 @@ class InicioControl extends Controlador{
         public function imprimeRolMovil($idRol, $idPersona){
                       
                     if ($idRol == 'A'){
-                        echo json_encode("Vista/usuarioAdministrador,".$idPersona);   
+                        echo json_encode("Vista/usuarioAdministrador.html,".$idPersona);   
                     }elseif ($idRol =='D') {
-                         echo json_encode("Vista/usuarioDocente,".$idPersona);
+                         echo json_encode("Vista/usuarioDocente.html,".$idPersona);
                     }elseif ($idRol == 'E') {
-                         echo json_encode("Vista/usuarioEstudiante,".$idPersona);
+                         echo json_encode("Vista/usuarioEstudiante.html,".$idPersona);
                     }elseif ($idRol == 'C') {
-                         echo json_encode("Vista/usuarioCoordinador,".$idPersona);
+                         echo json_encode("Vista/usuarioCoordinador.html,".$idPersona);
                     }elseif ($idRol == 'AC') {
-                         echo json_encode("Vista/usuarioAcudiente,".$idPersona);
+                         echo json_encode("Vista/usuarioAcudiente.html,".$idPersona);
                     }                   
         }
         
