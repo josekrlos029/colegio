@@ -1,7 +1,6 @@
    <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
    
         <title><?php echo $titulo; ?></title>
-    
 
 <script type="text/javascript">
     
@@ -16,7 +15,7 @@ function envio(){
 
 
     if (idPersona.value==""){
-      x.html ( "<p>Error: Ingresar Numero de Documento</p>");
+      x.html( "<p>Error: Ingresar Numero de Documento</p>");
       error(); 
       ocultar();
     }else{
@@ -79,9 +78,6 @@ function imprimir(anio){
        <p>&nbsp;</p>
        <div  id="tabla" align="left">
            
-           
-     
-
            </div>
         <!-------------------------------------------------------------------->         
     </body>

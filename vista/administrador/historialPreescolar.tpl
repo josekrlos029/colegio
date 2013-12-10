@@ -11,7 +11,7 @@ var y= $("#tablaEstudiantes");
     var data="idSalon="+idSalon+"&anio="+anio;
  envioJson2(url,data,function respuesta(res){   
     x.hide();            
-    y.html (res);
+    y.html(res);
          });
        
 }

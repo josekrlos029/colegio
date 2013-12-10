@@ -1,8 +1,6 @@
 <?php include HOME . DS . 'includes' . DS . 'cargaCabecera.php'; ?>
-   
         <title><?php echo $titulo; ?></title>
-    
-           <script type="text/javascript">
+<script type="text/javascript">
     
  function estPreescolar(){    
  $('#cargar').load('/colegio/administrador/historialPreescolar');           
@@ -60,6 +58,6 @@ function imprimirInformeIndividual(anio,idSalon){
 <div id="cargar">
 	   
 </div>       
+<?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </body>
- <?php include HOME . DS . 'includes' . DS . 'footer.php'; ?>
 </html>

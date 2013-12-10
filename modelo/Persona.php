@@ -243,6 +243,9 @@ class Persona extends Modelo{
      public function leerPorSalon($idSalon) {
         $fecha = getdate();
         $anio=$fecha["year"];
+        if($fecha["month"]=="December"){
+            $anio++;
+        }
         $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p, matricula m, datos_nac_persona dn,datos_ubicacion_persona du WHERE p.idPersona=m.idPersona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND p.estado='1' AND m.idSalon='".$idSalon."' AND m.estado='1' AND m.año_lectivo='".$anio."' ORDER BY p.Papellido";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
@@ -269,7 +272,7 @@ class Persona extends Modelo{
         return $pers;
     }
     public function leerPorSalonInhabilitado($idSalon) {
-        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p, matricula m, datos_nac_persona dn,datos_ubicacion_persona du WHERE p.idPersona=m.idPersona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND p.estado='0' AND m.idSalon='".$idSalon."' ORDER BY p.Papellido";
+        $sql = "SELECT p.idPersona, p.nombres, p.pApellido, p.sApellido, p.sexo, p.telefono, du.direccion, p.correo, dn.fNacimiento, p.estado FROM persona p, matricula m, datos_nac_persona dn,datos_ubicacion_persona du WHERE p.idPersona=m.idPersona AND p.idPersona=dn.idPersona AND p.idPersona=du.idPersona AND p.estado='0' AND m.estado='1' AND m.idSalon='".$idSalon."' ORDER BY p.Papellido";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $pers = array();
