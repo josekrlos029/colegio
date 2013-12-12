@@ -784,6 +784,120 @@ class Estudiante extends Persona {
         return $estudiante;
     }
     
+    public function cambiarIdEstudiante($idPersona, $idNuevo){
+        $sql = "UPDATE persona SET idPersona=:idNuevo WHERE idPersona=:idPersona";        
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql1 = "UPDATE acudiente_estudiante SET id_persona=:idNuevo WHERE id_persona=:idPersona";        
+        $this->__setSql($sql1);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql2 = "UPDATE datos_nac_persona SET idPersona=:idNuevo WHERE idPersona=:idPersona";        
+        $this->__setSql($sql2);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql3 = "UPDATE datos_persona SET idPersona=:idNuevo WHERE idPersona=:idPersona";        
+        $this->__setSql($sql3);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql4 = "UPDATE datos_ubicacion_persona SET idPersona=:idNuevo WHERE idPersona=:idPersona";        
+        $this->__setSql($sql4);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql5 = "UPDATE fallas SET idPersona=:idNuevo WHERE idPersona=:idPersona";        
+        $this->__setSql($sql5);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql6 = "UPDATE historial SET idPersona=:idNuevo WHERE idPersona=:idPersona";        
+        $this->__setSql($sql6);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql7 = "UPDATE madre_estudiante SET id_estudiante=:idNuevo WHERE id_estudiante=:idPersona";        
+        $this->__setSql($sql7);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql8 = "UPDATE matricula SET idPersona=:idNuevo WHERE idPersona=:idPersona";        
+        $this->__setSql($sql8);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql9 = "UPDATE notas SET idPersona=:idNuevo WHERE idPersona=:idPersona";        
+        $this->__setSql($sql9);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql10 = "UPDATE padre_estudiante SET id_estudiante=:idNuevo WHERE id_estudiante=:idPersona";        
+        $this->__setSql($sql10);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql12 = "UPDATE pago SET idPersona=:idNuevo WHERE idPersona=:idPersona";        
+        $this->__setSql($sql12);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql13 = "UPDATE rolespersona SET idPersona=:idNuevo WHERE idPersona=:idPersona";        
+        $this->__setSql($sql13);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+        
+        $sql14 = "UPDATE usuario SET idPersona=:idNuevo, usuario=:idNuevo, contraseña=:idNuevo WHERE idPersona=:idPersona";        
+        $this->__setSql($sql14);
+        $this->ejecutar(array(':idPersona'=>$idPersona,':idNuevo'=>$idNuevo));
+    }
+    public function eliminarEstudiante($idPersona){
+        $sql = "DELETE FROM persona WHERE idPersona=:idPersona";        
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql1 = "DELETE FROM acudiente_estudiante WHERE id_persona=:idPersona";        
+        $this->__setSql($sql1);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql2 = "DELETE FROM datos_nac_persona WHERE idPersona=:idPersona";        
+        $this->__setSql($sql2);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql3 = "DELETE FROM datos_persona WHERE idPersona=:idPersona";        
+        $this->__setSql($sql3);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql4 = "DELETE FROM datos_ubicacion_persona WHERE idPersona=:idPersona";        
+        $this->__setSql($sql4);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql5 = "DELETE FROM fallas WHERE idPersona=:idPersona";        
+        $this->__setSql($sql5);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql6 = "DELETE FROM historial WHERE idPersona=:idPersona";        
+        $this->__setSql($sql6);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql7 = "DELETE FROM madre_estudiante WHERE id_estudiante=:idPersona";        
+        $this->__setSql($sql7);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql8 = "DELETE FROM matricula WHERE idPersona=:idPersona";        
+        $this->__setSql($sql8);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql9 = "DELETE FROM notas WHERE idPersona=:idPersona";        
+        $this->__setSql($sql9);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql10 = "DELETE FROM padre_estudiante WHERE id_estudiante=:idPersona";        
+        $this->__setSql($sql10);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql12 = "DELETE FROM pago WHERE idPersona=:idPersona";        
+        $this->__setSql($sql12);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql13 = "DELETE FROM rolespersona  WHERE idPersona=:idPersona";        
+        $this->__setSql($sql13);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+        
+        $sql14 = "DELETE FROM usuario WHERE idPersona=:idPersona";        
+        $this->__setSql($sql14);
+        $this->ejecutar(array(':idPersona'=>$idPersona));
+    } 
 }
 
 ?>

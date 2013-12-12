@@ -169,5 +169,10 @@ class Matricula extends Modelo{
         $this->__setSql($sql);
         $this->ejecutar(null);
     }   
+    public function eliminarMatriculaPorId($idPersona){
+        $sql = "DELETE FROM matricula WHERE idPersona=:idPersona AND estado='1'";
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=> $idPersona));
+    }
 }
 ?>

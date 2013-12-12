@@ -58,24 +58,36 @@ function retirar(){
        error();
        ocultar();
     }else{
+                
+        var person=prompt("Por Favor escoja la razón por la cual va a retirar El estudiante: \n 1.Fue retirado o Promovido \n 2.Hubo un errror al matricularlo","");
 
-        var url="/colegio/administrador/retirar";
-        var data="idPersona="+idPersona.value;
+        if (person!=null)
+          {
+          if (person == "1" || person == "2"){
+              var opcion = person;
+              var url="/colegio/administrador/retirar";
+                var data="idPersona="+idPersona.value+"&opcion="+opcion;
 
-        envioJson(url,data,function respuesta(res){   
-            if (res == 1){
-                x.html ("<p>Estudiante Retirado Correctamente</p>");
-                exito();
-                ocultar();
-               nuevo();
-               
-            }else{
-                 x.html ("<p>"+res+"</p>");
-                 error();
-                ocultar();
-            }
-            
-         });
+                envioJson(url,data,function respuesta(res){   
+                    if (res == 1){
+                        x.html ("<p>Estudiante Retirado Correctamente</p>");
+                        exito();
+                        ocultar();
+                       nuevo();
+
+                    }else{
+                         x.html ("<p>"+res+"</p>");
+                         error();
+                        ocultar();
+                    }
+
+                 });
+          }else{
+              alert("Digitó una opción Invalida");
+              error();
+                        ocultar();
+          }    
+         }
     }   
 }   
 

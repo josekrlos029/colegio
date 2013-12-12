@@ -28,6 +28,35 @@ $(function(){
 function alerta(error){
     alert(error);
 }
+
+function eliminar(idPersona){
+    var r=confirm("Esta Seguro de Eliminar este estudiante IDENTIFICADO CON: "+idPersona);
+if (r==true)
+  {
+             var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+        
+        var url="/colegio/administrador/eliminarPersona";
+        var data="idPersona="+idPersona;
+
+        envioJson(url,data,function respuesta(res){   
+            if (res == 1){
+                x.html ( "<p>Eliminado Correctamente</p>");
+                exito();
+                ocultar();
+                document.location.href="/colegio/administrador/personas";
+            }else{
+                x.html ( "<p>"+res+"</p>");
+                error();
+                ocultar();
+
+            }
+         });
+  }
+     
+}
  </script>
  </head>
 <body>
@@ -62,6 +91,8 @@ function alerta(error){
                                 <h1>Listado de Personas</h1>
                             </td>
                          </tr>
+                         
+                         
                         </table>
                     </div>
                     
@@ -71,7 +102,8 @@ function alerta(error){
                       
                          
      <!--------------------------------------------------------------------> 
-    
+     <h2 style="margin-left: 5%;">Si va a eliminar un Estudiante es su responsabilidad alguna perdida de información importante.. !</h2>
+
 <table  width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
     <tr class="modo1">
         <td width="4%"><div align="center">N°</div></td>
@@ -83,6 +115,7 @@ function alerta(error){
         <td width="15%"><div align="center" >DIRECCION</div></td>
         <td width="7%"><div align="center" >CORREO</div></td>
         <td width="4%"><div align="center" >INSCRIPCION</div></td>
+        <td width="4%"><div align="center" >ELIMINAR</div></td>
     </tr>
     
     <?php 
@@ -100,6 +133,7 @@ function alerta(error){
         <td align="center"><?php echo $persona->getDireccion();?></td>
         <td align="center"><?php echo $persona->getCorreo();?></td>
         <td align="center"><a href="/colegio/administrador/imprimirRegistro/<?php echo $persona->getIdPersona();?>"><img alt="inscripcion" src="../utiles/imagenes/iconos/consultarPersona.png" /></a></td>
+        <td align="center"><a href="#" onclick="eliminar(<?php echo $persona->getIdPersona();?>)"><img width="20px" height="20px" alt="inscripcion" src="../utiles/imagenes/iconos/error.png" /></a></td>
     <?php    
     }//fin del For ?>
     </tr>

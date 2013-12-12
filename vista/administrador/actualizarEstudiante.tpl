@@ -211,7 +211,46 @@ function actualizaMadre(){
     }   
 }
 
+function actualizarId(){
+   
+    var btn = $("#btnMod");
+        if (btn.val()=="Modificar Identificación"){
+            $("#idPer").removeAttr("disabled");
+            btn.val("Procesar Modificación")
+        }else{
+             var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+            var idPersona =document.getElementById("idPersona");
+            var idNuevo = document.getElementById("idPer");
+            if (idPersona.value=="" || idNuevo.value=="" ){
+    x.html ( "<p>Error: Tiene Campos Requeridos Vacios</p>");
+    error();
+    ocultar();
+    }else{
+       
+        var url="/colegio/administrador/actualizaIdPersona";
+        var data="idPersona="+idPersona.value+"&idNuevo="+idNuevo.value;
 
+        envioJson(url,data,function respuesta(res){   
+            if (res == 1){
+                x.html ( "<p>Id Actualizado Correctamente</p>");
+                exito();
+                ocultar();
+                document.location.href="/colegio/administrador/actualizarEstudiante";
+            }else{
+                x.html ( "<p>"+res+"</p>");
+                error();
+                ocultar();
+
+            }
+         });
+    }   
+        }
+        
+    
+}
 
  </script>
  
@@ -225,7 +264,7 @@ function actualizaMadre(){
             <div id="mensaje" hidden> </div>
                 <div id="cabecera" class="blue">
                     <div class="color-text-blanco" id="title-cab">
-                        <table width="80%" align="center" border="0" cellspacing="0" cellpadding="2">
+                        <table width="80%" align="center"  border="0" cellspacing="0" cellpadding="2">
                          <tr>   
                             <td align="right">   
                                 <h1>Actualizar Datos del Estudiante</h1>

@@ -5,7 +5,13 @@
        <tr>
        <td></td>
        <td align="left" class="color-text-gris"><h1>ESTUDIANTE</h1></td>
-       </tr>  
+       </tr> 
+       <tr>
+        <td  align="right" width="40%" >Identificación:</td>
+        <td><input disabled name="idPer" id="idPer" type="number" class="box-text" value='<?php echo $estudiante->getNombres();?>' required/>
+            <input type="submit" value="Modificar Identificación" class="button large red" onclick="actualizarId()" />
+        </td>
+       </tr> 
       <tr>
         <td  align="right" width="40%" >Nombres:</td>
         <td><input name="nombres" id="nombres" type="text" class="box-text" value='<?php echo $estudiante->getNombres();?>' required/></td>

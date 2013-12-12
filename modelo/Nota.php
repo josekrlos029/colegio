@@ -130,6 +130,12 @@ class Nota extends Modelo {
         return $notas;
     }
     
+    public function eliminarNotasPorId($idPersona){
+        $sql = "DELETE FROM notas WHERE idPersona=:idPersona";
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=> $idPersona));
+    }
+    
     public function calcularDefNeta($n1,$n2,$n3,$n4){
         
             $def= ($n1 + $n2 + $n3 + $n4)/4;

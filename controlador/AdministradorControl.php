@@ -1862,10 +1862,23 @@ class AdministradorControl extends Controlador{
          public function retirar(){
              try {
              $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $opcion = isset($_POST['opcion']) ? $_POST['opcion'] : NULL;
              $fecha = getdate();
-                    $Alectivo=$fecha["year"];
+             $Alectivo=$fecha["year"];
+             if($fecha["month"]=="December"){
+                $Alectivo++;
+             }
              $mat = new Matricula();
-             $mat->retirarEstudiante($idPersona, $Alectivo);
+             $nota = new Nota();
+             $falla = new Falla();
+             if ($opcion == "1"){
+                 $mat->retirarEstudiante($idPersona, $Alectivo);
+             }else if ($opcion == "2"){
+                 $mat->eliminarMatriculaPorId($idPersona);
+             } 
+             $nota->eliminarNotasPorId($idPersona);
+             $falla->eliminarFallasPorId($idPersona);
+             
              echo json_encode(1);
              } catch (Exception $exc) {
                  echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
@@ -2408,6 +2421,35 @@ class AdministradorControl extends Controlador{
             }
              $this->vista->set('url', $_POST['url']);
             return $this->vista->imprimir(); 
+        }
+        
+        public function actualizaIdPersona(){
+            $idPersona=isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $idNuevo=isset($_POST['idNuevo']) ? $_POST['idNuevo'] : NULL;
+            try {
+
+            $estudiante = new Estudiante();
+            $estudiante->cambiarIdEstudiante($idPersona, $idNuevo);
+            
+            echo json_encode(1);  
+            
+            } catch (Exception $exc) {
+                echo json_encode($exc->getTraceAsString());
+            }
+        }
+        
+            public function eliminarPersona(){
+            
+            try {
+            $idPersona=isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;        
+            $estudiante = new Estudiante();
+            $estudiante->eliminarEstudiante($idPersona);
+            
+            echo json_encode(1); 
+            
+            } catch (Exception $exc) {
+                echo json_encode($exc->getTraceAsString());
+            }
         }
         
 }

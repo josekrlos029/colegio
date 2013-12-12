@@ -42,14 +42,16 @@ function envio(){
 } 
 
 function matricular(){ 
-  
+  var idSalon = document.getElementById("idSalon");
+   var r=confirm("Esta Seguro que desea matricularlo en el SALON: "+idSalon.value+" ?");
+if (r==true)
+  {
  var x = $("#mensaje");
  cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
    
  var idPersona = document.getElementById("idPersona");
- var idSalon = document.getElementById("idSalon");
  var jornada = document.getElementById("jornada");
 var foto = $("#foto");
 
@@ -80,6 +82,7 @@ var foto = $("#foto");
             
          });
     }   
+    }
 }
 
 window.onload = function() {
@@ -116,7 +119,7 @@ window.onload = function() {
 
             btnPhoto.addEventListener("click", function() {
                 limpiar(); 
-                context.drawImage(video, 0, 0, 320, 240);
+                context.drawImage(video, 200, 95, 240, 280, 0, 0, 113.4, 151.2);
                var img = document.getElementById("imagen");
                img.appendChild(convertCanvasToImage(canvas));
                // $("#imagen2").append($("#foto").attr("src"));
@@ -196,17 +199,20 @@ function limpiar(){
         <div style="float:right">
             <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
         </div>
-        <div style="margin:20%; ">
+        <div style="margin:5%; ">
             <h1>Capturar Foto</h1> 
-          
             <article>
-                <video  id="video" width="320" height="200" autoplay></video>
+                
                 <section style="float: left;">
                     <button id="btnStart" class="button large blue" >Encender WebCam</button>
                     <button id="btnStop"  class="button large blue">Pausar</button>           
                     <button id="btnPhoto" class="button large blue">Tomar Foto</button>
                 </section>
-                <canvas id="canvas" width="320" height="240" style="float: left;"></canvas>
+                <br>
+                <br>
+                <video  id="video" width="320" height="240" style="float: left; position: absolute; top: 140px; left: 56px;" autoplay></video>
+                <canvas id="canvas" width="320" height="240" style="float: left; margin-left: 40px; position: absolute; top: 198px; left: 400px;"></canvas>
+                <img id="marco" width="113.4" height="151.2"  style="position: absolute; top: 198px; left: 160px;" src="../utiles/imagenes/marcoFoto.png" />
             </article>
         </div>    
 </div>

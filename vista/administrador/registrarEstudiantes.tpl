@@ -49,6 +49,10 @@ if (check=="padre"){
 }
 
 function envio(){ 
+    var idPersona = document.getElementById("idPersona");
+    var r=confirm("El Numero de IDENTIFICACION:"+idPersona.value+" es Correcto?");
+if (r==true)
+  {
   if($("#activarMatricula").is(':checked')) { 
     envio2();
   }else{
@@ -160,11 +164,15 @@ function envio(){
          });
     }  
     }
+  }
 }
 
 function envio2(){ 
-  
- var x = $("#mensaje");
+  var idSalon = document.getElementById("idSalon");
+   var r=confirm("Esta Seguro que desea matricularlo en el SALON: "+idSalon.value+" ?");
+if (r==true)
+  {
+  var x = $("#mensaje");
  cargando();
  x.html ("<p>Cargando...</p>");
  x.show("slow");
@@ -230,7 +238,7 @@ function envio2(){
 
 
 //MATRICULA
-var idSalon = document.getElementById("idSalon");
+
 var jornada = document.getElementById("jornada");
 //var foto = document.getElementById("canvas")
 var foto = $("#foto");
@@ -297,7 +305,8 @@ var foto = $("#foto");
                 ocultar();  
             }
          });
-    }   
+    }
+  }
 }
 window.onload = function() {
 
@@ -396,7 +405,7 @@ function limpiar(){
     
                 <tr>
                     <td align="right" width="40%" >Identificación del Estudiante:</td>
-                    <td><input name="idPersona" id="idPersona" type="text" class="box-text" required/></td>
+                    <td><input name="idPersona" id="idPersona" type="number" class="box-text" required/></td>
                 </tr>
 <!-- nuevosCampos-->     
                 <tr>

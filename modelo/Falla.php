@@ -108,6 +108,11 @@ class Falla extends Modelo {
         return $falla;
     }
     
+    public function eliminarFallasPorId($idPersona){
+        $sql = "DELETE FROM fallas WHERE idPersona=:idPersona";
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=> $idPersona));
+    }
 
 }
 
