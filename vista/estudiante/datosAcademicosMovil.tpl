@@ -1,7 +1,4 @@
 <div><?php echo $tabla;?></div>
- </table> 
-       </div>
-      <table width="95%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
         <tr>
            <td colspan="6"><hr></td>
        </tr>

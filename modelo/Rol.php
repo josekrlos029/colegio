@@ -28,7 +28,7 @@ class Rol extends Modelo{
     }
 
   public function leerRoles($idPersona){
-        $sql =  "SELECT rp.idRol, r.nombre FROM rolespersona rp, rol r WHERE rp.idRol= r.idRol AND idPersona=".$idPersona;
+        $sql =  "SELECT rp.idRol, r.nombre FROM rolespersona rp, rol r WHERE rp.idRol= r.idRol AND rp.idPersona='".$idPersona."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $roles = array();

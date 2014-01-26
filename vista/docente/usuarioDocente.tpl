@@ -24,10 +24,11 @@ interface usuarioDocente {
  $('#cargar').load('/colegio/docente/datosAcademicos');           
 }
 function ingresoNotas(){    
-  $('#cargar').load('/colegio/docente/ingresoNotas.');        
+  $('#cargar').load('/colegio/docente/ingresoNotas');        
 }
 function funcionesAcademicas(){    
-  $('#cargar').load('/colegio/docente/funcionesAcademicas.');        
+    
+  $('#cargar').load('/colegio/docente/funcionesAcademicas');        
 }
  function notificaciones(){  
  $('#cargar').load('/colegio/docente/notificaciones');           

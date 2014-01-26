@@ -342,7 +342,7 @@ window.onload = function() {
 
             btnPhoto.addEventListener("click", function() {
                 limpiar(); 
-                context.drawImage(video, 0, 0, 320, 240);
+                 context.drawImage(video, 200, 93, 240, 280, 90, 50, 113.4, 151.2);
                var img = document.getElementById("imagen");
                img.appendChild(convertCanvasToImage(canvas));
                // $("#imagen2").append($("#foto").attr("src"));
@@ -530,7 +530,7 @@ function limpiar(){
              
                  <tr>
                     <td align="right" width="40%" >Cedula:</td>
-                    <td><input name="idPadre" id="idPadre" type="text" class="box-text" /></td>
+                    <td><input name="idPadre" id="idPadre" type="number" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Nombres:</td>
@@ -546,11 +546,11 @@ function limpiar(){
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono:</td>
-                    <td><input name="telPadre" id="telPadre" type="text" class="box-text" /></td>
+                    <td><input name="telPadre" id="telPadre" type="number" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono de Oficina:</td>
-                    <td><input name="telOficinaPadre" id="telOficinaPadre" type="text" class="box-text" /></td>
+                    <td><input name="telOficinaPadre" id="telOficinaPadre" type="number" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Direccion:</td>
@@ -565,7 +565,7 @@ function limpiar(){
                 </tr>
                 <tr>
                     <td align="right" width="40%" >Cedula:</td>
-                    <td><input name="idMadre" id="idMadre" type="text" class="box-text" /></td>
+                    <td><input name="idMadre" id="idMadre" type="number" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Nombres:</td>
@@ -581,11 +581,11 @@ function limpiar(){
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono:</td>
-                    <td><input name="telMadre" id="telMadre" type="text" class="box-text" /></td>
+                    <td><input name="telMadre" id="telMadre" type="number" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono de Oficina:</td>
-                    <td><input name="telOficinaMadre" id="telOficinaMadre" type="text" class="box-text" /></td>
+                    <td><input name="telOficinaMadre" id="telOficinaMadre" type="number" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Direccion:</td>
@@ -606,7 +606,7 @@ function limpiar(){
     <table width="50%" border="0" cellspacing="0" cellpadding="2">
  <tr>
                     <td align="right" width="40%" >Cedula:</td>
-                    <td><input name="idAcudiente" id="idAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="idAcudiente" id="idAcudiente" type="number" class="box-text" required/></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Nombres:</td>
@@ -622,11 +622,11 @@ function limpiar(){
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono:</td>
-                    <td><input name="telAcudiente" id="telAcudiente" type="text" class="box-text" required/></td>
+                    <td><input name="telAcudiente" id="telAcudiente" type="number" class="box-text" required/></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Telefono de Oficina:</td>
-                    <td><input name="telOficinaAcudiente" id="telOficinaAcudiente" type="text" class="box-text" /></td>
+                    <td><input name="telOficinaAcudiente" id="telOficinaAcudiente" type="number" class="box-text" /></td>
                 </tr>
                  <tr>
                     <td align="right" width="40%" >Direccion:</td>
@@ -663,7 +663,7 @@ function limpiar(){
                    <td><p id="imagen" style="float: left;"><img id="foto" src="" /></p></td>
                 </tr>
                 <tr>
-                    <td align="right" width="40%" >Activar Matricula:</td>
+                    <td align="right" width="40%" >ACTIVAR MATRICULA:</td>
                     <td><input name="activarMatricula" id="activarMatricula" type="checkbox" required/></td>
                 </tr>
                 </table>  
@@ -691,19 +691,22 @@ function limpiar(){
     
    
     
-        <div style="margin:20%; ">
-         <h1>Capturar Foto</h1> 
-          
-        <article>
-         <video  id="video" width="320" height="200" autoplay></video>
-            <section style="float: left;">
-                <button id="btnStart" class="button large blue" >Encender WebCam</button>
-                 <button id="btnStop"  class="button large blue">Pausar</button>           
-                 <button id="btnPhoto" class="button large blue">Tomar Foto</button>
-            </section>
-            <canvas id="canvas" width="320" height="240" style="float: left;"></canvas>
-        </article>
-        </div>    
+        <div style="margin:5%; ">
+            <h1>Capturar Foto</h1> 
+            <article>
+                
+                <section style="float: left;">
+                    <button id="btnStart" class="button large blue" >Encender WebCam</button>
+                    <button id="btnStop"  class="button large blue">Pausar</button>           
+                    <button id="btnPhoto" class="button large blue">Tomar Foto</button>
+                </section>
+                <br>
+                <br>
+                <video  id="video" width="320" height="240" style="float: left; position: absolute; top: 140px; left: 56px;" autoplay></video>
+                <canvas id="canvas" width="320" height="240" style="float: left; margin-left: 40px; position: absolute; top: 198px; left: 400px;"></canvas>
+                <img id="marco" width="113.4" height="151.2"  style="position: absolute; top: 177px; left: 160px;" src="../utiles/imagenes/marcoFoto.png" />
+            </article>
+        </div>
 </div>
  <script type="text/javascript">
  $("#accordion > li > span").click(function(){

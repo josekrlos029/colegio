@@ -169,21 +169,22 @@ class EstudianteControl extends Controlador{
             
             $respuesta = "";
             
-              $respuesta.='<table width="95%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+              $respuesta.='<table >
                     <tr>
-                    <td align="right" class="color-text-azul" colspan="6"><h3>Datos Academicos</h3></td>    
-                    </tr>
-                    <tr class="modo1">
-                    <td width="25%">Materia</td>
-                    <td width="15%">Primer Periodo</td>
-                    <td width="15%">Segundo Periodo</td>
-                    <td width="15%">Tercer Periodo</td>
-                    <td width="15%">Cuarto Periodo</td>
-                    <td width="15%">promedio</td>
+                    <td align="left" class="color-text-azul" colspan="6"><h3>Datos Academicos</h3></td>    
                     </tr>
                     </table>
-                    <div style="padding-left:5px; overflow-x:hidden;width:100%; height:250px;">
-                    <table width="95%" border="0" cellspacing="0" cellpadding="2" align="center" class="tabla">
+                    <table style="font-size: 11px" width="98%" border="0" cellspacing="0" cellpadding="2" align="center" class="table tBlue">
+                    <tr class="modo1">
+                    <td width="25%"><b>Materia</td>
+                    <td width="15%"><b>P.1</b></td>
+                    <td width="15%"><b>P.2</b></td>
+                    <td width="15%"><b>P.3</b></td>
+                    <td width="15%"><b>P.4</b></td>
+                    <td width="15%"><b>Prom.</b></td>
+                    </tr>
+                    
+                    
                     ';
               $cont= 0;
               $s1=0;
@@ -193,7 +194,7 @@ class EstudianteControl extends Controlador{
             foreach ($pens as $pen){
                 $cont++;
                 $respuesta.='
-                            <tr  onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">';
+                            <tr>';
                         $mat = new Materia();
                         $materia = $mat->leerMateriaPorId($pen->getIdMateria());
                          foreach ($materia as $mate){
@@ -215,8 +216,7 @@ class EstudianteControl extends Controlador{
                 $s3 += $not->getTercerP();
                 $s4 += $not->getCuartoP();
             }
-            
-             
+           
             $p1 = round($s1/$cont,2); 
             $p2 = round($s2/$cont,2); 
             $p3 = round($s3/$cont,2); 

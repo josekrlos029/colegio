@@ -61,7 +61,7 @@ class Docente extends Persona{
     public function crearConsulta2($idSalon,$idMateria){
         $fecha = getdate();
         $anio=$fecha["year"];
-        $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP FROM fallas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND m.estado='1' m.año_lectivo='".$anio."' AND n.idMateria='".$idMateria."' ORDER BY p.pApellido";
+        $sql = "SELECT p.idPersona as idPersona, p.nombres as nombres, p.pApellido as pApellido, p.sApellido as sApellido, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP FROM fallas n , matricula m , persona p WHERE n.idPersona=m.idPersona AND m.idPersona=p.idPersona AND m.idSalon='".$idSalon."' AND m.estado='1' AND m.año_lectivo='".$anio."' AND n.idMateria='".$idMateria."' ORDER BY p.pApellido";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         return $resultado;
@@ -92,6 +92,52 @@ class Docente extends Persona{
         $sql = "UPDATE notas SET primerP=:primerP, segundoP=:segundoP, tercerP=:tercerP, cuartoP=:cuartoP, definitiva=:def WHERE idPersona=:idPersona and idMateria=:idMateria";
         $this->__setSql($sql);
         $param = array(':idPersona' => $idPersona, ':idMateria'=> $idMateria, ':primerP'=>$primerP, ':segundoP'=>$segundoP, ':tercerP'=>$tercerP, ':cuartoP'=>$cuartoP, ':def'=>$def);
+        $this->ejecutar($param);   
+    }
+    
+    public function actualizarNotaPorPeriodo($idPersona,$idMateria,$periodo,$nota){
+        if ($periodo=="PRIMERO"){
+            $p="primerP";
+        }
+        if ($periodo=="SEGUNDO"){
+            $p="segundoP";
+        }
+        if ($periodo=="TERCERO"){
+            $p="tercerP";
+        }
+        if ($periodo=="CUARTO"){
+            $p="cuartoP";
+        }
+        if ($nota==""){
+            $nota=NULL;
+        }
+ 
+        $sql = "UPDATE notas SET ".$p."=:nota WHERE idPersona=:idPersona and idMateria=:idMateria";
+        $this->__setSql($sql);
+        $param = array(':idPersona' => $idPersona, ':idMateria'=> $idMateria, ':nota'=>$nota);
+        $this->ejecutar($param);   
+    }
+    
+     public function actualizarFallaPorPeriodo($idPersona,$idMateria,$periodo,$falla){
+        if ($periodo=="PRIMERO"){
+            $p="primerP";
+        }
+        if ($periodo=="SEGUNDO"){
+            $p="segundoP";
+        }
+        if ($periodo=="TERCERO"){
+            $p="tercerP";
+        }
+        if ($periodo=="CUARTO"){
+            $p="cuartoP";
+        }
+        if ($falla==""){
+            $falla=NULL;
+        }
+ 
+        $sql = "UPDATE fallas SET ".$p."=:falla WHERE idPersona=:idPersona and idMateria=:idMateria";
+        $this->__setSql($sql);
+         $param = array(':idPersona' => $idPersona, ':idMateria'=> $idMateria, ':falla'=>$falla);
         $this->ejecutar($param);   
     }
     

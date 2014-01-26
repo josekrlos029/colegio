@@ -119,7 +119,7 @@ window.onload = function() {
 
             btnPhoto.addEventListener("click", function() {
                 limpiar(); 
-                context.drawImage(video, 200, 95, 240, 280, 0, 0, 113.4, 151.2);
+                context.drawImage(video, 200, 93, 240, 280, 90, 50, 113.4, 151.2);
                var img = document.getElementById("imagen");
                img.appendChild(convertCanvasToImage(canvas));
                // $("#imagen2").append($("#foto").attr("src"));
@@ -212,7 +212,7 @@ function limpiar(){
                 <br>
                 <video  id="video" width="320" height="240" style="float: left; position: absolute; top: 140px; left: 56px;" autoplay></video>
                 <canvas id="canvas" width="320" height="240" style="float: left; margin-left: 40px; position: absolute; top: 198px; left: 400px;"></canvas>
-                <img id="marco" width="113.4" height="151.2"  style="position: absolute; top: 198px; left: 160px;" src="../utiles/imagenes/marcoFoto.png" />
+                <img id="marco" width="113.4" height="151.2"  style="position: absolute; top: 177px; left: 160px;" src="../utiles/imagenes/marcoFoto.png" />
             </article>
         </div>    
 </div>

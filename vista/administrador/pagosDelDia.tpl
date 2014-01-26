@@ -22,6 +22,7 @@
             <td width="7%">AÑO</td>
             <td width="10%">VALOR</td>
             <td width="15%">FECHA</td>
+            <td width="4%">SALON</td>
         </tr>
         <?php 
             $cont=0;
@@ -29,6 +30,8 @@
             $cont++;
             $persona= new Persona();
             $p  = $persona->leerPorId($pen->getIdPersona());
+            $matricula = new Matricula();
+            $mat= $matricula->leerMatriculaPorId($p->getIdPersona());
         ?>
         <tr>
             <td><?php echo $cont; ?></td>
@@ -38,6 +41,7 @@
             <td><?php echo $pen->getAno(); ?></td>
             <td><?php echo $pen->getValor(); ?></td>
             <td><?php echo $pen->getFecha(); ?></td>
+            <td><?php echo $mat->getIdSalon(); ?></td>
         </tr>
         <?php 
             }
@@ -56,6 +60,7 @@
             <td width="15%">CONCEPTO</td>
             <td width="10%">VALOR</td>
             <td width="15%">FECHA</td>
+            <td width="4%">SALON</td>
         </tr>
         <?php 
             $cont=0;
@@ -64,6 +69,8 @@
             $persona= new Persona();
             $p  = $persona->leerPorId($pen->getIdPersona());
             $cont++;
+            $matricula = new Matricula();
+            $mat= $matricula->leerMatriculaPorId($p->getIdPersona());
         ?>
         <tr>
             <td><?php echo $cont; ?></td>
@@ -72,6 +79,7 @@
             <td><?php echo $pen->getConcepto(); ?></td>
             <td><?php echo $pen->getValor(); ?></td>
             <td><?php echo $pen->getFecha(); ?></td>
+            <td><?php if($mat != NULL){ echo $mat->getIdSalon(); }?></td>
         </tr>
         <?php
             }

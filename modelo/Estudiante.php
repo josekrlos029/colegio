@@ -591,6 +591,13 @@ class Estudiante extends Persona {
         $this->__setSql($sql);
         $this->ejecutar($this->getParametrosAcudiente($estudiante));
     }
+    
+    public function CrearRolAcudiente(Estudiante $estudiante){
+        $sql = "INSERT INTO rolespersona (idPersona, idRol) VALUES ( :idAcudiente, 'AC')";
+        $this->__setSql($sql);
+        $this->ejecutar($this->getParametrosAcudiente($estudiante));
+    }
+    
     public function actDatosAcudiente(Estudiante $estudiante) {
         $sql = "UPDATE acudiente SET  nombre=:nombresAcudiente, apellido=:apellidosAcudiente, ocupacion=:ocupacionAcudiente, telefono=:telAcudiente, tel_oficina=:telOficinaAcudiente,  direccion=:dirAcudiente  WHERE id_acudiente=:idAcudiente";
         $this->__setSql($sql);

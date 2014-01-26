@@ -350,6 +350,8 @@ class Reportes {
             
             $pdf=new FPDF('P','cm','Legal');
             
+            $pdf->SetMargins(0, 0, 0);
+            
             foreach ($estudiantes as $estudiante){
                 
                 $matricula = new Matricula();
@@ -1411,7 +1413,7 @@ class Reportes {
            
             $pdf-> SetFont("Arial","B",9);
             $pdf->SetXY($x+8,$y);
-            $pdf->Cell(2,0.5,"RH: ".utf8_decode($est->getTipoSanguineo()),1,0,"L");
+            $pdf->Cell(2,0.5,"RH: ".$est->getTipoSanguineo(),1,0,"L");
             
             $pdf-> SetFont("Arial","B",10);
             $pdf->SetXY($x+10,$y);
@@ -2111,7 +2113,6 @@ class Reportes {
             $matriculas = $matricula->leerMatriculasPorId($idPersona);
                 
             $pdf=new FPDF('L','cm','Legal');
-            $pdf->AddPage();
             
             $x=2;
             $y=1;

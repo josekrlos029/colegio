@@ -764,6 +764,20 @@ class AdministradorControl extends Controlador{
             }
         }
         
+         public function matriculados(){
+              try {
+            if($this->verificarSession()){
+            $this->vista->set('titulo', 'Personas Matriculadas');
+            $persona = new Persona();
+            $personas = $persona->leerMatriculados();
+            $this->vista->set('personas', $personas);
+            return $this->vista->imprimir();
+            }
+            } catch (Exception $exc) {
+                echo 'Error de aplicacion: ' . $exc->getMessage();
+            }
+        }
+        
         public function pagos(){
          try {
             if($this->verificarSession()){
@@ -1390,6 +1404,7 @@ class AdministradorControl extends Controlador{
              if($idAcudiente !=NULL){
              if ($estudiante->verificarAcudiente($idAcudiente) == NULL){
                $estudiante->crearDatosAcudiente($estudiante);
+               //$estudiante->CrearRolAcudiente($estudiante);
              }
              $estudiante->estudianteAcudiente($estudiante);
              }
@@ -1568,6 +1583,7 @@ class AdministradorControl extends Controlador{
              if($idAcudiente !=NULL){
              if ($estudiante->verificarAcudiente($idAcudiente) == NULL){
                $estudiante->crearDatosAcudiente($estudiante);
+               //$estudiante->CrearRolAcudiente($estudiante);
              }
              $estudiante->estudianteAcudiente($estudiante);
              }
