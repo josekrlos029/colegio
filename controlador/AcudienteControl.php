@@ -49,6 +49,25 @@ class AcudienteControl extends Controlador{
         }
             
         }
+        
+        public function usuarioAcudienteMovil(){
+        try {
+            
+            $this->vista->set('titulo', 'Usuario Coordiandor');
+            $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $acudiente = new Acudiente();
+            $acu = $acudiente->leerPorId($idPersona);
+            $this->vista->set('acu', $acu);
+            $persona = new Persona();
+            $acudido = $persona->leerPorAcudiente($acu->getId_Acudiente());
+            $this->vista->set('acudido', $acudido);
+            return $this->vista->imprimir();
+            
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
         public function cerrarSesion() {
              parent::cerrarSesion();
          }

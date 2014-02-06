@@ -420,5 +420,4 @@ class Persona extends Modelo{
         }
         
 }
-
 ?>

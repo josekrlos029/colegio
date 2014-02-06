@@ -1101,15 +1101,66 @@ class AdministradorControl extends Controlador{
              $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
              $materias = isset($_POST['materias']) ? $_POST['materias'] : NULL;
              
+             $salon = new Salon();
+             $salones = $salon->leerSalonePorIdGrado($idGrado);
              $arreglo = array();
              $arreglo = explode(',', $materias);
              $pensum = new Materia();
+             
+             foreach ($salones as $sal) {
+                 $persona = new Persona();
+                 $personas = $persona->leerPorSalon($sal->getIdSalon());
+                 
+                 foreach ($personas as $p) {
+                     
+                   for ($i=0; $i<count($arreglo); $i++){
+                    
+                       $nota = new Nota();
+                       $nota->crearNota($p->getIdPersona(), $arreglo[$i]);
+                       
+                    }     
+                     
+                 }
+                 
+             }
+             
+             
              
              for ($i=0; $i<count($arreglo); $i++){
                  $pensum->crearPensum($idGrado, $arreglo[$i]);
              }
              
              echo json_encode("Pensum Agregado Correctamente");
+        } catch (Exception $exc) {
+            echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+        }    
+        }
+        
+        public function eliminarPensum(){
+            try {
+             
+             $idGrado = isset($_POST['idGrado']) ? $_POST['idGrado'] : NULL;
+             $idMateria = isset($_POST['idMateria']) ? $_POST['idMateria'] : NULL;
+             
+             $salon = new Salon();
+             $salones = $salon->leerSalonePorIdGrado($idGrado);
+             $pensum = new Materia();
+             foreach ($salones as $sal) {
+                 $persona = new Persona();
+                 $personas = $persona->leerPorSalon($sal->getIdSalon());
+                 
+                 foreach ($personas as $p) {
+                                         
+                       $nota = new Nota();
+                       $nota->eliminarNota($p->getIdPersona(), $idMateria);
+                        
+                 }
+                 
+             }
+             
+                 $pensum->eliminarPensum($idGrado, $idMateria);
+             
+             echo json_encode("Pensum Eliminado Correctamente");
         } catch (Exception $exc) {
             echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
         }    
@@ -2466,6 +2517,14 @@ class AdministradorControl extends Controlador{
             } catch (Exception $exc) {
                 echo json_encode($exc->getTraceAsString());
             }
+        }
+        
+        public function panelMovil(){
+            
+            $idPersona=isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+            $panel =isset($_POST['panel']) ? $_POST['panel'] : NULL;
+            
+            
         }
         
 }

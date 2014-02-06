@@ -5,6 +5,7 @@
     <td><?php echo strtoupper($materia->getIdMateria());?></td>
     <td><?php echo strtoupper($materia->getNombreMateria());?></td>
     <td><?php echo strtoupper($materia->getHoras());?></td>
+    <td><a href="#" onclick="eliminarMateria('<?php echo $materia->getIdMateria(); ?>')"><img alt="eli" src="../utiles/imagenes/iconos/errorCalificacion.png" /></a></td>
 </tr>
 <?php
             }

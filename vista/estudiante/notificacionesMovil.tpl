@@ -39,7 +39,7 @@ var data="id="+id;
        </tr> 
        </table>
  
-        <table class="table" width="98%" border="0" cellspacing="0" style="font-size: 11px" cellpadding="2" align="center">
+        <table class="table tBlue" width="98%" border="0" cellspacing="0" style="font-size: 11px" cellpadding="2" align="center">
          
         
                 <tr class="modo1">

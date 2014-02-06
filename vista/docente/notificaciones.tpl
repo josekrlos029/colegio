@@ -7,7 +7,7 @@ function consulta(id){
 var y= $("#tablaConsulta"); 
 var url="/colegio/administrador/consultaNotificacion";
 var data="id="+id;
- envioJson(url,data,function respuesta(res){   
+ envioJson2(url,data,function respuesta(res){   
    x.hide();            
     y.html (res);
     

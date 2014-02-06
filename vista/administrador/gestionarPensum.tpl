@@ -114,7 +114,36 @@ function enviar(){
         var url="/colegio/administrador/agregarPensum/";
         var data="idGrado="+idGrado.value+"&materias="+ arreglo;
 
-        envioJson(url,data,function respuesta(res){   
+        envioJson2(url,data,function respuesta(res){   
+           
+                y.html ( res);
+                y.hide();
+                consultarMaterias();
+         });
+    }   
+
+}
+
+function eliminarMateria(idMateria){
+
+ var y = $("#mensaje");
+  cargando();
+ y.html ("Cargando...");
+ y.show("slow");
+ 
+ var idGrado = document.getElementById("idGrado");
+ 
+    if (idGrado.value=="" || idGrado.value=="---"){
+      y.html ( "<p>Error:debe seleccionar un grado</p>");
+       error();
+       ocultar();
+      
+    }else{
+
+        var url="/colegio/administrador/eliminarPensum";
+        var data="idGrado="+idGrado.value+"&idMateria="+ idMateria;
+
+        envioJson2(url,data,function respuesta(res){   
            
                 y.html ( res);
                 y.hide();
@@ -196,6 +225,7 @@ function enviar(){
                     <td>ID de Materia</td>
                     <td>Nombre</td>
                     <td>Horas</td>
+                    <td>Eliminar</td>
                 
          
             <tbody id="tablaMaterias">

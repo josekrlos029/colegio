@@ -126,6 +126,15 @@ public function getIdMateria() {
            ':idMateria' => $idMateria);
         $this->ejecutar($param);
     }
+    
+    public function eliminarPensum($idGrado, $idMateria) {
+        $sql = "DELETE FROM pensum WHERE idGrado=:idGrado AND idMateria=:idMateria";
+        $this->__setSql($sql);
+        $param = array(':idGrado' => $idGrado,
+           ':idMateria' => $idMateria);
+        $this->ejecutar($param);
+    }
+    
     public function leerMateriasPorCarga($idSalon, $idPersona){
         $sql = "SELECT DISTINCT  m.idMateria as idMateria, m.nombre as nombre, m.horas as horas FROM materia m, carga c WHERE c.idMateria=m.idMateria AND c.idSalon='".$idSalon."' AND c.idPersona='".$idPersona."'";
         $this->__setSql($sql);

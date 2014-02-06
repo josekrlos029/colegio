@@ -104,7 +104,6 @@ public function crearSalon(Salon $salon) {
             $salones[$salon->getIdSalon()] = $salon;
         }
         return $salones;
-        return $salon;
     }
     
     public function leerSalonesJornada($limS,$limI){
@@ -146,5 +145,4 @@ public function crearSalon(Salon $salon) {
         $this->ejecutar();        
     }
 }
-
 ?>

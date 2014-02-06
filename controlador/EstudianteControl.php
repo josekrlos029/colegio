@@ -353,7 +353,50 @@ class EstudianteControl extends Controlador{
         }
             
         }
+        
+        public function notificacionesMovil(){
+         try {
+             
+            $this->vista->set('titulo', 'Notificaciones');
+            $destino1=1;
+            $destino2=3;
+            $notificacion = new Notificacion();
+            $noti = $notificacion->leerPorDestino($destino1,$destino2);
+             $this->vista->set('noti', $noti);
+            return $this->vista->imprimir();;
+            
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
          
+        public function pensionMovil(){
+         try {
+            
+             $idPersona =  isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;    
+            $this->vista->set('titulo', 'Pensión');
+            $pension = new Pago();
+            $pensiones = $pension->leerPensionesPorIdPersona($idPersona);
+            $this->vista->set('pensiones', $pensiones);
+            return $this->vista->imprimir();
+            
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
+        public function seguimientoMovil(){
+         try {
+            
+            $this->vista->set('titulo', 'Seguimiento Academico');
+            return $this->vista->imprimir();
+            
+        } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }
+            
+        }
         
 }
 

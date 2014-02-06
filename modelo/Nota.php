@@ -104,6 +104,19 @@ class Nota extends Modelo {
         return $parametros;
     }
     */
+    
+    public function crearNota($idPersona, $idMateria){
+        $sql = "INSERT INTO notas (idPersona, idMateria) VALUES ( :idPersona, :idMateria)";
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=> $idPersona, ':idMateria'=> $idMateria));
+    }
+    
+    public function eliminarNota($idPersona, $idMateria){
+        $sql = "DELETE FROM notas WHERE idPersona=:idPersona AND idMateria=:idMateria ";
+        $this->__setSql($sql);
+        $this->ejecutar(array(':idPersona'=> $idPersona, ':idMateria'=> $idMateria));
+    }
+    
     public function leerNotaEstudiante($idPersona, $idMateria){
         $sql = "SELECT idNota, primerP, segundoP, tercerP, cuartoP, definitiva FROM notas WHERE idPersona='".$idPersona."' AND idMateria='".$idMateria."'";
         $this->__setSql($sql);
