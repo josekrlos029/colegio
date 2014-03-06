@@ -586,25 +586,25 @@ class DocenteControl extends Controlador{
                                         <td align='center'><b>Logro Superior</b></td>
                                   </tr>
                                   <tr> 
-                                        <td align='center'><textarea id='superior' maxlength='213' autofocus placeholder='Aquí debes escribir el Logro Superior' rows='4' cols='60' class='box-text' >".$superior."</textarea><input x-webkit-speech onwebkitspeechchange='onChange1(this.value)' id='record1'/> </td>
+                                        <td align='center'><textarea id='superior' maxlength='213' autofocus placeholder='Aquí debes escribir el Logro Superior' rows='6' cols='40' class='box-text' >".$superior."</textarea><input x-webkit-speech onwebkitspeechchange='onChange1(this.value)' id='record1'/> </td>
                                   </tr>
                                   <tr> 
                                         <td align='center'><b>Logro Alto</b></td>
                                   </tr>
                                   <tr> 
-                                        <td align='center'><textarea id='alto' maxlength='213' placeholder='Aquí debes escribir el Logro Alto' rows='4' cols='60' class='box-text' >".$alto."</textarea><input x-webkit-speech onwebkitspeechchange='onChange2(this.value)' id='record2'/> </td>
+                                        <td align='center'><textarea id='alto' maxlength='213' placeholder='Aquí debes escribir el Logro Alto' rows='6' cols='40' class='box-text' >".$alto."</textarea><input x-webkit-speech onwebkitspeechchange='onChange2(this.value)' id='record2'/> </td>
                                   </tr>
                                   <tr> 
                                         <td align='center'><b>Logro Basico</b></td>
                                   </tr>
                                   <tr> 
-                                       <td align='center'><textarea id='basico' maxlength='213' placeholder='Aquí debes escribir el Logro Basico' rows='4' cols='60' class='box-text' >".$basico."</textarea><input x-webkit-speech onwebkitspeechchange='onChange3(this.value)' id='record3'/> </td>
+                                       <td align='center'><textarea id='basico' maxlength='213' placeholder='Aquí debes escribir el Logro Basico' rows='6' cols='40' class='box-text' >".$basico."</textarea><input x-webkit-speech onwebkitspeechchange='onChange3(this.value)' id='record3'/> </td>
                                   </tr>
                                   <tr> 
                                         <td align='center'><b>Logro Bajo</b></td>
                                   </tr>
                                   <tr> 
-                                       <td align='center'><textarea id='bajo' maxlength='213' placeholder='Aquí debes escribir el Logro Bajo' rows='4' cols='60' class='box-text' >".$bajo."</textarea><input x-webkit-speech onwebkitspeechchange='onChange4(this.value)' id='record4'/> </td>
+                                       <td align='center'><textarea id='bajo' maxlength='213' placeholder='Aquí debes escribir el Logro Bajo' rows='6' cols='40' class='box-text' >".$bajo."</textarea><input x-webkit-speech onwebkitspeechchange='onChange4(this.value)' id='record4'/> </td>
                                   </tr>
                                   <tr> 
                                        <td align='center'><button name='guardarLogros' id='guardarLogros' class='button large red' onclick='guardarLogros()'>Guardar</button></td>
@@ -791,8 +791,27 @@ class DocenteControl extends Controlador{
                 $this->vista->set('url', $_POST['url']);
                 return $this->vista->imprimir();
             }
+            
+        public function descargarPlanillas(){
+            try {
+                if($this->verificarSession()){
+
+                    $idDocente = $_SESSION['idUsuario'];
+                    $cfg = Configuracion::getConfiguracion('colegio');
+                    $colegio= $cfg['NOMBRE'];
+                    $reporte = new Reportes();
+                    if ($colegio=="galois"){
+
+                    }elseif ($colegio=="santaTeresita"){
+                        $reporte->planillasDocenteSantateresita($idDocente);
+                    }
+
+                }
+            
+            } catch (Exception $exc) {
+                echo 'Error de aplicacion: ' . $exc->getMessage();
+            }
+        }    
         
 }             
-
-
 ?>

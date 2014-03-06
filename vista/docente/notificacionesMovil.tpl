@@ -15,7 +15,7 @@ function consulta(id){
     });
 var y= $("#tablaConsulta"); 
 //var url="/colegio/administrador/consultaNotificacion";
-var url="http://liceogalois.com/administrador/consultaNotificacion";
+var url="http://controlacademico.liceogalois.com/administrador/consultaNotificacion";
 var data="id="+id;
  envioJson2(url,data,function respuesta(res){   
          

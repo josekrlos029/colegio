@@ -20,7 +20,7 @@ function cargarSeguimientos(){
         y.html ( "<p>Error: Un Tipo de Seguimiento Valido</p>");
           }else{
       
-             var url="http://liceogalois.com/estudiante/cargarSeguimientos";
+             var url="http://controlacademico.liceogalois.com/estudiante/cargarSeguimientos";
         var data="tipo="+tipo+"&idPersona="+idPersona;
         envioJson(url,data,function respuesta(res){               
             if (res==1){

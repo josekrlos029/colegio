@@ -456,7 +456,7 @@ class AdministradorControl extends Controlador{
             $anio = isset($_POST['anio']) ? $_POST['anio'] : NULL;
             
             $persona = new Persona();
-            $personas = $persona->leerPorSalon($idSalon);
+            $personas = $persona->leerPorSalonYAnio($idSalon,$anio);
             $pagos = ['MATRICULA','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','VR.PENSION'];
             $this->vista->set('idSalon', $idSalon);
             $this->vista->set('anio', $anio);
@@ -2290,6 +2290,7 @@ class AdministradorControl extends Controlador{
          
          
          public function generarBoletin($param){
+             if($this->verificarSession()){
             $cadena = explode(",", $param);    
             $idSalon = $cadena[0];
             $periodo = $cadena[1];
@@ -2301,7 +2302,7 @@ class AdministradorControl extends Controlador{
             }elseif ($colegio=="santaTeresita"){
                 
             }
-            
+             }
          }
          
          public function imprimirInformeFinal($param){
@@ -2524,7 +2525,45 @@ class AdministradorControl extends Controlador{
             $idPersona=isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
             $panel =isset($_POST['panel']) ? $_POST['panel'] : NULL;
             
+            if($panel=="acudiente"){
             
+                $acudiente = new Acudiente();
+                $acu = $acudiente->leerPorId($idPersona);
+                $this->vista->set('acu', $acu);
+                $persona = new Persona();
+                $acudido = $persona->leerPorAcudiente($acu->getId_Acudiente());
+                $this->vista->set('acudido', $acudido);
+                $ruta = 'utiles/imagenes/fotos/';
+                if (file_exists($ruta.$idPersona.'.jpg')) {
+                    $img= '<img height="90px" width="90px"  src="http://controlacademico.liceogalois.com/utiles/imagenes/fotos/'.$idPersona.'.jpg">';
+                }elseif (file_exists($ruta.$idPersona.'.png')) {
+                    $img= '<img height="90px" width="90px"  src="http://controlacademico.liceogalois.com/utiles/imagenes/fotos/'.$idPersona.'.png">';
+                }elseif (file_exists($ruta.$idPersona.'.jpeg')) {
+                    $img= '<img height="90px" width="90px"  src="http://controlacademico.liceogalois.com/utiles/imagenes/fotos/'.$idPersona.'.jpeg">';
+                }else{
+                    $img= '<img height="90px" width="90px"  src="http://controlacademico.liceogalois.com/utiles/imagenes/avatarDefaul.png">';
+                }
+                $this->vista->set('img', $img);
+                return $this->vista->imprimir();
+            }
+        }
+        
+        public function imprimirPlanillas($tipo){
+            if($this->verificarSession()){
+                $cfg = Configuracion::getConfiguracion('colegio');
+                $colegio= $cfg['NOMBRE'];
+                $reporte = new Reportes();
+            if ($colegio=="galois"){
+                
+            }elseif ($colegio=="santaTeresita"){
+                if($tipo=="AUXILIAR"){
+                    $reporte->planillaAuxiliarSantateresita();
+                }else if($tipo=="CALIFICACION"){
+                    $reporte->planillaCalificacionSantateresita();
+                }
+                
+            }
+            }
         }
         
 }

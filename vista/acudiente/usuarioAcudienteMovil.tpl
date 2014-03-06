@@ -11,15 +11,15 @@
                $cont=0;
                foreach ($acudido as $acud) { 
                $idPersona=$acud->getIdPersona();
-               $ruta = 'http://liceogalois.com/utiles/imagenes/fotos/';
+               $ruta = 'http://controlacademico.liceogalois.com/utiles/imagenes/fotos/';
                if (file_exists($ruta.$idPersona.'.jpg')) {
-                   $img= '<img height="90px" width="90px" src="http://liceogalois.com/utiles/imagenes/fotos/'.$idPersona.'.jpg">';
+                   $img= '<img height="90px" width="90px" src="http://controlacademico.liceogalois.com/utiles/imagenes/fotos/'.$idPersona.'.jpg">';
                }elseif (file_exists($ruta.$idPersona.'.png')) {
-                   $img= '<img height="90px" width="90px" src="http://liceogalois.com/utiles/imagenes/fotos/'.$idPersona.'.png">';
+                   $img= '<img height="90px" width="90px" src="http://controlacademico.liceogalois.com/utiles/imagenes/fotos/'.$idPersona.'.png">';
                }elseif (file_exists($ruta.$idPersona.'.jpeg')) {
-                   $img= '<img height="90px" width="90px" src="http://liceogalois.com/utiles/imagenes/fotos/'.$idPersona.'.jpeg">';
+                   $img= '<img height="90px" width="90px" src="http://controlacademico.liceogalois.com/utiles/imagenes/fotos/'.$idPersona.'.jpeg">';
                }else{
-                   $img= '<img height="90px" width="90px" src="http://liceogalois.com/utiles/imagenes/avatarDefaul.png">';
+                   $img= '<img height="90px" width="90px" src="http://controlacademico.liceogalois.com/utiles/imagenes/avatarDefaul.png">';
                }
                ?>
               <tr>

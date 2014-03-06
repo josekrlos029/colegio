@@ -49,7 +49,7 @@ function notas(){
     });
     var x = $("#content");
     
-                           //var url="http://liceogalois.com/estudiante/datosAcademicosMovil";
+                           //var url="http://controlacademico.liceogalois.com/estudiante/datosAcademicosMovil";
                            var url="/colegio/docente/actualizarNotasMovil";
                            var data="periodo="+periodo+"&salon="+salon+"&materia="+materia;
 
@@ -79,7 +79,7 @@ function inasistencias(){
     });
     var x = $("#content");
     
-                           //var url="http://liceogalois.com/estudiante/datosAcademicosMovil";
+                           //var url="http://controlacademico.liceogalois.com/estudiante/datosAcademicosMovil";
                            var url="/colegio/docente/asignarInasistenciasMovil";
                            var data="periodo="+periodo+"&salon="+salon+"&materia="+materia;
 

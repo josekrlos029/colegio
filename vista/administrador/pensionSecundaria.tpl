@@ -110,7 +110,11 @@ var arreglo = new Array();
            </tr>
            </table>
                   <div style="margin-left:  5%; margin-top: 2%; width:15%;"><table width="100%"><tr><td>AÑO:</td><td><select class="box-text" id="años" onchange="ocultarTabla()">
-                  <?php foreach ($anios as $anio) { ?>    
+                  <?php $fecha = getdate();
+                $anio=$fecha["year"];?>
+<option><?php echo $anio; ?></option>
+<?php
+ foreach ($anios as $anio) { ?>    
                   <option><?php echo $anio; ?></option>
                   <?php } ?>
               </select> </td></tr></table>

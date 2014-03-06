@@ -87,6 +87,13 @@ var data="idPersona="+idPersona;
             ocultar("datosAcademicos");
             document.getElementById('familia').style.display="block";
             }
+            
+ function planilla(){ 
+ 
+ var tipo = document.getElementById("tipo").value;
+
+      window.open("/colegio/administrador/imprimirPlanillas/"+tipo);
+    }           
   </script>  
     
     
@@ -225,7 +232,7 @@ var data="idPersona="+idPersona;
            <tr>
            <td width="10%" align="center">
                <a href="#" onclick="vistaBoletines()"><div id="box" class="green"><img height="40px" width="40px" src=../utiles/imagenes/iconos/boletines.png ></div></a>
-             <div class="text-icon">Boletines</div>
+             <div class="text-icon">Imprimir</div>
            </td>
            
            
@@ -280,6 +287,22 @@ var data="idPersona="+idPersona;
                           <option>FINAL</option>
                       </select></td>
                       <td><input name="generarBoletin" id="generarBoletin" type="submit" value="Generar" class="button large green" onclick="envio()" /></td>
+              </tr>
+          </table>
+         <br>
+         <hr>
+         <br>
+         <h1 style="margin-left: 430px">IMPRIMIR PLANILLAS</h1>
+         <table border="0" style="margin: 0 auto; width: 50%;" >
+              <tr>
+                  <td><b>Tipo</b></td>
+              </tr>
+              <tr>
+                      <td><select id="tipo" class="box-text">
+                          <option>AUXILIAR</option>
+                          <option>CALIFICACION</option>
+                      </select></td>
+                      <td><input name="generarPlanilla" id="generarPlanilla" type="submit" value="Generar" class="button large green" onclick="planilla()" /></td>
               </tr>
           </table>
       </div>

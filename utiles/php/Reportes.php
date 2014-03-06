@@ -2813,5 +2813,361 @@ class Reportes {
             $pdf->Line($x+5.75, $y+0.75, $x+30, $y+0.75);
             $pdf-> Output("Observador ".$nom." ".$ape,"I");
     }
+    
+    public function planillaAuxiliarSantateresita(){
+        set_time_limit(90);
+            
+            $x=0; $y=0;
+            $pdf=new FPDF('P','cm','Letter');
+            $pdf->AddPage();
+            $pdf-> SetFont("Times","BI",20);
+            $pdf->SetXY(1,5);
+            $pdf->Cell(20,3,"PLANILLAS AUXILIARES",0,0,"C");
+            $pdf->SetXY(1,9);
+            $pdf-> SetFont("Times","BI",15);
+            $pdf->Cell(20,3,"Imprime las que necesites !",0,0,"C");
+            $salon = new Salon();
+            $salones= $salon->leerSalones();
+            
+            foreach ($salones as $s) {
+                $pdf->AddPage();
+                $x=1;$y=1;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,2.25,"",1,0,"C");
+                $pdf->Cell(6.5,2.25,"",1,0,"C");
+                $pdf->Cell(4.5,2.25,"",1,0,"C");
+                $pdf-> SetFont("Times","BI",11);
+                
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,"COLEGIO",0,0,"C");
+                $pdf->Cell(6.5,0.5,utf8_decode("ÁREAS / ASIGNATURA"),0,0,"C");
+                $pdf->Cell(4.5,0.5,"GRUPO: ".$s->getGrupo(),0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'"SANTA TERESITA"',0,0,"C");
+                $pdf->Cell(6.5,0.5,utf8_decode("____________________"),0,0,"C");
+                $pdf->Cell(4.5,0.8,"GRADO: ".$s->getIdGrado(),0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'2014',0,0,"C");
+                $pdf->Cell(6.5,0.8,utf8_decode("DOCENTE"),0,0,"C");
+                $pdf->Cell(4.5,1,"PERIODO______",0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'PLANILLA AUXILIAR',0,0,"C");
+                $pdf->Cell(6.5,0.7,utf8_decode("____________________"),0,0,"C");
+                
+                $y=3.25;
+                $pdf->SetXY($x,$y);
+                $pdf-> SetFont("Times","BI",12);
+                $pdf->Cell(7.5,1.25,'APELLIDOS Y NOMBRES',1,0,"C");
+                $pdf-> SetFont("Times","B",9);
+                $pdf->Cell(1.98,0.5,'D. PROP.',1,0,"C");
+                $pdf->Cell(1.98,0.5,'D. ARG.',1,0,"C");
+                $pdf->Cell(1.98,0.5,'D. INTER',1,0,"C");
+                $pdf->Cell(1,1.25,'V.F',1,0,"C");
+                $pdf->Cell(1.06,1.25,'AUS.',1,0,"C");
+                
+                $y= 3.75;
+                $x = 8.5;
+                $pdf->SetXY($x,$y);
+                $pdf-> SetFont("Times","I",9);
+                $pdf->Cell(0.66,0.75,'1',1,0,"C");
+                $pdf->Cell(0.66,0.75,'2',1,0,"C");
+                $pdf->Cell(0.66,0.75,'3',1,0,"C");
+                $pdf->Cell(0.66,0.75,'4',1,0,"C");
+                $pdf->Cell(0.66,0.75,'5',1,0,"C");
+                $pdf->Cell(0.66,0.75,'6',1,0,"C");
+                $pdf->Cell(0.66,0.75,'7',1,0,"C");
+                $pdf->Cell(0.66,0.75,'8',1,0,"C");
+                $pdf->Cell(0.66,0.75,'9',1,0,"C");
+                
+                $y=4.5;
+                $x=1;
+                $c=0;
+                $persona = new Persona();
+                $personas = $persona->leerPorSalon($s->getIdSalon());
+                foreach ($personas as $p){
+                    $c++;
+                    $pdf->SetXY($x,$y);
+                    $pdf-> SetFont("Times","",9);
+                    $pdf->Cell(0.5,0.5,$c,1,0,"C");
+                    $pdf-> SetFont("Times","",8);
+                    $pdf->Cell(7,0.5,strtoupper ( utf8_decode($p->getPApellido()." ".$p->getSApellido()." ".$p->getNombres())),1,0,"L");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(1,0.5,'',1,0,"C");
+                    $pdf->Cell(1.06,0.5,'',1,0,"C");
+                    $y+=0.5;
+                }
+                
+
+            } 
+            
+            $pdf-> Output("Planillas","I");
+    }
+    public function planillaCalificacionSantateresita(){
+        set_time_limit(90);
+            
+            $x=0; $y=0;
+            $pdf=new FPDF('P','cm','Letter');
+            $pdf->AddPage();
+            $pdf-> SetFont("Times","BI",20);
+            $pdf->SetXY(1,5);
+            $pdf->Cell(20,3,"PLANILLAS DE CALIFICACION",0,0,"C");
+            $pdf->SetXY(1,9);
+            $pdf-> SetFont("Times","BI",15);
+            $pdf->Cell(20,3,"Imprime las que necesites !",0,0,"C");
+            $salon = new Salon();
+            $salones= $salon->leerSalones();
+            
+            foreach ($salones as $s) {
+                $pdf->AddPage();
+                $x=1;$y=1;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,2.25,"",1,0,"C");
+                $pdf->Cell(6.5,2.25,"",1,0,"C");
+                $pdf->Cell(2.5,2.25,"",1,0,"C");
+                $pdf-> SetFont("Times","BI",11);
+                
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,"COLEGIO",0,0,"C");
+                $pdf->Cell(6.5,0.5,utf8_decode("ÁREAS / ASIGNATURA"),0,0,"C");
+                $pdf->Cell(4.5,0.5,"GRUPO: ".$s->getGrupo(),0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'"SANTA TERESITA"',0,0,"C");
+                $pdf->Cell(6.5,0.5,utf8_decode("____________________"),0,0,"C");
+                $pdf->Cell(4.5,0.8,"GRADO: ".$s->getIdGrado(),0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'2014',0,0,"C");
+                $pdf->Cell(6.5,0.8,utf8_decode("DOCENTE"),0,0,"C");
+                $pdf->Cell(4.5,1,"PERIODO:__",0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'PLANILLA CALIFIC.',0,0,"C");
+                $pdf->Cell(6.5,0.7,utf8_decode("____________________"),0,0,"C");
+                
+                $y=3.25;
+                $pdf->SetXY($x,$y);
+                $pdf-> SetFont("Times","BI",12);
+                $pdf->Cell(8.5,1,'APELLIDOS Y NOMBRES',1,0,"C");
+                $pdf-> SetFont("Times","B",9);
+                $pdf->Cell(1,1,'%.',1,0,"C");
+                $pdf->Cell(1,1,'VAL.',1,0,"C");
+                $pdf->Cell(0.75,1,'AU.',1,0,"C");
+                $pdf->Cell(2.25,1,'CODIGOS',1,0,"C");
+                
+                $y=4.25;
+                $x=1;
+                $c=0;
+                $persona = new Persona();
+                $personas = $persona->leerPorSalon($s->getIdSalon());
+                foreach ($personas as $p){
+                    $c++;
+                    $pdf->SetXY($x,$y);
+                    $pdf-> SetFont("Times","",9);
+                    $pdf->Cell(0.5,0.5,$c,1,0,"C");
+                    $pdf-> SetFont("Times","",8);
+                    $pdf->Cell(8,0.5,strtoupper ( utf8_decode($p->getPApellido()." ".$p->getSApellido()." ".$p->getNombres())),1,0,"L");
+                    $pdf->Cell(1,0.5,'',1,0,"C");
+                    $pdf->Cell(1,0.5,'',1,0,"C");
+                    $pdf->Cell(0.75,0.5,'',1,0,"C");
+                    $pdf->Cell(2.25,0.5,'',1,0,"C");
+                    $y+=0.5;
+                }
+                
+
+            } 
+            
+            $pdf-> Output("Planillas","I");
+    }
+    
+    public function planillasDocenteSantateresita($idPersona){
+        set_time_limit(90);
+        $carga = new Carga();
+        $Cargas = $carga->leerCargasPorDocente($idPersona);
+            $salones= array();
+            $i=0;
+            foreach ($Cargas as $carga) {
+                $salones[$i]= $carga->getIdSalon();
+                $i++;
+            }
+            $salones= array_unique($salones);
+            $pdf=new FPDF('P','cm','Letter');
+            $pdf->AddPage();
+            $pdf-> SetFont("Times","BI",20);
+            $pdf->SetXY(1,5);
+            $pdf->Cell(20,3,"PLANILLAS AUXILIARES",0,0,"C");
+            $pdf->SetXY(1,9);
+            $pdf-> SetFont("Times","BI",15);
+            $pdf->Cell(20,3,"Imprime las que necesites !",0,0,"C");
+            $x=0; $y=0;
+            foreach ($salones as $idSalon) {
+                $pdf->AddPage();
+                $x=1;$y=1;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,2.25,"",1,0,"C");
+                $pdf->Cell(6.5,2.25,"",1,0,"C");
+                $pdf->Cell(4.5,2.25,"",1,0,"C");
+                $pdf-> SetFont("Times","BI",11);
+                
+                $salon = new Salon();
+                $s= $salon->leerSalonePorId($idSalon);
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,"COLEGIO",0,0,"C");
+                $pdf->Cell(6.5,0.5,utf8_decode("ÁREAS / ASIGNATURA"),0,0,"C");
+                $pdf->Cell(4.5,0.5,"GRUPO: ".$s->getGrupo(),0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'"SANTA TERESITA"',0,0,"C");
+                $pdf->Cell(6.5,0.5,utf8_decode("____________________"),0,0,"C");
+                $pdf->Cell(4.5,0.8,"GRADO: ".$s->getIdGrado(),0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'2014',0,0,"C");
+                $pdf->Cell(6.5,0.8,utf8_decode("DOCENTE"),0,0,"C");
+                $pdf->Cell(4.5,1,"PERIODO______",0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'PLANILLA AUXILIAR',0,0,"C");
+                $pdf->Cell(6.5,0.7,utf8_decode("____________________"),0,0,"C");
+                
+                $y=3.25;
+                $pdf->SetXY($x,$y);
+                $pdf-> SetFont("Times","BI",12);
+                $pdf->Cell(7.5,1.25,'APELLIDOS Y NOMBRES',1,0,"C");
+                $pdf-> SetFont("Times","B",9);
+                $pdf->Cell(1.98,0.5,'D. PROP.',1,0,"C");
+                $pdf->Cell(1.98,0.5,'D. ARG.',1,0,"C");
+                $pdf->Cell(1.98,0.5,'D. INTER',1,0,"C");
+                $pdf->Cell(1,1.25,'V.F',1,0,"C");
+                $pdf->Cell(1.06,1.25,'AUS.',1,0,"C");
+                
+                $y= 3.75;
+                $x = 8.5;
+                $pdf->SetXY($x,$y);
+                $pdf-> SetFont("Times","I",9);
+                $pdf->Cell(0.66,0.75,'1',1,0,"C");
+                $pdf->Cell(0.66,0.75,'2',1,0,"C");
+                $pdf->Cell(0.66,0.75,'3',1,0,"C");
+                $pdf->Cell(0.66,0.75,'4',1,0,"C");
+                $pdf->Cell(0.66,0.75,'5',1,0,"C");
+                $pdf->Cell(0.66,0.75,'6',1,0,"C");
+                $pdf->Cell(0.66,0.75,'7',1,0,"C");
+                $pdf->Cell(0.66,0.75,'8',1,0,"C");
+                $pdf->Cell(0.66,0.75,'9',1,0,"C");
+                
+                $y=4.5;
+                $x=1;
+                $c=0;
+                $persona = new Persona();
+                $personas = $persona->leerPorSalon($idSalon);
+                foreach ($personas as $p){
+                    $c++;
+                    $pdf->SetXY($x,$y);
+                    $pdf-> SetFont("Times","",9);
+                    $pdf->Cell(0.5,0.5,$c,1,0,"C");
+                    $pdf-> SetFont("Times","",8);
+                    $pdf->Cell(7,0.5,strtoupper ( utf8_decode($p->getPApellido()." ".$p->getSApellido()." ".$p->getNombres())),1,0,"L");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(0.66,0.5,'',1,0,"C");
+                    $pdf->Cell(1,0.5,'',1,0,"C");
+                    $pdf->Cell(1.06,0.5,'',1,0,"C");
+                    $y+=0.5;
+                }
+
+            }
+            
+            $pdf->AddPage();
+            $pdf-> SetFont("Times","BI",20);
+            $pdf->SetXY(1,5);
+            $pdf->Cell(20,3,"PLANILLAS DE CALIFICACION",0,0,"C");
+            $pdf->SetXY(1,9);
+            $pdf-> SetFont("Times","BI",15);
+            $pdf->Cell(20,3,"Imprime las que necesites !",0,0,"C");
+            
+            foreach ($salones as $idSalon) {
+                $pdf->AddPage();
+                $x=1;$y=1;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,2.25,"",1,0,"C");
+                $pdf->Cell(6.5,2.25,"",1,0,"C");
+                $pdf->Cell(2.5,2.25,"",1,0,"C");
+                $pdf-> SetFont("Times","BI",11);
+                $salon = new Salon();
+                $s= $salon->leerSalonePorId($idSalon);
+                
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,"COLEGIO",0,0,"C");
+                $pdf->Cell(6.5,0.5,utf8_decode("ÁREAS / ASIGNATURA"),0,0,"C");
+                $pdf->Cell(4.5,0.5,"GRUPO: ".$s->getGrupo(),0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'"SANTA TERESITA"',0,0,"C");
+                $pdf->Cell(6.5,0.5,utf8_decode("____________________"),0,0,"C");
+                $pdf->Cell(4.5,0.8,"GRADO: ".$s->getIdGrado(),0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'2014',0,0,"C");
+                $pdf->Cell(6.5,0.8,utf8_decode("DOCENTE"),0,0,"C");
+                $pdf->Cell(4.5,1,"PERIODO:__",0,0,"L");
+                $y+=0.5;
+                $pdf->SetXY($x,$y);
+                $pdf->Cell(4.5,0.5,'PLANILLA CALIFIC.',0,0,"C");
+                $pdf->Cell(6.5,0.7,utf8_decode("____________________"),0,0,"C");
+                
+                $y=3.25;
+                $pdf->SetXY($x,$y);
+                $pdf-> SetFont("Times","BI",12);
+                $pdf->Cell(8.5,1,'APELLIDOS Y NOMBRES',1,0,"C");
+                $pdf-> SetFont("Times","B",9);
+                $pdf->Cell(1,1,'%.',1,0,"C");
+                $pdf->Cell(1,1,'VAL.',1,0,"C");
+                $pdf->Cell(0.75,1,'AU.',1,0,"C");
+                $pdf->Cell(2.25,1,'CODIGOS',1,0,"C");
+                
+                $y=4.25;
+                $x=1;
+                $c=0;
+                $persona = new Persona();
+                $personas = $persona->leerPorSalon($s->getIdSalon());
+                foreach ($personas as $p){
+                    $c++;
+                    $pdf->SetXY($x,$y);
+                    $pdf-> SetFont("Times","",9);
+                    $pdf->Cell(0.5,0.5,$c,1,0,"C");
+                    $pdf-> SetFont("Times","",8);
+                    $pdf->Cell(8,0.5,strtoupper ( utf8_decode($p->getPApellido()." ".$p->getSApellido()." ".$p->getNombres())),1,0,"L");
+                    $pdf->Cell(1,0.5,'',1,0,"C");
+                    $pdf->Cell(1,0.5,'',1,0,"C");
+                    $pdf->Cell(0.75,0.5,'',1,0,"C");
+                    $pdf->Cell(2.25,0.5,'',1,0,"C");
+                    $y+=0.5;
+                }
+                
+
+            }
+            
+            
+            $pdf-> Output("Planillas","I");
+        
+    }
+    
 }
 ?>
