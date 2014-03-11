@@ -29,6 +29,52 @@ function alerta(error){
     alert(error);
 }
 
+function habilitar(){
+    $(".nmat").removeAttr("disabled");
+    $("#guarda").removeAttr("hidden");
+}
+
+function guardar(){
+var arreglo = new Array();
+  var i = 0;
+   var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+ 
+            $("#tabla .recorrer").each(function (index) {
+                var mat, idPersona;
+                
+                 $(this).children("td").each(function (index2) {
+                     switch (index2) {
+                         case 0:
+                             mat = $(this).children("input").val();
+                             break;
+                         case 1:
+                             idPersona = $(this).text();
+                         break;
+                    }
+                $(this).css("background-color", "#ECF8E0");
+                });
+               arreglo[i] = new Array(idPersona,mat); 
+               i++;
+            });
+            
+            
+            var matriculas = JSON.encode(arreglo);
+            
+             var url="/colegio/administrador/modificarNumeroMatricula";
+        var data="matriculas="+matriculas;
+        envioJson(url,data,function respuesta(res){               
+            if (res==1){
+            x.html("Matriculas Actualizadas Correctamente");
+            exito();
+            
+            }
+            
+         });  
+
+}
  </script>
  </head>
 <body>
@@ -74,9 +120,12 @@ function alerta(error){
                       
                          
      <!--------------------------------------------------------------------> 
+     <button onclick="habilitar()" class="button blue"> Modificar N° Matricula </button>
+     <div id="guarda" hidden><button onclick="guardar()" class="button red" >Guardar </button></div>
 <table  width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla" id="tabla">
     <tr class="modo1">
-        <td width="4%"><div align="center">N°</div></td>
+        
+        <td width="4%"><div align="center">MAT</div></td>
         <td width="12%"><div align="right" >IDENTIFICACION</div></td>
         <td><div align="center" width="10%">APELLIDOS</div></td>
         <td><div align="center" width="10%">NOMBRES</div></td>
@@ -96,8 +145,9 @@ function alerta(error){
     $mat= $matricula->leerMatriculaPorId($persona->getIdPersona());
     ?>
     <tr class="recorrer" id="cebra" onmouseover="cambiacolor_over(this)" onmouseout="cambiacolor_out(this)">
-        <td align="left"><?php echo $cont;?></td>
-          <td align="left"><?php echo $persona->getIdPersona();?></td>
+        
+        <td align="center"><input disabled style="width: 50px;" class="nmat" type="number" value="<?php echo $mat->getNMatricula();?>" />  
+        <td align="left"><?php echo $persona->getIdPersona();?></td>
         <td align="left"><?php echo strtoupper ($persona->getPApellido()." ".$persona->getSApellido());?></td> 
         <td align="left"><?php echo strtoupper ($persona->getNombres());?></td>
         <td align="center"><?php echo $persona->getSexo();?></td>

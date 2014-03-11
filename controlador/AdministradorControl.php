@@ -767,6 +767,7 @@ class AdministradorControl extends Controlador{
          public function matriculados(){
               try {
             if($this->verificarSession()){
+            set_time_limit(90);
             $this->vista->set('titulo', 'Personas Matriculadas');
             $persona = new Persona();
             $personas = $persona->leerMatriculados();
@@ -2566,5 +2567,26 @@ class AdministradorControl extends Controlador{
             }
         }
         
+        public function modificarNumeroMatricula(){
+            try {
+                 if($this->verificarSession()){
+                $arreglo =  isset($_POST['matriculas']) ? $_POST['matriculas'] : NULL;
+                
+                $matriculas = json_decode($arreglo);
+                $matricula = new Matricula();
+                $fecha = getdate();
+                $Alectivo=$fecha["year"];
+                if($fecha["month"]=="December"){
+                   $Alectivo++;
+                }
+                foreach($matriculas as $mat){
+                    $matricula->modificarNMatricula($mat[0], $mat[1],$Alectivo);
+                }
+                echo json_encode(1);
+                 }
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+        }
 }
 ?>

@@ -18,6 +18,7 @@ class Matricula extends Modelo{
     private $jornada;
     private $fecha;
     private $anoLectivo;
+    private $nMatricula;
     
     public function getIdPersona() {
         return $this->idPersona;
@@ -59,6 +60,15 @@ class Matricula extends Modelo{
         $this->anoLectivo = $anoLectivo;
     }
     
+    public function getNMatricula() {
+        return $this->nMatricula;
+    }
+
+    public function setNMatricula($nMatricula) {
+        $this->nMatricula = $nMatricula;
+    }
+
+        
     protected static function crearFecha($entrada) {
         parent::crearFecha($entrada);
     }
@@ -83,6 +93,9 @@ class Matricula extends Modelo{
         }
         if (array_key_exists('año_lectivo', $props)) {
           $matricula->setAnoLectivo($props['año_lectivo']);
+        }
+        if (array_key_exists('nMatricula', $props)) {
+          $matricula->setNMatricula($props['nMatricula']);
         }
     }
     
@@ -160,6 +173,12 @@ class Matricula extends Modelo{
     
     public function retirarEstudiante($idPersona, $Alectivo){
          $sql = "UPDATE matricula SET estado='2' WHERE idPersona='".$idPersona."' AND año_lectivo='".$Alectivo."'";
+        $this->__setSql($sql);
+        $this->ejecutar(null);
+    }
+    
+    public function modificarNMatricula($idPersona, $nMat, $Alectivo){
+         $sql = "UPDATE matricula SET nMatricula='".$nMat."' WHERE idPersona='".$idPersona."' AND año_lectivo='".$Alectivo."'";
         $this->__setSql($sql);
         $this->ejecutar(null);
     }
