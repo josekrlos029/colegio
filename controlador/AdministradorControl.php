@@ -2567,6 +2567,19 @@ class AdministradorControl extends Controlador{
             }
         }
         
+        public function imprimirDirectorio(){
+            if($this->verificarSession()){
+                $cfg = Configuracion::getConfiguracion('colegio');
+                $colegio= $cfg['NOMBRE'];
+                $reporte = new Reportes();
+            if ($colegio=="galois"){
+                $reporte->directorioGalois();
+            }elseif ($colegio=="santaTeresita"){
+                
+            }
+            }
+        }
+        
         public function modificarNumeroMatricula(){
             try {
                  if($this->verificarSession()){
@@ -2588,5 +2601,20 @@ class AdministradorControl extends Controlador{
                 echo $exc->getTraceAsString();
             }
         }
+        
+        public function guardarVoto(){
+            try {
+                 
+                $candidato =  isset($_POST['candidato']) ? $_POST['candidato'] : NULL;
+                $voto = new Voto();
+                $voto->creaVoto($candidato);
+                
+                echo json_encode(1);
+                 
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+                }
+        
 }
 ?>

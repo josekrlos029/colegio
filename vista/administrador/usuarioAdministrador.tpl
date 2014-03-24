@@ -93,7 +93,11 @@ var data="idPersona="+idPersona;
  var tipo = document.getElementById("tipo").value;
 
       window.open("/colegio/administrador/imprimirPlanillas/"+tipo);
-    }           
+    } 
+    function directorio(){ 
+
+      window.open("/colegio/administrador/imprimirDirectorio");
+    } 
   </script>  
     
     
@@ -303,6 +307,14 @@ var data="idPersona="+idPersona;
                           <option>CALIFICACION</option>
                       </select></td>
                       <td><input name="generarPlanilla" id="generarPlanilla" type="submit" value="Generar" class="button large green" onclick="planilla()" /></td>
+              </tr>
+          </table>
+         <br>
+         <hr>
+         <br>
+         <h1 style="margin-left: 430px">IMPRIMIR DIRECTORIO TELEFONICO</h1>
+         <table border="0" style="margin: 0 auto; width: 50%;" >
+                      <td><input name="generarPlanilla" id="generarPlanilla" type="submit" value="Generar" class="button large green" onclick="directorio()" /></td>
               </tr>
           </table>
       </div>

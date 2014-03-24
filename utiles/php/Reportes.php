@@ -3169,5 +3169,55 @@ class Reportes {
         
     }
     
+    public function directorioGalois(){
+        set_time_limit(90);
+            
+            $x=0; $y=0;
+            $pdf=new FPDF('P','cm','Letter');
+            $pdf->AddPage();
+            $pdf-> SetFont("Times","BI",20);
+            $pdf->SetXY(1,5);
+            $pdf->Cell(20,3,"DIRECTORIO TELEFONICO",0,0,"C");
+            $pdf->SetXY(1,9);
+            $pdf-> SetFont("Times","BI",15);
+            $pdf->Cell(20,3,"Imprime las hojas que necesites !",0,0,"C");
+            $salon = new Salon();
+            $salones= $salon->leerSalones();
+            
+            foreach ($salones as $s) {
+                $pdf->AddPage();
+                $x=1;$y=1;
+                $pdf->SetXY($x,$y);
+                $pdf->SetXY($x,$y);
+                $pdf-> SetFont("Times","BI",12);
+                $pdf->Cell(0.5,1,'No',1,0,"C");
+                $pdf->Cell(8.5,1,'APELLIDOS Y NOMBRES',1,0,"C");
+                $pdf->Cell(5,1,'TELEFONO',1,0,"C");
+                
+                
+                $y=2;
+                $x=1;
+                $c=0;
+                $persona = new Persona();
+                $personas = $persona->leerPorSalon($s->getIdSalon());
+                foreach ($personas as $p){
+                    $c++;
+                    $pdf->SetXY($x,$y);
+                    $pdf-> SetFont("Times","",9);
+                    $pdf->Cell(0.5,0.5,$c,1,0,"C");
+                    $pdf-> SetFont("Times","",9);
+                    $pdf->Cell(8.5,0.5,strtoupper ( utf8_decode($p->getPApellido()." ".$p->getSApellido()." ".$p->getNombres())),1,0,"L");
+                    $pdf-> SetFont("Times","",12);
+                    $pdf->Cell(5,0.5,$p->getTelefono(),1,0,"C");
+                    
+                    $y+=0.5;
+                }
+                
+
+            } 
+            
+            $pdf-> Output("Planillas","I");
+    }
+    
 }
 ?>
