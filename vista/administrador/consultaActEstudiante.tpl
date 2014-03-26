@@ -1,4 +1,4 @@
-<table width="90%">
+<table align="center" width="90%">
 <tr>
 <td>
       <table border="0" cellspacing="0" cellpadding="2">
@@ -8,7 +8,7 @@
        </tr> 
        <tr>
         <td  align="right" width="40%" >Identificación:</td>
-        <td><input disabled name="idPer" id="idPer" type="number" class="box-text" value='<?php echo $estudiante->getNombres();?>' required/>
+        <td><input disabled name="idPer" id="idPer" type="number" class="box-text" value='<?php echo $estudiante->getIdPersona();?>' required/>
             <input type="submit" value="Modificar Identificación" class="button large red" onclick="actualizarId()" />
         </td>
        </tr> 
@@ -100,7 +100,7 @@
 
      </br>
      </br>
-
+     <div style="margin-left: 20%">
     <table width="90%">
      <tr>
      <td>
@@ -193,14 +193,30 @@
   </td>
      </tr>
      </table>
-     </div>
-     <div style="margin:5%;"> 
-<h1>MODIFICAR IMAGEN</h1>
-<p>Por favor Seleccion la imagen que desea para su Perfil.</br>EXTENSIONES ACEPTADAS: .jpeg .jpg .png </br> TAMAÑO MAXIMO: 4MB</p>
-<form action="/colegio/administrador/actualizarFotoEstudiante" method="post" enctype="multipart/form-data" name="form1">
-<input type="file" name="foto" id="foto">
-<input type="hidden" name="url" value="/colegio/administrador/actualizarEstudiante">
-<input type="hidden" name="idPersona" value="<?php echo $idPersona;?>">
-<input type="submit" name="enviar" value="Enviar" class="button large blue" >
-</form>
-</div>
+     <table width="90%">
+         <tr>
+             <td>
+                 <div style="margin:5%;"> 
+                <h1>MODIFICAR IMAGEN</h1>
+                <p>Por favor Seleccion la imagen que desea para su Perfil.</br>EXTENSIONES ACEPTADAS: .jpeg .jpg .png </br> TAMAÑO MAXIMO: 4MB</p>
+                <form action="/colegio/administrador/actualizarFotoEstudiante" method="post" enctype="multipart/form-data" name="form1">
+                <input type="file" name="foto" id="foto">
+                <input type="hidden" name="url" value="/colegio/administrador/actualizarEstudiante">
+                <input type="hidden" name="idPersona" value="<?php echo $idPersona;?>">
+                <input type="submit" name="enviar" value="Enviar" class="button large blue" >
+                </form>
+                </div>
+             </td>
+             <td>
+                 <h1>TOMAR FOTO</h1>
+                 <br>
+                 <a href="#"><button class="button large blue" id="insertarImagen" onclick="abrir()">Insertar Imagen</button></a>
+                 <br>
+                 <a href="#"><button class="button large red" id="insertarImagen" onclick="guardaFoto()">Guardar</button></a>
+                 <br>
+                 <p id="imagen" style="float: left;"><img id="foto2" src="" /></p>
+                </form>
+             </td>
+         </tr>
+     </table>
+ </div>

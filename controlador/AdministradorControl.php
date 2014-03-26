@@ -2615,6 +2615,28 @@ class AdministradorControl extends Controlador{
                 echo $exc->getTraceAsString();
             }
                 }
+                
+                public function guardarFotoCam(){
+             try {
+                 
+             $idPersona = isset($_POST['idPersona']) ? $_POST['idPersona'] : NULL;
+             $foto = isset($_POST['foto']) ? $_POST['foto'] : NULL;
+             
+             if($foto!=""){
+                $foto = $this->limpia_espacios($foto);
+                $contents= file_get_contents($foto);
+                $savefile = fopen('utiles/imagenes/fotos/'.$idPersona.'.png', 'w');
+                fwrite($savefile,$contents);
+                fclose($savefile);           
+                }
+             
+             echo json_encode("1");
+             
+             } catch (Exception $exc) {
+                 echo json_encode('Error de aplicacion: ' . $exc->getMessage()) ;
+             }
+
+         }
         
 }
 ?>

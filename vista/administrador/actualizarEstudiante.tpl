@@ -5,6 +5,43 @@
 
 <script type="text/javascript">
 
+function guardaFoto(){ 
+  
+ var x = $("#mensaje");
+ cargando();
+ x.html ("<p>Cargando...</p>");
+ x.show("slow");
+   
+ var idPersona = document.getElementById("idPersona");
+var foto = $("#foto2");
+
+
+    if (idPersona.value==""){
+      x.html ( "<p>Error: Ingresar Numero de Documento</p>");
+       error();
+       ocultar();
+    }else{
+
+        var url="/colegio/administrador/guardarFotoCam";
+        var data="idPersona="+idPersona.value+"&foto="+foto.attr("src");
+
+        envioJson(url,data,function respuesta(res){   
+            if (res == "1"){
+                x.html ("<p>Foto Guardada Correctamente</p>");
+                exito();
+                ocultar();
+               $("#btnStop").click();
+            }else{
+                 x.html ("<p>"+res+"</p>");
+                 error();
+                ocultar();
+            }
+            
+         });
+    }   
+    
+}
+
 function envio(){ 
   
  var x = $("#mensaje");
@@ -251,6 +288,68 @@ function actualizarId(){
         
     
 }
+window.onload = function() {
+
+    //Compatibility
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+
+    var canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d"),
+        video = document.getElementById("video"),
+        btnStart = document.getElementById("btnStart"),
+        btnStop = document.getElementById("btnStop"),
+        btnPhoto = document.getElementById("btnPhoto"),
+        videoObj = {
+            video: true,
+            audio: false
+        };
+
+    btnStart.addEventListener("click", function() {
+        var localMediaStream;
+
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia(videoObj, function(stream) {              
+                video.src = (navigator.webkitGetUserMedia) ? window.webkitURL.createObjectURL(stream) : stream;
+                localMediaStream = stream;
+                
+            }, function(error) {
+                console.error("Video capture error: ", error.code);
+            });
+
+            btnStop.addEventListener("click", function() {
+                localMediaStream.stop();
+            });
+
+            btnPhoto.addEventListener("click", function() {
+                limpiar(); 
+                context.drawImage(video, 200, 93, 240, 280, 90, 50, 113.4, 151.2);
+               var img = document.getElementById("imagen");
+               img.appendChild(convertCanvasToImage(canvas));
+               // $("#imagen2").append($("#foto").attr("src"));
+            });
+        }
+    });
+};
+
+function convertCanvasToImage(canvas) {
+	var image = new Image();
+	image.src = canvas.toDataURL();
+        image.setAttribute('id','foto2');
+        //image.src=image.src.replace("image/png",'image/octet-stream');
+	return image;
+}
+function abrir(){
+
+    document.getElementById('light').style.display='block';
+    document.getElementById('fade').style.display='block'
+
+}
+function limpiar(){
+        var canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        $("#imagen").html(" ");
+}
 
  </script>
  
@@ -296,6 +395,28 @@ function actualizarId(){
      
 
            </div>
+       <div id="fade" class="overlay"></div>
+        <div id="light" class="modal">
+        <div style="float:right">
+            <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"><img src="../utiles/imagenes/iconos/close.png"/></a>
+        </div>
+        <div style="margin:5%; ">
+            <h1>Capturar Foto</h1> 
+            <article>
+                
+                <section style="float: left;">
+                    <button id="btnStart" class="button large blue" >Encender WebCam</button>
+                    <button id="btnStop"  class="button large blue">Pausar</button>           
+                    <button id="btnPhoto" class="button large blue">Tomar Foto</button>
+                </section>
+                <br>
+                <br>
+                <video  id="video" width="320" height="240" style="float: left; position: absolute; top: 140px; left: 56px;" autoplay></video>
+                <canvas id="canvas" width="320" height="240" style="float: left; margin-left: 40px; position: absolute; top: 198px; left: 400px;"></canvas>
+                <img id="marco" width="113.4" height="151.2"  style="position: absolute; top: 177px; left: 160px;" src="../utiles/imagenes/marcoFoto.png" />
+            </article>
+        </div>    
+</div>
         <!-------------------------------------------------------------------->         
 
     <script type="text/javascript">
