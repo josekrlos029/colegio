@@ -2,18 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
         <file>
-            <url>controlador/EstudianteControl.php</url>
-            <bookmark id="2">
-                <name/>
-                <line>171</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
             <url>vista/inicio/index.tpl</url>
             <bookmark id="1">
                 <name/>
                 <line>27</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>controlador/EstudianteControl.php</url>
+            <bookmark id="2">
+                <name/>
+                <line>171</line>
                 <key/>
             </bookmark>
         </file>
