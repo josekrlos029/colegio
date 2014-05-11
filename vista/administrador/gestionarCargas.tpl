@@ -112,7 +112,7 @@ var y = $("#mensaje");
     j++;
     }
   }   
-
+  
     if (idDocente=="" || idSalon.value=="---" || materias.length == 0){
           y.html ( "<p>Error: Seleccion invalida</p>");
       error();

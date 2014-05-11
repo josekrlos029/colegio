@@ -38,6 +38,7 @@ function cargadorClases(){
     require_once './modelo/Estudiante.php';
     require_once './modelo/Administrador.php';
     require_once './modelo/Grado.php';
+    require_once './modelo/Area.php';
     require_once './modelo/Materia.php';
     require_once './modelo/Pensum.php';
     require_once './modelo/Salon.php';

@@ -399,13 +399,34 @@ class AdministradorControl extends Controlador{
             if ($colegio=="galois"){
                 $reporte->consolidadoGalois($idSalon, $periodo);
             }elseif ($colegio=="santaTeresita"){
-                
+                $reporte->consolidadoSantaTeresita($idSalon, $periodo);
             }
             
              } catch (Exception $exc) {
             echo 'Error de aplicacion: ' . $exc->getMessage();
         }    
             
+        }
+        
+        public function imprimirConsolidado2($param){
+if($this->verificarSession()){
+            try {
+            $cadena = explode(",", $param);    
+            $idSalon = $cadena[0];
+            $periodo = $cadena[1];
+            $cfg = Configuracion::getConfiguracion('colegio');
+            $colegio= $cfg['NOMBRE'];
+            $reporte = new Reportes();
+            if ($colegio=="galois"){
+                $reporte->consolidadoGalois($idSalon, $periodo);
+            }elseif ($colegio=="santaTeresita"){
+                $reporte->consolidadoSantaTeresita($idSalon, $periodo);
+            }
+            
+             } catch (Exception $exc) {
+            echo 'Error de aplicacion: ' . $exc->getMessage();
+        }    
+            }
         }
         
         public function imprimirHistorialSalon($param){
@@ -2301,7 +2322,7 @@ class AdministradorControl extends Controlador{
             if ($colegio=="galois"){
                 $reporte->boletinGalois($idSalon, $periodo);
             }elseif ($colegio=="santaTeresita"){
-                
+                $reporte->boletinSantaTeresita($idSalon, $periodo);
             }
              }
          }

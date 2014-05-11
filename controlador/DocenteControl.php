@@ -492,7 +492,7 @@ class DocenteControl extends Controlador{
             public function actualizarLogros(){
                  if($this->verificarSession()){
                      try {
-                            $this->vista->set('titulo', 'ingreso de Logros');
+                             $this->vista->set('titulo', 'ingreso de Logros');
                             $carga = new Carga();
                             $idDocente = $_SESSION['idUsuario'];
                             $Cargas = $carga->leerCargasPorDocente($idDocente);
@@ -510,9 +510,9 @@ class DocenteControl extends Controlador{
                             }                            
                             $grads = array_unique($grados);
                             $gradosNetos = array();
-                            for($i = 0;$i < count($grads); $i++){
+                            for($j = 0;$j < count($grados); $j++){
                                 $gra = new Grado();
-                                $gradosNetos[$grads[$i]]= $gra->leerGradoPorId($grads[$i]);
+                                $gradosNetos[$grados[$j]]= $gra->leerGradoPorId($grados[$j]);
                             }
                             $this->vista->set('grados', $gradosNetos);
                             return $this->vista->imprimir();

@@ -40,6 +40,14 @@ function envio(){
       window.open("/colegio/administrador/generarBoletin/"+idSalon+","+periodo)
     }
       
+function consolidado(){ 
+ 
+ var idSalon = document.getElementById("idSalon").value;
+ var periodo = document.getElementById("periodo").value;
+
+      window.open("/colegio/administrador/imprimirConsolidado2/"+idSalon+","+periodo)
+    }      
+      
 
 function consultaPersona(){
  var x = $("#mensaje");
@@ -291,6 +299,33 @@ var data="idPersona="+idPersona;
                           <option>FINAL</option>
                       </select></td>
                       <td><input name="generarBoletin" id="generarBoletin" type="submit" value="Generar" class="button large green" onclick="envio()" /></td>
+              </tr>
+          </table>
+         <br>
+         <hr>
+         <br>
+         
+         <div style="margin: 0 auto;" id="tablaConsulta">
+         <h1 style="margin-left: 430px">IMPRIMIR CONSOLIDADOS</h1>
+          <table border="0" style="margin: 0 auto; width: 50%;" >
+              <tr>
+                  <td><b>Salón</b></td>
+                  <td><b>Periodo</b></td>
+              </tr>
+              <tr>
+                  <td><select id="idSalon2" class="box-text">
+                          <?php foreach ($salones as $salon) { ?>    
+                          <option><?php echo $salon->getIdSalon();?></option>
+                          <?php } ?>
+                      </select></td>
+                      <td><select id="periodo2" class="box-text">
+                          <option>PRIMERO</option>
+                          <option>SEGUNDO</option>
+                          <option>TERCERO</option>
+                          <option>CUARTO</option>
+                          <option>FINAL</option>
+                      </select></td>
+                      <td><input name="generarConsolidado" id="generarConsolidado" type="submit" value="Generar" class="button large green" onclick="consolidado()" /></td>
               </tr>
           </table>
          <br>

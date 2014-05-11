@@ -10,6 +10,7 @@ class Materia extends Modelo {
   private $idMateria;
   private $nombreMateria;
   private $horas;  
+  private $idArea;
   
 public function __construct() {
     parent::__construct();
@@ -38,7 +39,16 @@ public function getIdMateria() {
   public function setHoras($horas) {
       $this->horas = $horas;
   }
+  
+  public function getIdArea() {
+      return $this->idArea;
+  }
 
+  public function setIdArea($idArea) {
+      $this->idArea = $idArea;
+  }
+
+  
  private function mapearMateria(Materia $materia, array $props) {
         if (array_key_exists('idMateria', $props)) {
             $materia->setIdMateria($props['idMateria']);
@@ -49,6 +59,9 @@ public function getIdMateria() {
         if (array_key_exists('horas', $props)) {
             $materia->setHoras($props['horas']);
         }
+        if (array_key_exists('idArea', $props)) {
+            $materia->setIdArea($props['idArea']);
+        }
         
     }
   
@@ -57,20 +70,21 @@ public function getIdMateria() {
         $parametros = array(
             ':idMateria' => $mat->getIdMateria(),
             ':nombre' => $mat->getNombreMateria(),
-            ':horas' => $mat->getHoras()
+            ':horas' => $mat->getHoras(),
+            ':idArea' => $mat->getIdArea()
             
         );
         return $parametros;
     }
     
     public function crearMateria(Materia $materia) {
-        $sql = "INSERT INTO materia (idMateria, nombre, horas) VALUES (:idMateria,:nombre,:horas)";
+        $sql = "INSERT INTO materia (idMateria, nombre, horas, idArea) VALUES (:idMateria,:nombre,:horas,:idArea)";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($materia));
     }
 
     public function leerMaterias() {
-        $sql = "SELECT idMateria, nombre, horas FROM materia";
+        $sql = "SELECT idMateria, nombre, horas,idArea FROM materia";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $mats = array();
@@ -82,7 +96,7 @@ public function getIdMateria() {
         return $mats;
     }
     public function leerMateriaPorId($idMateria) {
-        $sql = "SELECT idMateria, nombre, horas FROM materia WHERE idMateria='".$idMateria."'";
+        $sql = "SELECT idMateria, nombre, horas, idArea FROM materia WHERE idMateria='".$idMateria."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $mats = array();
@@ -95,7 +109,7 @@ public function getIdMateria() {
     }
 
     public function actualizarMateria(Materia $materia) {
-        $sql = "UPDATE materia SET nombre=?, horas=? WHERE idMateria=?";
+        $sql = "UPDATE materia SET nombre=?, horas=?, idArea=? WHERE idMateria=?";
         $this->__setSql($sql);
         $this->ejecutar($this->getParametros($materia));        
         }
@@ -108,7 +122,7 @@ public function getIdMateria() {
         $this->ejecutar($param);        
     }
   public function leerMateriasPorGrado($idGrado){
-        $sql = "SELECT m.idMateria as idMateria, m.nombre as nombre, m.horas as horas FROM materia m, pensum p WHERE p.idMateria=m.idMateria AND p.idGrado='".$idGrado."'";
+        $sql = "SELECT m.idMateria as idMateria, m.nombre as nombre, m.horas as horas, m.idArea as idArea FROM materia m, pensum p WHERE p.idMateria=m.idMateria AND p.idGrado='".$idGrado."'";
         $this->__setSql($sql);
         $resultado = $this->consultar($sql);
         $mats = array();
@@ -148,7 +162,7 @@ public function getIdMateria() {
         return $mats;
   }
   public function leerMateriasPorCargaYGrado($idGrado, $idPersona){
-     $sql = " SELECT m.idMateria as idMateria, m.nombre as nombre, m.horas as horas 
+     $sql = " SELECT m.idMateria as idMateria, m.nombre as nombre, m.horas as horas, m.idArea as idArea 
                 FROM  materia m,  carga c,  salon s
                 WHERE m.idMateria = c.idMateria 
                 AND c.idSalon = s.idSalon 
