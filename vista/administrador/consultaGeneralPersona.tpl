@@ -151,7 +151,7 @@ $ruta = 'utiles/imagenes/fotos/';
 
 <?php
             }elseif($rol == 'E'){
-              $matricula = new Matricula();
+            $matricula = new Matricula();
             $matr = $matricula->leerMatriculaPorId($idPersona);
             $salon = new Salon();
             $sal = $salon->leerSalonePorId($matr->getIdSalon());

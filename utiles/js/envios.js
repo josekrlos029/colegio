@@ -10,8 +10,9 @@ function envioJson(url,data,respuesta){
 				dataType:"html",
 				success: function(data){
                                     
-				    //JSON.decode( data );
+				    //var json =JSON.decode( data );
                                     var json = eval("(" + data + ")");
+                                    alert(json);
                                     respuesta(json);
 				    //var json= jQuery.parseJSON(data);     
                                     

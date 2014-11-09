@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -348,8 +347,6 @@ class Reportes {
         $estudiantes = $persona->leerPorSalon($idSalon);
 
         $pdf = new FPDF('P', 'cm', 'Legal');
-
-        $pdf->SetMargins(0, 0, 0);
 
         foreach ($estudiantes as $estudiante) {
 
@@ -861,8 +858,6 @@ class Reportes {
 
             $pdf->SetFont("Arial", "", 9);
             $y = $y + 1.5;
-            
-            
             $x = 1;
         }
 
@@ -902,803 +897,6 @@ class Reportes {
 
         $pdf->Output("Boletin ", "I");
     }
-
-    function boletinSantaTeresita($idSalon, $periodo) {
-
-        $area = new Area();
-        $areas = $area->leerAreas();
-        $pensum = new Pensum();
-        $pens = $pensum->leerPensum($idSalon);
-        $persona = new Persona();
-        $estudiantes = $persona->leerPorSalon($idSalon);
-
-        $pdf = new FPDF('P', 'cm', 'Legal');
-
-        $pdf->SetMargins(0, 0, 0);
-
-        foreach ($estudiantes as $estudiante) {
-
-            $matricula = new Matricula();
-            $matr = $matricula->leerMatriculaPorId($estudiante->getIdPersona());
-            $salon = new Salon();
-            $sal = $salon->leerSalonePorId($idSalon);
-            $grado = new Grado();
-            $grad = $grado->leerGradoPorId($sal->getIdGrado());
-
-            $pdf->AddPage();
-            $pdf->SetFont("Arial", "B", 14);
-            $pdf->SetXY(1, 0);
-            $pdf->cell(18.5, 1, 'COLEGIO "SANTA TERESITA"', 0, 0, "C");
-            $pdf->ln();
-            $pdf->cell(4, 4, "", 0);
-            $pdf->Image('utiles/imagenes/escudoSantaTeresita.jpg', 1, 0, 2.5);
-            $pdf->SetFont("Arial", "", 10);
-            //CAbecera
-            $pdf->SetXY(1, 1);
-            $pdf->Cell(18.5, 1, utf8_decode('"EDUCAMOS PARA HACER POSIBLE LA VIDA Y LA FELICIDAD"'), 0, 1, "C");
-            $pdf->SetXY(1, 1.5);
-            $pdf->Cell(18.5, 1, "INFORME EVALUATIVO", 0, 1, "C");
-
-
-            $pdf->SetXY(16, 0);
-            $pdf->SetFont("Arial", "", 10);
-            $pdf->Cell(4, 1, "Bajo(Db): 10 - 69 ", 0, 0, "C");
-            $pdf->SetXY(16, 0.5);
-            $pdf->Cell(4, 1, "Basico(DB): 70 - 79  ", 0, 0, "C");
-            $pdf->SetXY(16, 1);
-            $pdf->Cell(4, 1, "Alto(DA): 80 - 94 ", 0, 0, "C");
-            $pdf->SetXY(16, 1.5);
-            $pdf->Cell(4, 1, "Superior(DS): 95 - 100", 0, 0, "C");
-            $pdf->SetXY(16, 0);
-            $pdf->Cell(4, 2.5, "", 1, 0, "C");
-
-            if ($periodo == "PRIMERO") {
-                $periodo3 = "1";
-            }
-            if ($periodo == "SEGUNDO") {
-                $periodo3 = "2";
-            }
-
-            if ($periodo == "TERCERO") {
-                $periodo3 = "3";
-            }
-
-            if ($periodo == "CUARTO") {
-                $periodo3 = "4";
-            }
-
-            $x = 1;
-            $y = 2.75;
-            $pdf->SetXY($x, $y);
-            $pdf->SetFont("Arial", "", 10);
-            $pdf->Cell(3.3, 0.5, "Apellidos y Nombre:", 0, 0, "L");
-            $pdf->SetFont("Arial", "B", 10);
-            $pdf->Cell(8, 0.5, utf8_decode(strtoupper($estudiante->getPApellido() . " " . $estudiante->getSApellido() . " " . $estudiante->getNombres())), 0, 0, "L");
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(12.8, 0.5, "", 1, 0, "L");
-
-
-            $pdf->SetFont("Arial", "", 10);
-            $pdf->Cell(1.2, 0.5, "Grado:", 0, 0, "L");
-            $pdf->SetFont("Arial", "B", 10);
-            $pdf->Cell(0.8, 0.5, $idSalon, 0, 0, "L");
-            $pdf->SetXY($x + 12.8, $y);
-            $pdf->Cell(2.2, 0.5, "", 1, 0, "L");
-
-            $pdf->SetFont("Arial", "", 10);
-            $pdf->Cell(1.5, 0.5, "Periodo:", 0, 0, "L");
-            $pdf->SetFont("Arial", "B", 10);
-            $pdf->Cell(0.5, 0.5, $periodo3, 0, 0, "L");
-            $pdf->SetXY($x + 15, $y);
-            $pdf->Cell(2, 0.5, "", 1, 0, "L");
-
-            $pdf->SetFont("Arial", "", 10);
-            $pdf->Cell(1, 0.5, utf8_decode("Año:"), 0, 0, "L");
-            $pdf->SetFont("Arial", "B", 10);
-            $pdf->Cell(1, 0.5, $matr->getAnoLectivo(), 0, 0, "L");
-            $pdf->SetXY($x + 17, $y);
-            $pdf->Cell(2, 0.5, "", 1, 0, "L");
-
-            $pdf->SetFont("Arial", "B", 9);
-            $y += 0.5;
-            $pdf->SetXY($x, $y);
-            $pdf->SetFont("Arial", "B", 9);
-            $pdf->Cell(5.5, 0.5, "AREAS Y ASIGNATURAS", 1, 0, "L");
-            $pdf->SetFont("Arial", "B", 8);
-            $pdf->Cell(0.5, 0.5, "I.H", 1, 0, "L");
-            $pdf->SetFont("Arial", "B", 9);
-            $pdf->Cell(12, 0.5, "FORTALEZAS Y/O DIFICULTADES", 1, 0, "C");
-            $pdf->Cell(1, 0.5, "NOTA", 1, 0, "C");
-
-            $y += 0.5;
-            $c = 0;
-            $suma = 0;
-            $cont=0;
-
-            for ($i = 0; $i < count($areas); $i++) {
-
-                $c++;
-                foreach ($areas as $a) {
-                    $g = intval($grad->getIdGrado());
-
-                    if ($a->getIdArea() == "FIL") {
-
-                        if ($g > 5 ) {
-
-                            if ($a->getOrden() == $c) {
-
-                                $pdf->SetXY($x, $y);
-                                $pdf->SetFont("Arial", "BU", 9);
-
-                                if ($a->getIdArea() == "EF" || $a->getIdArea() == "EA" || $a->getIdArea() == "ER" || $a->getIdArea() == "EVD" || $a->getIdArea() == "FIL") {
-                                    $pdf->Cell(5.5, 1.25, utf8_decode($a->getNombreArea()), 1, 0, "L");
-                                } else {
-
-                                    $pdf->Cell(5.5, 0.5, utf8_decode($a->getNombreArea()), 1, 0, "L");
-                                    $pdf->Cell(0.5, 0.5, utf8_decode(""), 1, 0, "L");
-                                    $pdf->Cell(12, 0.5, utf8_decode(""), 1, 0, "L");
-                                    $pdf->Cell(1, 0.5, utf8_decode(""), 1, 0, "L");
-                                }
-                                $mate = new Materia();
-                                $band = 0;
-                                foreach ($pens as $p) {
-                                    $materias = $mate->leerMateriaPorId($p->getIdMateria());
-                                    foreach ($materias as $materia) {
-                                        $idMateria = $materia->getIdMateria();
-                                        $nombreMateria = $materia->getNombreMateria();
-                                        $horas = $materia->getHoras();
-                                        $idArea = $materia->getIdArea();
-
-                                        if ($idArea == $a->getIdArea()) {
-
-                                            $nota = new Nota();
-                                            $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $idMateria);
-                                            $falla = new Falla();
-                                            $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $idMateria);
-                                            $logro = new Logro();
-                                            $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
-                                            $desempeño = "";
-                                            $cadena = "";
-
-
-                                            $band = 0;
-                                            $y+=0.5;
-
-                                            $pdf->SetXY($x, $y);
-                                            $pdf->SetFont("Arial", "B", 9);
-                                            if ($nombreMateria == "ARTISTICA" || $nombreMateria == "ETICA" || $nombreMateria == "RELIGION" || $nombreMateria == "EDUCACION FISICA" || $nombreMateria == "FILOSOFIA") {
-                                                //$pdf->MultiCell(5.5,1.25, utf8_decode($a->getNombreArea()),1,"L");
-                                                $band = 1;
-                                            } else {
-                                                $pdf->MultiCell(5.5, 1.25, utf8_decode($nombreMateria), 1, "L");
-                                            }
-                                            if ($band == 1) {
-                                                $pdf->SetXY($x + 5.5, $y - 0.5);
-                                            } else {
-                                                $pdf->SetXY($x + 5.5, $y);
-                                            }
-
-                                            $pdf->MultiCell(0.5, 1.25, $horas, 1, "L");
-
-
-
-                                            if ($log != NULL) {
-
-
-                                                if ($periodo == "PRIMERO") {
-                                                   // $pdf->Cell(1, 1.5, $not->getPrimerP(), 1, 0, "C");
-                                                    $suma = $suma + $not->getPrimerP();
-                                                    $n = $not->getPrimerP();
-                                                    if ($not->getPrimerP() <= 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getPrimerP() <= 79 && $not->getPrimerP() > 69) {
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getPrimerP() <= 94 && $not->getPrimerP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getPrimerP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "SEGUNDO") {
-                                                    $pdf->Cell(1, 1.5, $not->getSegundoP(), 1, 0, "C");
-                                                    $suma = $suma + $not->getSegundoP();
-                                                    $n= $not->getSegundoP();
-                                                    if ($not->getSegundoP() <= 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getSegundoP() <= 79 && $not->getSegundoP() > 69) {
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getSegundoP() <= 94 && $not->getSegundoP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getSegundoP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "TERCERO") {
-                                                    $pdf->Cell(1, 1.5, $not->getTercerP(), 1, 0, "C");
-                                                    $suma = $suma + $not->getTercerP();
-                                                    $n=$not->getTercerP();
-
-                                                    if ($not->getTercerP() <= 69) {
-
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getTercerP() <= 79 && $not->getTercerP() > 69) {
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getTercerP() <= 94 && $not->getTercerP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getTercerP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "CUARTO") {
-                                                    
-                                                    //$pdf->Cell(1, 1.5, $not->getCuartoP();, 1, 0, "C");
-                                                    $suma = $suma + $not->getCuartoP();
-                                                    $n = $not->getCuartoP();
-                                                    if ($not->getCuartoP() <= 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getCuartoP() <= 79 && $not->getCuartoP() > 69) {
-
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getCuartoP() <= 94 && $not->getCuartoP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getCuartoP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "FINAL") {
-                                                    $def = $nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
-                                                    $pdf->Cell(1, 1.5, $def, 1, 0, "C");
-                                                    $suma = $suma + $def;
-
-                                                    if ($def < 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($def <= 79 && $def > 69) {
-
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($def <= 94 && $def > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($def > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                }
-                                                $cont++;
-                                                $pdf->SetFont("Arial", "", 7);
-                                                if ($band == 1) {
-                                                    $pdf->SetXY($x + 6, $y - 0.5);
-                                                } else {
-                                                    $pdf->SetXY($x + 6, $y);
-                                                }
-
-                                                $pdf->MultiCell(12, 0.417, strtoupper(utf8_decode($desempeño.": ".$cadena)), 0, "L");
-                                                if ($band == 1) {
-                                                    $pdf->SetXY($x + 6, $y - 0.5);
-                                                } else {
-                                                    $pdf->SetXY($x + 6, $y);
-                                                }
-                                                $pdf->MultiCell(12, 1.25, "", 1, "L");
-                                                
-                                                if ($band == 1) {
-                                                $pdf->SetXY($x + 18, $y - 0.5);
-                                            } else {
-                                                $pdf->SetXY($x + 18, $y);
-                                            }
-                                            
-                                            $pdf->SetFont("Arial", "B", 7);
-                                            //MODIFICAR ESTA LINEA DE ACUERDO AL PERIODO
-                                            $pdf->MultiCell(12, 1.25, utf8_decode($n), 0, "L");
-                                            
-                                            if ($band == 1) {
-                                                $pdf->SetXY($x + 18, $y - 0.5);
-                                            } else {
-                                                $pdf->SetXY($x + 18, $y);
-                                            }
-                                            
-                                            $pdf->MultiCell(1, 1.25, "", 1, "L");
-                                            }
-                                            if ($band == 1) {
-                                                $y+=0.25;
-                                            } else {
-                                                $y+=0.75;
-                                            }
-                                        }
-                                    }
-                                }
-
-
-                                $y += 0.5;
-                            }
-                        }
-                    }elseif($a->getIdArea() == "ET"){
-                        
-                        if ($grad->getIdGrado() != "P" && $grad->getIdGrado() !="J") {
-                            if ($a->getOrden() == $c) {
-
-                                $pdf->SetXY($x, $y);
-                                $pdf->SetFont("Arial", "BU", 9);
-
-                                if ($a->getIdArea() == "EF" || $a->getIdArea() == "EA" || $a->getIdArea() == "ER" || $a->getIdArea() == "EVD" || $a->getIdArea() == "FIL") {
-                                    $pdf->Cell(5.5, 1.25, utf8_decode($a->getNombreArea()), 1, 0, "L");
-                                } else {
-
-                                    $pdf->Cell(5.5, 0.5, utf8_decode($a->getNombreArea()), 1, 0, "L");
-                                    $pdf->Cell(0.5, 0.5, utf8_decode(""), 1, 0, "L");
-                                    $pdf->Cell(12, 0.5, utf8_decode(""), 1, 0, "L");
-                                    $pdf->Cell(1, 0.5, utf8_decode(""), 1, 0, "L");
-                                }
-                                $mate = new Materia();
-                                $band = 0;
-                                foreach ($pens as $p) {
-                                    $materias = $mate->leerMateriaPorId($p->getIdMateria());
-                                    foreach ($materias as $materia) {
-                                        $idMateria = $materia->getIdMateria();
-                                        $nombreMateria = $materia->getNombreMateria();
-                                        $horas = $materia->getHoras();
-                                        $idArea = $materia->getIdArea();
-
-                                        if ($idArea == $a->getIdArea()) {
-
-                                            $nota = new Nota();
-                                            $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $idMateria);
-                                            $falla = new Falla();
-                                            $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $idMateria);
-                                            $logro = new Logro();
-                                            $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
-                                            $desempeño = "";
-                                            $cadena = "";
-
-
-                                            $band = 0;
-                                            $y+=0.5;
-
-                                            $pdf->SetXY($x, $y);
-                                            $pdf->SetFont("Arial", "B", 9);
-                                            if ($nombreMateria == "ARTISTICA" || $nombreMateria == "ETICA" || $nombreMateria == "RELIGION" || $nombreMateria == "EDUCACION FISICA" || $nombreMateria == "FILOSOFIA") {
-                                                //$pdf->MultiCell(5.5,1.25, utf8_decode($a->getNombreArea()),1,"L");
-                                                $band = 1;
-                                            } else {
-                                                $pdf->MultiCell(5.5, 1.25, utf8_decode($nombreMateria), 1, "L");
-                                            }
-                                            if ($band == 1) {
-                                                $pdf->SetXY($x + 5.5, $y - 0.5);
-                                            } else {
-                                                $pdf->SetXY($x + 5.5, $y);
-                                            }
-
-                                            $pdf->MultiCell(0.5, 1.25, $horas, 1, "L");
-
-
-
-                                            if ($log != NULL) {
-
-
-                                                if ($periodo == "PRIMERO") {
-                                                   // $pdf->Cell(1, 1.5, $not->getPrimerP(), 1, 0, "C");
-                                                    $suma = $suma + $not->getPrimerP();
-                                                    $n = $not->getPrimerP();
-                                                    if ($not->getPrimerP() <= 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getPrimerP() <= 79 && $not->getPrimerP() > 69) {
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getPrimerP() <= 94 && $not->getPrimerP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getPrimerP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "SEGUNDO") {
-                                                    $pdf->Cell(1, 1.5, $not->getSegundoP(), 1, 0, "C");
-                                                    $suma = $suma + $not->getSegundoP();
-                                                    $n= $not->getSegundoP();
-                                                    if ($not->getSegundoP() <= 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getSegundoP() <= 79 && $not->getSegundoP() > 69) {
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getSegundoP() <= 94 && $not->getSegundoP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getSegundoP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "TERCERO") {
-                                                    $pdf->Cell(1, 1.5, $not->getTercerP(), 1, 0, "C");
-                                                    $suma = $suma + $not->getTercerP();
-                                                    $n=$not->getTercerP();
-
-                                                    if ($not->getTercerP() <= 69) {
-
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getTercerP() <= 79 && $not->getTercerP() > 69) {
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getTercerP() <= 94 && $not->getTercerP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getTercerP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "CUARTO") {
-                                                    
-                                                    //$pdf->Cell(1, 1.5, $not->getCuartoP();, 1, 0, "C");
-                                                    $suma = $suma + $not->getCuartoP();
-                                                    $n = $not->getCuartoP();
-                                                    if ($not->getCuartoP() <= 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getCuartoP() <= 79 && $not->getCuartoP() > 69) {
-
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getCuartoP() <= 94 && $not->getCuartoP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getCuartoP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "FINAL") {
-                                                    $def = $nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
-                                                    $pdf->Cell(1, 1.5, $def, 1, 0, "C");
-                                                    $suma = $suma + $def;
-
-                                                    if ($def < 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($def <= 79 && $def > 69) {
-
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($def <= 94 && $def > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($def > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                }
-                                                $cont++;
-                                                $pdf->SetFont("Arial", "", 7);
-                                                if ($band == 1) {
-                                                    $pdf->SetXY($x + 6, $y - 0.5);
-                                                } else {
-                                                    $pdf->SetXY($x + 6, $y);
-                                                }
-
-                                                $pdf->MultiCell(12, 0.417, strtoupper(utf8_decode($desempeño.": ".$cadena)), 0, "L");
-                                                if ($band == 1) {
-                                                    $pdf->SetXY($x + 6, $y - 0.5);
-                                                } else {
-                                                    $pdf->SetXY($x + 6, $y);
-                                                }
-                                                $pdf->MultiCell(12, 1.25, "", 1, "L");
-                                                
-                                                if ($band == 1) {
-                                                $pdf->SetXY($x + 18, $y - 0.5);
-                                            } else {
-                                                $pdf->SetXY($x + 18, $y);
-                                            }
-                                            
-                                            $pdf->SetFont("Arial", "B", 7);
-                                            //MODIFICAR ESTA LINEA DE ACUERDO AL PERIODO
-                                            $pdf->MultiCell(12, 1.25, utf8_decode($n), 0, "L");
-                                            
-                                            if ($band == 1) {
-                                                $pdf->SetXY($x + 18, $y - 0.5);
-                                            } else {
-                                                $pdf->SetXY($x + 18, $y);
-                                            }
-                                            
-                                            $pdf->MultiCell(1, 1.25, "", 1, "L");
-                                            }
-                                            if ($band == 1) {
-                                                $y+=0.25;
-                                            } else {
-                                                $y+=0.75;
-                                            }
-                                        }
-                                    }
-                                }
-
-
-                                $y += 0.5;
-                            }
-                            
-                        }
-                        
-                        
-                    }else{
-                        if ($a->getOrden() == $c) {
-
-                            $pdf->SetXY($x, $y);
-                            $pdf->SetFont("Arial", "BU", 9);
-
-                            if ($a->getIdArea() == "EF" || $a->getIdArea() == "EA" || $a->getIdArea() == "ER" || $a->getIdArea() == "EVD" || $a->getIdArea() == "FIL") {
-                                $pdf->Cell(5.5, 1.25, utf8_decode($a->getNombreArea()), 1, 0, "L");
-                            } else {
-
-                                $pdf->Cell(5.5, 0.5, utf8_decode($a->getNombreArea()), 1, 0, "L");
-                                $pdf->Cell(0.5, 0.5, utf8_decode(""), 1, 0, "L");
-                                $pdf->Cell(12, 0.5, utf8_decode(""), 1, 0, "L");
-                                $pdf->Cell(1, 0.5, utf8_decode(""), 1, 0, "L");
-                            }
-                            $mate = new Materia();
-                            $band = 0;
-                            foreach ($pens as $p) {
-                                $materias = $mate->leerMateriaPorId($p->getIdMateria());
-                                foreach ($materias as $materia) {
-                                    $idMateria = $materia->getIdMateria();
-                                    $nombreMateria = $materia->getNombreMateria();
-                                    $horas = $materia->getHoras();
-                                    $idArea = $materia->getIdArea();
-
-                                    if ($idArea == $a->getIdArea()) {
-
-                                        $nota = new Nota();
-                                        $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $idMateria);
-                                        $falla = new Falla();
-                                        $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $idMateria);
-                                        $logro = new Logro();
-                                        $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
-                                        $desempeño = "";
-                                        $cadena = "";
-
-
-                                        $band = 0;
-                                        $y+=0.5;
-
-                                        $pdf->SetXY($x, $y);
-                                        $pdf->SetFont("Arial", "B", 9);
-                                        if ($nombreMateria == "ARTISTICA" || $nombreMateria == "ETICA" || $nombreMateria == "RELIGION" || $nombreMateria == "EDUCACION FISICA" || $nombreMateria == "FILOSOFIA") {
-                                            //$pdf->MultiCell(5.5,1.25, utf8_decode($a->getNombreArea()),1,"L");
-                                            $band = 1;
-                                        } else {
-                                            $pdf->MultiCell(5.5, 1.25, utf8_decode($nombreMateria), 1, "L");
-                                        }
-                                        if ($band == 1) {
-                                            $pdf->SetXY($x + 5.5, $y - 0.5);
-                                        } else {
-                                            $pdf->SetXY($x + 5.5, $y);
-                                        }
-
-                                        $pdf->MultiCell(0.5, 1.25, $horas, 1, "L");
-
-
-
-                                        if ($log != NULL) {
-
-
-                                            if ($periodo == "PRIMERO") {
-                                                   // $pdf->Cell(1, 1.5, $not->getPrimerP(), 1, 0, "C");
-                                                    $suma = $suma + $not->getPrimerP();
-                                                    $n = $not->getPrimerP();
-                                                    if ($not->getPrimerP() <= 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getPrimerP() <= 79 && $not->getPrimerP() > 69) {
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getPrimerP() <= 94 && $not->getPrimerP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getPrimerP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "SEGUNDO") {
-                                                    $pdf->Cell(1, 1.5, $not->getSegundoP(), 1, 0, "C");
-                                                    $suma = $suma + $not->getSegundoP();
-                                                    $n= $not->getSegundoP();
-                                                    if ($not->getSegundoP() <= 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getSegundoP() <= 79 && $not->getSegundoP() > 69) {
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getSegundoP() <= 94 && $not->getSegundoP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getSegundoP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "TERCERO") {
-                                                    $pdf->Cell(1, 1.5, $not->getTercerP(), 1, 0, "C");
-                                                    $suma = $suma + $not->getTercerP();
-                                                    $n=$not->getTercerP();
-
-                                                    if ($not->getTercerP() <= 69) {
-
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getTercerP() <= 79 && $not->getTercerP() > 69) {
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getTercerP() <= 94 && $not->getTercerP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getTercerP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "CUARTO") {
-                                                    
-                                                    //$pdf->Cell(1, 1.5, $not->getCuartoP();, 1, 0, "C");
-                                                    $suma = $suma + $not->getCuartoP();
-                                                    $n = $not->getCuartoP();
-                                                    if ($not->getCuartoP() <= 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($not->getCuartoP() <= 79 && $not->getCuartoP() > 69) {
-
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($not->getCuartoP() <= 94 && $not->getCuartoP() > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($not->getCuartoP() > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                } elseif ($periodo == "FINAL") {
-                                                    $def = $nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
-                                                    $pdf->Cell(1, 1.5, $def, 1, 0, "C");
-                                                    $suma = $suma + $def;
-
-                                                    if ($def < 69) {
-                                                        $cadena = $log->getBajo();
-                                                        $desempeño = "Db";
-                                                    }
-                                                    if ($def <= 79 && $def > 69) {
-
-                                                        $cadena = $log->getBasico();
-                                                        $desempeño = "DB";
-                                                    }
-                                                    if ($def <= 94 && $def > 79) {
-                                                        $cadena = $log->getAlto();
-                                                        $desempeño = "DA";
-                                                    }
-                                                    if ($def > 94) {
-                                                        $cadena = $log->getSuperior();
-                                                        $desempeño = "DS";
-                                                    }
-                                                }
-                                            $cont++;    
-                                            $pdf->SetFont("Arial", "", 7);
-                                            if ($band == 1) {
-                                                $pdf->SetXY($x + 6, $y - 0.5);
-                                            } else {
-                                                $pdf->SetXY($x + 6, $y);
-                                            }
-
-                                            $pdf->MultiCell(12, 0.417, strtoupper(utf8_decode($desempeño.": ".$cadena)), 0, "L");
-                                            if ($band == 1) {
-                                                $pdf->SetXY($x + 6, $y - 0.5);
-                                            } else {
-                                                $pdf->SetXY($x + 6, $y);
-                                            }
-                                            $pdf->MultiCell(12, 1.25, "", 1, "L");
-                                            
-                                            
-                                            if ($band == 1) {
-                                                $pdf->SetXY($x + 18, $y - 0.5);
-                                            } else {
-                                                $pdf->SetXY($x + 18, $y);
-                                            }
-                                            $pdf->SetFont("Arial", "B", 7);
-                                            //MODIFICAR ESTA LINEA DE ACUERDO AL PERIODO
-                                            $pdf->MultiCell(12, 0.417, utf8_decode($n), 0, "L");
-                                            
-                                            if ($band == 1) {
-                                                $pdf->SetXY($x + 18, $y - 0.5);
-                                            } else {
-                                                $pdf->SetXY($x + 18, $y);
-                                            }
-                                            
-                                            $pdf->MultiCell(1, 1.25, "", 1, "L");
-                                        }
-                                        if ($band == 1) {
-                                            $y+=0.25;
-                                        } else {
-                                            $y+=0.75;
-                                        }
-                                    }
-                                }
-                            }
-
-
-                            $y += 0.5;
-                        }
-//FIN IF
-                    }
-                }//FOREACH AREAS
-            }
-            $prom = round($suma / $cont, 1);
-            $pdf->SetXY($x+17.5, $y);
-            $pdf->Cell(1.5, 0.5, utf8_decode("PROM: ".$prom), 1, 0, "L");
-            $pdf->SetXY($x+17.5, $y+0.5);
-            $pdf->Cell(1.5, 0.5, utf8_decode("POS: "), 1, 0, "L");
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(17.5, 1, "", 1, 0, "L");
-            $pdf->SetXY($x, $y);
-            $pdf->Cell(17.5, 0.5, "Observaciones:", 0, 0, "L");
-            
-            $y +=1.5 ;
-            $pdf->SetXY($x, $y);
-            $pdf->SetFont("Arial", "B", 9);
-            $pdf->Cell(10, 0.5, "DIRECTOR DE GRUPO______________________", 0, 0, "C");
-            $pdf->Cell(10, 0.5, "RECTOR______________________", 0, 0, "C");
-            
-        }//FIn Estudiantes
-
-
-        $pdf->Output("Boletin ".$grad->getIdGrado(), "I");
-    }
-
 
     public function registroSantaTeresita($idPersona) {
         $estudiante = new Estudiante();
@@ -2198,7 +1396,7 @@ class Reportes {
 
         $pdf->SetFont("Arial", "B", 9);
         $pdf->SetXY($x + 8, $y);
-        $pdf->Cell(2, 0.5, "RH: " . $est->getTipoSanguineo(), 1, 0, "L");
+        $pdf->Cell(2, 0.5, "RH: " . utf8_decode($est->getTipoSanguineo()), 1, 0, "L");
 
         $pdf->SetFont("Arial", "B", 10);
         $pdf->SetXY($x + 10, $y);
@@ -2450,242 +1648,6 @@ class Reportes {
 
         $pdf->Output("Matricula " . $nom . " " . $ape, "I");
     }
-
-    public function consolidadoSantaTeresita($idSalon, $periodo){
-        
-        $area = new Area();
-        $areas = $area->leerAreas();
-        $pensum = new Pensum();
-        $pens = $pensum->leerPensum($idSalon);
-        $persona = new Persona();
-        $estudiantes = $persona->leerPorSalon($idSalon);
-        $salon = new Salon();
-        $sal = $salon->leerSalonePorId($idSalon);
-        $grado = new Grado();
-        $grad = $grado->leerGradoPorId($sal->getIdGrado());
-
-        $pdf = new FPDF('L', 'cm', 'Legal');
-        $pdf->SetMargins(0, 0, 0);
-        $pdf->AddPage();
-        $x=0;$y=0.25;
-        $pdf->SetXY($x, $y);
-        $pdf->SetFont("Arial", "B", 14);
-        $pdf->cell(31, 1, 'COLEGIO "SANTA TERESITA"', 0, 0, "C");
-        $y+=0.5;
-        $pdf->SetXY($x, $y);
-        $pdf->cell(31, 1, 'CONSOLIDADO DEL GRADO: '.$idSalon.'. PERIODO: '.$periodo, 0, 0, "C");
-        $y+=1;
-        $pdf->SetFont("Arial", "B", 10);
-        $pdf->SetXY($x, $y);
-        $pdf->cell(0.5, 1.5, 'No.', 1, 0, "C");
-        $pdf->cell(9, 0.75, 'Asignaturas', 0, 0, "R");
-        $y+=0.75;
-        $x+=0.5;
-        $pdf->SetXY($x, $y);
-        $pdf->cell(9, 0.75, 'Apellidos y Nombres', 0, 0, "L");
-        $y-=0.75;
-        $pdf->SetXY($x, $y);
-        $pdf->cell(9, 1.5, '', 1, 0, "L");
-        $pdf->Line($x, $y, $x+9, $y+1.5);
-        
-        $y+=0.75;
-        $x+=9;
-        $pdf->SetXY($x,$y);
-        $c=0;
-        $pdf->SetFont("Arial", "B", 7);
-        $m = array();
-        for ($i = 0; $i < count($areas); $i++) {
-
-            $c++;
-            $cont=0;
-            foreach ($areas as $a){
-                
-                if($a->getIdArea()=="FIL"){
-                    $g = intval($grad->getIdGrado());
-                     if ($g > 5 ) {
-                         if ($a->getOrden() == $c) {
-                            $mate = new Materia();
-
-                            foreach ($pens as $p) {
-
-                                $materias = $mate->leerMateriaPorId($p->getIdMateria());
-                                foreach ($materias as $materia) {
-                                    $idMateria = $materia->getIdMateria();
-                                    $nombreMateria = substr($materia->getNombreMateria(),0,5);
-                                    $horas = $materia->getHoras();
-                                    $idArea = $materia->getIdArea();
-
-                                    if ($idArea == $a->getIdArea()) {
-                                        $pdf->cell(1.1, 0.75, $nombreMateria, 1, 0, "C");
-                                        $cont++;
-                                        $m[]= $idMateria;
-                                    }
-
-                                }
-                            }
-
-                            $y-=0.75;
-                            $pdf->SetXY($x,$y);
-                            $w =$cont * 1.1;
-                            if($cont ==1){
-                                $nombreArea=substr($a->getNombreArea(),0,5);
-                            }else if($cont== 2){
-                                $nombreArea=substr($a->getNombreArea(),0,10);
-                            }else if($cont == 3){
-                                $nombreArea=substr($a->getNombreArea(),0,13);
-                            }else{
-                                $nombreArea=$a->getNombreArea();
-                            }
-                            $pdf->cell($w, 0.75, utf8_decode($nombreArea), 1, 0, "C");
-                            $x += $w;
-                            $y += 0.75;
-                            $pdf->SetXY($x,$y);
-                            }
-                         
-                         
-                     }
-                    
-                }else if($a->getIdArea()=="ET"){
-                    if ($grad->getIdGrado() != "P" && $grad->getIdGrado() !="J") {
-                            if ($a->getOrden() == $c) {
-                        $mate = new Materia();
-
-                        foreach ($pens as $p) {
-
-                            $materias = $mate->leerMateriaPorId($p->getIdMateria());
-                            foreach ($materias as $materia) {
-                                $idMateria = $materia->getIdMateria();
-                                $nombreMateria = substr($materia->getNombreMateria(),0,5);
-                                $horas = $materia->getHoras();
-                                $idArea = $materia->getIdArea();
-
-                                if ($idArea == $a->getIdArea()) {
-                                    $pdf->cell(1.1, 0.75, $nombreMateria, 1, 0, "C");
-                                    $cont++;
-                                    $m[]= $idMateria;
-                                }
-
-                            }
-                        }
-
-                        $y-=0.75;
-                        $pdf->SetXY($x,$y);
-                        $w =$cont * 1.1;
-                        if($cont ==1){
-                            $nombreArea=substr($a->getNombreArea(),0,5);
-                        }else if($cont== 2){
-                            $nombreArea=substr($a->getNombreArea(),0,10);
-                        }else if($cont == 3){
-                            $nombreArea=substr($a->getNombreArea(),0,13);
-                        }else{
-                            $nombreArea=$a->getNombreArea();
-                        }
-                        $pdf->cell($w, 0.75, utf8_decode($nombreArea), 1, 0, "C");
-                        $x += $w;
-                        $y += 0.75;
-                        $pdf->SetXY($x,$y);
-                    }
-                        
-                    }
-                
-                }else{
-                    if ($a->getOrden() == $c) {
-                    $mate = new Materia();
-                    
-                    foreach ($pens as $p) {
-                        
-                        $materias = $mate->leerMateriaPorId($p->getIdMateria());
-                        foreach ($materias as $materia) {
-                            $idMateria = $materia->getIdMateria();
-                            $nombreMateria = substr($materia->getNombreMateria(),0,5);
-                            $horas = $materia->getHoras();
-                            $idArea = $materia->getIdArea();
-
-                            if ($idArea == $a->getIdArea()) {
-                                $pdf->cell(1.1, 0.75, $nombreMateria, 1, 0, "C");
-                                $cont++;
-                                $m[]= $idMateria;
-                            }
-                            
-                        }
-                    }
-                    
-                    $y-=0.75;
-                    $pdf->SetXY($x,$y);
-                    $w =$cont * 1.1;
-                    if($cont ==1){
-                        $nombreArea=substr($a->getNombreArea(),0,5);
-                    }else if($cont== 2){
-                        $nombreArea=substr($a->getNombreArea(),0,10);
-                    }else if($cont == 3){
-                        $nombreArea=substr($a->getNombreArea(),0,13);
-                    }else{
-                        $nombreArea=$a->getNombreArea();
-                    }
-                    $pdf->cell($w, 0.75, utf8_decode($nombreArea), 1, 0, "C");
-                    $x += $w;
-                    $y += 0.75;
-                    $pdf->SetXY($x,$y);
-                    }
-                }
-                
-            }
-
-        }
-        
-        $x=0;
-        $y += 0.75;
-        $j=0;
-        $pdf->SetXY($x,$y);
-        $pdf->SetFont("Arial", "", 8);
-        foreach ($estudiantes as $estudiante) {
-            
-            $matricula = new Matricula();
-            $matr = $matricula->leerMatriculaPorId($estudiante->getIdPersona());
-            
-            $j++;
-            $pdf->cell(0.5, 0.4, $j, 1, 0, "C");
-            $pdf->cell(9, 0.4,utf8_decode(strtoupper($estudiante->getPApellido() . " " . $estudiante->getSApellido() . " " . $estudiante->getNombres())) , 1, 0, "L");
-        
-            foreach($m as $idMateria){
-                
-                $nota = new Nota();
-                $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $idMateria);
-                
-                switch ($periodo) {
-                    case "PRIMERO":
-                        $n = $not->getPrimerP();
-                        break;
-                    case "SEGUNDO":
-                        $n = $not->getSegundoP();
-                        break;
-                    case "TERCERO":
-                        $n = $not->getTercerP();
-                        break;
-                    case "CUARTO":
-                        $n = $not->getCuartoP();
-                        break;
-                }
-                
-                if($n<70){
-                    $pdf->SetTextColor(190,21,34);
-                }
-                
-                $pdf->cell(1.1, 0.4, $n, 1, 0, "C");
-                $pdf->SetTextColor(0,0,0);
-            }
-            
-            
-            $y+=0.4;
-            $x=0;
-            $pdf->SetXY($x,$y);
-        }
-        
-
-        $pdf->Output("Consolidado ".$grad->getIdGrado(), "I");
-    }
-
-    
 
     public function consolidadoGalois($idSalon, $periodo) {
         $pensum = new Pensum();
@@ -3121,6 +2083,7 @@ class Reportes {
         $matriculas = $matricula->leerMatriculasPorId($idPersona);
 
         $pdf = new FPDF('L', 'cm', 'Legal');
+        $pdf->AddPage();
 
         $x = 2;
         $y = 1;
@@ -4173,6 +3136,1073 @@ class Reportes {
         $pdf->Output("Planillas", "I");
     }
 
+    function boletinSantaTeresita($idSalon, $periodo) {
+
+        $area = new Area();
+        $areas = $area->leerAreas();
+        $pensum = new Pensum();
+        $pens = $pensum->leerPensum($idSalon);
+        $persona = new Persona();
+        $estudiantes = $persona->leerPorSalon($idSalon);
+
+        $nots = new Nota();
+        if ($periodo == "PRIMERO") {
+            $puestos = $nots->leerPromedios($idSalon, "primerP");
+        } elseif ($periodo == "SEGUNDO") {
+            $puestos = $nots->leerPromedios($idSalon, "segundoP");
+        } elseif ($periodo == "TERCERO") {
+            $puestos = $nots->leerPromedios($idSalon, "tercerP");
+        } elseif ($periodo == "CUARTO") {
+            $puestos = $nots->leerPromedios($idSalon, "cuartoP");
+        }
+
+
+        $pdf = new FPDF('P', 'cm', 'Legal');
+
+        $pdf->SetMargins(0, 0, 0);
+        $puest = 0;
+        foreach ($puestos as $puesto) {
+
+            foreach ($estudiantes as $estudiante) {
+
+                if ($puesto["idPersona"] == $estudiante->getIdPersona()) {
+
+                    $matricula = new Matricula();
+                    $matr = $matricula->leerMatriculaPorId($estudiante->getIdPersona());
+                    $salon = new Salon();
+                    $sal = $salon->leerSalonePorId($idSalon);
+                    $grado = new Grado();
+                    $grad = $grado->leerGradoPorId($sal->getIdGrado());
+
+                    $pdf->AddPage();
+                    $pdf->SetFont("Arial", "B", 14);
+                    $pdf->SetXY(1, 0);
+                    $pdf->cell(18.5, 1, 'COLEGIO "SANTA TERESITA"', 0, 0, "C");
+                    $pdf->ln();
+                    $pdf->cell(4, 4, "", 0);
+                    $pdf->Image('utiles/imagenes/escudoSantaTeresita.jpg', 1, 0, 2.5);
+                    $pdf->SetFont("Arial", "", 10);
+                    //CAbecera
+                    $pdf->SetXY(1, 1);
+                    $pdf->Cell(18.5, 1, utf8_decode('"EDUCAMOS PARA HACER POSIBLE LA VIDA Y LA FELICIDAD"'), 0, 1, "C");
+                    $pdf->SetXY(1, 1.5);
+                    $pdf->Cell(18.5, 1, "INFORME EVALUATIVO", 0, 1, "C");
+
+
+                    $pdf->SetXY(16, 0);
+                    $pdf->SetFont("Arial", "", 10);
+                    $pdf->Cell(4, 1, "Bajo(Db): 10 - 69 ", 0, 0, "C");
+                    $pdf->SetXY(16, 0.5);
+                    $pdf->Cell(4, 1, "Basico(DB): 70 - 79  ", 0, 0, "C");
+                    $pdf->SetXY(16, 1);
+                    $pdf->Cell(4, 1, "Alto(DA): 80 - 94 ", 0, 0, "C");
+                    $pdf->SetXY(16, 1.5);
+                    $pdf->Cell(4, 1, "Superior(DS): 95 - 100", 0, 0, "C");
+                    $pdf->SetXY(16, 0);
+                    $pdf->Cell(4, 2.5, "", 1, 0, "C");
+
+                    if ($periodo == "PRIMERO") {
+                        $periodo3 = "1";
+                    }
+                    if ($periodo == "SEGUNDO") {
+                        $periodo3 = "2";
+                    }
+
+                    if ($periodo == "TERCERO") {
+                        $periodo3 = "3";
+                    }
+
+                    if ($periodo == "CUARTO") {
+                        $periodo3 = "4";
+                    }
+
+                    $x = 1;
+                    $y = 2.75;
+                    $pdf->SetXY($x, $y);
+                    $pdf->SetFont("Arial", "", 10);
+                    $pdf->Cell(3.3, 0.5, "Apellidos y Nombre:", 0, 0, "L");
+                    $pdf->SetFont("Arial", "B", 10);
+                    $pdf->Cell(8, 0.5, utf8_decode(strtoupper($estudiante->getPApellido() . " " . $estudiante->getSApellido() . " " . $estudiante->getNombres())), 0, 0, "L");
+                    $pdf->SetXY($x, $y);
+                    $pdf->Cell(12.8, 0.5, "", 1, 0, "L");
+
+
+                    $pdf->SetFont("Arial", "", 10);
+                    $pdf->Cell(1.2, 0.5, "Grado:", 0, 0, "L");
+                    $pdf->SetFont("Arial", "B", 10);
+                    $pdf->Cell(0.8, 0.5, $idSalon, 0, 0, "L");
+                    $pdf->SetXY($x + 12.8, $y);
+                    $pdf->Cell(2.2, 0.5, "", 1, 0, "L");
+
+                    $pdf->SetFont("Arial", "", 10);
+                    $pdf->Cell(1.5, 0.5, "Periodo:", 0, 0, "L");
+                    $pdf->SetFont("Arial", "B", 10);
+                    $pdf->Cell(0.5, 0.5, $periodo3, 0, 0, "L");
+                    $pdf->SetXY($x + 15, $y);
+                    $pdf->Cell(2, 0.5, "", 1, 0, "L");
+
+                    $pdf->SetFont("Arial", "", 10);
+                    $pdf->Cell(1, 0.5, utf8_decode("Año:"), 0, 0, "L");
+                    $pdf->SetFont("Arial", "B", 10);
+                    $pdf->Cell(1, 0.5, $matr->getAnoLectivo(), 0, 0, "L");
+                    $pdf->SetXY($x + 17, $y);
+                    $pdf->Cell(2, 0.5, "", 1, 0, "L");
+
+                    $pdf->SetFont("Arial", "B", 9);
+                    $y += 0.5;
+                    $pdf->SetXY($x, $y);
+                    $pdf->SetFont("Arial", "B", 9);
+                    $pdf->Cell(5.5, 0.5, "AREAS Y ASIGNATURAS", 1, 0, "L");
+                    $pdf->SetFont("Arial", "B", 8);
+                    $pdf->Cell(0.5, 0.5, "I.H", 1, 0, "L");
+                    $pdf->SetFont("Arial", "B", 9);
+                    $pdf->Cell(12, 0.5, "FORTALEZAS Y/O DIFICULTADES", 1, 0, "C");
+                    $pdf->Cell(1, 0.5, "NOTA", 1, 0, "C");
+
+                    $y += 0.5;
+                    $c = 0;
+                    $suma = 0;
+                    $cont = 0;
+
+                    for ($i = 0; $i < count($areas); $i++) {
+
+                        $c++;
+                        foreach ($areas as $a) {
+                            $g = intval($grad->getIdGrado());
+
+                            if ($a->getIdArea() == "FIL") {
+
+                                if ($g > 5) {
+
+                                    if ($a->getOrden() == $c) {
+
+                                        $pdf->SetXY($x, $y);
+                                        $pdf->SetFont("Arial", "BU", 9);
+
+                                        if ($a->getIdArea() == "EF" || $a->getIdArea() == "EA" || $a->getIdArea() == "ER" || $a->getIdArea() == "EVD" || $a->getIdArea() == "FIL") {
+                                            $pdf->Cell(5.5, 1.25, utf8_decode($a->getNombreArea()), 1, 0, "L");
+                                        } else {
+
+                                            $pdf->Cell(5.5, 0.5, utf8_decode($a->getNombreArea()), 1, 0, "L");
+                                            $pdf->Cell(0.5, 0.5, utf8_decode(""), 1, 0, "L");
+                                            $pdf->Cell(12, 0.5, utf8_decode(""), 1, 0, "L");
+                                            $pdf->Cell(1, 0.5, utf8_decode(""), 1, 0, "L");
+                                        }
+                                        $mate = new Materia();
+                                        $band = 0;
+                                        foreach ($pens as $p) {
+                                            $materias = $mate->leerMateriaPorId($p->getIdMateria());
+                                            foreach ($materias as $materia) {
+                                                $idMateria = $materia->getIdMateria();
+                                                $nombreMateria = $materia->getNombreMateria();
+                                                $horas = $materia->getHoras();
+                                                $idArea = $materia->getIdArea();
+
+                                                if ($idArea == $a->getIdArea()) {
+
+                                                    $nota = new Nota();
+                                                    $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $idMateria);
+                                                    $falla = new Falla();
+                                                    $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $idMateria);
+                                                    $logro = new Logro();
+                                                    $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
+                                                    $desempeño = "";
+                                                    $cadena = "";
+
+
+                                                    $band = 0;
+                                                    $y+=0.5;
+
+                                                    $pdf->SetXY($x, $y);
+                                                    $pdf->SetFont("Arial", "B", 9);
+                                                    if ($nombreMateria == "ARTISTICA" || $nombreMateria == "ETICA" || $nombreMateria == "RELIGION" || $nombreMateria == "EDUCACION FISICA" || $nombreMateria == "FILOSOFIA") {
+                                                        //$pdf->MultiCell(5.5,1.25, utf8_decode($a->getNombreArea()),1,"L");
+                                                        $band = 1;
+                                                    } else {
+                                                        $pdf->MultiCell(5.5, 1.25, utf8_decode($nombreMateria), 1, "L");
+                                                    }
+                                                    if ($band == 1) {
+                                                        $pdf->SetXY($x + 5.5, $y - 0.5);
+                                                    } else {
+                                                        $pdf->SetXY($x + 5.5, $y);
+                                                    }
+
+                                                    $pdf->MultiCell(0.5, 1.25, $horas, 1, "L");
+
+
+
+                                                    if ($log != NULL) {
+
+
+                                                        if ($periodo == "PRIMERO") {
+                                                            // $pdf->Cell(1, 1.5, $not->getPrimerP(), 1, 0, "C");
+                                                            $suma = $suma + $not->getPrimerP();
+                                                            $n = $not->getPrimerP();
+                                                            if ($not->getPrimerP() <= 69) {
+                                                                $cadena = $log->getBajo();
+                                                                $desempeño = "Db";
+                                                            }
+                                                            if ($not->getPrimerP() <= 79 && $not->getPrimerP() > 69) {
+                                                                $cadena = $log->getBasico();
+                                                                $desempeño = "DB";
+                                                            }
+                                                            if ($not->getPrimerP() <= 94 && $not->getPrimerP() > 79) {
+                                                                $cadena = $log->getAlto();
+                                                                $desempeño = "DA";
+                                                            }
+                                                            if ($not->getPrimerP() > 94) {
+                                                                $cadena = $log->getSuperior();
+                                                                $desempeño = "DS";
+                                                            }
+                                                        } elseif ($periodo == "SEGUNDO") {
+                                                            //$pdf->Cell(1, 1.5, $not->getSegundoP(), 1, 0, "C");
+                                                            $suma = $suma + $not->getSegundoP();
+                                                            $n = $not->getSegundoP();
+                                                            if ($not->getSegundoP() <= 69) {
+                                                                $cadena = $log->getBajo();
+                                                                $desempeño = "Db";
+                                                            }
+                                                            if ($not->getSegundoP() <= 79 && $not->getSegundoP() > 69) {
+                                                                $cadena = $log->getBasico();
+                                                                $desempeño = "DB";
+                                                            }
+                                                            if ($not->getSegundoP() <= 94 && $not->getSegundoP() > 79) {
+                                                                $cadena = $log->getAlto();
+                                                                $desempeño = "DA";
+                                                            }
+                                                            if ($not->getSegundoP() > 94) {
+                                                                $cadena = $log->getSuperior();
+                                                                $desempeño = "DS";
+                                                            }
+                                                        } elseif ($periodo == "TERCERO") {
+                                                            //$pdf->Cell(1, 1.5, $not->getTercerP(), 1, 0, "C");
+                                                            $suma = $suma + $not->getTercerP();
+                                                            $n = $not->getTercerP();
+
+                                                            if ($not->getTercerP() <= 69) {
+
+                                                                $cadena = $log->getBajo();
+                                                                $desempeño = "Db";
+                                                            }
+                                                            if ($not->getTercerP() <= 79 && $not->getTercerP() > 69) {
+                                                                $cadena = $log->getBasico();
+                                                                $desempeño = "DB";
+                                                            }
+                                                            if ($not->getTercerP() <= 94 && $not->getTercerP() > 79) {
+                                                                $cadena = $log->getAlto();
+                                                                $desempeño = "DA";
+                                                            }
+                                                            if ($not->getTercerP() > 94) {
+                                                                $cadena = $log->getSuperior();
+                                                                $desempeño = "DS";
+                                                            }
+                                                        } elseif ($periodo == "CUARTO") {
+
+                                                            //$pdf->Cell(1, 1.5, $not->getCuartoP();, 1, 0, "C");
+                                                            $suma = $suma + $not->getCuartoP();
+                                                            $n = $not->getCuartoP();
+                                                            if ($not->getCuartoP() <= 69) {
+                                                                $cadena = $log->getBajo();
+                                                                $desempeño = "Db";
+                                                            }
+                                                            if ($not->getCuartoP() <= 79 && $not->getCuartoP() > 69) {
+
+                                                                $cadena = $log->getBasico();
+                                                                $desempeño = "DB";
+                                                            }
+                                                            if ($not->getCuartoP() <= 94 && $not->getCuartoP() > 79) {
+                                                                $cadena = $log->getAlto();
+                                                                $desempeño = "DA";
+                                                            }
+                                                            if ($not->getCuartoP() > 94) {
+                                                                $cadena = $log->getSuperior();
+                                                                $desempeño = "DS";
+                                                            }
+                                                        } elseif ($periodo == "FINAL") {
+                                                            $def = $nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
+                                                            $pdf->Cell(1, 1.5, $def, 1, 0, "C");
+                                                            $suma = $suma + $def;
+
+                                                            if ($def < 69) {
+                                                                $cadena = $log->getBajo();
+                                                                $desempeño = "Db";
+                                                            }
+                                                            if ($def <= 79 && $def > 69) {
+
+                                                                $cadena = $log->getBasico();
+                                                                $desempeño = "DB";
+                                                            }
+                                                            if ($def <= 94 && $def > 79) {
+                                                                $cadena = $log->getAlto();
+                                                                $desempeño = "DA";
+                                                            }
+                                                            if ($def > 94) {
+                                                                $cadena = $log->getSuperior();
+                                                                $desempeño = "DS";
+                                                            }
+                                                        }
+                                                        $cont++;
+                                                        $pdf->SetFont("Arial", "", 7);
+                                                        if ($band == 1) {
+                                                            $pdf->SetXY($x + 6, $y - 0.5);
+                                                        } else {
+                                                            $pdf->SetXY($x + 6, $y);
+                                                        }
+
+                                                        $pdf->MultiCell(12, 0.417, strtoupper(utf8_decode($desempeño . ": " . $cadena)), 0, "L");
+                                                        if ($band == 1) {
+                                                            $pdf->SetXY($x + 6, $y - 0.5);
+                                                        } else {
+                                                            $pdf->SetXY($x + 6, $y);
+                                                        }
+                                                        $pdf->MultiCell(12, 1.25, "", 1, "L");
+
+                                                        if ($band == 1) {
+                                                            $pdf->SetXY($x + 18, $y - 0.5);
+                                                        } else {
+                                                            $pdf->SetXY($x + 18, $y);
+                                                        }
+
+                                                        $pdf->SetFont("Arial", "B", 7);
+                                                        //MODIFICAR ESTA LINEA DE ACUERDO AL PERIODO
+                                                        $pdf->MultiCell(12, 1.25, utf8_decode($n), 0, "L");
+
+                                                        if ($band == 1) {
+                                                            $pdf->SetXY($x + 18, $y - 0.5);
+                                                        } else {
+                                                            $pdf->SetXY($x + 18, $y);
+                                                        }
+
+                                                        $pdf->MultiCell(1, 1.25, "", 1, "L");
+                                                    }
+                                                    if ($band == 1) {
+                                                        $y+=0.25;
+                                                    } else {
+                                                        $y+=0.75;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+
+                                        $y += 0.5;
+                                    }
+                                }
+                            } elseif ($a->getIdArea() == "ET") {
+
+                                if ($grad->getIdGrado() != "P" && $grad->getIdGrado() != "J") {
+                                    if ($a->getOrden() == $c) {
+
+                                        $pdf->SetXY($x, $y);
+                                        $pdf->SetFont("Arial", "BU", 9);
+
+                                        if ($a->getIdArea() == "EF" || $a->getIdArea() == "EA" || $a->getIdArea() == "ER" || $a->getIdArea() == "EVD" || $a->getIdArea() == "FIL") {
+                                            $pdf->Cell(5.5, 1.25, utf8_decode($a->getNombreArea()), 1, 0, "L");
+                                        } else {
+
+                                            $pdf->Cell(5.5, 0.5, utf8_decode($a->getNombreArea()), 1, 0, "L");
+                                            $pdf->Cell(0.5, 0.5, utf8_decode(""), 1, 0, "L");
+                                            $pdf->Cell(12, 0.5, utf8_decode(""), 1, 0, "L");
+                                            $pdf->Cell(1, 0.5, utf8_decode(""), 1, 0, "L");
+                                        }
+                                        $mate = new Materia();
+                                        $band = 0;
+                                        foreach ($pens as $p) {
+                                            $materias = $mate->leerMateriaPorId($p->getIdMateria());
+                                            foreach ($materias as $materia) {
+                                                $idMateria = $materia->getIdMateria();
+                                                $nombreMateria = $materia->getNombreMateria();
+                                                $horas = $materia->getHoras();
+                                                $idArea = $materia->getIdArea();
+
+                                                if ($idArea == $a->getIdArea()) {
+
+                                                    $nota = new Nota();
+                                                    $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $idMateria);
+                                                    $falla = new Falla();
+                                                    $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $idMateria);
+                                                    $logro = new Logro();
+                                                    $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
+                                                    $desempeño = "";
+                                                    $cadena = "";
+
+
+                                                    $band = 0;
+                                                    $y+=0.5;
+
+                                                    $pdf->SetXY($x, $y);
+                                                    $pdf->SetFont("Arial", "B", 9);
+                                                    if ($nombreMateria == "ARTISTICA" || $nombreMateria == "ETICA" || $nombreMateria == "RELIGION" || $nombreMateria == "EDUCACION FISICA" || $nombreMateria == "FILOSOFIA") {
+                                                        //$pdf->MultiCell(5.5,1.25, utf8_decode($a->getNombreArea()),1,"L");
+                                                        $band = 1;
+                                                    } else {
+                                                        $pdf->MultiCell(5.5, 1.25, utf8_decode($nombreMateria), 1, "L");
+                                                    }
+                                                    if ($band == 1) {
+                                                        $pdf->SetXY($x + 5.5, $y - 0.5);
+                                                    } else {
+                                                        $pdf->SetXY($x + 5.5, $y);
+                                                    }
+
+                                                    $pdf->MultiCell(0.5, 1.25, $horas, 1, "L");
+
+
+
+                                                    if ($log != NULL) {
+
+
+                                                        if ($periodo == "PRIMERO") {
+                                                            // $pdf->Cell(1, 1.5, $not->getPrimerP(), 1, 0, "C");
+                                                            $suma = $suma + $not->getPrimerP();
+                                                            $n = $not->getPrimerP();
+                                                            if ($not->getPrimerP() <= 69) {
+                                                                $cadena = $log->getBajo();
+                                                                $desempeño = "Db";
+                                                            }
+                                                            if ($not->getPrimerP() <= 79 && $not->getPrimerP() > 69) {
+                                                                $cadena = $log->getBasico();
+                                                                $desempeño = "DB";
+                                                            }
+                                                            if ($not->getPrimerP() <= 94 && $not->getPrimerP() > 79) {
+                                                                $cadena = $log->getAlto();
+                                                                $desempeño = "DA";
+                                                            }
+                                                            if ($not->getPrimerP() > 94) {
+                                                                $cadena = $log->getSuperior();
+                                                                $desempeño = "DS";
+                                                            }
+                                                        } elseif ($periodo == "SEGUNDO") {
+                                                            //$pdf->Cell(1, 1.5, $not->getSegundoP(), 1, 0, "C");
+                                                            $suma = $suma + $not->getSegundoP();
+                                                            $n = $not->getSegundoP();
+                                                            if ($not->getSegundoP() <= 69) {
+                                                                $cadena = $log->getBajo();
+                                                                $desempeño = "Db";
+                                                            }
+                                                            if ($not->getSegundoP() <= 79 && $not->getSegundoP() > 69) {
+                                                                $cadena = $log->getBasico();
+                                                                $desempeño = "DB";
+                                                            }
+                                                            if ($not->getSegundoP() <= 94 && $not->getSegundoP() > 79) {
+                                                                $cadena = $log->getAlto();
+                                                                $desempeño = "DA";
+                                                            }
+                                                            if ($not->getSegundoP() > 94) {
+                                                                $cadena = $log->getSuperior();
+                                                                $desempeño = "DS";
+                                                            }
+                                                        } elseif ($periodo == "TERCERO") {
+                                                            //$pdf->Cell(1, 1.5, $not->getTercerP(), 1, 0, "C");
+                                                            $suma = $suma + $not->getTercerP();
+                                                            $n = $not->getTercerP();
+
+                                                            if ($not->getTercerP() <= 69) {
+
+                                                                $cadena = $log->getBajo();
+                                                                $desempeño = "Db";
+                                                            }
+                                                            if ($not->getTercerP() <= 79 && $not->getTercerP() > 69) {
+                                                                $cadena = $log->getBasico();
+                                                                $desempeño = "DB";
+                                                            }
+                                                            if ($not->getTercerP() <= 94 && $not->getTercerP() > 79) {
+                                                                $cadena = $log->getAlto();
+                                                                $desempeño = "DA";
+                                                            }
+                                                            if ($not->getTercerP() > 94) {
+                                                                $cadena = $log->getSuperior();
+                                                                $desempeño = "DS";
+                                                            }
+                                                        } elseif ($periodo == "CUARTO") {
+
+                                                            //$pdf->Cell(1, 1.5, $not->getCuartoP();, 1, 0, "C");
+                                                            $suma = $suma + $not->getCuartoP();
+                                                            $n = $not->getCuartoP();
+                                                            if ($not->getCuartoP() <= 69) {
+                                                                $cadena = $log->getBajo();
+                                                                $desempeño = "Db";
+                                                            }
+                                                            if ($not->getCuartoP() <= 79 && $not->getCuartoP() > 69) {
+
+                                                                $cadena = $log->getBasico();
+                                                                $desempeño = "DB";
+                                                            }
+                                                            if ($not->getCuartoP() <= 94 && $not->getCuartoP() > 79) {
+                                                                $cadena = $log->getAlto();
+                                                                $desempeño = "DA";
+                                                            }
+                                                            if ($not->getCuartoP() > 94) {
+                                                                $cadena = $log->getSuperior();
+                                                                $desempeño = "DS";
+                                                            }
+                                                        } elseif ($periodo == "FINAL") {
+                                                            $def = $nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
+                                                            $pdf->Cell(1, 1.5, $def, 1, 0, "C");
+                                                            $suma = $suma + $def;
+
+                                                            if ($def < 69) {
+                                                                $cadena = $log->getBajo();
+                                                                $desempeño = "Db";
+                                                            }
+                                                            if ($def <= 79 && $def > 69) {
+
+                                                                $cadena = $log->getBasico();
+                                                                $desempeño = "DB";
+                                                            }
+                                                            if ($def <= 94 && $def > 79) {
+                                                                $cadena = $log->getAlto();
+                                                                $desempeño = "DA";
+                                                            }
+                                                            if ($def > 94) {
+                                                                $cadena = $log->getSuperior();
+                                                                $desempeño = "DS";
+                                                            }
+                                                        }
+                                                        $cont++;
+                                                        $pdf->SetFont("Arial", "", 7);
+                                                        if ($band == 1) {
+                                                            $pdf->SetXY($x + 6, $y - 0.5);
+                                                        } else {
+                                                            $pdf->SetXY($x + 6, $y);
+                                                        }
+
+                                                        $pdf->MultiCell(12, 0.417, strtoupper(utf8_decode($desempeño . ": " . $cadena)), 0, "L");
+                                                        if ($band == 1) {
+                                                            $pdf->SetXY($x + 6, $y - 0.5);
+                                                        } else {
+                                                            $pdf->SetXY($x + 6, $y);
+                                                        }
+                                                        $pdf->MultiCell(12, 1.25, "", 1, "L");
+
+                                                        if ($band == 1) {
+                                                            $pdf->SetXY($x + 18, $y - 0.5);
+                                                        } else {
+                                                            $pdf->SetXY($x + 18, $y);
+                                                        }
+
+                                                        $pdf->SetFont("Arial", "B", 7);
+                                                        //MODIFICAR ESTA LINEA DE ACUERDO AL PERIODO
+                                                        $pdf->MultiCell(12, 1.25, utf8_decode($n), 0, "L");
+
+                                                        if ($band == 1) {
+                                                            $pdf->SetXY($x + 18, $y - 0.5);
+                                                        } else {
+                                                            $pdf->SetXY($x + 18, $y);
+                                                        }
+
+                                                        $pdf->MultiCell(1, 1.25, "", 1, "L");
+                                                    }
+                                                    if ($band == 1) {
+                                                        $y+=0.25;
+                                                    } else {
+                                                        $y+=0.75;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+
+                                        $y += 0.5;
+                                    }
+                                }
+                            } else {
+                                if ($a->getOrden() == $c) {
+
+                                    $pdf->SetXY($x, $y);
+                                    $pdf->SetFont("Arial", "BU", 9);
+
+                                    if ($a->getIdArea() == "EF" || $a->getIdArea() == "EA" || $a->getIdArea() == "ER" || $a->getIdArea() == "EVD" || $a->getIdArea() == "FIL") {
+                                        $pdf->Cell(5.5, 1.25, utf8_decode($a->getNombreArea()), 1, 0, "L");
+                                    } else {
+
+                                        $pdf->Cell(5.5, 0.5, utf8_decode($a->getNombreArea()), 1, 0, "L");
+                                        $pdf->Cell(0.5, 0.5, utf8_decode(""), 1, 0, "L");
+                                        $pdf->Cell(12, 0.5, utf8_decode(""), 1, 0, "L");
+                                        $pdf->Cell(1, 0.5, utf8_decode(""), 1, 0, "L");
+                                    }
+                                    $mate = new Materia();
+                                    $band = 0;
+                                    foreach ($pens as $p) {
+                                        $materias = $mate->leerMateriaPorId($p->getIdMateria());
+                                        foreach ($materias as $materia) {
+                                            $idMateria = $materia->getIdMateria();
+                                            $nombreMateria = $materia->getNombreMateria();
+                                            $horas = $materia->getHoras();
+                                            $idArea = $materia->getIdArea();
+
+                                            if ($idArea == $a->getIdArea()) {
+
+                                                $nota = new Nota();
+                                                $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $idMateria);
+                                                $falla = new Falla();
+                                                $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $idMateria);
+                                                $logro = new Logro();
+                                                $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
+                                                $desempeño = "";
+                                                $cadena = "";
+
+
+                                                $band = 0;
+                                                $y+=0.5;
+
+                                                $pdf->SetXY($x, $y);
+                                                $pdf->SetFont("Arial", "B", 9);
+                                                if ($nombreMateria == "ARTISTICA" || $nombreMateria == "ETICA" || $nombreMateria == "RELIGION" || $nombreMateria == "EDUCACION FISICA" || $nombreMateria == "FILOSOFIA") {
+                                                    //$pdf->MultiCell(5.5,1.25, utf8_decode($a->getNombreArea()),1,"L");
+                                                    $band = 1;
+                                                } else {
+                                                    $pdf->MultiCell(5.5, 1.25, utf8_decode($nombreMateria), 1, "L");
+                                                }
+                                                if ($band == 1) {
+                                                    $pdf->SetXY($x + 5.5, $y - 0.5);
+                                                } else {
+                                                    $pdf->SetXY($x + 5.5, $y);
+                                                }
+
+                                                $pdf->MultiCell(0.5, 1.25, $horas, 1, "L");
+
+
+
+                                                if ($log != NULL) {
+
+
+                                                    if ($periodo == "PRIMERO") {
+                                                        // $pdf->Cell(1, 1.5, $not->getPrimerP(), 1, 0, "C");
+                                                        $suma = $suma + $not->getPrimerP();
+                                                        $n = $not->getPrimerP();
+                                                        if ($not->getPrimerP() <= 69) {
+                                                            $cadena = $log->getBajo();
+                                                            $desempeño = "Db";
+                                                        }
+                                                        if ($not->getPrimerP() <= 79 && $not->getPrimerP() > 69) {
+                                                            $cadena = $log->getBasico();
+                                                            $desempeño = "DB";
+                                                        }
+                                                        if ($not->getPrimerP() <= 94 && $not->getPrimerP() > 79) {
+                                                            $cadena = $log->getAlto();
+                                                            $desempeño = "DA";
+                                                        }
+                                                        if ($not->getPrimerP() > 94) {
+                                                            $cadena = $log->getSuperior();
+                                                            $desempeño = "DS";
+                                                        }
+                                                    } elseif ($periodo == "SEGUNDO") {
+                                                        //$pdf->Cell(1, 1.5, $not->getSegundoP(), 1, 0, "C");
+                                                        $suma = $suma + $not->getSegundoP();
+                                                        $n = $not->getSegundoP();
+                                                        if ($not->getSegundoP() <= 69) {
+                                                            $cadena = $log->getBajo();
+                                                            $desempeño = "Db";
+                                                        }
+                                                        if ($not->getSegundoP() <= 79 && $not->getSegundoP() > 69) {
+                                                            $cadena = $log->getBasico();
+                                                            $desempeño = "DB";
+                                                        }
+                                                        if ($not->getSegundoP() <= 94 && $not->getSegundoP() > 79) {
+                                                            $cadena = $log->getAlto();
+                                                            $desempeño = "DA";
+                                                        }
+                                                        if ($not->getSegundoP() > 94) {
+                                                            $cadena = $log->getSuperior();
+                                                            $desempeño = "DS";
+                                                        }
+                                                    } elseif ($periodo == "TERCERO") {
+                                                        //$pdf->Cell(1, 1.5, $not->getTercerP(), 1, 0, "C");
+                                                        $suma = $suma + $not->getTercerP();
+                                                        $n = $not->getTercerP();
+
+                                                        if ($not->getTercerP() <= 69) {
+
+                                                            $cadena = $log->getBajo();
+                                                            $desempeño = "Db";
+                                                        }
+                                                        if ($not->getTercerP() <= 79 && $not->getTercerP() > 69) {
+                                                            $cadena = $log->getBasico();
+                                                            $desempeño = "DB";
+                                                        }
+                                                        if ($not->getTercerP() <= 94 && $not->getTercerP() > 79) {
+                                                            $cadena = $log->getAlto();
+                                                            $desempeño = "DA";
+                                                        }
+                                                        if ($not->getTercerP() > 94) {
+                                                            $cadena = $log->getSuperior();
+                                                            $desempeño = "DS";
+                                                        }
+                                                    } elseif ($periodo == "CUARTO") {
+
+                                                        //$pdf->Cell(1, 1.5, $not->getCuartoP();, 1, 0, "C");
+                                                        $suma = $suma + $not->getCuartoP();
+                                                        $n = $not->getCuartoP();
+                                                        if ($not->getCuartoP() <= 69) {
+                                                            $cadena = $log->getBajo();
+                                                            $desempeño = "Db";
+                                                        }
+                                                        if ($not->getCuartoP() <= 79 && $not->getCuartoP() > 69) {
+
+                                                            $cadena = $log->getBasico();
+                                                            $desempeño = "DB";
+                                                        }
+                                                        if ($not->getCuartoP() <= 94 && $not->getCuartoP() > 79) {
+                                                            $cadena = $log->getAlto();
+                                                            $desempeño = "DA";
+                                                        }
+                                                        if ($not->getCuartoP() > 94) {
+                                                            $cadena = $log->getSuperior();
+                                                            $desempeño = "DS";
+                                                        }
+                                                    } elseif ($periodo == "FINAL") {
+                                                        $def = $nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
+                                                        $pdf->Cell(1, 1.5, $def, 1, 0, "C");
+                                                        $suma = $suma + $def;
+
+                                                        if ($def < 69) {
+                                                            $cadena = $log->getBajo();
+                                                            $desempeño = "Db";
+                                                        }
+                                                        if ($def <= 79 && $def > 69) {
+
+                                                            $cadena = $log->getBasico();
+                                                            $desempeño = "DB";
+                                                        }
+                                                        if ($def <= 94 && $def > 79) {
+                                                            $cadena = $log->getAlto();
+                                                            $desempeño = "DA";
+                                                        }
+                                                        if ($def > 94) {
+                                                            $cadena = $log->getSuperior();
+                                                            $desempeño = "DS";
+                                                        }
+                                                    }
+                                                    $cont++;
+                                                    $pdf->SetFont("Arial", "", 7);
+                                                    if ($band == 1) {
+                                                        $pdf->SetXY($x + 6, $y - 0.5);
+                                                    } else {
+                                                        $pdf->SetXY($x + 6, $y);
+                                                    }
+
+                                                    $pdf->MultiCell(12, 0.417, strtoupper(utf8_decode($desempeño . ": " . $cadena)), 0, "L");
+                                                    if ($band == 1) {
+                                                        $pdf->SetXY($x + 6, $y - 0.5);
+                                                    } else {
+                                                        $pdf->SetXY($x + 6, $y);
+                                                    }
+                                                    $pdf->MultiCell(12, 1.25, "", 1, "L");
+
+
+                                                    if ($band == 1) {
+                                                        $pdf->SetXY($x + 18, $y - 0.5);
+                                                    } else {
+                                                        $pdf->SetXY($x + 18, $y);
+                                                    }
+                                                    $pdf->SetFont("Arial", "B", 7);
+                                                    //MODIFICAR ESTA LINEA DE ACUERDO AL PERIODO
+                                                    $pdf->MultiCell(12, 0.417, utf8_decode($n), 0, "L");
+
+                                                    if ($band == 1) {
+                                                        $pdf->SetXY($x + 18, $y - 0.5);
+                                                    } else {
+                                                        $pdf->SetXY($x + 18, $y);
+                                                    }
+
+                                                    $pdf->MultiCell(1, 1.25, "", 1, "L");
+                                                }
+                                                if ($band == 1) {
+                                                    $y+=0.25;
+                                                } else {
+                                                    $y+=0.75;
+                                                }
+                                            }
+                                        }
+                                    }
+
+
+                                    $y += 0.5;
+                                }
+//FIN IF
+                            }
+                        }//FOREACH AREAS
+                    }
+                    $prom = round($suma / $cont, 1);
+                    $pdf->SetXY($x + 17.5, $y);
+                    $pdf->Cell(1.5, 0.5, utf8_decode("PROM: " . $prom), 1, 0, "L");
+                    $pdf->SetXY($x + 17.5, $y + 0.5);
+                    $puest++;
+                    $pdf->Cell(1.5, 0.5, utf8_decode("POS: " . $puest), 1, 0, "L");
+                    $pdf->SetXY($x, $y);
+                    $pdf->Cell(17.5, 1, "", 1, 0, "L");
+                    $pdf->SetXY($x, $y);
+                    $pdf->Cell(17.5, 0.5, "Observaciones:", 0, 0, "L");
+
+                    $y +=1.5;
+                    $pdf->SetXY($x, $y);
+                    $pdf->SetFont("Arial", "B", 9);
+                    $pdf->Cell(10, 0.5, "DIRECTOR DE GRUPO______________________", 0, 0, "C");
+                    $pdf->Cell(10, 0.5, "RECTOR______________________", 0, 0, "C");
+                    break;
+                }
+            }//FIn Estudiantes
+        }
+
+
+        $pdf->Output("Boletin " . $grad->getIdGrado(), "I");
+    }
+
+    public function consolidadoSantaTeresita($idSalon, $periodo) {
+
+        $area = new Area();
+        $areas = $area->leerAreas();
+        $pensum = new Pensum();
+        $pens = $pensum->leerPensum($idSalon);
+        $persona = new Persona();
+        $estudiantes = $persona->leerPorSalon($idSalon);
+        $salon = new Salon();
+        $sal = $salon->leerSalonePorId($idSalon);
+        $grado = new Grado();
+        $grad = $grado->leerGradoPorId($sal->getIdGrado());
+        $nots = new Nota();
+        if ($periodo == "PRIMERO") {
+            $puestos = $nots->leerPromedios($idSalon, "primerP");
+        } elseif ($periodo == "SEGUNDO") {
+            $puestos = $nots->leerPromedios($idSalon, "segundoP");
+        } elseif ($periodo == "TERCERO") {
+            $puestos = $nots->leerPromedios($idSalon, "tercerP");
+        } elseif ($periodo == "CUARTO") {
+            $puestos = $nots->leerPromedios($idSalon, "cuartoP");
+        }
+
+
+
+        $pdf = new FPDF('L', 'cm', 'Legal');
+        $pdf->SetMargins(0, 0, 0);
+        $pdf->AddPage();
+        $x = 0;
+        $y = 0.25;
+        $pdf->SetXY($x, $y);
+        $pdf->SetFont("Arial", "B", 14);
+        $pdf->cell(31, 1, 'COLEGIO "SANTA TERESITA"', 0, 0, "C");
+        $y+=0.5;
+        $pdf->SetXY($x, $y);
+        $pdf->cell(31, 1, 'CONSOLIDADO DEL GRADO: ' . $idSalon . '. PERIODO: ' . $periodo, 0, 0, "C");
+        $y+=1;
+        $pdf->SetFont("Arial", "B", 10);
+        $pdf->SetXY($x, $y);
+        $pdf->cell(0.5, 1.5, 'No.', 1, 0, "C");
+        $pdf->cell(9, 0.75, 'Asignaturas', 0, 0, "R");
+        $y+=0.75;
+        $x+=0.5;
+        $pdf->SetXY($x, $y);
+        $pdf->cell(9, 0.75, 'Apellidos y Nombres', 0, 0, "L");
+        $y-=0.75;
+        $pdf->SetXY($x, $y);
+        $pdf->cell(9, 1.5, '', 1, 0, "L");
+        $pdf->Line($x, $y, $x + 9, $y + 1.5);
+
+        $y+=0.75;
+        $x+=9;
+        $pdf->SetXY($x, $y);
+        $c = 0;
+        $pdf->SetFont("Arial", "B", 7);
+        $m = array();
+        for ($i = 0; $i < count($areas); $i++) {
+
+            $c++;
+            $cont = 0;
+            foreach ($areas as $a) {
+
+                if ($a->getIdArea() == "FIL") {
+                    $g = intval($grad->getIdGrado());
+                    if ($g > 5) {
+                        if ($a->getOrden() == $c) {
+                            $mate = new Materia();
+
+                            foreach ($pens as $p) {
+
+                                $materias = $mate->leerMateriaPorId($p->getIdMateria());
+                                foreach ($materias as $materia) {
+                                    $idMateria = $materia->getIdMateria();
+                                    $nombreMateria = substr($materia->getNombreMateria(), 0, 5);
+                                    $horas = $materia->getHoras();
+                                    $idArea = $materia->getIdArea();
+
+                                    if ($idArea == $a->getIdArea()) {
+                                        $pdf->cell(1.1, 0.75, $nombreMateria, 1, 0, "C");
+                                        $cont++;
+                                        $m[] = $idMateria;
+                                    }
+                                }
+                            }
+
+                            $y-=0.75;
+                            $pdf->SetXY($x, $y);
+                            $w = $cont * 1.1;
+                            if ($cont == 1) {
+                                $nombreArea = substr($a->getNombreArea(), 0, 5);
+                            } else if ($cont == 2) {
+                                $nombreArea = substr($a->getNombreArea(), 0, 10);
+                            } else if ($cont == 3) {
+                                $nombreArea = substr($a->getNombreArea(), 0, 13);
+                            } else {
+                                $nombreArea = $a->getNombreArea();
+                            }
+                            $pdf->cell($w, 0.75, utf8_decode($nombreArea), 1, 0, "C");
+                            $x += $w;
+                            $y += 0.75;
+                            $pdf->SetXY($x, $y);
+                        }
+                    }
+                } else if ($a->getIdArea() == "ET") {
+                    if ($grad->getIdGrado() != "P" && $grad->getIdGrado() != "J") {
+                        if ($a->getOrden() == $c) {
+                            $mate = new Materia();
+
+                            foreach ($pens as $p) {
+
+                                $materias = $mate->leerMateriaPorId($p->getIdMateria());
+                                foreach ($materias as $materia) {
+                                    $idMateria = $materia->getIdMateria();
+                                    $nombreMateria = substr($materia->getNombreMateria(), 0, 5);
+                                    $horas = $materia->getHoras();
+                                    $idArea = $materia->getIdArea();
+
+                                    if ($idArea == $a->getIdArea()) {
+                                        $pdf->cell(1.1, 0.75, $nombreMateria, 1, 0, "C");
+                                        $cont++;
+                                        $m[] = $idMateria;
+                                    }
+                                }
+                            }
+
+                            $y-=0.75;
+                            $pdf->SetXY($x, $y);
+                            $w = $cont * 1.1;
+                            if ($cont == 1) {
+                                $nombreArea = substr($a->getNombreArea(), 0, 5);
+                            } else if ($cont == 2) {
+                                $nombreArea = substr($a->getNombreArea(), 0, 10);
+                            } else if ($cont == 3) {
+                                $nombreArea = substr($a->getNombreArea(), 0, 13);
+                            } else {
+                                $nombreArea = $a->getNombreArea();
+                            }
+                            $pdf->cell($w, 0.75, utf8_decode($nombreArea), 1, 0, "C");
+                            $x += $w;
+                            $y += 0.75;
+                            $pdf->SetXY($x, $y);
+                        }
+                    }
+                } else {
+                    if ($a->getOrden() == $c) {
+                        $mate = new Materia();
+
+                        foreach ($pens as $p) {
+
+                            $materias = $mate->leerMateriaPorId($p->getIdMateria());
+                            foreach ($materias as $materia) {
+                                $idMateria = $materia->getIdMateria();
+                                $nombreMateria = substr($materia->getNombreMateria(), 0, 5);
+                                $horas = $materia->getHoras();
+                                $idArea = $materia->getIdArea();
+
+                                if ($idArea == $a->getIdArea()) {
+                                    $pdf->cell(1.1, 0.75, $nombreMateria, 1, 0, "C");
+                                    $cont++;
+                                    $m[] = $idMateria;
+                                }
+                            }
+                        }
+
+                        $y-=0.75;
+                        $pdf->SetXY($x, $y);
+                        $w = $cont * 1.1;
+                        if ($cont == 1) {
+                            $nombreArea = substr($a->getNombreArea(), 0, 5);
+                        } else if ($cont == 2) {
+                            $nombreArea = substr($a->getNombreArea(), 0, 10);
+                        } else if ($cont == 3) {
+                            $nombreArea = substr($a->getNombreArea(), 0, 13);
+                        } else {
+                            $nombreArea = $a->getNombreArea();
+                        }
+                        $pdf->cell($w, 0.75, utf8_decode($nombreArea), 1, 0, "C");
+                        $x += $w;
+                        $y += 0.75;
+                        $pdf->SetXY($x, $y);
+                    }
+                }
+            }
+        }
+        $y -= 0.75;
+        $pdf->SetXY($x, $y);
+        $pdf->cell($w, 0.75 * 2, utf8_decode("PROM"), 1, 0, "C");
+        $pdf->cell($w, 0.75 * 2, utf8_decode("POS"), 1, 0, "C");
+
+        $x = 0;
+        $y += 0.75 * 2;
+        $j = 0;
+        $pdf->SetXY($x, $y);
+        $pdf->SetFont("Arial", "", 8);
+        foreach ($estudiantes as $estudiante) {
+
+            $matricula = new Matricula();
+            $matr = $matricula->leerMatriculaPorId($estudiante->getIdPersona());
+
+            $j++;
+            $pdf->cell(0.5, 0.4, $j, 1, 0, "C");
+            $pdf->cell(9, 0.4, utf8_decode(strtoupper($estudiante->getPApellido() . " " . $estudiante->getSApellido() . " " . $estudiante->getNombres())), 1, 0, "L");
+            $conts = 0;
+            foreach ($puestos as $puesto) {
+                $conts++;
+                if ($puesto["idPersona"] == $estudiante->getIdPersona()) {
+
+                    $p = $conts;
+                    $promedio = $puesto["prom"];
+                }
+            }
+
+            foreach ($m as $idMateria) {
+
+                $nota = new Nota();
+                $not = $nota->leerNotaEstudiante($estudiante->getIdPersona(), $idMateria);
+
+                switch ($periodo) {
+                    case "PRIMERO":
+                        $n = $not->getPrimerP();
+                        break;
+                    case "SEGUNDO":
+                        $n = $not->getSegundoP();
+                        break;
+                    case "TERCERO":
+                        $n = $not->getTercerP();
+                        break;
+                    case "CUARTO":
+                        $n = $not->getCuartoP();
+                        break;
+                }
+
+                if ($n < 70) {
+                    $pdf->SetTextColor(190, 21, 34);
+                }
+
+                $pdf->cell(1.1, 0.4, $n, 1, 0, "C");
+                $pdf->SetTextColor(0, 0, 0);
+            }
+            if ($promedio < 70) {
+                $pdf->SetTextColor(190, 21, 34);
+            }
+
+            $pdf->cell(1.1, 0.4, round($promedio, 2), 1, 0, "C");
+            $pdf->SetTextColor(0, 0, 0);
+            $pdf->cell(1.1, 0.4, $p, 1, 0, "C");
+            $y+=0.4;
+            $x = 0;
+            $pdf->SetXY($x, $y);
+        }
+
+
+        $pdf->Output("Consolidado " . $grad->getIdGrado(), "I");
+    }
+
     public function directorioGalois() {
         set_time_limit(90);
 
@@ -4218,25 +4248,110 @@ class Reportes {
 
                 $y+=0.5;
             }
+            $y+= 1;
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(15, 0.5, "GRADO: " . $s->getIdSalon(), 0, 0, "C");
         }
 
         $pdf->Output("Planillas", "I");
     }
 
-    function ordenaPorPromedio($matrix) {
-
-    for ($i ; $i < count($matrix); $i++) {
-        $temp = $matrix[$i];
-        $j = $i - 1;
-        while (($matrix[$j] > $temp) && ($j >= 0)) {
-            $matrix[$j + 1] = $matrix[$j];
-            $j--;
-        }
-        $matrix[$j + 1] = $temp;
+    public function mosaicoSantaTeresita($idSalon) {
+        set_time_limit(90);
+        $url= "colsantateresita.innovardesign.com/utiles/imagenes/fotos/";
+        $x = 0.5;
+        $y = 0.5;
+        $pdf = new FPDF('P', 'cm', 'Letter');
+        $pdf->AddPage();
+        $pdf->SetFont("Times", "BI", 20);
+        $pdf->SetXY(1, 5);
+        $pdf->Cell(20, 3, "MOSAICO: " . $idSalon, 0, 0, "C");
+        $c=0;
+            $persona = new Persona();
+            $personas = $persona->leerPorSalon($idSalon);
+            foreach ($personas as $p) {
+                
+                $c++;
+                
+                $pdf->Image($url.$p->getIdPersona().".png", $x,$y);
+                $x+= 4;
+                if($c==5){
+                    $y+=5;
+                    $c=0;
+                    $x=0.5;
+                }
+                
+            }
+            
+        $pdf->Output("Mosaico", "I");
     }
     
-    return $matrix;
-}
-    
-}
-?>
+    public function informePorSalon($idSalon){
+      
+        $persona = new Persona();
+        $pdf = new FPDF('P', 'cm', 'Letter');
+        $personas = $persona->leerPorSalon($idSalon);
+        foreach ($personas as $p) {
+            $pdf->AddPage();
+            $matricula = new Matricula();
+            $matr = $matricula->leerMatriculaPorId($p->getIdPersona());
+            $salon = new Salon();
+            $sal = $salon->leerSalonePorId($matr->getIdSalon());
+            $grado = new Grado();
+            $grad= $grado->leerGradoPorId($sal->getIdGrado());
+            $pensum = new Pensum();
+            $pens = $pensum->leerPensum($matr->getIdSalon());
+
+            $x = 1;
+            $y = 1;
+            $pdf->SetXY($x, $y);
+            $pdf->SetFont("Times", "B", 12);
+            $pdf->Cell(20, 1, 'Liceo Galois', 0, 0, "C");
+            $y+=1;
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(20, 1,utf8_decode( 'Reporte Académico'), 0, 0, "C");
+            $y+=1;
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(20, 1, strtoupper(utf8_decode($p->getPApellido(). " ". $p->getSApellido(). " ". $p->getNombres())), 0, 0, "C");
+            $y+=1;
+            
+            $pdf->SetXY($x, $y);
+            $pdf->SetFont("Times", "BI", 12);
+            $pdf->Cell(5, 1, 'MATERIA', 1, 0, "C");
+            $pdf->Cell(3, 1, '1er PERIODO', 1, 0, "C");
+            $pdf->Cell(3, 1, '2do PERIODO', 1, 0, "C");
+            $pdf->Cell(3, 1, '3er PERIODO', 1, 0, "C");
+            $pdf->Cell(3, 1, '4to PERIODO', 1, 0, "C");
+            $pdf->Cell(3, 1, 'PONDERADO', 1, 0, "C");
+            $cont= 0;
+            foreach ($pens as $pen){
+                $cont++;
+                $y+=1;
+                $pdf->SetXY($x, $y);
+                $mat = new Materia();
+                $materia = $mat->leerMateriaPorId($pen->getIdMateria());
+                foreach ($materia as $mate){
+                    
+                     $pdf->Cell(5, 1, $mate->getNombreMateria(), 1, 0, "L");
+                }
+                $nota = new Nota();
+                $not =$nota->leerNotaEstudiante( $p->getIdPersona(), $pen->getIdMateria());
+                $prom=round($nota->calcularDef2($not->getprimerP(),$not->getSegundoP(),$not->getTercerP(),$not->getCuartoP()),2);
+                $pdf->Cell(3, 1, $not->getPrimerP(), 1, 0, "C");
+                $pdf->Cell(3, 1, $not->getSegundoP(), 1, 0, "C");
+                $pdf->Cell(3, 1, $not->getTercerP(), 1, 0, "C");
+                $pdf->Cell(3, 1, $not->getCuartoP(), 1, 0, "C");
+                if($prom<30){
+                    $pdf->SetTextColor(190, 21, 34);
+                }else{
+                    $pdf->SetTextColor(0, 0, 0);
+                }
+                $pdf->Cell(3, 1, $prom, 1, 0, "C");
+                $pdf->SetTextColor(0, 0, 0);
+            }
+            
+        }
+        
+        $pdf->Output("REPORTE ACADEMICO GRADO ".$idSalon, "I");
+    }
+}?>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     

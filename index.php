@@ -73,7 +73,6 @@ function cargadorClases(){
     require_once './utiles/php/Twitter.php';
     require_once './utiles/php/Reportes.php';
     require_once './utiles/php/fpdf/fpdf.php';
-    
 }
 
 spl_autoload_register('cargadorClases');

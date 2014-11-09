@@ -2327,6 +2327,20 @@ if($this->verificarSession()){
              }
          }
          
+         public function generarMosaico($idSalon){
+             if($this->verificarSession()){
+            
+            $cfg = Configuracion::getConfiguracion('colegio');
+            $colegio= $cfg['NOMBRE'];
+            $reporte = new Reportes();
+            if ($colegio=="galois"){
+                //$reporte->boletinGalois($idSalon, $periodo);
+            }elseif ($colegio=="santaTeresita"){
+                $reporte->mosaicoSantaTeresita($idSalon);
+            }
+             }
+         }
+         
          public function imprimirInformeFinal($param){
             $cadena = explode(",", $param);    
             $idPersona = $cadena[0];
@@ -2658,6 +2672,20 @@ if($this->verificarSession()){
              }
 
          }
+         
+         public function imprimirInformePorSalon($idSalon){
+            
+            $cfg = Configuracion::getConfiguracion('colegio');
+            $colegio= $cfg['NOMBRE'];
+            $reporte = new Reportes();
+            if ($colegio=="galois"){
+                $reporte->informePorSalon($idSalon);
+            }elseif ($colegio=="santaTeresita"){
+                
+            }
+            
+         }
+         
         
 }
 ?>

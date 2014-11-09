@@ -22,8 +22,10 @@ function envio(){
         var url="/colegio/inicio/verificarUsuario";
         var data="usuario="+usuario.value+"&clave="+contraseña.value;
 
-        envioJson(url,data,function respuesta(res){   
-            if (res == 0){
+        envioJson2(url,data,function respuesta(res){   
+        
+        if (res == 0){
+                
                 var div = document.getElementById("msg");
                 x.html ( "<p>Usuario o Contraseña Incorrectos</p>");
                 usuario.value="";
@@ -31,6 +33,7 @@ function envio(){
                 contraseña.value="";
                 setTimeout("$('#msg').hide();", 2000);
             }else{
+                
                 document.location.href=res;
             }
          });
