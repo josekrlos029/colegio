@@ -61,7 +61,7 @@ window.onload = function() {
    */
     ?>
      <div id="cuerpo">
-         <div class="escudo"><img height="100%" width="90%"  src="utiles/imagenes/escudo.png" alt="ESCUDO"></div>
+         <div class="escudo"><img style="margin-top: 23%"  width="70%"  src="utiles/imagenes/logo.png" alt="ESCUDO"></div>
          <div class="separador"></div>
          <div id="login">
          <h1>Iniciar Sesion</h1>
@@ -70,24 +70,7 @@ window.onload = function() {
             <input name="contraseña"  id="password" type="password" class="cajaTexto" placeholder="Contraseña" required />
             <button onclick="envio();" class="button blue">Iniciar Sesión </button>
             <a href="/colegio/inicio/olvidoclave" class="olvidoPass"></br>¿Olvidaste tu Contraseña?</a>
-            <div class="mensaje"></br>tambien puedes Iniciar sesion con</br> tu red Social Favorita:</br></div>
             
-            <a href="/colegio/inicio/accesofb/face">
-                     <img height="15%" width="15%" src="utiles/imagenes/iconos/facebook.png" alt="facebook" 
-                         accesskey=""onmouseover="this.src='utiles/imagenes/iconos/facebookHover.png'" 
-                        onmouseout="this.src='utiles/imagenes/iconos/facebook.png';"/>
-                     
-            <a href="/colegio/inicio/accesofb/twitter">
-                      <img height="15%" width="15%" src="utiles/imagenes/iconos/twitter.png" alt="twitter"
-                        accesskey=""onmouseover="this.src='utiles/imagenes/iconos/twitterHover.png'" 
-                        onmouseout="this.src='utiles/imagenes/iconos/twitter.png';"/>
-                      
-            <a href="/colegio/inicio/accesofb/google">
-                       <img height="15%" width="15%" src="utiles/imagenes/iconos/google.png" alt="google plus" 
-                        accesskey=""onmouseover="this.src='utiles/imagenes/iconos/googleHover.png'" 
-                        onmouseout="this.src='utiles/imagenes/iconos/google.png';"/>
-                       
-                 
          </div>
          </div>
    

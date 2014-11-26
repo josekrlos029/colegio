@@ -137,6 +137,13 @@ class Nota extends Modelo {
         
     }
     
+    public function leerPromediosFinal( $idSalon){
+        $sql = "SELECT n.idPersona, AVG((n.primerP + n.segundoP + n.tercerP + n.cuartoP)/4) as prom FROM notas n, matricula m WHERE n.idPersona = m.idPersona AND m.idSalon= '".$idSalon."' GROUP BY n.idPersona ORDER BY prom DESC";
+        $this->__setSql($sql);
+        return $this->consultar($sql);
+        
+    }
+    
     public function leerPorMateria($idSalon, $idMateria){
         $sql = "SELECT n.idNota as idNota, n.primerP as primerP, n.segundoP as segundoP, n.tercerP as tercerP, n.cuartoP as cuartoP, n.definitiva as definitiva FROM notas n, matricula m WHERE n.idPersona=m.idPersona AND m.idSalon='".$idSalon."' AND m.estado='1' AND n.idMateria='".$idMateria."'";
         $this->__setSql($sql);

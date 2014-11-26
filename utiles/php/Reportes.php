@@ -3154,6 +3154,8 @@ class Reportes {
             $puestos = $nots->leerPromedios($idSalon, "tercerP");
         } elseif ($periodo == "CUARTO") {
             $puestos = $nots->leerPromedios($idSalon, "cuartoP");
+        } elseif ($periodo == "FINAL") {
+            $puestos = $nots->leerPromediosFinal($idSalon);
         }
 
 
@@ -3214,6 +3216,10 @@ class Reportes {
 
                     if ($periodo == "CUARTO") {
                         $periodo3 = "4";
+                    }
+                    
+                    if ($periodo == "FINAL") {
+                        $periodo3 = "F";
                     }
 
                     $x = 1;
@@ -3305,7 +3311,11 @@ class Reportes {
                                                     $falla = new Falla();
                                                     $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $idMateria);
                                                     $logro = new Logro();
-                                                    $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
+                                                    if($periodo == "FINAL"){
+                                                         $log = $logro->leerLogro("CUARTO", $grad->getIdGrado(), $idMateria);
+                                                    }else{
+                                                         $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
+                                                    }
                                                     $desempeño = "";
                                                     $cadena = "";
 
@@ -3420,7 +3430,8 @@ class Reportes {
                                                             }
                                                         } elseif ($periodo == "FINAL") {
                                                             $def = $nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
-                                                            $pdf->Cell(1, 1.5, $def, 1, 0, "C");
+                                                            //$pdf->Cell(1, 1.5, $def, 1, 0, "C");
+                                                            $n = $def;
                                                             $suma = $suma + $def;
 
                                                             if ($def < 69) {
@@ -3522,7 +3533,13 @@ class Reportes {
                                                     $falla = new Falla();
                                                     $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $idMateria);
                                                     $logro = new Logro();
-                                                    $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
+                                                    if($periodo == "FINAL"){
+                                                         $log = $logro->leerLogro("CUARTO", $grad->getIdGrado(), $idMateria);
+                                                    }else{
+                                                         $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
+                                                    }
+                                                   
+                                                    
                                                     $desempeño = "";
                                                     $cadena = "";
 
@@ -3637,8 +3654,9 @@ class Reportes {
                                                             }
                                                         } elseif ($periodo == "FINAL") {
                                                             $def = $nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
-                                                            $pdf->Cell(1, 1.5, $def, 1, 0, "C");
+                                                            //$pdf->Cell(1, 1.5, $def, 1, 0, "C");
                                                             $suma = $suma + $def;
+                                                            $n = $def;
 
                                                             if ($def < 69) {
                                                                 $cadena = $log->getBajo();
@@ -3737,7 +3755,11 @@ class Reportes {
                                                 $falla = new Falla();
                                                 $fal = $falla->leerFallaEstudiante($estudiante->getIdPersona(), $idMateria);
                                                 $logro = new Logro();
-                                                $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
+                                                if($periodo == "FINAL"){
+                                                         $log = $logro->leerLogro("CUARTO", $grad->getIdGrado(), $idMateria);
+                                                }else{
+                                                     $log = $logro->leerLogro($periodo, $grad->getIdGrado(), $idMateria);
+                                                }
                                                 $desempeño = "";
                                                 $cadena = "";
 
@@ -3852,7 +3874,8 @@ class Reportes {
                                                         }
                                                     } elseif ($periodo == "FINAL") {
                                                         $def = $nota->calcularDef2($not->getPrimerP(), $not->getSegundoP(), $not->getTercerP(), $not->getCuartoP());
-                                                        $pdf->Cell(1, 1.5, $def, 1, 0, "C");
+                                                        //$pdf->Cell(1, 1.5, $def, 1, 0, "C");
+                                                        $n = $def;
                                                         $suma = $suma + $def;
 
                                                         if ($def < 69) {
